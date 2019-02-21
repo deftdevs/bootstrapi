@@ -236,20 +236,9 @@
                         <goals>
                             <goal>atlassian-spring-scanner</goal>
                         </goals>
-                        <!-- process-classes seems to be skipped if you are using scala
-                             so perhaps use prepare-package -->
                         <phase>process-classes</phase>
                     </execution>
                 </executions>
-                <configuration>
-                    <scannedDependencies>
-                        <dependency>
-                            <groupId>com.atlassian.plugin</groupId>
-                            <artifactId>atlassian-spring-scanner-external-jar</artifactId>
-                        </dependency>
-                    </scannedDependencies>
-                    <verbose>false</verbose>
-                </configuration>
             </plugin>
 
             <plugin>
