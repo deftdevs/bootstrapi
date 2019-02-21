@@ -46,7 +46,7 @@
     </issueManagement>
 
     <scm>
-        <connection>scm:git:git://github.com/aservo/crowd-confapi-plugin.git</connection>
+	<connection>scm:git:git@github.com:aservo/crowd-confapi-plugin.git</connection>
         <developerConnection>scm:git:git@github.com:aservo/crowd-confapi-plugin.git</developerConnection>
         <url>https://github.com/aservo/crowd-confapi-plugin</url>
     </scm>
@@ -239,6 +239,17 @@
                         <phase>process-classes</phase>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <version>2.4.2</version>
+                <configuration>
+                    <allowTimestampedSnapshots>true</allowTimestampedSnapshots>
+                    <tagNameFormat>v@{project.version}</tagNameFormat>
+                    <remoteTagging>false</remoteTagging>
+                </configuration>
             </plugin>
 
             <plugin>
