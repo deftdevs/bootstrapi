@@ -305,8 +305,8 @@
                     </plugin>
                     <plugin>
                         <groupId>com.atlassian.maven.plugins</groupId>
-                        <artifactId>maven-jira-plugin</artifactId>
-                        <version>${atlassian.amps.version}</version>
+                        <artifactId>maven-crowd-plugin</artifactId>
+                        <version>${amps.version}</version>
                         <configuration>
                             <skipITs>true</skipITs>
                         </configuration>
