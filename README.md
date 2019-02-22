@@ -3,6 +3,7 @@
 ConfAPI for Crowd
 =================
 
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.aservo.atlassian/crowd-confapi-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.aservo.atlassian/crowd-confapi-plugin)
 [![Build Status](https://api.travis-ci.org/aservo/crowd-confapi-plugin.svg?branch=master)](https://travis-ci.org/aservo/crowd-confapi-plugin)
 [![Coverage Status](https://coveralls.io/repos/github/aservo/crowd-confapi-plugin/badge.svg?branch=master)](https://coveralls.io/github/aservo/crowd-confapi-plugin?branch=master)
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)

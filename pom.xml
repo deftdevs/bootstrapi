@@ -6,7 +6,7 @@
 
     <groupId>de.aservo.atlassian</groupId>
     <artifactId>crowd-confapi-plugin</artifactId>
-    <version>0.0.4</version>
+    <version>0.0.5-SNAPSHOT</version>
     <packaging>atlassian-plugin</packaging>
 
     <name>ConfAPI for Atlassian Crowd</name>
