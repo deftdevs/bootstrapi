@@ -6,11 +6,12 @@
 
     <groupId>de.aservo.atlassian</groupId>
     <artifactId>crowd-confapi-plugin</artifactId>
-    <version>0.0.2</version>
+    <version>0.0.3</version>
     <packaging>atlassian-plugin</packaging>
 
     <name>ConfAPI for Atlassian Crowd</name>
     <description>REST API for automated Atlassian Crowd configuration.</description>
+    <url>https://github.com/aservo/crowd-confapi-plugin</url>
 
     <organization>
         <name>ASERVO Software GmbH</name>
