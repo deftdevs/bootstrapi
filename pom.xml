@@ -15,8 +15,8 @@
     <version>0.0.5-SNAPSHOT</version>
     <packaging>atlassian-plugin</packaging>
 
-    <name>ConfAPI for Atlassian Crowd</name>
-    <description>REST API for automated Atlassian Crowd configuration.</description>
+    <name>ConfAPI for Crowd</name>
+    <description>REST API for automated Crowd configuration.</description>
     <url>https://github.com/aservo/crowd-confapi-plugin</url>
 
     <licenses>
