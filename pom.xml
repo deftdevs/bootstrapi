@@ -161,6 +161,13 @@
         </dependency>
 
         <dependency>
+            <groupId>org.apache.wink</groupId>
+            <artifactId>wink-client</artifactId>
+            <version>1.4</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.atlassian.plugins</groupId>
             <artifactId>atlassian-plugins-osgi-testrunner</artifactId>
             <version>${plugin.testrunner.version}</version>
