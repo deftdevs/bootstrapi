@@ -4,9 +4,9 @@ ConfAPI for Crowd
 =================
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.aservo.atlassian/crowd-confapi-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.aservo.atlassian/crowd-confapi-plugin)
-[![Build Status](https://circleci.com/gh/aservo/jira-confapi-plugin.svg?style=shield)](https://circleci.com/gh/aservo/jira-confapi-plugin)
-[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=aservo_jira-confapi-plugin&metric=coverage)](https://sonarcloud.io/dashboard?id=aservo_jira-confapi-plugin)
-[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=aservo_jira-confapi-plugin&metric=alert_status)](https://sonarcloud.io/dashboard?id=aservo_jira-confapi-plugin)
+[![Build Status](https://circleci.com/gh/aservo/crowd-confapi-plugin.svg?style=shield)](https://circleci.com/gh/aservo/crowd-confapi-plugin)
+[![Coverage](https://sonarcloud.io/api/project_badges/measure?project=aservo_crowd-confapi-plugin&metric=coverage)](https://sonarcloud.io/dashboard?id=aservo_crowd-confapi-plugin)
+[![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=aservo_crowd-confapi-plugin&metric=alert_status)](https://sonarcloud.io/dashboard?id=aservo_crowd-confapi-plugin)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
 REST API for automated Crowd configuration.
