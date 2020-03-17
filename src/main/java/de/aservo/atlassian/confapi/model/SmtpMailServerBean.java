@@ -28,6 +28,9 @@ public class SmtpMailServerBean {
     private final String description;
 
     @XmlElement
+    private final String adminContact;
+
+    @XmlElement
     private final String from;
 
     @XmlElement
@@ -62,6 +65,7 @@ public class SmtpMailServerBean {
     public SmtpMailServerBean() {
         this.name = null;
         this.description = null;
+        this.adminContact = null;
         this.from = null;
         this.prefix = null;
         this.protocol = null;
@@ -73,9 +77,10 @@ public class SmtpMailServerBean {
         this.password = null;
     }
 
-    private SmtpMailServerBean(
+    public SmtpMailServerBean(
             final String name,
             final String description,
+            final String adminContact,
             final String from,
             final String prefix,
             final String protocol,
@@ -87,6 +92,7 @@ public class SmtpMailServerBean {
 
         this.name = name;
         this.description = StringUtils.isNoneBlank(description) ? description : null;
+        this.adminContact = adminContact;
         this.from = from;
         this.prefix = prefix;
         this.protocol = protocol;
@@ -104,6 +110,10 @@ public class SmtpMailServerBean {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getAdminContact() {
+        return adminContact;
     }
 
     public String getFrom() {
@@ -152,6 +162,7 @@ public class SmtpMailServerBean {
         return new SmtpMailServerBean(
                 smtpMailServer.getName(),
                 smtpMailServer.getDescription(),
+                null,
                 smtpMailServer.getDefaultFrom(),
                 smtpMailServer.getPrefix(),
                 smtpMailServer.getMailProtocol().getProtocol(),
