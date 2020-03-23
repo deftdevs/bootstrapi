@@ -23,11 +23,11 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * The type User directory service.
  */
-@ExportAsService
 @BambooComponent
 @BitbucketComponent
 @ConfluenceComponent
 @JiraComponent
+@ExportAsService({UserDirectoryService.class})
 public class UserDirectoryServiceImpl implements UserDirectoryService {
 
     private static final Logger log = LoggerFactory.getLogger(UserDirectoryServiceImpl.class);
