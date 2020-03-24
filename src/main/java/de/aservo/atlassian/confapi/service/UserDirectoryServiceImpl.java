@@ -3,16 +3,13 @@ package de.aservo.atlassian.confapi.service;
 import com.atlassian.crowd.embedded.api.CrowdDirectoryService;
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.exception.DirectoryCurrentlySynchronisingException;
-import com.atlassian.plugin.spring.scanner.annotation.component.BambooComponent;
-import com.atlassian.plugin.spring.scanner.annotation.component.BitbucketComponent;
-import com.atlassian.plugin.spring.scanner.annotation.component.ConfluenceComponent;
-import com.atlassian.plugin.spring.scanner.annotation.component.JiraComponent;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.aservo.atlassian.confapi.model.UserDirectoryBean;
 import de.aservo.atlassian.confapi.util.BeanValidationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,10 +20,7 @@ import static com.google.common.base.Preconditions.checkNotNull;
 /**
  * The type User directory service.
  */
-@BambooComponent
-@BitbucketComponent
-@ConfluenceComponent
-@JiraComponent
+@Component
 @ExportAsService({UserDirectoryService.class})
 public class UserDirectoryServiceImpl implements UserDirectoryService {
 
