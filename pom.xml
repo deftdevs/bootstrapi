@@ -51,6 +51,7 @@
         <atlassian-mail.version>5.0.0</atlassian-mail.version>
         <atlassian-crowd.version>2.10.6</atlassian-crowd.version>
         <jsr311-api.version>1.1.1</jsr311-api.version>
+        <javax.inject.version>1</javax.inject.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <lombok.version>1.18.10</lombok.version>
@@ -95,6 +96,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
+            <version>${javax.inject.version}</version>
+            <scope>provided</scope>
+        </dependency>
 
         <dependency>
             <groupId>javax.ws.rs</groupId>
