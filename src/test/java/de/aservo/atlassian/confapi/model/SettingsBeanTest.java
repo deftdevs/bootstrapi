@@ -16,19 +16,21 @@ public class SettingsBeanTest {
     public void testDefaultConstructor() {
         final SettingsBean bean = new SettingsBean();
 
-        assertNull(bean.getBaseurl());
+        assertNull(bean.getBaseUrl());
         assertNull(bean.getTitle());
     }
 
     @Test
     public void testParameterConstructor() throws Exception {
-        final String baseurl = "http://localhost/product";
+        final String baseUrl = "http://localhost/product";
         final String title = "PRODUCT";
 
         final SMTPMailServer server = new DefaultTestSmtpMailServerImpl();
-        final SettingsBean bean = new SettingsBean(baseurl, title);
+        final SettingsBean bean = new SettingsBean();
+        bean.setBaseUrl(baseUrl);
+        bean.setTitle(title);
 
-        assertEquals(baseurl, bean.getBaseurl());
+        assertEquals(baseUrl, bean.getBaseUrl());
         assertEquals(title, bean.getTitle());
     }
 

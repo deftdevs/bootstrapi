@@ -3,152 +3,49 @@ package de.aservo.atlassian.confapi.model;
 import com.atlassian.mail.server.SMTPMailServer;
 import de.aservo.atlassian.confapi.constants.ConfAPI;
 import de.aservo.atlassian.confapi.exception.NoContentException;
-import org.apache.commons.lang3.StringUtils;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.EqualsExclude;
 import org.apache.commons.lang3.builder.HashCodeBuilder;
-import org.apache.commons.lang3.builder.HashCodeExclude;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import static com.atlassian.mail.MailConstants.DEFAULT_TIMEOUT;
-
-/**
- * Bean for SMTP mail server in REST requests.
- */
+@Data
+@NoArgsConstructor
 @XmlRootElement(name = ConfAPI.MAIL_SERVER_SMTP)
-public class MailServerSmtpBean {
+public class MailServerSmtpBean extends AbstractMailServerProtocolBean {
 
     @XmlElement
-    private final String name;
+    private String adminContact;
 
     @XmlElement
-    private final String description;
+    private String from;
 
     @XmlElement
-    private final String adminContact;
+    private String prefix;
 
     @XmlElement
-    private final String from;
-
-    @XmlElement
-    private final String prefix;
-
-    @XmlElement
-    private final String protocol;
-
-    @XmlElement
-    private final String host;
-
-    @XmlElement
-    private final Integer port;
-
-    @XmlElement
-    private final boolean tls;
-
-    @XmlElement
-    private final long timeout;
-
-    @XmlElement
-    private final String username;
-
-    @XmlElement
-    @EqualsExclude
-    @HashCodeExclude
-    private final String password;
+    private boolean tls;
 
     /**
-     * The default constructor is needed for JSON request deserialization.
+     * Constructor for {@link MailServerSmtpBean} used in crowd-confapi-plugin.
+     *
+     * @param adminContact the admin contact email address
+     * @param from         the server from email address
+     * @param prefix       the subject prefix
+     * @param host         the SMTP host
      */
-    public MailServerSmtpBean() {
-        this.name = null;
-        this.description = null;
-        this.adminContact = null;
-        this.from = null;
-        this.prefix = null;
-        this.protocol = null;
-        this.host = null;
-        this.port = null;
-        this.tls = false;
-        this.timeout = DEFAULT_TIMEOUT;
-        this.username = null;
-        this.password = null;
-    }
-
     public MailServerSmtpBean(
-            final String name,
-            final String description,
             final String adminContact,
             final String from,
             final String prefix,
-            final String protocol,
-            final String host,
-            final Integer port,
-            final boolean tls,
-            final long timeout,
-            final String username) {
+            final String host) {
 
-        this.name = name;
-        this.description = StringUtils.isNoneBlank(description) ? description : null;
-        this.adminContact = adminContact;
-        this.from = from;
-        this.prefix = prefix;
-        this.protocol = protocol;
-        this.host = host;
-        this.port = port;
-        this.tls = tls;
-        this.timeout = timeout;
-        this.username = username;
-        this.password = null;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public String getAdminContact() {
-        return adminContact;
-    }
-
-    public String getFrom() {
-        return from;
-    }
-
-    public String getPrefix() {
-        return prefix;
-    }
-
-    public String getProtocol() {
-        return protocol != null ? protocol.toLowerCase() : null;
-    }
-
-    public String getHost() {
-        return host;
-    }
-
-    public Integer getPort() {
-        return port;
-    }
-
-    public boolean isTls() {
-        return tls;
-    }
-
-    public long getTimeout() {
-        return timeout;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public String getPassword() {
-        return password;
+        setAdminContact(adminContact);
+        setFrom(from);
+        setPrefix(prefix);
+        setHost(host);
     }
 
     public static MailServerSmtpBean from(
@@ -158,18 +55,18 @@ public class MailServerSmtpBean {
             throw new NoContentException("No SMTP mail server defined");
         }
 
-        return new MailServerSmtpBean(
-                smtpMailServer.getName(),
-                smtpMailServer.getDescription(),
-                null,
-                smtpMailServer.getDefaultFrom(),
-                smtpMailServer.getPrefix(),
-                smtpMailServer.getMailProtocol().getProtocol(),
-                smtpMailServer.getHostname(),
-                StringUtils.isNotBlank(smtpMailServer.getPort()) ? Integer.parseInt(smtpMailServer.getPort()) : null,
-                smtpMailServer.isTlsRequired(),
-                smtpMailServer.getTimeout(),
-                smtpMailServer.getUsername());
+        final MailServerSmtpBean mailServerSmtpBean = new MailServerSmtpBean();
+        mailServerSmtpBean.setName(smtpMailServer.getName());
+        mailServerSmtpBean.setDescription(smtpMailServer.getDescription());
+        mailServerSmtpBean.setFrom(smtpMailServer.getDefaultFrom());
+        mailServerSmtpBean.setPrefix(smtpMailServer.getPrefix());
+        mailServerSmtpBean.setProtocol(smtpMailServer.getMailProtocol().getProtocol());
+        mailServerSmtpBean.setHost(smtpMailServer.getHostname());
+        mailServerSmtpBean.setPort(smtpMailServer.getPort());
+        mailServerSmtpBean.setTls(smtpMailServer.isTlsRequired());
+        mailServerSmtpBean.setTimeout(smtpMailServer.getTimeout());
+        mailServerSmtpBean.setUsername(smtpMailServer.getUsername());
+        return mailServerSmtpBean;
     }
 
     @Override
