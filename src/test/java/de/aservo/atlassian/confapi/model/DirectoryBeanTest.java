@@ -13,11 +13,11 @@ import static com.atlassian.crowd.directory.RemoteCrowdDirectory.*;
 import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserDirectoryBeanTest {
+public class DirectoryBeanTest {
 
     @Test
     public void testBuildDirectoryImpl() {
-        UserDirectoryBean bean = new UserDirectoryBean();
+        DirectoryBean bean = new DirectoryBean();
         bean.setName("dir1");
         bean.setType(DirectoryType.CROWD);
         bean.setImplClass("test.class");
@@ -55,7 +55,7 @@ public class UserDirectoryBeanTest {
         directory.setAttribute(CROWD_HTTP_PROXY_USERNAME, "user");
         directory.setAttribute(CROWD_HTTP_PROXY_PASSWORD, "pass");
 
-        UserDirectoryBean directoryBean = UserDirectoryBean.from(directory);
+        DirectoryBean directoryBean = DirectoryBean.from(directory);
 
         assertNotNull(directoryBean);
         assertEquals(directory.getName(), directoryBean.getName());

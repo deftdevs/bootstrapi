@@ -1,6 +1,6 @@
 package de.aservo.atlassian.confapi.model;
 
-import com.atlassian.mail.server.SMTPMailServer;
+import com.atlassian.mail.server.PopMailServer;
 import de.aservo.atlassian.confapi.constants.ConfAPI;
 import de.aservo.atlassian.confapi.exception.NoContentException;
 import org.apache.commons.lang3.StringUtils;
@@ -15,25 +15,16 @@ import javax.xml.bind.annotation.XmlRootElement;
 import static com.atlassian.mail.MailConstants.DEFAULT_TIMEOUT;
 
 /**
- * Bean for SMTP mail server in REST requests.
+ * Bean for POP mail server in REST requests.
  */
-@XmlRootElement(name = ConfAPI.MAIL_SERVER_SMTP)
-public class SmtpMailServerBean {
+@XmlRootElement(name = ConfAPI.MAIL_SERVER_POP)
+public class MailServerPopBean {
 
     @XmlElement
     private final String name;
 
     @XmlElement
     private final String description;
-
-    @XmlElement
-    private final String adminContact;
-
-    @XmlElement
-    private final String from;
-
-    @XmlElement
-    private final String prefix;
 
     @XmlElement
     private final String protocol;
@@ -43,9 +34,6 @@ public class SmtpMailServerBean {
 
     @XmlElement
     private final Integer port;
-
-    @XmlElement
-    private final boolean tls;
 
     @XmlElement
     private final long timeout;
@@ -61,43 +49,31 @@ public class SmtpMailServerBean {
     /**
      * The default constructor is needed for JSON request deserialization.
      */
-    public SmtpMailServerBean() {
+    public MailServerPopBean() {
         this.name = null;
         this.description = null;
-        this.adminContact = null;
-        this.from = null;
-        this.prefix = null;
         this.protocol = null;
         this.host = null;
         this.port = null;
-        this.tls = false;
         this.timeout = DEFAULT_TIMEOUT;
         this.username = null;
         this.password = null;
     }
 
-    public SmtpMailServerBean(
+    private MailServerPopBean(
             final String name,
             final String description,
-            final String adminContact,
-            final String from,
-            final String prefix,
             final String protocol,
             final String host,
             final Integer port,
-            final boolean tls,
             final long timeout,
             final String username) {
 
         this.name = name;
         this.description = StringUtils.isNoneBlank(description) ? description : null;
-        this.adminContact = adminContact;
-        this.from = from;
-        this.prefix = prefix;
         this.protocol = protocol;
         this.host = host;
         this.port = port;
-        this.tls = tls;
         this.timeout = timeout;
         this.username = username;
         this.password = null;
@@ -109,18 +85,6 @@ public class SmtpMailServerBean {
 
     public String getDescription() {
         return description;
-    }
-
-    public String getAdminContact() {
-        return adminContact;
-    }
-
-    public String getFrom() {
-        return from;
-    }
-
-    public String getPrefix() {
-        return prefix;
     }
 
     public String getProtocol() {
@@ -135,10 +99,6 @@ public class SmtpMailServerBean {
         return port;
     }
 
-    public boolean isTls() {
-        return tls;
-    }
-
     public long getTimeout() {
         return timeout;
     }
@@ -151,25 +111,21 @@ public class SmtpMailServerBean {
         return password;
     }
 
-    public static SmtpMailServerBean from(
-            final SMTPMailServer smtpMailServer) throws NoContentException {
+    public static MailServerPopBean from(
+            final PopMailServer popMailServer) throws NoContentException {
 
-        if (smtpMailServer == null) {
-            throw new NoContentException("No SMTP mail server defined");
+        if (popMailServer == null) {
+            throw new NoContentException("No POP mail server defined");
         }
 
-        return new SmtpMailServerBean(
-                smtpMailServer.getName(),
-                smtpMailServer.getDescription(),
-                null,
-                smtpMailServer.getDefaultFrom(),
-                smtpMailServer.getPrefix(),
-                smtpMailServer.getMailProtocol().getProtocol(),
-                smtpMailServer.getHostname(),
-                StringUtils.isNotBlank(smtpMailServer.getPort()) ? Integer.parseInt(smtpMailServer.getPort()) : null,
-                smtpMailServer.isTlsRequired(),
-                smtpMailServer.getTimeout(),
-                smtpMailServer.getUsername());
+        return new MailServerPopBean(
+                popMailServer.getName(),
+                popMailServer.getDescription(),
+                popMailServer.getMailProtocol().getProtocol(),
+                popMailServer.getHostname(),
+                StringUtils.isNotBlank(popMailServer.getPort()) ? Integer.parseInt(popMailServer.getPort()) : null,
+                popMailServer.getTimeout(),
+                popMailServer.getUsername());
     }
 
     @Override

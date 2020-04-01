@@ -5,7 +5,7 @@ import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.exception.DirectoryCurrentlySynchronisingException;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.atlassian.confapi.model.UserDirectoryBean;
+import de.aservo.atlassian.confapi.model.DirectoryBean;
 import de.aservo.atlassian.confapi.util.BeanValidationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,10 +22,10 @@ import static com.google.common.base.Preconditions.checkNotNull;
  * The type User directory service.
  */
 @Component
-@ExportAsService({UserDirectoryService.class})
-public class UserDirectoryServiceImpl implements UserDirectoryService {
+@ExportAsService({DirectoryService.class})
+public class DirectoryServiceImpl implements DirectoryService {
 
-    private static final Logger log = LoggerFactory.getLogger(UserDirectoryServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(DirectoryServiceImpl.class);
 
     private final CrowdDirectoryService crowdDirectoryService;
 
@@ -35,7 +35,7 @@ public class UserDirectoryServiceImpl implements UserDirectoryService {
      * @param crowdDirectoryService the crowd directory service
      */
     @Inject
-    public UserDirectoryServiceImpl(@ComponentImport CrowdDirectoryService crowdDirectoryService) {
+    public DirectoryServiceImpl(@ComponentImport CrowdDirectoryService crowdDirectoryService) {
         this.crowdDirectoryService = checkNotNull(crowdDirectoryService);
     }
 
@@ -44,8 +44,8 @@ public class UserDirectoryServiceImpl implements UserDirectoryService {
      *
      * @return the directories
      */
-    public List<UserDirectoryBean> getDirectories() {
-        return crowdDirectoryService.findAllDirectories().stream().map(UserDirectoryBean::from).collect(Collectors.toList());
+    public List<DirectoryBean> getDirectories() {
+        return crowdDirectoryService.findAllDirectories().stream().map(DirectoryBean::from).collect(Collectors.toList());
     }
 
     /**
@@ -56,7 +56,7 @@ public class UserDirectoryServiceImpl implements UserDirectoryService {
      * @return the configuration added
      * @throws DirectoryCurrentlySynchronisingException the directory currently synchronising exception
      */
-    public UserDirectoryBean addDirectory(UserDirectoryBean directoryBean, boolean testConnection) throws DirectoryCurrentlySynchronisingException {
+    public DirectoryBean addDirectory(DirectoryBean directoryBean, boolean testConnection) throws DirectoryCurrentlySynchronisingException {
         //preps and validation
         BeanValidationUtil.validate(directoryBean);
         Directory directory = directoryBean.toDirectory();
@@ -75,6 +75,6 @@ public class UserDirectoryServiceImpl implements UserDirectoryService {
         }
 
         //add new directory
-        return UserDirectoryBean.from(crowdDirectoryService.addDirectory(directory));
+        return DirectoryBean.from(crowdDirectoryService.addDirectory(directory));
     }
 }
