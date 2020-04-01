@@ -49,19 +49,18 @@
     </developers>
 
     <properties>
-        <crowd.version>3.2.1</crowd.version>
-        <crowd.data.version>3.1.2</crowd.data.version>
         <amps.version>6.3.5</amps.version>
-        <plugin.testrunner.version>1.2.3</plugin.testrunner.version>
+        <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>1.2.13</atlassian.spring.scanner.version>
+        <confapi-commons.version>0.0.1-SNAPSHOT</confapi-commons.version>
+        <coveralls.version>4.3.0</coveralls.version>
+        <crowd.version>3.2.1</crowd.version>
+        <lombok.version>1.18.10</lombok.version>
         <javax.ws.version>1.1.1</javax.ws.version>
         <javax.xml.version>2.1</javax.xml.version>
-        <!-- This key is used to keep the consistency between the key in atlassian-plugin.xml and the key to generate bundle. -->
-        <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-
-        <!-- Test properties -->
         <jacoco.version>0.8.1</jacoco.version>
-        <coveralls.version>4.3.0</coveralls.version>
+        <plugin.testrunner.version>1.2.3</plugin.testrunner.version>
+        <swagger.version>2.1.1</swagger.version>
     </properties>
 
     <dependencyManagement>
@@ -77,6 +76,13 @@
     </dependencyManagement>
 
     <dependencies>
+        <dependency>
+            <groupId>de.aservo.atlassian</groupId>
+            <artifactId>confapi-commons</artifactId>
+            <version>${confapi-commons.version}</version>
+            <scope>compile</scope>
+        </dependency>
+
         <dependency>
             <groupId>com.atlassian.crowd</groupId>
             <artifactId>crowd-api</artifactId>
@@ -129,6 +135,34 @@
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.7.9</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <version>${lombok.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-jaxrs2</artifactId>
+            <version>${swagger.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.1</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
             <scope>provided</scope>
         </dependency>
 
@@ -194,28 +228,29 @@
                 <extensions>true</extensions>
                 <configuration>
                     <productVersion>${crowd.version}</productVersion>
-                    <productDataVersion>${crowd.data.version}</productDataVersion>
+                    <productDataVersion>${crowd.version}</productDataVersion>
                     <allowGoogleTracking>false</allowGoogleTracking>
                     <enableQuickReload>true</enableQuickReload>
                     <enableFastdev>false</enableFastdev>
                     <extractDependencies>true</extractDependencies>
-
-                    <!-- See here for an explanation of default instructions: -->
-                    <!-- https://developer.atlassian.com/docs/advanced-topics/configuration-of-instructions-in-atlassian-plugins -->
                     <instructions>
                         <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
-
-                        <!-- Add package import here -->
                         <Import-Package>
                             org.springframework.osgi.*;resolution:="optional",
                             org.eclipse.gemini.blueprint.*;resolution:="optional",
                             *
                         </Import-Package>
-
-                        <!-- Ensure plugin is spring powered -->
                         <Spring-Context>*</Spring-Context>
                     </instructions>
                 </configuration>
+                <executions>
+                    <execution>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>copy-bundled-dependencies</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -224,10 +259,10 @@
                 <version>${atlassian.spring.scanner.version}</version>
                 <executions>
                     <execution>
+                        <phase>process-classes</phase>
                         <goals>
                             <goal>atlassian-spring-scanner</goal>
                         </goals>
-                        <phase>process-classes</phase>
                     </execution>
                 </executions>
             </plugin>

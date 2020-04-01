@@ -28,7 +28,7 @@ public class DirectoryAttributesBeanTest {
 
     @Test
     public void testConstruct() {
-        final DirectoryAttributesBean directoryAttributesBean = new DirectoryAttributesBean(directory);
+        final DirectoryAttributesBean directoryAttributesBean = DirectoryAttributesBean.from(directory);
 
         assertThat(directoryAttributesBean.getPasswordRegex(), equalTo(MockDirectory.ATTRIBUTE_PASSWORD_REGEX_VALUE));
         assertThat(directoryAttributesBean.getPasswordComplexityMessage(), equalTo(MockDirectory.ATTRIBUTE_PASSWORD_COMPLEXITY_MESSAGE_VALUE));
@@ -39,8 +39,8 @@ public class DirectoryAttributesBeanTest {
 
     @Test
     public void testEquals() {
-        final DirectoryAttributesBean directoryAttributesBean1 = new DirectoryAttributesBean(directory);
-        final DirectoryAttributesBean directoryAttributesBean2 = new DirectoryAttributesBean(directory);
+        final DirectoryAttributesBean directoryAttributesBean1 = DirectoryAttributesBean.from(directory);
+        final DirectoryAttributesBean directoryAttributesBean2 = DirectoryAttributesBean.from(directory);
 
         assertThat(directoryAttributesBean1, equalTo(directoryAttributesBean2));
     }

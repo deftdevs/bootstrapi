@@ -4,7 +4,7 @@ import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.MockDirectory;
 import com.atlassian.crowd.exception.DirectoryNotFoundException;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
-import de.aservo.atlassian.crowd.confapi.CrowdWebAuthenticationHelper;
+import de.aservo.atlassian.crowd.confapi.helper.CrowdWebAuthenticationHelper;
 import de.aservo.atlassian.crowd.confapi.bean.DirectoryAttributesBean;
 import de.aservo.atlassian.crowd.confapi.bean.DirectoryBean;
 import org.junit.Test;
@@ -46,7 +46,7 @@ public class DirectoryResourceTest {
 
         assertThat(directoryBean.getId(), equalTo(directory.getId()));
         assertThat(directoryBean.getName(), equalTo(directory.getName()));
-        assertThat(directoryBean.getAttributes(), equalTo(new DirectoryAttributesBean(directory)));
+        assertThat(directoryBean.getAttributes(), equalTo(DirectoryAttributesBean.from(directory)));
     }
 
     @Test
@@ -67,7 +67,7 @@ public class DirectoryResourceTest {
 
         final DirectoryAttributesBean directoryAttributesBean = (DirectoryAttributesBean) responseEntity;
 
-        assertThat(directoryAttributesBean, equalTo(new DirectoryAttributesBean(directory)));
+        assertThat(directoryAttributesBean, equalTo(DirectoryAttributesBean.from(directory)));
     }
 
     @Test

@@ -26,8 +26,8 @@ public class DirectoryBeanTest {
 
     @Test
     public void testConstruct() {
-        final DirectoryBean directoryBean = new DirectoryBean(directory);
-        final DirectoryAttributesBean directoryAttributesBean = new DirectoryAttributesBean(directory);
+        final DirectoryBean directoryBean = DirectoryBean.from(directory);
+        final DirectoryAttributesBean directoryAttributesBean = DirectoryAttributesBean.from(directory);
 
         assertThat(directoryBean.getId(), equalTo(directory.getId()));
         assertThat(directoryBean.getName(), equalTo(directory.getName()));
@@ -36,8 +36,8 @@ public class DirectoryBeanTest {
 
     @Test
     public void testEqual() {
-        final DirectoryBean directoryBean1 = new DirectoryBean(directory);
-        final DirectoryBean directoryBean2 = new DirectoryBean(directory);
+        final DirectoryBean directoryBean1 = DirectoryBean.from(directory);
+        final DirectoryBean directoryBean2 = DirectoryBean.from(directory);
 
         assertThat(directoryBean1, equalTo(directoryBean2));
     }
