@@ -1,66 +1,48 @@
 package de.aservo.atlassian.crowd.confapi.bean;
 
 import com.atlassian.crowd.embedded.api.Directory;
+import de.aservo.atlassian.confapi.constants.ConfAPI;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-/**
- * Bean for directory in REST queries.
- */
-@XmlRootElement(name = "directory")
+@Data
+@NoArgsConstructor
+@XmlRootElement(name = ConfAPI.DIRECTORY)
 public class DirectoryBean {
 
     @XmlElement
-    private final Long id;
+    private Long id;
 
     @XmlElement
-    private final String name;
+    private String name;
 
     @XmlElement
-    private final DirectoryAttributesBean attributes;
+    private DirectoryAttributesBean attributes;
 
-    /**
-     * The default constructor is needed for JSON request deserialization.
-     */
-    public DirectoryBean() {
-        this.id = null;
-        this.name = null;
-        this.attributes = null;
-    }
-
-    public DirectoryBean(
+    public static DirectoryBean from(
             final Directory directory) {
 
-        this.id = directory.getId();
-        this.name = directory.getName();
-        this.attributes = new DirectoryAttributesBean(directory);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public DirectoryAttributesBean getAttributes() {
-        return attributes;
+        final DirectoryBean directoryBean = new DirectoryBean();
+        directoryBean.setId(directory.getId());
+        directoryBean.setName(directory.getName());
+        directoryBean.setAttributes(DirectoryAttributesBean.from(directory));
+        return directoryBean;
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (obj == null) { return false; }
-        if (obj == this) { return true; }
-        if (obj.getClass() != getClass()) { return false; }
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
 
-        final DirectoryBean directoryBean = (DirectoryBean) obj;
-        return new EqualsBuilder()
-                .append(id, directoryBean.id)
-                .append(name, directoryBean.name)
-                .isEquals();
+    @Override
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
+    public boolean equals(Object o) {
+        return EqualsBuilder.reflectionEquals(this, o);
     }
 
 }

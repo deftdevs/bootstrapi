@@ -4,13 +4,13 @@ import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.exception.DirectoryNotFoundException;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import com.atlassian.plugins.rest.common.security.AnonymousAllowed;
-import de.aservo.atlassian.crowd.confapi.CrowdWebAuthenticationHelper;
+import de.aservo.atlassian.confapi.constants.ConfAPI;
+import de.aservo.atlassian.crowd.confapi.helper.CrowdWebAuthenticationHelper;
 import de.aservo.atlassian.crowd.confapi.bean.DirectoryAttributesBean;
 import de.aservo.atlassian.crowd.confapi.bean.DirectoryBean;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
@@ -18,11 +18,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-/**
- * Directory resource.
- */
-@Path("/directory")
-@AnonymousAllowed
+@Path(ConfAPI.DIRECTORY)
 @Produces(MediaType.APPLICATION_JSON)
 @Component
 public class DirectoryResource {
@@ -32,10 +28,7 @@ public class DirectoryResource {
 
     private final CrowdWebAuthenticationHelper crowdWebAuthenticationHelper;
 
-    /**
-     * Constructor.
-     */
-    @Autowired
+    @Inject
     public DirectoryResource(
             final DirectoryManager directoryManager,
             final CrowdWebAuthenticationHelper crowdWebAuthenticationHelper) {
@@ -57,7 +50,7 @@ public class DirectoryResource {
             final Directory directory = directoryManager.findDirectoryById(id);
 
             if (directory != null) {
-                directoryBean = new DirectoryBean(directory);
+                directoryBean = DirectoryBean.from(directory);
             }
         } catch (DirectoryNotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -79,7 +72,7 @@ public class DirectoryResource {
             final Directory directory = directoryManager.findDirectoryById(id);
 
             if (directory != null) {
-                directoryAttributesBean = new DirectoryAttributesBean(directory);
+                directoryAttributesBean = DirectoryAttributesBean.from(directory);
             }
         } catch (DirectoryNotFoundException e) {
             return Response.status(Response.Status.NOT_FOUND).build();

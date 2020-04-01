@@ -1,7 +1,10 @@
 package de.aservo.atlassian.crowd.confapi.bean;
 
 import com.atlassian.crowd.embedded.api.Directory;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.EqualsBuilder;
+import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -9,82 +12,36 @@ import javax.xml.bind.annotation.XmlRootElement;
 import static com.atlassian.crowd.directory.AbstractInternalDirectory.*;
 import static org.apache.commons.lang.StringUtils.isNotBlank;
 
-/**
- * Bean for directory attributes in REST queries.
- */
+@Data
+@NoArgsConstructor
 @XmlRootElement(name = "attributes")
 public class DirectoryAttributesBean {
 
     @XmlElement
-    private final String passwordRegex;
+    private String passwordRegex;
 
     @XmlElement
-    private final String passwordComplexityMessage;
+    private String passwordComplexityMessage;
 
     @XmlElement
-    private final Long passwordMaxAttempts;
+    private Long passwordMaxAttempts;
 
     @XmlElement
-    private final Long passwordHistoryCount;
+    private Long passwordHistoryCount;
 
     @XmlElement
-    private final Long passwordMaxChangeTime;
+    private Long passwordMaxChangeTime;
 
-    /**
-     * The default constructor is needed for JSON request deserialization.
-     */
-    public DirectoryAttributesBean() {
-        this.passwordRegex = null;
-        this.passwordComplexityMessage = null;
-        this.passwordMaxAttempts = null;
-        this.passwordHistoryCount = null;
-        this.passwordMaxChangeTime = null;
-    }
-
-    public DirectoryAttributesBean(
+    public static DirectoryAttributesBean from(
             final Directory directory) {
 
-        this.passwordRegex = extractPasswordRegex(directory);
-        this.passwordComplexityMessage = extractPasswordComplexityMessage(directory);
-        this.passwordMaxAttempts = extractPasswordMaxAttempts(directory);
-        this.passwordHistoryCount = extractPasswordHistoryCount(directory);
-        this.passwordMaxChangeTime = extractPasswordMaxChangeTimeAttribute(directory);
-    }
-
-    public String getPasswordRegex() {
-        return passwordRegex;
-    }
-
-    public String getPasswordComplexityMessage() {
-        return passwordComplexityMessage;
-    }
-
-    public Long getPasswordMaxAttempts() {
-        return passwordMaxAttempts;
-    }
-
-    public Long getPasswordHistoryCount() {
-        return passwordHistoryCount;
-    }
-
-    public Long getPasswordMaxChangeTime() {
-        return passwordMaxChangeTime;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) { return false; }
-        if (obj == this) { return true; }
-        if (obj.getClass() != getClass()) { return false; }
-
-        final DirectoryAttributesBean directoryAttributesBean = (DirectoryAttributesBean) obj;
-        return new EqualsBuilder()
-                .append(passwordRegex, directoryAttributesBean.passwordRegex)
-                .append(passwordComplexityMessage, directoryAttributesBean.passwordComplexityMessage)
-                .append(passwordMaxAttempts, directoryAttributesBean.passwordMaxAttempts)
-                .append(passwordHistoryCount, directoryAttributesBean.passwordHistoryCount)
-                .append(passwordMaxChangeTime, directoryAttributesBean.passwordMaxChangeTime)
-                .isEquals();
+        final DirectoryAttributesBean directoryAttributesBean = new DirectoryAttributesBean();
+        directoryAttributesBean.setPasswordRegex(extractPasswordRegex(directory));
+        directoryAttributesBean.setPasswordComplexityMessage(extractPasswordComplexityMessage(directory));
+        directoryAttributesBean.setPasswordMaxAttempts(extractPasswordMaxAttempts(directory));
+        directoryAttributesBean.setPasswordHistoryCount(extractPasswordHistoryCount(directory));
+        directoryAttributesBean.setPasswordMaxChangeTime(extractPasswordMaxChangeTimeAttribute(directory));
+        return directoryAttributesBean;
     }
 
     private static String extractPasswordRegex(
@@ -128,6 +85,17 @@ public class DirectoryAttributesBean {
         }
 
         return null;
+    }
+
+    @Override
+    public int hashCode() {
+        return HashCodeBuilder.reflectionHashCode(this);
+    }
+
+    @Override
+    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
+    public boolean equals(Object o) {
+        return EqualsBuilder.reflectionEquals(this, o);
     }
 
 }
