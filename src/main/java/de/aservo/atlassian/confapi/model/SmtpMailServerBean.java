@@ -17,7 +17,7 @@ import static com.atlassian.mail.MailConstants.DEFAULT_TIMEOUT;
 /**
  * Bean for SMTP mail server in REST requests.
  */
-@XmlRootElement(name = ConfAPI.MAIL_SMTP)
+@XmlRootElement(name = ConfAPI.MAIL_SERVER_SMTP)
 public class SmtpMailServerBean {
 
     @XmlElement

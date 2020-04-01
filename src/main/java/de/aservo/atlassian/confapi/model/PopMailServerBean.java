@@ -17,7 +17,7 @@ import static com.atlassian.mail.MailConstants.DEFAULT_TIMEOUT;
 /**
  * Bean for POP mail server in REST requests.
  */
-@XmlRootElement(name = ConfAPI.MAIL_POP)
+@XmlRootElement(name = ConfAPI.MAIL_SERVER_POP)
 public class PopMailServerBean {
 
     @XmlElement
