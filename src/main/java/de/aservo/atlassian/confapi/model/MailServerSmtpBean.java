@@ -17,8 +17,8 @@ import static com.atlassian.mail.MailConstants.DEFAULT_TIMEOUT;
 /**
  * Bean for SMTP mail server in REST requests.
  */
-@XmlRootElement(name = ConfAPI.MAIL_SMTP)
-public class SmtpMailServerBean {
+@XmlRootElement(name = ConfAPI.MAIL_SERVER_SMTP)
+public class MailServerSmtpBean {
 
     @XmlElement
     private final String name;
@@ -61,7 +61,7 @@ public class SmtpMailServerBean {
     /**
      * The default constructor is needed for JSON request deserialization.
      */
-    public SmtpMailServerBean() {
+    public MailServerSmtpBean() {
         this.name = null;
         this.description = null;
         this.adminContact = null;
@@ -76,7 +76,7 @@ public class SmtpMailServerBean {
         this.password = null;
     }
 
-    public SmtpMailServerBean(
+    public MailServerSmtpBean(
             final String name,
             final String description,
             final String adminContact,
@@ -151,14 +151,14 @@ public class SmtpMailServerBean {
         return password;
     }
 
-    public static SmtpMailServerBean from(
+    public static MailServerSmtpBean from(
             final SMTPMailServer smtpMailServer) throws NoContentException {
 
         if (smtpMailServer == null) {
             throw new NoContentException("No SMTP mail server defined");
         }
 
-        return new SmtpMailServerBean(
+        return new MailServerSmtpBean(
                 smtpMailServer.getName(),
                 smtpMailServer.getDescription(),
                 null,

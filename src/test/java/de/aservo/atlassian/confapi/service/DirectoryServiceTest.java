@@ -5,7 +5,7 @@ import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.exception.DirectoryCurrentlySynchronisingException;
 import com.atlassian.crowd.model.directory.ImmutableDirectory;
-import de.aservo.atlassian.confapi.model.UserDirectoryBean;
+import de.aservo.atlassian.confapi.model.DirectoryBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -27,22 +27,22 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserDirectoryServiceTest {
+public class DirectoryServiceTest {
 
     @Mock
     private CrowdDirectoryService crowdDirectoryService;
 
     @InjectMocks
-    private UserDirectoryServiceImpl userDirectoryService;
+    private DirectoryServiceImpl userDirectoryService;
 
     @Test
     public void testGetDirectories() {
         Directory directory = createDirectory();
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
 
-        List<UserDirectoryBean> directories = userDirectoryService.getDirectories();
+        List<DirectoryBean> directories = userDirectoryService.getDirectories();
 
-        assertEquals(directories.get(0), UserDirectoryBean.from(directory));
+        assertEquals(directories.get(0), DirectoryBean.from(directory));
     }
 
     @Test
@@ -50,9 +50,9 @@ public class UserDirectoryServiceTest {
         Directory directory = createDirectory();
         doReturn(directory).when(crowdDirectoryService).addDirectory(any(Directory.class));
 
-        UserDirectoryBean directoryBean = UserDirectoryBean.from(directory);
+        DirectoryBean directoryBean = DirectoryBean.from(directory);
         directoryBean.setAppPassword("test");
-        UserDirectoryBean directoryAdded = userDirectoryService.addDirectory(directoryBean, false);
+        DirectoryBean directoryAdded = userDirectoryService.addDirectory(directoryBean, false);
 
         assertEquals(directoryAdded.getName(), directoryBean.getName());
     }
@@ -60,7 +60,7 @@ public class UserDirectoryServiceTest {
     @Test(expected = ValidationException.class)
     public void testAddDirectoryInvalidBean() throws DirectoryCurrentlySynchronisingException {
         Directory directory = createDirectory();
-        UserDirectoryBean directoryBean = UserDirectoryBean.from(directory);
+        DirectoryBean directoryBean = DirectoryBean.from(directory);
         directoryBean.setAppPassword("test");
         directoryBean.setClientName(null);
 

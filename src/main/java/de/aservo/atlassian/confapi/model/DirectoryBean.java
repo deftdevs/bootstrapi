@@ -25,7 +25,7 @@ import static com.atlassian.crowd.model.directory.DirectoryImpl.ATTRIBUTE_KEY_US
 @Data
 @NoArgsConstructor
 @XmlRootElement(name = ConfAPI.DIRECTORY)
-public class UserDirectoryBean {
+public class DirectoryBean {
 
     @XmlElement
     private boolean active;
@@ -102,9 +102,9 @@ public class UserDirectoryBean {
      * @param directory the directory
      * @return the user directory bean
      */
-    public static UserDirectoryBean from(Directory directory) {
+    public static DirectoryBean from(Directory directory) {
         Map<String, String> attributes = directory.getAttributes();
-        UserDirectoryBean directoryBean = new UserDirectoryBean();
+        DirectoryBean directoryBean = new DirectoryBean();
         directoryBean.setName(directory.getName());
         directoryBean.setActive(directory.isActive());
         directoryBean.setType(directory.getType());

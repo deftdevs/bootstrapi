@@ -3,7 +3,7 @@ package de.aservo.atlassian.confapi.suite;
 import de.aservo.atlassian.confapi.exception.NoContentExceptionTest;
 import de.aservo.atlassian.confapi.helper.WebAuthenticationHelperTest;
 import de.aservo.atlassian.confapi.model.*;
-import de.aservo.atlassian.confapi.service.UserDirectoryServiceTest;
+import de.aservo.atlassian.confapi.service.DirectoryServiceTest;
 import de.aservo.atlassian.confapi.util.MailProtocolUtilTest;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
@@ -14,12 +14,12 @@ import org.junit.runners.Suite.SuiteClasses;
     NoContentExceptionTest.class,
     WebAuthenticationHelperTest.class,
     ErrorCollectionTest.class,
-    PopMailServerBeanTest.class,
+    MailServerPopBeanTest.class,
     SettingsBeanTest.class,
-    SmtpMailServerBeanTest.class,
-    UserDirectoryBeanTest.class,
+    MailServerSmtpBeanTest.class,
+    DirectoryBeanTest.class,
 
-    UserDirectoryServiceTest.class,
+    DirectoryServiceTest.class,
 
     MailProtocolUtilTest.class
 })

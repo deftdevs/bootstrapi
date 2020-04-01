@@ -17,8 +17,8 @@ import static com.atlassian.mail.MailConstants.DEFAULT_TIMEOUT;
 /**
  * Bean for POP mail server in REST requests.
  */
-@XmlRootElement(name = ConfAPI.MAIL_POP)
-public class PopMailServerBean {
+@XmlRootElement(name = ConfAPI.MAIL_SERVER_POP)
+public class MailServerPopBean {
 
     @XmlElement
     private final String name;
@@ -49,7 +49,7 @@ public class PopMailServerBean {
     /**
      * The default constructor is needed for JSON request deserialization.
      */
-    public PopMailServerBean() {
+    public MailServerPopBean() {
         this.name = null;
         this.description = null;
         this.protocol = null;
@@ -60,7 +60,7 @@ public class PopMailServerBean {
         this.password = null;
     }
 
-    private PopMailServerBean(
+    private MailServerPopBean(
             final String name,
             final String description,
             final String protocol,
@@ -111,14 +111,14 @@ public class PopMailServerBean {
         return password;
     }
 
-    public static PopMailServerBean from(
+    public static MailServerPopBean from(
             final PopMailServer popMailServer) throws NoContentException {
 
         if (popMailServer == null) {
             throw new NoContentException("No POP mail server defined");
         }
 
-        return new PopMailServerBean(
+        return new MailServerPopBean(
                 popMailServer.getName(),
                 popMailServer.getDescription(),
                 popMailServer.getMailProtocol().getProtocol(),
