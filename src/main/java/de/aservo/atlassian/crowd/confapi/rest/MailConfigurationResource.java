@@ -8,6 +8,10 @@ import de.aservo.atlassian.confapi.constants.ConfAPI;
 import de.aservo.atlassian.confapi.model.ErrorCollection;
 import de.aservo.atlassian.confapi.model.MailServerSmtpBean;
 import de.aservo.atlassian.crowd.confapi.helper.CrowdWebAuthenticationHelper;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -48,6 +52,13 @@ public class MailConfigurationResource {
 
     @GET
     @Path(ConfAPI.MAIL_SERVER_SMTP)
+    @Operation(
+            summary = "Retrieve the current SMTP mail server configuration",
+            responses = {
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = MailServerSmtpBean.class))),
+                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+            }
+    )
     public Response getMailServerSmtp() {
         crowdWebAuthenticationHelper.mustBeSysAdmin();
 
@@ -73,6 +84,13 @@ public class MailConfigurationResource {
     @PUT
     @Path(ConfAPI.MAIL_SERVER_SMTP)
     @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(
+            summary = "Update the SMTP mail server configuration",
+            responses = {
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = MailServerSmtpBean.class))),
+                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+            }
+    )
     public Response putMailServerSmtp(
             final MailServerSmtpBean bean) {
 
