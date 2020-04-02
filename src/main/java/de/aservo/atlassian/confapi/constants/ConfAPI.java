@@ -6,6 +6,8 @@ public class ConfAPI {
     public static final String APPLICATION_LINKS            = "application-links";
     public static final String DIRECTORIES                  = "directories";
     public static final String DIRECTORY                    = "directory";
+    public static final String ERRORS                       = "errors";
+    public static final String ERROR                        = "error";
     public static final String EXPORT                       = "export";
     public static final String GADGET                       = "gadget";
     public static final String GADGETS                      = "gadgets";

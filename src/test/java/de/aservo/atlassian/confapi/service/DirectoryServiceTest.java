@@ -46,13 +46,38 @@ public class DirectoryServiceTest {
     }
 
     @Test
-    public void testAddDirectory() throws DirectoryCurrentlySynchronisingException {
+    public void testAddDirectoryWithoutExistingDirectory() throws DirectoryCurrentlySynchronisingException {
         Directory directory = createDirectory();
         doReturn(directory).when(crowdDirectoryService).addDirectory(any(Directory.class));
 
         DirectoryBean directoryBean = DirectoryBean.from(directory);
         directoryBean.setAppPassword("test");
         DirectoryBean directoryAdded = userDirectoryService.addDirectory(directoryBean, false);
+
+        assertEquals(directoryAdded.getName(), directoryBean.getName());
+    }
+
+    @Test
+    public void testAddDirectoryWithExistingDirectory() throws DirectoryCurrentlySynchronisingException {
+        Directory directory = createDirectory();
+        doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
+        doReturn(directory).when(crowdDirectoryService).addDirectory(any(Directory.class));
+
+        DirectoryBean directoryBean = DirectoryBean.from(directory);
+        directoryBean.setAppPassword("test");
+        DirectoryBean directoryAdded = userDirectoryService.addDirectory(directoryBean, false);
+
+        assertEquals(directoryAdded.getName(), directoryBean.getName());
+    }
+
+    @Test
+    public void testAddDirectoryWithConnectionTest() throws DirectoryCurrentlySynchronisingException {
+        Directory directory = createDirectory();
+        doReturn(directory).when(crowdDirectoryService).addDirectory(any(Directory.class));
+
+        DirectoryBean directoryBean = DirectoryBean.from(directory);
+        directoryBean.setAppPassword("test");
+        DirectoryBean directoryAdded = userDirectoryService.addDirectory(directoryBean, true);
 
         assertEquals(directoryAdded.getName(), directoryBean.getName());
     }
@@ -76,6 +101,6 @@ public class DirectoryServiceTest {
         attributes.put(ATTRIBUTE_KEY_USE_NESTED_GROUPS, "false");
         attributes.put(INCREMENTAL_SYNC_ENABLED, "true");
         attributes.put(SYNC_GROUP_MEMBERSHIP_AFTER_SUCCESSFUL_USER_AUTH_ENABLED, WHEN_AUTHENTICATION_CREATED_THE_USER.getValue());
-        return ImmutableDirectory.builder("test", DirectoryType.CROWD, "test.class").setAttributes(attributes).build();
+        return ImmutableDirectory.builder("test", DirectoryType.CROWD, "test.class").setId(1L).setAttributes(attributes).build();
     }
 }

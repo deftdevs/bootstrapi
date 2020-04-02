@@ -1,12 +1,14 @@
 package de.aservo.atlassian.confapi.model;
 
+import de.aservo.atlassian.confapi.constants.ConfAPI;
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 
-@XmlRootElement
+@XmlRootElement(name = ConfAPI.ERROR)
 public class ErrorCollection {
 
     @XmlElement
