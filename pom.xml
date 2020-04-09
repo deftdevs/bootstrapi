@@ -48,6 +48,7 @@
     <properties>
         <amps.version>8.0.2</amps.version>
         <applinks-api.version>7.1.3</applinks-api.version>
+        <atlassian-application-api.version>1.2</atlassian-application-api.version>
         <atlassian-crowd.version>2.10.6</atlassian-crowd.version>
         <atlassian-mail.version>5.0.0</atlassian-mail.version>
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
@@ -108,6 +109,13 @@
             <groupId>com.atlassian.applinks</groupId>
             <artifactId>applinks-spi</artifactId>
             <version>${applinks-api.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.application</groupId>
+            <artifactId>atlassian-application-api</artifactId>
+            <version>${atlassian-application-api.version}</version>
             <scope>provided</scope>
         </dependency>
 
