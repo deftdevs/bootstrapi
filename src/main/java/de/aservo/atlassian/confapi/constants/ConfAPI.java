@@ -25,6 +25,7 @@ public class ConfAPI {
     public static final String SETTINGS                     = "settings";
     public static final String USER                         = "user";
     public static final String USERS                        = "users";
+    public static final String USER_PASSWORD                = "password";
 
     private ConfAPI() {
     }
