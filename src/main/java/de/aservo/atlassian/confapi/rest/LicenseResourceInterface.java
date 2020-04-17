@@ -20,5 +20,5 @@ public interface LicenseResourceInterface {
      * @param licenseKey the license key to set
      * @return the added license of type {@link de.aservo.atlassian.confapi.model.LicenseBean}.
      */
-    Response setLicense(Boolean clear, final String licenseKey);
+    Response setLicense(final boolean clear, final String licenseKey);
 }
