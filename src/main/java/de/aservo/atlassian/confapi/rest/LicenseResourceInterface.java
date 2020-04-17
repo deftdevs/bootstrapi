@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
+import javax.annotation.Nonnull;
 import javax.ws.rs.core.Response;
 
 /**
@@ -50,6 +51,6 @@ public interface LicenseResourceInterface {
     )
     Response setLicense(
             @Parameter(description="Clears license details before updating (Jira only).") final boolean clear,
-            final String licenseKey);
+            @Nonnull final String licenseKey);
 
 }

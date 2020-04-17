@@ -7,7 +7,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import javax.validation.constraints.NotNull;
+import javax.annotation.Nonnull;
 import javax.ws.rs.core.Response;
 
 public interface SettingsResourceInterface {
@@ -29,6 +29,6 @@ public interface SettingsResourceInterface {
             }
     )
     public Response setSettings(
-            @NotNull final SettingsBean bean);
+            @Nonnull final SettingsBean bean);
 
 }
