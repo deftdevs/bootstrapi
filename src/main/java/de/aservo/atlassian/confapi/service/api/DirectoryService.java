@@ -1,4 +1,4 @@
-package de.aservo.atlassian.confapi.service;
+package de.aservo.atlassian.confapi.service.api;
 
 import com.atlassian.crowd.exception.DirectoryCurrentlySynchronisingException;
 import de.aservo.atlassian.confapi.model.DirectoryBean;

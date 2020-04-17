@@ -1,4 +1,4 @@
-package de.aservo.atlassian.confapi.rest;
+package de.aservo.atlassian.confapi.rest.api;
 
 import de.aservo.atlassian.confapi.constants.ConfAPI;
 import de.aservo.atlassian.confapi.model.ErrorCollection;
@@ -9,12 +9,13 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
+import javax.annotation.Nonnull;
 import javax.ws.rs.core.Response;
 
 /**
  * The License resource interface.
  */
-public interface LicenseResourceInterface {
+public interface LicenseResource {
 
     /**
      * Returns all licenses.
@@ -50,6 +51,6 @@ public interface LicenseResourceInterface {
     )
     Response setLicense(
             @Parameter(description="Clears license details before updating (Jira only).") final boolean clear,
-            final String licenseKey);
+            @Nonnull final String licenseKey);
 
 }

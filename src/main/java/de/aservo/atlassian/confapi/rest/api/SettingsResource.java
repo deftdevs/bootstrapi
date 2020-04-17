@@ -1,4 +1,4 @@
-package de.aservo.atlassian.confapi.rest;
+package de.aservo.atlassian.confapi.rest.api;
 
 import de.aservo.atlassian.confapi.constants.ConfAPI;
 import de.aservo.atlassian.confapi.model.SettingsBean;
@@ -7,10 +7,10 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import javax.validation.constraints.NotNull;
+import javax.annotation.Nonnull;
 import javax.ws.rs.core.Response;
 
-public interface SettingsResourceInterface {
+public interface SettingsResource {
 
     @Operation(
             tags = { ConfAPI.SETTINGS },
@@ -29,6 +29,6 @@ public interface SettingsResourceInterface {
             }
     )
     public Response setSettings(
-            @NotNull final SettingsBean bean);
+            @Nonnull final SettingsBean bean);
 
 }

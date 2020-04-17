@@ -1,4 +1,4 @@
-package de.aservo.atlassian.confapi.service;
+package de.aservo.atlassian.confapi.service.api;
 
 import com.atlassian.applinks.api.ApplicationLink;
 import com.atlassian.applinks.spi.auth.AuthenticationConfigurationException;
