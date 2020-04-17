@@ -23,6 +23,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
+import javax.inject.Inject;
 import java.net.URISyntaxException;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -48,6 +49,7 @@ public class ApplicationLinkServiceImpl implements ApplicationLinkService {
      * @param mutatingApplicationLinkService the application link service
      * @param typeAccessor           the type accessor
      */
+    @Inject
     public ApplicationLinkServiceImpl(@ComponentImport MutatingApplicationLinkService mutatingApplicationLinkService,
                                       @ComponentImport TypeAccessor typeAccessor) {
         this.mutatingApplicationLinkService = mutatingApplicationLinkService;
