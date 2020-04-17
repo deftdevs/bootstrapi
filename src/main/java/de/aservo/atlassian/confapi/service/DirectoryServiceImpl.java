@@ -6,6 +6,7 @@ import com.atlassian.crowd.exception.DirectoryCurrentlySynchronisingException;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.aservo.atlassian.confapi.model.DirectoryBean;
+import de.aservo.atlassian.confapi.service.api.DirectoryService;
 import de.aservo.atlassian.confapi.util.BeanValidationUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

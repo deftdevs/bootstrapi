@@ -18,6 +18,7 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.aservo.atlassian.confapi.model.ApplicationLinkBean;
 import de.aservo.atlassian.confapi.model.ApplicationLinkTypes;
 import de.aservo.atlassian.confapi.model.DefaultAuthenticationScenario;
+import de.aservo.atlassian.confapi.service.api.ApplicationLinkService;
 import org.apache.commons.lang3.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

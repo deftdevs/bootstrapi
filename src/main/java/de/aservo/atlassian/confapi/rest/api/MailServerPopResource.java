@@ -1,4 +1,4 @@
-package de.aservo.atlassian.confapi.rest;
+package de.aservo.atlassian.confapi.rest.api;
 
 import de.aservo.atlassian.confapi.constants.ConfAPI;
 import de.aservo.atlassian.confapi.model.ErrorCollection;
@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import javax.annotation.Nonnull;
 import javax.ws.rs.core.Response;
 
-public interface MailServerPopResourceInterface {
+public interface MailServerPopResource {
 
     @Operation(
             tags = { ConfAPI.MAIL_SERVER },

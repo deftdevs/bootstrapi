@@ -1,4 +1,4 @@
-package de.aservo.atlassian.confapi.rest;
+package de.aservo.atlassian.confapi.rest.api;
 
 import de.aservo.atlassian.confapi.constants.ConfAPI;
 import de.aservo.atlassian.confapi.model.ErrorCollection;
@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 /**
  * The License resource interface.
  */
-public interface LicenseResourceInterface {
+public interface LicenseResource {
 
     /**
      * Returns all licenses.
