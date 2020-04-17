@@ -43,6 +43,12 @@
             <organization>ASERVO Software GmbH</organization>
             <organizationUrl>https://www.aservo.com</organizationUrl>
         </developer>
+        <developer>
+            <name>Kai Lehmann</name>
+            <email>klehmann@aservo.com</email>
+            <organization>ASERVO Software GmbH</organization>
+            <organizationUrl>https://www.aservo.com</organizationUrl>
+        </developer>
     </developers>
 
     <properties>
