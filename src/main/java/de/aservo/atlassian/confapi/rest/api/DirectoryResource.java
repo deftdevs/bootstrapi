@@ -8,11 +8,19 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import javax.annotation.Nonnull;
+import javax.validation.constraints.NotNull;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+@Path(ConfAPI.DIRECTORIES)
+@Produces(MediaType.APPLICATION_JSON)
 public interface DirectoryResource {
 
+    @GET
     @Operation(
             tags = { ConfAPI.DIRECTORIES },
             summary = "Get the list of user directories",
@@ -23,6 +31,7 @@ public interface DirectoryResource {
     )
     Response getDirectories();
 
+    @PUT
     @Operation(
             tags = { ConfAPI.DIRECTORIES },
             summary = "Add a new directory",
@@ -34,6 +43,6 @@ public interface DirectoryResource {
     )
     Response addDirectory(
             boolean testConnection,
-            @Nonnull final DirectoryBean directory);
+            @NotNull final DirectoryBean directory);
 
 }
