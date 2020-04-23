@@ -60,6 +60,7 @@
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
         <atlassian-user.version>3.0</atlassian-user.version>
         <commons-lang3.version>3.9</commons-lang3.version>
+        <guava.version>29.0-jre</guava.version>
         <hamcrest.version>2.2</hamcrest.version>
         <hibernate-validator.version>5.2.1.Final</hibernate-validator.version>
         <javax.el-api.version>2.2.4</javax.el-api.version>
@@ -195,6 +196,14 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- needs to be of scope 'provided' as implicitly used for 'checkNotNull' -->
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
+            <version>${guava.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- test dependencies -->
 
         <dependency>
@@ -259,6 +268,7 @@
             <version>${log4j.version}</version>
             <scope>test</scope>
         </dependency>
+
     </dependencies>
 
     <build>

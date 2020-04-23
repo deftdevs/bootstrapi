@@ -1,6 +1,7 @@
 package de.aservo.atlassian.confapi.model;
 
 import com.atlassian.user.impl.DefaultUser;
+import de.aservo.atlassian.confapi.junit.AbstractBeanTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -8,7 +9,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class UserBeanTest {
+public class UserBeanTest extends AbstractBeanTest {
 
     @Test
     public void testParameterConstructor() {

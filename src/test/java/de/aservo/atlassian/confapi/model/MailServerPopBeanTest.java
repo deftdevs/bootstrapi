@@ -2,6 +2,7 @@ package de.aservo.atlassian.confapi.model;
 
 import com.atlassian.mail.server.DefaultTestPopMailServerImpl;
 import com.atlassian.mail.server.PopMailServer;
+import de.aservo.atlassian.confapi.junit.AbstractBeanTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -11,7 +12,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MailServerPopBeanTest {
+public class MailServerPopBeanTest extends AbstractBeanTest {
 
     @Test
     public void testDefaultConstructor() {

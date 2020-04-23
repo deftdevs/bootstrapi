@@ -2,6 +2,7 @@ package de.aservo.atlassian.confapi.model;
 
 import com.atlassian.mail.server.DefaultTestSmtpMailServerImpl;
 import com.atlassian.mail.server.SMTPMailServer;
+import de.aservo.atlassian.confapi.junit.AbstractBeanTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -10,7 +11,7 @@ import static com.atlassian.mail.MailConstants.DEFAULT_TIMEOUT;
 import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class MailServerSmtpBeanTest {
+public class MailServerSmtpBeanTest extends AbstractBeanTest {
 
     @Test
     public void testDefaultConstructor() {

@@ -12,7 +12,7 @@ import java.util.Collections;
 import java.util.Date;
 
 /**
- * Bean for licence infos in REST requests.
+ * Bean for a licence info in REST requests.
  */
 @Data
 @NoArgsConstructor

@@ -22,7 +22,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 
 /**
- * Bean for licence infos in REST requests.
+ * Bean for an application link in REST requests.
  */
 @Data
 @NoArgsConstructor
