@@ -3,11 +3,11 @@ package de.aservo.atlassian.confapi.model;
 import de.aservo.atlassian.confapi.constants.ConfAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import static org.apache.commons.lang.StringUtils.isNotBlank;
 
 @Data
 @NoArgsConstructor
@@ -18,17 +18,17 @@ public class SettingsBean {
     private String baseUrl;
 
     @XmlElement
+    private String mode;
+
+    @XmlElement
     private String title;
 
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
+    public String getMode() {
+        if (isNotBlank(mode)) {
+            return mode.toLowerCase();
+        }
 
-    @Override
-    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
-    public boolean equals(Object o) {
-        return EqualsBuilder.reflectionEquals(this, o);
+        return null;
     }
 
 }
