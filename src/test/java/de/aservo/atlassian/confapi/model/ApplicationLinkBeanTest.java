@@ -13,6 +13,7 @@ import com.atlassian.applinks.api.application.refapp.RefAppApplicationType;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
 import com.atlassian.settings.setup.DefaultApplicationLink;
 import com.atlassian.settings.setup.DefaultApplicationType;
+import de.aservo.atlassian.confapi.junit.AbstractBeanTest;
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,7 +29,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.mock;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ApplicationLinkBeanTest {
+public class ApplicationLinkBeanTest extends AbstractBeanTest {
 
     @Test
     public void testParameterConstructor() throws URISyntaxException {
@@ -104,4 +105,5 @@ public class ApplicationLinkBeanTest {
         ApplicationLink applicationLink = new DefaultApplicationLink(applicationId, applicationType, "test", uri, uri, false, false);
         new ApplicationLinkBean(applicationLink);
     }
+
 }

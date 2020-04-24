@@ -3,6 +3,7 @@ package de.aservo.atlassian.confapi.model;
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.model.directory.DirectoryImpl;
+import de.aservo.atlassian.confapi.junit.AbstractBeanTest;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -13,7 +14,7 @@ import static com.atlassian.crowd.directory.RemoteCrowdDirectory.*;
 import static org.junit.Assert.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DirectoryBeanTest {
+public class DirectoryBeanTest extends AbstractBeanTest {
 
     @Test
     public void testBuildDirectoryImpl() {
@@ -71,4 +72,5 @@ public class DirectoryBeanTest {
         assertEquals(attributes.get(CROWD_HTTP_PROXY_USERNAME), directoryBean.getProxyUsername());
         assertNull(directoryBean.getProxyPassword());
     }
+
 }

@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
 
 /**
- * Bean for licences infos in REST requests.
+ * Bean for licences info in REST requests.
  */
 @Data
 @NoArgsConstructor

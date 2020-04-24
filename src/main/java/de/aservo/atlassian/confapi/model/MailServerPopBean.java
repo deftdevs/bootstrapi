@@ -4,15 +4,15 @@ import com.atlassian.mail.server.PopMailServer;
 import de.aservo.atlassian.confapi.constants.ConfAPI;
 import de.aservo.atlassian.confapi.exception.NoContentException;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.apache.commons.lang3.builder.EqualsBuilder;
-import org.apache.commons.lang3.builder.HashCodeBuilder;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
 @NoArgsConstructor
-@XmlRootElement(name = ConfAPI.MAIL_SERVER_POP)
+@EqualsAndHashCode(callSuper = true)
+@XmlRootElement(name = ConfAPI.MAIL_SERVER + "-" + ConfAPI.MAIL_SERVER_POP)
 public class MailServerPopBean extends AbstractMailServerProtocolBean {
 
     public static MailServerPopBean from(
@@ -31,17 +31,6 @@ public class MailServerPopBean extends AbstractMailServerProtocolBean {
         mailServerPopBean.setTimeout(popMailServer.getTimeout());
         mailServerPopBean.setUsername(popMailServer.getUsername());
         return mailServerPopBean;
-    }
-
-    @Override
-    public int hashCode() {
-        return HashCodeBuilder.reflectionHashCode(this);
-    }
-
-    @Override
-    @SuppressWarnings("EqualsWhichDoesntCheckParameterClass")
-    public boolean equals(Object o) {
-        return EqualsBuilder.reflectionEquals(this, o);
     }
 
 }
