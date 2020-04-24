@@ -20,12 +20,6 @@ import javax.ws.rs.core.Response;
 
 public interface UsersResource {
 
-    /**
-     * Get a user.
-     *
-     * @param userName the user name
-     * @return the user
-     */
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
@@ -40,13 +34,6 @@ public interface UsersResource {
     public Response getUser(
             @NotNull @QueryParam("userName") final String userName);
 
-    /**
-     * Update a user.
-     *
-     * @param userName the user name of the user to update
-     * @param userBean the user bean to update
-     * @return the response
-     */
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -63,13 +50,6 @@ public interface UsersResource {
             @NotNull @QueryParam("userName") final String userName,
             @NotNull final UserBean userBean);
 
-    /**
-     * Update the user password.
-     *
-     * @param userName the user name
-     * @param password the new password
-     * @return the response
-     */
     @PUT
     @Path(ConfAPI.USER_PASSWORD)
     @Consumes(MediaType.TEXT_PLAIN)
