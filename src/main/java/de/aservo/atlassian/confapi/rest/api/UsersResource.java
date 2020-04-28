@@ -28,10 +28,11 @@ public interface UsersResource {
             description = "Upon successful request, returns a `UserBean` object containing user details",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class))),
-                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
-    public Response getUser(
+    Response getUser(
             @NotNull @QueryParam("userName") final String userName);
 
     @PUT
@@ -43,10 +44,11 @@ public interface UsersResource {
             description = "Upon successful request, returns the updated `UserBean` object (user name cannot be updated)",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class))),
-                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
-    public Response updateUser(
+    Response updateUser(
             @NotNull @QueryParam("userName") final String userName,
             @NotNull final UserBean userBean);
 
@@ -60,10 +62,11 @@ public interface UsersResource {
             description = "Upon successful request, returns the updated `UserBean` object.",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class))),
-                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
-    public Response setUserPassword(
+    Response setUserPassword(
             @NotNull @QueryParam("userName") final String userName,
             @NotNull final String password);
 
