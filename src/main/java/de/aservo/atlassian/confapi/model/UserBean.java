@@ -1,6 +1,5 @@
 package de.aservo.atlassian.confapi.model;
 
-import com.atlassian.user.User;
 import de.aservo.atlassian.confapi.constants.ConfAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,15 +27,16 @@ public class UserBean {
     @XmlElement
     private String password;
 
-    /**
-     * Instantiates a new user bean.
-     *
-     * @param user the user
-     */
-    public UserBean(User user) {
-        userName = user.getName();
-        fullName = user.getFullName();
-        email = user.getEmail();
+    // Example instances for documentation and tests
+
+    public static final UserBean EXAMPLE_1;
+
+    static {
+        EXAMPLE_1 = new UserBean();
+        EXAMPLE_1.setUserName("example");
+        EXAMPLE_1.setFullName("Example User");
+        EXAMPLE_1.setEmail("user@example.com");
+        EXAMPLE_1.setPassword("3x4mpl3");
     }
 
 }
