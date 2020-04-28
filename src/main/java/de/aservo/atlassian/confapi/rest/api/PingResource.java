@@ -16,7 +16,7 @@ public interface PingResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Operation(
-            tags = {ConfAPI.PING},
+            tags = { ConfAPI.PING },
             summary = "Simple ping method for probing the REST api. Returns 'pong' upon success",
             responses = {
                     @ApiResponse(responseCode = "200"),

@@ -21,6 +21,7 @@ public interface MailServerPopResource {
 
     @GET
     @Path(ConfAPI.MAIL_SERVER_POP)
+    @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.MAIL_SERVER },
             summary = "Get the default POP mail server",
@@ -33,6 +34,8 @@ public interface MailServerPopResource {
 
     @PUT
     @Path(ConfAPI.MAIL_SERVER_POP)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.MAIL_SERVER },
             summary = "Set the default POP mail server",

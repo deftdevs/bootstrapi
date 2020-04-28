@@ -11,22 +11,18 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-/**
- * The License resource interface.
- */
 public interface LicensesResource {
 
-    /**
-     * Returns all licenses.
-     *
-     * @return the licenses with entity type {@link de.aservo.atlassian.confapi.model.LicensesBean}.
-     */
     @GET
+    @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.LICENSES },
             summary = "Get all licenses information",
@@ -38,15 +34,9 @@ public interface LicensesResource {
     )
     Response getLicenses();
 
-    /**
-     * Sets license.
-     *
-     * @param clear      true, if licenses shall be cleared before setting the new license
-     * @param licenseKey the license key to set
-     * @return the added license of type {@link de.aservo.atlassian.confapi.model.LicenseBean}.
-     */
     @PUT
     @Consumes(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.LICENSES },
             summary = "Set a new license",
@@ -57,7 +47,7 @@ public interface LicensesResource {
             }
     )
     Response setLicense(
-            @Parameter(description="Clears license details before updating (Jira only).") final boolean clear,
+            @Parameter(description="Clear license details before updating (Jira only).") @QueryParam ("clear") @DefaultValue("false") final boolean clear,
             @NotNull final String licenseKey);
 
 }
