@@ -11,7 +11,7 @@
 
     <groupId>de.aservo.atlassian</groupId>
     <artifactId>confapi-commons</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.5-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>ConfAPI Commons</name>
@@ -62,7 +62,7 @@
         <commons-lang3.version>3.9</commons-lang3.version>
         <guava.version>29.0-jre</guava.version>
         <hamcrest.version>2.2</hamcrest.version>
-        <hibernate-validator.version>5.2.1.Final</hibernate-validator.version>
+        <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
         <javax.el-api.version>2.2.4</javax.el-api.version>
         <javax.inject.version>1</javax.inject.version>
         <jaxb-api.version>2.3.1</jaxb-api.version>

@@ -15,6 +15,7 @@ import com.atlassian.applinks.spi.manifest.ManifestNotFoundException;
 import com.atlassian.applinks.spi.util.TypeAccessor;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import de.aservo.atlassian.confapi.exception.BadRequestException;
 import de.aservo.atlassian.confapi.model.ApplicationLinkBean;
 import de.aservo.atlassian.confapi.model.ApplicationLinkTypes;
 import de.aservo.atlassian.confapi.model.DefaultAuthenticationScenario;
@@ -36,7 +37,7 @@ import static de.aservo.atlassian.confapi.util.BeanValidationUtil.validate;
  * The type Application link service.
  */
 @Component
-@ExportAsService({ApplicationLinkService.class})
+@ExportAsService(ApplicationLinkService.class)
 public class ApplicationLinkServiceImpl implements ApplicationLinkService {
 
     private static final Logger log = LoggerFactory.getLogger(ApplicationLinkService.class);
@@ -74,14 +75,18 @@ public class ApplicationLinkServiceImpl implements ApplicationLinkService {
      *
      * @param linkBean the link bean
      * @return the added application ,link
-     * @throws URISyntaxException                   the uri syntax exception
-     * @throws ManifestNotFoundException            the manifest not found exception
-     * @throws AuthenticationConfigurationException the authentication configuration exception
      */
-    public ApplicationLink addApplicationLink(ApplicationLinkBean linkBean) throws URISyntaxException, ManifestNotFoundException, AuthenticationConfigurationException {
+    public ApplicationLinkBean addApplicationLink(ApplicationLinkBean linkBean) throws BadRequestException {
         //preparations
         validate(linkBean);
-        ApplicationLinkDetails linkDetails = linkBean.toApplicationLinkDetails();
+
+        ApplicationLinkDetails linkDetails = null;
+        try {
+            linkDetails = linkBean.toApplicationLinkDetails();
+        } catch (URISyntaxException e) {
+            throw new BadRequestException(e.getMessage());
+        }
+
         ApplicationType applicationType = buildApplicationType(linkBean.getLinkType());
 
         //check if there is already an application link of supplied type and if yes, remove it
@@ -93,11 +98,16 @@ public class ApplicationLinkServiceImpl implements ApplicationLinkService {
         }
 
         //add new application link
-        ApplicationLink applicationLink = mutatingApplicationLinkService.createApplicationLink(applicationType, linkDetails);
-        mutatingApplicationLinkService.configureAuthenticationForApplicationLink(applicationLink,
-                new DefaultAuthenticationScenario(), linkBean.getUsername(), linkBean.getPassword());
+        ApplicationLink applicationLink = null;
+        try {
+            applicationLink = mutatingApplicationLinkService.createApplicationLink(applicationType, linkDetails);
+            mutatingApplicationLinkService.configureAuthenticationForApplicationLink(applicationLink,
+                    new DefaultAuthenticationScenario(), linkBean.getUsername(), linkBean.getPassword());
+        } catch (ManifestNotFoundException | AuthenticationConfigurationException e) {
+            throw new BadRequestException(e.getMessage());
+        }
 
-        return applicationLink;
+        return new ApplicationLinkBean(applicationLink);
     }
 
     private ApplicationType buildApplicationType(ApplicationLinkTypes linkType) {

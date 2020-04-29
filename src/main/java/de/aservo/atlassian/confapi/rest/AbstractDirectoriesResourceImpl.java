@@ -1,5 +1,6 @@
 package de.aservo.atlassian.confapi.rest;
 
+import de.aservo.atlassian.confapi.exception.api.AbstractWebException;
 import de.aservo.atlassian.confapi.model.DirectoriesBean;
 import de.aservo.atlassian.confapi.model.DirectoryBean;
 import de.aservo.atlassian.confapi.model.ErrorCollection;
@@ -44,13 +45,13 @@ public abstract class AbstractDirectoriesResourceImpl implements DirectoriesReso
 
         final ErrorCollection errorCollection = new ErrorCollection();
         try {
-            DirectoryBean addDirectory = directoryService.addDirectory(directory, testConnection);
+            DirectoryBean addDirectory = directoryService.setDirectory(directory, testConnection);
             return Response.ok(addDirectory).build();
-        } catch (Exception e) {
+        } catch (AbstractWebException e) {
             log.error(e.getMessage(), e);
             errorCollection.addErrorMessage(e.getMessage());
+            return Response.status(e.getStatus()).entity(errorCollection).build();
         }
-        return Response.status(BAD_REQUEST).entity(errorCollection).build();
     }
 
 }
