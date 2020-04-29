@@ -28,8 +28,7 @@ public interface UsersResource {
             description = "Upon successful request, returns a `UserBean` object containing user details",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class))),
-                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
-                    @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
             }
     )
     Response getUser(
@@ -44,8 +43,7 @@ public interface UsersResource {
             description = "Upon successful request, returns the updated `UserBean` object (user name cannot be updated)",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class))),
-                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
-                    @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
             }
     )
     Response updateUser(
@@ -62,8 +60,7 @@ public interface UsersResource {
             description = "Upon successful request, returns the updated `UserBean` object.",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class))),
-                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
-                    @ApiResponse(responseCode = "404", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
             }
     )
     Response setUserPassword(

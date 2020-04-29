@@ -2,11 +2,11 @@ package de.aservo.atlassian.confapi.model;
 
 import com.atlassian.mail.server.SMTPMailServer;
 import de.aservo.atlassian.confapi.constants.ConfAPI;
-import de.aservo.atlassian.confapi.exception.NoContentException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -48,11 +48,12 @@ public class MailServerSmtpBean extends AbstractMailServerProtocolBean {
         setHost(host);
     }
 
+    @Nullable
     public static MailServerSmtpBean from(
-            final SMTPMailServer smtpMailServer) throws NoContentException {
+            @Nullable final SMTPMailServer smtpMailServer) {
 
         if (smtpMailServer == null) {
-            throw new NoContentException("No SMTP mail server defined");
+            return null;
         }
 
         final MailServerSmtpBean mailServerSmtpBean = new MailServerSmtpBean();

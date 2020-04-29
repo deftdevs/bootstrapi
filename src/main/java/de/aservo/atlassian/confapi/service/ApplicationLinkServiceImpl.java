@@ -76,7 +76,7 @@ public class ApplicationLinkServiceImpl implements ApplicationLinkService {
      * @param linkBean the link bean
      * @return the added application ,link
      */
-    public ApplicationLinkBean addApplicationLink(ApplicationLinkBean linkBean) throws BadRequestException {
+    public ApplicationLinkBean addApplicationLink(ApplicationLinkBean linkBean) {
         //preparations
         validate(linkBean);
 

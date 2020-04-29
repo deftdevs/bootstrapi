@@ -5,7 +5,6 @@ import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.exception.DirectoryCurrentlySynchronisingException;
 import com.atlassian.crowd.model.directory.ImmutableDirectory;
-import de.aservo.atlassian.confapi.exception.BadRequestException;
 import de.aservo.atlassian.confapi.exception.InternalServerErrorException;
 import de.aservo.atlassian.confapi.model.DirectoryBean;
 import org.junit.Test;
@@ -48,7 +47,7 @@ public class DirectoryServiceTest {
     }
 
     @Test
-    public void testSetDirectoryWithoutExistingDirectory() throws BadRequestException, InternalServerErrorException {
+    public void testSetDirectoryWithoutExistingDirectory() {
         Directory directory = createDirectory();
         doReturn(directory).when(crowdDirectoryService).addDirectory(any(Directory.class));
 
@@ -60,7 +59,7 @@ public class DirectoryServiceTest {
     }
 
     @Test
-    public void testSetDirectoryWithExistingDirectory() throws BadRequestException, InternalServerErrorException {
+    public void testSetDirectoryWithExistingDirectory() {
         Directory directory = createDirectory();
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
         doReturn(directory).when(crowdDirectoryService).addDirectory(any(Directory.class));
@@ -73,7 +72,7 @@ public class DirectoryServiceTest {
     }
 
     @Test
-    public void testSetDirectoryWithConnectionTest() throws BadRequestException, InternalServerErrorException {
+    public void testSetDirectoryWithConnectionTest() {
         Directory directory = createDirectory();
         doReturn(directory).when(crowdDirectoryService).addDirectory(any(Directory.class));
 
@@ -84,27 +83,15 @@ public class DirectoryServiceTest {
         assertEquals(directoryAdded.getName(), directoryBean.getName());
     }
 
-    @Test(expected = BadRequestException.class)
-    public void testSetDirectoryInvalidBean() throws BadRequestException, InternalServerErrorException {
-        Directory directory = createDirectory();
-        DirectoryBean directoryBean = DirectoryBean.from(directory);
-        directoryBean.setAppPassword("test");
-        directoryBean.setClientName(null);
-
-        userDirectoryService.setDirectory(directoryBean, false);
-    }
-
     @Test(expected = InternalServerErrorException.class)
-    public void testSetDirectoryWithExistingDirectoryDirectoryCurrentlySynchronisingException()
-            throws BadRequestException, InternalServerErrorException, DirectoryCurrentlySynchronisingException {
-
+    public void testSetDirectoryDirectoryCurrentlySynchronisingException() throws DirectoryCurrentlySynchronisingException {
         Directory directory = createDirectory();
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
         doThrow(new DirectoryCurrentlySynchronisingException(1L)).when(crowdDirectoryService).removeDirectory(1L);
 
         DirectoryBean directoryBean = DirectoryBean.from(directory);
-        directoryBean.setAppPassword("test");
-        DirectoryBean directoryAdded = userDirectoryService.setDirectory(directoryBean, false);
+        directoryBean.setAppPassword("appPassword");
+        DirectoryBean directoryAdded = userDirectoryService.setDirectory(directoryBean, true);
     }
 
     private Directory createDirectory() {

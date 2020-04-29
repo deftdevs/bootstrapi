@@ -1,7 +1,5 @@
 package de.aservo.atlassian.confapi.service.api;
 
-import de.aservo.atlassian.confapi.exception.BadRequestException;
-import de.aservo.atlassian.confapi.exception.InternalServerErrorException;
 import de.aservo.atlassian.confapi.model.ApplicationLinkBean;
 
 import java.util.List;
@@ -24,10 +22,7 @@ public interface ApplicationLinkService {
      *
      * @param linkBean the link bean
      * @return the added application link
-     * @throws BadRequestException          the bad request exception
-     * @throws InternalServerErrorException the internal server error exception
      */
-    ApplicationLinkBean addApplicationLink(ApplicationLinkBean linkBean)
-            throws BadRequestException, InternalServerErrorException;
+    ApplicationLinkBean addApplicationLink(ApplicationLinkBean linkBean);
 
 }

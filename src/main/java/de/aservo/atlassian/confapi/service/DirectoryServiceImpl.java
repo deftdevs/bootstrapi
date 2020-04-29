@@ -5,7 +5,6 @@ import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.exception.DirectoryCurrentlySynchronisingException;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.atlassian.confapi.exception.BadRequestException;
 import de.aservo.atlassian.confapi.exception.InternalServerErrorException;
 import de.aservo.atlassian.confapi.model.DirectoryBean;
 import de.aservo.atlassian.confapi.service.api.DirectoryService;
@@ -38,8 +37,7 @@ public class DirectoryServiceImpl implements DirectoryService {
         return crowdDirectoryService.findAllDirectories().stream().map(DirectoryBean::from).collect(Collectors.toList());
     }
 
-    public DirectoryBean setDirectory(DirectoryBean directoryBean, boolean testConnection)
-            throws BadRequestException, InternalServerErrorException {
+    public DirectoryBean setDirectory(DirectoryBean directoryBean, boolean testConnection) {
 
         //preps and validation
         BeanValidationUtil.validate(directoryBean);

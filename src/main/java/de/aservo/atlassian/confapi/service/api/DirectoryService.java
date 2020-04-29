@@ -1,7 +1,5 @@
 package de.aservo.atlassian.confapi.service.api;
 
-import de.aservo.atlassian.confapi.exception.BadRequestException;
-import de.aservo.atlassian.confapi.exception.InternalServerErrorException;
 import de.aservo.atlassian.confapi.model.DirectoryBean;
 
 import java.util.List;
@@ -25,10 +23,7 @@ public interface DirectoryService {
      * @param directory      the directory
      * @param testConnection whether to test connection
      * @return the configuration added
-     * @throws BadRequestException the bad request exception
-     * @throws InternalServerErrorException the internal server error exception
      */
-    DirectoryBean setDirectory(DirectoryBean directory, boolean testConnection)
-            throws BadRequestException, InternalServerErrorException;
+    DirectoryBean setDirectory(DirectoryBean directory, boolean testConnection);
 
 }

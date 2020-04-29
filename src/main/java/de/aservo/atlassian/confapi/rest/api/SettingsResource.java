@@ -1,6 +1,7 @@
 package de.aservo.atlassian.confapi.rest.api;
 
 import de.aservo.atlassian.confapi.constants.ConfAPI;
+import de.aservo.atlassian.confapi.model.ErrorCollection;
 import de.aservo.atlassian.confapi.model.SettingsBean;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,6 +25,7 @@ public interface SettingsResource {
             summary = "Get the application settings",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBean.class))),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
             }
     )
     Response getSettings();
@@ -36,6 +38,7 @@ public interface SettingsResource {
             summary = "Set the application settings",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBean.class))),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
             }
     )
     Response setSettings(

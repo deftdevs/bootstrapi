@@ -1,7 +1,6 @@
 package de.aservo.atlassian.confapi.exception;
 
-import de.aservo.atlassian.confapi.junit.AbstractWebExceptionTest;
+import de.aservo.atlassian.confapi.junit.AbstractExceptionTest;
 
-public class BadRequestExceptionTest extends AbstractWebExceptionTest {
-
+public class BadRequestExceptionTest extends AbstractExceptionTest {
 }
