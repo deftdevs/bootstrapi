@@ -8,8 +8,6 @@ import org.apache.commons.lang3.builder.HashCodeExclude;
 
 import javax.xml.bind.annotation.XmlElement;
 
-import static com.atlassian.mail.MailConstants.DEFAULT_TIMEOUT;
-
 @Data
 @NoArgsConstructor
 public abstract class AbstractMailServerProtocolBean {
@@ -30,7 +28,7 @@ public abstract class AbstractMailServerProtocolBean {
     private String protocol;
 
     @XmlElement
-    private long timeout = DEFAULT_TIMEOUT;
+    private long timeout = 10000L;
 
     @XmlElement
     private String username;

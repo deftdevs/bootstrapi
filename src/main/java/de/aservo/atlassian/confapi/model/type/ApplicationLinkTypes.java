@@ -1,4 +1,4 @@
-package de.aservo.atlassian.confapi.model;
+package de.aservo.atlassian.confapi.model.type;
 
 /**
  * The enum Application link types.

@@ -7,10 +7,11 @@ import javax.annotation.Nullable;
 import java.net.URI;
 
 public class DefaultApplicationType implements JiraApplicationType {
+
     @Nonnull
     @Override
     public String getI18nKey() {
-        return null;
+        return "";
     }
 
     @Nullable
@@ -18,4 +19,5 @@ public class DefaultApplicationType implements JiraApplicationType {
     public URI getIconUrl() {
         return null;
     }
+
 }
