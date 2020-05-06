@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * Bean for licences info in REST requests.
@@ -20,5 +21,9 @@ public class LicensesBean {
 
     @XmlElement
     private Collection<LicenseBean> licenses;
+
+    // Example instances for documentation and tests
+
+    public static final LicensesBean EXAMPLE_1 = new LicensesBean(Collections.singleton(LicenseBean.EXAMPLE_1));
 
 }

@@ -10,18 +10,18 @@ import java.util.Collection;
 import java.util.Collections;
 
 /**
- * Bean for a gadget in REST requests.
+ * Bean for directories in REST requests.
  */
 @Data
 @AllArgsConstructor
-@XmlRootElement(name = ConfAPI.GADGETS)
-public class GadgetsBean {
+@XmlRootElement(name = ConfAPI.DIRECTORIES)
+public class ApplicationLinksBean {
 
     @XmlElement
-    private Collection<GadgetBean> gadgets;
+    private Collection<ApplicationLinkBean> applicationLinks;
 
     // Example instances for documentation and tests
 
-    public static final GadgetsBean EXAMPLE_1 = new GadgetsBean(Collections.singleton(GadgetBean.EXAMPLE_1));
+    public static final ApplicationLinksBean EXAMPLE_1 = new ApplicationLinksBean(Collections.singleton(ApplicationLinkBean.EXAMPLE_1));
 
 }

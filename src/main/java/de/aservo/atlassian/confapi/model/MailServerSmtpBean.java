@@ -70,4 +70,17 @@ public class MailServerSmtpBean extends AbstractMailServerProtocolBean {
         return mailServerSmtpBean;
     }
 
+    // Example instances for documentation and tests
+
+    public static final MailServerSmtpBean EXAMPLE_1;
+
+    static {
+        EXAMPLE_1 = new MailServerSmtpBean();
+        EXAMPLE_1.setName("Example");
+        EXAMPLE_1.setAdminContact("admin@example.com");
+        EXAMPLE_1.setFrom("mail@example.com");
+        EXAMPLE_1.setPrefix("[Example]");
+        EXAMPLE_1.setHost("mail.example.com");
+    }
+
 }

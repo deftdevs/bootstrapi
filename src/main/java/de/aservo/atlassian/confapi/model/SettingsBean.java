@@ -31,4 +31,15 @@ public class SettingsBean {
         return null;
     }
 
+    // Example instances for documentation and tests
+
+    public static final SettingsBean EXAMPLE_1;
+
+    static {
+        EXAMPLE_1 = new SettingsBean();
+        EXAMPLE_1.setTitle("Example");
+        EXAMPLE_1.setBaseUrl("https://example.com");
+        EXAMPLE_1.setMode("private");
+    }
+
 }

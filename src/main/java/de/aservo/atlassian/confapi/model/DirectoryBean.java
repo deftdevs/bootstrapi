@@ -117,4 +117,31 @@ public class DirectoryBean {
         directoryBean.setImplClass(directory.getImplementationClass());
         return directoryBean;
     }
+
+    // Example instances for documentation and tests
+
+    public static final DirectoryBean EXAMPLE_1;
+
+    static {
+        EXAMPLE_1 = new DirectoryBean();
+        EXAMPLE_1.setName("example");
+        EXAMPLE_1.setCrowdUrl("https://crowd.example.com");
+        EXAMPLE_1.setAppPassword("p455w0rd");
+        // EXAMPLE_1.setType("crowd");
+        EXAMPLE_1.setClientName("confluence-client");
+        EXAMPLE_1.setImplClass("test.class");
+    }
+
+    public static final DirectoryBean EXAMPLE_2;
+
+    static {
+        EXAMPLE_2 = new DirectoryBean();
+        EXAMPLE_2.setName("example");
+        EXAMPLE_2.setCrowdUrl("https://localhost/crowd");
+        EXAMPLE_1.setAppPassword("0th3r");
+        // EXAMPLE_2.setType("crowd");
+        EXAMPLE_2.setClientName("confluence-client");
+        EXAMPLE_2.setImplClass("test.class");
+    }
+
 }

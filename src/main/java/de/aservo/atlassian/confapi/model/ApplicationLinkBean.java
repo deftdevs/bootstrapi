@@ -20,6 +20,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.UUID;
 
 /**
  * Bean for an application link in REST requests.
@@ -111,4 +112,21 @@ public class ApplicationLinkBean {
     public ApplicationLinkDetails toApplicationLinkDetails() throws URISyntaxException {
         return ApplicationLinkDetails.builder().name(name).displayUrl(new URI(displayUrl)).rpcUrl(new URI(rpcUrl)).isPrimary(primary).build();
     }
+
+    // Example instances for documentation and tests
+
+    public static final ApplicationLinkBean EXAMPLE_1;
+
+    static {
+        EXAMPLE_1 = new ApplicationLinkBean();
+        EXAMPLE_1.setName("Example");
+        EXAMPLE_1.setDisplayUrl("http://example.com");
+        EXAMPLE_1.setRpcUrl("http://rpc.example.com");
+        EXAMPLE_1.setPrimary(true);
+        EXAMPLE_1.setServerId(UUID.randomUUID().toString());
+        EXAMPLE_1.setAppType("jira");
+        EXAMPLE_1.setUsername("username");
+        EXAMPLE_1.setPassword("p455w0rd");
+    }
+
 }

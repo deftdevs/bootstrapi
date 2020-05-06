@@ -34,4 +34,14 @@ public class MailServerPopBean extends AbstractMailServerProtocolBean {
         return mailServerPopBean;
     }
 
+    // Example instances for documentation and tests
+
+    public static final MailServerPopBean EXAMPLE_1;
+
+    static {
+        EXAMPLE_1 = new MailServerPopBean();
+        EXAMPLE_1.setName("Example");
+        EXAMPLE_1.setHost("mail.example.com");
+    }
+
 }

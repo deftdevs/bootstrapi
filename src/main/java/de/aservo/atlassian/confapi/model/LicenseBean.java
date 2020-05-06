@@ -53,4 +53,19 @@ public class LicenseBean {
         expiryDate = productLicense.getMaintenanceExpiryDate();
         numUsers = productLicense.getNumberOfUsers();
     }
+
+    // Example instances for documentation and tests
+
+    public static final LicenseBean EXAMPLE_1;
+
+    static {
+        EXAMPLE_1 = new LicenseBean();
+        EXAMPLE_1.setKey("ABC...");
+        EXAMPLE_1.setDescription("Example License");
+        EXAMPLE_1.setOrganization("Example Organization");
+        EXAMPLE_1.setProducts(Collections.singleton("example-product"));
+        EXAMPLE_1.setNumUsers(10);
+        EXAMPLE_1.setExpiryDate(new Date());
+    }
+
 }
