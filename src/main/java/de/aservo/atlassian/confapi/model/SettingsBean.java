@@ -3,7 +3,7 @@ package de.aservo.atlassian.confapi.model;
 import de.aservo.atlassian.confapi.constants.ConfAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
