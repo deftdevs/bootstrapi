@@ -1,8 +1,10 @@
 package de.aservo.atlassian.confapi.util;
 
-import org.apache.commons.lang3.StringUtils;
-
-import javax.validation.*;
+import javax.validation.ConstraintViolation;
+import javax.validation.Validation;
+import javax.validation.ValidationException;
+import javax.validation.Validator;
+import javax.validation.ValidatorFactory;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -12,13 +14,10 @@ import java.util.stream.Collectors;
  */
 public class BeanValidationUtil {
 
-    private BeanValidationUtil() {}
-
     /**
      * Validates the given bean using javax.validation impl from hibernate reference.
      *
      * @param bean the bean
-     * @throws ValidationException the validation exception
      */
     public static void validate(Object bean) {
         ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
@@ -26,7 +25,11 @@ public class BeanValidationUtil {
         Set<ConstraintViolation<Object>> violations = validator.validate(bean);
         if (!violations.isEmpty()) {
             List<String> collect = violations.stream().map(v -> v.getPropertyPath() + ": " + v.getMessage()).collect(Collectors.toList());
-            throw new ValidationException(StringUtils.join(collect, "\n"));
+            throw new ValidationException(String.join("\n", collect));
         }
     }
+
+    private BeanValidationUtil() {
+    }
+
 }

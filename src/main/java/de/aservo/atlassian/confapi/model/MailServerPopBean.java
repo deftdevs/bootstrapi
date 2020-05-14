@@ -2,11 +2,11 @@ package de.aservo.atlassian.confapi.model;
 
 import com.atlassian.mail.server.PopMailServer;
 import de.aservo.atlassian.confapi.constants.ConfAPI;
-import de.aservo.atlassian.confapi.exception.NoContentException;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
@@ -15,11 +15,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = ConfAPI.MAIL_SERVER + "-" + ConfAPI.MAIL_SERVER_POP)
 public class MailServerPopBean extends AbstractMailServerProtocolBean {
 
+    @Nullable
     public static MailServerPopBean from(
-            final PopMailServer popMailServer) throws NoContentException {
+            @Nullable final PopMailServer popMailServer) {
 
         if (popMailServer == null) {
-            throw new NoContentException("No POP mail server defined");
+            return null;
         }
 
         final MailServerPopBean mailServerPopBean = new MailServerPopBean();

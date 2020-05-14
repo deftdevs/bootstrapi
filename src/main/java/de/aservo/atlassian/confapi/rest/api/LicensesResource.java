@@ -29,7 +29,7 @@ public interface LicensesResource {
             description = "Upon successful request, returns a `LicensesBean` object containing license details",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = LicensesBean.class))),
-                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
             }
     )
     Response getLicenses();
@@ -43,7 +43,7 @@ public interface LicensesResource {
             description = "Existing license details are overwritten. Upon successful request, returns a `LicensesBean` object containing license details",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = LicensesBean.class))),
-                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
             }
     )
     Response setLicense(

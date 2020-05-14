@@ -2,11 +2,9 @@ package de.aservo.atlassian.confapi.rest;
 
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
-import com.atlassian.crowd.exception.DirectoryCurrentlySynchronisingException;
 import com.atlassian.crowd.model.directory.DirectoryImpl;
 import de.aservo.atlassian.confapi.model.DirectoriesBean;
 import de.aservo.atlassian.confapi.model.DirectoryBean;
-import de.aservo.atlassian.confapi.model.ErrorCollection;
 import de.aservo.atlassian.confapi.service.api.DirectoryService;
 import org.junit.Before;
 import org.junit.Test;
@@ -18,8 +16,7 @@ import javax.ws.rs.core.Response;
 import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AbstractDirectoriesResourceTest {
@@ -49,47 +46,20 @@ public class AbstractDirectoriesResourceTest {
     }
 
     @Test
-    public void testGetDirectoriesWithError() {
-        doThrow(new RuntimeException()).when(directoryService).getDirectories();
-
-        final Response response = resource.getDirectories();
-        assertEquals(400, response.getStatus());
-
-        assertNotNull(response.getEntity());
-        assertEquals(ErrorCollection.class, response.getEntity().getClass());
-    }
-
-    @Test
-    public void testAddDirectory() throws DirectoryCurrentlySynchronisingException {
+    public void testAddDirectory() {
         Directory directory = createDirectory();
         DirectoryBean directoryBean = DirectoryBean.from(directory);
         directoryBean.setCrowdUrl("http://localhost");
         directoryBean.setClientName("confluence-client");
         directoryBean.setAppPassword("test");
 
-        doReturn(directoryBean).when(directoryService).addDirectory(directoryBean, false);
+        doReturn(directoryBean).when(directoryService).setDirectory(directoryBean, false);
 
         final Response response = resource.setDirectory(Boolean.FALSE, directoryBean);
         assertEquals(200, response.getStatus());
         final DirectoryBean DirectoryBean = (DirectoryBean) response.getEntity();
 
         assertEquals(DirectoryBean.getName(), directoryBean.getName());
-    }
-
-    @Test
-    public void testAddDirectoryWithError() throws DirectoryCurrentlySynchronisingException {
-        Directory directory = createDirectory();
-        DirectoryBean directoryBean = DirectoryBean.from(directory);
-        directoryBean.setCrowdUrl("http://localhost");
-        directoryBean.setClientName("confluence-client");
-        directoryBean.setAppPassword("test");
-        doThrow(new DirectoryCurrentlySynchronisingException(1L)).when(directoryService).addDirectory(directoryBean, false);
-
-        final Response response = resource.setDirectory(Boolean.FALSE, directoryBean);
-        assertEquals(400, response.getStatus());
-
-        assertNotNull(response.getEntity());
-        assertEquals(ErrorCollection.class, response.getEntity().getClass());
     }
 
     private Directory createDirectory() {

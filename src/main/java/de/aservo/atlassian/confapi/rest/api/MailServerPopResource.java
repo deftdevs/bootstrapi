@@ -27,7 +27,8 @@ public interface MailServerPopResource {
             summary = "Get the default POP mail server",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = MailServerPopBean.class))),
-                    @ApiResponse(responseCode = "204", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "204", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
             }
     )
     Response getMailServerPop();
@@ -41,7 +42,7 @@ public interface MailServerPopResource {
             summary = "Set the default POP mail server",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = MailServerPopBean.class))),
-                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
             }
     )
     Response setMailServerPop(

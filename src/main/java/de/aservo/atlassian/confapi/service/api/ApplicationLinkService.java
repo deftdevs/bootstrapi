@@ -1,11 +1,7 @@
 package de.aservo.atlassian.confapi.service.api;
 
-import com.atlassian.applinks.api.ApplicationLink;
-import com.atlassian.applinks.spi.auth.AuthenticationConfigurationException;
-import com.atlassian.applinks.spi.manifest.ManifestNotFoundException;
 import de.aservo.atlassian.confapi.model.ApplicationLinkBean;
 
-import java.net.URISyntaxException;
 import java.util.List;
 
 /**
@@ -25,10 +21,8 @@ public interface ApplicationLinkService {
      * removed before adding the new configuration.
      *
      * @param linkBean the link bean
-     * @return the added application ,link
-     * @throws URISyntaxException                   the uri syntax exception
-     * @throws ManifestNotFoundException            the manifest not found exception
-     * @throws AuthenticationConfigurationException the authentication configuration exception
+     * @return the added application link
      */
-    ApplicationLink addApplicationLink(ApplicationLinkBean linkBean) throws URISyntaxException, ManifestNotFoundException, AuthenticationConfigurationException;
+    ApplicationLinkBean addApplicationLink(ApplicationLinkBean linkBean);
+
 }
