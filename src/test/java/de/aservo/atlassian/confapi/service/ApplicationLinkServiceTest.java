@@ -10,8 +10,9 @@ import com.atlassian.applinks.spi.util.TypeAccessor;
 import com.atlassian.settings.setup.DefaultApplicationLink;
 import com.atlassian.settings.setup.DefaultApplicationType;
 import de.aservo.atlassian.confapi.model.ApplicationLinkBean;
-import de.aservo.atlassian.confapi.model.ApplicationLinkTypes;
-import de.aservo.atlassian.confapi.model.DefaultAuthenticationScenario;
+import de.aservo.atlassian.confapi.model.type.ApplicationLinkTypes;
+import de.aservo.atlassian.confapi.model.type.DefaultAuthenticationScenario;
+import de.aservo.atlassian.confapi.model.util.ApplicationLinkBeanUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -55,11 +56,13 @@ public class ApplicationLinkServiceTest {
 
         List<ApplicationLinkBean> applicationLinks = applicationLinkService.getApplicationLinks();
 
-        assertEquals(applicationLinks.get(0), new ApplicationLinkBean(applicationLink));
+        assertEquals(applicationLinks.get(0), ApplicationLinkBeanUtil.toApplicationLinkBean(applicationLink));
     }
 
     @Test
-    public void testAddApplicationLinkWithoutExistingTargetLink() throws URISyntaxException, ManifestNotFoundException {
+    public void testAddApplicationLinkWithoutExistingTargetLink()
+            throws URISyntaxException, ManifestNotFoundException {
+
         ApplicationLink applicationLink = createApplicationLink();
         ApplicationLinkBean applicationLinkBean = createApplicationLinkBean();
 
@@ -104,7 +107,8 @@ public class ApplicationLinkServiceTest {
             ApplicationLinkBean applicationLinkBean = createApplicationLinkBean();
             applicationLinkBean.setLinkType(linkType);
 
-            doReturn(applicationLink).when(mutatingApplicationLinkService).createApplicationLink(any(ApplicationType.class), any(ApplicationLinkDetails.class));
+            doReturn(applicationLink).when(mutatingApplicationLinkService).createApplicationLink(
+                    any(ApplicationType.class), any(ApplicationLinkDetails.class));
             doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
 
             ApplicationLinkBean applicationLinkResponse = applicationLinkService.addApplicationLink(applicationLinkBean);
@@ -115,7 +119,7 @@ public class ApplicationLinkServiceTest {
     }
 
     private ApplicationLinkBean createApplicationLinkBean() throws URISyntaxException {
-        ApplicationLinkBean bean = new ApplicationLinkBean(createApplicationLink());
+        ApplicationLinkBean bean = ApplicationLinkBeanUtil.toApplicationLinkBean(createApplicationLink());
         bean.setLinkType(ApplicationLinkTypes.CROWD);
         bean.setUsername("test");
         bean.setPassword("test");
@@ -127,4 +131,5 @@ public class ApplicationLinkServiceTest {
         URI uri = new URI("http://localhost");
         return new DefaultApplicationLink(applicationId, new DefaultApplicationType(), "test", uri, uri, false, false);
     }
+
 }

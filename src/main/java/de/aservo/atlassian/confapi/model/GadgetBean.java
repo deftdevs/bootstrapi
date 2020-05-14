@@ -18,4 +18,13 @@ public class GadgetBean {
     @XmlElement
     private String url;
 
+    // Example instances for documentation and tests
+
+    public static final GadgetBean EXAMPLE_1;
+
+    static {
+        EXAMPLE_1 = new GadgetBean();
+        EXAMPLE_1.setUrl("http://localhost/gadget");
+    }
+
 }

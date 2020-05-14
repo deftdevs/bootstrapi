@@ -3,11 +3,10 @@ package de.aservo.atlassian.confapi.model;
 import de.aservo.atlassian.confapi.constants.ConfAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.apache.commons.lang.StringUtils;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import static org.apache.commons.lang.StringUtils.isNotBlank;
 
 @Data
 @NoArgsConstructor
@@ -24,11 +23,22 @@ public class SettingsBean {
     private String title;
 
     public String getMode() {
-        if (isNotBlank(mode)) {
+        if (StringUtils.isNotBlank(mode)) {
             return mode.toLowerCase();
         }
 
         return null;
+    }
+
+    // Example instances for documentation and tests
+
+    public static final SettingsBean EXAMPLE_1;
+
+    static {
+        EXAMPLE_1 = new SettingsBean();
+        EXAMPLE_1.setTitle("Example");
+        EXAMPLE_1.setBaseUrl("https://example.com");
+        EXAMPLE_1.setMode("private");
     }
 
 }

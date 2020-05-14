@@ -1,6 +1,5 @@
 package de.aservo.atlassian.confapi.model;
 
-import com.atlassian.sal.api.license.SingleProductLicenseDetailsView;
 import de.aservo.atlassian.confapi.constants.ConfAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -40,17 +39,18 @@ public class LicenseBean {
     @XmlElement
     private Collection<String> products;
 
-    /**
-     * Instantiates a new License bean.
-     *
-     * @param productLicense the product license
-     */
-    public LicenseBean(SingleProductLicenseDetailsView productLicense) {
-        products = Collections.singletonList(productLicense.getProductDisplayName());
-        licenseType = productLicense.getLicenseTypeName();
-        organization = productLicense.getOrganisationName();
-        description = productLicense.getDescription();
-        expiryDate = productLicense.getMaintenanceExpiryDate();
-        numUsers = productLicense.getNumberOfUsers();
+    // Example instances for documentation and tests
+
+    public static final LicenseBean EXAMPLE_1;
+
+    static {
+        EXAMPLE_1 = new LicenseBean();
+        EXAMPLE_1.setKey("ABC...");
+        EXAMPLE_1.setDescription("Example License");
+        EXAMPLE_1.setOrganization("Example Organization");
+        EXAMPLE_1.setProducts(Collections.singleton("example-product"));
+        EXAMPLE_1.setNumUsers(10);
+        EXAMPLE_1.setExpiryDate(new Date());
     }
+
 }

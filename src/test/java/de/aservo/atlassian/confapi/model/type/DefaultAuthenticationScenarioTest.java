@@ -1,4 +1,4 @@
-package de.aservo.atlassian.confapi.model;
+package de.aservo.atlassian.confapi.model.type;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -15,4 +15,5 @@ public class DefaultAuthenticationScenarioTest {
         assertTrue(scenario.isCommonUserBase());
         assertTrue(scenario.isTrusted());
     }
+
 }

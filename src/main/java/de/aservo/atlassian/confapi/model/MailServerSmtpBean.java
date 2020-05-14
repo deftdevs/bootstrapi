@@ -1,12 +1,10 @@
 package de.aservo.atlassian.confapi.model;
 
-import com.atlassian.mail.server.SMTPMailServer;
 import de.aservo.atlassian.confapi.constants.ConfAPI;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.annotation.Nullable;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -48,26 +46,17 @@ public class MailServerSmtpBean extends AbstractMailServerProtocolBean {
         setHost(host);
     }
 
-    @Nullable
-    public static MailServerSmtpBean from(
-            @Nullable final SMTPMailServer smtpMailServer) {
+    // Example instances for documentation and tests
 
-        if (smtpMailServer == null) {
-            return null;
-        }
+    public static final MailServerSmtpBean EXAMPLE_1;
 
-        final MailServerSmtpBean mailServerSmtpBean = new MailServerSmtpBean();
-        mailServerSmtpBean.setName(smtpMailServer.getName());
-        mailServerSmtpBean.setDescription(smtpMailServer.getDescription());
-        mailServerSmtpBean.setFrom(smtpMailServer.getDefaultFrom());
-        mailServerSmtpBean.setPrefix(smtpMailServer.getPrefix());
-        mailServerSmtpBean.setProtocol(smtpMailServer.getMailProtocol().getProtocol());
-        mailServerSmtpBean.setHost(smtpMailServer.getHostname());
-        mailServerSmtpBean.setPort(smtpMailServer.getPort());
-        mailServerSmtpBean.setTls(smtpMailServer.isTlsRequired());
-        mailServerSmtpBean.setTimeout(smtpMailServer.getTimeout());
-        mailServerSmtpBean.setUsername(smtpMailServer.getUsername());
-        return mailServerSmtpBean;
+    static {
+        EXAMPLE_1 = new MailServerSmtpBean();
+        EXAMPLE_1.setName("Example");
+        EXAMPLE_1.setAdminContact("admin@example.com");
+        EXAMPLE_1.setFrom("mail@example.com");
+        EXAMPLE_1.setPrefix("[Example]");
+        EXAMPLE_1.setHost("mail.example.com");
     }
 
 }

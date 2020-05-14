@@ -7,6 +7,7 @@ import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.aservo.atlassian.confapi.exception.InternalServerErrorException;
 import de.aservo.atlassian.confapi.model.DirectoryBean;
+import de.aservo.atlassian.confapi.model.util.DirectoryBeanUtil;
 import de.aservo.atlassian.confapi.service.api.DirectoryService;
 import de.aservo.atlassian.confapi.util.BeanValidationUtil;
 import org.slf4j.Logger;
@@ -34,14 +35,14 @@ public class DirectoryServiceImpl implements DirectoryService {
     }
 
     public List<DirectoryBean> getDirectories() {
-        return crowdDirectoryService.findAllDirectories().stream().map(DirectoryBean::from).collect(Collectors.toList());
+        return crowdDirectoryService.findAllDirectories().stream().map(DirectoryBeanUtil::toDirectoryBean).collect(Collectors.toList());
     }
 
     public DirectoryBean setDirectory(DirectoryBean directoryBean, boolean testConnection) {
 
         //preps and validation
         BeanValidationUtil.validate(directoryBean);
-        Directory directory = directoryBean.toDirectory();
+        Directory directory = DirectoryBeanUtil.toDirectory(directoryBean);
         String directoryName = directoryBean.getName();
         if (testConnection) {
             log.debug("testing user directory connection for {}", directoryName);
@@ -61,7 +62,7 @@ public class DirectoryServiceImpl implements DirectoryService {
         }
 
         //add new directory
-        return DirectoryBean.from(crowdDirectoryService.addDirectory(directory));
+        return DirectoryBeanUtil.toDirectoryBean(crowdDirectoryService.addDirectory(directory));
     }
 
 }

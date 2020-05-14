@@ -17,8 +17,9 @@ import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.aservo.atlassian.confapi.exception.BadRequestException;
 import de.aservo.atlassian.confapi.model.ApplicationLinkBean;
-import de.aservo.atlassian.confapi.model.ApplicationLinkTypes;
-import de.aservo.atlassian.confapi.model.DefaultAuthenticationScenario;
+import de.aservo.atlassian.confapi.model.type.ApplicationLinkTypes;
+import de.aservo.atlassian.confapi.model.type.DefaultAuthenticationScenario;
+import de.aservo.atlassian.confapi.model.util.ApplicationLinkBeanUtil;
 import de.aservo.atlassian.confapi.service.api.ApplicationLinkService;
 import org.apache.commons.lang3.NotImplementedException;
 import org.slf4j.Logger;
@@ -66,7 +67,8 @@ public class ApplicationLinkServiceImpl implements ApplicationLinkService {
     public List<ApplicationLinkBean> getApplicationLinks() {
         Iterable<ApplicationLink> applicationLinksIterable = mutatingApplicationLinkService.getApplicationLinks();
         return StreamSupport.stream(applicationLinksIterable.spliterator(), false)
-                .map(ApplicationLinkBean::new).collect(Collectors.toList());
+                .map(ApplicationLinkBeanUtil::toApplicationLinkBean)
+                .collect(Collectors.toList());
     }
 
     /**
@@ -82,7 +84,7 @@ public class ApplicationLinkServiceImpl implements ApplicationLinkService {
 
         ApplicationLinkDetails linkDetails = null;
         try {
-            linkDetails = linkBean.toApplicationLinkDetails();
+            linkDetails = ApplicationLinkBeanUtil.toApplicationLinkDetails(linkBean);
         } catch (URISyntaxException e) {
             throw new BadRequestException(e.getMessage());
         }
@@ -93,7 +95,8 @@ public class ApplicationLinkServiceImpl implements ApplicationLinkService {
         Class<? extends ApplicationType> appType = applicationType != null ? applicationType.getClass() : null;
         ApplicationLink primaryApplicationLink = mutatingApplicationLinkService.getPrimaryApplicationLink(appType);
         if (primaryApplicationLink != null) {
-            log.info("An existing application link configuration '{}' was found and is removed now before adding the new configuration", primaryApplicationLink.getName());
+            log.info("An existing application link configuration '{}' was found and is removed now before adding the new configuration",
+                    primaryApplicationLink.getName());
             mutatingApplicationLinkService.deleteApplicationLink(primaryApplicationLink);
         }
 
@@ -107,7 +110,7 @@ public class ApplicationLinkServiceImpl implements ApplicationLinkService {
             throw new BadRequestException(e.getMessage());
         }
 
-        return new ApplicationLinkBean(applicationLink);
+        return ApplicationLinkBeanUtil.toApplicationLinkBean(applicationLink);
     }
 
     private ApplicationType buildApplicationType(ApplicationLinkTypes linkType) {

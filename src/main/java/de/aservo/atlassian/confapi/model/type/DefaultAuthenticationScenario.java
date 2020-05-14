@@ -1,4 +1,4 @@
-package de.aservo.atlassian.confapi.model;
+package de.aservo.atlassian.confapi.model.type;
 
 import com.atlassian.applinks.spi.auth.AuthenticationScenario;
 

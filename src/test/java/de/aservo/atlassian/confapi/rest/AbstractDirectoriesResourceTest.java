@@ -1,8 +1,5 @@
 package de.aservo.atlassian.confapi.rest;
 
-import com.atlassian.crowd.embedded.api.Directory;
-import com.atlassian.crowd.embedded.api.DirectoryType;
-import com.atlassian.crowd.model.directory.DirectoryImpl;
 import de.aservo.atlassian.confapi.model.DirectoriesBean;
 import de.aservo.atlassian.confapi.model.DirectoryBean;
 import de.aservo.atlassian.confapi.service.api.DirectoryService;
@@ -33,8 +30,7 @@ public class AbstractDirectoriesResourceTest {
 
     @Test
     public void testGetDirectories() {
-        Directory directory = createDirectory();
-        DirectoryBean initialDirectoryBean = DirectoryBean.from(directory);
+        DirectoryBean initialDirectoryBean = DirectoryBean.EXAMPLE_1;
 
         doReturn(Collections.singletonList(initialDirectoryBean)).when(directoryService).getDirectories();
 
@@ -47,8 +43,7 @@ public class AbstractDirectoriesResourceTest {
 
     @Test
     public void testAddDirectory() {
-        Directory directory = createDirectory();
-        DirectoryBean directoryBean = DirectoryBean.from(directory);
+        DirectoryBean directoryBean = DirectoryBean.EXAMPLE_1;
         directoryBean.setCrowdUrl("http://localhost");
         directoryBean.setClientName("confluence-client");
         directoryBean.setAppPassword("test");
@@ -60,10 +55,6 @@ public class AbstractDirectoriesResourceTest {
         final DirectoryBean DirectoryBean = (DirectoryBean) response.getEntity();
 
         assertEquals(DirectoryBean.getName(), directoryBean.getName());
-    }
-
-    private Directory createDirectory() {
-        return new DirectoryImpl("test", DirectoryType.CROWD, "test.class");
     }
 
 }
