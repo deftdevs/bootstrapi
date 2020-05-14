@@ -11,7 +11,7 @@
 
     <groupId>de.aservo.atlassian</groupId>
     <artifactId>confapi-commons</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <version>0.0.6-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>ConfAPI Commons</name>
@@ -52,13 +52,6 @@
     </developers>
 
     <properties>
-        <amps.version>8.0.2</amps.version>
-        <applinks-api.version>7.1.3</applinks-api.version>
-        <atlassian-application-api.version>1.2</atlassian-application-api.version>
-        <atlassian-crowd.version>2.10.6</atlassian-crowd.version>
-        <atlassian-mail.version>5.0.0</atlassian-mail.version>
-        <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
-        <atlassian-user.version>3.0</atlassian-user.version>
         <commons-lang3.version>3.9</commons-lang3.version>
         <guava.version>29.0-jre</guava.version>
         <hamcrest.version>2.2</hamcrest.version>
@@ -90,62 +83,6 @@
         </dependency>
 
         <!-- provided dependencies -->
-
-        <dependency>
-            <groupId>com.atlassian.plugin</groupId>
-            <artifactId>atlassian-spring-scanner-annotation</artifactId>
-            <version>${atlassian.spring.scanner.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.mail</groupId>
-            <artifactId>atlassian-mail</artifactId>
-            <version>${atlassian-mail.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.crowd</groupId>
-            <artifactId>crowd-api</artifactId>
-            <version>${atlassian-crowd.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.crowd</groupId>
-            <artifactId>crowd-remote</artifactId>
-            <version>${atlassian-crowd.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.applinks</groupId>
-            <artifactId>applinks-api</artifactId>
-            <version>${applinks-api.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.applinks</groupId>
-            <artifactId>applinks-spi</artifactId>
-            <version>${applinks-api.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.application</groupId>
-            <artifactId>atlassian-application-api</artifactId>
-            <version>${atlassian-application-api.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.user</groupId>
-            <artifactId>atlassian-user</artifactId>
-            <version>${atlassian-user.version}</version>
-            <scope>provided</scope>
-        </dependency>
 
         <dependency>
             <groupId>javax.inject</groupId>
