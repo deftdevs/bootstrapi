@@ -10,7 +10,7 @@ public class BadRequestException extends WebApplicationException {
     private static final Response.Status STATUS = BAD_REQUEST;
 
     public BadRequestException(String message) {
-        super(new Throwable(message), STATUS);
+        super(new Exception(message), STATUS);
     }
 
     public BadRequestException(Throwable cause) {
