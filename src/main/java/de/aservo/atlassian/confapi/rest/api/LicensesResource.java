@@ -2,6 +2,7 @@ package de.aservo.atlassian.confapi.rest.api;
 
 import de.aservo.atlassian.confapi.constants.ConfAPI;
 import de.aservo.atlassian.confapi.model.ErrorCollection;
+import de.aservo.atlassian.confapi.model.LicenseBean;
 import de.aservo.atlassian.confapi.model.LicensesBean;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -35,7 +36,23 @@ public interface LicensesResource {
     Response getLicenses();
 
     @PUT
-    @Consumes(MediaType.TEXT_PLAIN)
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            tags = { ConfAPI.LICENSES },
+            summary = "Set a new set of license",
+            description = "Existing license details are overwritten. Upon successful request, returns a `LicensesBean` object containing license details",
+            responses = {
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = LicensesBean.class))),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+            }
+    )
+    Response setLicenses(
+            @Parameter(description="Clear license details before updating (Jira only).") @QueryParam ("clear") @DefaultValue("false") final boolean clear,
+            @NotNull final LicensesBean licensesBean);
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.LICENSES },
@@ -48,6 +65,6 @@ public interface LicensesResource {
     )
     Response setLicense(
             @Parameter(description="Clear license details before updating (Jira only).") @QueryParam ("clear") @DefaultValue("false") final boolean clear,
-            @NotNull final String licenseKey);
+            @NotNull final LicenseBean licenseBean);
 
 }
