@@ -22,14 +22,14 @@ public abstract class AbstractLicensesResourceImpl implements LicensesResource {
     }
 
     @Override
-    public Response setLicenses(boolean clear, LicensesBean licensesBean) {
-        LicensesBean updatedLicensesBean = licensesService.setLicenses(clear, licensesBean);
+    public Response setLicenses(LicensesBean licensesBean) {
+        LicensesBean updatedLicensesBean = licensesService.setLicenses(licensesBean);
         return Response.ok(updatedLicensesBean).build();
     }
 
     @Override
-    public Response setLicense(boolean clear, LicenseBean licenseBean) {
-        LicensesBean updatedLicensesBean = licensesService.setLicense(clear, licenseBean);
+    public Response addLicense(LicenseBean licenseBean) {
+        LicensesBean updatedLicensesBean = licensesService.setLicense(licenseBean);
         return Response.ok(updatedLicensesBean).build();
     }
 }

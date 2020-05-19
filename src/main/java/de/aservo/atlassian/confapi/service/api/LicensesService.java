@@ -19,21 +19,17 @@ public interface LicensesService {
      * Set the licenses
      *
      * @param licensesBean the licenses to set
-     * @param clear whether or not to clear all licenses before setting the new ones
      * @return the licenses
      */
     public LicensesBean setLicenses(
-            boolean clear,
             @NotNull final LicensesBean licensesBean);
 
     /**
      * Set a single license
      *
      * @param licenseBean the single license to set
-     * @param clear whether or not to clear all licenses before setting the new one
      * @return the licenses
      */
     public LicensesBean setLicense(
-            boolean clear,
             @NotNull final LicenseBean licenseBean);
 }

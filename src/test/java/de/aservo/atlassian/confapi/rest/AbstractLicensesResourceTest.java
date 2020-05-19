@@ -44,9 +44,9 @@ public class AbstractLicensesResourceTest {
     public void testSetLicenses() {
         final LicensesBean bean = LicensesBean.EXAMPLE_1;
 
-        doReturn(bean).when(licensesService).setLicenses(true, bean);
+        doReturn(bean).when(licensesService).setLicenses(bean);
 
-        final Response response = resource.setLicenses(true, bean);
+        final Response response = resource.setLicenses(bean);
         assertEquals(200, response.getStatus());
         final LicensesBean licensesBean = (LicensesBean) response.getEntity();
 
@@ -54,13 +54,13 @@ public class AbstractLicensesResourceTest {
     }
 
     @Test
-    public void testSetLicense() {
+    public void testAddLicense() {
         final LicensesBean beanToReturn = LicensesBean.EXAMPLE_1;
         final LicenseBean beanArg = beanToReturn.getLicenses().iterator().next();
 
-        doReturn(beanToReturn).when(licensesService).setLicense(true, beanArg);
+        doReturn(beanToReturn).when(licensesService).setLicense(beanArg);
 
-        final Response response = resource.setLicense(true, beanArg);
+        final Response response = resource.addLicense(beanArg);
         assertEquals(200, response.getStatus());
         final LicensesBean licensesBean = (LicensesBean) response.getEntity();
 
