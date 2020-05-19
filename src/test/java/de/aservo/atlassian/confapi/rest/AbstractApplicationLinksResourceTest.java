@@ -1,0 +1,69 @@
+package de.aservo.atlassian.confapi.rest;
+
+import de.aservo.atlassian.confapi.model.ApplicationLinkBean;
+import de.aservo.atlassian.confapi.model.ApplicationLinksBean;
+import de.aservo.atlassian.confapi.service.api.ApplicationLinksService;
+import org.junit.Before;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.mockito.Mock;
+import org.mockito.junit.MockitoJUnitRunner;
+
+import javax.ws.rs.core.Response;
+
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.doReturn;
+
+@RunWith(MockitoJUnitRunner.class)
+public class AbstractApplicationLinksResourceTest {
+
+    @Mock
+    private ApplicationLinksService applicationLinksService;
+
+    private TestApplicationLinksResourceImpl resource;
+
+    @Before
+    public void setup() {
+        resource = new TestApplicationLinksResourceImpl(applicationLinksService);
+    }
+
+    @Test
+    public void testGetApplicationLinks() {
+        final ApplicationLinksBean bean = ApplicationLinksBean.EXAMPLE_1;
+
+        doReturn(bean).when(applicationLinksService).getApplicationLinks();
+
+        final Response response = resource.getApplicationLinks();
+        assertEquals(200, response.getStatus());
+        final ApplicationLinksBean linksBean = (ApplicationLinksBean) response.getEntity();
+
+        assertEquals(linksBean, bean);
+    }
+
+    @Test
+    public void testSetApplicationLinks() {
+        final ApplicationLinksBean bean = ApplicationLinksBean.EXAMPLE_1;
+
+        doReturn(bean).when(applicationLinksService).setApplicationLinks(bean);
+
+        final Response response = resource.setApplicationLinks(bean);
+        assertEquals(200, response.getStatus());
+        final ApplicationLinksBean linksBean = (ApplicationLinksBean) response.getEntity();
+
+        assertEquals(linksBean, bean);
+    }
+
+    @Test
+    public void testAddApplicationLink() {
+        final ApplicationLinksBean beanToReturn = ApplicationLinksBean.EXAMPLE_1;
+        final ApplicationLinkBean beanArg = beanToReturn.getApplicationLinks().iterator().next();
+
+        doReturn(beanToReturn).when(applicationLinksService).addApplicationLink(beanArg);
+
+        final Response response = resource.addApplicationLink(beanArg);
+        assertEquals(200, response.getStatus());
+        final ApplicationLinksBean linksBean = (ApplicationLinksBean) response.getEntity();
+
+        assertEquals(linksBean, beanToReturn);
+    }
+}
