@@ -32,7 +32,7 @@ public abstract class AbstractExceptionTest extends AbstractTest {
         final WebApplicationException messageException = (WebApplicationException) baseClass.getConstructor(String.class)
                 .newInstance(MESSAGE);
         final WebApplicationException throwableException = (WebApplicationException) baseClass.getConstructor(Throwable.class)
-                .newInstance(new Throwable(MESSAGE));
+                .newInstance(new Exception(MESSAGE));
 
         assertEquals("The message for both constructors should be equal",
                 throwableException.getMessage(), messageException.getMessage());

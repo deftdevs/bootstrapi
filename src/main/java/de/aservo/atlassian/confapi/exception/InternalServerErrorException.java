@@ -10,7 +10,7 @@ public class InternalServerErrorException extends WebApplicationException {
     public static final Response.Status STATUS = INTERNAL_SERVER_ERROR;
 
     public InternalServerErrorException(String message) {
-        super(new Throwable(message), STATUS);
+        super(new Exception(message), STATUS);
     }
 
     public InternalServerErrorException(Throwable cause) {

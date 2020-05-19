@@ -10,7 +10,7 @@ public class NotFoundException extends WebApplicationException {
     private static final Response.Status STATUS = NOT_FOUND;
 
     public NotFoundException(String message) {
-        super(new Throwable(message), STATUS);
+        super(new Exception(message), STATUS);
     }
 
     public NotFoundException(Throwable cause) {
