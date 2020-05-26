@@ -3,7 +3,7 @@
 ConfAPI Commons
 ===============
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.aservo.atlassian/confapi-commons/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.aservo.atlassian/confapi-commons)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.aservo/confapi-commons/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.aservo/confapi-commons)
 [![Build Status](https://circleci.com/gh/aservo/confapi-commons.svg?style=shield)](https://circleci.com/gh/aservo/confapi-commons)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=aservo_confapi-commons&metric=coverage)](https://sonarcloud.io/dashboard?id=aservo_confapi-commons)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=aservo_confapi-commons&metric=alert_status)](https://sonarcloud.io/dashboard?id=aservo_confapi-commons)
