@@ -13,7 +13,7 @@ import javax.ws.rs.core.Response;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public abstract class SettingsResourceFuncTest {
+public abstract class AbstractSettingsResourceFuncTest {
 
     @Test
     public void testGetSettings() {

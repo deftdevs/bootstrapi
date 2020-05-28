@@ -25,5 +25,6 @@ public class LicensesBean {
     // Example instances for documentation and tests
 
     public static final LicensesBean EXAMPLE_1 = new LicensesBean(Collections.singleton(LicenseBean.EXAMPLE_1));
+    public static final LicensesBean EXAMPLE_2_DEVELOPER_LICENSE = new LicensesBean(Collections.singleton(LicenseBean.EXAMPLE_2_DEVELOPER_LICENSE));
 
 }
