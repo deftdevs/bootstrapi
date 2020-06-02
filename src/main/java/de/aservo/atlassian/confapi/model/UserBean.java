@@ -50,4 +50,13 @@ public class UserBean {
         EXAMPLE_2.setEmail("user@new-example.com");
     }
 
+    public static final UserBean EXAMPLE_3_ADMIN;
+
+    static {
+        EXAMPLE_3_ADMIN = new UserBean();
+        EXAMPLE_3_ADMIN.setFullName("Administrator");
+        EXAMPLE_3_ADMIN.setUserName("admin");
+        EXAMPLE_3_ADMIN.setEmail("admin@admin.de");
+        EXAMPLE_3_ADMIN.setPassword("admin");
+    }
 }
