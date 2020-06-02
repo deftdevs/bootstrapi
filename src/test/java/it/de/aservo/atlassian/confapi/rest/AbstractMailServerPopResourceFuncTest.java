@@ -1,7 +1,7 @@
 package it.de.aservo.atlassian.confapi.rest;
 
-import de.aservo.atlassian.confapi.constants.ConfAPI;
-import de.aservo.atlassian.confapi.model.MailServerPopBean;
+import de.aservo.confapi.commons.constants.ConfAPI;
+import de.aservo.confapi.commons.model.MailServerPopBean;
 import org.apache.wink.client.ClientAuthenticationException;
 import org.apache.wink.client.ClientResponse;
 import org.apache.wink.client.Resource;
