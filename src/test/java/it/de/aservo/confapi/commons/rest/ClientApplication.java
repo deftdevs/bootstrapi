@@ -1,4 +1,4 @@
-package it.de.aservo.atlassian.confapi.rest;
+package it.de.aservo.confapi.commons.rest;
 
 import javax.ws.rs.core.Application;
 import java.util.Collections;
