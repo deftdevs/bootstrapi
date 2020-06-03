@@ -52,9 +52,6 @@ public abstract class AbstractUserResourceFuncTest {
 
         ClientResponse clientResponse = usersResource.put(exampleBean.getPassword());
         assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
-
-        UserBean userBean = clientResponse.getEntity(UserBean.class);
-        assertEquals(exampleBean, userBean);
     }
 
     @Test(expected = ClientAuthenticationException.class)
