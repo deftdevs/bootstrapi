@@ -25,7 +25,7 @@ public interface LicensesResource {
     @Operation(
             tags = { ConfAPI.LICENSES },
             summary = "Get all licenses information",
-            description = "Upon successful request, returns a `LicensesBean` object containing license details",
+            description = "Upon successful request, returns a `LicensesBean` object containing license details. Be aware that `products` collection of the `LicenseBean` contains the product display names, not the product key names",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = LicensesBean.class))),
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
