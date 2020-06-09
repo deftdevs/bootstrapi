@@ -5,7 +5,6 @@ import de.aservo.confapi.commons.model.SettingsBean;
 import org.apache.wink.client.ClientAuthenticationException;
 import org.apache.wink.client.ClientResponse;
 import org.apache.wink.client.Resource;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.ws.rs.core.Response;
@@ -52,7 +51,6 @@ public abstract class AbstractSettingsResourceFuncTest {
     }
 
     @Test
-    @Ignore("cannot be executed because there is no default user with restricted access rights")
     public void testGetSettingsUnauthorized() {
         Resource settingsResource = ResourceBuilder.builder(ConfAPI.SETTINGS)
                 .username("user")
@@ -62,7 +60,6 @@ public abstract class AbstractSettingsResourceFuncTest {
     }
 
     @Test
-    @Ignore("cannot be executed because there is no default user with restricted access rights")
     public void testSetSettingsUnauthorized() {
         Resource settingsResource = ResourceBuilder.builder(ConfAPI.SETTINGS)
                 .username("user")
