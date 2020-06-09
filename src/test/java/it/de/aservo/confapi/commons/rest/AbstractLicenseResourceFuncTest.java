@@ -6,7 +6,6 @@ import de.aservo.confapi.commons.model.LicensesBean;
 import org.apache.wink.client.ClientAuthenticationException;
 import org.apache.wink.client.ClientResponse;
 import org.apache.wink.client.Resource;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.ws.rs.core.Response;
@@ -75,7 +74,6 @@ public abstract class AbstractLicenseResourceFuncTest {
     }
 
     @Test
-    @Ignore("cannot be executed because there is no default user with restricted access rights")
     public void testGetLicensesUnauthorized() {
         Resource licensesResource = ResourceBuilder.builder(ConfAPI.LICENSES)
                 .username("user")
@@ -85,7 +83,6 @@ public abstract class AbstractLicenseResourceFuncTest {
     }
 
     @Test
-    @Ignore("cannot be executed because there is no default user with restricted access rights")
     public void testSetLicensesUnauthorized() {
         Resource licensesResource = ResourceBuilder.builder(ConfAPI.LICENSES)
                 .username("user")

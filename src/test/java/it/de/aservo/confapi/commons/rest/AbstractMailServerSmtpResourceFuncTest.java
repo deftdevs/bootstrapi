@@ -5,7 +5,6 @@ import de.aservo.confapi.commons.model.MailServerSmtpBean;
 import org.apache.wink.client.ClientAuthenticationException;
 import org.apache.wink.client.ClientResponse;
 import org.apache.wink.client.Resource;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.ws.rs.core.Response;
@@ -56,7 +55,6 @@ public abstract class AbstractMailServerSmtpResourceFuncTest {
     }
 
     @Test
-    @Ignore("cannot be executed because there is no default user with restricted access rights")
     public void testGetMailserverImapUnauthorized() {
         Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_SMTP)
                 .username("user")
@@ -67,7 +65,6 @@ public abstract class AbstractMailServerSmtpResourceFuncTest {
     }
 
     @Test
-    @Ignore("cannot be executed because there is no default user with restricted access rights")
     public void testSetMailserverImapUnauthorized() {
         Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_SMTP)
                 .username("user")

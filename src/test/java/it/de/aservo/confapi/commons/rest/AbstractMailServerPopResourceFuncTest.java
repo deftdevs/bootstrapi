@@ -5,7 +5,6 @@ import de.aservo.confapi.commons.model.MailServerPopBean;
 import org.apache.wink.client.ClientAuthenticationException;
 import org.apache.wink.client.ClientResponse;
 import org.apache.wink.client.Resource;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import javax.ws.rs.core.Response;
@@ -56,7 +55,6 @@ public abstract class AbstractMailServerPopResourceFuncTest {
     }
 
     @Test
-    @Ignore("cannot be executed because there is no default user with restricted access rights")
     public void testGetMailserverPopUnauthorized() {
         Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_POP)
                 .username("user")
@@ -67,7 +65,6 @@ public abstract class AbstractMailServerPopResourceFuncTest {
     }
 
     @Test
-    @Ignore("cannot be executed because there is no default user with restricted access rights")
     public void testSetMailserverPopUnauthorized() {
         Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_POP)
                 .username("user")
