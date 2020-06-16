@@ -3,7 +3,7 @@ version: 2.1
 executors:
   maven:
     docker:
-      - image: circleci/openjdk:8-jdk
+      - image: circleci/openjdk:11-jdk
     working_directory: /tmp/build
 
 jobs:
@@ -15,7 +15,7 @@ jobs:
           key: confapi-plugin-{{ checksum "pom.xml" }}
       - run:
           name: Download Dependencies
-          command: mvn dependency:go-offline
+          command: mvn dependency:go-offline -U -B
       - run:
           name: Compile and Package
           command: mvn package -DskipTests
@@ -57,7 +57,7 @@ jobs:
           key: confapi-plugin-{{ checksum "pom.xml" }}
       - run:
           name: Run Integration Tests
-          command: mvn integration-test -DskipUnitTests
+          command: mvn integration-test -DskipUnitTests -B
       - save_cache:
           paths:
             - ~/.m2

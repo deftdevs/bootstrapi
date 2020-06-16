@@ -2,13 +2,15 @@ package de.aservo.atlassian.crowd.confapi.bean;
 
 import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.crowd.util.mail.SMTPServer;
-import de.aservo.atlassian.confapi.model.MailServerSmtpBean;
+import de.aservo.confapi.commons.model.MailServerSmtpBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
+
+import java.util.Collections;
 
 import static org.junit.Assert.*;
 
@@ -18,7 +20,7 @@ public class MailServerSmtpBeanTest {
 
     private MailConfiguration getDefaultMailConfiguration() throws AddressException {
         return MailConfiguration.builder()
-                .setServerAlertAddress("alert@aservo.com")
+                .setNotificationEmails(Collections.singletonList("alert@aservo.com"))
                 .setSmtpServer(SMTPServer.builder()
                         .setPrefix("[ASERVO]")
                         .setFrom(new InternetAddress("mail@aservo.com"))
@@ -40,12 +42,12 @@ public class MailServerSmtpBeanTest {
     @Test
     public void testConstructor() throws AddressException {
         final MailServerSmtpBean bean = new MailServerSmtpBean(
-                getDefaultMailConfiguration().getServerAlertAddress(),
+                getDefaultMailConfiguration().getNotificationEmails().iterator().next(),
                 getDefaultMailConfiguration().getSmtpServer().getFrom().toString(),
                 getDefaultMailConfiguration().getSmtpServer().getPrefix(),
                 getDefaultMailConfiguration().getSmtpServer().getHost()
         );
-        assertEquals(bean.getAdminContact(), getDefaultMailConfiguration().getServerAlertAddress());
+        assertEquals(bean.getAdminContact(), getDefaultMailConfiguration().getNotificationEmails().iterator().next());
         assertEquals(bean.getFrom(), getDefaultMailConfiguration().getSmtpServer().getFrom().toString());
         assertEquals(bean.getPrefix(), getDefaultMailConfiguration().getSmtpServer().getPrefix());
         assertEquals(bean.getHost(), getDefaultMailConfiguration().getSmtpServer().getHost());
@@ -54,14 +56,14 @@ public class MailServerSmtpBeanTest {
     @Test
     public void testEqualsAndHashCode() throws Exception {
         final MailServerSmtpBean bean1 = new MailServerSmtpBean(
-                getDefaultMailConfiguration().getServerAlertAddress(),
+                getDefaultMailConfiguration().getNotificationEmails().iterator().next(),
                 getDefaultMailConfiguration().getSmtpServer().getFrom().toString(),
                 getDefaultMailConfiguration().getSmtpServer().getPrefix(),
                 getDefaultMailConfiguration().getSmtpServer().getHost()
         );
 
         final MailServerSmtpBean bean2 = new MailServerSmtpBean(
-                getDefaultMailConfiguration().getServerAlertAddress(),
+                getDefaultMailConfiguration().getNotificationEmails().iterator().next(),
                 getDefaultMailConfiguration().getSmtpServer().getFrom().toString(),
                 getDefaultMailConfiguration().getSmtpServer().getPrefix(),
                 getDefaultMailConfiguration().getSmtpServer().getHost()

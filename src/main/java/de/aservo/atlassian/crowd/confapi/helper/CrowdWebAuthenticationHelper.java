@@ -5,7 +5,7 @@ import com.atlassian.crowd.model.permission.UserPermission;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.user.UserManager;
 import com.atlassian.sal.api.user.UserProfile;
-import de.aservo.atlassian.confapi.helper.WebAuthenticationHelper;
+import de.aservo.confapi.commons.helper.WebAuthenticationHelper;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

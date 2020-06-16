@@ -1,7 +1,7 @@
 package de.aservo.atlassian.crowd.confapi.bean;
 
 import com.atlassian.crowd.embedded.api.Directory;
-import de.aservo.atlassian.confapi.constants.ConfAPI;
+import de.aservo.confapi.commons.constants.ConfAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.builder.EqualsBuilder;
