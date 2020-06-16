@@ -6,8 +6,8 @@ import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.aservo.confapi.commons.constants.ConfAPI;
 import de.aservo.confapi.crowd.helper.CrowdWebAuthenticationHelper;
-import de.aservo.confapi.crowd.bean.DirectoryAttributesBean;
-import de.aservo.confapi.crowd.bean.DirectoryBean;
+import de.aservo.confapi.crowd.model.DirectoryAttributesBean;
+import de.aservo.confapi.crowd.model.DirectoryBean;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

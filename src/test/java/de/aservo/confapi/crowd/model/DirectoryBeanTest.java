@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.bean;
+package de.aservo.confapi.crowd.model;
 
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.MockDirectory;
@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
 @RunWith(MockitoJUnitRunner.class)
 public class DirectoryBeanTest {
 
-    private Directory directory = new MockDirectory();
+    private final Directory directory = new MockDirectory();
 
     @Test
     public void testConstructWithDefaultConstructor() {
@@ -32,14 +32,6 @@ public class DirectoryBeanTest {
         assertThat(directoryBean.getId(), equalTo(directory.getId()));
         assertThat(directoryBean.getName(), equalTo(directory.getName()));
         assertThat(directoryBean.getAttributes(), equalTo(directoryAttributesBean));
-    }
-
-    @Test
-    public void testEqual() {
-        final DirectoryBean directoryBean1 = DirectoryBean.from(directory);
-        final DirectoryBean directoryBean2 = DirectoryBean.from(directory);
-
-        assertThat(directoryBean1, equalTo(directoryBean2));
     }
 
 }

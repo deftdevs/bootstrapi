@@ -5,8 +5,8 @@ import com.atlassian.crowd.embedded.api.MockDirectory;
 import com.atlassian.crowd.exception.DirectoryNotFoundException;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
 import de.aservo.confapi.crowd.helper.CrowdWebAuthenticationHelper;
-import de.aservo.confapi.crowd.bean.DirectoryAttributesBean;
-import de.aservo.confapi.crowd.bean.DirectoryBean;
+import de.aservo.confapi.crowd.model.DirectoryAttributesBean;
+import de.aservo.confapi.crowd.model.DirectoryBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -32,7 +32,7 @@ public class DirectoryResourceTest {
     @InjectMocks
     private DirectoryResource directoryResource;
 
-    private Directory directory = new MockDirectory();
+    private final Directory directory = new MockDirectory();
 
     @Test
     public void testGetDirectory() throws DirectoryNotFoundException {
