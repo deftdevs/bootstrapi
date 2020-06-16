@@ -1,6 +1,5 @@
 package de.aservo.confapi.crowd.model;
 
-import com.atlassian.crowd.embedded.api.Directory;
 import de.aservo.confapi.commons.constants.ConfAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -20,16 +19,25 @@ public class DirectoryBean {
     private String name;
 
     @XmlElement
-    private DirectoryAttributesBean attributes;
+    private String description;
 
-    public static DirectoryBean from(
-            final Directory directory) {
+    @XmlElement
+    private Boolean active;
 
-        final DirectoryBean directoryBean = new DirectoryBean();
-        directoryBean.setId(directory.getId());
-        directoryBean.setName(directory.getName());
-        directoryBean.setAttributes(DirectoryAttributesBean.from(directory));
-        return directoryBean;
+    @XmlElement
+    private DirectoryConfigurationBean configuration;
+
+    // examples
+
+    public static final DirectoryBean EXAMPLE_1;
+
+    static {
+        EXAMPLE_1 = new DirectoryBean();
+        EXAMPLE_1.setId(1L);
+        EXAMPLE_1.setName("Example");
+        EXAMPLE_1.setActive(true);
+        EXAMPLE_1.setDescription("Example Directory");
+        EXAMPLE_1.setConfiguration(DirectoryConfigurationBean.EXAMPLE_1);
     }
 
 }
