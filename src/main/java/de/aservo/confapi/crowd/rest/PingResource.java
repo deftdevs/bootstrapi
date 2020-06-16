@@ -1,4 +1,4 @@
-package de.aservo.atlassian.crowd.confapi.rest;
+package de.aservo.confapi.crowd.rest;
 
 import com.atlassian.plugins.rest.common.security.AnonymousAllowed;
 import de.aservo.confapi.commons.constants.ConfAPI;

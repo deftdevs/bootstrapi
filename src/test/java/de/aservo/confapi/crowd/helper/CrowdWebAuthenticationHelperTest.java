@@ -1,10 +1,9 @@
-package de.aservo.atlassian.crowd.confapi.helper;
+package de.aservo.confapi.crowd.helper;
 
 import com.atlassian.crowd.manager.permission.UserPermissionService;
 import com.atlassian.crowd.model.permission.UserPermission;
 import com.atlassian.sal.api.user.UserManager;
 import com.atlassian.sal.api.user.UserProfile;
-import de.aservo.atlassian.crowd.confapi.helper.CrowdWebAuthenticationHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;

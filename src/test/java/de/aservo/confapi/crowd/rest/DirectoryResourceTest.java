@@ -1,12 +1,12 @@
-package de.aservo.atlassian.crowd.confapi.rest;
+package de.aservo.confapi.crowd.rest;
 
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.MockDirectory;
 import com.atlassian.crowd.exception.DirectoryNotFoundException;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
-import de.aservo.atlassian.crowd.confapi.helper.CrowdWebAuthenticationHelper;
-import de.aservo.atlassian.crowd.confapi.bean.DirectoryAttributesBean;
-import de.aservo.atlassian.crowd.confapi.bean.DirectoryBean;
+import de.aservo.confapi.crowd.helper.CrowdWebAuthenticationHelper;
+import de.aservo.confapi.crowd.model.DirectoryAttributesBean;
+import de.aservo.confapi.crowd.model.DirectoryBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -32,7 +32,7 @@ public class DirectoryResourceTest {
     @InjectMocks
     private DirectoryResource directoryResource;
 
-    private Directory directory = new MockDirectory();
+    private final Directory directory = new MockDirectory();
 
     @Test
     public void testGetDirectory() throws DirectoryNotFoundException {

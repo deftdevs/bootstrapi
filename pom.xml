@@ -7,17 +7,16 @@
     <parent>
         <groupId>de.aservo</groupId>
         <artifactId>parent-pom</artifactId>
-        <version>0.0.6</version>
+        <version>0.0.9</version>
     </parent>
 
-    <groupId>de.aservo.atlassian</groupId>
-    <artifactId>crowd-confapi-plugin</artifactId>
-    <version>0.0.5-SNAPSHOT</version>
+    <artifactId>confapi-crowd-plugin</artifactId>
+    <version>0.0.6-SNAPSHOT</version>
     <packaging>atlassian-plugin</packaging>
 
     <name>ConfAPI for Crowd</name>
     <description>REST API for automated Crowd configuration.</description>
-    <url>https://github.com/aservo/crowd-confapi-plugin</url>
+    <url>https://github.com/aservo/confapi-crowd-plugin</url>
 
     <licenses>
         <license>
@@ -29,13 +28,13 @@
 
     <issueManagement>
         <system>Github</system>
-        <url>https://github.com/aservo/crowd-confapi-plugin/issues</url>
+        <url>https://github.com/aservo/confapi-crowd-plugin/issues</url>
     </issueManagement>
 
     <scm>
-        <connection>scm:git:git@github.com:aservo/crowd-confapi-plugin.git</connection>
-        <developerConnection>scm:git:git@github.com:aservo/crowd-confapi-plugin.git</developerConnection>
-        <url>https://github.com/aservo/crowd-confapi-plugin</url>
+        <connection>scm:git:git@github.com:aservo/confapi-crowd-plugin.git</connection>
+        <developerConnection>scm:git:git@github.com:aservo/confapi-crowd-plugin.git</developerConnection>
+        <url>https://github.com/aservo/confapi-crowd-plugin</url>
         <tag>v@{project.version}</tag>
     </scm>
 
@@ -54,12 +53,7 @@
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
         <confapi-commons.version>0.0.10-SNAPSHOT</confapi-commons.version>
-        <lombok.version>1.18.10</lombok.version>
-        <javax.ws.version>1.1.1</javax.ws.version>
-        <javax.xml.version>2.1</javax.xml.version>
-        <jacoco.version>0.8.1</jacoco.version>
         <plugin.testrunner.version>1.2.3</plugin.testrunner.version>
-        <swagger.version>2.1.1</swagger.version>
     </properties>
 
     <dependencyManagement>
