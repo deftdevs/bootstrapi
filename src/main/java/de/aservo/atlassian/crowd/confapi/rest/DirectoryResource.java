@@ -4,7 +4,7 @@ import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.exception.DirectoryNotFoundException;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.atlassian.confapi.constants.ConfAPI;
+import de.aservo.confapi.commons.constants.ConfAPI;
 import de.aservo.atlassian.crowd.confapi.helper.CrowdWebAuthenticationHelper;
 import de.aservo.atlassian.crowd.confapi.bean.DirectoryAttributesBean;
 import de.aservo.atlassian.crowd.confapi.bean.DirectoryBean;

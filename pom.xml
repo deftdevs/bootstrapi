@@ -49,12 +49,11 @@
     </developers>
 
     <properties>
-        <amps.version>6.3.5</amps.version>
+        <crowd.version>4.0.1</crowd.version>
+        <amps.version>8.0.2</amps.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <atlassian.spring.scanner.version>1.2.13</atlassian.spring.scanner.version>
-        <confapi-commons.version>0.0.1-SNAPSHOT</confapi-commons.version>
-        <coveralls.version>4.3.0</coveralls.version>
-        <crowd.version>3.2.1</crowd.version>
+        <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
+        <confapi-commons.version>0.0.10-SNAPSHOT</confapi-commons.version>
         <lombok.version>1.18.10</lombok.version>
         <javax.ws.version>1.1.1</javax.ws.version>
         <javax.xml.version>2.1</javax.xml.version>
@@ -72,16 +71,42 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <dependency>
+                <groupId>de.aservo</groupId>
+                <artifactId>confapi-commons</artifactId>
+                <version>${confapi-commons.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
     <dependencies>
+
+        <!-- compile dependencies -->
+
         <dependency>
-            <groupId>de.aservo.atlassian</groupId>
+            <groupId>de.aservo</groupId>
             <artifactId>confapi-commons</artifactId>
             <version>${confapi-commons.version}</version>
             <scope>compile</scope>
         </dependency>
+
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- behaves like a compile dependency -->
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- provided dependencies -->
 
         <dependency>
             <groupId>com.atlassian.crowd</groupId>
@@ -115,19 +140,30 @@
             <groupId>com.atlassian.plugin</groupId>
             <artifactId>atlassian-spring-scanner-annotation</artifactId>
             <version>${atlassian.spring.scanner.version}</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.plugin</groupId>
-            <artifactId>atlassian-spring-scanner-runtime</artifactId>
-            <version>${atlassian.spring.scanner.version}</version>
-            <scope>runtime</scope>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>com.atlassian.plugins.rest</groupId>
             <artifactId>atlassian-rest-common</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -138,47 +174,19 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
-            <scope>provided</scope>
-        </dependency>
+        <!-- test dependencies -->
 
         <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <version>${swagger.version}</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <version>2.1</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <version>3.1.0</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- Test dependencies -->
-
-        <dependency>
-            <groupId>com.atlassian.crowd</groupId>
-            <artifactId>crowd-test-utils</artifactId>
-            <version>${crowd.version}</version>
-            <scope>provided</scope>
+            <groupId>de.aservo</groupId>
+            <artifactId>confapi-commons</artifactId>
+            <version>${confapi-commons.version}</version>
+            <type>test-jar</type>
+            <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.11</version>
             <scope>provided</scope>
         </dependency>
 
@@ -197,8 +205,14 @@
         <dependency>
             <groupId>org.apache.wink</groupId>
             <artifactId>wink-client</artifactId>
-            <version>1.4</version>
             <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.crowd</groupId>
+            <artifactId>crowd-test-utils</artifactId>
+            <version>${crowd.version}</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -217,13 +231,14 @@
                 </exclusion>
             </exclusions>
         </dependency>
+
     </dependencies>
 
     <build>
         <plugins>
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
-                <artifactId>maven-crowd-plugin</artifactId>
+                <artifactId>crowd-maven-plugin</artifactId>
                 <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
@@ -231,14 +246,11 @@
                     <productDataVersion>${crowd.version}</productDataVersion>
                     <allowGoogleTracking>false</allowGoogleTracking>
                     <enableQuickReload>true</enableQuickReload>
-                    <enableFastdev>false</enableFastdev>
                     <extractDependencies>true</extractDependencies>
                     <instructions>
                         <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
                         <Import-Package>
-                            org.springframework.osgi.*;resolution:="optional",
-                            org.eclipse.gemini.blueprint.*;resolution:="optional",
-                            *
+                            *;resolution:="optional"
                         </Import-Package>
                         <Spring-Context>*</Spring-Context>
                     </instructions>

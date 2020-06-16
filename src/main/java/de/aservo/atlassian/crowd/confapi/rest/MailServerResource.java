@@ -1,13 +1,13 @@
 package de.aservo.atlassian.crowd.confapi.rest;
 
 import com.atlassian.crowd.manager.mail.MailConfiguration;
-import com.atlassian.crowd.manager.mail.MailManager;
+import com.atlassian.crowd.manager.mail.MailConfigurationService;
 import com.atlassian.crowd.util.mail.SMTPServer;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.atlassian.confapi.constants.ConfAPI;
-import de.aservo.atlassian.confapi.model.ErrorCollection;
-import de.aservo.atlassian.confapi.model.MailServerSmtpBean;
 import de.aservo.atlassian.crowd.confapi.helper.CrowdWebAuthenticationHelper;
+import de.aservo.confapi.commons.constants.ConfAPI;
+import de.aservo.confapi.commons.model.ErrorCollection;
+import de.aservo.confapi.commons.model.MailServerSmtpBean;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,6 +25,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.Collections;
 
 import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
 import static javax.ws.rs.core.Response.Status.NOT_FOUND;
@@ -32,21 +33,21 @@ import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 @Path(ConfAPI.MAIL_SERVER)
 @Produces(MediaType.APPLICATION_JSON)
 @Component
-public class MailConfigurationResource {
+public class MailServerResource {
 
-    private static final Logger log = LoggerFactory.getLogger(MailConfigurationResource.class);
+    private static final Logger log = LoggerFactory.getLogger(MailServerResource.class);
 
     @ComponentImport
-    private final MailManager mailManager;
+    private final MailConfigurationService mailConfigurationService;
 
     private final CrowdWebAuthenticationHelper crowdWebAuthenticationHelper;
 
     @Inject
-    public MailConfigurationResource(
-            final MailManager mailManager,
+    public MailServerResource(
+            final MailConfigurationService mailConfigurationService,
             final CrowdWebAuthenticationHelper crowdWebAuthenticationHelper) {
 
-        this.mailManager = mailManager;
+        this.mailConfigurationService = mailConfigurationService;
         this.crowdWebAuthenticationHelper = crowdWebAuthenticationHelper;
     }
 
@@ -65,9 +66,9 @@ public class MailConfigurationResource {
         final ErrorCollection errorCollection = new ErrorCollection();
 
         try {
-            final MailConfiguration mailConfiguration = mailManager.getMailConfiguration();
+            final MailConfiguration mailConfiguration = mailConfigurationService.getMailConfiguration();
             final MailServerSmtpBean mailConfigurationBean = new MailServerSmtpBean(
-                    mailConfiguration.getServerAlertAddress(),
+                    mailConfiguration.getNotificationEmails().iterator().next(),
                     mailConfiguration.getSmtpServer().getFrom().toString(),
                     mailConfiguration.getSmtpServer().getPrefix(),
                     mailConfiguration.getSmtpServer().getHost()
@@ -99,10 +100,10 @@ public class MailConfigurationResource {
         final ErrorCollection errorCollection = new ErrorCollection();
 
         try {
-            final MailConfiguration mailConfiguration = mailManager.getMailConfiguration();
+            final MailConfiguration mailConfiguration = mailConfigurationService.getMailConfiguration();
 
             final MailConfiguration newMailConfig = MailConfiguration.builder()
-                    .setServerAlertAddress(bean.getAdminContact())
+                    .setNotificationEmails(Collections.singletonList(bean.getAdminContact()))
                     .setSmtpServer(SMTPServer.builder()
                             .setFrom(new InternetAddress(bean.getFrom()))
                             .setPrefix(bean.getPrefix())
@@ -116,7 +117,7 @@ public class MailConfigurationResource {
                             .setTimeout(mailConfiguration.getSmtpServer().getTimeout())
                             .build())
                     .build();
-            mailManager.saveConfiguration(newMailConfig);
+            mailConfigurationService.saveConfiguration(newMailConfig);
 
             return getMailServerSmtp();
         } catch (Exception e) {

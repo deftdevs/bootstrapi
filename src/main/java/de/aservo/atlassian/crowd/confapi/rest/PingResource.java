@@ -1,7 +1,7 @@
 package de.aservo.atlassian.crowd.confapi.rest;
 
 import com.atlassian.plugins.rest.common.security.AnonymousAllowed;
-import de.aservo.atlassian.confapi.constants.ConfAPI;
+import de.aservo.confapi.commons.constants.ConfAPI;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
