@@ -4,8 +4,9 @@ import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.exception.DirectoryNotFoundException;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import com.sun.jersey.spi.container.ResourceFilters;
 import de.aservo.confapi.commons.constants.ConfAPI;
-import de.aservo.confapi.crowd.helper.CrowdWebAuthenticationHelper;
+import de.aservo.confapi.crowd.filter.SysadminOnlyResourceFilter;
 import de.aservo.confapi.crowd.model.DirectoryAttributesBean;
 import de.aservo.confapi.crowd.model.DirectoryBean;
 import org.springframework.stereotype.Component;
@@ -18,31 +19,26 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path(ConfAPI.DIRECTORY)
+@Path(ConfAPI.DIRECTORIES)
 @Produces(MediaType.APPLICATION_JSON)
+@ResourceFilters(SysadminOnlyResourceFilter.class)
 @Component
-public class DirectoryResource {
+public class DirectoriesResource {
 
     @ComponentImport
     private final DirectoryManager directoryManager;
 
-    private final CrowdWebAuthenticationHelper crowdWebAuthenticationHelper;
-
     @Inject
-    public DirectoryResource(
-            final DirectoryManager directoryManager,
-            final CrowdWebAuthenticationHelper crowdWebAuthenticationHelper) {
+    public DirectoriesResource(
+            final DirectoryManager directoryManager) {
 
         this.directoryManager = directoryManager;
-        this.crowdWebAuthenticationHelper = crowdWebAuthenticationHelper;
     }
 
     @GET
     @Path("{id}")
     public Response getDirectory(
             @PathParam("id") final long id) {
-
-        crowdWebAuthenticationHelper.mustBeSysAdmin();
 
         DirectoryBean directoryBean = null;
 
@@ -63,8 +59,6 @@ public class DirectoryResource {
     @Path("{id}/attributes")
     public Response getDirectoryAttributes(
             @PathParam("id") final long id) {
-
-        crowdWebAuthenticationHelper.mustBeSysAdmin();
 
         DirectoryAttributesBean directoryAttributesBean = null;
 

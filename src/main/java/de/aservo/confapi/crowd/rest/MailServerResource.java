@@ -4,10 +4,11 @@ import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.crowd.manager.mail.MailConfigurationService;
 import com.atlassian.crowd.util.mail.SMTPServer;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.crowd.helper.CrowdWebAuthenticationHelper;
+import com.sun.jersey.spi.container.ResourceFilters;
 import de.aservo.confapi.commons.constants.ConfAPI;
 import de.aservo.confapi.commons.model.ErrorCollection;
 import de.aservo.confapi.commons.model.MailServerSmtpBean;
+import de.aservo.confapi.crowd.filter.SysadminOnlyResourceFilter;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -32,6 +33,7 @@ import static javax.ws.rs.core.Response.Status.NOT_FOUND;
 
 @Path(ConfAPI.MAIL_SERVER)
 @Produces(MediaType.APPLICATION_JSON)
+@ResourceFilters(SysadminOnlyResourceFilter.class)
 @Component
 public class MailServerResource {
 
@@ -40,15 +42,11 @@ public class MailServerResource {
     @ComponentImport
     private final MailConfigurationService mailConfigurationService;
 
-    private final CrowdWebAuthenticationHelper crowdWebAuthenticationHelper;
-
     @Inject
     public MailServerResource(
-            final MailConfigurationService mailConfigurationService,
-            final CrowdWebAuthenticationHelper crowdWebAuthenticationHelper) {
+            final MailConfigurationService mailConfigurationService) {
 
         this.mailConfigurationService = mailConfigurationService;
-        this.crowdWebAuthenticationHelper = crowdWebAuthenticationHelper;
     }
 
     @GET
@@ -61,8 +59,6 @@ public class MailServerResource {
             }
     )
     public Response getMailServerSmtp() {
-        crowdWebAuthenticationHelper.mustBeSysAdmin();
-
         final ErrorCollection errorCollection = new ErrorCollection();
 
         try {
@@ -94,8 +90,6 @@ public class MailServerResource {
     )
     public Response putMailServerSmtp(
             final MailServerSmtpBean bean) {
-
-        crowdWebAuthenticationHelper.mustBeSysAdmin();
 
         final ErrorCollection errorCollection = new ErrorCollection();
 

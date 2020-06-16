@@ -3,8 +3,8 @@ package de.aservo.confapi.crowd.rest;
 import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.crowd.manager.mail.MailConfigurationService;
 import com.atlassian.crowd.util.mail.SMTPServer;
-import de.aservo.confapi.crowd.helper.CrowdWebAuthenticationHelper;
 import de.aservo.confapi.commons.model.MailServerSmtpBean;
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
@@ -36,15 +36,17 @@ public class MailServerResourceTest {
     @Mock
     private MailConfigurationService mailConfigurationService;
 
-    @Mock
-    private CrowdWebAuthenticationHelper crowdWebAuthenticationHelper;
+    private MailServerResource resource;
+
+    @Before
+    public void setup() {
+        resource = new MailServerResource(mailConfigurationService);
+    }
 
     @Test
     public void testGetSmtpMailServerWithSuccess() throws AddressException {
         MailConfiguration mailConfiguration = this.getDefaultMailConfiguration();
         doReturn(this.getDefaultMailConfiguration()).when(mailConfigurationService).getMailConfiguration();
-
-        final MailServerResource resource = new MailServerResource(mailConfigurationService, crowdWebAuthenticationHelper);
         final Response response = resource.getMailServerSmtp();
         final MailServerSmtpBean bean = (MailServerSmtpBean) response.getEntity();
 
@@ -59,7 +61,6 @@ public class MailServerResourceTest {
     public void testGetSmtpMailServerWithFailure() throws AddressException {
         doReturn(null).when(mailConfigurationService).getMailConfiguration();
 
-        final MailServerResource resource = new MailServerResource(mailConfigurationService, crowdWebAuthenticationHelper);
         final Response response = resource.getMailServerSmtp();
 
         assertEquals(NOT_FOUND.getStatusCode(), response.getStatus());
@@ -70,7 +71,6 @@ public class MailServerResourceTest {
         MailConfiguration mailConfiguration = this.getDefaultMailConfiguration();
         doReturn(this.getDefaultMailConfiguration()).when(mailConfigurationService).getMailConfiguration();
 
-        final MailServerResource resource = new MailServerResource(mailConfigurationService, crowdWebAuthenticationHelper);
         final MailServerSmtpBean requestBean = new MailServerSmtpBean(
                 mailConfiguration.getNotificationEmails().iterator().next(),
                 mailConfiguration.getSmtpServer().getFrom().toString(),
@@ -89,7 +89,6 @@ public class MailServerResourceTest {
         MailConfiguration mailConfiguration = this.getDefaultMailConfiguration();
         doReturn(null).when(mailConfigurationService).getMailConfiguration();
 
-        final MailServerResource resource = new MailServerResource(mailConfigurationService, crowdWebAuthenticationHelper);
         final MailServerSmtpBean requestBean = new MailServerSmtpBean(
                 mailConfiguration.getNotificationEmails().iterator().next(),
                 mailConfiguration.getSmtpServer().getFrom().toString(),
