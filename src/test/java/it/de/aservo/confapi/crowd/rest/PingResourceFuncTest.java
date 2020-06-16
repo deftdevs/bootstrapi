@@ -1,4 +1,4 @@
-package it.de.aservo.atlassian.crowd.confapi.rest;
+package it.de.aservo.confapi.crowd.rest;
 
 import org.apache.wink.client.ClientConfig;
 import org.apache.wink.client.Resource;

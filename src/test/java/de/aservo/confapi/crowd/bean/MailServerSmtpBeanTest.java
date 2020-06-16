@@ -1,4 +1,4 @@
-package de.aservo.atlassian.crowd.confapi.bean;
+package de.aservo.confapi.crowd.bean;
 
 import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.crowd.util.mail.SMTPServer;

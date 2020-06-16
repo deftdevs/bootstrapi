@@ -1,4 +1,4 @@
-package de.aservo.atlassian.crowd.confapi.helper;
+package de.aservo.confapi.crowd.helper;
 
 import com.atlassian.crowd.manager.permission.UserPermissionService;
 import com.atlassian.crowd.model.permission.UserPermission;

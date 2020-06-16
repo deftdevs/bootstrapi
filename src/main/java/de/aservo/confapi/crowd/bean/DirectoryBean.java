@@ -1,4 +1,4 @@
-package de.aservo.atlassian.crowd.confapi.bean;
+package de.aservo.confapi.crowd.bean;
 
 import com.atlassian.crowd.embedded.api.Directory;
 import de.aservo.confapi.commons.constants.ConfAPI;

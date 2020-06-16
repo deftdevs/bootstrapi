@@ -1,10 +1,10 @@
-package de.aservo.atlassian.crowd.confapi.rest;
+package de.aservo.confapi.crowd.rest;
 
 import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.crowd.manager.mail.MailConfigurationService;
 import com.atlassian.crowd.util.mail.SMTPServer;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.atlassian.crowd.confapi.helper.CrowdWebAuthenticationHelper;
+import de.aservo.confapi.crowd.helper.CrowdWebAuthenticationHelper;
 import de.aservo.confapi.commons.constants.ConfAPI;
 import de.aservo.confapi.commons.model.ErrorCollection;
 import de.aservo.confapi.commons.model.MailServerSmtpBean;

@@ -1,9 +1,9 @@
-package de.aservo.atlassian.crowd.confapi.rest;
+package de.aservo.confapi.crowd.rest;
 
 import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.crowd.manager.mail.MailConfigurationService;
 import com.atlassian.crowd.util.mail.SMTPServer;
-import de.aservo.atlassian.crowd.confapi.helper.CrowdWebAuthenticationHelper;
+import de.aservo.confapi.crowd.helper.CrowdWebAuthenticationHelper;
 import de.aservo.confapi.commons.model.MailServerSmtpBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
