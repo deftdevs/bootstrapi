@@ -280,6 +280,50 @@
                     <redirectTestOutputToFile>true</redirectTestOutputToFile>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>io.swagger.core.v3</groupId>
+                <artifactId>swagger-maven-plugin</artifactId>
+                <version>${swagger.version}</version>
+                <configuration>
+                    <openapiFilePath>${basedir}/src/main/resources/openapi.yaml</openapiFilePath>
+                    <resourcePackages>
+                        <resourcePackage>de.aservo.confapi.crowd.rest</resourcePackage>
+                    </resourcePackages>
+                    <outputPath>${project.build.directory}</outputPath>
+                    <outputFormat>YAML</outputFormat>
+                    <prettyPrint>true</prettyPrint>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>resolve</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.openapitools</groupId>
+                <artifactId>openapi-generator-maven-plugin</artifactId>
+                <version>${openapi-generator-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.build.directory}/openapi.yaml</inputSpec>
+                            <generatorName>asciidoc</generatorName>
+                            <output>${project.basedir}</output>
+                            <skipValidateSpec>true</skipValidateSpec>
+                            <additionalProperties>specDir=src/main/resources/doc/</additionalProperties>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
 
