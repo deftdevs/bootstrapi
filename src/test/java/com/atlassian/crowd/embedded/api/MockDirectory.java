@@ -1,22 +1,26 @@
 package com.atlassian.crowd.embedded.api;
 
 import javax.annotation.Nullable;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static com.atlassian.crowd.directory.AbstractInternalDirectory.*;
+import static com.atlassian.crowd.password.factory.PasswordEncoderFactory.ATLASSIAN_SECURITY_ENCODER;
 
 public class MockDirectory implements Directory {
 
-    public static final String ATTRIBUTE_PASSWORD_REGEX_VALUE              = ".*";
-    public static final String ATTRIBUTE_PASSWORD_COMPLEXITY_MESSAGE_VALUE = "complex";
-    public static final long   ATTRIBUTE_PASSWORD_MAX_ATTEMPTS_VALUE       = 10L;
-    public static final String ATTRIBUTE_PASSWORD_HISTORY_COUNT_VALUE      = null;
-    public static final long   ATTRIBUTE_PASSWORD_MAX_CHANGE_TIME_VALUE    = 60L;
+    public static final String ATTRIBUTE_PASSWORD_REGEX_VALUE                           = ".*";
+    public static final String ATTRIBUTE_PASSWORD_COMPLEXITY_MESSAGE_VALUE              = "complex";
+    public static final long   ATTRIBUTE_PASSWORD_MAX_ATTEMPTS_VALUE                    = 10L;
+    public static final String ATTRIBUTE_PASSWORD_HISTORY_COUNT_VALUE                   = null;
+    public static final long   ATTRIBUTE_PASSWORD_MAX_CHANGE_TIME_VALUE                 = 60L;
+    public static final List<String> ATTRIBUTE_PASSWORD_EXPIRATION_NOTIFICATION_PERIODS_VALUE = Arrays.asList("1", "7");
 
     private final Map<String, String> attributes;
 
@@ -27,6 +31,7 @@ public class MockDirectory implements Directory {
                 // don't add ATTRIBUTE_PASSWORD_MAX_ATTEMPTS attribute
                 { ATTRIBUTE_PASSWORD_MAX_ATTEMPTS, String.valueOf(ATTRIBUTE_PASSWORD_MAX_ATTEMPTS_VALUE) },
                 { ATTRIBUTE_PASSWORD_MAX_CHANGE_TIME, String.valueOf(ATTRIBUTE_PASSWORD_MAX_CHANGE_TIME_VALUE) },
+                { ATTRIBUTE_PASSWORD_EXPIRATION_NOTIFICATION_PERIODS, String.join(",", ATTRIBUTE_PASSWORD_EXPIRATION_NOTIFICATION_PERIODS_VALUE) },
         }).collect(Collectors.toMap(data -> data[0], data -> data[1]));
     }
 
@@ -52,7 +57,7 @@ public class MockDirectory implements Directory {
 
     @Override
     public String getEncryptionType() {
-        return null;
+        return ATLASSIAN_SECURITY_ENCODER;
     }
 
     @Override

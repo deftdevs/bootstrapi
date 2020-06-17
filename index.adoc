@@ -1,0 +1,574 @@
+= ConfAPI for Crowd
+github@aservo.com
+1
+:toc: left
+:numbered:
+:toclevels: 3
+:source-highlighter: highlightjs
+:keywords: openapi, rest, ConfAPI for Crowd 
+:specDir: src/main/resources/doc/
+:snippetDir: 
+:generator-template: v1 2019-12-20
+:info-url: https://github.com/aservo/confapi-crowd-plugin
+:app-name: ConfAPI for Crowd
+
+[abstract]
+.Abstract
+This plugin provides methods for accessing configuration for Crowd.
+
+
+// markup not found, no include::{specDir}intro.adoc[opts=optional]
+
+
+== Access
+
+* *HTTP Basic* Authentication _basicAuth_
+
+
+
+
+
+== Endpoints
+
+
+[.Directories]
+=== Directories
+
+
+[.getDirectory]
+==== getDirectory
+    
+`GET /directories/{id}`
+
+Get a directory based on it's ID
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}directories/\{id\}/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| id 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+
+
+
+
+===== Return Type
+
+<<DirectoryBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<DirectoryBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}directories/\{id\}/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}directories/\{id\}/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :directories/{id}/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}directories/\{id\}/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.MailServer]
+=== MailServer
+
+
+[.getMailServerSmtp]
+==== getMailServerSmtp
+    
+`GET /mail-server/smtp`
+
+Get the default SMTP mail server
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}mail-server/smtp/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<MailServerSmtpBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<MailServerSmtpBean>>
+
+
+| 204
+| 
+|  <<ErrorCollection>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}mail-server/smtp/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}mail-server/smtp/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :mail-server/smtp/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}mail-server/smtp/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setMailServerSmtp]
+==== setMailServerSmtp
+    
+`PUT /mail-server/smtp`
+
+Set the default SMTP mail server
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}mail-server/smtp/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| MailServerSmtpBean 
+|  <<MailServerSmtpBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+<<MailServerSmtpBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<MailServerSmtpBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}mail-server/smtp/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}mail-server/smtp/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :mail-server/smtp/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}mail-server/smtp/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.Ping]
+=== Ping
+
+
+[.getPing]
+==== getPing
+    
+`GET /ping`
+
+Simple ping method for probing the REST api. Returns 'pong' upon success
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}ping/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* text/plain
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 0
+| default response
+|  <<>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}ping/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}ping/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :ping/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}ping/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[#models]
+== Models
+
+
+[#DirectoryBean]
+=== _DirectoryBean_ 
+
+
+
+[.fields-DirectoryBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+|  
+| Long  
+| 
+| int64 
+
+| name 
+|  
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| active 
+|  
+| Boolean  
+| 
+|  
+
+| configuration 
+|  
+| DirectoryConfigurationBean  
+| 
+|  
+
+|===
+
+
+[#DirectoryConfigurationBean]
+=== _DirectoryConfigurationBean_ 
+
+
+
+[.fields-DirectoryConfigurationBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| passwordRegex 
+|  
+| String  
+| 
+|  
+
+| passwordComplexityMessage 
+|  
+| String  
+| 
+|  
+
+| passwordMaxAttempts 
+|  
+| Long  
+| 
+| int64 
+
+| passwordHistoryCount 
+|  
+| Long  
+| 
+| int64 
+
+| passwordMaxChangeTime 
+|  
+| Long  
+| 
+| int64 
+
+| passwordExpiryNotificationDays 
+|  
+| List  of <<integer>> 
+| 
+| int32 
+
+| passwordEncryptionMethod 
+|  
+| String  
+| 
+|  
+
+|===
+
+
+[#ErrorCollection]
+=== _ErrorCollection_ 
+
+
+
+[.fields-ErrorCollection]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| errorMessages 
+|  
+| List  of <<string>> 
+| 
+|  
+
+|===
+
+
+[#MailServerSmtpBean]
+=== _MailServerSmtpBean_ 
+
+
+
+[.fields-MailServerSmtpBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| name 
+|  
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| host 
+|  
+| String  
+| 
+|  
+
+| port 
+|  
+| Integer  
+| 
+| int32 
+
+| protocol 
+|  
+| String  
+| 
+|  
+
+| timeout 
+|  
+| Long  
+| 
+| int64 
+
+| username 
+|  
+| String  
+| 
+|  
+
+| password 
+|  
+| String  
+| 
+|  
+
+| adminContact 
+|  
+| String  
+| 
+|  
+
+| from 
+|  
+| String  
+| 
+|  
+
+| prefix 
+|  
+| String  
+| 
+|  
+
+| tls 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
