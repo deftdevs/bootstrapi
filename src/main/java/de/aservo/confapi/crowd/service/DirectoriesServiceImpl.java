@@ -3,8 +3,12 @@ package de.aservo.confapi.crowd.service;
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.exception.DirectoryNotFoundException;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
+import com.atlassian.crowd.search.EntityDescriptor;
+import com.atlassian.crowd.search.builder.QueryBuilder;
+import com.atlassian.crowd.search.query.entity.EntityQuery;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import de.aservo.confapi.crowd.model.DirectoriesBean;
 import de.aservo.confapi.crowd.model.DirectoryBean;
 import de.aservo.confapi.crowd.model.util.DirectoryBeanUtil;
 import de.aservo.confapi.crowd.service.api.DirectoriesService;
@@ -13,6 +17,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
+import java.util.stream.Collectors;
 
 @Component
 @ExportAsService(DirectoriesService.class)
@@ -28,6 +33,17 @@ public class DirectoriesServiceImpl implements DirectoriesService {
             final DirectoryManager directoryManager) {
 
         this.directoryManager = directoryManager;
+    }
+
+    @Override
+    public DirectoriesBean getDirectories() {
+        final EntityQuery<Directory> directoryEntityQuery = QueryBuilder.queryFor(Directory.class, EntityDescriptor.directory())
+                .returningAtMost(EntityQuery.ALL_RESULTS);
+
+        return new DirectoriesBean(directoryManager.searchDirectories(directoryEntityQuery).stream()
+                .map(DirectoryBeanUtil::toDirectoryBean)
+                .collect(Collectors.toList())
+        );
     }
 
     @Override
