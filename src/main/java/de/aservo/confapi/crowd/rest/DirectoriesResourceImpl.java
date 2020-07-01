@@ -26,6 +26,12 @@ public class DirectoriesResourceImpl implements DirectoriesResource {
         this.directoriesService = directoriesService;
     }
 
+
+    @Override
+    public Response getDirectories() {
+        return Response.ok(directoriesService.getDirectories()).build();
+    }
+
     @Override
     public Response getDirectory(
             final long id) {

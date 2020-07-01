@@ -35,6 +35,80 @@ This plugin provides methods for accessing configuration for Crowd.
 === Directories
 
 
+[.getDirectories]
+==== getDirectories
+    
+`GET /directories`
+
+Get the list of directories
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}directories/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<DirectoriesBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<DirectoriesBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}directories/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}directories/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :directories/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}directories/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.getDirectory]
 ==== getDirectory
     
@@ -368,6 +442,25 @@ endif::internal-generation[]
 
 [#models]
 == Models
+
+
+[#DirectoriesBean]
+=== _DirectoriesBean_ 
+
+
+
+[.fields-DirectoriesBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| directories 
+|  
+| List  of <<DirectoryBean>> 
+| 
+|  
+
+|===
 
 
 [#DirectoryBean]

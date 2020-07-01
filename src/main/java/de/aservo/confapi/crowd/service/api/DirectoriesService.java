@@ -1,10 +1,13 @@
 package de.aservo.confapi.crowd.service.api;
 
+import de.aservo.confapi.crowd.model.DirectoriesBean;
 import de.aservo.confapi.crowd.model.DirectoryBean;
 
 import javax.annotation.Nullable;
 
 public interface DirectoriesService {
+
+    DirectoriesBean getDirectories();
 
     @Nullable
     DirectoryBean getDirectory(

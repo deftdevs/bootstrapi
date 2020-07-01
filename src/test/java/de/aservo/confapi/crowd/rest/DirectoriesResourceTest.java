@@ -1,5 +1,6 @@
 package de.aservo.confapi.crowd.rest;
 
+import de.aservo.confapi.crowd.model.DirectoriesBean;
 import de.aservo.confapi.crowd.model.DirectoryBean;
 import de.aservo.confapi.crowd.service.api.DirectoriesService;
 import org.junit.Before;
@@ -25,6 +26,18 @@ public class DirectoriesResourceTest {
     @Before
     public void setup() {
         directoriesResource = new DirectoriesResourceImpl(directoriesService);
+    }
+
+    @Test
+    public void testGetDirectories() {
+        final DirectoriesBean directoriesBean = DirectoriesBean.EXAMPLE_1;
+        doReturn(directoriesBean).when(directoriesService).getDirectories();
+
+        final Response response = directoriesResource.getDirectories();
+        assertEquals(200, response.getStatus());
+
+        final DirectoriesBean responseDirectoriesBean = (DirectoriesBean) response.getEntity();
+        assertEquals(directoriesBean, responseDirectoriesBean);
     }
 
     @Test
