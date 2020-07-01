@@ -10,6 +10,7 @@ import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.ws.rs.core.Response;
+import java.util.Arrays;
 import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
@@ -31,30 +32,44 @@ public class AbstractDirectoriesResourceTest {
     @Test
     public void testGetDirectories() {
         DirectoryBean initialDirectoryBean = DirectoryBean.EXAMPLE_1;
+        DirectoriesBean directoriesBean = new DirectoriesBean(Collections.singleton(initialDirectoryBean));
 
-        doReturn(Collections.singletonList(initialDirectoryBean)).when(directoryService).getDirectories();
+        doReturn(directoriesBean).when(directoryService).getDirectories();
 
         final Response response = resource.getDirectories();
         assertEquals(200, response.getStatus());
-        @SuppressWarnings("unchecked") final DirectoriesBean directoriesBean = (DirectoriesBean) response.getEntity();
+        final DirectoriesBean directoriesBeanResponse = (DirectoriesBean) response.getEntity();
 
-        assertEquals(initialDirectoryBean, directoriesBean.getDirectories().iterator().next());
+        assertEquals(initialDirectoryBean, directoriesBeanResponse.getDirectories().iterator().next());
+    }
+
+    @Test
+    public void testSetDirectories() {
+        DirectoryBean directoryBean1 = DirectoryBean.EXAMPLE_1;
+        DirectoryBean directoryBean2 = DirectoryBean.EXAMPLE_3;
+        DirectoriesBean directoriesBean = new DirectoriesBean(Arrays.asList(directoryBean1, directoryBean2));
+
+        doReturn(directoriesBean).when(directoryService).setDirectories(directoriesBean, false);
+
+        final Response response = resource.setDirectories(Boolean.FALSE, directoriesBean);
+        assertEquals(200, response.getStatus());
+        final DirectoriesBean directoriesBeanResponse = (DirectoriesBean) response.getEntity();
+
+        assertEquals(directoriesBean.getDirectories().size(), directoriesBeanResponse.getDirectories().size());
     }
 
     @Test
     public void testAddDirectory() {
         DirectoryBean directoryBean = DirectoryBean.EXAMPLE_1;
-        directoryBean.setCrowdUrl("http://localhost");
-        directoryBean.setClientName("confluence-client");
-        directoryBean.setAppPassword("test");
+        DirectoriesBean directoriesBean = new DirectoriesBean(Collections.singleton(directoryBean));
 
-        doReturn(directoryBean).when(directoryService).setDirectory(directoryBean, false);
+        doReturn(directoriesBean).when(directoryService).addDirectory(directoryBean, false);
 
-        final Response response = resource.setDirectory(Boolean.FALSE, directoryBean);
+        final Response response = resource.addDirectory(Boolean.FALSE, directoryBean);
         assertEquals(200, response.getStatus());
-        final DirectoryBean DirectoryBean = (DirectoryBean) response.getEntity();
+        final DirectoriesBean directoriesBeanResponse = (DirectoriesBean) response.getEntity();
 
-        assertEquals(DirectoryBean.getName(), directoryBean.getName());
+        assertEquals(directoryBean.getName(), directoriesBeanResponse.getDirectories().iterator().next().getName());
     }
 
 }

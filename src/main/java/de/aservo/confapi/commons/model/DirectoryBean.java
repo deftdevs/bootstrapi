@@ -84,10 +84,22 @@ public class DirectoryBean {
         EXAMPLE_2 = new DirectoryBean();
         EXAMPLE_2.setName("example");
         EXAMPLE_2.setCrowdUrl("https://localhost/crowd");
-        EXAMPLE_1.setAppPassword("0th3r");
+        EXAMPLE_2.setAppPassword("0th3r");
         EXAMPLE_2.setType("crowd");
-        EXAMPLE_2.setClientName("confluence-client");
-        EXAMPLE_2.setImplClass("test.class");
+        EXAMPLE_2.setClientName("confluence-client2");
+        EXAMPLE_2.setImplClass("test2.class");
+    }
+
+    public static final DirectoryBean EXAMPLE_3;
+
+    static {
+        EXAMPLE_3 = new DirectoryBean();
+        EXAMPLE_3.setName("example other");
+        EXAMPLE_3.setCrowdUrl("https://crowd.other.example.com");
+        EXAMPLE_3.setAppPassword("p455w0rd");
+        EXAMPLE_3.setType("other");
+        EXAMPLE_3.setClientName("confluence-client3");
+        EXAMPLE_3.setImplClass("test3.class");
     }
 
 }
