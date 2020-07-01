@@ -1,7 +1,7 @@
 package de.aservo.confapi.commons.rest;
 
 import de.aservo.confapi.commons.model.DirectoriesBean;
-import de.aservo.confapi.commons.model.DirectoryBean;
+import de.aservo.confapi.commons.model.AbstractDirectoryBean;
 import de.aservo.confapi.commons.rest.api.DirectoriesResource;
 import de.aservo.confapi.commons.service.api.DirectoryService;
 
@@ -36,7 +36,7 @@ public abstract class AbstractDirectoriesResourceImpl implements DirectoriesReso
     @Override
     public Response addDirectory (
             final boolean testConnection,
-            @Nonnull final DirectoryBean directory) {
+            @Nonnull final AbstractDirectoryBean directory) {
 
         DirectoriesBean directoriesBean = directoryService.addDirectory(directory, testConnection);
         return Response.ok(directoriesBean).build();

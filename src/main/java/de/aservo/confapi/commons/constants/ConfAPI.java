@@ -10,6 +10,9 @@ public class ConfAPI {
     public static final String BACKUP_QUEUE                 = "queue";
     public static final String DIRECTORIES                  = "directories";
     public static final String DIRECTORY                    = "directory";
+    public static final String DIRECTORY_INTERNAL           = "directory-internal";
+    public static final String DIRECTORY_CROWD              = "directory-crowd";
+    public static final String DIRECTORY_LDAP               = "directory-ldap";
     public static final String ERROR                        = "error";
     public static final String ERRORS                       = "errors";
     public static final String GADGET                       = "gadget";

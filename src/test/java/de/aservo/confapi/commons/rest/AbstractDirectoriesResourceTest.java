@@ -1,7 +1,7 @@
 package de.aservo.confapi.commons.rest;
 
 import de.aservo.confapi.commons.model.DirectoriesBean;
-import de.aservo.confapi.commons.model.DirectoryBean;
+import de.aservo.confapi.commons.model.DirectoryCrowdBean;
 import de.aservo.confapi.commons.service.api.DirectoryService;
 import org.junit.Before;
 import org.junit.Test;
@@ -31,7 +31,7 @@ public class AbstractDirectoriesResourceTest {
 
     @Test
     public void testGetDirectories() {
-        DirectoryBean initialDirectoryBean = DirectoryBean.EXAMPLE_1;
+        DirectoryCrowdBean initialDirectoryBean = DirectoryCrowdBean.EXAMPLE_1;
         DirectoriesBean directoriesBean = new DirectoriesBean(Collections.singleton(initialDirectoryBean));
 
         doReturn(directoriesBean).when(directoryService).getDirectories();
@@ -45,8 +45,8 @@ public class AbstractDirectoriesResourceTest {
 
     @Test
     public void testSetDirectories() {
-        DirectoryBean directoryBean1 = DirectoryBean.EXAMPLE_1;
-        DirectoryBean directoryBean2 = DirectoryBean.EXAMPLE_3;
+        DirectoryCrowdBean directoryBean1 = DirectoryCrowdBean.EXAMPLE_1;
+        DirectoryCrowdBean directoryBean2 = DirectoryCrowdBean.EXAMPLE_3;
         DirectoriesBean directoriesBean = new DirectoriesBean(Arrays.asList(directoryBean1, directoryBean2));
 
         doReturn(directoriesBean).when(directoryService).setDirectories(directoriesBean, false);
@@ -60,7 +60,7 @@ public class AbstractDirectoriesResourceTest {
 
     @Test
     public void testAddDirectory() {
-        DirectoryBean directoryBean = DirectoryBean.EXAMPLE_1;
+        DirectoryCrowdBean directoryBean = DirectoryCrowdBean.EXAMPLE_1;
         DirectoriesBean directoriesBean = new DirectoriesBean(Collections.singleton(directoryBean));
 
         doReturn(directoriesBean).when(directoryService).addDirectory(directoryBean, false);
