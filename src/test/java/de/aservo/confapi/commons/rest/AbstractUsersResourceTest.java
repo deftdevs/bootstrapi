@@ -45,7 +45,7 @@ public class AbstractUsersResourceTest {
 
         doReturn(bean).when(userService).updateUser(bean.getUserName(), bean);
 
-        final Response response = resource.updateUser(bean.getUserName(), bean);
+        final Response response = resource.setUser(bean.getUserName(), bean);
         assertEquals(200, response.getStatus());
         final UserBean userBean = (UserBean) response.getEntity();
 

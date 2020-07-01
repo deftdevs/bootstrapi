@@ -46,7 +46,7 @@ public interface UsersResource {
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
             }
     )
-    Response updateUser(
+    Response setUser(
             @NotNull @QueryParam("userName") final String userName,
             @NotNull final UserBean userBean);
 

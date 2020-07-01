@@ -23,7 +23,7 @@ public class AbstractUsersResourceImpl implements UsersResource {
     }
 
     @Override
-    public Response updateUser(
+    public Response setUser(
             final String userName,
             final UserBean userBean) {
 
