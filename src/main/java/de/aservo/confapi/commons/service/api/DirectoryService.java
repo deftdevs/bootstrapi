@@ -1,8 +1,7 @@
 package de.aservo.confapi.commons.service.api;
 
+import de.aservo.confapi.commons.model.DirectoriesBean;
 import de.aservo.confapi.commons.model.DirectoryBean;
-
-import java.util.List;
 
 /**
  * The User directory service interface.
@@ -14,16 +13,24 @@ public interface DirectoryService {
      *
      * @return the directories
      */
-    List<DirectoryBean> getDirectories();
+    DirectoriesBean getDirectories();
 
     /**
-     * Adds a new directory configurations. Any existing configurations with the same 'name' property are removed before
-     * adding the new configuration.
+     * Adds new directory configurations. Any existing configurations with the same 'name' property are removed before
+     * adding the new configurations.
      *
-     * @param directory      the directory
+     * @param directories    the directories
      * @param testConnection whether to test connection
-     * @return the configuration added
+     * @return the directories
      */
-    DirectoryBean setDirectory(DirectoryBean directory, boolean testConnection);
+    DirectoriesBean setDirectories(DirectoriesBean directories, boolean testConnection);
 
+    /**
+     * Adds a new directory configuration.
+     *
+     * @param directory      the directories
+     * @param testConnection whether to test connection
+     * @return the directories
+     */
+    DirectoriesBean addDirectory(DirectoryBean directory, boolean testConnection);
 }
