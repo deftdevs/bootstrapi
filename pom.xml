@@ -54,7 +54,7 @@
         <commons-lang3.version>3.9</commons-lang3.version>
         <guava.version>29.0-jre</guava.version>
         <hamcrest.version>2.2</hamcrest.version>
-        <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
+        <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
         <jackson-jaxrs.version>1.9.13-atlassian-5</jackson-jaxrs.version>
         <javax.el-api.version>2.2.4</javax.el-api.version>
         <javax.inject.version>1</javax.inject.version>
