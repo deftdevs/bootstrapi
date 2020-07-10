@@ -38,7 +38,7 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
         private URI uri;
 
         @XmlElement
-        private CrowdServerProxy proxy;
+        private DirectoryCrowdServerProxy proxy;
 
         @XmlElement
         @NotNull
@@ -58,7 +58,7 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
 
         @Data
         @NoArgsConstructor
-        public static class CrowdServerProxy {
+        public static class DirectoryCrowdServerProxy {
 
             @XmlElement
             private String username;
@@ -118,12 +118,11 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
         EXAMPLE_1_WITH_PROXY.setName("example");
         EXAMPLE_1_WITH_PROXY.setServer(new DirectoryCrowdServer());
         EXAMPLE_1_WITH_PROXY.getServer().setUri(URI.create("https://crowd.example.com"));
-        DirectoryCrowdServer.CrowdServerProxy proxy = new DirectoryCrowdServer.CrowdServerProxy();
-        proxy.setUri(URI.create("https://proxy.example.com"));
-        proxy.setUsername("user");
-        proxy.setPassword("pass");
-        EXAMPLE_1_WITH_PROXY.getServer().setProxy(proxy);
         EXAMPLE_1_WITH_PROXY.getServer().setAppPassword("p433w0rd");
+        EXAMPLE_1_WITH_PROXY.getServer().setProxy(new DirectoryCrowdServer.DirectoryCrowdServerProxy());
+        EXAMPLE_1_WITH_PROXY.getServer().getProxy().setUri(URI.create("https://proxy.example.com"));
+        EXAMPLE_1_WITH_PROXY.getServer().getProxy().setUsername("user");
+        EXAMPLE_1_WITH_PROXY.getServer().getProxy().setPassword("pass");
     }
 
     public static final DirectoryCrowdBean EXAMPLE_2;
