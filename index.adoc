@@ -148,7 +148,7 @@ Get a directory based on it's ID
 
 ===== Return Type
 
-<<DirectoryBean>>
+<<AbstractDirectoryBean>>
 
 
 ===== Content Type
@@ -165,7 +165,7 @@ Get a directory based on it's ID
 
 | 200
 | 
-|  <<DirectoryBean>>
+|  <<AbstractDirectoryBean>>
 
 
 | 0
@@ -444,31 +444,12 @@ endif::internal-generation[]
 == Models
 
 
-[#DirectoriesBean]
-=== _DirectoriesBean_ 
+[#AbstractDirectoryBean]
+=== _AbstractDirectoryBean_ 
 
 
 
-[.fields-DirectoriesBean]
-[cols="2,1,2,4,1"]
-|===         
-| Field Name| Required| Type| Description| Format
-
-| directories 
-|  
-| List  of <<DirectoryBean>> 
-| 
-|  
-
-|===
-
-
-[#DirectoryBean]
-=== _DirectoryBean_ 
-
-
-
-[.fields-DirectoryBean]
+[.fields-AbstractDirectoryBean]
 [cols="2,1,2,4,1"]
 |===         
 | Field Name| Required| Type| Description| Format
@@ -480,7 +461,7 @@ endif::internal-generation[]
 | int64 
 
 | name 
-|  
+| X 
 | String  
 | 
 |  
@@ -497,21 +478,335 @@ endif::internal-generation[]
 | 
 |  
 
-| configuration 
+| credentialPolicy 
 |  
-| DirectoryConfigurationBean  
+| DirectoryInternalCredentialPolicy  
+| 
+|  
+
+| advanced 
+|  
+| DirectoryCrowdAdvanced  
+| 
+|  
+
+| permissions 
+|  
+| DirectoryLdapPermissions  
+| 
+|  
+
+| server 
+|  
+| DirectoryLdapServer  
+| 
+|  
+
+| schema 
+|  
+| DirectoryLdapSchema  
 | 
 |  
 
 |===
 
 
-[#DirectoryConfigurationBean]
-=== _DirectoryConfigurationBean_ 
+[#CrowdServerProxy]
+=== _CrowdServerProxy_ 
 
 
 
-[.fields-DirectoryConfigurationBean]
+[.fields-CrowdServerProxy]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| username 
+|  
+| String  
+| 
+|  
+
+| password 
+|  
+| String  
+| 
+|  
+
+| uri 
+|  
+| URI  
+| 
+| uri 
+
+|===
+
+
+[#DirectoriesBean]
+=== _DirectoriesBean_ 
+
+
+
+[.fields-DirectoriesBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| directories 
+|  
+| List  of <<AbstractDirectoryBean>> 
+| 
+|  
+
+|===
+
+
+[#DirectoryCrowdAdvanced]
+=== _DirectoryCrowdAdvanced_ 
+
+
+
+[.fields-DirectoryCrowdAdvanced]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| enableNestedGroups 
+|  
+| Boolean  
+| 
+|  
+
+| enableIncrementalSync 
+|  
+| Boolean  
+| 
+|  
+
+| updateGroupMembershipMethod 
+|  
+| String  
+| 
+|  
+
+| updateSyncInterval 
+|  
+| Integer  
+| 
+| int32 
+
+|===
+
+
+[#DirectoryCrowdBean]
+=== _DirectoryCrowdBean_ 
+
+
+
+[.fields-DirectoryCrowdBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+|  
+| Long  
+| 
+| int64 
+
+| name 
+| X 
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| active 
+|  
+| Boolean  
+| 
+|  
+
+| server 
+|  
+| DirectoryCrowdServer  
+| 
+|  
+
+| permissions 
+|  
+| DirectoryCrowdPermissions  
+| 
+|  
+
+| advanced 
+|  
+| DirectoryCrowdAdvanced  
+| 
+|  
+
+|===
+
+
+[#DirectoryCrowdPermissions]
+=== _DirectoryCrowdPermissions_ 
+
+
+
+[.fields-DirectoryCrowdPermissions]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| readonly 
+|  
+| Boolean  
+| 
+|  
+
+| fullAccess 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
+[#DirectoryCrowdServer]
+=== _DirectoryCrowdServer_ 
+
+
+
+[.fields-DirectoryCrowdServer]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| uri 
+| X 
+| URI  
+| 
+| uri 
+
+| proxy 
+|  
+| CrowdServerProxy  
+| 
+|  
+
+| appUsername 
+| X 
+| String  
+| 
+|  
+
+| appPassword 
+| X 
+| String  
+| 
+|  
+
+| connectionTimeout 
+|  
+| Long  
+| 
+| int64 
+
+| maxConnections 
+|  
+| Integer  
+| 
+| int32 
+
+|===
+
+
+[#DirectoryInternalAdvanced]
+=== _DirectoryInternalAdvanced_ 
+
+
+
+[.fields-DirectoryInternalAdvanced]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| enableNestedGroups 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
+[#DirectoryInternalBean]
+=== _DirectoryInternalBean_ 
+
+
+
+[.fields-DirectoryInternalBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+|  
+| Long  
+| 
+| int64 
+
+| name 
+| X 
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| active 
+|  
+| Boolean  
+| 
+|  
+
+| credentialPolicy 
+|  
+| DirectoryInternalCredentialPolicy  
+| 
+|  
+
+| advanced 
+|  
+| DirectoryInternalAdvanced  
+| 
+|  
+
+| permissions 
+|  
+| DirectoryInternalPermissions  
+| 
+|  
+
+|===
+
+
+[#DirectoryInternalCredentialPolicy]
+=== _DirectoryInternalCredentialPolicy_ 
+
+
+
+[.fields-DirectoryInternalCredentialPolicy]
 [cols="2,1,2,4,1"]
 |===         
 | Field Name| Required| Type| Description| Format
@@ -553,6 +848,227 @@ endif::internal-generation[]
 | int32 
 
 | passwordEncryptionMethod 
+|  
+| String  
+| 
+|  
+
+|===
+
+
+[#DirectoryInternalPermissions]
+=== _DirectoryInternalPermissions_ 
+
+
+
+[.fields-DirectoryInternalPermissions]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| addGroup 
+|  
+| Boolean  
+| 
+|  
+
+| addUser 
+|  
+| Boolean  
+| 
+|  
+
+| modifyGroup 
+|  
+| Boolean  
+| 
+|  
+
+| modifyUser 
+|  
+| Boolean  
+| 
+|  
+
+| modifyGroupAttributes 
+|  
+| Boolean  
+| 
+|  
+
+| modifyUserAttributes 
+|  
+| Boolean  
+| 
+|  
+
+| removeGroup 
+|  
+| Boolean  
+| 
+|  
+
+| removeUser 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
+[#DirectoryLdapBean]
+=== _DirectoryLdapBean_ 
+
+
+
+[.fields-DirectoryLdapBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+|  
+| Long  
+| 
+| int64 
+
+| name 
+| X 
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| active 
+|  
+| Boolean  
+| 
+|  
+
+| server 
+|  
+| DirectoryLdapServer  
+| 
+|  
+
+| schema 
+|  
+| DirectoryLdapSchema  
+| 
+|  
+
+| permissions 
+|  
+| DirectoryLdapPermissions  
+| 
+|  
+
+|===
+
+
+[#DirectoryLdapPermissions]
+=== _DirectoryLdapPermissions_ 
+
+
+
+[.fields-DirectoryLdapPermissions]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| readonly 
+|  
+| Boolean  
+| 
+|  
+
+| readonlyForLocalGroups 
+|  
+| Boolean  
+| 
+|  
+
+| fullAccess 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
+[#DirectoryLdapSchema]
+=== _DirectoryLdapSchema_ 
+
+
+
+[.fields-DirectoryLdapSchema]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| baseDn 
+|  
+| String  
+| 
+|  
+
+| userDn 
+|  
+| String  
+| 
+|  
+
+| groupDn 
+|  
+| String  
+| 
+|  
+
+|===
+
+
+[#DirectoryLdapServer]
+=== _DirectoryLdapServer_ 
+
+
+
+[.fields-DirectoryLdapServer]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| hostName 
+| X 
+| String  
+| 
+|  
+
+| port 
+|  
+| Integer  
+| 
+| int32 
+
+| useSsl 
+|  
+| Boolean  
+| 
+|  
+
+| username 
+|  
+| String  
+| 
+|  
+
+| password 
 |  
 | String  
 | 

@@ -1,9 +1,9 @@
 package de.aservo.confapi.crowd.rest.api;
 
 import de.aservo.confapi.commons.constants.ConfAPI;
+import de.aservo.confapi.commons.model.AbstractDirectoryBean;
+import de.aservo.confapi.commons.model.DirectoriesBean;
 import de.aservo.confapi.commons.model.ErrorCollection;
-import de.aservo.confapi.crowd.model.DirectoriesBean;
-import de.aservo.confapi.crowd.model.DirectoryBean;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -37,7 +37,7 @@ public interface DirectoriesResource {
             tags = { ConfAPI.DIRECTORIES },
             summary = "Get a directory based on it's ID",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = DirectoryBean.class))),
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryBean.class))),
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )

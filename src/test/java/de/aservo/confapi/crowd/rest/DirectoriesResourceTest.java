@@ -1,7 +1,7 @@
 package de.aservo.confapi.crowd.rest;
 
-import de.aservo.confapi.crowd.model.DirectoriesBean;
-import de.aservo.confapi.crowd.model.DirectoryBean;
+import de.aservo.confapi.commons.model.DirectoriesBean;
+import de.aservo.confapi.commons.model.DirectoryInternalBean;
 import de.aservo.confapi.crowd.service.api.DirectoriesService;
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.ws.rs.core.Response;
+
+import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyLong;
@@ -30,7 +32,7 @@ public class DirectoriesResourceTest {
 
     @Test
     public void testGetDirectories() {
-        final DirectoriesBean directoriesBean = DirectoriesBean.EXAMPLE_1;
+        final DirectoriesBean directoriesBean = new DirectoriesBean(Collections.singletonList(DirectoryInternalBean.EXAMPLE_1));
         doReturn(directoriesBean).when(directoriesService).getDirectories();
 
         final Response response = directoriesResource.getDirectories();
@@ -42,13 +44,13 @@ public class DirectoriesResourceTest {
 
     @Test
     public void testGetDirectory() {
-        final DirectoryBean directoryBean = DirectoryBean.EXAMPLE_1;
+        final DirectoryInternalBean directoryBean = DirectoryInternalBean.EXAMPLE_1;
         doReturn(directoryBean).when(directoriesService).getDirectory(anyLong());
 
         final Response response = directoriesResource.getDirectory(directoryBean.getId());
         assertEquals(200, response.getStatus());
 
-        final DirectoryBean responseDirectoryBean = (DirectoryBean) response.getEntity();
+        final DirectoryInternalBean responseDirectoryBean = (DirectoryInternalBean) response.getEntity();
         assertEquals(directoryBean, responseDirectoryBean);
     }
 

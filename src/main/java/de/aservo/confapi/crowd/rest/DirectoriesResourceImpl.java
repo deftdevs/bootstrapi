@@ -2,8 +2,8 @@ package de.aservo.confapi.crowd.rest;
 
 import com.sun.jersey.spi.container.ResourceFilters;
 import de.aservo.confapi.commons.constants.ConfAPI;
+import de.aservo.confapi.commons.model.AbstractDirectoryBean;
 import de.aservo.confapi.crowd.filter.SysadminOnlyResourceFilter;
-import de.aservo.confapi.crowd.model.DirectoryBean;
 import de.aservo.confapi.crowd.rest.api.DirectoriesResource;
 import de.aservo.confapi.crowd.service.api.DirectoriesService;
 import org.springframework.stereotype.Component;
@@ -36,7 +36,7 @@ public class DirectoriesResourceImpl implements DirectoriesResource {
     public Response getDirectory(
             final long id) {
 
-        final DirectoryBean directoryBean = directoriesService.getDirectory(id);
+        final AbstractDirectoryBean directoryBean = directoriesService.getDirectory(id);
         if (directoryBean == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
