@@ -51,7 +51,7 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
         private String appPassword;
 
         @XmlElement
-        private Long connectionTimeout;     //in millisecs
+        private Long connectionTimeoutInMillis;
 
         @XmlElement
         private Integer maxConnections;
@@ -96,7 +96,7 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
         private String updateGroupMembershipMethod;
 
         @XmlElement
-        private Integer updateSyncInterval;     //in minutes
+        private Integer updateSyncIntervalInMinutes;
     }
 
     // Example instances for documentation and tests
