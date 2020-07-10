@@ -1,7 +1,7 @@
 package de.aservo.confapi.crowd.service.api;
 
-import de.aservo.confapi.crowd.model.DirectoriesBean;
-import de.aservo.confapi.crowd.model.DirectoryBean;
+import de.aservo.confapi.commons.model.AbstractDirectoryBean;
+import de.aservo.confapi.commons.model.DirectoriesBean;
 
 import javax.annotation.Nullable;
 
@@ -10,7 +10,7 @@ public interface DirectoriesService {
     DirectoriesBean getDirectories();
 
     @Nullable
-    DirectoryBean getDirectory(
+    AbstractDirectoryBean getDirectory(
             final long id);
 
 }

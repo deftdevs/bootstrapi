@@ -1,6 +1,7 @@
 package de.aservo.confapi.crowd.service;
 
 import com.atlassian.crowd.embedded.api.Directory;
+import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.exception.DirectoryNotFoundException;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.crowd.search.EntityDescriptor;
@@ -8,9 +9,9 @@ import com.atlassian.crowd.search.builder.QueryBuilder;
 import com.atlassian.crowd.search.query.entity.EntityQuery;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.crowd.model.DirectoriesBean;
-import de.aservo.confapi.crowd.model.DirectoryBean;
-import de.aservo.confapi.crowd.model.util.DirectoryBeanUtil;
+import de.aservo.confapi.commons.model.AbstractDirectoryBean;
+import de.aservo.confapi.commons.model.DirectoriesBean;
+import de.aservo.confapi.crowd.model.util.DirectoryInternalBeanUtil;
 import de.aservo.confapi.crowd.service.api.DirectoriesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -41,18 +42,19 @@ public class DirectoriesServiceImpl implements DirectoriesService {
                 .returningAtMost(EntityQuery.ALL_RESULTS);
 
         return new DirectoriesBean(directoryManager.searchDirectories(directoryEntityQuery).stream()
-                .map(DirectoryBeanUtil::toDirectoryBean)
+                .filter(d -> d.getType().equals(DirectoryType.INTERNAL))
+                .map(DirectoryInternalBeanUtil::toDirectoryInternalBean)
                 .collect(Collectors.toList())
         );
     }
 
     @Override
-    public DirectoryBean getDirectory(
+    public AbstractDirectoryBean getDirectory(
             final long id) {
 
         try {
             final Directory directory = directoryManager.findDirectoryById(id);
-            return DirectoryBeanUtil.toDirectoryBean(directory);
+            return DirectoryInternalBeanUtil.toDirectoryInternalBean(directory);
         } catch (DirectoryNotFoundException e) {
             log.info("Directory with id {} could not been found", id);
             return null;
