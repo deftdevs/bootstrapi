@@ -59,7 +59,7 @@ public class DirectoryInternalBean extends AbstractDirectoryBean {
     public static class DirectoryInternalAdvanced {
 
         @XmlElement
-        private boolean enableNestedGroups;
+        private Boolean enableNestedGroups;
     }
 
     @Data
@@ -67,28 +67,28 @@ public class DirectoryInternalBean extends AbstractDirectoryBean {
     public static class DirectoryInternalPermissions {
 
         @XmlElement
-        private boolean addGroup;               //Allow groups to be added to the directory.
+        private Boolean addGroup;               //Allow groups to be added to the directory.
 
         @XmlElement
-        private boolean addUser;                //Allow users to be added to the directory.
+        private Boolean addUser;                //Allow users to be added to the directory.
 
         @XmlElement
-        private boolean modifyGroup;            //Allow groups to be modified in the directory.
+        private Boolean modifyGroup;            //Allow groups to be modified in the directory.
 
         @XmlElement
-        private boolean modifyUser;             //Allow users to be modified in the directory.
+        private Boolean modifyUser;             //Allow users to be modified in the directory.
 
         @XmlElement
-        private boolean modifyGroupAttributes;  //Allow group attributes to be modified in the directory.
+        private Boolean modifyGroupAttributes;  //Allow group attributes to be modified in the directory.
 
         @XmlElement
-        private boolean modifyUserAttributes;   //Allow user attributes to be modified in the directory.
+        private Boolean modifyUserAttributes;   //Allow user attributes to be modified in the directory.
 
         @XmlElement
-        private boolean removeGroup;            //Allow groups to be removed from the directory.
+        private Boolean removeGroup;            //Allow groups to be removed from the directory.
 
         @XmlElement
-        private boolean removeUser;             //Allow users to be removed from the directory.
+        private Boolean removeUser;             //Allow users to be removed from the directory.
     }
 
     // examples

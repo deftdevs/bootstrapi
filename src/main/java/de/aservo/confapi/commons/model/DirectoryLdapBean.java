@@ -38,10 +38,10 @@ public class DirectoryLdapBean extends AbstractDirectoryBean {
         private String hostName;
 
         @XmlElement
-        private int port;
+        private Integer port;
 
         @XmlElement
-        private boolean useSsl;
+        private Boolean useSsl;
 
         @XmlElement
         private String username;
@@ -69,12 +69,12 @@ public class DirectoryLdapBean extends AbstractDirectoryBean {
     public static class DirectoryLdapPermissions {
 
         @XmlElement
-        private boolean readonly;
+        private Boolean readonly;
 
         @XmlElement
-        private boolean readonlyForLocalGroups;
+        private Boolean readonlyForLocalGroups;
 
         @XmlElement
-        private boolean fullAccess;
+        private Boolean fullAccess;
     }
 }
