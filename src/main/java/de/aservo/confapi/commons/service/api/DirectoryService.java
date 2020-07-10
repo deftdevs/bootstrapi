@@ -1,7 +1,7 @@
 package de.aservo.confapi.commons.service.api;
 
 import de.aservo.confapi.commons.model.DirectoriesBean;
-import de.aservo.confapi.commons.model.DirectoryBean;
+import de.aservo.confapi.commons.model.AbstractDirectoryBean;
 
 /**
  * The User directory service interface.
@@ -32,5 +32,5 @@ public interface DirectoryService {
      * @param testConnection whether to test connection
      * @return the directories
      */
-    DirectoriesBean addDirectory(DirectoryBean directory, boolean testConnection);
+    DirectoriesBean addDirectory(AbstractDirectoryBean directory, boolean testConnection);
 }

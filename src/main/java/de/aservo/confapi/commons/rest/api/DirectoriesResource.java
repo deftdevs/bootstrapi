@@ -2,7 +2,7 @@ package de.aservo.confapi.commons.rest.api;
 
 import de.aservo.confapi.commons.constants.ConfAPI;
 import de.aservo.confapi.commons.model.DirectoriesBean;
-import de.aservo.confapi.commons.model.DirectoryBean;
+import de.aservo.confapi.commons.model.AbstractDirectoryBean;
 import de.aservo.confapi.commons.model.ErrorCollection;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -64,6 +64,6 @@ public interface DirectoriesResource {
     )
     Response addDirectory(
             @QueryParam("test-connection") @DefaultValue("false") final boolean testConnection,
-            @NotNull final DirectoryBean directory);
+            @NotNull final AbstractDirectoryBean directory);
 
 }
