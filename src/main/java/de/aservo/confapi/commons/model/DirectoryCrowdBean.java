@@ -51,10 +51,10 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
         private String appPassword;
 
         @XmlElement
-        private long connectionTimeout;     //in millisecs
+        private Long connectionTimeout;     //in millisecs
 
         @XmlElement
-        private int maxConnections;
+        private Integer maxConnections;
 
         @Data
         @NoArgsConstructor
@@ -76,10 +76,10 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
     public static class DirectoryCrowdPermissions {
 
         @XmlElement
-        private boolean readonly;
+        private Boolean readonly;
 
         @XmlElement
-        private boolean fullAccess;
+        private Boolean fullAccess;
     }
 
     @Data
@@ -87,16 +87,16 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
     public static class DirectoryCrowdAdvanced {
 
         @XmlElement
-        private boolean enableNestedGroups;
+        private Boolean enableNestedGroups;
 
         @XmlElement
-        private boolean enableIncrementalSync;
+        private Boolean enableIncrementalSync;
 
         @XmlElement
         private String updateGroupMembershipMethod;
 
         @XmlElement
-        private int updateSyncInterval;     //in minutes
+        private Integer updateSyncInterval;     //in minutes
     }
 
     // Example instances for documentation and tests
