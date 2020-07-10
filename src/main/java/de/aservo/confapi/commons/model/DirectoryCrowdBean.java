@@ -132,7 +132,7 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
         EXAMPLE_2 = new DirectoryCrowdBean();
         EXAMPLE_2.setName("example2");
         EXAMPLE_2.setServer(new DirectoryCrowdServer());
-        EXAMPLE_1.getServer().setUri(URI.create("https://crowd2.example.com"));
+        EXAMPLE_2.getServer().setUri(URI.create("https://crowd2.example.com"));
         EXAMPLE_2.getServer().setAppPassword("0th3r");
     }
 
@@ -142,7 +142,7 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
         EXAMPLE_3 = new DirectoryCrowdBean();
         EXAMPLE_3.setName("example other");
         EXAMPLE_3.setServer(new DirectoryCrowdServer());
-        EXAMPLE_1.getServer().setUri(URI.create("https://crowd3.example.com"));
+        EXAMPLE_3.getServer().setUri(URI.create("https://crowd3.example.com"));
         EXAMPLE_3.getServer().setAppPassword("p466w0rd");
     }
 
