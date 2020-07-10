@@ -31,6 +31,93 @@ This plugin provides methods for accessing configuration for Crowd.
 == Endpoints
 
 
+[.Default]
+=== Default
+
+
+[.addDirectory]
+==== addDirectory
+    
+`POST /directories`
+
+
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}directories/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| AbstractDirectoryBean 
+|  <<AbstractDirectoryBean>> 
+| - 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* */*
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 0
+| default response
+|  <<>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}directories/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}directories/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :directories/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}directories/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.Directories]
 === Directories
 
@@ -478,67 +565,6 @@ endif::internal-generation[]
 | 
 |  
 
-| credentialPolicy 
-|  
-| DirectoryInternalCredentialPolicy  
-| 
-|  
-
-| advanced 
-|  
-| DirectoryCrowdAdvanced  
-| 
-|  
-
-| permissions 
-|  
-| DirectoryLdapPermissions  
-| 
-|  
-
-| server 
-|  
-| DirectoryLdapServer  
-| 
-|  
-
-| schema 
-|  
-| DirectoryLdapSchema  
-| 
-|  
-
-|===
-
-
-[#CrowdServerProxy]
-=== _CrowdServerProxy_ 
-
-
-
-[.fields-CrowdServerProxy]
-[cols="2,1,2,4,1"]
-|===         
-| Field Name| Required| Type| Description| Format
-
-| username 
-|  
-| String  
-| 
-|  
-
-| password 
-|  
-| String  
-| 
-|  
-
-| uri 
-|  
-| URI  
-| 
-| uri 
-
 |===
 
 
@@ -589,7 +615,7 @@ endif::internal-generation[]
 | 
 |  
 
-| updateSyncInterval 
+| updateSyncIntervalInMinutes 
 |  
 | Integer  
 | 
@@ -696,7 +722,7 @@ endif::internal-generation[]
 
 | proxy 
 |  
-| CrowdServerProxy  
+| DirectoryCrowdServerProxy  
 | 
 |  
 
@@ -712,7 +738,7 @@ endif::internal-generation[]
 | 
 |  
 
-| connectionTimeout 
+| connectionTimeoutInMillis 
 |  
 | Long  
 | 
@@ -723,6 +749,74 @@ endif::internal-generation[]
 | Integer  
 | 
 | int32 
+
+|===
+
+
+[#DirectoryCrowdServerProxy]
+=== _DirectoryCrowdServerProxy_ 
+
+
+
+[.fields-DirectoryCrowdServerProxy]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| username 
+|  
+| String  
+| 
+|  
+
+| password 
+|  
+| String  
+| 
+|  
+
+| uri 
+|  
+| URI  
+| 
+| uri 
+
+|===
+
+
+[#DirectoryGenericBean]
+=== _DirectoryGenericBean_ 
+
+
+
+[.fields-DirectoryGenericBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+|  
+| Long  
+| 
+| int64 
+
+| name 
+| X 
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| active 
+|  
+| Boolean  
+| 
+|  
 
 |===
 

@@ -1,6 +1,6 @@
 package de.aservo.confapi.crowd.service;
 
-import com.atlassian.crowd.embedded.api.MockDirectory;
+import com.atlassian.crowd.embedded.api.MockDirectoryInternal;
 import com.atlassian.crowd.exception.DirectoryNotFoundException;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.crowd.search.query.entity.EntityQuery;
@@ -34,13 +34,13 @@ public class DirectoriesServiceTest {
 
     @Test
     public void testGetDirectories() throws DirectoryNotFoundException {
-        doReturn(Collections.singletonList(new MockDirectory())).when(directoryManager).searchDirectories(any(EntityQuery.class));
+        doReturn(Collections.singletonList(new MockDirectoryInternal())).when(directoryManager).searchDirectories(any(EntityQuery.class));
         assertNotNull(directoriesService.getDirectories());
     }
 
     @Test
     public void testGetDirectory() throws DirectoryNotFoundException {
-        doReturn(new MockDirectory()).when(directoryManager).findDirectoryById(anyLong());
+        doReturn(new MockDirectoryInternal()).when(directoryManager).findDirectoryById(anyLong());
         assertNotNull(directoriesService.getDirectory(1L));
     }
 
