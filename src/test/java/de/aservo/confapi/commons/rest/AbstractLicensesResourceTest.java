@@ -55,15 +55,14 @@ public class AbstractLicensesResourceTest {
 
     @Test
     public void testAddLicense() {
-        final LicensesBean beanToReturn = LicensesBean.EXAMPLE_1;
-        final LicenseBean beanArg = beanToReturn.getLicenses().iterator().next();
+        final LicenseBean bean = LicenseBean.EXAMPLE_1;
 
-        doReturn(beanToReturn).when(licensesService).setLicense(beanArg);
+        doReturn(bean).when(licensesService).addLicense(bean);
 
-        final Response response = resource.addLicense(beanArg);
+        final Response response = resource.addLicense(bean);
         assertEquals(200, response.getStatus());
-        final LicensesBean licensesBean = (LicensesBean) response.getEntity();
+        final LicenseBean responseBean = (LicenseBean) response.getEntity();
 
-        assertEquals(licensesBean, beanToReturn);
+        assertEquals(bean, responseBean);
     }
 }

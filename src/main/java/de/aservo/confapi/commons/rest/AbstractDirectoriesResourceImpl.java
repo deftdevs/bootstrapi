@@ -1,11 +1,10 @@
 package de.aservo.confapi.commons.rest;
 
-import de.aservo.confapi.commons.model.DirectoriesBean;
 import de.aservo.confapi.commons.model.AbstractDirectoryBean;
+import de.aservo.confapi.commons.model.DirectoriesBean;
 import de.aservo.confapi.commons.rest.api.DirectoriesResource;
 import de.aservo.confapi.commons.service.api.DirectoryService;
 
-import javax.annotation.Nonnull;
 import javax.ws.rs.core.Response;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -27,7 +26,7 @@ public abstract class AbstractDirectoriesResourceImpl implements DirectoriesReso
     @Override
     public Response setDirectories (
             final boolean testConnection,
-            @Nonnull final DirectoriesBean directories) {
+            final DirectoriesBean directories) {
 
         DirectoriesBean directoriesBean = directoryService.setDirectories(directories, testConnection);
         return Response.ok(directoriesBean).build();
@@ -36,9 +35,9 @@ public abstract class AbstractDirectoriesResourceImpl implements DirectoriesReso
     @Override
     public Response addDirectory (
             final boolean testConnection,
-            @Nonnull final AbstractDirectoryBean directory) {
+            final AbstractDirectoryBean directory) {
 
-        DirectoriesBean directoriesBean = directoryService.addDirectory(directory, testConnection);
-        return Response.ok(directoriesBean).build();
+        AbstractDirectoryBean addedDirectoryBean = directoryService.addDirectory(directory, testConnection);
+        return Response.ok(addedDirectoryBean).build();
     }
 }

@@ -1,7 +1,9 @@
 package de.aservo.confapi.commons.service.api;
 
-import de.aservo.confapi.commons.model.DirectoriesBean;
 import de.aservo.confapi.commons.model.AbstractDirectoryBean;
+import de.aservo.confapi.commons.model.DirectoriesBean;
+
+import javax.validation.constraints.NotNull;
 
 /**
  * The User directory service interface.
@@ -23,14 +25,18 @@ public interface DirectoryService {
      * @param testConnection whether to test connection
      * @return the directories
      */
-    DirectoriesBean setDirectories(DirectoriesBean directories, boolean testConnection);
+    DirectoriesBean setDirectories(
+            @NotNull DirectoriesBean directories,
+            boolean testConnection);
 
     /**
      * Adds a new directory configuration.
      *
      * @param directory      the directories
      * @param testConnection whether to test connection
-     * @return the directories
+     * @return the added directory
      */
-    DirectoriesBean addDirectory(AbstractDirectoryBean directory, boolean testConnection);
+    AbstractDirectoryBean addDirectory(
+            @NotNull AbstractDirectoryBean directory,
+            boolean testConnection);
 }

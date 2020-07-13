@@ -27,9 +27,9 @@ public interface GadgetsService {
      * Add one single gadget.
      *
      * @param gadgetBean the gadget bean to add
-     * @return the updated gadgets
+     * @return the added gadget
      */
-    public GadgetsBean addGadget(
+    public GadgetBean addGadget(
             @NotNull final GadgetBean gadgetBean);
 
 }

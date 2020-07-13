@@ -54,9 +54,9 @@ public interface GadgetsResource {
     @Operation(
             tags = { ConfAPI.GADGETS },
             summary = "Adds a single gadget",
-            description = "Upon successful request, returns a `GadgetsBean` object containing gadgets details",
+            description = "Upon successful request, returns the added `GadgetBean` object containing gadget details",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetsBean.class))),
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetBean.class))),
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
             }
     )
