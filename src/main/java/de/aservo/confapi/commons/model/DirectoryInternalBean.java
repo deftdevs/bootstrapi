@@ -16,7 +16,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@XmlRootElement(name = ConfAPI.DIRECTORY_INTERNAL)
+@XmlRootElement(name = ConfAPI.DIRECTORY + '-' + ConfAPI.DIRECTORY_INTERNAL)
 public class DirectoryInternalBean extends AbstractDirectoryBean {
 
     @XmlElement

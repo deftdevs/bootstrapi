@@ -17,7 +17,7 @@ import java.net.URI;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@XmlRootElement(name = ConfAPI.DIRECTORY_CROWD)
+@XmlRootElement(name = ConfAPI.DIRECTORY + '-' + ConfAPI.DIRECTORY_CROWD)
 public class DirectoryCrowdBean extends AbstractDirectoryBean {
 
     @XmlElement

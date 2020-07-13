@@ -1,5 +1,6 @@
 package de.aservo.confapi.commons.model;
 
+import de.aservo.confapi.commons.constants.ConfAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.codehaus.jackson.annotate.JsonSubTypes;
@@ -20,11 +21,13 @@ import javax.xml.bind.annotation.XmlRootElement;
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,
-        property = "type")
+        property = "type"
+)
 @JsonSubTypes({
-        @Type(value = DirectoryInternalBean.class, name = "internal"),
-        @Type(value = DirectoryCrowdBean.class, name = "crowd"),
-        @Type(value = DirectoryLdapBean.class, name = "ldap")
+        @Type(value = DirectoryCrowdBean.class, name = ConfAPI.DIRECTORY_CROWD),
+        @Type(value = DirectoryGenericBean.class, name = ConfAPI.DIRECTORY_GENERIC),
+        @Type(value = DirectoryInternalBean.class, name = ConfAPI.DIRECTORY_INTERNAL),
+        @Type(value = DirectoryLdapBean.class, name = ConfAPI.DIRECTORY_LDAP),
 })
 public abstract class AbstractDirectoryBean {
 

@@ -20,6 +20,11 @@ import java.util.Collection;
 public class DirectoriesBean {
 
     @XmlElement
-    @Schema(oneOf = { DirectoryInternalBean.class, DirectoryCrowdBean.class, DirectoryLdapBean.class })
+    @Schema(oneOf = {
+            DirectoryCrowdBean.class,
+            DirectoryGenericBean.class,
+            DirectoryInternalBean.class,
+            DirectoryLdapBean.class,
+    })
     private Collection<AbstractDirectoryBean> directories;
 }
