@@ -16,7 +16,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@XmlRootElement(name = ConfAPI.DIRECTORY_LDAP)
+@XmlRootElement(name = ConfAPI.DIRECTORY + '-' + ConfAPI.DIRECTORY_LDAP)
 public class DirectoryLdapBean extends AbstractDirectoryBean {
 
     @XmlElement
