@@ -11,7 +11,7 @@ import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.aservo.confapi.commons.model.AbstractDirectoryBean;
 import de.aservo.confapi.commons.model.DirectoriesBean;
-import de.aservo.confapi.crowd.model.util.DirectoryInternalBeanUtil;
+import de.aservo.confapi.crowd.model.util.DirectoryBeanUtil;
 import de.aservo.confapi.crowd.service.api.DirectoriesService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,7 +43,7 @@ public class DirectoriesServiceImpl implements DirectoriesService {
 
         return new DirectoriesBean(directoryManager.searchDirectories(directoryEntityQuery).stream()
                 .filter(d -> d.getType().equals(DirectoryType.INTERNAL))
-                .map(DirectoryInternalBeanUtil::toDirectoryInternalBean)
+                .map(DirectoryBeanUtil::toDirectoryBean)
                 .collect(Collectors.toList())
         );
     }
@@ -54,7 +54,7 @@ public class DirectoriesServiceImpl implements DirectoriesService {
 
         try {
             final Directory directory = directoryManager.findDirectoryById(id);
-            return DirectoryInternalBeanUtil.toDirectoryInternalBean(directory);
+            return DirectoryBeanUtil.toDirectoryBean(directory);
         } catch (DirectoryNotFoundException e) {
             log.info("Directory with id {} could not been found", id);
             return null;

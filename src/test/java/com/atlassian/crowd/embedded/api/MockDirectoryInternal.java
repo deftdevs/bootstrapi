@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 import static com.atlassian.crowd.directory.AbstractInternalDirectory.*;
 import static com.atlassian.crowd.password.factory.PasswordEncoderFactory.ATLASSIAN_SECURITY_ENCODER;
 
-public class MockDirectory implements Directory {
+public class MockDirectoryInternal implements Directory {
 
     public static final String ATTRIBUTE_PASSWORD_REGEX_VALUE                           = ".*";
     public static final String ATTRIBUTE_PASSWORD_COMPLEXITY_MESSAGE_VALUE              = "complex";
@@ -24,7 +24,7 @@ public class MockDirectory implements Directory {
 
     private final Map<String, String> attributes;
 
-    public MockDirectory() {
+    public MockDirectoryInternal() {
         this.attributes = Stream.of(new String[][] {
                 { ATTRIBUTE_PASSWORD_REGEX, ATTRIBUTE_PASSWORD_REGEX_VALUE },
                 { ATTRIBUTE_PASSWORD_COMPLEXITY_MESSAGE, ATTRIBUTE_PASSWORD_COMPLEXITY_MESSAGE_VALUE },
