@@ -29,7 +29,7 @@ public abstract class AbstractGadgetsResourceImpl implements GadgetsResource {
 
     @Override
     public Response addGadget(GadgetBean gadgetBean) {
-        GadgetsBean updatedGadgetsBean = gadgetsService.addGadget(gadgetBean);
-        return Response.ok(updatedGadgetsBean).build();
+        GadgetBean addedGadgetBean = gadgetsService.addGadget(gadgetBean);
+        return Response.ok(addedGadgetBean).build();
     }
 }

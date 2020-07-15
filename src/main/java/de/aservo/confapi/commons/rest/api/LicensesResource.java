@@ -54,9 +54,9 @@ public interface LicensesResource {
     @Operation(
             tags = { ConfAPI.LICENSES },
             summary = "Adds a single license",
-            description = "Upon successful request, returns a `LicensesBean` object containing license details",
+            description = "Upon successful request, returns the added `LicenseBean` object containing license details",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = LicensesBean.class))),
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = LicenseBean.class))),
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
             }
     )

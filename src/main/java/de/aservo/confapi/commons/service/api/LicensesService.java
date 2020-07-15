@@ -12,7 +12,7 @@ public interface LicensesService {
      *
      * @return the licenses
      */
-    public LicensesBean getLicenses();
+    LicensesBean getLicenses();
 
 
     /**
@@ -21,15 +21,15 @@ public interface LicensesService {
      * @param licensesBean the licenses to set
      * @return the licenses
      */
-    public LicensesBean setLicenses(
+    LicensesBean setLicenses(
             @NotNull final LicensesBean licensesBean);
 
     /**
-     * Set a single license
+     * Add a single license
      *
      * @param licenseBean the single license to set
-     * @return the licenses
+     * @return the added license
      */
-    public LicensesBean setLicense(
+    LicenseBean addLicense(
             @NotNull final LicenseBean licenseBean);
 }

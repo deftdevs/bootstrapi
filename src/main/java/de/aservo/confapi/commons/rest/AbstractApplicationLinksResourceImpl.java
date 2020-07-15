@@ -29,7 +29,7 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
 
     @Override
     public Response addApplicationLink(ApplicationLinkBean linkBean) {
-        final ApplicationLinksBean updatedLinksBean = applicationLinksService.addApplicationLink(linkBean);
-        return Response.ok(updatedLinksBean).build();
+        final ApplicationLinkBean addedApplicationLink = applicationLinksService.addApplicationLink(linkBean);
+        return Response.ok(addedApplicationLink).build();
     }
 }

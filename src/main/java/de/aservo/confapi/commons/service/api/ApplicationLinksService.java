@@ -28,8 +28,8 @@ public interface ApplicationLinksService {
      * Adds a single application link
      *
      * @param applicationLinkBean the application link to set
-     * @return the application links
+     * @return the added application link
      */
-    public ApplicationLinksBean addApplicationLink(
+    public ApplicationLinkBean addApplicationLink(
             @NotNull final ApplicationLinkBean applicationLinkBean);
 }

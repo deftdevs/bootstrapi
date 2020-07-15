@@ -54,9 +54,9 @@ public interface ApplicationLinksResource {
     @Operation(
             tags = { ConfAPI.APPLICATION_LINKS },
             summary = "Add a single application link",
-            description = "Upon successful request, returns a `ApplicationLinksBean` object containing all application links",
+            description = "Upon successful request, returns the added `ApplicationLinkBean` object",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinksBean.class))),
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class))),
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
             }
     )

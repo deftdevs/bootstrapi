@@ -58,7 +58,7 @@ public interface DirectoriesResource {
             summary = "Adds a new directory",
             description = "Adds a new user directory to the existing list of directories",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = DirectoriesBean.class))),
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryBean.class))),
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
             }
     )

@@ -1,5 +1,6 @@
 package de.aservo.confapi.commons.rest;
 
+import de.aservo.confapi.commons.model.AbstractDirectoryBean;
 import de.aservo.confapi.commons.model.DirectoriesBean;
 import de.aservo.confapi.commons.model.DirectoryCrowdBean;
 import de.aservo.confapi.commons.service.api.DirectoryService;
@@ -60,16 +61,15 @@ public class AbstractDirectoriesResourceTest {
 
     @Test
     public void testAddDirectory() {
-        DirectoryCrowdBean directoryBean = DirectoryCrowdBean.EXAMPLE_1;
-        DirectoriesBean directoriesBean = new DirectoriesBean(Collections.singleton(directoryBean));
+        DirectoryCrowdBean bean = DirectoryCrowdBean.EXAMPLE_1;
 
-        doReturn(directoriesBean).when(directoryService).addDirectory(directoryBean, false);
+        doReturn(bean).when(directoryService).addDirectory(bean, false);
 
-        final Response response = resource.addDirectory(Boolean.FALSE, directoryBean);
+        final Response response = resource.addDirectory(Boolean.FALSE, bean);
         assertEquals(200, response.getStatus());
-        final DirectoriesBean directoriesBeanResponse = (DirectoriesBean) response.getEntity();
+        final AbstractDirectoryBean responseBean = (AbstractDirectoryBean) response.getEntity();
 
-        assertEquals(directoryBean.getName(), directoriesBeanResponse.getDirectories().iterator().next().getName());
+        assertEquals(bean.getName(), responseBean.getName());
     }
 
 }
