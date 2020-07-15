@@ -15,8 +15,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.mail.internet.AddressException;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
@@ -35,8 +34,14 @@ public class MailServerServiceTest {
 
     @Test
     public void testGetMailServerSmtp() throws AddressException {
+        doReturn(true).when(mailConfigurationService).isConfigured();
         doReturn(new MockMailConfiguration()).when(mailConfigurationService).getMailConfiguration();
         assertNotNull(mailServerService.getMailServerSmtp());
+    }
+
+    @Test
+    public void testGetMailServerSmtpNotConfigured() throws AddressException {
+        assertNull(mailServerService.getMailServerSmtp());
     }
 
     @Test

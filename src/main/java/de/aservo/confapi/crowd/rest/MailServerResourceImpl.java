@@ -29,6 +29,11 @@ public class MailServerResourceImpl implements MailServerSmtpResource {
     @Override
     public Response getMailServerSmtp() {
         final MailServerSmtpBean smtpBean = mailServerService.getMailServerSmtp();
+
+        if (smtpBean == null) {
+            return Response.noContent().build();
+        }
+
         return Response.ok(smtpBean).build();
     }
 
