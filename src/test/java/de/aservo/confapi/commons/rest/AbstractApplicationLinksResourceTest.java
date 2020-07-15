@@ -44,9 +44,9 @@ public class AbstractApplicationLinksResourceTest {
     public void testSetApplicationLinks() {
         final ApplicationLinksBean bean = ApplicationLinksBean.EXAMPLE_1;
 
-        doReturn(bean).when(applicationLinksService).setApplicationLinks(bean);
+        doReturn(bean).when(applicationLinksService).setApplicationLinks(bean, true);
 
-        final Response response = resource.setApplicationLinks(bean);
+        final Response response = resource.setApplicationLinks(true, bean);
         assertEquals(200, response.getStatus());
         final ApplicationLinksBean linksBean = (ApplicationLinksBean) response.getEntity();
 
@@ -57,9 +57,9 @@ public class AbstractApplicationLinksResourceTest {
     public void testAddApplicationLink() {
         final ApplicationLinkBean bean = ApplicationLinkBean.EXAMPLE_1;
 
-        doReturn(bean).when(applicationLinksService).addApplicationLink(bean);
+        doReturn(bean).when(applicationLinksService).addApplicationLink(bean, true);
 
-        final Response response = resource.addApplicationLink(bean);
+        final Response response = resource.addApplicationLink(true, bean);
         assertEquals(200, response.getStatus());
         final ApplicationLinkBean responseBean = (ApplicationLinkBean) response.getEntity();
 
