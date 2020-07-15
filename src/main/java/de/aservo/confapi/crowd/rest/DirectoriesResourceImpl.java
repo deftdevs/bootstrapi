@@ -2,17 +2,14 @@ package de.aservo.confapi.crowd.rest;
 
 import com.sun.jersey.spi.container.ResourceFilters;
 import de.aservo.confapi.commons.constants.ConfAPI;
-import de.aservo.confapi.commons.exception.BadRequestException;
 import de.aservo.confapi.commons.exception.NotFoundException;
 import de.aservo.confapi.commons.model.AbstractDirectoryBean;
-import de.aservo.confapi.commons.model.DirectoryInternalBean;
 import de.aservo.confapi.crowd.filter.SysadminOnlyResourceFilter;
 import de.aservo.confapi.crowd.rest.api.DirectoriesResource;
 import de.aservo.confapi.crowd.service.api.DirectoriesService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
@@ -46,18 +43,6 @@ public class DirectoriesResourceImpl implements DirectoriesResource {
         }
 
         return Response.ok(directoryBean).build();
-    }
-
-    @POST
-    public Response addDirectory(
-            final AbstractDirectoryBean directoryBean) {
-
-        if (!(directoryBean instanceof DirectoryInternalBean)) {
-            throw new BadRequestException("Directories of other type than 'DirectoryInternalBean' are not supported yet");
-        }
-
-        final DirectoryInternalBean directoryInternalBean = (DirectoryInternalBean) directoryBean;
-        return Response.ok(directoryInternalBean).build();
     }
 
 }
