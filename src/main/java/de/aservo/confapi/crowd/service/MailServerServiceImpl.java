@@ -33,7 +33,11 @@ public class MailServerServiceImpl implements MailServerService {
 
     @Override
     public MailServerSmtpBean getMailServerSmtp() {
-        return MailServerSmtpBeanUtil.toMailServerSmtpBean(mailConfigurationService.getMailConfiguration());
+        if (mailConfigurationService.isConfigured()) {
+            return MailServerSmtpBeanUtil.toMailServerSmtpBean(mailConfigurationService.getMailConfiguration());
+        }
+
+        return null;
     }
 
     @Override

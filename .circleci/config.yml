@@ -77,7 +77,7 @@ jobs:
           command: gpg --no-tty --batch --import .circleci/sign.asc
       - run:
           name: Deploy to Maven Central
-          command: export GPG_TTY=$(tty) && mvn -s .circleci/settings.xml -DskipTests deploy
+          command: export GPG_TTY=$(tty) && mvn deploy -s .circleci/settings.xml -DskipTests -U
       - save_cache:
           paths:
             - ~/.m2

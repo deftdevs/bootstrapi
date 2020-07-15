@@ -40,6 +40,12 @@ public class MailServerResourceTest {
     }
 
     @Test
+    public void testGetMailServerSmtpNotConfigured() {
+        final Response response = mailServerResource.getMailServerSmtp();
+        assertEquals(204, response.getStatus());
+    }
+
+    @Test
     public void testSetMailServerSmtp() {
         final MailServerSmtpBean mailServerSmtpBean = MailServerSmtpBean.EXAMPLE_2;
         doReturn(mailServerSmtpBean).when(mailServerService).setMailServerSmtp(any(MailServerSmtpBean.class));
