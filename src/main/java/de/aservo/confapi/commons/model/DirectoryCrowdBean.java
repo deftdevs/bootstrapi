@@ -61,13 +61,16 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
         public static class DirectoryCrowdServerProxy {
 
             @XmlElement
+            private String host;
+
+            @XmlElement
+            private Integer port;
+
+            @XmlElement
             private String username;
 
             @XmlElement
             private String password;
-
-            @XmlElement
-            private URI uri;
         }
     }
 
@@ -120,7 +123,7 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
         EXAMPLE_1_WITH_PROXY.getServer().setUri(URI.create("https://crowd.example.com"));
         EXAMPLE_1_WITH_PROXY.getServer().setAppPassword("p433w0rd");
         EXAMPLE_1_WITH_PROXY.getServer().setProxy(new DirectoryCrowdServer.DirectoryCrowdServerProxy());
-        EXAMPLE_1_WITH_PROXY.getServer().getProxy().setUri(URI.create("https://proxy.example.com"));
+        EXAMPLE_1_WITH_PROXY.getServer().getProxy().setHost("proxy.example.com");
         EXAMPLE_1_WITH_PROXY.getServer().getProxy().setUsername("user");
         EXAMPLE_1_WITH_PROXY.getServer().getProxy().setPassword("pass");
     }
