@@ -22,14 +22,22 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
     }
 
     @Override
-    public Response setApplicationLinks(ApplicationLinksBean linksBean) {
-        final ApplicationLinksBean updatedLinksBean = applicationLinksService.setApplicationLinks(linksBean);
+    public Response setApplicationLinks(
+            final boolean ignoreSetupErrors,
+            ApplicationLinksBean linksBean) {
+        final ApplicationLinksBean updatedLinksBean = applicationLinksService.setApplicationLinks(
+                linksBean,
+                ignoreSetupErrors);
         return Response.ok(updatedLinksBean).build();
     }
 
     @Override
-    public Response addApplicationLink(ApplicationLinkBean linkBean) {
-        final ApplicationLinkBean addedApplicationLink = applicationLinksService.addApplicationLink(linkBean);
+    public Response addApplicationLink(
+            final boolean ignoreSetupErrors,
+            ApplicationLinkBean linkBean) {
+        final ApplicationLinkBean addedApplicationLink = applicationLinksService.addApplicationLink(
+                linkBean,
+                ignoreSetupErrors);
         return Response.ok(addedApplicationLink).build();
     }
 }
