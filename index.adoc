@@ -31,93 +31,6 @@ This plugin provides methods for accessing configuration for Crowd.
 == Endpoints
 
 
-[.Default]
-=== Default
-
-
-[.addDirectory]
-==== addDirectory
-    
-`POST /directories`
-
-
-
-===== Description 
-
-
-
-
-// markup not found, no include::{specDir}directories/POST/spec.adoc[opts=optional]
-
-
-
-===== Parameters
-
-
-===== Body Parameter
-
-[cols="2,3,1,1,1"]
-|===         
-|Name| Description| Required| Default| Pattern
-
-| AbstractDirectoryBean 
-|  <<AbstractDirectoryBean>> 
-| - 
-|  
-|  
-
-|===         
-
-
-
-
-
-===== Return Type
-
-
-
--
-
-===== Content Type
-
-* */*
-
-===== Responses
-
-.http response codes
-[cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
-
-
-| 0
-| default response
-|  <<>>
-
-|===         
-
-===== Samples
-
-
-// markup not found, no include::{snippetDir}directories/POST/http-request.adoc[opts=optional]
-
-
-// markup not found, no include::{snippetDir}directories/POST/http-response.adoc[opts=optional]
-
-
-
-// file not found, no * wiremock data link :directories/POST/POST.json[]
-
-
-ifdef::internal-generation[]
-===== Implementation
-
-// markup not found, no include::{specDir}directories/POST/implementation.adoc[opts=optional]
-
-
-endif::internal-generation[]
-
-
 [.Directories]
 === Directories
 
@@ -235,7 +148,8 @@ Get a directory based on it's ID
 
 ===== Return Type
 
-<<AbstractDirectoryBean>>
+
+<<oneOf&lt;DirectoryInternalBean,DirectoryGenericBean&gt;>>
 
 
 ===== Content Type
@@ -252,7 +166,7 @@ Get a directory based on it's ID
 
 | 200
 | 
-|  <<AbstractDirectoryBean>>
+|  <<oneOf&lt;DirectoryInternalBean,DirectoryGenericBean&gt;>>
 
 
 | 0
@@ -562,6 +476,36 @@ endif::internal-generation[]
 | active 
 |  
 | Boolean  
+| 
+|  
+
+| server 
+|  
+| DirectoryLdapServer  
+| 
+|  
+
+| permissions 
+|  
+| DirectoryLdapPermissions  
+| 
+|  
+
+| advanced 
+|  
+| DirectoryInternalAdvanced  
+| 
+|  
+
+| credentialPolicy 
+|  
+| DirectoryInternalCredentialPolicy  
+| 
+|  
+
+| schema 
+|  
+| DirectoryLdapSchema  
 | 
 |  
 
