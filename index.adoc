@@ -707,6 +707,18 @@ endif::internal-generation[]
 |===         
 | Field Name| Required| Type| Description| Format
 
+| host 
+|  
+| String  
+| 
+|  
+
+| port 
+|  
+| Integer  
+| 
+| int32 
+
 | username 
 |  
 | String  
@@ -718,12 +730,6 @@ endif::internal-generation[]
 | String  
 | 
 |  
-
-| uri 
-|  
-| URI  
-| 
-| uri 
 
 |===
 
