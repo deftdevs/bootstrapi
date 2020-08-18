@@ -19,6 +19,12 @@ import java.util.UUID;
 @XmlRootElement(name = ConfAPI.APPLICATION_LINK)
 public class ApplicationLinkBean {
 
+    public enum ApplicationLinkStatus {
+        AVAILABLE,
+        UNAVAILABLE,
+        CONFIGURATION_ERROR
+    }
+
     @XmlElement
     private String serverId;
 
@@ -46,6 +52,9 @@ public class ApplicationLinkBean {
 
     @XmlElement
     private boolean primary;
+
+    @XmlElement
+    private ApplicationLinkStatus status;
 
     @XmlElement
     private String username;
