@@ -12,7 +12,8 @@ ConfAPI Commons
 
 Library for common sources of the ConfAPI plugins:
 
-* [ConfAPI for Jira](https://github.com/aservo/jira-confapi-plugin)
-* [ConfAPI for Confluence](https://github.com/aservo/confluence-confapi-plugin)
-* [ConfAPI for Bitbucket](https://github.com/aservo/bitbucket-confapi-plugin)
-* [ConfAPI for Crowd](https://github.com/aservo/crowd-confapi-plugin)
+* [ConfAPI for Jira](https://github.com/aservo/confapi-jira-plugin)
+* [ConfAPI for Confluence](https://github.com/aservo/confapi-confluence-plugin)
+* [ConfAPI for Bitbucket](https://github.com/aservo/confapi-bitbucket-plugin)
+* [ConfAPI for Crowd](https://github.com/aservo/confapi-crowd-plugin)
+* [ConfAPI for Fisheye / Crucible](https://github.com/aservo/confapi-fisheye-plugin)
