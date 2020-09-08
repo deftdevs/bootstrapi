@@ -7,7 +7,7 @@
     <parent>
         <groupId>de.aservo</groupId>
         <artifactId>parent-pom</artifactId>
-        <version>0.0.9</version>
+        <version>0.0.11</version>
     </parent>
 
     <artifactId>confapi-crowd-plugin</artifactId>
@@ -48,11 +48,11 @@
     </developers>
 
     <properties>
-        <crowd.version>4.0.1</crowd.version>
+        <crowd.version>4.1.1</crowd.version>
         <amps.version>8.0.2</amps.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
-        <confapi-commons.version>0.0.16-SNAPSHOT</confapi-commons.version>
+        <confapi-commons.version>0.0.18-SNAPSHOT</confapi-commons.version>
         <plugin.testrunner.version>1.2.3</plugin.testrunner.version>
     </properties>
 
@@ -65,6 +65,7 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
             <dependency>
                 <groupId>de.aservo</groupId>
                 <artifactId>confapi-commons</artifactId>
