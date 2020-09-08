@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<atlassian-plugin-marketing>
+    <compatibility>
+        <product name="crowd" min="3.3.0" max="4.1.1"/>
+    </compatibility>
+    <logo image="images/aservo.png"/>
+</atlassian-plugin-marketing>
