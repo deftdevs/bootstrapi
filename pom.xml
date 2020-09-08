@@ -54,7 +54,7 @@
         <atlassian.amps.version>8.0.2</atlassian.amps.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
-        <confapi-commons.version>0.0.18-SNAPSHOT</confapi-commons.version>
+        <confapi-commons.version>0.0.19-SNAPSHOT</confapi-commons.version>
         <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
         <javax.el-api.version>2.2.4</javax.el-api.version>
     </properties>

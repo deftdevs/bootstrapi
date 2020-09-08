@@ -1,29 +1,37 @@
 package de.aservo.confapi.jira.model.util;
 
-import com.atlassian.sal.api.license.SingleProductLicenseDetailsView;
+import com.atlassian.application.api.ApplicationKey;
+import com.atlassian.jira.license.LicenseDetails;
 import de.aservo.confapi.commons.model.LicenseBean;
 
 import javax.annotation.Nonnull;
-import java.util.Collections;
+import java.util.stream.Collectors;
 
 public class LicenseBeanUtil {
 
     /**
      * Instantiates a new License bean.
      *
-     * @param productLicense the product license
+     * @param licenseDetails the product license
      */
     @Nonnull
     public static LicenseBean toLicenseBean(
-            @Nonnull final SingleProductLicenseDetailsView productLicense) {
+            @Nonnull final LicenseDetails licenseDetails) {
 
         final LicenseBean licenseBean = new LicenseBean();
-        licenseBean.setProducts(Collections.singletonList(productLicense.getProductDisplayName()));
-        licenseBean.setLicenseType(productLicense.getLicenseTypeName());
-        licenseBean.setOrganization(productLicense.getOrganisationName());
-        licenseBean.setDescription(productLicense.getDescription());
-        licenseBean.setExpiryDate(productLicense.getMaintenanceExpiryDate());
-        licenseBean.setNumUsers(productLicense.getNumberOfUsers());
+
+        licenseBean.setProducts(licenseDetails.getLicensedApplications().getKeys().stream()
+                        .map(ApplicationKey::value)
+                        .collect(Collectors.toList()));
+
+        if (licenseDetails.getLicenseType() != null) {
+            licenseBean.setLicenseType(licenseDetails.getLicenseType().name());
+        }
+
+        licenseBean.setOrganization(licenseDetails.getOrganisation());
+        licenseBean.setDescription(licenseDetails.getDescription());
+        licenseBean.setExpiryDate(licenseDetails.getMaintenanceExpiryDate());
+        // cannot set max users with license details
         return licenseBean;
     }
 

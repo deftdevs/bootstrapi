@@ -9,7 +9,7 @@ import de.aservo.confapi.commons.exception.InternalServerErrorException;
 import de.aservo.confapi.commons.model.AbstractDirectoryBean;
 import de.aservo.confapi.commons.model.DirectoriesBean;
 import de.aservo.confapi.commons.model.DirectoryCrowdBean;
-import de.aservo.confapi.commons.service.api.DirectoryService;
+import de.aservo.confapi.commons.service.api.DirectoriesService;
 import de.aservo.confapi.commons.util.BeanValidationUtil;
 import de.aservo.confapi.jira.model.util.DirectoryBeanUtil;
 import org.slf4j.Logger;
@@ -25,15 +25,16 @@ import java.util.stream.Collectors;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 @Component
-@ExportAsService(DirectoryService.class)
-public class DirectoryServiceImpl implements DirectoryService {
+@ExportAsService(DirectoriesService.class)
+public class DirectoriesServiceImpl implements DirectoriesService {
 
-    private static final Logger log = LoggerFactory.getLogger(DirectoryServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(DirectoriesServiceImpl.class);
 
     private final CrowdDirectoryService crowdDirectoryService;
 
     @Inject
-    public DirectoryServiceImpl(@ComponentImport CrowdDirectoryService crowdDirectoryService) {
+    public DirectoriesServiceImpl(
+            @ComponentImport CrowdDirectoryService crowdDirectoryService) {
         this.crowdDirectoryService = checkNotNull(crowdDirectoryService);
     }
 

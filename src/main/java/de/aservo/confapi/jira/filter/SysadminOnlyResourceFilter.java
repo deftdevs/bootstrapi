@@ -19,9 +19,8 @@ import javax.ws.rs.ext.Provider;
  */
 @Provider
 @Component
-public class SysadminOnlyResourceFilter implements ResourceFilter, ContainerRequestFilter {
+public class SysadminOnlyResourceFilter implements ContainerRequestFilter, ResourceFilter {
 
-    @ComponentImport
     private final UserManager userManager;
 
     /**
@@ -31,17 +30,9 @@ public class SysadminOnlyResourceFilter implements ResourceFilter, ContainerRequ
      */
     @Inject
     public SysadminOnlyResourceFilter(
-            final UserManager userManager) {
+            @ComponentImport final UserManager userManager) {
 
         this.userManager = userManager;
-    }
-
-    public ContainerRequestFilter getRequestFilter() {
-        return this;
-    }
-
-    public ContainerResponseFilter getResponseFilter() {
-        return null;
     }
 
     public ContainerRequest filter(
@@ -56,6 +47,14 @@ public class SysadminOnlyResourceFilter implements ResourceFilter, ContainerRequ
         }
 
         return containerRequest;
+    }
+
+    public ContainerRequestFilter getRequestFilter() {
+        return this;
+    }
+
+    public ContainerResponseFilter getResponseFilter() {
+        return null;
     }
 
 }

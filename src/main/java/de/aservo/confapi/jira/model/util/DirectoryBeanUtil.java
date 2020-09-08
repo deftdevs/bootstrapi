@@ -33,7 +33,9 @@ public class DirectoryBeanUtil {
 
         final Map<String, String> attributes = new HashMap<>();
         if (directoryBean.getServer() != null) {
-            attributes.put(CROWD_SERVER_URL, directoryBean.getServer().getUri().toString());
+            if (directoryBean.getServer().getUri() != null) {
+                attributes.put(CROWD_SERVER_URL, directoryBean.getServer().getUri().toString());
+            }
             attributes.put(APPLICATION_NAME, directoryBean.getServer().getAppUsername());
             attributes.put(APPLICATION_PASSWORD, directoryBean.getServer().getAppPassword());
             if (directoryBean.getServer().getProxy() != null) {

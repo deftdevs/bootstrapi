@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.UUID;
 
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -111,7 +111,7 @@ public class ApplicationLinkServiceTest {
 
             ApplicationLinkBean applicationLinkResponse = applicationLinkService.addApplicationLink(applicationLinkBean, false);
 
-            assertEquals(applicationLink.getName(), applicationLinkBean.getName());
+            assertEquals(applicationLinkResponse.getName(), applicationLinkBean.getName());
         }
     }
 
