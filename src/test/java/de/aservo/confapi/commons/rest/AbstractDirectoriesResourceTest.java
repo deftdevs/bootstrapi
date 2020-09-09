@@ -3,7 +3,7 @@ package de.aservo.confapi.commons.rest;
 import de.aservo.confapi.commons.model.AbstractDirectoryBean;
 import de.aservo.confapi.commons.model.DirectoriesBean;
 import de.aservo.confapi.commons.model.DirectoryCrowdBean;
-import de.aservo.confapi.commons.service.api.DirectoryService;
+import de.aservo.confapi.commons.service.api.DirectoriesService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,13 +21,13 @@ import static org.mockito.Mockito.doReturn;
 public class AbstractDirectoriesResourceTest {
 
     @Mock
-    private DirectoryService directoryService;
+    private DirectoriesService directoriesService;
 
     private TestDirectoriesResourceImpl resource;
 
     @Before
     public void setup() {
-        resource = new TestDirectoriesResourceImpl(directoryService);
+        resource = new TestDirectoriesResourceImpl(directoriesService);
     }
 
     @Test
@@ -35,7 +35,7 @@ public class AbstractDirectoriesResourceTest {
         DirectoryCrowdBean initialDirectoryBean = DirectoryCrowdBean.EXAMPLE_1;
         DirectoriesBean directoriesBean = new DirectoriesBean(Collections.singleton(initialDirectoryBean));
 
-        doReturn(directoriesBean).when(directoryService).getDirectories();
+        doReturn(directoriesBean).when(directoriesService).getDirectories();
 
         final Response response = resource.getDirectories();
         assertEquals(200, response.getStatus());
@@ -50,7 +50,7 @@ public class AbstractDirectoriesResourceTest {
         DirectoryCrowdBean directoryBean2 = DirectoryCrowdBean.EXAMPLE_3;
         DirectoriesBean directoriesBean = new DirectoriesBean(Arrays.asList(directoryBean1, directoryBean2));
 
-        doReturn(directoriesBean).when(directoryService).setDirectories(directoriesBean, false);
+        doReturn(directoriesBean).when(directoriesService).setDirectories(directoriesBean, false);
 
         final Response response = resource.setDirectories(Boolean.FALSE, directoriesBean);
         assertEquals(200, response.getStatus());
@@ -63,7 +63,7 @@ public class AbstractDirectoriesResourceTest {
     public void testAddDirectory() {
         DirectoryCrowdBean bean = DirectoryCrowdBean.EXAMPLE_1;
 
-        doReturn(bean).when(directoryService).addDirectory(bean, false);
+        doReturn(bean).when(directoriesService).addDirectory(bean, false);
 
         final Response response = resource.addDirectory(Boolean.FALSE, bean);
         assertEquals(200, response.getStatus());

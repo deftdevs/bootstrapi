@@ -8,7 +8,7 @@ import javax.validation.constraints.NotNull;
 /**
  * The User directory service interface.
  */
-public interface DirectoryService {
+public interface DirectoriesService {
 
     /**
      * Gets directories.

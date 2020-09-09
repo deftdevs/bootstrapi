@@ -1,11 +1,11 @@
 package de.aservo.confapi.commons.rest;
 
-import de.aservo.confapi.commons.service.api.DirectoryService;
+import de.aservo.confapi.commons.service.api.DirectoriesService;
 
 public class TestDirectoriesResourceImpl extends AbstractDirectoriesResourceImpl {
 
-    public TestDirectoriesResourceImpl(DirectoryService directoryService) {
-        super(directoryService);
+    public TestDirectoriesResourceImpl(DirectoriesService directoriesService) {
+        super(directoriesService);
     }
 
 }
