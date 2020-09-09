@@ -4,7 +4,7 @@ import de.aservo.confapi.commons.model.UserBean;
 
 import javax.validation.constraints.NotNull;
 
-public interface UserService {
+public interface UsersService {
 
     /**
      * Get the user.

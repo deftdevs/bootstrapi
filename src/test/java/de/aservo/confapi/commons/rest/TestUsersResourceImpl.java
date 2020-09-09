@@ -1,11 +1,11 @@
 package de.aservo.confapi.commons.rest;
 
-import de.aservo.confapi.commons.service.api.UserService;
+import de.aservo.confapi.commons.service.api.UsersService;
 
 public class TestUsersResourceImpl extends AbstractUsersResourceImpl {
 
-    public TestUsersResourceImpl(UserService userService) {
-        super(userService);
+    public TestUsersResourceImpl(UsersService usersService) {
+        super(usersService);
     }
 
 }
