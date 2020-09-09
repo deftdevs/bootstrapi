@@ -48,6 +48,7 @@
 
     <properties>
         <jira.version>8.12.1</jira.version>
+        <jira.data.version>8.12.1</jira.data.version>
         <!-- other properties -->
         <atlassian.ajp.port>8209</atlassian.ajp.port>
         <atlassian.amps.version>8.0.2</atlassian.amps.version>
@@ -300,11 +301,14 @@
                 <extensions>true</extensions>
                 <configuration>
                     <productVersion>${jira.version}</productVersion>
+                    <productDataVersion>${jira.data.version}</productDataVersion>
+                    <productDataPath>${project.basedir}/src/test/resources/generated-test-resources.zip</productDataPath>
                     <ajpPort>${atlassian.ajp.port}</ajpPort>
                     <!-- <extractDependencies>false</extractDependencies> -->
                     <allowGoogleTracking>false</allowGoogleTracking>
                     <systemPropertyVariables>
                         <atlassian.mail.senddisabled>false</atlassian.mail.senddisabled>
+                        <atlassian.darkfeature.jira.onboarding.feature.disabled>true</atlassian.darkfeature.jira.onboarding.feature.disabled>
                     </systemPropertyVariables>
                     <enableQuickReload>true</enableQuickReload>
                     <applications>
