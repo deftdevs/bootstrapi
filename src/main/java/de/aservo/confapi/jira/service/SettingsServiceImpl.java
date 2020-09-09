@@ -10,7 +10,6 @@ import de.aservo.confapi.commons.service.api.SettingsService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import javax.validation.constraints.NotNull;
 
 import static com.atlassian.jira.config.properties.APKeys.*;
 
@@ -43,7 +42,7 @@ public class SettingsServiceImpl implements SettingsService {
 
     @Override
     public SettingsBean setSettings(
-            @NotNull final SettingsBean settingsBean) {
+            final SettingsBean settingsBean) {
 
         if (settingsBean.getBaseUrl() != null) {
             applicationProperties.setString(JIRA_BASEURL, settingsBean.getBaseUrl());

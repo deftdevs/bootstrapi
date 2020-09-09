@@ -55,8 +55,9 @@
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
         <confapi-commons.version>0.0.19-SNAPSHOT</confapi-commons.version>
-        <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
-        <javax.el-api.version>2.2.4</javax.el-api.version>
+        <glassfish.el-api.version>2.2.4</glassfish.el-api.version>
+        <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
+        <javax.el-api.version>3.0.0</javax.el-api.version>
     </properties>
 
     <dependencyManagement>
@@ -263,14 +264,14 @@
         </dependency>
 
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate-validator.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
             <version>${hibernate-validator.version}</version>
             <scope>test</scope>
@@ -286,7 +287,7 @@
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>javax.el</artifactId>
-            <version>${javax.el-api.version}</version>
+            <version>${glassfish.el-api.version}</version>
             <scope>test</scope>
         </dependency>
 
