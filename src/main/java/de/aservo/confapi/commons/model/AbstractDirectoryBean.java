@@ -8,7 +8,6 @@ import org.codehaus.jackson.annotate.JsonSubTypes.Type;
 import org.codehaus.jackson.annotate.JsonTypeInfo;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -36,7 +35,6 @@ public abstract class AbstractDirectoryBean {
 
     @XmlElement
     @NotNull
-    @Size(min = 1)
     private String name;
 
     @XmlElement

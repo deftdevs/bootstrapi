@@ -20,7 +20,7 @@ import java.util.Date;
 public class LicenseBean {
 
     @XmlElement
-    private String licenseType;
+    private String type;
 
     @XmlElement
     private String organization;
@@ -32,7 +32,7 @@ public class LicenseBean {
     private Date expiryDate;
 
     @XmlElement
-    private int numUsers;
+    private int maxUsers;
 
     @XmlElement
     private String key;
@@ -51,7 +51,7 @@ public class LicenseBean {
         EXAMPLE_1.setDescription("Example License");
         EXAMPLE_1.setOrganization("Example Organization");
         EXAMPLE_1.setProducts(Collections.singleton("example-product"));
-        EXAMPLE_1.setNumUsers(10);
+        EXAMPLE_1.setMaxUsers(10);
         EXAMPLE_1.setExpiryDate(new Date());
 
         // use "3 hour expiration for all Atlassian host products*"
@@ -70,7 +70,7 @@ public class LicenseBean {
                 "5pJpNmxk5hP3qovutY8Pi4E2WIJ59esnr1p+T6eD67teBVCHf+ga+ho4/4D9YItZDAsAhQ5qQ6pA\n" +
                 "SJ+SA7YG9zthbLxRoBBEwIURQr5Zy1B8PonepyLz3UhL7kMVEs=X02q6");
         EXAMPLE_2_DEVELOPER_LICENSE.setDescription("Test license for plugin developers");
-        EXAMPLE_2_DEVELOPER_LICENSE.setLicenseType("TESTING");
+        EXAMPLE_2_DEVELOPER_LICENSE.setType("TESTING");
         EXAMPLE_2_DEVELOPER_LICENSE.setOrganization("Atlassian");
         EXAMPLE_2_DEVELOPER_LICENSE.setProducts(Arrays.asList(
                 "Confluence",
@@ -79,7 +79,7 @@ public class LicenseBean {
                 "Crowd",
                 "Bamboo",
                 "Fisheye"));
-        EXAMPLE_2_DEVELOPER_LICENSE.setNumUsers(1);
+        EXAMPLE_2_DEVELOPER_LICENSE.setMaxUsers(1);
         EXAMPLE_2_DEVELOPER_LICENSE.setExpiryDate(new Date());
     }
 

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.net.URI;
 
 /**
  * Bean for a gadget in REST requests.
@@ -16,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class GadgetBean {
 
     @XmlElement
-    private String url;
+    private URI url;
 
     // Example instances for documentation and tests
 
@@ -24,7 +25,7 @@ public class GadgetBean {
 
     static {
         EXAMPLE_1 = new GadgetBean();
-        EXAMPLE_1.setUrl("http://localhost/gadget");
+        EXAMPLE_1.setUrl(URI.create("http://localhost/gadget"));
     }
 
 }

@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class UserBean {
 
     @XmlElement
-    private String userName;
+    private String username;
 
     @XmlElement
     private String fullName;
@@ -35,7 +35,7 @@ public class UserBean {
 
     static {
         EXAMPLE_1 = new UserBean();
-        EXAMPLE_1.setUserName("example");
+        EXAMPLE_1.setUsername("example");
         EXAMPLE_1.setFullName("Example User");
         EXAMPLE_1.setEmail("user@example.com");
         EXAMPLE_1.setPassword("3x4mpl3");
@@ -45,7 +45,7 @@ public class UserBean {
 
     static {
         EXAMPLE_2 = new UserBean();
-        EXAMPLE_2.setUserName("example");
+        EXAMPLE_2.setUsername("example");
         EXAMPLE_2.setFullName("Changed Example User");
         EXAMPLE_2.setEmail("user@new-example.com");
     }
@@ -55,7 +55,7 @@ public class UserBean {
     static {
         EXAMPLE_3_ADMIN = new UserBean();
         EXAMPLE_3_ADMIN.setFullName("Administrator");
-        EXAMPLE_3_ADMIN.setUserName("admin");
+        EXAMPLE_3_ADMIN.setUsername("admin");
         EXAMPLE_3_ADMIN.setEmail("admin@admin.de");
         EXAMPLE_3_ADMIN.setPassword("admin");
     }

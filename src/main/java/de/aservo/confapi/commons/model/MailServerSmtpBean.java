@@ -24,7 +24,7 @@ public class MailServerSmtpBean extends AbstractMailServerProtocolBean {
     private String prefix;
 
     @XmlElement
-    private boolean tls;
+    private Boolean useTls;
 
     /**
      * Constructor for {@link MailServerSmtpBean} used in crowd-confapi-plugin.
@@ -44,6 +44,10 @@ public class MailServerSmtpBean extends AbstractMailServerProtocolBean {
         setFrom(from);
         setPrefix(prefix);
         setHost(host);
+    }
+
+    public boolean getUseTls() {
+        return Boolean.TRUE.equals(useTls);
     }
 
     // Example instances for documentation and tests
