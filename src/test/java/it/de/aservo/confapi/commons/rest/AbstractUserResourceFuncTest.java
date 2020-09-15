@@ -96,7 +96,7 @@ public abstract class AbstractUserResourceFuncTest {
     }
 
     protected String getUserNameQueryParam(UserBean userBean) {
-        return "?" + PARAM_USERNAME + "=" + userBean.getUserName();
+        return "?" + PARAM_USERNAME + "=" + userBean.getUsername();
     }
 
     protected UserBean getExampleBean() {

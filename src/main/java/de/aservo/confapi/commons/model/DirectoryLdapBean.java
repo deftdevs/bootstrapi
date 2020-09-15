@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -34,8 +33,7 @@ public class DirectoryLdapBean extends AbstractDirectoryBean {
 
         @XmlElement
         @NotNull
-        @Size(min = 1)
-        private String hostName;
+        private String host;
 
         @XmlElement
         private Integer port;
@@ -69,10 +67,10 @@ public class DirectoryLdapBean extends AbstractDirectoryBean {
     public static class DirectoryLdapPermissions {
 
         @XmlElement
-        private Boolean readonly;
+        private Boolean readOnly;
 
         @XmlElement
-        private Boolean readonlyForLocalGroups;
+        private Boolean readOnlyForLocalGroups;
 
         @XmlElement
         private Boolean fullAccess;

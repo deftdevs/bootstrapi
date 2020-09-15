@@ -6,7 +6,6 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URI;
@@ -35,19 +34,17 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
 
         @XmlElement
         @NotNull
-        private URI uri;
+        private URI url;
 
         @XmlElement
         private DirectoryCrowdServerProxy proxy;
 
         @XmlElement
         @NotNull
-        @Size(min = 1)
         private String appUsername;
 
         @XmlElement
         @NotNull
-        @Size(min = 1)
         private String appPassword;
 
         @XmlElement
@@ -79,7 +76,7 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
     public static class DirectoryCrowdPermissions {
 
         @XmlElement
-        private Boolean readonly;
+        private Boolean readOnly;
 
         @XmlElement
         private Boolean fullAccess;
@@ -110,7 +107,7 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
         EXAMPLE_1 = new DirectoryCrowdBean();
         EXAMPLE_1.setName("example");
         EXAMPLE_1.setServer(new DirectoryCrowdServer());
-        EXAMPLE_1.getServer().setUri(URI.create("https://crowd.example.com"));
+        EXAMPLE_1.getServer().setUrl(URI.create("https://crowd.example.com"));
         EXAMPLE_1.getServer().setAppPassword("p455w0rd");
     }
 
@@ -120,7 +117,7 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
         EXAMPLE_1_WITH_PROXY = new DirectoryCrowdBean();
         EXAMPLE_1_WITH_PROXY.setName("example");
         EXAMPLE_1_WITH_PROXY.setServer(new DirectoryCrowdServer());
-        EXAMPLE_1_WITH_PROXY.getServer().setUri(URI.create("https://crowd.example.com"));
+        EXAMPLE_1_WITH_PROXY.getServer().setUrl(URI.create("https://crowd.example.com"));
         EXAMPLE_1_WITH_PROXY.getServer().setAppPassword("p433w0rd");
         EXAMPLE_1_WITH_PROXY.getServer().setProxy(new DirectoryCrowdServer.DirectoryCrowdServerProxy());
         EXAMPLE_1_WITH_PROXY.getServer().getProxy().setHost("proxy.example.com");
@@ -134,7 +131,7 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
         EXAMPLE_2 = new DirectoryCrowdBean();
         EXAMPLE_2.setName("example2");
         EXAMPLE_2.setServer(new DirectoryCrowdServer());
-        EXAMPLE_2.getServer().setUri(URI.create("https://crowd2.example.com"));
+        EXAMPLE_2.getServer().setUrl(URI.create("https://crowd2.example.com"));
         EXAMPLE_2.getServer().setAppPassword("0th3r");
     }
 
@@ -144,7 +141,7 @@ public class DirectoryCrowdBean extends AbstractDirectoryBean {
         EXAMPLE_3 = new DirectoryCrowdBean();
         EXAMPLE_3.setName("example other");
         EXAMPLE_3.setServer(new DirectoryCrowdServer());
-        EXAMPLE_3.getServer().setUri(URI.create("https://crowd3.example.com"));
+        EXAMPLE_3.getServer().setUrl(URI.create("https://crowd3.example.com"));
         EXAMPLE_3.getServer().setAppPassword("p466w0rd");
     }
 

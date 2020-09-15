@@ -1,14 +1,13 @@
 package de.aservo.confapi.commons.model;
 
 import de.aservo.confapi.commons.constants.ConfAPI;
-import de.aservo.confapi.commons.model.type.ApplicationLinkTypes;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.net.URI;
 import java.util.UUID;
 
 /**
@@ -18,6 +17,15 @@ import java.util.UUID;
 @NoArgsConstructor
 @XmlRootElement(name = ConfAPI.APPLICATION_LINK)
 public class ApplicationLinkBean {
+
+    public enum ApplicationLinkTypes {
+        BAMBOO,
+        JIRA,
+        BITBUCKET,
+        CONFLUENCE,
+        FISHEYE,
+        CROWD
+    }
 
     public enum ApplicationLinkStatus {
         AVAILABLE,
@@ -29,26 +37,20 @@ public class ApplicationLinkBean {
     private String serverId;
 
     @XmlElement
-    private String appType;
-
-    @XmlElement
     @NotNull
-    private ApplicationLinkTypes linkType;
-
-    @XmlElement
-    @NotNull
-    @Size(min = 1)
     private String name;
 
     @XmlElement
     @NotNull
-    @Size(min = 1)
-    private String displayUrl;
+    private ApplicationLinkTypes type;
 
     @XmlElement
     @NotNull
-    @Size(min = 1)
-    private String rpcUrl;
+    private URI displayUrl;
+
+    @XmlElement
+    @NotNull
+    private URI rpcUrl;
 
     @XmlElement
     private boolean primary;
@@ -69,11 +71,11 @@ public class ApplicationLinkBean {
     static {
         EXAMPLE_1 = new ApplicationLinkBean();
         EXAMPLE_1.setName("Example");
-        EXAMPLE_1.setDisplayUrl("http://example.com");
-        EXAMPLE_1.setRpcUrl("http://rpc.example.com");
+        EXAMPLE_1.setDisplayUrl(URI.create("http://example.com"));
+        EXAMPLE_1.setRpcUrl(URI.create("http://rpc.example.com"));
         EXAMPLE_1.setPrimary(true);
         EXAMPLE_1.setServerId(UUID.randomUUID().toString());
-        EXAMPLE_1.setAppType("jira");
+        EXAMPLE_1.setType(ApplicationLinkTypes.JIRA);
         EXAMPLE_1.setUsername("username");
         EXAMPLE_1.setPassword("p455w0rd");
     }

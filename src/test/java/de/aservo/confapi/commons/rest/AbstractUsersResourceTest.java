@@ -30,9 +30,9 @@ public class AbstractUsersResourceTest {
     public void testGetUser() {
         final UserBean bean = UserBean.EXAMPLE_1;
 
-        doReturn(bean).when(usersService).getUser(bean.getUserName());
+        doReturn(bean).when(usersService).getUser(bean.getUsername());
 
-        final Response response = resource.getUser(bean.getUserName());
+        final Response response = resource.getUser(bean.getUsername());
         assertEquals(200, response.getStatus());
         final UserBean userBean = (UserBean) response.getEntity();
 
@@ -43,9 +43,9 @@ public class AbstractUsersResourceTest {
     public void testUpdateUser() {
         final UserBean bean = UserBean.EXAMPLE_1;
 
-        doReturn(bean).when(usersService).updateUser(bean.getUserName(), bean);
+        doReturn(bean).when(usersService).updateUser(bean.getUsername(), bean);
 
-        final Response response = resource.setUser(bean.getUserName(), bean);
+        final Response response = resource.setUser(bean.getUsername(), bean);
         assertEquals(200, response.getStatus());
         final UserBean userBean = (UserBean) response.getEntity();
 
@@ -56,9 +56,9 @@ public class AbstractUsersResourceTest {
     public void testUpdateUserPassword() {
         final UserBean bean = UserBean.EXAMPLE_1;
 
-        doReturn(bean).when(usersService).updatePassword(bean.getUserName(), bean.getPassword());
+        doReturn(bean).when(usersService).updatePassword(bean.getUsername(), bean.getPassword());
 
-        final Response response = resource.setUserPassword(bean.getUserName(), bean.getPassword());
+        final Response response = resource.setUserPassword(bean.getUsername(), bean.getPassword());
         assertEquals(200, response.getStatus());
         final UserBean userBean = (UserBean) response.getEntity();
 
