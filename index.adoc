@@ -1,5 +1,5 @@
 = ConfAPI for Crowd
-github@aservo.com
+opensource@aservo.com
 1
 :toc: left
 :numbered:
@@ -633,7 +633,7 @@ endif::internal-generation[]
 |===         
 | Field Name| Required| Type| Description| Format
 
-| readonly 
+| readOnly 
 |  
 | Boolean  
 | 
@@ -658,7 +658,7 @@ endif::internal-generation[]
 |===         
 | Field Name| Required| Type| Description| Format
 
-| uri 
+| url 
 | X 
 | URI  
 | 
@@ -1026,13 +1026,13 @@ endif::internal-generation[]
 |===         
 | Field Name| Required| Type| Description| Format
 
-| readonly 
+| readOnly 
 |  
 | Boolean  
 | 
 |  
 
-| readonlyForLocalGroups 
+| readOnlyForLocalGroups 
 |  
 | Boolean  
 | 
@@ -1088,7 +1088,7 @@ endif::internal-generation[]
 |===         
 | Field Name| Required| Type| Description| Format
 
-| hostName 
+| host 
 | X 
 | String  
 | 
@@ -1216,7 +1216,7 @@ endif::internal-generation[]
 | 
 |  
 
-| tls 
+| useTls 
 |  
 | Boolean  
 | 
