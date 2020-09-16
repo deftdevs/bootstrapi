@@ -14,7 +14,6 @@ import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 @Component
 @ExportAsService(LicensesService.class)
@@ -45,10 +44,10 @@ public class LicensesServiceImpl implements LicensesService {
         // clear all licenses first
         licenseManager.removeLicenses(licenseManager.getLicenses());
 
-        // set all licenses and fire event
-        licenseManager.setLicenses(licensesBean.getLicenses().stream()
+        // set all licenses and fire event(s)
+        licensesBean.getLicenses().stream()
                 .map(LicenseBean::getKey)
-                .collect(Collectors.toList()));
+                .forEach(licenseManager::setLicense);
 
         return getLicenses();
     }
