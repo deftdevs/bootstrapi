@@ -12,7 +12,8 @@ public class WebApplicationExceptionMapper implements ExceptionMapper<WebApplica
 
     public Response toResponse(WebApplicationException e) {
         final ErrorCollection errorCollection = new ErrorCollection();
-        errorCollection.addErrorMessage(e.getMessage());
+        // there is no way around the cause in the WebApplicationException so that messages always start with the exception name
+        errorCollection.addErrorMessage(e.getMessage().replaceFirst("([^:]*: )", ""));
         return Response.status(e.getResponse().getStatus()).entity(errorCollection).build();
     }
 
