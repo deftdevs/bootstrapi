@@ -21,8 +21,8 @@ public class LicenseBeanUtil {
         final LicenseBean licenseBean = new LicenseBean();
 
         licenseBean.setProducts(licenseDetails.getLicensedApplications().getKeys().stream()
-                        .map(ApplicationKey::value)
-                        .collect(Collectors.toList()));
+                .map(ApplicationKey::value)
+                .collect(Collectors.toList()));
 
         if (licenseDetails.getLicenseType() != null) {
             licenseBean.setType(licenseDetails.getLicenseType().name());

@@ -66,7 +66,7 @@ public class LicensesServiceTest {
         // make sure that all licenses are deleted first
         verify(licenseManager).removeLicenses(existingLicenses);
         // make sure that license is added
-        verify(licenseManager).setLicenses(anyCollection());
+        verify(licenseManager).setLicense(any());
         // Make sure that licenses are returned from getter
         verify(spy).getLicenses();
     }
