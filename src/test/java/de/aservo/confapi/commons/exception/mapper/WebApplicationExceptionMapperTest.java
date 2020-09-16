@@ -10,7 +10,7 @@ import static org.junit.Assert.assertEquals;
 
 public class WebApplicationExceptionMapperTest {
 
-    private static final String MESSAGE = "Message";
+    private static final String MESSAGE = "Space with key 'KEY' does not exist";
 
     @Test
     public void testResponse() {
@@ -25,6 +25,10 @@ public class WebApplicationExceptionMapperTest {
 
         assertEquals("The response error collection size is wrong",
                 1, errorCollection.getErrorMessages().size());
+
+        final String errorMessage = errorCollection.getErrorMessages().iterator().next();
+
+        assertEquals(MESSAGE, errorMessage);
     }
 
 }
