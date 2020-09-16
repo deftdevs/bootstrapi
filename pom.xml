@@ -47,15 +47,17 @@
     </developers>
 
     <properties>
-        <jira.version>8.8.1</jira.version>
+        <jira.version>8.12.1</jira.version>
+        <jira.data.version>8.12.1</jira.data.version>
         <!-- other properties -->
         <atlassian.ajp.port>8209</atlassian.ajp.port>
         <atlassian.amps.version>8.0.2</atlassian.amps.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
-        <confapi-commons.version>0.0.18-SNAPSHOT</confapi-commons.version>
-        <hibernate-validator.version>5.2.4.Final</hibernate-validator.version>
-        <javax.el-api.version>2.2.4</javax.el-api.version>
+        <confapi-commons.version>0.0.20-SNAPSHOT</confapi-commons.version>
+        <glassfish.el-api.version>2.2.4</glassfish.el-api.version>
+        <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
+        <javax.el-api.version>3.0.0</javax.el-api.version>
     </properties>
 
     <dependencyManagement>
@@ -108,8 +110,6 @@
             <scope>provided</scope>
             <version>1.18.10</version>
         </dependency>
-
-        <!-- provided dependencies -->
 
         <!-- provided dependencies -->
 
@@ -264,14 +264,14 @@
         </dependency>
 
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
             <version>${hibernate-validator.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
-            <groupId>org.hibernate</groupId>
+            <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
             <version>${hibernate-validator.version}</version>
             <scope>test</scope>
@@ -287,7 +287,7 @@
         <dependency>
             <groupId>org.glassfish.web</groupId>
             <artifactId>javax.el</artifactId>
-            <version>${javax.el-api.version}</version>
+            <version>${glassfish.el-api.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -302,11 +302,14 @@
                 <extensions>true</extensions>
                 <configuration>
                     <productVersion>${jira.version}</productVersion>
+                    <productDataVersion>${jira.data.version}</productDataVersion>
+                    <productDataPath>${project.basedir}/src/test/resources/generated-test-resources.zip</productDataPath>
                     <ajpPort>${atlassian.ajp.port}</ajpPort>
                     <!-- <extractDependencies>false</extractDependencies> -->
                     <allowGoogleTracking>false</allowGoogleTracking>
                     <systemPropertyVariables>
                         <atlassian.mail.senddisabled>false</atlassian.mail.senddisabled>
+                        <atlassian.darkfeature.jira.onboarding.feature.disabled>true</atlassian.darkfeature.jira.onboarding.feature.disabled>
                     </systemPropertyVariables>
                     <enableQuickReload>true</enableQuickReload>
                     <applications>

@@ -31,6 +31,284 @@ This plugin provides methods for accessing configuration for Jira.
 == Endpoints
 
 
+[.ApplicationLinks]
+=== ApplicationLinks
+
+
+[.addApplicationLink]
+==== addApplicationLink
+    
+`POST /application-link`
+
+Add a single application link
+
+===== Description 
+
+Upon successful request, returns the added `ApplicationLinkBean` object
+
+
+// markup not found, no include::{specDir}application-link/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| ApplicationLinkBean 
+|  <<ApplicationLinkBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| ignore-setup-errors 
+|   
+| - 
+| false 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<ApplicationLinkBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<ApplicationLinkBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}application-link/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}application-link/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :application-link/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}application-link/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getApplicationLinks]
+==== getApplicationLinks
+    
+`GET /application-link`
+
+Get all application links
+
+===== Description 
+
+Upon successful request, returns a `ApplicationLinksBean` object containing all application links
+
+
+// markup not found, no include::{specDir}application-link/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<ApplicationLinksBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<ApplicationLinksBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}application-link/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}application-link/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :application-link/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}application-link/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setApplicationLinks]
+==== setApplicationLinks
+    
+`PUT /application-link`
+
+Set a new set of application links
+
+===== Description 
+
+Upon successful request, returns a `ApplicationLinksBean` object containing all application links
+
+
+// markup not found, no include::{specDir}application-link/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| ApplicationLinksBean 
+|  <<ApplicationLinksBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| ignore-setup-errors 
+|   
+| - 
+| false 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<ApplicationLinksBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<ApplicationLinksBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}application-link/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}application-link/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :application-link/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}application-link/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.Directories]
 === Directories
 
@@ -1207,6 +1485,92 @@ endif::internal-generation[]
 |===
 
 
+[#ApplicationLinkBean]
+=== _ApplicationLinkBean_ 
+
+
+
+[.fields-ApplicationLinkBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| serverId 
+|  
+| String  
+| 
+|  
+
+| name 
+| X 
+| String  
+| 
+|  
+
+| type 
+| X 
+| String  
+| 
+|  _Enum:_ BAMBOO, JIRA, BITBUCKET, CONFLUENCE, FISHEYE, CROWD, 
+
+| displayUrl 
+| X 
+| URI  
+| 
+| uri 
+
+| rpcUrl 
+| X 
+| URI  
+| 
+| uri 
+
+| primary 
+|  
+| Boolean  
+| 
+|  
+
+| status 
+|  
+| String  
+| 
+|  _Enum:_ AVAILABLE, UNAVAILABLE, CONFIGURATION_ERROR, 
+
+| username 
+|  
+| String  
+| 
+|  
+
+| password 
+|  
+| String  
+| 
+|  
+
+|===
+
+
+[#ApplicationLinksBean]
+=== _ApplicationLinksBean_ 
+
+
+
+[.fields-ApplicationLinksBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| applicationLinks 
+|  
+| List  of <<ApplicationLinkBean>> 
+| 
+|  
+
+|===
+
+
 [#DirectoriesBean]
 === _DirectoriesBean_ 
 
@@ -1328,7 +1692,7 @@ endif::internal-generation[]
 |===         
 | Field Name| Required| Type| Description| Format
 
-| readonly 
+| readOnly 
 |  
 | Boolean  
 | 
@@ -1353,7 +1717,7 @@ endif::internal-generation[]
 |===         
 | Field Name| Required| Type| Description| Format
 
-| uri 
+| url 
 | X 
 | URI  
 | 
@@ -1721,13 +2085,13 @@ endif::internal-generation[]
 |===         
 | Field Name| Required| Type| Description| Format
 
-| readonly 
+| readOnly 
 |  
 | Boolean  
 | 
 |  
 
-| readonlyForLocalGroups 
+| readOnlyForLocalGroups 
 |  
 | Boolean  
 | 
@@ -1783,7 +2147,7 @@ endif::internal-generation[]
 |===         
 | Field Name| Required| Type| Description| Format
 
-| hostName 
+| host 
 | X 
 | String  
 | 
@@ -1845,7 +2209,7 @@ endif::internal-generation[]
 |===         
 | Field Name| Required| Type| Description| Format
 
-| licenseType 
+| type 
 |  
 | String  
 | 
@@ -1869,7 +2233,7 @@ endif::internal-generation[]
 | 
 | date-time 
 
-| numUsers 
+| maxUsers 
 |  
 | Integer  
 | 
@@ -2046,7 +2410,7 @@ endif::internal-generation[]
 | 
 |  
 
-| tls 
+| useTls 
 |  
 | Boolean  
 | 
@@ -2067,9 +2431,9 @@ endif::internal-generation[]
 
 | baseUrl 
 |  
-| String  
+| URI  
 | 
-|  
+| uri 
 
 | mode 
 |  

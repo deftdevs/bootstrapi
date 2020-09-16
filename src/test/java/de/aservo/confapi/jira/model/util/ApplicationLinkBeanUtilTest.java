@@ -14,7 +14,6 @@ import com.atlassian.applinks.api.application.jira.JiraApplicationType;
 import com.atlassian.applinks.api.application.refapp.RefAppApplicationType;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
 import de.aservo.confapi.commons.model.ApplicationLinkBean;
-import de.aservo.confapi.commons.model.type.ApplicationLinkTypes;
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -42,26 +41,26 @@ public class ApplicationLinkBeanUtilTest {
 
         assertNotNull(bean);
         assertEquals(bean.getName(), applicationLink.getName());
-        assertEquals(bean.getDisplayUrl(), applicationLink.getDisplayUrl().toString());
-        assertEquals(bean.getRpcUrl(), applicationLink.getRpcUrl().toString());
+        assertEquals(bean.getDisplayUrl(), applicationLink.getDisplayUrl());
+        assertEquals(bean.getRpcUrl(), applicationLink.getRpcUrl());
         assertEquals(bean.isPrimary(), applicationLink.isPrimary());
     }
 
     @Test
-    public void testToApplicationLinkDetails() throws Exception {
+    public void testToApplicationLinkDetails() {
         final ApplicationLinkBean bean = ApplicationLinkBean.EXAMPLE_1;
         final ApplicationLinkDetails linkDetails = ApplicationLinkBeanUtil.toApplicationLinkDetails(bean);
 
         assertNotNull(linkDetails);
         assertEquals(bean.getName(), linkDetails.getName());
-        assertEquals(bean.getDisplayUrl(), linkDetails.getDisplayUrl().toString());
-        assertEquals(bean.getRpcUrl(), linkDetails.getRpcUrl().toString());
+        assertEquals(bean.getDisplayUrl(), linkDetails.getDisplayUrl());
+        assertEquals(bean.getRpcUrl(), linkDetails.getRpcUrl());
         assertEquals(bean.isPrimary(), linkDetails.isPrimary());
     }
 
     @Test
     public void testLinkTypeGenerator() throws URISyntaxException {
-        for (ApplicationLinkTypes linkType : ApplicationLinkTypes.values()) {
+        for (ApplicationLinkBean.ApplicationLinkTypes linkType : ApplicationLinkBean.ApplicationLinkTypes.values()) {
             ApplicationType applicationType = null;
             switch (linkType) {
                 case BAMBOO:
@@ -88,7 +87,7 @@ public class ApplicationLinkBeanUtilTest {
             ApplicationLink applicationLink = new DefaultApplicationLink(
                     applicationId, applicationType, "test", uri, uri, false, false);
             ApplicationLinkBean bean = ApplicationLinkBeanUtil.toApplicationLinkBean(applicationLink);
-            assertEquals(linkType, bean.getLinkType());
+            assertEquals(linkType, bean.getType());
         }
     }
 

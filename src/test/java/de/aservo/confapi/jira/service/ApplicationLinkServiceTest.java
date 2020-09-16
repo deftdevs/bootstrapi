@@ -11,7 +11,6 @@ import com.atlassian.applinks.spi.manifest.ManifestNotFoundException;
 import com.atlassian.applinks.spi.util.TypeAccessor;
 import de.aservo.confapi.commons.model.ApplicationLinkBean;
 import de.aservo.confapi.commons.model.ApplicationLinksBean;
-import de.aservo.confapi.commons.model.type.ApplicationLinkTypes;
 import de.aservo.confapi.jira.model.type.DefaultAuthenticationScenario;
 import de.aservo.confapi.jira.model.util.ApplicationLinkBeanUtil;
 import org.junit.Test;
@@ -26,8 +25,9 @@ import java.net.URISyntaxException;
 import java.util.Collections;
 import java.util.UUID;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -93,17 +93,17 @@ public class ApplicationLinkServiceTest {
     @Test(expected = ValidationException.class)
     public void testAddApplicationLinkMissingLinkType() throws URISyntaxException {
         ApplicationLinkBean applicationLinkBean = createApplicationLinkBean();
-        applicationLinkBean.setLinkType(null);
+        applicationLinkBean.setType(null);
 
         applicationLinkService.addApplicationLink(applicationLinkBean, false);
     }
 
     @Test
     public void testApplicationLinkTypeConverter() throws URISyntaxException, ManifestNotFoundException {
-        for (ApplicationLinkTypes linkType : ApplicationLinkTypes.values()) {
+        for (ApplicationLinkBean.ApplicationLinkTypes linkType : ApplicationLinkBean.ApplicationLinkTypes.values()) {
             ApplicationLink applicationLink = createApplicationLink();
             ApplicationLinkBean applicationLinkBean = createApplicationLinkBean();
-            applicationLinkBean.setLinkType(linkType);
+            applicationLinkBean.setType(linkType);
 
             doReturn(applicationLink).when(mutatingApplicationLinkService).createApplicationLink(
                     any(ApplicationType.class), any(ApplicationLinkDetails.class));
@@ -111,13 +111,13 @@ public class ApplicationLinkServiceTest {
 
             ApplicationLinkBean applicationLinkResponse = applicationLinkService.addApplicationLink(applicationLinkBean, false);
 
-            assertEquals(applicationLink.getName(), applicationLinkBean.getName());
+            assertEquals(applicationLinkResponse.getName(), applicationLinkBean.getName());
         }
     }
 
     private ApplicationLinkBean createApplicationLinkBean() throws URISyntaxException {
         ApplicationLinkBean bean = ApplicationLinkBeanUtil.toApplicationLinkBean(createApplicationLink());
-        bean.setLinkType(ApplicationLinkTypes.CROWD);
+        bean.setType(ApplicationLinkBean.ApplicationLinkTypes.CROWD);
         bean.setUsername("test");
         bean.setPassword("test");
         return bean;
