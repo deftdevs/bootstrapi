@@ -11,6 +11,8 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 
+import java.net.URI;
+
 import static com.atlassian.jira.config.properties.APKeys.*;
 
 @Component
@@ -34,7 +36,10 @@ public class SettingsServiceImpl implements SettingsService {
     @Override
     public SettingsBean getSettings() {
         final SettingsBean settingsBean = new SettingsBean();
-        settingsBean.setBaseUrl(applicationProperties.getString(JIRA_BASEURL));
+        final String baseUrl = applicationProperties.getString(JIRA_BASEURL);
+        if (baseUrl != null) {
+            settingsBean.setBaseUrl(URI.create(baseUrl));
+        }
         settingsBean.setMode(applicationProperties.getString(JIRA_MODE));
         settingsBean.setTitle(applicationProperties.getString(JIRA_TITLE));
         return settingsBean;
@@ -45,7 +50,7 @@ public class SettingsServiceImpl implements SettingsService {
             final SettingsBean settingsBean) {
 
         if (settingsBean.getBaseUrl() != null) {
-            applicationProperties.setString(JIRA_BASEURL, settingsBean.getBaseUrl());
+            applicationProperties.setString(JIRA_BASEURL, settingsBean.getBaseUrl().toString());
         }
 
         if (settingsBean.getMode() != null) {

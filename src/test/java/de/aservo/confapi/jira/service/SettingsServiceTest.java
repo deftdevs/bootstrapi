@@ -9,6 +9,8 @@ import org.junit.runner.RunWith;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import java.net.URI;
+
 import static com.atlassian.jira.config.properties.APKeys.*;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
@@ -16,7 +18,7 @@ import static org.mockito.Mockito.*;
 @RunWith(MockitoJUnitRunner.class)
 public class SettingsServiceTest {
 
-    private static final String BASE_URL = "https://jira.atlassian.com";
+    private static final URI BASE_URL = URI.create("https://jira.atlassian.com");
     private static final String MODE_PUBLIC = "public";
     private static final String TITLE = "Atlassian Public JIRA";
 
@@ -32,7 +34,7 @@ public class SettingsServiceTest {
 
     @Test
     public void testGetSettings() {
-        doReturn(BASE_URL).when(applicationProperties).getString(JIRA_BASEURL);
+        doReturn(BASE_URL.toString()).when(applicationProperties).getString(JIRA_BASEURL);
         doReturn(MODE_PUBLIC).when(applicationProperties).getString(JIRA_MODE);
         doReturn(TITLE).when(applicationProperties).getString(JIRA_TITLE);
 
@@ -52,7 +54,7 @@ public class SettingsServiceTest {
 
         settingsService.setSettings(settingsBean);
 
-        verify(applicationProperties).setString(JIRA_BASEURL, BASE_URL);
+        verify(applicationProperties).setString(JIRA_BASEURL, BASE_URL.toString());
         verify(applicationProperties).setString(JIRA_MODE, MODE_PUBLIC);
         verify(applicationProperties).setString(JIRA_TITLE, TITLE);
     }
@@ -63,7 +65,7 @@ public class SettingsServiceTest {
 
         settingsService.setSettings(settingsBean);
 
-        verify(applicationProperties, never()).setString(JIRA_BASEURL, BASE_URL);
+        verify(applicationProperties, never()).setString(JIRA_BASEURL, BASE_URL.toString());
         verify(applicationProperties, never()).setString(JIRA_MODE, MODE_PUBLIC);
         verify(applicationProperties, never()).setString(JIRA_TITLE, TITLE);
     }

@@ -4,9 +4,11 @@ import com.atlassian.jira.mock.MockApplicationProperties;
 import de.aservo.confapi.commons.model.SettingsBean;
 import de.aservo.confapi.jira.service.SettingsServiceImpl;
 
+import java.net.URI;
+
 public class MockSettingsServiceImpl extends SettingsServiceImpl {
 
-    public static final String BASE_URL = "http://localhost:2990/jira";
+    public static final URI BASE_URL = URI.create("http://localhost:2990/jira");
     public static final String MODE = "private";
     public static final String TITLE = "Your Company JIRA";
 

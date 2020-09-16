@@ -18,7 +18,6 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.aservo.confapi.commons.exception.BadRequestException;
 import de.aservo.confapi.commons.model.ApplicationLinkBean;
 import de.aservo.confapi.commons.model.ApplicationLinksBean;
-import de.aservo.confapi.commons.model.type.ApplicationLinkTypes;
 import de.aservo.confapi.commons.service.api.ApplicationLinksService;
 import de.aservo.confapi.jira.model.type.DefaultAuthenticationScenario;
 import de.aservo.confapi.jira.model.util.ApplicationLinkBeanUtil;
@@ -28,7 +27,6 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
-import java.net.URISyntaxException;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -91,14 +89,8 @@ public class ApplicationLinksServiceImpl implements ApplicationLinksService {
         //preparations
         validate(linkBean);
 
-        ApplicationLinkDetails linkDetails;
-        try {
-            linkDetails = ApplicationLinkBeanUtil.toApplicationLinkDetails(linkBean);
-        } catch (URISyntaxException e) {
-            throw new BadRequestException(e.getMessage());
-        }
-
-        ApplicationType applicationType = buildApplicationType(linkBean.getLinkType());
+        ApplicationLinkDetails linkDetails = ApplicationLinkBeanUtil.toApplicationLinkDetails(linkBean);
+        ApplicationType applicationType = buildApplicationType(linkBean.getType());
 
         //check if there is already an application link of supplied type and if yes, remove it
         Class<? extends ApplicationType> appType = applicationType != null ? applicationType.getClass() : null;
@@ -122,7 +114,7 @@ public class ApplicationLinksServiceImpl implements ApplicationLinksService {
         return ApplicationLinkBeanUtil.toApplicationLinkBean(applicationLink);
     }
 
-    private ApplicationType buildApplicationType(ApplicationLinkTypes linkType) {
+    private ApplicationType buildApplicationType(ApplicationLinkBean.ApplicationLinkTypes linkType) {
         switch (linkType) {
             case BAMBOO:
                 return typeAccessor.getApplicationType(BambooApplicationType.class);

@@ -27,7 +27,7 @@ public class LicenseBeanUtilTest {
 
         final LicenseDetails licenseDetails = mock(LicenseDetails.class);
         // license type of example bean is null and usually a string but this way we can notice if it changes in the future
-        doReturn(exampleLicenseBean.getLicenseType()).when(licenseDetails).getLicenseType();
+        doReturn(exampleLicenseBean.getType()).when(licenseDetails).getLicenseType();
         doReturn(exampleLicenseBean.getOrganization()).when(licenseDetails).getOrganisation();
         doReturn(exampleLicenseBean.getDescription()).when(licenseDetails).getDescription();
         doReturn(exampleLicenseBean.getExpiryDate()).when(licenseDetails).getMaintenanceExpiryDate();
@@ -37,11 +37,11 @@ public class LicenseBeanUtilTest {
         final LicenseBean bean = LicenseBeanUtil.toLicenseBean(licenseDetails);
 
         assertNotNull(bean);
-        assertEquals(exampleLicenseBean.getLicenseType(), bean.getLicenseType());
+        assertEquals(exampleLicenseBean.getType(), bean.getType());
         assertEquals(exampleLicenseBean.getOrganization(), bean.getOrganization());
         assertEquals(exampleLicenseBean.getDescription(), bean.getDescription());
         assertEquals(exampleLicenseBean.getExpiryDate(), bean.getExpiryDate());
-        assertEquals(0, bean.getNumUsers());
+        assertEquals(0, bean.getMaxUsers());
         assertEquals(exampleLicenseBean.getProducts().iterator().next(), bean.getProducts().iterator().next());
     }
 

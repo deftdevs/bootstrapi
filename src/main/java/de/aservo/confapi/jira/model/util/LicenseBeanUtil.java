@@ -25,7 +25,7 @@ public class LicenseBeanUtil {
                         .collect(Collectors.toList()));
 
         if (licenseDetails.getLicenseType() != null) {
-            licenseBean.setLicenseType(licenseDetails.getLicenseType().name());
+            licenseBean.setType(licenseDetails.getLicenseType().name());
         }
 
         licenseBean.setOrganization(licenseDetails.getOrganisation());
