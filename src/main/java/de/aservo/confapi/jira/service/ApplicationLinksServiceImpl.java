@@ -8,6 +8,10 @@ import com.atlassian.applinks.api.application.confluence.ConfluenceApplicationTy
 import com.atlassian.applinks.api.application.crowd.CrowdApplicationType;
 import com.atlassian.applinks.api.application.fecru.FishEyeCrucibleApplicationType;
 import com.atlassian.applinks.api.application.jira.JiraApplicationType;
+import com.atlassian.applinks.core.ApplinkStatus;
+import com.atlassian.applinks.core.ApplinkStatusService;
+import com.atlassian.applinks.internal.common.exception.NoAccessException;
+import com.atlassian.applinks.internal.common.exception.NoSuchApplinkException;
 import com.atlassian.applinks.spi.auth.AuthenticationConfigurationException;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
@@ -17,21 +21,24 @@ import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.aservo.confapi.commons.exception.BadRequestException;
 import de.aservo.confapi.commons.model.ApplicationLinkBean;
+import de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkTypes;
 import de.aservo.confapi.commons.model.ApplicationLinksBean;
 import de.aservo.confapi.commons.service.api.ApplicationLinksService;
 import de.aservo.confapi.jira.model.type.DefaultAuthenticationScenario;
-import de.aservo.confapi.jira.model.util.ApplicationLinkBeanUtil;
+import org.apache.commons.lang3.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-import static de.aservo.confapi.commons.util.BeanValidationUtil.validate;
+import static com.atlassian.applinks.internal.status.error.ApplinkErrorType.CONNECTION_REFUSED;
+import static de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus.*;
+import static de.aservo.confapi.jira.model.util.ApplicationLinkBeanUtil.toApplicationLinkBean;
+import static de.aservo.confapi.jira.model.util.ApplicationLinkBeanUtil.toApplicationLinkDetails;
 
 /**
  * The type Application link service.
@@ -44,52 +51,46 @@ public class ApplicationLinksServiceImpl implements ApplicationLinksService {
 
     private final MutatingApplicationLinkService mutatingApplicationLinkService;
     private final TypeAccessor typeAccessor;
+    private final ApplinkStatusService applinkStatusService;
 
-    /**
-     * Instantiates a new Application link service.
-     *
-     * @param mutatingApplicationLinkService the application link service
-     * @param typeAccessor           the type accessor
-     */
     @Inject
     public ApplicationLinksServiceImpl(
             @ComponentImport MutatingApplicationLinkService mutatingApplicationLinkService,
-            @ComponentImport TypeAccessor typeAccessor) {
-
+            @ComponentImport TypeAccessor typeAccessor,
+            @ComponentImport ApplinkStatusService applinkStatusService) {
         this.mutatingApplicationLinkService = mutatingApplicationLinkService;
         this.typeAccessor = typeAccessor;
-    }
-
-    /**
-     * Gets application links.
-     *
-     * @return the application links
-     */
-    public ApplicationLinksBean getApplicationLinks() {
-        final Iterable<ApplicationLink> applicationLinksIterable = mutatingApplicationLinkService.getApplicationLinks();
-        final List<ApplicationLinkBean> applicationLinkBeans = StreamSupport.stream(applicationLinksIterable.spliterator(), false)
-                .map(ApplicationLinkBeanUtil::toApplicationLinkBean)
-                .collect(Collectors.toList());
-        return new ApplicationLinksBean(applicationLinkBeans);
+        this.applinkStatusService = applinkStatusService;
     }
 
     @Override
-    public ApplicationLinksBean setApplicationLinks(@NotNull ApplicationLinksBean applicationLinksBean, boolean b) {
-        throw new UnsupportedOperationException("Not implemented");
+    public ApplicationLinksBean getApplicationLinks() {
+        Iterable<ApplicationLink> applicationLinksIterable = mutatingApplicationLinkService.getApplicationLinks();
+
+        List<ApplicationLinkBean> applicationLinkBeans = StreamSupport.stream(applicationLinksIterable.spliterator(),false)
+                .map(this::getApplicationLinkBeanWithStatus)
+                .collect(Collectors.toList());
+
+        return new ApplicationLinksBean(applicationLinkBeans);
     }
 
-    /**
-     * Adds a new application link. NOTE: existing application links with the same type, e.g. "JIRA" will be
-     * removed before adding the new configuration.
-     *
-     * @param linkBean the link bean
-     * @return the added application ,link
-     */
-    public ApplicationLinkBean addApplicationLink(@NotNull ApplicationLinkBean linkBean, boolean b) {
-        //preparations
-        validate(linkBean);
 
-        ApplicationLinkDetails linkDetails = ApplicationLinkBeanUtil.toApplicationLinkDetails(linkBean);
+    @Override
+    public ApplicationLinksBean setApplicationLinks(
+            final ApplicationLinksBean applicationLinksBean,
+            final boolean ignoreSetupErrors) {
+
+        applicationLinksBean.getApplicationLinks().forEach(link -> addApplicationLink(link, ignoreSetupErrors));
+        return getApplicationLinks();
+    }
+
+    @Override
+    public ApplicationLinkBean addApplicationLink(
+            final ApplicationLinkBean linkBean,
+            final boolean ignoreSetupErrors) {
+
+        ApplicationLinkDetails linkDetails;
+        linkDetails = toApplicationLinkDetails(linkBean);
         ApplicationType applicationType = buildApplicationType(linkBean.getType());
 
         //check if there is already an application link of supplied type and if yes, remove it
@@ -101,20 +102,28 @@ public class ApplicationLinksServiceImpl implements ApplicationLinksService {
             mutatingApplicationLinkService.deleteApplicationLink(primaryApplicationLink);
         }
 
-        //add new application link
+        //add new application link, this should always work - even if remote app is not accessible
         ApplicationLink applicationLink;
         try {
             applicationLink = mutatingApplicationLinkService.createApplicationLink(applicationType, linkDetails);
-            mutatingApplicationLinkService.configureAuthenticationForApplicationLink(applicationLink,
-                    new DefaultAuthenticationScenario(), linkBean.getUsername(), linkBean.getPassword());
-        } catch (ManifestNotFoundException | AuthenticationConfigurationException e) {
+        } catch (ManifestNotFoundException e) {
             throw new BadRequestException(e.getMessage());
         }
 
-        return ApplicationLinkBeanUtil.toApplicationLinkBean(applicationLink);
+        //configure authenticator, this might fail if setup is incorrect or remote app is unavailable
+        try {
+            mutatingApplicationLinkService.configureAuthenticationForApplicationLink(applicationLink,
+                    new DefaultAuthenticationScenario(), linkBean.getUsername(), linkBean.getPassword());
+        } catch (AuthenticationConfigurationException e) {
+            if (!ignoreSetupErrors) {
+                throw new BadRequestException(e.getMessage());
+            }
+        }
+
+        return getApplicationLinkBeanWithStatus(applicationLink);
     }
 
-    private ApplicationType buildApplicationType(ApplicationLinkBean.ApplicationLinkTypes linkType) {
+    private ApplicationType buildApplicationType(ApplicationLinkTypes linkType) {
         switch (linkType) {
             case BAMBOO:
                 return typeAccessor.getApplicationType(BambooApplicationType.class);
@@ -129,7 +138,29 @@ public class ApplicationLinksServiceImpl implements ApplicationLinksService {
             case CROWD:
                 return typeAccessor.getApplicationType(CrowdApplicationType.class);
             default:
-                throw new UnsupportedOperationException("application type '" + linkType + "' not implemented");
+                throw new NotImplementedException("application type '" + linkType + "' not implemented");
         }
+    }
+
+    private ApplicationLinkBean getApplicationLinkBeanWithStatus(ApplicationLink applicationLink) {
+
+        ApplicationLinkBean applicationLinkBean = toApplicationLinkBean(applicationLink);
+
+        try {
+            ApplinkStatus applinkStatus = applinkStatusService.getApplinkStatus(applicationLink.getId());
+            if (applinkStatus.isWorking()) {
+                applicationLinkBean.setStatus(AVAILABLE);
+            } else {
+                if (applinkStatus.getError() != null && CONNECTION_REFUSED.equals(applinkStatus.getError().getType())) {
+                    applicationLinkBean.setStatus(UNAVAILABLE);
+                } else {
+                    applicationLinkBean.setStatus(CONFIGURATION_ERROR);
+                }
+            }
+        } catch (NoAccessException | NoSuchApplinkException e) {
+            applicationLinkBean.setStatus(CONFIGURATION_ERROR);
+        }
+
+        return applicationLinkBean;
     }
 }

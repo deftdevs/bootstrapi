@@ -6,9 +6,9 @@ import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.exception.DirectoryCurrentlySynchronisingException;
 import com.atlassian.crowd.model.directory.ImmutableDirectory;
 import de.aservo.confapi.commons.exception.InternalServerErrorException;
+import de.aservo.confapi.commons.model.AbstractDirectoryBean;
 import de.aservo.confapi.commons.model.DirectoriesBean;
 import de.aservo.confapi.commons.model.DirectoryCrowdBean;
-import de.aservo.confapi.jira.model.util.DirectoryBeanUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
@@ -23,40 +23,49 @@ import static com.atlassian.crowd.directory.RemoteCrowdDirectory.*;
 import static com.atlassian.crowd.directory.SynchronisableDirectoryProperties.*;
 import static com.atlassian.crowd.directory.SynchronisableDirectoryProperties.SyncGroupMembershipsAfterAuth.WHEN_AUTHENTICATION_CREATED_THE_USER;
 import static com.atlassian.crowd.model.directory.DirectoryImpl.ATTRIBUTE_KEY_USE_NESTED_GROUPS;
+import static de.aservo.confapi.jira.model.util.DirectoryBeanUtil.toDirectoryBean;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
 
 @RunWith(MockitoJUnitRunner.class)
-public class DirectoryServiceTest {
+public class DirectoriesServiceTest {
 
     @Mock
     private CrowdDirectoryService crowdDirectoryService;
 
     @InjectMocks
-    private DirectoriesServiceImpl directoriesService;
+    private DirectoriesServiceImpl directoryService;
 
     @Test
     public void testGetDirectories() {
         Directory directory = createDirectory();
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
 
-        DirectoriesBean directories = directoriesService.getDirectories();
+        DirectoriesBean directories = directoryService.getDirectories();
 
-        assertEquals(directories.getDirectories().iterator().next(), DirectoryBeanUtil.toDirectoryBean(directory));
+        assertEquals(directories.getDirectories().iterator().next(), toDirectoryBean(directory));
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testGetDirectoriesUriException() {
+        Directory directory = createDirectory("öäöää://uhveuehvde");
+        doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
+        directoryService.getDirectories();
     }
 
     @Test
-    public void testSetDirectoryWithoutExistingDirectory() {
+    public void testSetDirectoriesWithoutExistingDirectory() {
         Directory directory = createDirectory();
         doReturn(directory).when(crowdDirectoryService).addDirectory(any(Directory.class));
+        doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
 
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) DirectoryBeanUtil.toDirectoryBean(directory);
-        directoryBean.setServer(new DirectoryCrowdBean.DirectoryCrowdServer());
+        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) toDirectoryBean(directory);
         directoryBean.getServer().setAppPassword("test");
-        DirectoriesBean directoriesBean = directoriesService.setDirectories(new DirectoriesBean(Collections.singletonList(directoryBean)), false);
+        DirectoriesBean directoryAdded = directoryService.setDirectories(new DirectoriesBean(Collections.singletonList(directoryBean)), false);
 
-        assertEquals(directoriesBean.getDirectories().iterator().next().getName(), directoryBean.getName());
+        assertEquals(directoryAdded.getDirectories().iterator().next().getName(), directoryBean.getName());
     }
 
     @Test
@@ -65,28 +74,49 @@ public class DirectoryServiceTest {
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
         doReturn(directory).when(crowdDirectoryService).addDirectory(any(Directory.class));
 
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) DirectoryBeanUtil.toDirectoryBean(directory);
-        directoryBean.setServer(new DirectoryCrowdBean.DirectoryCrowdServer());
+        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) toDirectoryBean(directory);
         directoryBean.getServer().setAppPassword("test");
-        DirectoriesBean directoriesBean = directoriesService.setDirectories(new DirectoriesBean(Collections.singletonList(directoryBean)), false);
+        DirectoriesBean directoryAdded = directoryService.setDirectories(new DirectoriesBean(Collections.singletonList(directoryBean)), false);
 
-        assertEquals(directoriesBean.getDirectories().iterator().next().getName(), directoryBean.getName());
+        assertEquals(directoryAdded.getDirectories().iterator().next().getName(), directoryBean.getName());
     }
 
     @Test
     public void testSetDirectoryWithConnectionTest() {
         Directory directory = createDirectory();
+        doReturn(directory).when(crowdDirectoryService).addDirectory(any(Directory.class));
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
+
+        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) toDirectoryBean(directory);
+        directoryBean.getServer().setAppPassword("test");
+        DirectoriesBean directoryAdded = directoryService.setDirectories(new DirectoriesBean(Collections.singletonList(directoryBean)), true);
+
+        assertEquals(directoryAdded.getDirectories().iterator().next().getName(), directoryBean.getName());
+    }
+
+    @Test(expected = IllegalArgumentException.class)
+    public void testAddDirectoryUriException() {
+        Directory responseDirectory = createDirectory("öäöää://uhveuehvde");
+        doReturn(responseDirectory).when(crowdDirectoryService).addDirectory(any());
+
+        Directory directory = createDirectory();
+        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) toDirectoryBean(directory);
+
+        directoryService.addDirectory(directoryBean, false);
+    }
+
+    @Test
+    public void testAddDirectory() {
+        Directory directory = createDirectory();
         doReturn(directory).when(crowdDirectoryService).addDirectory(any(Directory.class));
 
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) DirectoryBeanUtil.toDirectoryBean(directory);
-        directoryBean.setServer(new DirectoryCrowdBean.DirectoryCrowdServer());
+        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) toDirectoryBean(directory);
         directoryBean.getServer().setAppPassword("test");
-        DirectoriesBean directoriesBean = directoriesService.setDirectories(new DirectoriesBean(Collections.singletonList(directoryBean)), true);
 
-        verify(crowdDirectoryService).testConnection(any());
-        assertEquals(directoriesBean.getDirectories().iterator().next().getName(), directoryBean.getName());
+        AbstractDirectoryBean directoryAdded = directoryService.addDirectory(directoryBean, false);
+        assertEquals(directoryAdded.getName(), directoryBean.getName());
     }
+
 
     @Test(expected = InternalServerErrorException.class)
     public void testSetDirectoryDirectoryCurrentlySynchronisingException() throws DirectoryCurrentlySynchronisingException {
@@ -94,15 +124,18 @@ public class DirectoryServiceTest {
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
         doThrow(new DirectoryCurrentlySynchronisingException(1L)).when(crowdDirectoryService).removeDirectory(1L);
 
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) DirectoryBeanUtil.toDirectoryBean(directory);
-        directoryBean.setServer(new DirectoryCrowdBean.DirectoryCrowdServer());
+        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) toDirectoryBean(directory);
         directoryBean.getServer().setAppPassword("test");
-        DirectoriesBean directoriesBean = directoriesService.setDirectories(new DirectoriesBean(Collections.singletonList(directoryBean)), false);
+        directoryService.setDirectories(new DirectoriesBean(Collections.singletonList(directoryBean)), false);
     }
 
     private Directory createDirectory() {
+        return createDirectory("http://localhost");
+    }
+
+    private Directory createDirectory(String url) {
         Map<String, String> attributes = new HashMap<>();
-        attributes.put(CROWD_SERVER_URL, "http://localhost");
+        attributes.put(CROWD_SERVER_URL, url);
         attributes.put(APPLICATION_PASSWORD, "test");
         attributes.put(APPLICATION_NAME, "confluence-client");
         attributes.put(CACHE_SYNCHRONISE_INTERVAL, "3600");
