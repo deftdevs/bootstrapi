@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 
-@Path(ConfAPI.APPLICATION_LINK)
+@Path(ConfAPI.APPLICATION_LINKS)
 @ResourceFilters(SysadminOnlyResourceFilter.class)
 @Component
 public class ApplicationLinksResourceImpl extends AbstractApplicationLinksResourceImpl {

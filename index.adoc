@@ -38,7 +38,7 @@ This plugin provides methods for accessing configuration for Jira.
 [.addApplicationLink]
 ==== addApplicationLink
     
-`POST /application-link`
+`POST /application-links`
 
 Add a single application link
 
@@ -47,7 +47,7 @@ Add a single application link
 Upon successful request, returns the added `ApplicationLinkBean` object
 
 
-// markup not found, no include::{specDir}application-link/POST/spec.adoc[opts=optional]
+// markup not found, no include::{specDir}application-links/POST/spec.adoc[opts=optional]
 
 
 
@@ -116,20 +116,20 @@ Upon successful request, returns the added `ApplicationLinkBean` object
 ===== Samples
 
 
-// markup not found, no include::{snippetDir}application-link/POST/http-request.adoc[opts=optional]
+// markup not found, no include::{snippetDir}application-links/POST/http-request.adoc[opts=optional]
 
 
-// markup not found, no include::{snippetDir}application-link/POST/http-response.adoc[opts=optional]
+// markup not found, no include::{snippetDir}application-links/POST/http-response.adoc[opts=optional]
 
 
 
-// file not found, no * wiremock data link :application-link/POST/POST.json[]
+// file not found, no * wiremock data link :application-links/POST/POST.json[]
 
 
 ifdef::internal-generation[]
 ===== Implementation
 
-// markup not found, no include::{specDir}application-link/POST/implementation.adoc[opts=optional]
+// markup not found, no include::{specDir}application-links/POST/implementation.adoc[opts=optional]
 
 
 endif::internal-generation[]
@@ -138,7 +138,7 @@ endif::internal-generation[]
 [.getApplicationLinks]
 ==== getApplicationLinks
     
-`GET /application-link`
+`GET /application-links`
 
 Get all application links
 
@@ -147,7 +147,7 @@ Get all application links
 Upon successful request, returns a `ApplicationLinksBean` object containing all application links
 
 
-// markup not found, no include::{specDir}application-link/GET/spec.adoc[opts=optional]
+// markup not found, no include::{specDir}application-links/GET/spec.adoc[opts=optional]
 
 
 
@@ -190,20 +190,20 @@ Upon successful request, returns a `ApplicationLinksBean` object containing all 
 ===== Samples
 
 
-// markup not found, no include::{snippetDir}application-link/GET/http-request.adoc[opts=optional]
+// markup not found, no include::{snippetDir}application-links/GET/http-request.adoc[opts=optional]
 
 
-// markup not found, no include::{snippetDir}application-link/GET/http-response.adoc[opts=optional]
+// markup not found, no include::{snippetDir}application-links/GET/http-response.adoc[opts=optional]
 
 
 
-// file not found, no * wiremock data link :application-link/GET/GET.json[]
+// file not found, no * wiremock data link :application-links/GET/GET.json[]
 
 
 ifdef::internal-generation[]
 ===== Implementation
 
-// markup not found, no include::{specDir}application-link/GET/implementation.adoc[opts=optional]
+// markup not found, no include::{specDir}application-links/GET/implementation.adoc[opts=optional]
 
 
 endif::internal-generation[]
@@ -212,7 +212,7 @@ endif::internal-generation[]
 [.setApplicationLinks]
 ==== setApplicationLinks
     
-`PUT /application-link`
+`PUT /application-links`
 
 Set a new set of application links
 
@@ -221,7 +221,7 @@ Set a new set of application links
 Upon successful request, returns a `ApplicationLinksBean` object containing all application links
 
 
-// markup not found, no include::{specDir}application-link/PUT/spec.adoc[opts=optional]
+// markup not found, no include::{specDir}application-links/PUT/spec.adoc[opts=optional]
 
 
 
@@ -290,20 +290,20 @@ Upon successful request, returns a `ApplicationLinksBean` object containing all 
 ===== Samples
 
 
-// markup not found, no include::{snippetDir}application-link/PUT/http-request.adoc[opts=optional]
+// markup not found, no include::{snippetDir}application-links/PUT/http-request.adoc[opts=optional]
 
 
-// markup not found, no include::{snippetDir}application-link/PUT/http-response.adoc[opts=optional]
+// markup not found, no include::{snippetDir}application-links/PUT/http-response.adoc[opts=optional]
 
 
 
-// file not found, no * wiremock data link :application-link/PUT/PUT.json[]
+// file not found, no * wiremock data link :application-links/PUT/PUT.json[]
 
 
 ifdef::internal-generation[]
 ===== Implementation
 
-// markup not found, no include::{specDir}application-link/PUT/implementation.adoc[opts=optional]
+// markup not found, no include::{specDir}application-links/PUT/implementation.adoc[opts=optional]
 
 
 endif::internal-generation[]
