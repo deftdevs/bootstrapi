@@ -2,6 +2,8 @@ package de.aservo.confapi.commons.constants;
 
 public class ConfAPI {
 
+    public static final String APPLICATION                  = "application";
+    public static final String APPLICATIONS                 = "applications";
     public static final String APPLICATION_LINK             = "application-link";
     public static final String APPLICATION_LINKS            = "application-links";
     public static final String BACKUP                       = "backup";
