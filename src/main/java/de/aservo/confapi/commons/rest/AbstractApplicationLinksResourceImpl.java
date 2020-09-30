@@ -32,6 +32,18 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
     }
 
     @Override
+    public Response setApplicationLink(
+            final long id,
+            final boolean ignoreSetupErrors,
+            ApplicationLinkBean linkBean) {
+        final ApplicationLinkBean updatedLinkBean = applicationLinksService.setApplicationLink(
+                id,
+                linkBean,
+                ignoreSetupErrors);
+        return Response.ok(updatedLinkBean).build();
+    }
+
+    @Override
     public Response addApplicationLink(
             final boolean ignoreSetupErrors,
             ApplicationLinkBean linkBean) {

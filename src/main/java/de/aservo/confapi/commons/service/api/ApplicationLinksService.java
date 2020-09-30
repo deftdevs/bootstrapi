@@ -16,15 +16,29 @@ public interface ApplicationLinksService {
 
 
     /**
-     * Sets the application links
+     * Sets or updates the given application links
      *
-     * @param applicationLinksBean the application links to set
+     * @param applicationLinksBean the application links to set / update
      * @param ignoreSetupErrors whether or not to ignore authentication or other setup errors when setting up the link
      *                          which usually happens if the application to link has not setup the link counterpart yet
-     * @return the application links
+     * @return the updated application links
      */
     public ApplicationLinksBean setApplicationLinks(
             @NotNull final ApplicationLinksBean applicationLinksBean,
+            boolean ignoreSetupErrors);
+
+    /**
+     * Updates the given application link
+     *
+     * @param id the application link id to update
+     * @param applicationLinkBean the application link to set / update
+     * @param ignoreSetupErrors whether or not to ignore authentication or other setup errors when setting up the link
+     *                          which usually happens if the application to link has not setup the link counterpart yet
+     * @return the updated application link
+     */
+    public ApplicationLinkBean setApplicationLink(
+            final long id,
+            @NotNull final ApplicationLinkBean applicationLinkBean,
             boolean ignoreSetupErrors);
 
     /**
