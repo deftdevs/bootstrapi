@@ -17,6 +17,9 @@ import java.net.URI;
 public class GadgetBean {
 
     @XmlElement
+    private Long id;
+
+    @XmlElement
     private URI url;
 
     // Example instances for documentation and tests
