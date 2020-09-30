@@ -11,10 +11,13 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -66,5 +69,30 @@ public interface ApplicationLinksResource {
     Response addApplicationLink(
             @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
             @NotNull final ApplicationLinkBean linkBean);
+
+    @DELETE
+    @Operation(
+            tags = { ConfAPI.APPLICATION_LINKS },
+            summary = "Deletes all application links. NOTE: The 'force' parameter muste be se to 'true' in order to execute this request.",
+            responses = {
+                    @ApiResponse(responseCode = "200"),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+            }
+    )
+    Response deleteApplicationLinks(
+            @QueryParam("force") final boolean force);
+
+    @DELETE
+    @Path("{id}")
+    @Operation(
+            tags = { ConfAPI.APPLICATION_LINKS },
+            summary = "Deletes a single application link",
+            responses = {
+                    @ApiResponse(responseCode = "200"),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+            }
+    )
+    Response deleteApplicationLink(
+            @PathParam("id") final long id);
 
 }
