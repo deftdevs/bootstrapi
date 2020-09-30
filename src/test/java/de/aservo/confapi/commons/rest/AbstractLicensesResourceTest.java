@@ -54,6 +54,19 @@ public class AbstractLicensesResourceTest {
     }
 
     @Test
+    public void testSetLicense() {
+        final LicenseBean bean = LicenseBean.EXAMPLE_1;
+
+        doReturn(bean).when(licensesService).setLicense("CONF", bean);
+
+        final Response response = resource.setLicense("CONF", bean);
+        assertEquals(200, response.getStatus());
+        final LicenseBean licenseBean = (LicenseBean) response.getEntity();
+
+        assertEquals(licenseBean, bean);
+    }
+
+    @Test
     public void testAddLicense() {
         final LicenseBean bean = LicenseBean.EXAMPLE_1;
 

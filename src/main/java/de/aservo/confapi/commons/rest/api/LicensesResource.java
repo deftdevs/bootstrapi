@@ -14,6 +14,8 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -38,7 +40,7 @@ public interface LicensesResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.LICENSES },
-            summary = "Set a new set of license",
+            summary = "Sets or Updates a set of licenses",
             description = "Existing license details are always cleared before setting the new licenses. Upon successful request, returns a `LicensesBean` object containing license details",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = LicensesBean.class))),
@@ -47,6 +49,23 @@ public interface LicensesResource {
     )
     Response setLicenses(
             @NotNull final LicensesBean licensesBean);
+
+    @PUT
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            tags = { ConfAPI.LICENSES },
+            summary = "Updates a single license",
+            description = "Existing license details are always cleared before setting the new licenses. Upon successful request, returns a `LicenseBean` object containing license details",
+            responses = {
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = LicenseBean.class))),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+            }
+    )
+    Response setLicense(
+            @PathParam("id") @NotNull final String product,
+            @NotNull final LicenseBean licenseBean);
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

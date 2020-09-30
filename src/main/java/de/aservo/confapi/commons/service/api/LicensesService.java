@@ -16,13 +16,24 @@ public interface LicensesService {
 
 
     /**
-     * Set the licenses
+     * Set or updates a list of licenses
      *
      * @param licensesBean the licenses to set
      * @return the licenses
      */
     LicensesBean setLicenses(
             @NotNull final LicensesBean licensesBean);
+
+    /**
+     * Updates a single license
+     *
+     * @param product     the product license type to update
+     * @param licenseBean the licenses to set
+     * @return the licenses
+     */
+    LicenseBean setLicense(
+            final String product,
+            @NotNull final LicenseBean licenseBean);
 
     /**
      * Add a single license
