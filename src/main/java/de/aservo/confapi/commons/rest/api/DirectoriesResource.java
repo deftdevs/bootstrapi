@@ -15,6 +15,8 @@ import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -39,8 +41,8 @@ public interface DirectoriesResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.DIRECTORIES },
-            summary = "Set a new list of directories",
-            description = "Any existing directories with the same names will be removed before adding the new ones",
+            summary = "Sets or updates a list of directories",
+            description = "Any existing configurations with the same 'name' property is updated.",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = DirectoriesBean.class))),
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
@@ -49,6 +51,24 @@ public interface DirectoriesResource {
     Response setDirectories(
             @QueryParam("test-connection") @DefaultValue("false") final boolean testConnection,
             @NotNull final DirectoriesBean directories);
+
+    @PUT
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            tags = { ConfAPI.DIRECTORIES },
+            summary = "Updates a single directory",
+            description = "Any existing configuration with the same 'name' property is updated.",
+            responses = {
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryBean.class))),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+            }
+    )
+    Response setDirectory(
+            @PathParam("id") final long id,
+            @QueryParam("test-connection") @DefaultValue("false") final boolean testConnection,
+            @NotNull final AbstractDirectoryBean directory);
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

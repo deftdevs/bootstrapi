@@ -18,8 +18,7 @@ public interface DirectoriesService {
     DirectoriesBean getDirectories();
 
     /**
-     * Adds new directory configurations. Any existing configurations with the same 'name' property are removed before
-     * adding the new configurations.
+     * Adds or Updates directory configurations. Any existing configurations with the same 'name' property is updated.
      *
      * @param directories    the directories
      * @param testConnection whether to test connection
@@ -27,6 +26,19 @@ public interface DirectoriesService {
      */
     DirectoriesBean setDirectories(
             @NotNull DirectoriesBean directories,
+            boolean testConnection);
+
+    /**
+     * Updates a single directory configuration. Any existing configuration with the same 'name' property is updated.
+     *
+     * @param id             the directory id to update
+     * @param directory      the directory
+     * @param testConnection whether to test connection
+     * @return the directories
+     */
+    AbstractDirectoryBean setDirectory(
+            long id,
+            @NotNull AbstractDirectoryBean directory,
             boolean testConnection);
 
     /**

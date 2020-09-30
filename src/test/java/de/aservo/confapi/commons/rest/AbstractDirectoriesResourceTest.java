@@ -60,6 +60,19 @@ public class AbstractDirectoriesResourceTest {
     }
 
     @Test
+    public void testSetDirectory() {
+        DirectoryCrowdBean directoryBean = DirectoryCrowdBean.EXAMPLE_1;
+
+        doReturn(directoryBean).when(directoriesService).setDirectory(1L, directoryBean, false);
+
+        final Response response = resource.setDirectory(1L, Boolean.FALSE, directoryBean);
+        assertEquals(200, response.getStatus());
+        final AbstractDirectoryBean directoryBeanResponse = (AbstractDirectoryBean) response.getEntity();
+
+        assertEquals(directoryBean, directoryBeanResponse);
+    }
+
+    @Test
     public void testAddDirectory() {
         DirectoryCrowdBean bean = DirectoryCrowdBean.EXAMPLE_1;
 
