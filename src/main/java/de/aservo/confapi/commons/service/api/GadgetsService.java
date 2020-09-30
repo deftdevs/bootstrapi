@@ -15,13 +15,23 @@ public interface GadgetsService {
     public GadgetsBean getGadgets();
 
     /**
-     * Update the gadgets set.
+     * Sets or updates the gadgets set.
      *
      * @param gadgetsBean the gadgets bean
      * @return the updated gadgets
      */
     public GadgetsBean setGadgets(
             @NotNull final GadgetsBean gadgetsBean);
+
+    /**
+     * Updates a single gadgets.
+     *
+     * @param gadgetBean the gadgets bean
+     * @return the updated gadgets
+     */
+    public GadgetBean setGadget(
+            final long id,
+            @NotNull final GadgetBean gadgetBean);
 
     /**
      * Add one single gadget.
