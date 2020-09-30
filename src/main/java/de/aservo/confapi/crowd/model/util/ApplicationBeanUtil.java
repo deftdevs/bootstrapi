@@ -15,6 +15,7 @@ public class ApplicationBeanUtil {
 
         final ApplicationBean applicationBean = new ApplicationBean();
 
+        applicationBean.setId(application.getId());
         applicationBean.setName(application.getName());
         applicationBean.setDescription(application.getDescription());
         applicationBean.setActive(application.isActive());
@@ -26,6 +27,7 @@ public class ApplicationBeanUtil {
     public static Application toApplication(
             final ApplicationBean applicationBean) {
 
+        // don't set id from request data
         return ImmutableApplication.builder(applicationBean.getName(), toApplicationType(applicationBean.getType()))
                 .setDescription(applicationBean.getDescription())
                 .setActive(applicationBean.getActive())
