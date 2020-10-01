@@ -44,4 +44,18 @@ public abstract class AbstractGadgetsResourceImpl implements GadgetsResource {
         GadgetBean addedGadgetBean = gadgetsService.addGadget(gadgetBean);
         return Response.ok(addedGadgetBean).build();
     }
+
+    @Override
+    public Response deleteGadgets(
+            final boolean force) {
+        gadgetsService.deleteGadgets(force);
+        return Response.ok().build();
+    }
+
+    @Override
+    public Response deleteGadget(
+            final long id) {
+        gadgetsService.deleteGadget(id);
+        return Response.ok().build();
+    }
 }

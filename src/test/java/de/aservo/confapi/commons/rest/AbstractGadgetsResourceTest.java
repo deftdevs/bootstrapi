@@ -12,6 +12,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -77,5 +78,17 @@ public class AbstractGadgetsResourceTest {
         final GadgetBean responseBean = (GadgetBean) response.getEntity();
 
         assertEquals(bean, responseBean);
+    }
+
+    @Test
+    public void testDeleteGadgets() {
+        resource.deleteGadgets(true);
+        assertTrue("Delete Successful", true);
+    }
+
+    @Test
+    public void testDeleteGadget() {
+        resource.deleteGadget(1L);
+        assertTrue("Delete Successful", true);
     }
 }
