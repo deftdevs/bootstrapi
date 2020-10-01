@@ -15,6 +15,8 @@ import javax.ws.rs.DefaultValue;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
@@ -40,7 +42,7 @@ public interface ApplicationLinksResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.APPLICATION_LINKS },
-            summary = "Set a new set of application links",
+            summary = "Sets or updates a set of application links",
             description = "Upon successful request, returns a `ApplicationLinksBean` object containing all application links",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinksBean.class))),
@@ -50,6 +52,24 @@ public interface ApplicationLinksResource {
     Response setApplicationLinks(
             @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
             @NotNull final ApplicationLinksBean linksBean);
+
+    @PUT
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            tags = { ConfAPI.APPLICATION_LINKS },
+            summary = "Updates an application link",
+            description = "Upon successful request, returns the updated `ApplicationLinkBean` object containing the updated application link",
+            responses = {
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class))),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+            }
+    )
+    Response setApplicationLink(
+            @PathParam("id") final long id,
+            @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
+            @NotNull final ApplicationLinkBean linksBean);
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

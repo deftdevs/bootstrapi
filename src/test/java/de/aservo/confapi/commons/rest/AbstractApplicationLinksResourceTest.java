@@ -54,6 +54,19 @@ public class AbstractApplicationLinksResourceTest {
     }
 
     @Test
+    public void testSetApplicationLink() {
+        final ApplicationLinkBean bean = ApplicationLinkBean.EXAMPLE_1;
+
+        doReturn(bean).when(applicationLinksService).setApplicationLink(1L, bean, true);
+
+        final Response response = resource.setApplicationLink(1L, true, bean);
+        assertEquals(200, response.getStatus());
+        final ApplicationLinkBean linkBean = (ApplicationLinkBean) response.getEntity();
+
+        assertEquals(linkBean, bean);
+    }
+
+    @Test
     public void testAddApplicationLink() {
         final ApplicationLinkBean bean = ApplicationLinkBean.EXAMPLE_1;
 
