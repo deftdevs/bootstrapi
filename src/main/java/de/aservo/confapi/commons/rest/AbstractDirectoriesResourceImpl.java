@@ -33,6 +33,16 @@ public abstract class AbstractDirectoriesResourceImpl implements DirectoriesReso
     }
 
     @Override
+    public Response setDirectory (
+            final long id,
+            final boolean testConnection,
+            final AbstractDirectoryBean directory) {
+
+        AbstractDirectoryBean directoriesBean = directoriesService.setDirectory(id, directory, testConnection);
+        return Response.ok(directoriesBean).build();
+    }
+
+    @Override
     public Response addDirectory (
             final boolean testConnection,
             final AbstractDirectoryBean directory) {
