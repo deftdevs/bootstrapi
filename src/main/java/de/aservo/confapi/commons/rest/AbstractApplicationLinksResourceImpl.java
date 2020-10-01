@@ -52,4 +52,18 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
                 ignoreSetupErrors);
         return Response.ok(addedApplicationLink).build();
     }
+
+    @Override
+    public Response deleteApplicationLinks(
+            final boolean force) {
+        applicationLinksService.deleteApplicationLinks(force);
+        return Response.ok().build();
+    }
+
+    @Override
+    public Response deleteApplicationLink(
+            final long id) {
+        applicationLinksService.deleteApplicationLink(id);
+        return Response.ok().build();
+    }
 }

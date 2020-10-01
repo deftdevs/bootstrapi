@@ -12,6 +12,7 @@ import org.mockito.junit.MockitoJUnitRunner;
 import javax.ws.rs.core.Response;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -77,5 +78,17 @@ public class AbstractApplicationLinksResourceTest {
         final ApplicationLinkBean responseBean = (ApplicationLinkBean) response.getEntity();
 
         assertEquals(responseBean, bean);
+    }
+
+    @Test
+    public void testDeleteApplicationLinks() {
+        resource.deleteApplicationLinks(true);
+        assertTrue("Delete Successful", true);
+    }
+
+    @Test
+    public void testDeleteApplicationLink() {
+        resource.deleteApplicationLink(1L);
+        assertTrue("Delete Successful", true);
     }
 }

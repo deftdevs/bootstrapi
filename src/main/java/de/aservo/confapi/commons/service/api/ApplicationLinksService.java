@@ -52,4 +52,19 @@ public interface ApplicationLinksService {
     public ApplicationLinkBean addApplicationLink(
             @NotNull final ApplicationLinkBean applicationLinkBean,
             boolean ignoreSetupErrors);
+    /**
+     * Deletes all application links
+     *
+     * @param force must be set to 'true' in order to delete all entries
+     */
+    public void deleteApplicationLinks(
+            boolean force);
+
+    /**
+     * Deletes a single application link
+     *
+     * @param id the application link to set
+     */
+    public void deleteApplicationLink(
+            final long id);
 }
