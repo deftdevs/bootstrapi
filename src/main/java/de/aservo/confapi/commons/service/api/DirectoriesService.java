@@ -51,4 +51,20 @@ public interface DirectoriesService {
     AbstractDirectoryBean addDirectory(
             @NotNull AbstractDirectoryBean directory,
             boolean testConnection);
+
+    /**
+     * Deletes all directories
+     *
+     * @param force must be set to 'true' in order to delete all entries
+     */
+    public void deleteDirectories(
+            boolean force);
+
+    /**
+     * Deletes a single directory
+     *
+     * @param id the directory id to delete
+     */
+    public void deleteDirectory(
+            final long id);
 }

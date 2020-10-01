@@ -50,4 +50,18 @@ public abstract class AbstractDirectoriesResourceImpl implements DirectoriesReso
         AbstractDirectoryBean addedDirectoryBean = directoriesService.addDirectory(directory, testConnection);
         return Response.ok(addedDirectoryBean).build();
     }
+
+    @Override
+    public Response deleteDirectories(
+            final boolean force) {
+        directoriesService.deleteDirectories(force);
+        return Response.ok().build();
+    }
+
+    @Override
+    public Response deleteDirectory(
+            final long id) {
+        directoriesService.deleteDirectory(id);
+        return Response.ok().build();
+    }
 }
