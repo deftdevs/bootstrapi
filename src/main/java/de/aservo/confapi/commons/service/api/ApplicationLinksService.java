@@ -63,7 +63,7 @@ public interface ApplicationLinksService {
     /**
      * Deletes a single application link
      *
-     * @param id the application link to set
+     * @param id the application link id to delete
      */
     public void deleteApplicationLink(
             final long id);

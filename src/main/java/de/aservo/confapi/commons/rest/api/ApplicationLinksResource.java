@@ -91,7 +91,7 @@ public interface ApplicationLinksResource {
     @DELETE
     @Operation(
             tags = { ConfAPI.APPLICATION_LINKS },
-            summary = "Deletes all application links. NOTE: The 'force' parameter muste be se to 'true' in order to execute this request.",
+            summary = "Deletes all application links. NOTE: The 'force' parameter must be set to 'true' in order to execute this request.",
             responses = {
                     @ApiResponse(responseCode = "200"),
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),

@@ -15,6 +15,7 @@ import java.util.Arrays;
 import java.util.Collections;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
 
 @RunWith(MockitoJUnitRunner.class)
@@ -83,6 +84,18 @@ public class AbstractDirectoriesResourceTest {
         final AbstractDirectoryBean responseBean = (AbstractDirectoryBean) response.getEntity();
 
         assertEquals(bean.getName(), responseBean.getName());
+    }
+
+    @Test
+    public void testDeleteDirectories() {
+        resource.deleteDirectories(true);
+        assertTrue("Delete Successful", true);
+    }
+
+    @Test
+    public void testDeleteDirectory() {
+        resource.deleteDirectory(1L);
+        assertTrue("Delete Successful", true);
     }
 
 }
