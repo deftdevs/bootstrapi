@@ -22,13 +22,25 @@ public abstract class AbstractLicensesResourceImpl implements LicensesResource {
     }
 
     @Override
-    public Response setLicenses(LicensesBean licensesBean) {
+    public Response setLicenses(
+            final LicensesBean licensesBean) {
         LicensesBean updatedLicensesBean = licensesService.setLicenses(licensesBean);
         return Response.ok(updatedLicensesBean).build();
     }
 
     @Override
-    public Response addLicense(LicenseBean licenseBean) {
+    public Response setLicense(
+            final String product,
+            final LicenseBean licensesBean) {
+        LicenseBean updatedLicenseBean = licensesService.setLicense(
+                product,
+                licensesBean);
+        return Response.ok(updatedLicenseBean).build();
+    }
+
+    @Override
+    public Response addLicense(
+            final LicenseBean licenseBean) {
         LicenseBean updatedLicenseBean = licensesService.addLicense(licenseBean);
         return Response.ok(updatedLicenseBean).build();
     }
