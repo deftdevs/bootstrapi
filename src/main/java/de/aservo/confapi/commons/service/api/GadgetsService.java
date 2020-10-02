@@ -42,4 +42,20 @@ public interface GadgetsService {
     public GadgetBean addGadget(
             @NotNull final GadgetBean gadgetBean);
 
+    /**
+     * Deletes all gadgets
+     *
+     * @param force must be set to 'true' in order to delete all entries
+     */
+    public void deleteGadgets(
+            boolean force);
+
+    /**
+     * Deletes a single gadget
+     *
+     * @param id the gadget id to delete
+     */
+    public void deleteGadget(
+            final long id);
+
 }
