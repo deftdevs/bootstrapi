@@ -11,6 +11,8 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import javax.ws.rs.core.Response;
 
+import java.util.UUID;
+
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.doReturn;
@@ -39,6 +41,21 @@ public class AbstractApplicationLinksResourceTest {
         final ApplicationLinksBean linksBean = (ApplicationLinksBean) response.getEntity();
 
         assertEquals(linksBean, bean);
+    }
+
+    @Test
+    public void testGetApplicationLink() {
+        final ApplicationLinkBean bean = ApplicationLinkBean.EXAMPLE_1;
+
+        UUID id = UUID.randomUUID();
+
+        doReturn(bean).when(applicationLinksService).getApplicationLink(id);
+
+        final Response response = resource.getApplicationLink(id);
+        assertEquals(200, response.getStatus());
+        final ApplicationLinkBean linkBean = (ApplicationLinkBean) response.getEntity();
+
+        assertEquals(linkBean, bean);
     }
 
     @Test

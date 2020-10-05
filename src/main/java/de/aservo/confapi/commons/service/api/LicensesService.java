@@ -8,12 +8,21 @@ import javax.validation.constraints.NotNull;
 public interface LicensesService {
 
     /**
-     * Get the licenses.
+     * Gets all licenses.
      *
      * @return the licenses
      */
     LicensesBean getLicenses();
 
+    /**
+     * Gets a single liocense.
+     *
+     * @param id the license product code to query
+     *
+     * @return the gadget
+     */
+    LicenseBean getLicense(
+            @NotNull final String id);
 
     /**
      * Set or updates a list of licenses
@@ -43,4 +52,20 @@ public interface LicensesService {
      */
     LicenseBean addLicense(
             @NotNull final LicenseBean licenseBean);
+
+    /**
+     * Deletes all application links
+     *
+     * @param force must be set to 'true' in order to delete all entries
+     */
+    public void deleteLicenses(
+            boolean force);
+
+    /**
+     * Deletes a single license
+     *
+     * @param id the product key for which to delete the license
+     */
+    public void deleteLicense(
+            final long id);
 }

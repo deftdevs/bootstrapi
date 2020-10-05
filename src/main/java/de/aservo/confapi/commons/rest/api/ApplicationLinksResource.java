@@ -22,6 +22,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.UUID;
 
 public interface ApplicationLinksResource {
 
@@ -37,6 +38,21 @@ public interface ApplicationLinksResource {
             }
     )
     Response getApplicationLinks();
+
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            tags = { ConfAPI.APPLICATION_LINKS },
+            summary = "Gets a single application link",
+            description = "Upon successful request, returns a `ApplicationLinkBean` object containing the requested application link",
+            responses = {
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class))),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+            }
+    )
+    Response getApplicationLink(
+            @PathParam("id") @NotNull final UUID id);
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)

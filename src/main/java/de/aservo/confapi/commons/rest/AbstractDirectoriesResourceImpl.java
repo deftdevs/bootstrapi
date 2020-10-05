@@ -24,6 +24,13 @@ public abstract class AbstractDirectoriesResourceImpl implements DirectoriesReso
     }
 
     @Override
+    public Response getDirectory(
+            final long id) {
+        final AbstractDirectoryBean directoryBean = directoriesService.getDirectory(id);
+        return Response.ok(directoryBean).build();
+    }
+
+    @Override
     public Response setDirectories (
             final boolean testConnection,
             final DirectoriesBean directories) {

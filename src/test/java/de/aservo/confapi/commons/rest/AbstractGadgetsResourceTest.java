@@ -42,6 +42,19 @@ public class AbstractGadgetsResourceTest {
     }
 
     @Test
+    public void testGetGadget() {
+        final GadgetBean bean = GadgetBean.EXAMPLE_1;
+
+        doReturn(bean).when(gadgetsService).getGadget(1L);
+
+        final Response response = resource.getGadget(1L);
+        assertEquals(200, response.getStatus());
+        final GadgetBean gadgetBean = (GadgetBean) response.getEntity();
+
+        assertEquals(gadgetBean, bean);
+    }
+
+    @Test
     public void testSetGadgets() {
         final GadgetsBean bean = GadgetsBean.EXAMPLE_1;
 
