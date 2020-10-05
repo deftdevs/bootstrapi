@@ -74,10 +74,11 @@ public class AbstractApplicationLinksResourceTest {
     @Test
     public void testSetApplicationLink() {
         final ApplicationLinkBean bean = ApplicationLinkBean.EXAMPLE_1;
+        UUID id = UUID.randomUUID();
 
-        doReturn(bean).when(applicationLinksService).setApplicationLink(1L, bean, true);
+        doReturn(bean).when(applicationLinksService).setApplicationLink(id, bean, true);
 
-        final Response response = resource.setApplicationLink(1L, true, bean);
+        final Response response = resource.setApplicationLink(id, true, bean);
         assertEquals(200, response.getStatus());
         final ApplicationLinkBean linkBean = (ApplicationLinkBean) response.getEntity();
 
@@ -105,7 +106,7 @@ public class AbstractApplicationLinksResourceTest {
 
     @Test
     public void testDeleteApplicationLink() {
-        resource.deleteApplicationLink(1L);
+        resource.deleteApplicationLink(UUID.randomUUID());
         assertTrue("Delete Successful", true);
     }
 }

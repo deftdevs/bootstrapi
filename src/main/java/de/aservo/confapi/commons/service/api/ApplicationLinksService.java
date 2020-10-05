@@ -47,7 +47,7 @@ public interface ApplicationLinksService {
      * @return the updated application link
      */
     public ApplicationLinkBean setApplicationLink(
-            final long id,
+            @NotNull final UUID id,
             @NotNull final ApplicationLinkBean applicationLinkBean,
             boolean ignoreSetupErrors);
 
@@ -76,5 +76,5 @@ public interface ApplicationLinksService {
      * @param id the application link id to delete
      */
     public void deleteApplicationLink(
-            final long id);
+            @NotNull final UUID id);
 }

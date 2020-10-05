@@ -84,7 +84,7 @@ public interface ApplicationLinksResource {
             }
     )
     Response setApplicationLink(
-            @PathParam("id") final long id,
+            @PathParam("id") @NotNull final UUID id,
             @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
             @NotNull final ApplicationLinkBean linksBean);
 
@@ -127,6 +127,6 @@ public interface ApplicationLinksResource {
             }
     )
     Response deleteApplicationLink(
-            @PathParam("id") final long id);
+            @PathParam("id") @NotNull final UUID id);
 
 }

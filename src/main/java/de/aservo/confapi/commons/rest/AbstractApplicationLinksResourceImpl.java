@@ -41,7 +41,7 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
 
     @Override
     public Response setApplicationLink(
-            final long id,
+            final UUID id,
             final boolean ignoreSetupErrors,
             ApplicationLinkBean linkBean) {
         final ApplicationLinkBean updatedLinkBean = applicationLinksService.setApplicationLink(
@@ -70,7 +70,7 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
 
     @Override
     public Response deleteApplicationLink(
-            final long id) {
+            final UUID id) {
         applicationLinksService.deleteApplicationLink(id);
         return Response.ok().build();
     }
