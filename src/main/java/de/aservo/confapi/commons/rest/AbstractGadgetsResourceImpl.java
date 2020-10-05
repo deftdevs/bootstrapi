@@ -22,6 +22,13 @@ public abstract class AbstractGadgetsResourceImpl implements GadgetsResource {
     }
 
     @Override
+    public Response getGadget(
+            final long id) {
+        final GadgetBean gadgetBean = gadgetsService.getGadget(id);
+        return Response.ok(gadgetBean).build();
+    }
+
+    @Override
     public Response setGadgets(
             final GadgetsBean gadgetsBean) {
         GadgetsBean updatedGadgetsBean = gadgetsService.setGadgets(gadgetsBean);

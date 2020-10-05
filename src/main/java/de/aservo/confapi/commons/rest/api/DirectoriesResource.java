@@ -37,6 +37,20 @@ public interface DirectoriesResource {
     )
     Response getDirectories();
 
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            tags = { ConfAPI.DIRECTORIES },
+            summary = "Gets a single user directories",
+            responses = {
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryBean.class))),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+            }
+    )
+    Response getDirectory(
+            @PathParam("id") final long id);
+
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

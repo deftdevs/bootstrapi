@@ -8,11 +8,21 @@ import javax.validation.constraints.NotNull;
 public interface GadgetsService {
 
     /**
-     * Get the gadgets.
+     * Gets all gadgets.
      *
      * @return the gadgets
      */
     public GadgetsBean getGadgets();
+
+    /**
+     * Gets a single gadget.
+     *
+     * @param id the gadget id to query
+     *
+     * @return the gadget
+     */
+    GadgetBean getGadget(
+            final long id);
 
     /**
      * Sets or updates the gadgets set.
