@@ -35,6 +35,21 @@ public interface LicensesResource {
     )
     Response getLicenses();
 
+    @GET
+    @Path("{product}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            tags = { ConfAPI.LICENSES },
+            summary = "Gets licenses information for a single license",
+            description = "Upon successful request, returns a `LicenseBean` object containing license details.",
+            responses = {
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = LicenseBean.class))),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+            }
+    )
+    Response getLicense(
+            @PathParam("product") @NotNull final String product);
+
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

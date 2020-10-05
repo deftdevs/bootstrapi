@@ -11,11 +11,21 @@ import javax.validation.constraints.NotNull;
 public interface DirectoriesService {
 
     /**
-     * Gets directories.
+     * Gets all directories.
      *
      * @return the directories
      */
     DirectoriesBean getDirectories();
+
+    /**
+     * Gets a single directory.
+     *
+     * @param id the directory id to query
+     *
+     * @return the directory
+     */
+    AbstractDirectoryBean getDirectory(
+            final long id);
 
     /**
      * Adds or Updates directory configurations. Any existing configurations with the same 'name' property is updated.

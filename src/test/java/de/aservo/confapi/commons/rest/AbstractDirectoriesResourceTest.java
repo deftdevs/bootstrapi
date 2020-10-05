@@ -46,6 +46,19 @@ public class AbstractDirectoriesResourceTest {
     }
 
     @Test
+    public void testGetDirectory() {
+        DirectoryCrowdBean directoryBean = DirectoryCrowdBean.EXAMPLE_1;
+
+        doReturn(directoryBean).when(directoriesService).getDirectory(1L);
+
+        final Response response = resource.getDirectory(1L);
+        assertEquals(200, response.getStatus());
+        final AbstractDirectoryBean directoryBeanResponse = (AbstractDirectoryBean) response.getEntity();
+
+        assertEquals(directoryBean, directoryBeanResponse);
+    }
+
+    @Test
     public void testSetDirectories() {
         DirectoryCrowdBean directoryBean1 = DirectoryCrowdBean.EXAMPLE_1;
         DirectoryCrowdBean directoryBean2 = DirectoryCrowdBean.EXAMPLE_3;

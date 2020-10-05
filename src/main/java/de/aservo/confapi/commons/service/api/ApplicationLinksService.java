@@ -9,12 +9,21 @@ import java.util.UUID;
 public interface ApplicationLinksService {
 
     /**
-     * Gets the application links.
+     * Gets all application links.
      *
      * @return the application links
      */
     public ApplicationLinksBean getApplicationLinks();
 
+    /**
+     * Gets a single application link.
+     *
+     * @param id the application link id query
+     *
+     * @return the application link
+     */
+    public ApplicationLinkBean getApplicationLink(
+            final UUID id);
 
     /**
      * Sets or updates the given application links

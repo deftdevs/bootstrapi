@@ -37,6 +37,21 @@ public interface GadgetsResource {
     )
     Response getGadgets();
 
+    @GET
+    @Path("{id}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            tags = { ConfAPI.GADGETS },
+            summary = "Gets a single gadget",
+            description = "Upon successful request, returns a `GadgetsBean` object containing gadgets details",
+            responses = {
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetBean.class))),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+            }
+    )
+    Response getGadget(
+            @PathParam("id") final long id);
+
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
