@@ -37,9 +37,6 @@ public class ApplicationLinkBean {
     private UUID id;
 
     @XmlElement
-    private String serverId;
-
-    @XmlElement
     @NotNull
     private String name;
 
@@ -73,11 +70,11 @@ public class ApplicationLinkBean {
 
     static {
         EXAMPLE_1 = new ApplicationLinkBean();
+        EXAMPLE_1.setId(UUID.randomUUID());
         EXAMPLE_1.setName("Example");
         EXAMPLE_1.setDisplayUrl(URI.create("http://example.com"));
         EXAMPLE_1.setRpcUrl(URI.create("http://rpc.example.com"));
         EXAMPLE_1.setPrimary(true);
-        EXAMPLE_1.setServerId(UUID.randomUUID().toString());
         EXAMPLE_1.setType(ApplicationLinkTypes.JIRA);
         EXAMPLE_1.setUsername("username");
         EXAMPLE_1.setPassword("p455w0rd");
