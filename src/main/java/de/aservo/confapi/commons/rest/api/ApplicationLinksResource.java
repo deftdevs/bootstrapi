@@ -22,6 +22,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.UUID;
 
 public interface ApplicationLinksResource {
 
@@ -68,7 +69,7 @@ public interface ApplicationLinksResource {
             }
     )
     Response setApplicationLink(
-            @PathParam("id") final long id,
+            @PathParam("id") @NotNull final UUID id,
             @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
             @NotNull final ApplicationLinkBean linksBean);
 
@@ -111,6 +112,6 @@ public interface ApplicationLinksResource {
             }
     )
     Response deleteApplicationLink(
-            @PathParam("id") final long id);
+            @PathParam("id") @NotNull final UUID id);
 
 }

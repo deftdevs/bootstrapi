@@ -6,6 +6,7 @@ import de.aservo.confapi.commons.rest.api.ApplicationLinksResource;
 import de.aservo.confapi.commons.service.api.ApplicationLinksService;
 
 import javax.ws.rs.core.Response;
+import java.util.UUID;
 
 public abstract class AbstractApplicationLinksResourceImpl implements ApplicationLinksResource {
 
@@ -33,7 +34,7 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
 
     @Override
     public Response setApplicationLink(
-            final long id,
+            final UUID id,
             final boolean ignoreSetupErrors,
             ApplicationLinkBean linkBean) {
         final ApplicationLinkBean updatedLinkBean = applicationLinksService.setApplicationLink(
@@ -62,7 +63,7 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
 
     @Override
     public Response deleteApplicationLink(
-            final long id) {
+            final UUID id) {
         applicationLinksService.deleteApplicationLink(id);
         return Response.ok().build();
     }

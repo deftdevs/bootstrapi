@@ -34,7 +34,7 @@ public class ApplicationLinkBean {
     }
 
     @XmlElement
-    private Long id;
+    private UUID id;
 
     @XmlElement
     private String serverId;
