@@ -13,41 +13,40 @@ public interface ApplicationLinksService {
      *
      * @return the application links
      */
-    public ApplicationLinksBean getApplicationLinks();
+    ApplicationLinksBean getApplicationLinks();
 
     /**
      * Gets a single application link.
      *
-     * @param id the application link id query
-     *
+     * @param uuid the application link uuid query
      * @return the application link
      */
-    public ApplicationLinkBean getApplicationLink(
-            final UUID id);
+    ApplicationLinkBean getApplicationLink(
+            final UUID uuid);
 
     /**
      * Sets or updates the given application links
      *
      * @param applicationLinksBean the application links to set / update
-     * @param ignoreSetupErrors whether or not to ignore authentication or other setup errors when setting up the link
-     *                          which usually happens if the application to link has not setup the link counterpart yet
+     * @param ignoreSetupErrors    whether or not to ignore authentication or other setup errors when setting up the link
+     *                             which usually happens if the application to link has not setup the link counterpart yet
      * @return the updated application links
      */
-    public ApplicationLinksBean setApplicationLinks(
+    ApplicationLinksBean setApplicationLinks(
             @NotNull final ApplicationLinksBean applicationLinksBean,
             boolean ignoreSetupErrors);
 
     /**
      * Updates the given application link
      *
-     * @param id the application link id to update
+     * @param uuid                the application link uuid to update
      * @param applicationLinkBean the application link to set / update
-     * @param ignoreSetupErrors whether or not to ignore authentication or other setup errors when setting up the link
-     *                          which usually happens if the application to link has not setup the link counterpart yet
+     * @param ignoreSetupErrors   whether or not to ignore authentication or other setup errors when setting up the link
+     *                            which usually happens if the application to link has not setup the link counterpart yet
      * @return the updated application link
      */
-    public ApplicationLinkBean setApplicationLink(
-            @NotNull final UUID id,
+    ApplicationLinkBean setApplicationLink(
+            @NotNull final UUID uuid,
             @NotNull final ApplicationLinkBean applicationLinkBean,
             boolean ignoreSetupErrors);
 
@@ -55,26 +54,28 @@ public interface ApplicationLinksService {
      * Adds a single application link
      *
      * @param applicationLinkBean the application link to set
-     * @param ignoreSetupErrors whether or not to ignore authentication or other setup errors when setting up the link
-     *                          which usually happens if the application to link has not setup the link counterpart yet
+     * @param ignoreSetupErrors   whether or not to ignore authentication or other setup errors when setting up the link
+     *                            which usually happens if the application to link has not setup the link counterpart yet
      * @return the added application link
      */
-    public ApplicationLinkBean addApplicationLink(
+    ApplicationLinkBean addApplicationLink(
             @NotNull final ApplicationLinkBean applicationLinkBean,
             boolean ignoreSetupErrors);
+
     /**
      * Deletes all application links
      *
      * @param force must be set to 'true' in order to delete all entries
      */
-    public void deleteApplicationLinks(
+    void deleteApplicationLinks(
             boolean force);
 
     /**
      * Deletes a single application link
      *
-     * @param id the application link id to delete
+     * @param uuid the application link uuid to delete
      */
-    public void deleteApplicationLink(
-            @NotNull final UUID id);
+    void deleteApplicationLink(
+            @NotNull final UUID uuid);
+
 }

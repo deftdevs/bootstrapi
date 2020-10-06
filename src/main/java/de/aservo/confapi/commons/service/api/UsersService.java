@@ -9,32 +9,32 @@ public interface UsersService {
     /**
      * Get the user.
      *
-     * @param userName the user name
+     * @param username the user name
      * @return the user bean
      */
-    public UserBean getUser(
-            @NotNull final String userName);
+    UserBean getUser(
+            @NotNull final String username);
 
     /**
      * Update the user.
      *
-     * @param userName the user name
+     * @param username the user name
      * @param userBean the user bean
      * @return the updated user bean
      */
-    public UserBean updateUser(
-            @NotNull final String userName,
+    UserBean updateUser(
+            @NotNull final String username,
             @NotNull final UserBean userBean);
 
     /**
      * Update the user password.
      *
-     * @param userName the user name
+     * @param username the user name
      * @param password the password
      * @return the updated user bean
      */
-    public UserBean updatePassword(
-            @NotNull final String userName,
+    UserBean updatePassword(
+            @NotNull final String username,
             @NotNull final String password);
 
 }

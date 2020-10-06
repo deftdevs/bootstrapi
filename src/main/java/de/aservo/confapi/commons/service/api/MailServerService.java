@@ -12,7 +12,7 @@ public interface MailServerService {
      *
      * @return the smtp mailserver settings
      */
-    public MailServerSmtpBean getMailServerSmtp();
+    MailServerSmtpBean getMailServerSmtp();
 
     /**
      * Sets the smtp mailserver settings.
@@ -20,7 +20,7 @@ public interface MailServerService {
      * @param smtpBean the smtp mailserver settings to set
      * @return the smtp mailserver settings
      */
-    public MailServerSmtpBean setMailServerSmtp(
+    MailServerSmtpBean setMailServerSmtp(
             @NotNull final MailServerSmtpBean smtpBean);
 
     /**
@@ -28,7 +28,7 @@ public interface MailServerService {
      *
      * @return the pop mailserver settings
      */
-    public MailServerPopBean getMailServerPop();
+    MailServerPopBean getMailServerPop();
 
     /**
      * Sets the pop mailserver settings.
@@ -36,6 +36,6 @@ public interface MailServerService {
      * @param popBean the pop mailserver settings to set
      * @return the pop mailserver settings
      */
-    public MailServerPopBean setMailServerPop(
+    MailServerPopBean setMailServerPop(
             @NotNull final MailServerPopBean popBean);
 }

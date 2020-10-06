@@ -12,13 +12,12 @@ public interface GadgetsService {
      *
      * @return the gadgets
      */
-    public GadgetsBean getGadgets();
+    GadgetsBean getGadgets();
 
     /**
      * Gets a single gadget.
      *
      * @param id the gadget id to query
-     *
      * @return the gadget
      */
     GadgetBean getGadget(
@@ -30,16 +29,17 @@ public interface GadgetsService {
      * @param gadgetsBean the gadgets bean
      * @return the updated gadgets
      */
-    public GadgetsBean setGadgets(
+    GadgetsBean setGadgets(
             @NotNull final GadgetsBean gadgetsBean);
 
     /**
      * Updates a single gadgets.
      *
+     * @param id         the gadget id to update
      * @param gadgetBean the gadgets bean
      * @return the updated gadgets
      */
-    public GadgetBean setGadget(
+    GadgetBean setGadget(
             final long id,
             @NotNull final GadgetBean gadgetBean);
 
@@ -49,7 +49,7 @@ public interface GadgetsService {
      * @param gadgetBean the gadget bean to add
      * @return the added gadget
      */
-    public GadgetBean addGadget(
+    GadgetBean addGadget(
             @NotNull final GadgetBean gadgetBean);
 
     /**
@@ -57,7 +57,7 @@ public interface GadgetsService {
      *
      * @param force must be set to 'true' in order to delete all entries
      */
-    public void deleteGadgets(
+    void deleteGadgets(
             boolean force);
 
     /**
@@ -65,7 +65,7 @@ public interface GadgetsService {
      *
      * @param id the gadget id to delete
      */
-    public void deleteGadget(
+    void deleteGadget(
             final long id);
 
 }

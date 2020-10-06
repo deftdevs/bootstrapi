@@ -21,7 +21,6 @@ public interface DirectoriesService {
      * Gets a single directory.
      *
      * @param id the directory id to query
-     *
      * @return the directory
      */
     AbstractDirectoryBean getDirectory(
@@ -67,7 +66,7 @@ public interface DirectoriesService {
      *
      * @param force must be set to 'true' in order to delete all entries
      */
-    public void deleteDirectories(
+    void deleteDirectories(
             boolean force);
 
     /**
@@ -75,6 +74,6 @@ public interface DirectoriesService {
      *
      * @param id the directory id to delete
      */
-    public void deleteDirectory(
+    void deleteDirectory(
             final long id);
 }
