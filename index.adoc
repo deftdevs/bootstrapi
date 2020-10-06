@@ -1396,12 +1396,288 @@ endif::internal-generation[]
 === Directories
 
 
+[.addDirectory]
+==== addDirectory
+    
+`POST /directories`
+
+Add a user directory
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}directories/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| AbstractDirectoryBean 
+|  <<AbstractDirectoryBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| test-connection 
+|   
+| - 
+| false 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<AbstractDirectoryBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the added directory.
+|  <<AbstractDirectoryBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}directories/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}directories/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :directories/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}directories/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.deleteDirectories]
+==== deleteDirectories
+    
+`DELETE /directories`
+
+Delete all user directories
+
+===== Description 
+
+NOTE: The 'force' parameter must be set to 'true' in order to execute this request.
+
+
+// markup not found, no include::{specDir}directories/DELETE/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| force 
+|   
+| - 
+| null 
+|  
+
+|===         
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* */*
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns an empty body.
+|  <<>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}directories/DELETE/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}directories/DELETE/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :directories/DELETE/DELETE.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}directories/DELETE/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.deleteDirectory]
+==== deleteDirectory
+    
+`DELETE /directories/{id}`
+
+Delete a user directory
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}directories/\{id\}/DELETE/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| id 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* */*
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns an empty body.
+|  <<>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}directories/\{id\}/DELETE/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}directories/\{id\}/DELETE/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :directories/{id}/DELETE/DELETE.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}directories/\{id\}/DELETE/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.getDirectories]
 ==== getDirectories
     
 `GET /directories`
 
-Get the list of directories
+Get all user directories
 
 ===== Description 
 
@@ -1438,12 +1714,12 @@ Get the list of directories
 
 
 | 200
-| 
+| Returns all directories.
 |  <<DirectoriesBean>>
 
 
 | 0
-| 
+| Returns a list of error messages.
 |  <<ErrorCollection>>
 
 |===         
@@ -1475,7 +1751,7 @@ endif::internal-generation[]
     
 `GET /directories/{id}`
 
-Get a directory based on it's ID
+Get a user directory
 
 ===== Description 
 
@@ -1509,8 +1785,7 @@ Get a directory based on it's ID
 
 ===== Return Type
 
-
-<<oneOf&lt;DirectoryInternalBean,DirectoryGenericBean&gt;>>
+<<AbstractDirectoryBean>>
 
 
 ===== Content Type
@@ -1526,12 +1801,12 @@ Get a directory based on it's ID
 
 
 | 200
-| 
-|  <<oneOf&lt;DirectoryInternalBean,DirectoryGenericBean&gt;>>
+| Returns the requested directory.
+|  <<AbstractDirectoryBean>>
 
 
 | 0
-| 
+| Returns a list of error messages.
 |  <<ErrorCollection>>
 
 |===         
@@ -1553,6 +1828,219 @@ ifdef::internal-generation[]
 ===== Implementation
 
 // markup not found, no include::{specDir}directories/\{id\}/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setDirectories]
+==== setDirectories
+    
+`PUT /directories`
+
+Set or update a list of user directories
+
+===== Description 
+
+NOTE: All existing directories with the same 'name' attribute are updated.
+
+
+// markup not found, no include::{specDir}directories/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| DirectoriesBean 
+|  <<DirectoriesBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| test-connection 
+|   
+| - 
+| false 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<DirectoriesBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns all directories.
+|  <<DirectoriesBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}directories/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}directories/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :directories/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}directories/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setDirectory]
+==== setDirectory
+    
+`PUT /directories/{id}`
+
+Update a user directory
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}directories/\{id\}/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| id 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| AbstractDirectoryBean 
+|  <<AbstractDirectoryBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| test-connection 
+|   
+| - 
+| false 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<AbstractDirectoryBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the updated directory.
+|  <<AbstractDirectoryBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}directories/\{id\}/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}directories/\{id\}/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :directories/{id}/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}directories/\{id\}/PUT/implementation.adoc[opts=optional]
 
 
 endif::internal-generation[]

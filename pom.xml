@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>confapi-crowd-plugin</artifactId>
-    <version>0.1.0</version>
+    <version>0.2.0-SNAPSHOT</version>
     <packaging>atlassian-plugin</packaging>
 
     <name>ConfAPI for Crowd</name>
@@ -68,6 +68,10 @@
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
         <confapi-commons.version>0.0.34</confapi-commons.version>
         <plugin.testrunner.version>2.0.1</plugin.testrunner.version>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencyManagement>
