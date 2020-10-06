@@ -29,8 +29,14 @@ public interface LicensesResource {
             summary = "Get all licenses information",
             description = "Upon successful request, returns a `LicensesBean` object containing license details. Be aware that `products` collection of the `LicenseBean` contains the product display names, not the product key names",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = LicensesBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = LicensesBean.class)),
+                            description = ""
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response getLicenses();
@@ -43,8 +49,14 @@ public interface LicensesResource {
             summary = "Gets licenses information for a single license",
             description = "Upon successful request, returns a `LicenseBean` object containing license details.",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = LicenseBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = LicenseBean.class)),
+                            description = ""
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response getLicense(
@@ -58,8 +70,14 @@ public interface LicensesResource {
             summary = "Sets or Updates a set of licenses",
             description = "Existing license details are always cleared before setting the new licenses. Upon successful request, returns a `LicensesBean` object containing license details",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = LicensesBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = LicensesBean.class)),
+                            description = ""
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response setLicenses(
@@ -72,14 +90,20 @@ public interface LicensesResource {
     @Operation(
             tags = { ConfAPI.LICENSES },
             summary = "Updates a single license",
-            description = "Existing license details are always cleared before setting the new licenses. Upon successful request, returns a `LicenseBean` object containing license details",
+            description = "NOTE: Existing license details are always cleared before setting the new licenses.",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = LicenseBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = LicenseBean.class)),
+                            description = "Returns the updated license details"
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response setLicense(
-            @PathParam("id") @NotNull final String product,
+            @NotNull @PathParam("id") final String product,
             @NotNull final LicenseBean licenseBean);
 
     @POST
@@ -87,13 +111,19 @@ public interface LicensesResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.LICENSES },
-            summary = "Adds a single license",
-            description = "Upon successful request, returns the added `LicenseBean` object containing license details",
+            summary = "Add a license",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = LicenseBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = LicenseBean.class)),
+                            description = "Returns the added license details"
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response addLicense(
             @NotNull final LicenseBean licenseBean);
+
 }

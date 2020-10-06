@@ -11,7 +11,7 @@ public interface SettingsService {
      *
      * @return the settings
      */
-    public SettingsBean getSettings();
+    SettingsBean getSettings();
 
 
     /**
@@ -20,6 +20,6 @@ public interface SettingsService {
      * @param settingsBean the settings to set
      * @return the settings
      */
-    public SettingsBean setSettings(
+    SettingsBean setSettings(
             @NotNull final SettingsBean settingsBean);
 }

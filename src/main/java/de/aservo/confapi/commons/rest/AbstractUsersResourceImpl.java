@@ -16,27 +16,27 @@ public class AbstractUsersResourceImpl implements UsersResource {
 
     @Override
     public Response getUser(
-            final String userName) {
+            final String username) {
 
-        final UserBean userBean = usersService.getUser(userName);
+        final UserBean userBean = usersService.getUser(username);
         return Response.ok(userBean).build();
     }
 
     @Override
     public Response setUser(
-            final String userName,
+            final String username,
             final UserBean userBean) {
 
-        final UserBean updatedUserBean = usersService.updateUser(userName, userBean);
+        final UserBean updatedUserBean = usersService.updateUser(username, userBean);
         return Response.ok(updatedUserBean).build();
     }
 
     @Override
     public Response setUserPassword(
-            final String userName,
+            final String username,
             final String password) {
 
-        final UserBean updatedUserBean = usersService.updatePassword(userName, password);
+        final UserBean updatedUserBean = usersService.updatePassword(username, password);
         return Response.ok(updatedUserBean).build();
     }
 

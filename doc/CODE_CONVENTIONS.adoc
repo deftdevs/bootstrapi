@@ -139,7 +139,10 @@ public interface EntitiesResource {
             tags = { ConfAPI.ENTITIES },
             summary = "Get the list of entities",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = EntitiesBean.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = EntitiesBean.class)),
+                            description = ""
+                    ),
                     @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
@@ -153,7 +156,10 @@ public interface EntitiesResource {
             summary = "Add a new entity",
             description = "A new entity can be added here if no other entity with the same name already exists",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = EntityBean.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = EntityBean.class)),
+                            description = ""
+                    ),
                     @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )

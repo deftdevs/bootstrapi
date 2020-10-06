@@ -18,7 +18,6 @@ public interface LicensesService {
      * Gets a single liocense.
      *
      * @param product the license product code to query
-     *
      * @return the gadget
      */
     LicenseBean getLicense(
@@ -52,4 +51,5 @@ public interface LicensesService {
      */
     LicenseBean addLicense(
             @NotNull final LicenseBean licenseBean);
+
 }

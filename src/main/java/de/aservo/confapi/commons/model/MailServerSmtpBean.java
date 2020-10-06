@@ -72,7 +72,7 @@ public class MailServerSmtpBean extends AbstractMailServerProtocolBean {
         EXAMPLE_2.setDescription("test smtp server");
         EXAMPLE_2.setPort("25");
         EXAMPLE_2.setProtocol("smtp");
-        EXAMPLE_2.setTimeout(2000);
+        EXAMPLE_2.setTimeout(2000L);
         EXAMPLE_2.setUsername("admin");
         EXAMPLE_2.setPassword("password");
     }
