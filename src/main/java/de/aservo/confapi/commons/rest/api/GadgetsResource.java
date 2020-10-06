@@ -29,10 +29,15 @@ public interface GadgetsResource {
     @Operation(
             tags = { ConfAPI.GADGETS },
             summary = "Get all gadgets",
-            description = "Upon successful request, returns a `GadgetsBean` object containing gadgets details",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetsBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetsBean.class)),
+                            description = "Returns all gadgets."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response getGadgets();
@@ -42,11 +47,16 @@ public interface GadgetsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.GADGETS },
-            summary = "Gets a single gadget",
-            description = "Upon successful request, returns a `GadgetsBean` object containing gadgets details",
+            summary = "Get a gadget",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetBean.class)),
+                            description = "Returns the requested gadget."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response getGadget(
@@ -57,11 +67,17 @@ public interface GadgetsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.GADGETS },
-            summary = "Sets or updates a new list of gadgets",
-            description = "Upon successful request, returns a `GadgetsBean` object containing gadgets details",
+            summary = "Set or update a list of gadgets",
+            description = "NOTE: This will only create gadgets that does not exist yet as there is no real 'update'.",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetsBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetsBean.class)),
+                            description = "Returns all gadgets."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response setGadgets(
@@ -73,11 +89,16 @@ public interface GadgetsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.GADGETS },
-            summary = "Updates a single gadget",
-            description = "Upon successful request, returns a `GadgetBean` object containing gadget details",
+            summary = "Update a gadget",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetBean.class)),
+                            description = "Returns the updated gadget."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response setGadget(
@@ -89,11 +110,17 @@ public interface GadgetsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.GADGETS },
-            summary = "Adds a single gadget",
-            description = "Upon successful request, returns the added `GadgetBean` object containing gadget details",
+            summary = "Add a gadget",
+            description = "Upon successful request, returns a `GadgetBean` object of the created gadget.",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetBean.class)),
+                            description = "Returns the added gadget."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response addGadget(
@@ -102,10 +129,17 @@ public interface GadgetsResource {
     @DELETE
     @Operation(
             tags = { ConfAPI.GADGETS },
-            summary = "Deletes all gadgets. NOTE: The 'force' parameter must be set to 'true' in order to execute this request.",
+            summary = "Delete all gadgets",
+            description = "NOTE: The 'force' parameter must be set to 'true' in order to execute this request.",
             responses = {
-                    @ApiResponse(responseCode = "200"),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Returns an empty body."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response deleteGadgets(
@@ -115,12 +149,19 @@ public interface GadgetsResource {
     @Path("{id}")
     @Operation(
             tags = { ConfAPI.GADGETS },
-            summary = "Deletes a single gadget",
+            summary = "Delete a gadget",
             responses = {
-                    @ApiResponse(responseCode = "200"),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Returns an empty body."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response deleteGadget(
             @PathParam("id") final long id);
+
 }

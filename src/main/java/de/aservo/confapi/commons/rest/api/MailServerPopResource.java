@@ -26,9 +26,18 @@ public interface MailServerPopResource {
             tags = { ConfAPI.MAIL_SERVER },
             summary = "Get the default POP mail server",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = MailServerPopBean.class))),
-                    @ApiResponse(responseCode = "204", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = MailServerPopBean.class)),
+                            description = "Returns the default POP mail server's details."
+                    ),
+                    @ApiResponse(
+                            responseCode = "204", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns an error message explaining that no default POP mail server is configured."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response getMailServerPop();
@@ -41,8 +50,14 @@ public interface MailServerPopResource {
             tags = { ConfAPI.MAIL_SERVER },
             summary = "Set the default POP mail server",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = MailServerPopBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = MailServerPopBean.class)),
+                            description = "Returns the default POP mail server's details."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response setMailServerPop(

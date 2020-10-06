@@ -12,7 +12,9 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
 
     private final ApplicationLinksService applicationLinksService;
 
-    public AbstractApplicationLinksResourceImpl(final ApplicationLinksService applicationLinksService) {
+    public AbstractApplicationLinksResourceImpl(
+            final ApplicationLinksService applicationLinksService) {
+
         this.applicationLinksService = applicationLinksService;
     }
 
@@ -24,8 +26,9 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
 
     @Override
     public Response getApplicationLink(
-            final UUID id) {
-        final ApplicationLinkBean linkBean = applicationLinksService.getApplicationLink(id);
+            final UUID uuid) {
+
+        final ApplicationLinkBean linkBean = applicationLinksService.getApplicationLink(uuid);
         return Response.ok(linkBean).build();
     }
 
@@ -33,45 +36,46 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
     public Response setApplicationLinks(
             final boolean ignoreSetupErrors,
             ApplicationLinksBean linksBean) {
+
         final ApplicationLinksBean updatedLinksBean = applicationLinksService.setApplicationLinks(
-                linksBean,
-                ignoreSetupErrors);
+                linksBean, ignoreSetupErrors);
         return Response.ok(updatedLinksBean).build();
     }
 
     @Override
     public Response setApplicationLink(
-            final UUID id,
+            final UUID uuid,
             final boolean ignoreSetupErrors,
-            ApplicationLinkBean linkBean) {
+            final ApplicationLinkBean linkBean) {
+
         final ApplicationLinkBean updatedLinkBean = applicationLinksService.setApplicationLink(
-                id,
-                linkBean,
-                ignoreSetupErrors);
+                uuid, linkBean, ignoreSetupErrors);
         return Response.ok(updatedLinkBean).build();
     }
 
     @Override
     public Response addApplicationLink(
             final boolean ignoreSetupErrors,
-            ApplicationLinkBean linkBean) {
+            final ApplicationLinkBean linkBean) {
+
         final ApplicationLinkBean addedApplicationLink = applicationLinksService.addApplicationLink(
-                linkBean,
-                ignoreSetupErrors);
+                linkBean, ignoreSetupErrors);
         return Response.ok(addedApplicationLink).build();
     }
 
     @Override
     public Response deleteApplicationLinks(
             final boolean force) {
+
         applicationLinksService.deleteApplicationLinks(force);
         return Response.ok().build();
     }
 
     @Override
     public Response deleteApplicationLink(
-            final UUID id) {
-        applicationLinksService.deleteApplicationLink(id);
+            final UUID uuid) {
+
+        applicationLinksService.deleteApplicationLink(uuid);
         return Response.ok().build();
     }
 }

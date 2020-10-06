@@ -29,10 +29,16 @@ public interface DirectoriesResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.DIRECTORIES },
-            summary = "Get the list of user directories",
+            summary = "Get all user directories",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = DirectoriesBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = DirectoriesBean.class)),
+                            description = "Returns all directories."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response getDirectories();
@@ -42,10 +48,16 @@ public interface DirectoriesResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.DIRECTORIES },
-            summary = "Gets a single user directories",
+            summary = "Get a user directory",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryBean.class)),
+                            description = "Returns the requested directory."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response getDirectory(
@@ -56,11 +68,17 @@ public interface DirectoriesResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.DIRECTORIES },
-            summary = "Sets or updates a list of directories",
-            description = "Any existing configurations with the same 'name' property is updated.",
+            summary = "Set or update a list of user directories",
+            description = "NOTE: All existing directories with the same 'name' attribute are updated.",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = DirectoriesBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = DirectoriesBean.class)),
+                            description = "Returns all directories."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response setDirectories(
@@ -73,11 +91,16 @@ public interface DirectoriesResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.DIRECTORIES },
-            summary = "Updates a single directory",
-            description = "Any existing configuration with the same 'name' property is updated.",
+            summary = "Update a user directory",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryBean.class)),
+                            description = "Returns the updated directory."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response setDirectory(
@@ -90,11 +113,16 @@ public interface DirectoriesResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.DIRECTORIES },
-            summary = "Adds a new directory",
-            description = "Adds a new user directory to the existing list of directories",
+            summary = "Add a user directory",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryBean.class)),
+                            description = "Returns the added directory."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response addDirectory(
@@ -104,10 +132,17 @@ public interface DirectoriesResource {
     @DELETE
     @Operation(
             tags = { ConfAPI.DIRECTORIES },
-            summary = "Deletes all user directories. NOTE: The 'force' parameter must be set to 'true' in order to execute this request.",
+            summary = "Delete all user directories",
+            description = "NOTE: The 'force' parameter must be set to 'true' in order to execute this request.",
             responses = {
-                    @ApiResponse(responseCode = "200"),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Returns an empty body."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response deleteDirectories(
@@ -117,10 +152,16 @@ public interface DirectoriesResource {
     @Path("{id}")
     @Operation(
             tags = { ConfAPI.DIRECTORIES },
-            summary = "Deletes a single user directory",
+            summary = "Delete a user directory",
             responses = {
-                    @ApiResponse(responseCode = "200"),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Returns an empty body."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response deleteDirectory(

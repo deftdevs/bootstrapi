@@ -31,39 +31,56 @@ public interface ApplicationLinksResource {
     @Operation(
             tags = { ConfAPI.APPLICATION_LINKS },
             summary = "Get all application links",
-            description = "Upon successful request, returns a `ApplicationLinksBean` object containing all application links",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinksBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinksBean.class)),
+                            description = "Returns all application links."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response getApplicationLinks();
 
     @GET
-    @Path("{id}")
+    @Path("{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.APPLICATION_LINKS },
-            summary = "Gets a single application link",
-            description = "Upon successful request, returns a `ApplicationLinkBean` object containing the requested application link",
+            summary = "Get an application link",
+            description = "Upon successful request, ",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class)),
+                            description = "Returns the requested application link."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response getApplicationLink(
-            @PathParam("id") @NotNull final UUID id);
+            @PathParam("uuid") @NotNull final UUID uuid);
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.APPLICATION_LINKS },
-            summary = "Sets or updates a set of application links",
-            description = "Upon successful request, returns a `ApplicationLinksBean` object containing all application links",
+            summary = "Set or update a list of application links",
+            description = "NOTE: All existing application links with the same 'rpcUrl' attribute are updated.",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinksBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinksBean.class)),
+                            description = "Returns all application links."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response setApplicationLinks(
@@ -71,20 +88,25 @@ public interface ApplicationLinksResource {
             @NotNull final ApplicationLinksBean linksBean);
 
     @PUT
-    @Path("{id}")
+    @Path("{uuid}")
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.APPLICATION_LINKS },
-            summary = "Updates an application link",
-            description = "Upon successful request, returns the updated `ApplicationLinkBean` object containing the updated application link",
+            summary = "Update an application link",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class)),
+                            description = "Returns the updated application link."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response setApplicationLink(
-            @PathParam("id") @NotNull final UUID id,
+            @PathParam("uuid") @NotNull final UUID uuid,
             @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
             @NotNull final ApplicationLinkBean linksBean);
 
@@ -93,11 +115,16 @@ public interface ApplicationLinksResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.APPLICATION_LINKS },
-            summary = "Add a single application link",
-            description = "Upon successful request, returns the added `ApplicationLinkBean` object",
+            summary = "Add an application link",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class)),
+                            description = "Returns the added application link."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response addApplicationLink(
@@ -107,26 +134,39 @@ public interface ApplicationLinksResource {
     @DELETE
     @Operation(
             tags = { ConfAPI.APPLICATION_LINKS },
-            summary = "Deletes all application links. NOTE: The 'force' parameter must be set to 'true' in order to execute this request.",
+            summary = "Delete all application links",
+            description = "NOTE: The 'force' parameter must be set to 'true' in order to execute this request.",
             responses = {
-                    @ApiResponse(responseCode = "200"),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Returns an empty body."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response deleteApplicationLinks(
             @QueryParam("force") final boolean force);
 
     @DELETE
-    @Path("{id}")
+    @Path("{uuid}")
     @Operation(
             tags = { ConfAPI.APPLICATION_LINKS },
-            summary = "Deletes a single application link",
+            summary = "Delete an application link",
             responses = {
-                    @ApiResponse(responseCode = "200"),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Returns an empty body."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response deleteApplicationLink(
-            @PathParam("id") @NotNull final UUID id);
+            @PathParam("uuid") @NotNull final UUID uuid);
 
 }

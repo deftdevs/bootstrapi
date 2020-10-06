@@ -24,30 +24,40 @@ public interface UsersResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.USERS },
-            summary = "Retrieves user information",
-            description = "Upon successful request, returns a `UserBean` object containing user details",
+            summary = "Get a user",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class)),
+                            description = "Returns the requested user details"
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response getUser(
-            @NotNull @QueryParam("userName") final String userName);
+            @NotNull @QueryParam("username") final String username);
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.USERS },
-            summary = "Updates user details",
-            description = "Upon successful request, returns the updated `UserBean` object (user name cannot be updated)",
+            summary = "Update an user",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class)),
+                            description = "Returns the updated user details"
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response setUser(
-            @NotNull @QueryParam("userName") final String userName,
+            @NotNull @QueryParam("username") final String username,
             @NotNull final UserBean userBean);
 
     @PUT
@@ -56,15 +66,20 @@ public interface UsersResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.USERS },
-            summary = "Updates the user password",
-            description = "Upon successful request, returns the updated `UserBean` object.",
+            summary = "Update a user password",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class))),
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class)),
+                            description = "Returns the user details"
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
             }
     )
     Response setUserPassword(
-            @NotNull @QueryParam("userName") final String userName,
+            @NotNull @QueryParam("username") final String username,
             @NotNull final String password);
 
 }
