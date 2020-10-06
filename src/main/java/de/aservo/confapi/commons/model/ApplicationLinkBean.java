@@ -18,7 +18,7 @@ import java.util.UUID;
 @XmlRootElement(name = ConfAPI.APPLICATION_LINK)
 public class ApplicationLinkBean {
 
-    public enum ApplicationLinkTypes {
+    public enum ApplicationLinkType {
         BAMBOO,
         JIRA,
         BITBUCKET,
@@ -34,7 +34,7 @@ public class ApplicationLinkBean {
     }
 
     @XmlElement
-    private UUID id;
+    private UUID uuid;
 
     @XmlElement
     @NotNull
@@ -42,7 +42,7 @@ public class ApplicationLinkBean {
 
     @XmlElement
     @NotNull
-    private ApplicationLinkTypes type;
+    private ApplicationLinkType type;
 
     @XmlElement
     @NotNull
@@ -70,12 +70,12 @@ public class ApplicationLinkBean {
 
     static {
         EXAMPLE_1 = new ApplicationLinkBean();
-        EXAMPLE_1.setId(UUID.randomUUID());
+        EXAMPLE_1.setUuid(UUID.randomUUID());
         EXAMPLE_1.setName("Example");
         EXAMPLE_1.setDisplayUrl(URI.create("http://example.com"));
         EXAMPLE_1.setRpcUrl(URI.create("http://rpc.example.com"));
         EXAMPLE_1.setPrimary(true);
-        EXAMPLE_1.setType(ApplicationLinkTypes.JIRA);
+        EXAMPLE_1.setType(ApplicationLinkType.JIRA);
         EXAMPLE_1.setUsername("username");
         EXAMPLE_1.setPassword("p455w0rd");
     }

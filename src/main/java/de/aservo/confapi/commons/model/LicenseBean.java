@@ -20,6 +20,9 @@ import java.util.Date;
 public class LicenseBean {
 
     @XmlElement
+    private Collection<String> products;
+
+    @XmlElement
     private String type;
 
     @XmlElement
@@ -36,9 +39,6 @@ public class LicenseBean {
 
     @XmlElement
     private String key;
-
-    @XmlElement
-    private Collection<String> products;
 
     // Example instances for documentation and tests
 

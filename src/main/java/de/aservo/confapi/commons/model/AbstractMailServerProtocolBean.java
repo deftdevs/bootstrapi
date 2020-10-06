@@ -28,7 +28,7 @@ public abstract class AbstractMailServerProtocolBean {
     private String protocol;
 
     @XmlElement
-    private long timeout = 10000L;
+    private Long timeout;
 
     @XmlElement
     private String username;
@@ -77,4 +77,16 @@ public abstract class AbstractMailServerProtocolBean {
         }
     }
 
+    /**
+     * Return set timeout or default timeout of 10000L if null.
+     *
+     * @return timeout
+     */
+    public Long getTimeout() {
+        if (timeout == null) {
+            return 10000L;
+        }
+
+        return timeout;
+    }
 }
