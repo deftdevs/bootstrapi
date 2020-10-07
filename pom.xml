@@ -56,6 +56,7 @@
 
     <properties>
         <crowd.version>4.1.1</crowd.version>
+        <ajp.port>8409</ajp.port>
         <amps.version>8.0.2</amps.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
@@ -262,6 +263,7 @@
                 <version>${amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
+                    <ajpPort>${ajp.port}</ajpPort>
                     <productVersion>${crowd.version}</productVersion>
                     <productDataVersion>${crowd.version}</productDataVersion>
                     <allowGoogleTracking>false</allowGoogleTracking>
