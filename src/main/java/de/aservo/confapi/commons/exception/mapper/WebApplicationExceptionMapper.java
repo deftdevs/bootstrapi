@@ -12,9 +12,12 @@ public class WebApplicationExceptionMapper implements ExceptionMapper<WebApplica
 
     public Response toResponse(WebApplicationException e) {
         final ErrorCollection errorCollection = new ErrorCollection();
-        // there is no way around the cause in the WebApplicationException so that messages always start with the exception name
+
+        // there is no way around the cause in the WebApplicationException so that messages always start
+        // with the exception name, which will be stripped with the following regex
         errorCollection.addErrorMessage(e.getMessage().replaceFirst("([^:]*: )", ""));
-        return Response.status(e.getResponse().getStatus()).entity(errorCollection).build();
+
+        return Response.fromResponse(e.getResponse()).entity(errorCollection).build();
     }
 
 }
