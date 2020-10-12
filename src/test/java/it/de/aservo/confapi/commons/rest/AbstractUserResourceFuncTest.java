@@ -15,7 +15,7 @@ import static org.junit.Assert.assertNotNull;
 
 public abstract class AbstractUserResourceFuncTest {
 
-    private static final String PARAM_USERNAME = "userName";
+    private static final String PARAM_USERNAME = "username";
 
     @Test
     public void testGetUser() {
