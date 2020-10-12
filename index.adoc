@@ -42,7 +42,7 @@ This plugin provides methods for accessing configuration for Crowd.
 
 Add a single application link
 
-===== Description 
+===== Description
 
 Upon successful request, returns the added `ApplicationLinkBean` object
 
@@ -57,32 +57,32 @@ Upon successful request, returns the added `ApplicationLinkBean` object
 ===== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| ApplicationLinkBean 
-|  <<ApplicationLinkBean>> 
-| X 
-|  
-|  
+| ApplicationLinkBean
+|  <<ApplicationLinkBean>>
+| X
+|
+|
 
-|===         
+|===
 
 
 
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| ignore-setup-errors 
-|   
-| - 
-| false 
-|  
+| ignore-setup-errors
+|
+| -
+| false
+|
 
-|===         
+|===
 
 
 ===== Return Type
@@ -98,20 +98,20 @@ Upon successful request, returns the added `ApplicationLinkBean` object
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
-| 
+|
 |  <<ApplicationLinkBean>>
 
 
 | 0
-| 
+|
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -137,12 +137,12 @@ endif::internal-generation[]
 
 [.deleteApplicationLink]
 ==== deleteApplicationLink
-    
+
 `DELETE /application-links/{id}`
 
 Deletes a single application link
 
-===== Description 
+===== Description
 
 
 
@@ -156,16 +156,16 @@ Deletes a single application link
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| id 
-|   
-| X 
-| null 
-|  
+| id
+|
+| X
+| null
+|
 
-|===         
+|===
 
 
 
@@ -185,15 +185,15 @@ Deletes a single application link
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 0
-| 
+|
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -219,12 +219,12 @@ endif::internal-generation[]
 
 [.deleteApplicationLinks]
 ==== deleteApplicationLinks
-    
+
 `DELETE /application-links`
 
 Deletes all application links. NOTE: The 'force' parameter must be set to 'true' in order to execute this request.
 
-===== Description 
+===== Description
 
 
 
@@ -242,16 +242,16 @@ Deletes all application links. NOTE: The 'force' parameter must be set to 'true'
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| force 
-|   
-| - 
-| null 
-|  
+| force
+|
+| -
+| null
+|
 
-|===         
+|===
 
 
 ===== Return Type
@@ -267,15 +267,15 @@ Deletes all application links. NOTE: The 'force' parameter must be set to 'true'
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 0
-| 
+|
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -301,12 +301,12 @@ endif::internal-generation[]
 
 [.getApplicationLink]
 ==== getApplicationLink
-    
+
 `GET /application-links/{id}`
 
 Gets a single application link
 
-===== Description 
+===== Description
 
 Upon successful request, returns a `ApplicationLinkBean` object containing the requested application link
 
@@ -320,16 +320,16 @@ Upon successful request, returns a `ApplicationLinkBean` object containing the r
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| id 
-|   
-| X 
-| null 
-|  
+| id
+|
+| X
+| null
+|
 
-|===         
+|===
 
 
 
@@ -349,20 +349,20 @@ Upon successful request, returns a `ApplicationLinkBean` object containing the r
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
-| 
+|
 |  <<ApplicationLinkBean>>
 
 
 | 0
-| 
+|
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -388,12 +388,12 @@ endif::internal-generation[]
 
 [.getApplicationLinks]
 ==== getApplicationLinks
-    
+
 `GET /application-links`
 
 Get all application links
 
-===== Description 
+===== Description
 
 Upon successful request, returns a `ApplicationLinksBean` object containing all application links
 
@@ -423,20 +423,20 @@ Upon successful request, returns a `ApplicationLinksBean` object containing all 
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
-| 
+|
 |  <<ApplicationLinksBean>>
 
 
 | 0
-| 
+|
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -462,12 +462,12 @@ endif::internal-generation[]
 
 [.setApplicationLink]
 ==== setApplicationLink
-    
+
 `PUT /application-links/{id}`
 
 Updates an application link
 
-===== Description 
+===== Description
 
 Upon successful request, returns the updated `ApplicationLinkBean` object containing the updated application link
 
@@ -481,46 +481,46 @@ Upon successful request, returns the updated `ApplicationLinkBean` object contai
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| id 
-|   
-| X 
-| null 
-|  
+| id
+|
+| X
+| null
+|
 
-|===         
+|===
 
 ===== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| ApplicationLinkBean 
-|  <<ApplicationLinkBean>> 
-| X 
-|  
-|  
+| ApplicationLinkBean
+|  <<ApplicationLinkBean>>
+| X
+|
+|
 
-|===         
+|===
 
 
 
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| ignore-setup-errors 
-|   
-| - 
-| false 
-|  
+| ignore-setup-errors
+|
+| -
+| false
+|
 
-|===         
+|===
 
 
 ===== Return Type
@@ -536,20 +536,20 @@ Upon successful request, returns the updated `ApplicationLinkBean` object contai
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
-| 
+|
 |  <<ApplicationLinkBean>>
 
 
 | 0
-| 
+|
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -575,12 +575,12 @@ endif::internal-generation[]
 
 [.setApplicationLinks]
 ==== setApplicationLinks
-    
+
 `PUT /application-links`
 
 Sets or updates a set of application links
 
-===== Description 
+===== Description
 
 Upon successful request, returns a `ApplicationLinksBean` object containing all application links
 
@@ -595,32 +595,32 @@ Upon successful request, returns a `ApplicationLinksBean` object containing all 
 ===== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| ApplicationLinksBean 
-|  <<ApplicationLinksBean>> 
-| X 
-|  
-|  
+| ApplicationLinksBean
+|  <<ApplicationLinksBean>>
+| X
+|
+|
 
-|===         
+|===
 
 
 
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| ignore-setup-errors 
-|   
-| - 
-| false 
-|  
+| ignore-setup-errors
+|
+| -
+| false
+|
 
-|===         
+|===
 
 
 ===== Return Type
@@ -636,20 +636,20 @@ Upon successful request, returns a `ApplicationLinksBean` object containing all 
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
-| 
+|
 |  <<ApplicationLinksBean>>
 
 
 | 0
-| 
+|
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -679,12 +679,12 @@ endif::internal-generation[]
 
 [.addApplication]
 ==== addApplication
-    
+
 `POST /applications`
 
 Add an application
 
-===== Description 
+===== Description
 
 
 
@@ -699,16 +699,16 @@ Add an application
 ===== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| ApplicationBean 
-|  <<ApplicationBean>> 
-| - 
-|  
-|  
+| ApplicationBean
+|  <<ApplicationBean>>
+| -
+|
+|
 
-|===         
+|===
 
 
 
@@ -727,8 +727,8 @@ Add an application
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -740,7 +740,7 @@ Add an application
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -766,12 +766,12 @@ endif::internal-generation[]
 
 [.deleteApplication]
 ==== deleteApplication
-    
+
 `DELETE /applications/{id}`
 
 Delete an application
 
-===== Description 
+===== Description
 
 
 
@@ -785,16 +785,16 @@ Delete an application
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| id 
-|   
-| X 
-| null 
-|  
+| id
+|
+| X
+| null
+|
 
-|===         
+|===
 
 
 
@@ -815,8 +815,8 @@ Delete an application
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -828,7 +828,7 @@ Delete an application
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -854,12 +854,12 @@ endif::internal-generation[]
 
 [.deleteApplications]
 ==== deleteApplications
-    
+
 `DELETE /applications`
 
 Delete all applications
 
-===== Description 
+===== Description
 
 NOTE: The 'force' parameter must be se to 'true' in order to execute this request.
 
@@ -877,16 +877,16 @@ NOTE: The 'force' parameter must be se to 'true' in order to execute this reques
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| force 
-|   
-| - 
-| null 
-|  
+| force
+|
+| -
+| null
+|
 
-|===         
+|===
 
 
 ===== Return Type
@@ -903,8 +903,8 @@ NOTE: The 'force' parameter must be se to 'true' in order to execute this reques
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -916,7 +916,7 @@ NOTE: The 'force' parameter must be se to 'true' in order to execute this reques
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -942,12 +942,12 @@ endif::internal-generation[]
 
 [.getApplication]
 ==== getApplication
-    
+
 `GET /applications/{id}`
 
 Get an application
 
-===== Description 
+===== Description
 
 
 
@@ -961,16 +961,16 @@ Get an application
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| id 
-|   
-| X 
-| null 
-|  
+| id
+|
+| X
+| null
+|
 
-|===         
+|===
 
 
 
@@ -990,8 +990,8 @@ Get an application
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -1003,7 +1003,7 @@ Get an application
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1029,12 +1029,12 @@ endif::internal-generation[]
 
 [.getApplications]
 ==== getApplications
-    
+
 `GET /applications`
 
 Get all applications
 
-===== Description 
+===== Description
 
 Upon successful request, returns a `ApplicationsBean` object containing all applications
 
@@ -1064,8 +1064,8 @@ Upon successful request, returns a `ApplicationsBean` object containing all appl
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -1077,7 +1077,7 @@ Upon successful request, returns a `ApplicationsBean` object containing all appl
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1103,12 +1103,12 @@ endif::internal-generation[]
 
 [.setApplication]
 ==== setApplication
-    
+
 `PUT /applications/{id}`
 
 Update an application
 
-===== Description 
+===== Description
 
 
 
@@ -1122,30 +1122,30 @@ Update an application
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| id 
-|   
-| X 
-| null 
-|  
+| id
+|
+| X
+| null
+|
 
-|===         
+|===
 
 ===== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| ApplicationBean 
-|  <<ApplicationBean>> 
-| - 
-|  
-|  
+| ApplicationBean
+|  <<ApplicationBean>>
+| -
+|
+|
 
-|===         
+|===
 
 
 
@@ -1164,8 +1164,8 @@ Update an application
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -1177,7 +1177,7 @@ Update an application
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1203,12 +1203,12 @@ endif::internal-generation[]
 
 [.setApplications]
 ==== setApplications
-    
+
 `PUT /applications`
 
 Set or update a list of applications
 
-===== Description 
+===== Description
 
 NOTE: All existing applications with the same 'name' attribute are updated.
 
@@ -1223,16 +1223,16 @@ NOTE: All existing applications with the same 'name' attribute are updated.
 ===== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| ApplicationsBean 
-|  <<ApplicationsBean>> 
-| - 
-|  
-|  
+| ApplicationsBean
+|  <<ApplicationsBean>>
+| -
+|
+|
 
-|===         
+|===
 
 
 
@@ -1251,8 +1251,8 @@ NOTE: All existing applications with the same 'name' attribute are updated.
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -1264,7 +1264,7 @@ NOTE: All existing applications with the same 'name' attribute are updated.
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1294,12 +1294,12 @@ endif::internal-generation[]
 
 [.getDirectories]
 ==== getDirectories
-    
+
 `GET /directories`
 
 Get the list of directories
 
-===== Description 
+===== Description
 
 
 
@@ -1329,20 +1329,20 @@ Get the list of directories
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
-| 
+|
 |  <<DirectoriesBean>>
 
 
 | 0
-| 
+|
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1368,12 +1368,12 @@ endif::internal-generation[]
 
 [.getDirectory]
 ==== getDirectory
-    
+
 `GET /directories/{id}`
 
 Get a directory based on it's ID
 
-===== Description 
+===== Description
 
 
 
@@ -1387,16 +1387,16 @@ Get a directory based on it's ID
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| id 
-|   
-| X 
-| null 
-|  
+| id
+|
+| X
+| null
+|
 
-|===         
+|===
 
 
 
@@ -1417,20 +1417,20 @@ Get a directory based on it's ID
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
-| 
+|
 |  <<oneOf&lt;DirectoryInternalBean,DirectoryGenericBean&gt;>>
 
 
 | 0
-| 
+|
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1460,12 +1460,12 @@ endif::internal-generation[]
 
 [.getMailServerSmtp]
 ==== getMailServerSmtp
-    
+
 `GET /mail-server/smtp`
 
 Get the default SMTP mail server
 
-===== Description 
+===== Description
 
 
 
@@ -1495,25 +1495,25 @@ Get the default SMTP mail server
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
-| 
+|
 |  <<MailServerSmtpBean>>
 
 
 | 204
-| 
+|
 |  <<ErrorCollection>>
 
 
 | 0
-| 
+|
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1539,12 +1539,12 @@ endif::internal-generation[]
 
 [.setMailServerSmtp]
 ==== setMailServerSmtp
-    
+
 `PUT /mail-server/smtp`
 
 Set the default SMTP mail server
 
-===== Description 
+===== Description
 
 
 
@@ -1559,16 +1559,16 @@ Set the default SMTP mail server
 ===== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| MailServerSmtpBean 
-|  <<MailServerSmtpBean>> 
-| X 
-|  
-|  
+| MailServerSmtpBean
+|  <<MailServerSmtpBean>>
+| X
+|
+|
 
-|===         
+|===
 
 
 
@@ -1587,20 +1587,20 @@ Set the default SMTP mail server
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
-| 
+|
 |  <<MailServerSmtpBean>>
 
 
 | 0
-| 
+|
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1630,12 +1630,12 @@ endif::internal-generation[]
 
 [.getPing]
 ==== getPing
-    
+
 `GET /ping`
 
 Simple ping method for probing the REST api. Returns 'pong' upon success
 
-===== Description 
+===== Description
 
 
 
@@ -1666,15 +1666,15 @@ Simple ping method for probing the REST api. Returns 'pong' upon success
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 0
 | default response
 |  <<>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1704,12 +1704,12 @@ endif::internal-generation[]
 
 [.getSettings]
 ==== getSettings
-    
+
 `GET /settings`
 
 Get the application settings
 
-===== Description 
+===== Description
 
 
 
@@ -1739,20 +1739,20 @@ Get the application settings
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
-| 
+|
 |  <<SettingsBean>>
 
 
 | 0
-| 
+|
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1778,12 +1778,12 @@ endif::internal-generation[]
 
 [.setSettings]
 ==== setSettings
-    
+
 `PUT /settings`
 
 Set the application settings
 
-===== Description 
+===== Description
 
 
 
@@ -1798,16 +1798,16 @@ Set the application settings
 ===== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| SettingsBean 
-|  <<SettingsBean>> 
-| X 
-|  
-|  
+| SettingsBean
+|  <<SettingsBean>>
+| X
+|
+|
 
-|===         
+|===
 
 
 
@@ -1826,20 +1826,20 @@ Set the application settings
 
 .http response codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
-| 
+|
 |  <<SettingsBean>>
 
 
 | 0
-| 
+|
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1868,967 +1868,966 @@ endif::internal-generation[]
 
 
 [#AbstractDirectoryBean]
-=== _AbstractDirectoryBean_ 
+=== _AbstractDirectoryBean_
 
 
 
 [.fields-AbstractDirectoryBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| id 
-|  
-| Long  
-| 
-| int64 
+| id
+|
+| Long
+|
+| int64
 
-| name 
-| X 
-| String  
-| 
-|  
+| name
+| X
+| String
+|
+|
 
-| description 
-|  
-| String  
-| 
-|  
+| description
+|
+| String
+|
+|
 
-| active 
-|  
-| Boolean  
-| 
-|  
+| active
+|
+| Boolean
+|
+|
 
-| server 
-|  
-| DirectoryLdapServer  
-| 
-|  
+| server
+|
+| DirectoryLdapServer
+|
+|
 
-| permissions 
-|  
-| DirectoryLdapPermissions  
-| 
-|  
+| permissions
+|
+| DirectoryLdapPermissions
+|
+|
 
-| advanced 
-|  
-| DirectoryInternalAdvanced  
-| 
-|  
+| advanced
+|
+| DirectoryInternalAdvanced
+|
+|
 
-| credentialPolicy 
-|  
-| DirectoryInternalCredentialPolicy  
-| 
-|  
+| credentialPolicy
+|
+| DirectoryInternalCredentialPolicy
+|
+|
 
-| schema 
-|  
-| DirectoryLdapSchema  
-| 
-|  
+| schema
+|
+| DirectoryLdapSchema
+|
+|
 
 |===
 
 
 [#ApplicationBean]
-=== _ApplicationBean_ 
+=== _ApplicationBean_
 
 
 
 [.fields-ApplicationBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| id 
-|  
-| Long  
-| 
-| int64 
+| id
+|
+| Long
+|
+| int64
 
-| name 
-|  
-| String  
-| 
-|  
+| name
+|
+| String
+|
+|
 
-| description 
-|  
-| String  
-| 
-|  
+| description
+|
+| String
+|
+|
 
-| active 
-|  
-| Boolean  
-| 
-|  
+| active
+|
+| Boolean
+|
+|
 
-| type 
-|  
-| String  
-| 
-|  _Enum:_ GENERIC, PLUGIN, CROWD, JIRA, CONFLUENCE, BITBUCKET, FISHEYE, CRUCIBLE, BAMBOO, 
+| type
+|
+| String
+|
+|  _Enum:_ GENERIC, PLUGIN, CROWD, JIRA, CONFLUENCE, BITBUCKET, FISHEYE, CRUCIBLE, BAMBOO,
 
-| password 
-|  
-| String  
-| 
-|  
+| password
+|
+| String
+|
+|
 
 |===
 
 
 [#ApplicationLinkBean]
-=== _ApplicationLinkBean_ 
+=== _ApplicationLinkBean_
 
 
 
 [.fields-ApplicationLinkBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| id 
-|  
-| UUID  
-| 
-| uuid 
+| id
+|
+| UUID
+|
+| uuid
 
-| name 
-| X 
-| String  
-| 
-|  
+| name
+| X
+| String
+|
+|
 
-| type 
-| X 
-| String  
-| 
-|  _Enum:_ BAMBOO, JIRA, BITBUCKET, CONFLUENCE, FISHEYE, CROWD, 
+| type
+| X
+| String
+|
+|  _Enum:_ BAMBOO, JIRA, BITBUCKET, CONFLUENCE, FISHEYE, CROWD,
 
-| displayUrl 
-| X 
-| URI  
-| 
-| uri 
+| displayUrl
+| X
+| URI
+|
+| uri
 
-| rpcUrl 
-| X 
-| URI  
-| 
-| uri 
+| rpcUrl
+| X
+| URI
+|
+| uri
 
-| primary 
-|  
-| Boolean  
-| 
-|  
+| primary
+|
+| Boolean
+|
+|
 
-| status 
-|  
-| String  
-| 
-|  _Enum:_ AVAILABLE, UNAVAILABLE, CONFIGURATION_ERROR, 
+| status
+|
+| String
+|
+|  _Enum:_ AVAILABLE, UNAVAILABLE, CONFIGURATION_ERROR,
 
-| username 
-|  
-| String  
-| 
-|  
+| username
+|
+| String
+|
+|
 
-| password 
-|  
-| String  
-| 
-|  
+| password
+|
+| String
+|
+|
 
 |===
 
 
 [#ApplicationLinksBean]
-=== _ApplicationLinksBean_ 
+=== _ApplicationLinksBean_
 
 
 
 [.fields-ApplicationLinksBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| applicationLinks 
-|  
-| List  of <<ApplicationLinkBean>> 
-| 
-|  
+| applicationLinks
+|
+| List  of <<ApplicationLinkBean>>
+|
+|
 
 |===
 
 
 [#ApplicationsBean]
-=== _ApplicationsBean_ 
+=== _ApplicationsBean_
 
 
 
 [.fields-ApplicationsBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| applications 
-|  
-| List  of <<ApplicationBean>> 
-| 
-|  
+| applications
+|
+| List  of <<ApplicationBean>>
+|
+|
 
 |===
 
 
 [#DirectoriesBean]
-=== _DirectoriesBean_ 
+=== _DirectoriesBean_
 
 
 
 [.fields-DirectoriesBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| directories 
-|  
-| List  of <<AbstractDirectoryBean>> 
-| 
-|  
+| directories
+|
+| List  of <<AbstractDirectoryBean>>
+|
+|
 
 |===
 
 
 [#DirectoryCrowdAdvanced]
-=== _DirectoryCrowdAdvanced_ 
+=== _DirectoryCrowdAdvanced_
 
 
 
 [.fields-DirectoryCrowdAdvanced]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| enableNestedGroups 
-|  
-| Boolean  
-| 
-|  
+| enableNestedGroups
+|
+| Boolean
+|
+|
 
-| enableIncrementalSync 
-|  
-| Boolean  
-| 
-|  
+| enableIncrementalSync
+|
+| Boolean
+|
+|
 
-| updateGroupMembershipMethod 
-|  
-| String  
-| 
-|  
+| updateGroupMembershipMethod
+|
+| String
+|
+|
 
-| updateSyncIntervalInMinutes 
-|  
-| Integer  
-| 
-| int32 
+| updateSyncIntervalInMinutes
+|
+| Integer
+|
+| int32
 
 |===
 
 
 [#DirectoryCrowdBean]
-=== _DirectoryCrowdBean_ 
+=== _DirectoryCrowdBean_
 
 
 
 [.fields-DirectoryCrowdBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| id 
-|  
-| Long  
-| 
-| int64 
+| id
+|
+| Long
+|
+| int64
 
-| name 
-| X 
-| String  
-| 
-|  
+| name
+| X
+| String
+|
+|
 
-| description 
-|  
-| String  
-| 
-|  
+| description
+|
+| String
+|
+|
 
-| active 
-|  
-| Boolean  
-| 
-|  
+| active
+|
+| Boolean
+|
+|
 
-| server 
-|  
-| DirectoryCrowdServer  
-| 
-|  
+| server
+|
+| DirectoryCrowdServer
+|
+|
 
-| permissions 
-|  
-| DirectoryCrowdPermissions  
-| 
-|  
+| permissions
+|
+| DirectoryCrowdPermissions
+|
+|
 
-| advanced 
-|  
-| DirectoryCrowdAdvanced  
-| 
-|  
+| advanced
+|
+| DirectoryCrowdAdvanced
+|
+|
 
 |===
 
 
 [#DirectoryCrowdPermissions]
-=== _DirectoryCrowdPermissions_ 
+=== _DirectoryCrowdPermissions_
 
 
 
 [.fields-DirectoryCrowdPermissions]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| readOnly 
-|  
-| Boolean  
-| 
-|  
+| readOnly
+|
+| Boolean
+|
+|
 
-| fullAccess 
-|  
-| Boolean  
-| 
-|  
+| fullAccess
+|
+| Boolean
+|
+|
 
 |===
 
 
 [#DirectoryCrowdServer]
-=== _DirectoryCrowdServer_ 
+=== _DirectoryCrowdServer_
 
 
 
 [.fields-DirectoryCrowdServer]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| url 
-| X 
-| URI  
-| 
-| uri 
+| url
+| X
+| URI
+|
+| uri
 
-| proxy 
-|  
-| DirectoryCrowdServerProxy  
-| 
-|  
+| proxy
+|
+| DirectoryCrowdServerProxy
+|
+|
 
-| appUsername 
-| X 
-| String  
-| 
-|  
+| appUsername
+| X
+| String
+|
+|
 
-| appPassword 
-| X 
-| String  
-| 
-|  
+| appPassword
+| X
+| String
+|
+|
 
-| connectionTimeoutInMillis 
-|  
-| Long  
-| 
-| int64 
+| connectionTimeoutInMillis
+|
+| Long
+|
+| int64
 
-| maxConnections 
-|  
-| Integer  
-| 
-| int32 
+| maxConnections
+|
+| Integer
+|
+| int32
 
 |===
 
 
 [#DirectoryCrowdServerProxy]
-=== _DirectoryCrowdServerProxy_ 
+=== _DirectoryCrowdServerProxy_
 
 
 
 [.fields-DirectoryCrowdServerProxy]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| host 
-|  
-| String  
-| 
-|  
+| host
+|
+| String
+|
+|
 
-| port 
-|  
-| Integer  
-| 
-| int32 
+| port
+|
+| Integer
+|
+| int32
 
-| username 
-|  
-| String  
-| 
-|  
+| username
+|
+| String
+|
+|
 
-| password 
-|  
-| String  
-| 
-|  
+| password
+|
+| String
+|
+|
 
 |===
 
 
 [#DirectoryGenericBean]
-=== _DirectoryGenericBean_ 
+=== _DirectoryGenericBean_
 
 
 
 [.fields-DirectoryGenericBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| id 
-|  
-| Long  
-| 
-| int64 
+| id
+|
+| Long
+|
+| int64
 
-| name 
-| X 
-| String  
-| 
-|  
+| name
+| X
+| String
+|
+|
 
-| description 
-|  
-| String  
-| 
-|  
+| description
+|
+| String
+|
+|
 
-| active 
-|  
-| Boolean  
-| 
-|  
+| active
+|
+| Boolean
+|
+|
 
 |===
 
 
 [#DirectoryInternalAdvanced]
-=== _DirectoryInternalAdvanced_ 
+=== _DirectoryInternalAdvanced_
 
 
 
 [.fields-DirectoryInternalAdvanced]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| enableNestedGroups 
-|  
-| Boolean  
-| 
-|  
+| enableNestedGroups
+|
+| Boolean
+|
+|
 
 |===
 
 
 [#DirectoryInternalBean]
-=== _DirectoryInternalBean_ 
+=== _DirectoryInternalBean_
 
 
 
 [.fields-DirectoryInternalBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| id 
-|  
-| Long  
-| 
-| int64 
+| id
+|
+| Long
+|
+| int64
 
-| name 
-| X 
-| String  
-| 
-|  
+| name
+| X
+| String
+|
+|
 
-| description 
-|  
-| String  
-| 
-|  
+| description
+|
+| String
+|
+|
 
-| active 
-|  
-| Boolean  
-| 
-|  
+| active
+|
+| Boolean
+|
+|
 
-| credentialPolicy 
-|  
-| DirectoryInternalCredentialPolicy  
-| 
-|  
+| credentialPolicy
+|
+| DirectoryInternalCredentialPolicy
+|
+|
 
-| advanced 
-|  
-| DirectoryInternalAdvanced  
-| 
-|  
+| advanced
+|
+| DirectoryInternalAdvanced
+|
+|
 
-| permissions 
-|  
-| DirectoryInternalPermissions  
-| 
-|  
+| permissions
+|
+| DirectoryInternalPermissions
+|
+|
 
 |===
 
 
 [#DirectoryInternalCredentialPolicy]
-=== _DirectoryInternalCredentialPolicy_ 
+=== _DirectoryInternalCredentialPolicy_
 
 
 
 [.fields-DirectoryInternalCredentialPolicy]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| passwordRegex 
-|  
-| String  
-| 
-|  
+| passwordRegex
+|
+| String
+|
+|
 
-| passwordComplexityMessage 
-|  
-| String  
-| 
-|  
+| passwordComplexityMessage
+|
+| String
+|
+|
 
-| passwordMaxAttempts 
-|  
-| Long  
-| 
-| int64 
+| passwordMaxAttempts
+|
+| Long
+|
+| int64
 
-| passwordHistoryCount 
-|  
-| Long  
-| 
-| int64 
+| passwordHistoryCount
+|
+| Long
+|
+| int64
 
-| passwordMaxChangeTime 
-|  
-| Long  
-| 
-| int64 
+| passwordMaxChangeTime
+|
+| Long
+|
+| int64
 
-| passwordExpiryNotificationDays 
-|  
-| List  of <<integer>> 
-| 
-| int32 
+| passwordExpiryNotificationDays
+|
+| List  of <<integer>>
+|
+| int32
 
-| passwordEncryptionMethod 
-|  
-| String  
-| 
-|  
+| passwordEncryptionMethod
+|
+| String
+|
+|
 
 |===
 
 
 [#DirectoryInternalPermissions]
-=== _DirectoryInternalPermissions_ 
+=== _DirectoryInternalPermissions_
 
 
 
 [.fields-DirectoryInternalPermissions]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| addGroup 
-|  
-| Boolean  
-| 
-|  
+| addGroup
+|
+| Boolean
+|
+|
 
-| addUser 
-|  
-| Boolean  
-| 
-|  
+| addUser
+|
+| Boolean
+|
+|
 
-| modifyGroup 
-|  
-| Boolean  
-| 
-|  
+| modifyGroup
+|
+| Boolean
+|
+|
 
-| modifyUser 
-|  
-| Boolean  
-| 
-|  
+| modifyUser
+|
+| Boolean
+|
+|
 
-| modifyGroupAttributes 
-|  
-| Boolean  
-| 
-|  
+| modifyGroupAttributes
+|
+| Boolean
+|
+|
 
-| modifyUserAttributes 
-|  
-| Boolean  
-| 
-|  
+| modifyUserAttributes
+|
+| Boolean
+|
+|
 
-| removeGroup 
-|  
-| Boolean  
-| 
-|  
+| removeGroup
+|
+| Boolean
+|
+|
 
-| removeUser 
-|  
-| Boolean  
-| 
-|  
+| removeUser
+|
+| Boolean
+|
+|
 
 |===
 
 
 [#DirectoryLdapBean]
-=== _DirectoryLdapBean_ 
+=== _DirectoryLdapBean_
 
 
 
 [.fields-DirectoryLdapBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| id 
-|  
-| Long  
-| 
-| int64 
+| id
+|
+| Long
+|
+| int64
 
-| name 
-| X 
-| String  
-| 
-|  
+| name
+| X
+| String
+|
+|
 
-| description 
-|  
-| String  
-| 
-|  
+| description
+|
+| String
+|
+|
 
-| active 
-|  
-| Boolean  
-| 
-|  
+| active
+|
+| Boolean
+|
+|
 
-| server 
-|  
-| DirectoryLdapServer  
-| 
-|  
+| server
+|
+| DirectoryLdapServer
+|
+|
 
-| schema 
-|  
-| DirectoryLdapSchema  
-| 
-|  
+| schema
+|
+| DirectoryLdapSchema
+|
+|
 
-| permissions 
-|  
-| DirectoryLdapPermissions  
-| 
-|  
+| permissions
+|
+| DirectoryLdapPermissions
+|
+|
 
 |===
 
 
 [#DirectoryLdapPermissions]
-=== _DirectoryLdapPermissions_ 
+=== _DirectoryLdapPermissions_
 
 
 
 [.fields-DirectoryLdapPermissions]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| readOnly 
-|  
-| Boolean  
-| 
-|  
+| readOnly
+|
+| Boolean
+|
+|
 
-| readOnlyForLocalGroups 
-|  
-| Boolean  
-| 
-|  
+| readOnlyForLocalGroups
+|
+| Boolean
+|
+|
 
-| fullAccess 
-|  
-| Boolean  
-| 
-|  
+| fullAccess
+|
+| Boolean
+|
+|
 
 |===
 
 
 [#DirectoryLdapSchema]
-=== _DirectoryLdapSchema_ 
+=== _DirectoryLdapSchema_
 
 
 
 [.fields-DirectoryLdapSchema]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| baseDn 
-|  
-| String  
-| 
-|  
+| baseDn
+|
+| String
+|
+|
 
-| userDn 
-|  
-| String  
-| 
-|  
+| userDn
+|
+| String
+|
+|
 
-| groupDn 
-|  
-| String  
-| 
-|  
+| groupDn
+|
+| String
+|
+|
 
 |===
 
 
 [#DirectoryLdapServer]
-=== _DirectoryLdapServer_ 
+=== _DirectoryLdapServer_
 
 
 
 [.fields-DirectoryLdapServer]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| host 
-| X 
-| String  
-| 
-|  
+| host
+| X
+| String
+|
+|
 
-| port 
-|  
-| Integer  
-| 
-| int32 
+| port
+|
+| Integer
+|
+| int32
 
-| useSsl 
-|  
-| Boolean  
-| 
-|  
+| useSsl
+|
+| Boolean
+|
+|
 
-| username 
-|  
-| String  
-| 
-|  
+| username
+|
+| String
+|
+|
 
-| password 
-|  
-| String  
-| 
-|  
+| password
+|
+| String
+|
+|
 
 |===
 
 
 [#ErrorCollection]
-=== _ErrorCollection_ 
+=== _ErrorCollection_
 
 
 
 [.fields-ErrorCollection]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| errorMessages 
-|  
-| List  of <<string>> 
-| 
-|  
+| errorMessages
+|
+| List  of <<string>>
+|
+|
 
 |===
 
 
 [#MailServerSmtpBean]
-=== _MailServerSmtpBean_ 
+=== _MailServerSmtpBean_
 
 
 
 [.fields-MailServerSmtpBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| name 
-|  
-| String  
-| 
-|  
+| name
+|
+| String
+|
+|
 
-| description 
-|  
-| String  
-| 
-|  
+| description
+|
+| String
+|
+|
 
-| host 
-|  
-| String  
-| 
-|  
+| host
+|
+| String
+|
+|
 
-| port 
-|  
-| Integer  
-| 
-| int32 
+| port
+|
+| Integer
+|
+| int32
 
-| protocol 
-|  
-| String  
-| 
-|  
+| protocol
+|
+| String
+|
+|
 
-| timeout 
-|  
-| Long  
-| 
-| int64 
+| timeout
+|
+| Long
+|
+| int64
 
-| username 
-|  
-| String  
-| 
-|  
+| username
+|
+| String
+|
+|
 
-| password 
-|  
-| String  
-| 
-|  
+| password
+|
+| String
+|
+|
 
-| adminContact 
-|  
-| String  
-| 
-|  
+| adminContact
+|
+| String
+|
+|
 
-| from 
-|  
-| String  
-| 
-|  
+| from
+|
+| String
+|
+|
 
-| prefix 
-|  
-| String  
-| 
-|  
+| prefix
+|
+| String
+|
+|
 
-| useTls 
-|  
-| Boolean  
-| 
-|  
+| useTls
+|
+| Boolean
+|
+|
 
 |===
 
 
 [#SettingsBean]
-=== _SettingsBean_ 
+=== _SettingsBean_
 
 
 
 [.fields-SettingsBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| baseUrl 
-|  
-| URI  
-| 
-| uri 
+| baseUrl
+|
+| URI
+|
+| uri
 
-| mode 
-|  
-| String  
-| 
-|  
+| mode
+|
+| String
+|
+|
 
-| title 
-|  
-| String  
-| 
-|  
+| title
+|
+| String
+|
+|
 
 |===
-
 
