@@ -14,7 +14,9 @@ import org.apache.commons.lang3.NotImplementedException;
 
 import javax.validation.constraints.NotNull;
 
-import static de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkTypes.*;
+import java.util.UUID;
+
+import static de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkType.*;
 
 public class ApplicationLinkBeanUtil {
 
@@ -28,7 +30,7 @@ public class ApplicationLinkBeanUtil {
             @NotNull final ApplicationLink linkDetails) {
 
         final ApplicationLinkBean applicationLinkBean = new ApplicationLinkBean();
-        applicationLinkBean.setServerId(linkDetails.getId().toString());
+        applicationLinkBean.setUuid(UUID.fromString(linkDetails.getId().get()));
         applicationLinkBean.setName(linkDetails.getName());
         applicationLinkBean.setType(getLinkTypeFromAppType(linkDetails.getType()));
         applicationLinkBean.setDisplayUrl(linkDetails.getDisplayUrl());
@@ -60,7 +62,7 @@ public class ApplicationLinkBeanUtil {
      * @param type the ApplicationType
      * @return the linktype
      */
-    private static ApplicationLinkBean.ApplicationLinkTypes getLinkTypeFromAppType(
+    private static ApplicationLinkBean.ApplicationLinkType getLinkTypeFromAppType(
             @NotNull final ApplicationType type) {
 
         if (type instanceof BambooApplicationType) {

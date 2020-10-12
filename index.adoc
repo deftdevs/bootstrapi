@@ -135,6 +135,257 @@ ifdef::internal-generation[]
 endif::internal-generation[]
 
 
+[.deleteApplicationLink]
+==== deleteApplicationLink
+    
+`DELETE /application-links/{id}`
+
+Deletes a single application link
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}application-links/\{id\}/DELETE/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| id 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+
+
+
+
+===== Return Type
+
+<<ErrorCollection>>
+
+
+===== Content Type
+
+* */*
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}application-links/\{id\}/DELETE/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}application-links/\{id\}/DELETE/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :application-links/{id}/DELETE/DELETE.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}application-links/\{id\}/DELETE/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.deleteApplicationLinks]
+==== deleteApplicationLinks
+    
+`DELETE /application-links`
+
+Deletes all application links. NOTE: The 'force' parameter must be set to 'true' in order to execute this request.
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}application-links/DELETE/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| force 
+|   
+| - 
+| null 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<ErrorCollection>>
+
+
+===== Content Type
+
+* */*
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}application-links/DELETE/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}application-links/DELETE/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :application-links/DELETE/DELETE.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}application-links/DELETE/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getApplicationLink]
+==== getApplicationLink
+    
+`GET /application-links/{id}`
+
+Gets a single application link
+
+===== Description 
+
+Upon successful request, returns a `ApplicationLinkBean` object containing the requested application link
+
+
+// markup not found, no include::{specDir}application-links/\{id\}/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| id 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+
+
+
+
+===== Return Type
+
+<<ApplicationLinkBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<ApplicationLinkBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}application-links/\{id\}/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}application-links/\{id\}/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :application-links/{id}/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}application-links/\{id\}/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.getApplicationLinks]
 ==== getApplicationLinks
     
@@ -209,12 +460,125 @@ ifdef::internal-generation[]
 endif::internal-generation[]
 
 
+[.setApplicationLink]
+==== setApplicationLink
+    
+`PUT /application-links/{id}`
+
+Updates an application link
+
+===== Description 
+
+Upon successful request, returns the updated `ApplicationLinkBean` object containing the updated application link
+
+
+// markup not found, no include::{specDir}application-links/\{id\}/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| id 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| ApplicationLinkBean 
+|  <<ApplicationLinkBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| ignore-setup-errors 
+|   
+| - 
+| false 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<ApplicationLinkBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<ApplicationLinkBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}application-links/\{id\}/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}application-links/\{id\}/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :application-links/{id}/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}application-links/\{id\}/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.setApplicationLinks]
 ==== setApplicationLinks
     
 `PUT /application-links`
 
-Set a new set of application links
+Sets or updates a set of application links
 
 ===== Description 
 
@@ -1629,11 +1993,11 @@ endif::internal-generation[]
 |===         
 | Field Name| Required| Type| Description| Format
 
-| serverId 
+| id 
 |  
-| String  
+| UUID  
 | 
-|  
+| uuid 
 
 | name 
 | X 

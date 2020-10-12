@@ -60,7 +60,7 @@ public class ApplicationLinkBeanUtilTest {
 
     @Test
     public void testLinkTypeGenerator() throws URISyntaxException {
-        for (ApplicationLinkBean.ApplicationLinkTypes linkType : ApplicationLinkBean.ApplicationLinkTypes.values()) {
+        for (ApplicationLinkBean.ApplicationLinkType linkType : ApplicationLinkBean.ApplicationLinkType.values()) {
             ApplicationType applicationType = null;
             switch (linkType) {
                 case BAMBOO:
