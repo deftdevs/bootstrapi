@@ -309,6 +309,621 @@ ifdef::internal-generation[]
 endif::internal-generation[]
 
 
+[.Applications]
+=== Applications
+
+
+[.addApplication]
+==== addApplication
+    
+`POST /applications`
+
+Add an application
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}applications/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| ApplicationBean 
+|  <<ApplicationBean>> 
+| - 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+<<ApplicationBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the added application.
+|  <<ApplicationBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}applications/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}applications/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :applications/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}applications/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.deleteApplication]
+==== deleteApplication
+    
+`DELETE /applications/{id}`
+
+Delete an application
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}applications/\{id\}/DELETE/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| id 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* */*
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns an empty body.
+|  <<>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}applications/\{id\}/DELETE/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}applications/\{id\}/DELETE/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :applications/{id}/DELETE/DELETE.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}applications/\{id\}/DELETE/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.deleteApplications]
+==== deleteApplications
+    
+`DELETE /applications`
+
+Delete all applications
+
+===== Description 
+
+NOTE: The 'force' parameter must be se to 'true' in order to execute this request.
+
+
+// markup not found, no include::{specDir}applications/DELETE/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| force 
+|   
+| - 
+| null 
+|  
+
+|===         
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* */*
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns an empty body.
+|  <<>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}applications/DELETE/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}applications/DELETE/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :applications/DELETE/DELETE.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}applications/DELETE/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getApplication]
+==== getApplication
+    
+`GET /applications/{id}`
+
+Get an application
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}applications/\{id\}/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| id 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+
+
+
+
+===== Return Type
+
+<<ApplicationsBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the requested application.
+|  <<ApplicationsBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}applications/\{id\}/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}applications/\{id\}/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :applications/{id}/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}applications/\{id\}/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getApplications]
+==== getApplications
+    
+`GET /applications`
+
+Get all applications
+
+===== Description 
+
+Upon successful request, returns a `ApplicationsBean` object containing all applications
+
+
+// markup not found, no include::{specDir}applications/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<ApplicationsBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns all applications.
+|  <<ApplicationsBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}applications/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}applications/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :applications/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}applications/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setApplication]
+==== setApplication
+    
+`PUT /applications/{id}`
+
+Update an application
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}applications/\{id\}/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+====== Path Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| id 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| ApplicationBean 
+|  <<ApplicationBean>> 
+| - 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+<<ApplicationBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the updated application.
+|  <<ApplicationBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}applications/\{id\}/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}applications/\{id\}/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :applications/{id}/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}applications/\{id\}/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setApplications]
+==== setApplications
+    
+`PUT /applications`
+
+Set or update a list of applications
+
+===== Description 
+
+NOTE: All existing applications with the same 'name' attribute are updated.
+
+
+// markup not found, no include::{specDir}applications/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| ApplicationsBean 
+|  <<ApplicationsBean>> 
+| - 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+<<ApplicationsBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns all applications.
+|  <<ApplicationsBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}applications/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}applications/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :applications/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}applications/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.Directories]
 === Directories
 
@@ -955,6 +1570,55 @@ endif::internal-generation[]
 |===
 
 
+[#ApplicationBean]
+=== _ApplicationBean_ 
+
+
+
+[.fields-ApplicationBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+|  
+| Long  
+| 
+| int64 
+
+| name 
+|  
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| active 
+|  
+| Boolean  
+| 
+|  
+
+| type 
+|  
+| String  
+| 
+|  _Enum:_ GENERIC, PLUGIN, CROWD, JIRA, CONFLUENCE, BITBUCKET, FISHEYE, CRUCIBLE, BAMBOO, 
+
+| password 
+|  
+| String  
+| 
+|  
+
+|===
+
+
 [#ApplicationLinkBean]
 === _ApplicationLinkBean_ 
 
@@ -1035,6 +1699,25 @@ endif::internal-generation[]
 | applicationLinks 
 |  
 | List  of <<ApplicationLinkBean>> 
+| 
+|  
+
+|===
+
+
+[#ApplicationsBean]
+=== _ApplicationsBean_ 
+
+
+
+[.fields-ApplicationsBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| applications 
+|  
+| List  of <<ApplicationBean>> 
 | 
 |  
 
