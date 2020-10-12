@@ -57,7 +57,7 @@ public class ApplicationLinkBeanUtil {
     }
 
     /**
-     * Gets the linktype ApplicationLinkTypes enum value.
+     * Gets the linktype ApplicationLinkType enum value.
      *
      * @param type the ApplicationType
      * @return the linktype
