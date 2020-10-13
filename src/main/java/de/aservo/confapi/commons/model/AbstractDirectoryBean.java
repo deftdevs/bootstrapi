@@ -41,5 +41,6 @@ public abstract class AbstractDirectoryBean {
     private String description;
 
     @XmlElement
-    private boolean active;
+    private Boolean active;
+
 }
