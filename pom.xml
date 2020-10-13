@@ -75,10 +75,19 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+
             <dependency>
                 <groupId>com.atlassian.jira</groupId>
                 <artifactId>jira-plugins</artifactId>
                 <version>${jira.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>de.aservo</groupId>
+                <artifactId>confapi-commons</artifactId>
+                <version>${confapi-commons.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -108,7 +117,6 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <scope>provided</scope>
-            <version>1.18.10</version>
         </dependency>
 
         <!-- provided dependencies -->
@@ -252,34 +260,29 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <scope>test</scope>
-            <version>4.12</version>
         </dependency>
 
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
             <scope>test</scope>
-            <version>2.28.2</version>
         </dependency>
 
         <dependency>
             <groupId>org.apache.wink</groupId>
             <artifactId>wink-client</artifactId>
             <scope>test</scope>
-            <version>1.4</version>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <version>${hibernate-validator.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
-            <version>${hibernate-validator.version}</version>
             <scope>test</scope>
         </dependency>
 
