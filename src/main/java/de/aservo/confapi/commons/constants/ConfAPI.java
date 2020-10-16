@@ -21,6 +21,7 @@ public class ConfAPI {
     public static final String GADGET                       = "gadget";
     public static final String GADGETS                      = "gadgets";
     public static final String GADGET_EXTERNAL              = "external";
+    public static final String HTTP                         = "http";
     public static final String LICENSE                      = "license";
     public static final String LICENSES                     = "licenses";
     public static final String MAIL_SERVER                  = "mail-server";
