@@ -56,7 +56,7 @@ public class DirectoryBeanUtil {
         }
 
         return ImmutableDirectory.builder(directoryBean.getName(), DirectoryBeanUtil.getDirectoryType(directoryBean), RemoteCrowdDirectory.class.getName())
-                .setActive(directoryBean.isActive())
+                .setActive(directoryBean.getActive() != null && directoryBean.getActive())
                 .setAttributes(attributes)
                 .build();
     }

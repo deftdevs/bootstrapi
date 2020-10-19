@@ -23,7 +23,7 @@ public class MailServerPopBeanUtilTest {
         assertEquals(server.getMailProtocol().getProtocol(), bean.getProtocol());
         assertEquals(server.getHostname(), bean.getHost());
         assertEquals(Integer.valueOf(server.getPort()), bean.getPort());
-        assertEquals(server.getTimeout(), bean.getTimeout());
+        assertEquals(server.getTimeout(), (long) bean.getTimeout());
         assertEquals(server.getUsername(), bean.getUsername());
         assertNull(bean.getPassword());
     }
