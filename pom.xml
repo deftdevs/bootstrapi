@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>confapi-jira-plugin</artifactId>
-    <version>0.0.4-SNAPSHOT</version>
+    <version>0.0.5-SNAPSHOT</version>
     <packaging>atlassian-plugin</packaging>
 
     <name>ConfAPI for Jira</name>
@@ -54,7 +54,7 @@
         <atlassian.amps.version>8.0.2</atlassian.amps.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
-        <confapi-commons.version>0.0.20-SNAPSHOT</confapi-commons.version>
+        <confapi-commons.version>0.0.27-SNAPSHOT</confapi-commons.version>
         <glassfish.el-api.version>2.2.4</glassfish.el-api.version>
         <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
         <javax.el-api.version>3.0.0</javax.el-api.version>

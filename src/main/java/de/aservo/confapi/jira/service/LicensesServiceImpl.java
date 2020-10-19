@@ -39,7 +39,6 @@ public class LicensesServiceImpl implements LicensesService {
         return new LicensesBean(licenseBeans);
     }
 
-    @Override
     public LicensesBean setLicenses(@NotNull LicensesBean licensesBean) {
         // clear all licenses first
         licenseManager.removeLicenses(licenseManager.getLicenses());
