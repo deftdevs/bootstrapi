@@ -12,6 +12,8 @@ import javax.xml.bind.annotation.XmlElement;
 @NoArgsConstructor
 public abstract class AbstractMailServerProtocolBean {
 
+    public static final Long DEFAULT_TIMEOUT = 10000L;
+
     @XmlElement
     private String name;
 
@@ -39,20 +41,18 @@ public abstract class AbstractMailServerProtocolBean {
     private String password;
 
     /**
-     * Make sure not to set empty string as description.
+     * Make sure port can be set from an int and from a String value.
      *
-     * @param description the description
+     * @param port the port
      */
-    public void setDescription(
-            final String description) {
+    public void setPort(
+            final int port) {
 
-        if (StringUtils.isNotBlank(description)) {
-            this.description = description;
-        }
+        this.port = port;
     }
 
     /**
-     * make sure port can be set from a String value.
+     * Make sure port can be set from an int and from a String value.
      *
      * @param port the port
      */
@@ -84,9 +84,10 @@ public abstract class AbstractMailServerProtocolBean {
      */
     public Long getTimeout() {
         if (timeout == null) {
-            return 10000L;
+            return DEFAULT_TIMEOUT;
         }
 
         return timeout;
     }
+
 }
