@@ -10,6 +10,7 @@ import org.codehaus.jackson.annotate.JsonTypeInfo;
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Date;
 
 /**
  * Bean for user directory settings in REST requests.
@@ -42,5 +43,11 @@ public abstract class AbstractDirectoryBean {
 
     @XmlElement
     private Boolean active;
+
+    @XmlElement
+    private Date createdDate;
+
+    @XmlElement
+    private Date updatedDate;
 
 }
