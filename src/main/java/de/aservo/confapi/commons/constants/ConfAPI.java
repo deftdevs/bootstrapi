@@ -7,9 +7,11 @@ public class ConfAPI {
     public static final String APPLICATION_LINK             = "application-link";
     public static final String APPLICATION_LINKS            = "application-links";
     public static final String BACKUP                       = "backup";
+    public static final String BRANDING                     = "branding";
     public static final String BACKUP_EXPORT                = "export";
     public static final String BACKUP_IMPORT                = "import";
     public static final String BACKUP_QUEUE                 = "queue";
+    public static final String COLOUR_SCHEME                = "colour-scheme";
     public static final String DIRECTORIES                  = "directories";
     public static final String DIRECTORY                    = "directory";
     public static final String DIRECTORY_CROWD              = "crowd";
@@ -18,12 +20,14 @@ public class ConfAPI {
     public static final String DIRECTORY_LDAP               = "ldap";
     public static final String ERROR                        = "error";
     public static final String ERRORS                       = "errors";
+    public static final String FAVICON                      = "favicon";
     public static final String GADGET                       = "gadget";
     public static final String GADGETS                      = "gadgets";
     public static final String GADGET_EXTERNAL              = "external";
     public static final String HTTP                         = "http";
     public static final String LICENSE                      = "license";
     public static final String LICENSES                     = "licenses";
+    public static final String LOGO                         = "logo";
     public static final String MAIL_SERVER                  = "mail-server";
     public static final String MAIL_SERVERS                 = "mail-servers";
     public static final String MAIL_SERVER_POP              = "pop";
