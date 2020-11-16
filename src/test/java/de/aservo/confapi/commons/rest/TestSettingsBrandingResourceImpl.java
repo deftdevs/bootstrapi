@@ -1,10 +1,10 @@
 package de.aservo.confapi.commons.rest;
 
-import de.aservo.confapi.commons.service.api.BrandingService;
+import de.aservo.confapi.commons.service.api.SettingsBrandingService;
 
 public class TestSettingsBrandingResourceImpl extends AbstractSettingsBrandingResourceImpl {
 
-    public TestSettingsBrandingResourceImpl(BrandingService brandingService) {
+    public TestSettingsBrandingResourceImpl(SettingsBrandingService brandingService) {
         super(brandingService);
     }
 

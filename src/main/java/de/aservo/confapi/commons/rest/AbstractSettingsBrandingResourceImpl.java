@@ -1,29 +1,29 @@
 package de.aservo.confapi.commons.rest;
 
-import de.aservo.confapi.commons.model.SettingsBrandingColourSchemeBean;
+import de.aservo.confapi.commons.model.SettingsBrandingColorSchemeBean;
 import de.aservo.confapi.commons.rest.api.SettingsBrandingResource;
-import de.aservo.confapi.commons.service.api.BrandingService;
+import de.aservo.confapi.commons.service.api.SettingsBrandingService;
 
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
 
 public abstract class AbstractSettingsBrandingResourceImpl implements SettingsBrandingResource {
 
-    private final BrandingService brandingService;
+    private final SettingsBrandingService brandingService;
 
-    public AbstractSettingsBrandingResourceImpl(final BrandingService brandingService) {
+    public AbstractSettingsBrandingResourceImpl(final SettingsBrandingService brandingService) {
         this.brandingService = brandingService;
     }
 
     @Override
     public Response getColourScheme() {
-        final SettingsBrandingColourSchemeBean colourSchemeBean = brandingService.getColourScheme();
+        final SettingsBrandingColorSchemeBean colourSchemeBean = brandingService.getColourScheme();
         return Response.ok(colourSchemeBean).build();
     }
 
     @Override
-    public Response setColourScheme(SettingsBrandingColourSchemeBean bean) {
-        final SettingsBrandingColourSchemeBean colourSchemeBean = brandingService.setColourScheme(bean);
+    public Response setColourScheme(SettingsBrandingColorSchemeBean bean) {
+        final SettingsBrandingColorSchemeBean colourSchemeBean = brandingService.setColourScheme(bean);
         return Response.ok(colourSchemeBean).build();
     }
 

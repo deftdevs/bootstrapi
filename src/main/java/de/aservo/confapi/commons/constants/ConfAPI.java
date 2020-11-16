@@ -11,7 +11,7 @@ public class ConfAPI {
     public static final String BACKUP_EXPORT                = "export";
     public static final String BACKUP_IMPORT                = "import";
     public static final String BACKUP_QUEUE                 = "queue";
-    public static final String COLOUR_SCHEME                = "colour-scheme";
+    public static final String COLOR_SCHEME                 = "color-scheme";
     public static final String DIRECTORIES                  = "directories";
     public static final String DIRECTORY                    = "directory";
     public static final String DIRECTORY_CROWD              = "crowd";
