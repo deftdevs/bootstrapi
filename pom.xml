@@ -16,7 +16,13 @@
     <packaging>atlassian-plugin</packaging>
 
     <name>ConfAPI for Jira</name>
-    <description>REST API for automated Jira configuration.</description>
+    <description>ConfAPI for Jira provides a REST API for automated configuration tasks.</description>
+    <url>https://github.com/aservo/confapi-jira-plugin</url>
+
+    <organization>
+        <name>ASERVO Software GmbH</name>
+        <url>https://www.aservo.com</url>
+    </organization>
 
     <licenses>
         <license>
