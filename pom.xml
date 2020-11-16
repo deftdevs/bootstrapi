@@ -15,8 +15,13 @@
     <packaging>atlassian-plugin</packaging>
 
     <name>ConfAPI for Crowd</name>
-    <description>REST API for automated Crowd configuration.</description>
+    <description>ConfAPI for Crowd provides a REST API for automated configuration tasks.</description>
     <url>https://github.com/aservo/confapi-crowd-plugin</url>
+
+    <organization>
+        <name>ASERVO Software GmbH</name>
+        <url>https://www.aservo.com</url>
+    </organization>
 
     <licenses>
         <license>
