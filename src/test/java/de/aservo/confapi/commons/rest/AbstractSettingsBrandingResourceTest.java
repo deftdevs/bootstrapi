@@ -1,7 +1,7 @@
 package de.aservo.confapi.commons.rest;
 
-import de.aservo.confapi.commons.model.SettingsBrandingColourSchemeBean;
-import de.aservo.confapi.commons.service.api.BrandingService;
+import de.aservo.confapi.commons.model.SettingsBrandingColorSchemeBean;
+import de.aservo.confapi.commons.service.api.SettingsBrandingService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,7 +20,7 @@ import static org.mockito.Mockito.doReturn;
 public class AbstractSettingsBrandingResourceTest {
 
     @Mock
-    private BrandingService brandingService;
+    private SettingsBrandingService brandingService;
 
     private TestSettingsBrandingResourceImpl resource;
 
@@ -31,26 +31,26 @@ public class AbstractSettingsBrandingResourceTest {
 
     @Test
     public void testGetColourScheme() {
-        final SettingsBrandingColourSchemeBean bean = SettingsBrandingColourSchemeBean.EXAMPLE_1;
+        final SettingsBrandingColorSchemeBean bean = SettingsBrandingColorSchemeBean.EXAMPLE_1;
 
         doReturn(bean).when(brandingService).getColourScheme();
 
         final Response response = resource.getColourScheme();
         assertEquals(200, response.getStatus());
-        final SettingsBrandingColourSchemeBean colourSchemeBean = (SettingsBrandingColourSchemeBean) response.getEntity();
+        final SettingsBrandingColorSchemeBean colourSchemeBean = (SettingsBrandingColorSchemeBean) response.getEntity();
 
         assertEquals(colourSchemeBean, bean);
     }
 
     @Test
     public void testSetColourScheme() {
-        final SettingsBrandingColourSchemeBean bean = SettingsBrandingColourSchemeBean.EXAMPLE_1;
+        final SettingsBrandingColorSchemeBean bean = SettingsBrandingColorSchemeBean.EXAMPLE_1;
 
         doReturn(bean).when(brandingService).setColourScheme(bean);
 
         final Response response = resource.setColourScheme(bean);
         assertEquals(200, response.getStatus());
-        final SettingsBrandingColourSchemeBean colourSchemeBean = (SettingsBrandingColourSchemeBean) response.getEntity();
+        final SettingsBrandingColorSchemeBean colourSchemeBean = (SettingsBrandingColorSchemeBean) response.getEntity();
 
         assertEquals(colourSchemeBean, bean);
     }

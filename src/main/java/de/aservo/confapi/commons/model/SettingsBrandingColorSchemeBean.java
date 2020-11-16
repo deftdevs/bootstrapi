@@ -12,9 +12,9 @@ import static de.aservo.confapi.commons.constants.ConfAPI.*;
 
 @Data
 @NoArgsConstructor
-@XmlRootElement(name = SETTINGS + "-" + BRANDING + "-" + COLOUR_SCHEME)
+@XmlRootElement(name = SETTINGS + "-" + BRANDING + "-" + COLOR_SCHEME)
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SettingsBrandingColourSchemeBean {
+public class SettingsBrandingColorSchemeBean {
 
     @XmlElement
     private String topBar;
@@ -66,12 +66,12 @@ public class SettingsBrandingColourSchemeBean {
 
     // Example instances for documentation and tests
 
-    public static final SettingsBrandingColourSchemeBean EXAMPLE_1;
+    public static final SettingsBrandingColorSchemeBean EXAMPLE_1;
 
     static {
         final String COLOR_WHITE = "#FFFFFF";
 
-        EXAMPLE_1 = new SettingsBrandingColourSchemeBean();
+        EXAMPLE_1 = new SettingsBrandingColorSchemeBean();
         EXAMPLE_1.setBordersAndDividers(COLOR_WHITE);
         EXAMPLE_1.setHeaderButtonBackground(COLOR_WHITE);
         EXAMPLE_1.setHeaderButtonText(COLOR_WHITE);

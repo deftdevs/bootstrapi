@@ -5,5 +5,5 @@ import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 @RunWith(MockitoJUnitRunner.class)
-public class SettingsBrandingColourSchemeBeanTest extends AbstractBeanTest {
+public class SettingsBrandingColorSchemeBeanTest extends AbstractBeanTest {
 }

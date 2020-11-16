@@ -1,18 +1,18 @@
 package de.aservo.confapi.commons.service.api;
 
-import de.aservo.confapi.commons.model.SettingsBrandingColourSchemeBean;
+import de.aservo.confapi.commons.model.SettingsBrandingColorSchemeBean;
 
 import javax.validation.constraints.NotNull;
 import java.io.InputStream;
 
-public interface BrandingService {
+public interface SettingsBrandingService {
 
     /**
      * Get the colour scheme.
      *
      * @return the colour scheme
      */
-    SettingsBrandingColourSchemeBean getColourScheme();
+    SettingsBrandingColorSchemeBean getColourScheme();
 
 
     /**
@@ -21,8 +21,8 @@ public interface BrandingService {
      * @param colourSchemeBean the colour scheme to set
      * @return the updated colour scheme
      */
-    SettingsBrandingColourSchemeBean setColourScheme(
-            @NotNull final SettingsBrandingColourSchemeBean colourSchemeBean);
+    SettingsBrandingColorSchemeBean setColourScheme(
+            @NotNull final SettingsBrandingColorSchemeBean colourSchemeBean);
 
     /**
      * Get the logo binary.
