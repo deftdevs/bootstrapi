@@ -1915,6 +1915,230 @@ endif::internal-generation[]
 === Settings
 
 
+[.getBrandingColorScheme]
+==== getBrandingColorScheme
+    
+`GET /settings/branding/color-scheme`
+
+Get the color scheme
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}settings/branding/color-scheme/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<SettingsBrandingColorSchemeBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the color scheme
+|  <<SettingsBrandingColorSchemeBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}settings/branding/color-scheme/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}settings/branding/color-scheme/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :settings/branding/color-scheme/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}settings/branding/color-scheme/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getBrandingFavicon]
+==== getBrandingFavicon
+    
+`GET /settings/branding/favicon`
+
+Get the favicon
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}settings/branding/favicon/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+
+<<Object>>
+
+
+===== Content Type
+
+* application/octet-stream
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the favicon binary
+|  <<Object>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}settings/branding/favicon/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}settings/branding/favicon/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :settings/branding/favicon/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}settings/branding/favicon/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getBrandingLogo]
+==== getBrandingLogo
+    
+`GET /settings/branding/logo`
+
+Get the logo
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}settings/branding/logo/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+
+<<Object>>
+
+
+===== Content Type
+
+* application/octet-stream
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the logo binary
+|  <<Object>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}settings/branding/logo/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}settings/branding/logo/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :settings/branding/logo/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}settings/branding/logo/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.getSettings]
 ==== getSettings
     
@@ -1984,6 +2208,269 @@ ifdef::internal-generation[]
 ===== Implementation
 
 // markup not found, no include::{specDir}settings/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setBrandingColorScheme]
+==== setBrandingColorScheme
+    
+`PUT /settings/branding/color-scheme`
+
+Set the color scheme
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}settings/branding/color-scheme/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| SettingsBrandingColorSchemeBean 
+|  <<SettingsBrandingColorSchemeBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+<<SettingsBrandingColorSchemeBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the updated color scheme
+|  <<SettingsBrandingColorSchemeBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}settings/branding/color-scheme/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}settings/branding/color-scheme/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :settings/branding/color-scheme/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}settings/branding/color-scheme/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setBrandingFavicon]
+==== setBrandingFavicon
+    
+`PUT /settings/branding/favicon`
+
+Set the favicon
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}settings/branding/favicon/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| body 
+|  <<object>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| favicon successfully set
+|  <<>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}settings/branding/favicon/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}settings/branding/favicon/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :settings/branding/favicon/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}settings/branding/favicon/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setBrandingLogo]
+==== setBrandingLogo
+    
+`PUT /settings/branding/logo`
+
+Set the logo
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}settings/branding/logo/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| body 
+|  <<object>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| logo successfully set
+|  <<>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}settings/branding/logo/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}settings/branding/logo/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :settings/branding/logo/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}settings/branding/logo/PUT/implementation.adoc[opts=optional]
 
 
 endif::internal-generation[]
@@ -2113,6 +2600,18 @@ endif::internal-generation[]
 | Boolean  
 | 
 |  
+
+| createdDate 
+|  
+| Date  
+| 
+| date-time 
+
+| updatedDate 
+|  
+| Date  
+| 
+| date-time 
 
 | server 
 |  
@@ -2323,6 +2822,18 @@ endif::internal-generation[]
 | 
 |  
 
+| createdDate 
+|  
+| Date  
+| 
+| date-time 
+
+| updatedDate 
+|  
+| Date  
+| 
+| date-time 
+
 | server 
 |  
 | DirectoryCrowdServer  
@@ -2489,6 +3000,18 @@ endif::internal-generation[]
 | 
 |  
 
+| createdDate 
+|  
+| Date  
+| 
+| date-time 
+
+| updatedDate 
+|  
+| Date  
+| 
+| date-time 
+
 |===
 
 
@@ -2544,6 +3067,18 @@ endif::internal-generation[]
 | Boolean  
 | 
 |  
+
+| createdDate 
+|  
+| Date  
+| 
+| date-time 
+
+| updatedDate 
+|  
+| Date  
+| 
+| date-time 
 
 | credentialPolicy 
 |  
@@ -2715,6 +3250,18 @@ endif::internal-generation[]
 | Boolean  
 | 
 |  
+
+| createdDate 
+|  
+| Date  
+| 
+| date-time 
+
+| updatedDate 
+|  
+| Date  
+| 
+| date-time 
 
 | server 
 |  
@@ -3104,6 +3651,115 @@ endif::internal-generation[]
 |  
 
 | title 
+|  
+| String  
+| 
+|  
+
+|===
+
+
+[#SettingsBrandingColorSchemeBean]
+=== _SettingsBrandingColorSchemeBean_ 
+
+
+
+[.fields-SettingsBrandingColorSchemeBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| topBar 
+|  
+| String  
+| 
+|  
+
+| topBarText 
+|  
+| String  
+| 
+|  
+
+| headerButtonBackground 
+|  
+| String  
+| 
+|  
+
+| headerButtonText 
+|  
+| String  
+| 
+|  
+
+| topBarMenuSelectedBackground 
+|  
+| String  
+| 
+|  
+
+| topBarMenuSelectedText 
+|  
+| String  
+| 
+|  
+
+| topBarMenuItemText 
+|  
+| String  
+| 
+|  
+
+| menuItemSelectedBackground 
+|  
+| String  
+| 
+|  
+
+| menuItemSelectedText 
+|  
+| String  
+| 
+|  
+
+| searchFieldBackground 
+|  
+| String  
+| 
+|  
+
+| searchFieldText 
+|  
+| String  
+| 
+|  
+
+| pageMenuSelectedBackground 
+|  
+| String  
+| 
+|  
+
+| pageMenuItemText 
+|  
+| String  
+| 
+|  
+
+| headingText 
+|  
+| String  
+| 
+|  
+
+| links 
+|  
+| String  
+| 
+|  
+
+| bordersAndDividers 
 |  
 | String  
 | 
