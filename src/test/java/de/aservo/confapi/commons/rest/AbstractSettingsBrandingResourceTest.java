@@ -35,7 +35,7 @@ public class AbstractSettingsBrandingResourceTest {
 
         doReturn(bean).when(brandingService).getColourScheme();
 
-        final Response response = resource.getColourScheme();
+        final Response response = resource.getBrandingColorScheme();
         assertEquals(200, response.getStatus());
         final SettingsBrandingColorSchemeBean colourSchemeBean = (SettingsBrandingColorSchemeBean) response.getEntity();
 
@@ -48,7 +48,7 @@ public class AbstractSettingsBrandingResourceTest {
 
         doReturn(bean).when(brandingService).setColourScheme(bean);
 
-        final Response response = resource.setColourScheme(bean);
+        final Response response = resource.setBrandingColorScheme(bean);
         assertEquals(200, response.getStatus());
         final SettingsBrandingColorSchemeBean colourSchemeBean = (SettingsBrandingColorSchemeBean) response.getEntity();
 
@@ -61,7 +61,7 @@ public class AbstractSettingsBrandingResourceTest {
 
         doReturn(stream).when(brandingService).getLogo();
 
-        final Response response = resource.getLogo();
+        final Response response = resource.getBrandingLogo();
         assertEquals(200, response.getStatus());
         final InputStream inputStream = (InputStream) response.getEntity();
 
@@ -72,7 +72,7 @@ public class AbstractSettingsBrandingResourceTest {
     public void testSetLogo() {
         final InputStream stream = createDummyInputStream();
 
-        final Response response = resource.setLogo(stream);
+        final Response response = resource.setBrandingLogo(stream);
 
         assertEquals(200, response.getStatus());
     }
@@ -83,7 +83,7 @@ public class AbstractSettingsBrandingResourceTest {
 
         doReturn(stream).when(brandingService).getFavicon();
 
-        final Response response = resource.getFavicon();
+        final Response response = resource.getBrandingFavicon();
         assertEquals(200, response.getStatus());
         final InputStream inputStream = (InputStream) response.getEntity();
 
@@ -94,7 +94,7 @@ public class AbstractSettingsBrandingResourceTest {
     public void testSetFavicon() {
         final InputStream stream = createDummyInputStream();
 
-        final Response response = resource.setFavicon(stream);
+        final Response response = resource.setBrandingFavicon(stream);
 
         assertEquals(200, response.getStatus());
     }
