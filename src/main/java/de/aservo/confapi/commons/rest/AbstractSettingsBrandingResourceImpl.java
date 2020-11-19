@@ -16,37 +16,37 @@ public abstract class AbstractSettingsBrandingResourceImpl implements SettingsBr
     }
 
     @Override
-    public Response getColourScheme() {
+    public Response getBrandingColorScheme() {
         final SettingsBrandingColorSchemeBean colourSchemeBean = brandingService.getColourScheme();
         return Response.ok(colourSchemeBean).build();
     }
 
     @Override
-    public Response setColourScheme(SettingsBrandingColorSchemeBean bean) {
+    public Response setBrandingColorScheme(SettingsBrandingColorSchemeBean bean) {
         final SettingsBrandingColorSchemeBean colourSchemeBean = brandingService.setColourScheme(bean);
         return Response.ok(colourSchemeBean).build();
     }
 
     @Override
-    public Response getLogo() {
+    public Response getBrandingLogo() {
         InputStream logo = brandingService.getLogo();
         return Response.ok(logo).build();
     }
 
     @Override
-    public Response setLogo(InputStream binaryInputStream) {
+    public Response setBrandingLogo(InputStream binaryInputStream) {
         brandingService.setLogo(binaryInputStream);
         return Response.ok().build();
     }
 
     @Override
-    public Response getFavicon() {
+    public Response getBrandingFavicon() {
         InputStream favicon = brandingService.getFavicon();
         return Response.ok(favicon).build();
     }
 
     @Override
-    public Response setFavicon(InputStream binaryInputStream) {
+    public Response setBrandingFavicon(InputStream binaryInputStream) {
         brandingService.setFavicon(binaryInputStream);
         return Response.ok().build();
     }

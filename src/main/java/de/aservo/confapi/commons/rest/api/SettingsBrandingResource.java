@@ -25,11 +25,11 @@ public interface SettingsBrandingResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.SETTINGS },
-            summary = "Get the colour scheme",
+            summary = "Get the color scheme",
             responses = {
                     @ApiResponse(
                             responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingColorSchemeBean.class)),
-                            description = "Returns the colour scheme"
+                            description = "Returns the color scheme"
                     ),
                     @ApiResponse(
                             responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
@@ -37,7 +37,7 @@ public interface SettingsBrandingResource {
                     ),
             }
     )
-    Response getColourScheme();
+    Response getBrandingColorScheme();
 
     @PUT
     @Path(ConfAPI.COLOR_SCHEME)
@@ -45,11 +45,11 @@ public interface SettingsBrandingResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { ConfAPI.SETTINGS },
-            summary = "Set the colour scheme",
+            summary = "Set the color scheme",
             responses = {
                     @ApiResponse(
                             responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingColorSchemeBean.class)),
-                            description = "Returns the updated colour scheme"
+                            description = "Returns the updated color scheme"
                     ),
                     @ApiResponse(
                             responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
@@ -57,7 +57,7 @@ public interface SettingsBrandingResource {
                     ),
             }
     )
-    Response setColourScheme(
+    Response setBrandingColorScheme(
             @NotNull final SettingsBrandingColorSchemeBean bean);
 
     @GET
@@ -77,7 +77,7 @@ public interface SettingsBrandingResource {
                     ),
             }
     )
-    Response getLogo();
+    Response getBrandingLogo();
 
     @PUT
     @Path(ConfAPI.LOGO)
@@ -97,7 +97,7 @@ public interface SettingsBrandingResource {
                     ),
             }
     )
-    Response setLogo(
+    Response setBrandingLogo(
             @NotNull final InputStream binaryInputStream);
 
     @GET
@@ -117,7 +117,7 @@ public interface SettingsBrandingResource {
                     ),
             }
     )
-    Response getFavicon();
+    Response getBrandingFavicon();
 
     @PUT
     @Path(ConfAPI.FAVICON)
@@ -137,6 +137,6 @@ public interface SettingsBrandingResource {
                     ),
             }
     )
-    Response setFavicon(
+    Response setBrandingFavicon(
             @NotNull final InputStream binaryInputStream);
 }
