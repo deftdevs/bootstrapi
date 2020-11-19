@@ -35,7 +35,6 @@ public class MailServerPopBeanUtilTest {
         final MailServerPopBean bean = MailServerPopBeanUtil.toMailServerPopBean(server);
 
         assertNotNull(bean);
-        assertNull(bean.getDescription());
+        assertTrue(bean.getDescription().isEmpty());
     }
-
 }

@@ -38,7 +38,7 @@ public class MailServerSmtpBeanUtilTest {
         final MailServerSmtpBean bean = MailServerSmtpBeanUtil.toMailServerSmtpBean(server);
 
         assertNotNull(bean);
-        assertNull(bean.getDescription());
+        assertTrue(bean.getDescription().isEmpty());
     }
 
 }
