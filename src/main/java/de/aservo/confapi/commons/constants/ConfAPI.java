@@ -18,6 +18,9 @@ public class ConfAPI {
     public static final String DIRECTORY_GENERIC            = "generic";
     public static final String DIRECTORY_INTERNAL           = "internal";
     public static final String DIRECTORY_LDAP               = "ldap";
+    public static final String CACHES                       = "caches";
+    public static final String CACHE_FLUSH                  = "flush";
+    public static final String CACHE                        = "cache";
     public static final String ERROR                        = "error";
     public static final String ERRORS                       = "errors";
     public static final String FAVICON                      = "favicon";
