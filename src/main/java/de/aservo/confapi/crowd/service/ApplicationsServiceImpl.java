@@ -79,7 +79,8 @@ public class ApplicationsServiceImpl implements ApplicationsService {
             final ApplicationBean applicationBean) {
 
         try {
-            final ImmutableApplication.Builder applicationBuilder = new ImmutableApplication.Builder(applicationManager.findById(id));
+            Application existingApplication = applicationManager.findById(id);
+            final ImmutableApplication.Builder applicationBuilder = new ImmutableApplication.Builder(existingApplication);
 
             if (applicationBean.getName() != null) {
                 applicationBuilder.setName(applicationBean.getName());
@@ -94,7 +95,7 @@ public class ApplicationsServiceImpl implements ApplicationsService {
                 applicationBuilder.setActive(applicationBean.getActive());
             }
             if (applicationBean.getPassword() != null) {
-                applicationBuilder.setPasswordCredential(PasswordCredential.unencrypted(applicationBean.getPassword()));
+                applicationManager.updateCredential(existingApplication, PasswordCredential.unencrypted(applicationBean.getPassword()));
             }
 
             return ApplicationBeanUtil.toApplicationBean(applicationManager.update(applicationBuilder.build()));
