@@ -36,8 +36,12 @@ public class SettingsServiceImpl implements SettingsService {
 
     @Override
     public SettingsBean setSettings(SettingsBean settingsBean) {
-        propertyManager.setBaseUrl(settingsBean.getBaseUrl());
-        propertyManager.setDeploymentTitle(settingsBean.getTitle());
+        if (settingsBean.getBaseUrl() != null) {
+            propertyManager.setBaseUrl(settingsBean.getBaseUrl());
+        }
+        if (settingsBean.getTitle() != null) {
+            propertyManager.setDeploymentTitle(settingsBean.getTitle());
+        }
         return getSettings();
     }
 
