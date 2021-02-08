@@ -47,11 +47,13 @@ public class SettingsBean {
         EXAMPLE_1.setTitle("Example");
         EXAMPLE_1.setBaseUrl(URI.create("https://example.com"));
         EXAMPLE_1.setMode("private");
+        EXAMPLE_1.setContactMessage("Test Message");
 
         EXAMPLE_1_NO_MODE = new SettingsBean();
         EXAMPLE_1_NO_MODE.setTitle("Example");
         EXAMPLE_1_NO_MODE.setBaseUrl(URI.create("https://example.com"));
         EXAMPLE_1_NO_MODE.setMode(null);
+        EXAMPLE_1_NO_MODE.setContactMessage("Test Message");
     }
 
 }
