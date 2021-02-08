@@ -3656,6 +3656,12 @@ endif::internal-generation[]
 | 
 |  
 
+| contactMessage 
+|  
+| String  
+| 
+|  
+
 |===
 
 

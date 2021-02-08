@@ -42,6 +42,8 @@ public class SettingsServiceImpl implements SettingsService {
         }
         settingsBean.setMode(applicationProperties.getString(JIRA_MODE));
         settingsBean.setTitle(applicationProperties.getString(JIRA_TITLE));
+        settingsBean.setContactMessage(applicationProperties.getString(JIRA_CONTACT_ADMINISTRATORS_MESSSAGE));
+
         return settingsBean;
     }
 
@@ -65,6 +67,10 @@ public class SettingsServiceImpl implements SettingsService {
 
         if (settingsBean.getTitle() != null) {
             applicationProperties.setString(JIRA_TITLE, settingsBean.getTitle());
+        }
+
+        if (settingsBean.getContactMessage() != null) {
+            applicationProperties.setString(JIRA_CONTACT_ADMINISTRATORS_MESSSAGE, settingsBean.getContactMessage());
         }
 
         return getSettings();

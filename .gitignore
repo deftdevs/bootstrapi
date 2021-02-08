@@ -13,3 +13,6 @@
 *.asc
 
 .openapi-generator*
+
+# osx specific
+.DS_Store
