@@ -11,3 +11,6 @@
 
 # Private keys
 *.asc
+
+# osx specific
+.DS_Store
