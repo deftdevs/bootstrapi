@@ -26,6 +26,9 @@ public class SettingsBean {
     @XmlElement
     private String title;
 
+    @XmlElement
+    private String contactMessage;
+
     public String getMode() {
         if (StringUtils.isNotBlank(mode)) {
             return mode.toLowerCase();
