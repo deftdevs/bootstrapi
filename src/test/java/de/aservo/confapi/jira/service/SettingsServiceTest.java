@@ -21,6 +21,7 @@ public class SettingsServiceTest {
     private static final URI BASE_URL = URI.create("https://jira.atlassian.com");
     private static final String MODE_PUBLIC = "public";
     private static final String TITLE = "Atlassian Public JIRA";
+    private static final String CONTACT_MESSAGE = "Test Contact Message";
 
     @Mock
     private ApplicationProperties applicationProperties;
@@ -37,12 +38,14 @@ public class SettingsServiceTest {
         doReturn(BASE_URL.toString()).when(applicationProperties).getString(JIRA_BASEURL);
         doReturn(MODE_PUBLIC).when(applicationProperties).getString(JIRA_MODE);
         doReturn(TITLE).when(applicationProperties).getString(JIRA_TITLE);
+        doReturn(CONTACT_MESSAGE).when(applicationProperties).getString(JIRA_CONTACT_ADMINISTRATORS_MESSSAGE);
 
         final SettingsBean settingsBean = settingsService.getSettings();
 
         assertEquals(BASE_URL, settingsBean.getBaseUrl());
         assertEquals(MODE_PUBLIC, settingsBean.getMode());
         assertEquals(TITLE, settingsBean.getTitle());
+        assertEquals(CONTACT_MESSAGE, settingsBean.getContactMessage());
     }
 
     @Test
@@ -51,12 +54,14 @@ public class SettingsServiceTest {
         settingsBean.setBaseUrl(BASE_URL);
         settingsBean.setMode(MODE_PUBLIC);
         settingsBean.setTitle(TITLE);
+        settingsBean.setContactMessage(CONTACT_MESSAGE);
 
         settingsService.setSettings(settingsBean);
 
         verify(applicationProperties).setString(JIRA_BASEURL, BASE_URL.toString());
         verify(applicationProperties).setString(JIRA_MODE, MODE_PUBLIC);
         verify(applicationProperties).setString(JIRA_TITLE, TITLE);
+        verify(applicationProperties).setString(JIRA_CONTACT_ADMINISTRATORS_MESSSAGE, CONTACT_MESSAGE);
     }
 
     @Test
@@ -68,6 +73,7 @@ public class SettingsServiceTest {
         verify(applicationProperties, never()).setString(JIRA_BASEURL, BASE_URL.toString());
         verify(applicationProperties, never()).setString(JIRA_MODE, MODE_PUBLIC);
         verify(applicationProperties, never()).setString(JIRA_TITLE, TITLE);
+        verify(applicationProperties, never()).setString(JIRA_CONTACT_ADMINISTRATORS_MESSSAGE, CONTACT_MESSAGE);
     }
 
     @Test(expected = BadRequestException.class)
