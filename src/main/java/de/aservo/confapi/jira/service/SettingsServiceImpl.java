@@ -43,6 +43,7 @@ public class SettingsServiceImpl implements SettingsService {
         settingsBean.setMode(applicationProperties.getString(JIRA_MODE));
         settingsBean.setTitle(applicationProperties.getString(JIRA_TITLE));
         settingsBean.setContactMessage(applicationProperties.getString(JIRA_CONTACT_ADMINISTRATORS_MESSSAGE));
+        settingsBean.setExternalUserManagement(Boolean.parseBoolean(applicationProperties.getString(JIRA_OPTION_USER_EXTERNALMGT)));
 
         return settingsBean;
     }
@@ -71,6 +72,10 @@ public class SettingsServiceImpl implements SettingsService {
 
         if (settingsBean.getContactMessage() != null) {
             applicationProperties.setString(JIRA_CONTACT_ADMINISTRATORS_MESSSAGE, settingsBean.getContactMessage());
+        }
+
+        if (settingsBean.getExternalUserManagement() != null) {
+            applicationProperties.setString(JIRA_OPTION_USER_EXTERNALMGT, String.valueOf(settingsBean.getExternalUserManagement()));
         }
 
         return getSettings();
