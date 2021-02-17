@@ -41,6 +41,7 @@ import static com.atlassian.applinks.internal.status.error.ApplinkErrorType.AUTH
 import static com.atlassian.applinks.internal.status.error.ApplinkErrorType.CONNECTION_REFUSED;
 import static de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus.AVAILABLE;
 import static de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus.CONFIGURATION_ERROR;
+import static de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkType.CROWD;
 import static org.junit.Assert.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
@@ -99,13 +100,14 @@ public class ApplicationLinkServiceTest {
 
     @Test
     public void testSetApplicationLinks()
-            throws URISyntaxException, NoAccessException, NoSuchApplinkException {
+            throws URISyntaxException, NoAccessException, NoSuchApplinkException, TypeNotInstalledException {
 
         ApplicationLink applicationLink = createApplicationLink();
         ApplicationLinkBean applicationLinkBean = createApplicationLinkBean();
         ApplicationLinksBean applicationLinksBean = new ApplicationLinksBean(Collections.singletonList(createApplicationLinkBean()));
 
         doReturn(Collections.singletonList(applicationLink)).when(mutatingApplicationLinkService).getApplicationLinks();
+        doReturn(applicationLink).when(mutatingApplicationLinkService).getApplicationLink(any());
         doReturn(applicationLink).when(mutatingApplicationLinkService).addApplicationLink(any(), any(), any());
         doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
         doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
@@ -117,16 +119,35 @@ public class ApplicationLinkServiceTest {
 
     @Test
     public void testSetApplicationLink()
-            throws URISyntaxException, NoAccessException, NoSuchApplinkException {
+            throws URISyntaxException, NoAccessException, NoSuchApplinkException, TypeNotInstalledException {
 
         ApplicationLink applicationLink = createApplicationLink();
         ApplicationLinkBean applicationLinkBean = createApplicationLinkBean();
 
+        doReturn(applicationLink).when(mutatingApplicationLinkService).getApplicationLink(any());
         doReturn(applicationLink).when(mutatingApplicationLinkService).addApplicationLink(any(), any(), any());
         doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
         doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
 
         ApplicationLinkBean applicationLinkResponse = applicationLinkService.setApplicationLink(UUID.randomUUID(), applicationLinkBean, true);
+
+        assertEquals(applicationLinkBean.getName(), applicationLinkResponse.getName());
+    }
+
+    @Test
+    public void testSetApplicationLinkUpdate()
+            throws URISyntaxException, NoAccessException, NoSuchApplinkException, TypeNotInstalledException {
+
+        ApplicationLink applicationLink = createApplicationLink();
+        ApplicationLinkBean applicationLinkBean = createApplicationLinkBeanUpdate();
+
+        ApplicationLinkServiceImpl spyApplicationLinkService = spy(applicationLinkService);
+        doReturn(applicationLink.getType()).when(spyApplicationLinkService).buildApplicationType(applicationLinkBean.getType());
+
+        doReturn(applicationLink).when(mutatingApplicationLinkService).getApplicationLink(any());
+        doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
+
+        ApplicationLinkBean applicationLinkResponse = spyApplicationLinkService.setApplicationLink(UUID.randomUUID(), applicationLinkBean, true);
 
         assertEquals(applicationLinkBean.getName(), applicationLinkResponse.getName());
     }
@@ -246,6 +267,12 @@ public class ApplicationLinkServiceTest {
         bean.setType(ApplicationLinkType.CROWD);
         bean.setUsername("test");
         bean.setPassword("test");
+        return bean;
+    }
+
+    private ApplicationLinkBean createApplicationLinkBeanUpdate() throws URISyntaxException {
+        ApplicationLinkBean bean = ApplicationLinkBeanUtil.toApplicationLinkBean(createApplicationLink());
+        bean.setType(CROWD);
         return bean;
     }
 
