@@ -135,6 +135,7 @@ public class DirectoryServiceTest {
         AbstractDirectoryBean directoryAdded = directoryService.setDirectory(1L, directoryBean, true);
 
         assertEquals(directoryBean.getName(), directoryAdded.getName());
+        assertEquals(directoryBean.getId(), directoryAdded.getId());
     }
 
     @Test(expected = BadRequestException.class)
@@ -169,6 +170,7 @@ public class DirectoryServiceTest {
 
         AbstractDirectoryBean directoryAdded = directoryService.addDirectory(directoryBean, false);
         assertEquals(directoryAdded.getName(), directoryBean.getName());
+        assertEquals(directoryAdded.getId(), directoryBean.getId());
     }
 
     @Test(expected = BadRequestException.class)

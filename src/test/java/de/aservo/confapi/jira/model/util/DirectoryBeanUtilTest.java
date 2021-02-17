@@ -74,6 +74,7 @@ public class DirectoryBeanUtilTest {
         assertEquals(directory.getName(), directoryBean.getName());
 
         final Map<String, String> attributes = directory.getAttributes();
+        assertEquals(directory.getId(), directoryBean.getId());
         assertEquals(attributes.get(CROWD_SERVER_URL), directoryBean.getServer().getUrl().toString());
         assertNull(directoryBean.getServer().getAppPassword());
         assertEquals(attributes.get(CROWD_HTTP_PROXY_HOST), directoryBean.getServer().getProxy().getHost());
