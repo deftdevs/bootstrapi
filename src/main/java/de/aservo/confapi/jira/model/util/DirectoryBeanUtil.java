@@ -108,6 +108,7 @@ public class DirectoryBeanUtil {
         directoryBean.setName(directory.getName());
         directoryBean.setActive(directory.isActive());
         directoryBean.setDescription(directory.getDescription());
+        directoryBean.setId(directory.getId());
         return directoryBean;
     }
 
