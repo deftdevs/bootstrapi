@@ -61,7 +61,7 @@ jobs:
       run: ./mvnw test sonar:sonar -B
 
   deploy:
-    needs: [unit-tests, integration-tests]
+    needs: unit-tests
 
     runs-on: ubuntu-20.04
 
