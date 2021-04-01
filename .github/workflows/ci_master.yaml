@@ -105,10 +105,10 @@ jobs:
     runs-on: ubuntu-20.04
 
     env:
-      GPG_KEY_NAME: ${{ GPG_KEY_NAME }}
-      GPG_PASSPHRASE: ${{ GPG_PASSPHRASE }}
-      OSSRH_PASSWORD: ${{ OSSRH_PASSWORD }}
-      OSSRH_USERNAME: ${{ OSSRH_USERNAME }}
+      GPG_KEY_NAME: ${{ secrets.GPG_KEY_NAME }}
+      GPG_PASSPHRASE: ${{ secrets.GPG_PASSPHRASE }}
+      OSSRH_PASSWORD: ${{ secrets.OSSRH_PASSWORD }}
+      OSSRH_USERNAME: ${{ secrets.OSSRH_USERNAME }}
       SIGN_ASC_SALT: ${{ secrets.SIGN_ASC_SALT }}
       SIGN_ASC_KEY: ${{ secrets.SIGN_ASC_KEY }}
       SIGN_ASC_IV: ${{ secrets.SIGN_ASC_IV }}
