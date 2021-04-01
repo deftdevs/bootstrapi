@@ -1,4 +1,4 @@
-name: Maven CI
+name: CI Pull Requests
 
 on:
   pull_request:
@@ -52,6 +52,7 @@ jobs:
     runs-on: ubuntu-20.04
 
     env:
+      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
 
     steps:
