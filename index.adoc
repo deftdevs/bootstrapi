@@ -2075,6 +2075,18 @@ endif::internal-generation[]
 | 
 |  
 
+| createdDate 
+|  
+| Date  
+| 
+| date-time 
+
+| updatedDate 
+|  
+| Date  
+| 
+| date-time 
+
 | server 
 |  
 | DirectoryLdapServer  
@@ -2352,6 +2364,18 @@ endif::internal-generation[]
 | 
 |  
 
+| createdDate 
+|  
+| Date  
+| 
+| date-time 
+
+| updatedDate 
+|  
+| Date  
+| 
+| date-time 
+
 | server 
 |  
 | DirectoryCrowdServer  
@@ -2518,6 +2542,18 @@ endif::internal-generation[]
 | 
 |  
 
+| createdDate 
+|  
+| Date  
+| 
+| date-time 
+
+| updatedDate 
+|  
+| Date  
+| 
+| date-time 
+
 |===
 
 
@@ -2573,6 +2609,18 @@ endif::internal-generation[]
 | Boolean  
 | 
 |  
+
+| createdDate 
+|  
+| Date  
+| 
+| date-time 
+
+| updatedDate 
+|  
+| Date  
+| 
+| date-time 
 
 | credentialPolicy 
 |  
@@ -2744,6 +2792,18 @@ endif::internal-generation[]
 | Boolean  
 | 
 |  
+
+| createdDate 
+|  
+| Date  
+| 
+| date-time 
+
+| updatedDate 
+|  
+| Date  
+| 
+| date-time 
 
 | server 
 |  
@@ -3074,6 +3134,18 @@ endif::internal-generation[]
 | title 
 |  
 | String  
+| 
+|  
+
+| contactMessage 
+|  
+| String  
+| 
+|  
+
+| externalUserManagement 
+|  
+| Boolean  
 | 
 |  
 

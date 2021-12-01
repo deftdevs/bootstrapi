@@ -28,7 +28,7 @@ public class DirectoryBeanUtilTest {
         assertEquals(directoryBean.getId(), directory.getId());
         assertEquals(directoryBean.getName(), directory.getName());
         assertEquals(directoryBean.getDescription(), directory.getDescription());
-        assertEquals(directoryBean.isActive(), directory.isActive());
+        assertEquals(directoryBean.getActive(), directory.isActive());
 
         final DirectoryInternalBean directoryInternalBean = (DirectoryInternalBean) directoryBean;
         final Map<String, String> attributes = directory.getAttributes();
@@ -52,7 +52,7 @@ public class DirectoryBeanUtilTest {
         assertEquals(directoryBean.getId(), directory.getId());
         assertEquals(directoryBean.getName(), directory.getName());
         assertEquals(directoryBean.getDescription(), directory.getDescription());
-        assertEquals(directoryBean.isActive(), directory.isActive());
+        assertEquals(directoryBean.getActive(), directory.isActive());
     }
 
     @Test

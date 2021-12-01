@@ -35,7 +35,8 @@ public class SettingsServiceTest {
     public void testGetSettings() throws PropertyManagerException {
         doReturn(settingsBean.getTitle()).when(propertyManager).getDeploymentTitle();
         doReturn(settingsBean.getBaseUrl()).when(propertyManager).getBaseUrl();
-        assertEquals(settingsBean, settingsService.getSettings());
+        assertEquals(settingsBean.getTitle(), settingsService.getSettings().getTitle());
+        assertEquals(settingsBean.getBaseUrl(), settingsService.getSettings().getBaseUrl());
     }
 
     @Test(expected = InternalServerErrorException.class)

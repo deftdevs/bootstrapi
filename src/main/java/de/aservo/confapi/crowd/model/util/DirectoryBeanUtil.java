@@ -111,7 +111,7 @@ public class DirectoryBeanUtil {
         return ImmutableDirectory.builder(directoryBean.getName(), directoryType, "")
                 .setId(directoryBean.getId())
                 .setDescription(directoryBean.getDescription())
-                .setActive(directoryBean.isActive())
+                .setActive(directoryBean.getActive())
                 .setAttributes(directoryAttributes)
                 .build();
     }
