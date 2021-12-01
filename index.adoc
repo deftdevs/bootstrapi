@@ -1876,6 +1876,80 @@ endif::internal-generation[]
 === Settings
 
 
+[.getLoginPage]
+==== getLoginPage
+    
+`GET /settings/branding/login-page`
+
+Get the login-page settings
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}settings/branding/login-page/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<SettingsBrandingLoginPageBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<SettingsBrandingLoginPageBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}settings/branding/login-page/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}settings/branding/login-page/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :settings/branding/login-page/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}settings/branding/login-page/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.getSettings]
 ==== getSettings
     
@@ -1945,6 +2019,175 @@ ifdef::internal-generation[]
 ===== Implementation
 
 // markup not found, no include::{specDir}settings/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setLoginPage]
+==== setLoginPage
+    
+`PUT /settings/branding/login-page`
+
+Set the login-page settings
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}settings/branding/login-page/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| SettingsBrandingLoginPageBean 
+|  <<SettingsBrandingLoginPageBean>> 
+| - 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+<<ErrorCollection>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}settings/branding/login-page/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}settings/branding/login-page/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :settings/branding/login-page/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}settings/branding/login-page/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setLogo]
+==== setLogo
+    
+`PUT /settings/branding/logo`
+
+Set the logo
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}settings/branding/logo/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| body 
+|  <<object>> 
+| - 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+<<SettingsBrandingLoginPageBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<SettingsBrandingLoginPageBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}settings/branding/logo/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}settings/branding/logo/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :settings/branding/logo/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}settings/branding/logo/PUT/implementation.adoc[opts=optional]
 
 
 endif::internal-generation[]
@@ -3146,6 +3389,43 @@ endif::internal-generation[]
 | externalUserManagement 
 |  
 | Boolean  
+| 
+|  
+
+|===
+
+
+[#SettingsBrandingLoginPageBean]
+=== _SettingsBrandingLoginPageBean_ 
+
+
+
+[.fields-SettingsBrandingLoginPageBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| showLogo 
+|  
+| Boolean  
+| 
+|  
+
+| header 
+|  
+| String  
+| 
+|  
+
+| content 
+|  
+| String  
+| 
+|  
+
+| buttonColor 
+|  
+| String  
 | 
 |  
 
