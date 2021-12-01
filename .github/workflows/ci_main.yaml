@@ -145,10 +145,10 @@ jobs:
         restore-keys: confapi-plugin
 
     - name: Download APCC
-      run: ./mvnw dependency:get -DgroupId=de.aservo -DartifactId=atlassian-plugin-compatibility-check -Dversion=0.0.3
+      run: ./mvnw dependency:get -DgroupId=de.aservo -DartifactId=atlassian-plugin-compatibility-check -Dversion=0.0.4
 
     - name: Copy APCC to current Directory
-      run: ./mvnw dependency:copy -Dartifact=de.aservo:atlassian-plugin-compatibility-check:0.0.3 -DoutputDirectory=.
+      run: ./mvnw dependency:copy -Dartifact=de.aservo:atlassian-plugin-compatibility-check:0.0.4 -DoutputDirectory=.
 
     - name: Run APCC
-      run: java -jar atlassian-plugin-compatibility-check-0.0.3.jar "crowd.version"
+      run: java -jar atlassian-plugin-compatibility-check-0.0.4.jar "crowd.version"
