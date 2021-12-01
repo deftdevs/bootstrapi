@@ -60,7 +60,7 @@
     </developers>
 
     <properties>
-        <crowd.version>4.2.0</crowd.version>
+        <crowd.version>4.4.0</crowd.version>
         <ajp.port>8409</ajp.port>
         <amps.version>8.0.2</amps.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
