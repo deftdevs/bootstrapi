@@ -103,14 +103,6 @@ public class MailServerServiceTest {
     public void testPutMailServerSmtpDefaultConfig() throws MailException {
         final MailServerSmtpBean mailServerSmtpBean = new MailServerSmtpBean();
 
-        mailServerSmtpBean.setName(null);
-        mailServerSmtpBean.setDescription(null);
-        mailServerSmtpBean.setFrom(null);
-        mailServerSmtpBean.setPrefix(null);
-        mailServerSmtpBean.setHost(null);
-        mailServerSmtpBean.setPort(null);
-        mailServerSmtpBean.setUsername(null);
-
         mailServerService.setMailServerSmtp(mailServerSmtpBean);
 
         final ArgumentCaptor<SMTPMailServer> smtpMailServerCaptor = ArgumentCaptor.forClass(SMTPMailServer.class);
