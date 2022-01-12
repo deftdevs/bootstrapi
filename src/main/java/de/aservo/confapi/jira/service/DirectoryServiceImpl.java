@@ -69,7 +69,7 @@ public class DirectoryServiceImpl implements DirectoriesService {
 
         directoriesBean.getDirectories().forEach(directoryRequestBean -> {
             if (directoryRequestBean instanceof DirectoryCrowdBean) {
-                DirectoryCrowdBean crowdRequestBean = (DirectoryCrowdBean)directoryRequestBean;
+                DirectoryCrowdBean crowdRequestBean = (DirectoryCrowdBean) directoryRequestBean;
 
                 if (existingDirectoriesByName.containsKey(crowdRequestBean.getName())) {
                     setDirectory(existingDirectoriesByName.get(crowdRequestBean.getName()).getId(), crowdRequestBean, testConnection);
@@ -97,10 +97,21 @@ public class DirectoryServiceImpl implements DirectoriesService {
         Directory directory = validateAndCreateDirectoryConfig(crowdBean, testConnection);
 
         ImmutableDirectory.Builder directoryBuilder = ImmutableDirectory.newBuilder(existingDirectory);
-        directoryBuilder.setAttributes(directory.getAttributes());
-        directoryBuilder.setDescription(directory.getDescription());
-        directoryBuilder.setName(directory.getName());
+
+        if (directory.getAttributes() != null) {
+            directoryBuilder.setAttributes(directory.getAttributes());
+        }
+
+        if (directory.getDescription() != null) {
+            directoryBuilder.setDescription(directory.getDescription());
+        }
+
+        if (directory.getName() != null) {
+            directoryBuilder.setName(directory.getName());
+        }
+
         directoryBuilder.setActive(directory.isActive());
+
         Directory updatedDirectory = directoryBuilder.toDirectory();
 
         Directory responseDirectory = crowdDirectoryService.updateDirectory(updatedDirectory);
@@ -110,7 +121,7 @@ public class DirectoryServiceImpl implements DirectoriesService {
     @Override
     public AbstractDirectoryBean addDirectory(AbstractDirectoryBean abstractDirectoryBean, boolean testConnection) {
         if (abstractDirectoryBean instanceof DirectoryCrowdBean) {
-            DirectoryCrowdBean crowdBean = (DirectoryCrowdBean)abstractDirectoryBean;
+            DirectoryCrowdBean crowdBean = (DirectoryCrowdBean) abstractDirectoryBean;
             Directory directory = validateAndCreateDirectoryConfig(crowdBean, testConnection);
             Directory addedDirectory = crowdDirectoryService.addDirectory(directory);
             return DirectoryBeanUtil.toDirectoryBean(addedDirectory);

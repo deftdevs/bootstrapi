@@ -4,10 +4,13 @@ import atlassian.mail.server.DefaultTestPopMailServerImpl;
 import atlassian.mail.server.DefaultTestSmtpMailServerImpl;
 import atlassian.mail.server.OtherTestPopMailServerImpl;
 import atlassian.mail.server.OtherTestSmtpMailServerImpl;
+import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.mail.MailException;
+import com.atlassian.mail.server.MailServer;
 import com.atlassian.mail.server.MailServerManager;
 import com.atlassian.mail.server.PopMailServer;
 import com.atlassian.mail.server.SMTPMailServer;
+import com.atlassian.mail.server.impl.SMTPMailServerImpl;
 import de.aservo.confapi.commons.exception.BadRequestException;
 import de.aservo.confapi.commons.model.MailServerPopBean;
 import de.aservo.confapi.commons.model.MailServerSmtpBean;
@@ -94,6 +97,25 @@ public class MailServerServiceTest {
 
         assertEquals(MailServerSmtpBeanUtil.toMailServerSmtpBean(createSmtpMailServer), MailServerSmtpBeanUtil.toMailServerSmtpBean(smtpMailServer));
         assertEquals(requestMailServerSmtpBean, responseMailServerSmtpBean);
+    }
+
+    @Test
+    public void testPutMailServerSmtpDefaultConfig() throws MailException {
+        final MailServerSmtpBean mailServerSmtpBean = new MailServerSmtpBean();
+
+        mailServerService.setMailServerSmtp(mailServerSmtpBean);
+
+        final ArgumentCaptor<SMTPMailServer> smtpMailServerCaptor = ArgumentCaptor.forClass(SMTPMailServer.class);
+        verify(mailServerManager).create(smtpMailServerCaptor.capture());
+        final SMTPMailServer smtpMailServer = smtpMailServerCaptor.getValue();
+
+        assertEquals(mailServerSmtpBean.getName(), smtpMailServer.getName());
+        assertEquals(mailServerSmtpBean.getDescription(), smtpMailServer.getDescription());
+        assertEquals(mailServerSmtpBean.getFrom(), smtpMailServer.getDefaultFrom());
+        assertEquals(mailServerSmtpBean.getPrefix(), smtpMailServer.getPrefix());
+        assertEquals(mailServerSmtpBean.getHost(), smtpMailServer.getHostname());
+        assertEquals(smtpMailServer.getMailProtocol().getDefaultPort(), smtpMailServer.getPort());
+        assertEquals(mailServerSmtpBean.getUsername(), smtpMailServer.getUsername());
     }
 
     @Test

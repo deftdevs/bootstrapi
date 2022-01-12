@@ -86,7 +86,7 @@ public class DirectoryServiceTest {
         doReturn(directory).when(crowdDirectoryService).addDirectory(any());
         doReturn(Collections.emptyList()).when(crowdDirectoryService).findAllDirectories();
 
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
+        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) DirectoryBeanUtil.toDirectoryBean(directory);
         directoryBean.getServer().setAppPassword("test");
         directoryService.setDirectories(new DirectoriesBean(Collections.singletonList(directoryBean)), false);
 
@@ -101,7 +101,7 @@ public class DirectoryServiceTest {
         doReturn(directory).when(crowdDirectoryService).updateDirectory(any());
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
 
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
+        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) DirectoryBeanUtil.toDirectoryBean(directory);
         directoryBean.getServer().setAppPassword("test");
         DirectoriesBean directoryAdded = directoryService.setDirectories(new DirectoriesBean(Collections.singletonList(directoryBean)), false);
 
@@ -116,11 +116,29 @@ public class DirectoryServiceTest {
         doReturn(directory).when(crowdDirectoryService).updateDirectory(any());
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
 
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
+        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) DirectoryBeanUtil.toDirectoryBean(directory);
         directoryBean.getServer().setAppPassword("test");
         DirectoriesBean directoryAdded = directoryService.setDirectories(new DirectoriesBean(Collections.singletonList(directoryBean)), true);
 
         assertEquals(directoryAdded.getDirectories().iterator().next().getName(), directoryBean.getName());
+    }
+
+    @Test
+    public void testSetDirectoryDefault() {
+        Directory directory = createDirectory();
+
+        doReturn(directory).when(crowdDirectoryService).findDirectoryById(1L);
+        doReturn(directory).when(crowdDirectoryService).updateDirectory(any());
+
+        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
+        directoryBean.setDescription(null);
+        directoryBean.setName(null);
+
+        directoryBean.getServer().setAppPassword("test");
+        AbstractDirectoryBean directoryAdded = directoryService.setDirectory(1L, directoryBean, true);
+
+        assertEquals(directoryBean.getDescription(), directoryAdded.getDescription());
+        assertEquals(directory.getName(), directoryAdded.getName());
     }
 
     @Test
@@ -130,7 +148,7 @@ public class DirectoryServiceTest {
         doReturn(directory).when(crowdDirectoryService).findDirectoryById(1L);
         doReturn(directory).when(crowdDirectoryService).updateDirectory(any());
 
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
+        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) DirectoryBeanUtil.toDirectoryBean(directory);
         directoryBean.getServer().setAppPassword("test");
         AbstractDirectoryBean directoryAdded = directoryService.setDirectory(1L, directoryBean, true);
 
@@ -155,7 +173,7 @@ public class DirectoryServiceTest {
         doReturn(responseDirectory).when(crowdDirectoryService).addDirectory(any());
 
         Directory directory = createDirectory();
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
+        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) DirectoryBeanUtil.toDirectoryBean(directory);
 
         directoryService.addDirectory(directoryBean, false);
     }
@@ -165,7 +183,7 @@ public class DirectoryServiceTest {
         Directory directory = createDirectory();
         doReturn(directory).when(crowdDirectoryService).addDirectory(any(Directory.class));
 
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
+        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) DirectoryBeanUtil.toDirectoryBean(directory);
         directoryBean.getServer().setAppPassword("test");
 
         AbstractDirectoryBean directoryAdded = directoryService.addDirectory(directoryBean, false);
