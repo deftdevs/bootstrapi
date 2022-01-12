@@ -61,6 +61,7 @@
 
     <properties>
         <crowd.version>4.4.0</crowd.version>
+        <crowd.data.version>4.4.0</crowd.data.version>
         <ajp.port>8409</ajp.port>
         <amps.version>8.0.2</amps.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
@@ -270,7 +271,9 @@
                 <configuration>
                     <ajpPort>${ajp.port}</ajpPort>
                     <productVersion>${crowd.version}</productVersion>
-                    <productDataVersion>${crowd.version}</productDataVersion>
+                    <productDataVersion>${crowd.data.version}</productDataVersion>
+                    <!-- in case new home zip should be generated, please add your executed steps to generated-test-resources.md -->
+                    <productDataPath>${project.basedir}/src/test/resources/generated-test-resources.zip</productDataPath>
                     <allowGoogleTracking>false</allowGoogleTracking>
                     <enableQuickReload>true</enableQuickReload>
                     <extractDependencies>true</extractDependencies>
