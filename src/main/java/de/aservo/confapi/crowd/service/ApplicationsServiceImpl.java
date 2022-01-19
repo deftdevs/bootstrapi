@@ -126,7 +126,9 @@ public class ApplicationsServiceImpl implements ApplicationsService {
             throw new BadRequestException("Set 'force' query param to true in order to delete all applications");
         }
 
-        applicationManager.findAll().forEach(a -> deleteApplication(a.getId()));
+        applicationManager.findAll().stream()
+                .filter(a -> !a.isPermanent())
+                .forEach(a -> deleteApplication((a.getId())));
     }
 
     @Override
