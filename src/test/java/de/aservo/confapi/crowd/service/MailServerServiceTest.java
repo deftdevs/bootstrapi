@@ -3,7 +3,7 @@ package de.aservo.confapi.crowd.service;
 import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.crowd.manager.mail.MailConfigurationService;
 import com.atlassian.crowd.manager.mail.MockMailConfiguration;
-import de.aservo.confapi.commons.exception.InternalServerErrorException;
+import de.aservo.confapi.commons.exception.BadRequestException;
 import de.aservo.confapi.commons.model.MailServerSmtpBean;
 import de.aservo.confapi.crowd.model.util.MailServerSmtpBeanUtil;
 import org.junit.Before;
@@ -45,11 +45,11 @@ public class MailServerServiceTest {
     }
 
     @Test
-    public void testSetMailServerSmtp() {
+    public void testSetMailServerSmtpDefault() {
         final MailConfiguration emptyMailConfiguration = MailConfiguration.builder().build();
         doReturn(emptyMailConfiguration).when(mailConfigurationService).getMailConfiguration();
 
-        final MailServerSmtpBean mailServerSmtpBean = MailServerSmtpBean.EXAMPLE_1;
+        final MailServerSmtpBean mailServerSmtpBean = new MailServerSmtpBean();
         mailServerService.setMailServerSmtp(mailServerSmtpBean);
 
         final ArgumentCaptor<MailConfiguration> mailConfigurationCaptor = ArgumentCaptor.forClass(MailConfiguration.class);
@@ -62,7 +62,25 @@ public class MailServerServiceTest {
         assertEquals(mailServerSmtpBean.getHost(), updatedMailServerSmtpBean.getHost());
     }
 
-    @Test(expected = InternalServerErrorException.class)
+    @Test
+    public void testSetMailServerSmtp() {
+        final MailConfiguration emptyMailConfiguration = MailConfiguration.builder().build();
+        doReturn(emptyMailConfiguration).when(mailConfigurationService).getMailConfiguration();
+
+        final MailServerSmtpBean mailServerSmtpBean = MailServerSmtpBean.EXAMPLE_1;
+
+        mailServerService.setMailServerSmtp(mailServerSmtpBean);
+
+        final ArgumentCaptor<MailConfiguration> mailConfigurationCaptor = ArgumentCaptor.forClass(MailConfiguration.class);
+        verify(mailConfigurationService).saveConfiguration(mailConfigurationCaptor.capture());
+        final MailServerSmtpBean updatedMailServerSmtpBean = MailServerSmtpBeanUtil.toMailServerSmtpBean(mailConfigurationCaptor.getValue());
+
+        assertEquals(mailServerSmtpBean.getFrom(), updatedMailServerSmtpBean.getFrom());
+        assertEquals(mailServerSmtpBean.getPrefix(), updatedMailServerSmtpBean.getPrefix());
+        assertEquals(mailServerSmtpBean.getHost(), updatedMailServerSmtpBean.getHost());
+    }
+
+    @Test(expected = BadRequestException.class)
     public void testSetMailServerSmtpWithException() {
         final MailConfiguration emptyMailConfiguration = MailConfiguration.builder().build();
         doReturn(emptyMailConfiguration).when(mailConfigurationService).getMailConfiguration();
@@ -81,5 +99,4 @@ public class MailServerServiceTest {
     public void testSetMailServerPop() {
         mailServerService.setMailServerPop(null);
     }
-
 }

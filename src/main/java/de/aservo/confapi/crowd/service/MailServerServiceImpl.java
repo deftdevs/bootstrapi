@@ -5,7 +5,7 @@ import com.atlassian.crowd.manager.mail.MailConfigurationService;
 import com.atlassian.crowd.util.mail.SMTPServer;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.commons.exception.InternalServerErrorException;
+import de.aservo.confapi.commons.exception.BadRequestException;
 import de.aservo.confapi.commons.model.MailServerPopBean;
 import de.aservo.confapi.commons.model.MailServerSmtpBean;
 import de.aservo.confapi.commons.service.api.MailServerService;
@@ -44,23 +44,38 @@ public class MailServerServiceImpl implements MailServerService {
     public MailServerSmtpBean setMailServerSmtp(
             final MailServerSmtpBean mailServerSmtpBean) {
 
-        try {
-            final MailConfiguration mailConfiguration = mailConfigurationService.getMailConfiguration();
-            final MailConfiguration newMailConfiguration = MailConfiguration.builder(mailConfiguration)
-                    .setNotificationEmails(Collections.singletonList(mailServerSmtpBean.getAdminContact()))
-                    .setSmtpServer(SMTPServer.builder()
-                            .setFrom(new InternetAddress(mailServerSmtpBean.getFrom()))
-                            .setPrefix(mailServerSmtpBean.getPrefix())
-                            .setHost(mailServerSmtpBean.getHost())
-                            .build())
-                    .build();
+        final MailConfiguration mailConfiguration = mailConfigurationService.getMailConfiguration();
+        final MailConfiguration.Builder newMailConfigurationBuilder = MailConfiguration.builder(mailConfiguration);
 
-            mailConfigurationService.saveConfiguration(newMailConfiguration);
-
-            return getMailServerSmtp();
-        } catch (AddressException e) {
-            throw new InternalServerErrorException(e.getMessage());
+        if (mailServerSmtpBean.getAdminContact() != null) {
+            newMailConfigurationBuilder.setNotificationEmails(Collections.singletonList(mailServerSmtpBean.getAdminContact()));
         }
+
+        //noinspection ConstantConditions
+        final SMTPServer.Builder smtpServerBuilder = mailConfiguration != null && mailConfiguration.getSmtpServer() != null
+                ? SMTPServer.builder(mailConfiguration.getSmtpServer()) : SMTPServer.builder();
+
+        if (mailServerSmtpBean.getFrom() != null) {
+            try {
+                smtpServerBuilder.setFrom(new InternetAddress(mailServerSmtpBean.getFrom()));
+            } catch (AddressException e) {
+                throw new BadRequestException(e.getMessage());
+            }
+        }
+
+        if (mailServerSmtpBean.getPrefix() != null) {
+            smtpServerBuilder.setPrefix(mailServerSmtpBean.getPrefix());
+        }
+
+        if (mailServerSmtpBean.getHost() != null) {
+            smtpServerBuilder.setHost(mailServerSmtpBean.getHost());
+        }
+
+        newMailConfigurationBuilder.setSmtpServer(smtpServerBuilder.build());
+
+        mailConfigurationService.saveConfiguration(newMailConfigurationBuilder.build());
+
+        return getMailServerSmtp();
     }
 
     @Override
@@ -74,5 +89,4 @@ public class MailServerServiceImpl implements MailServerService {
 
         throw new UnsupportedOperationException("Setting POP mail server is not implemented");
     }
-
 }
