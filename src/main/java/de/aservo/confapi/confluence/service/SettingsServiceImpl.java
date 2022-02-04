@@ -6,7 +6,6 @@ import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.aservo.confapi.commons.model.SettingsBean;
 import de.aservo.confapi.commons.service.api.SettingsService;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
@@ -39,15 +38,16 @@ public class SettingsServiceImpl implements SettingsService {
     @Override
     public SettingsBean setSettings(SettingsBean settingsBean) {
         final Settings settings = settingsManager.getGlobalSettings();
+
         if (settingsBean.getBaseUrl() != null) {
             settings.setBaseUrl(settingsBean.getBaseUrl().toString());
         }
 
-        if (StringUtils.isNotBlank(settingsBean.getTitle())) {
+        if (settingsBean.getTitle() != null) {
             settings.setSiteTitle(settingsBean.getTitle());
         }
 
-        if (StringUtils.isNotBlank(settingsBean.getContactMessage())) {
+        if (settingsBean.getContactMessage() != null) {
             settings.setCustomContactMessage(settingsBean.getContactMessage());
         }
 

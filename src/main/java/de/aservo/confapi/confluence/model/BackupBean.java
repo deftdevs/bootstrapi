@@ -45,6 +45,7 @@ public class BackupBean {
         return Boolean.TRUE.equals(backupAttachments);
     }
 
+    //TODO Default value should be true, how to declare in documentation?
     public boolean getBackupComments() {
         return Boolean.TRUE.equals(backupComments);
     }

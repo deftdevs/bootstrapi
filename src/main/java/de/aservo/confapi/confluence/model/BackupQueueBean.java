@@ -14,13 +14,13 @@ import java.net.URI;
 public class BackupQueueBean {
 
     @XmlElement
-    private int percentageComplete;
+    private Integer percentageComplete;
 
     @XmlElement
-    private long elapsedTimeInMillis;
+    private Long elapsedTimeInMillis;
 
     @XmlElement
-    private long estimatedTimeRemainingInMillis;
+    private Long estimatedTimeRemainingInMillis;
 
     @XmlElement
     private URI entityUrl;

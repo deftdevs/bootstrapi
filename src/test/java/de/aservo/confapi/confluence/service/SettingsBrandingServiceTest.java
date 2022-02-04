@@ -51,7 +51,7 @@ public class SettingsBrandingServiceTest {
     @Test
     public void testGetColourScheme() {
 
-        BaseColourScheme dummyBaseColourScheme = toGlobalColorScheme(SettingsBrandingColorSchemeBean.EXAMPLE_1, false, null);
+        BaseColourScheme dummyBaseColourScheme = toGlobalColorScheme(SettingsBrandingColorSchemeBean.EXAMPLE_1, null);
         doReturn(dummyBaseColourScheme).when(colourSchemeManager).getGlobalColourScheme();
 
         SettingsBrandingColorSchemeBean colourScheme = settingsBrandingService.getColourScheme();
@@ -63,7 +63,7 @@ public class SettingsBrandingServiceTest {
     public void testSetColourScheme() {
 
         SettingsBrandingColorSchemeBean schemeBean = SettingsBrandingColorSchemeBean.EXAMPLE_1;
-        BaseColourScheme dummyBaseColourScheme = toGlobalColorScheme(schemeBean, false,null);
+        BaseColourScheme dummyBaseColourScheme = toGlobalColorScheme(schemeBean, null);
         doReturn(dummyBaseColourScheme).when(colourSchemeManager).getGlobalColourScheme();
 
         SettingsBrandingColorSchemeBean colourScheme = settingsBrandingService.setColourScheme(schemeBean);

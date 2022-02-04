@@ -60,7 +60,7 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
     public SettingsBrandingColorSchemeBean setColourScheme(
             @NotNull SettingsBrandingColorSchemeBean colorSchemeBean) {
         BaseColourScheme baseColourScheme = new BaseColourScheme(colourSchemeManager.getGlobalColourScheme());
-        BaseColourScheme newColourScheme = SettingsBrandingColorSchemeBeanUtil.toGlobalColorScheme(colorSchemeBean, false, baseColourScheme);
+        BaseColourScheme newColourScheme = SettingsBrandingColorSchemeBeanUtil.toGlobalColorScheme(colorSchemeBean, baseColourScheme);
         colourSchemeManager.saveGlobalColourScheme(newColourScheme);
         return SettingsBrandingColorSchemeBeanUtil.toSettingsBrandingColorSchemeBean(newColourScheme);
     }

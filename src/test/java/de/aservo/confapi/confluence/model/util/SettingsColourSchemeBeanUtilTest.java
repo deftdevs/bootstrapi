@@ -18,7 +18,7 @@ public class SettingsColourSchemeBeanUtilTest {
     public void testToGlobalColorScheme() {
 
         SettingsBrandingColorSchemeBean schemeBean = SettingsBrandingColorSchemeBean.EXAMPLE_1;
-        BaseColourScheme baseColourScheme = toGlobalColorScheme(schemeBean, false, null);
+        BaseColourScheme baseColourScheme = toGlobalColorScheme(schemeBean, null);
 
         assertNotNull(baseColourScheme);
         assertEquals(schemeBean.getTopBar(), baseColourScheme.get(ColourScheme.TOP_BAR));
@@ -30,7 +30,7 @@ public class SettingsColourSchemeBeanUtilTest {
     public void testToGlobalColorSchemeSetNullValues() {
 
         SettingsBrandingColorSchemeBean schemeBean = new SettingsBrandingColorSchemeBean();
-        BaseColourScheme baseColourScheme = toGlobalColorScheme(schemeBean, true, null);
+        BaseColourScheme baseColourScheme = toGlobalColorScheme(schemeBean, null);
 
         assertNotNull(baseColourScheme);
         assertNull(baseColourScheme.get(ColourScheme.TOP_BAR));

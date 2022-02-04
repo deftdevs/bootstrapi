@@ -120,6 +120,25 @@ public class MailServerServiceTest {
     }
 
     @Test
+    public void testPutSmtpServerDefaultConfig() throws MailException {
+        final MailServerSmtpBean mailServerSmtpBean = new MailServerSmtpBean();
+
+        mailServerService.setMailServerSmtp(mailServerSmtpBean);
+
+        final ArgumentCaptor<SMTPMailServer> smtpMailServerCaptor = ArgumentCaptor.forClass(SMTPMailServer.class);
+        verify(mailServerManager).create(smtpMailServerCaptor.capture());
+        final SMTPMailServer smtpMailServer = smtpMailServerCaptor.getValue();
+
+        assertEquals(mailServerSmtpBean.getName(), smtpMailServer.getName());
+        assertEquals(mailServerSmtpBean.getDescription(), smtpMailServer.getDescription());
+        assertEquals(mailServerSmtpBean.getFrom(), smtpMailServer.getDefaultFrom());
+        assertEquals(mailServerSmtpBean.getPrefix(), smtpMailServer.getPrefix());
+        assertEquals(mailServerSmtpBean.getHost(), smtpMailServer.getHostname());
+        assertEquals(smtpMailServer.getMailProtocol().getDefaultPort(), smtpMailServer.getPort());
+        assertEquals(mailServerSmtpBean.getUsername(), smtpMailServer.getUsername());
+    }
+
+    @Test
     public void testGetPopMailServer() {
         final PopMailServer popMailServer = new DefaultTestPopMailServerImpl();
         doReturn(popMailServer).when(mailServerManager).getDefaultPopMailServer();

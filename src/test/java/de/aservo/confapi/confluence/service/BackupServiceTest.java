@@ -280,7 +280,7 @@ public class BackupServiceTest {
         verify(indexManager).reIndex();
     }
 
-    @Test
+    @Test(expected = NotFoundException.class)
     public void testGetQueueTaskNull() {
         final ConfluenceUser user = mock(ConfluenceUser.class);
 
@@ -288,7 +288,7 @@ public class BackupServiceTest {
         expect(HttpUtil.getUser()).andReturn(user);
         PowerMock.replay(HttpUtil.class);
 
-        assertNull(backupService.getQueue(BACKUP_QUEUE_UUID));
+        backupService.getQueue(BACKUP_QUEUE_UUID);
     }
 
     @Test(expected = BadRequestException.class)
