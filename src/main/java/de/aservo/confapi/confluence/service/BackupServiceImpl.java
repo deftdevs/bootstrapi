@@ -160,7 +160,8 @@ public class BackupServiceImpl implements BackupService {
         log.info("Trying to get queue information for task with uuid '{}'", uuid);
 
         if (task == null) {
-            return null;
+            throw new NotFoundException(String.format(
+                    "Could not find task for given uuid '%s'", uuid));
         }
 
         final BackupQueueBean backupQueueBean = new BackupQueueBean();

@@ -9,14 +9,13 @@ import com.atlassian.mail.server.impl.PopMailServerImpl;
 import com.atlassian.mail.server.impl.SMTPMailServerImpl;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.confluence.model.util.MailServerPopBeanUtil;
-import de.aservo.confapi.confluence.model.util.MailServerSmtpBeanUtil;
-import de.aservo.confapi.confluence.util.MailProtocolUtil;
 import de.aservo.confapi.commons.exception.BadRequestException;
 import de.aservo.confapi.commons.model.MailServerPopBean;
 import de.aservo.confapi.commons.model.MailServerSmtpBean;
 import de.aservo.confapi.commons.service.api.MailServerService;
-import org.apache.commons.lang3.StringUtils;
+import de.aservo.confapi.confluence.model.util.MailServerPopBeanUtil;
+import de.aservo.confapi.confluence.model.util.MailServerSmtpBeanUtil;
+import de.aservo.confapi.confluence.util.MailProtocolUtil;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
@@ -46,25 +45,25 @@ public class MailServerServiceImpl implements MailServerService {
 
         assert smtpMailServer != null;
 
-        if (StringUtils.isNotBlank(mailServerSmtpBean.getName())) {
+        if (mailServerSmtpBean.getName() != null) {
             smtpMailServer.setName(mailServerSmtpBean.getName());
         }
 
-        if (StringUtils.isNotBlank(mailServerSmtpBean.getDescription())) {
+        if (mailServerSmtpBean.getDescription() != null) {
             smtpMailServer.setDescription(mailServerSmtpBean.getDescription());
         }
 
-        if (StringUtils.isNotBlank(mailServerSmtpBean.getFrom())) {
+        if (mailServerSmtpBean.getFrom() != null) {
             smtpMailServer.setDefaultFrom(mailServerSmtpBean.getFrom());
         }
 
-        if (StringUtils.isNotBlank(mailServerSmtpBean.getPrefix())) {
+        if (mailServerSmtpBean.getPrefix() != null) {
             smtpMailServer.setPrefix(mailServerSmtpBean.getPrefix());
         }
 
         smtpMailServer.setMailProtocol(MailProtocolUtil.find(mailServerSmtpBean.getProtocol(), MailProtocol.SMTP));
 
-        if (StringUtils.isNotBlank(mailServerSmtpBean.getHost())) {
+        if (mailServerSmtpBean.getHost() != null) {
             smtpMailServer.setHostname(mailServerSmtpBean.getHost());
         }
 
@@ -76,7 +75,7 @@ public class MailServerServiceImpl implements MailServerService {
 
         smtpMailServer.setTlsRequired(mailServerSmtpBean.getUseTls());
 
-        if (StringUtils.isNotBlank(mailServerSmtpBean.getUsername())) {
+        if (mailServerSmtpBean.getUsername() != null) {
             smtpMailServer.setUsername(mailServerSmtpBean.getUsername());
         }
 
@@ -109,17 +108,17 @@ public class MailServerServiceImpl implements MailServerService {
 
         assert popMailServer != null;
 
-        if (StringUtils.isNotBlank(mailServerPopBean.getName())) {
+        if (mailServerPopBean.getName() != null) {
             popMailServer.setName(mailServerPopBean.getName());
         }
 
-        if (StringUtils.isNotBlank(mailServerPopBean.getDescription())) {
+        if (mailServerPopBean.getDescription() != null) {
             popMailServer.setDescription(mailServerPopBean.getDescription());
         }
 
         popMailServer.setMailProtocol(MailProtocolUtil.find(mailServerPopBean.getProtocol(), MailProtocol.POP));
 
-        if (StringUtils.isNotBlank(mailServerPopBean.getHost())) {
+        if (mailServerPopBean.getHost() != null) {
             popMailServer.setHostname(mailServerPopBean.getHost());
         }
 
@@ -129,7 +128,7 @@ public class MailServerServiceImpl implements MailServerService {
             popMailServer.setPort(popMailServer.getMailProtocol().getDefaultPort());
         }
 
-        if (StringUtils.isNotBlank(mailServerPopBean.getUsername())) {
+        if (mailServerPopBean.getUsername() != null) {
             popMailServer.setUsername(mailServerPopBean.getUsername());
         }
 

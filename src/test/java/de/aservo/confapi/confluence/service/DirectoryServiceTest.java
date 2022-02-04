@@ -137,6 +137,24 @@ public class DirectoryServiceTest {
         assertEquals(directoryBean.getName(), directoryAdded.getName());
     }
 
+    @Test
+    public void testSetDirectoryDefault() {
+        Directory directory = createDirectory();
+
+        doReturn(directory).when(crowdDirectoryService).findDirectoryById(1L);
+        doReturn(directory).when(crowdDirectoryService).updateDirectory(any());
+
+        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
+        directoryBean.setDescription(null);
+        directoryBean.setName(null);
+
+        directoryBean.getServer().setAppPassword("test");
+        AbstractDirectoryBean directoryAdded = directoryService.setDirectory(1L, directoryBean, true);
+
+        assertEquals(directoryBean.getDescription(), directoryAdded.getDescription());
+        assertEquals(directory.getName(), directoryAdded.getName());
+    }
+
     @Test(expected = BadRequestException.class)
     public void testSetDirectoryUnsupportedType() {
         directoryService.setDirectory(1L, new DirectoryLdapBean(), false);
@@ -248,5 +266,4 @@ public class DirectoryServiceTest {
                 .setAttributes(attributes).build();
         return new DirectoryImpl(immutableDirectory);  //required because directory needs to be mutable throughout the test
     }
-
 }

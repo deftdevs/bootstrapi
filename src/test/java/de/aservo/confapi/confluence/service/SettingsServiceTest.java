@@ -77,4 +77,25 @@ public class SettingsServiceTest {
         assertEquals(requestBean, responseBean);
     }
 
+    @Test
+    public void testPutSettingsDefaultConfig(){
+        final SettingsBean settingsBean = new SettingsBean();
+        
+        final Settings defaultSettings = new DefaultTestSettings();
+        doReturn(defaultSettings).when(settingsManager).getGlobalSettings();
+
+        settingsService.setSettings(settingsBean);
+
+        final ArgumentCaptor<Settings> settingsCaptor = ArgumentCaptor.forClass(Settings.class);
+        verify(settingsManager).updateGlobalSettings(settingsCaptor.capture());
+        final Settings settings = settingsCaptor.getValue();
+
+        assertEquals(defaultSettings.getBaseUrl(), settings.getBaseUrl());
+        assertEquals(defaultSettings.getSiteTitle(), settings.getSiteTitle());
+        assertEquals(defaultSettings.getCustomContactMessage(), settings.getCustomContactMessage());
+        assertEquals(defaultSettings.isExternalUserManagement(), settings.isExternalUserManagement());
+    }
+
+
+
 }

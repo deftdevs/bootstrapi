@@ -18,7 +18,6 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 
 import static de.aservo.confapi.commons.util.BeanValidationUtil.validate;
-import static org.apache.commons.lang.StringUtils.isNotBlank;
 
 @Component
 @ExportAsService(UsersService.class)
@@ -53,7 +52,7 @@ public class UsersServiceImpl implements UsersService {
         validate(userBean);
         User user = findConfluenceUser(userName);
 
-        if (isNotBlank(userBean.getUsername()) && !userName.equals(userBean.getUsername())) {
+        if (userBean.getUsername() != null && !userName.equals(userBean.getUsername())) {
             try {
                 user = userAccessor.renameUser((ConfluenceUser)user, userBean.getUsername());
             } catch (EntityException e) {
@@ -65,13 +64,13 @@ public class UsersServiceImpl implements UsersService {
         // userManager.saveUser will convert this user into a ConfluenceUser
         final DefaultUser updateUser = new DefaultUser(user);
 
-        if (isNotBlank(userBean.getFullName())) {
+        if (userBean.getFullName() != null) {
             updateUser.setFullName(userBean.getFullName());
         }
-        if (isNotBlank(userBean.getEmail())) {
+        if (userBean.getEmail() != null) {
             updateUser.setEmail(userBean.getEmail());
         }
-        if (isNotBlank(userBean.getPassword())) {
+        if (userBean.getPassword() != null) {
             updatePassword(userName, userBean.getPassword());
         }
 

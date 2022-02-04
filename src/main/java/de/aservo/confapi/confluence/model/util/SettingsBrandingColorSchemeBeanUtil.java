@@ -6,8 +6,6 @@ import de.aservo.confapi.commons.model.SettingsBrandingColorSchemeBean;
 
 import javax.validation.constraints.NotNull;
 
-import static org.apache.commons.lang3.StringUtils.isBlank;
-
 
 public class SettingsBrandingColorSchemeBeanUtil {
 
@@ -49,31 +47,32 @@ public class SettingsBrandingColorSchemeBeanUtil {
     @NotNull
     public static BaseColourScheme toGlobalColorScheme(
             @NotNull final SettingsBrandingColorSchemeBean schemeBean,
-            boolean setNullValues,
             final ColourScheme baseScheme) {
 
         final BaseColourScheme colourScheme = baseScheme == null ? new BaseColourScheme() : new BaseColourScheme(baseScheme);
-        setColorCode(colourScheme, ColourScheme.TOP_BAR, schemeBean.getTopBar(), setNullValues);
-        setColorCode(colourScheme, ColourScheme.TOP_BAR_MENU_ITEM_TEXT, schemeBean.getTopBarMenuItemText(), setNullValues);
-        setColorCode(colourScheme, ColourScheme.TOP_BAR_MENU_SELECTED_BACKGROUND, schemeBean.getTopBarMenuSelectedBackground(), setNullValues);
-        setColorCode(colourScheme, ColourScheme.TOP_BAR_MENU_SELECTED_TEXT, schemeBean.getTopBarMenuSelectedText(), setNullValues);
-        setColorCode(colourScheme, ColourScheme.TOP_BAR_MENU_ITEM_TEXT, schemeBean.getTopBarText(), setNullValues);
-        setColorCode(colourScheme, ColourScheme.BORDER, schemeBean.getBordersAndDividers(), setNullValues);
-        setColorCode(colourScheme, ColourScheme.HEADER_BUTTON_BASE_BACKGROUND, schemeBean.getHeaderButtonBackground(), setNullValues);
-        setColorCode(colourScheme, ColourScheme.HEADER_BUTTON_TEXT, schemeBean.getHeaderButtonText(), setNullValues);
-        setColorCode(colourScheme, ColourScheme.HEADING_TEXT, schemeBean.getHeadingText(), setNullValues);
-        setColorCode(colourScheme, ColourScheme.LINK, schemeBean.getLinks(), setNullValues);
-        setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_BACKGROUND, schemeBean.getMenuItemSelectedBackground(), setNullValues);
-        setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_TEXT, schemeBean.getMenuItemSelectedText(), setNullValues);
-        setColorCode(colourScheme, ColourScheme.MENU_ITEM_TEXT, schemeBean.getPageMenuItemText(), setNullValues);
-        setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_BACKGROUND, schemeBean.getPageMenuSelectedBackground(), setNullValues);
-        setColorCode(colourScheme, ColourScheme.SEARCH_FIELD_BACKGROUND, schemeBean.getSearchFieldBackground(), setNullValues);
-        setColorCode(colourScheme, ColourScheme.SEARCH_FIELD_TEXT, schemeBean.getSearchFieldText(), setNullValues);
+
+        setColorCode(colourScheme, ColourScheme.TOP_BAR, schemeBean.getTopBar());
+        setColorCode(colourScheme, ColourScheme.TOP_BAR_MENU_ITEM_TEXT, schemeBean.getTopBarMenuItemText());
+        setColorCode(colourScheme, ColourScheme.TOP_BAR_MENU_SELECTED_BACKGROUND, schemeBean.getTopBarMenuSelectedBackground());
+        setColorCode(colourScheme, ColourScheme.TOP_BAR_MENU_SELECTED_TEXT, schemeBean.getTopBarMenuSelectedText());
+        setColorCode(colourScheme, ColourScheme.TOP_BAR_MENU_ITEM_TEXT, schemeBean.getTopBarText());
+        setColorCode(colourScheme, ColourScheme.BORDER, schemeBean.getBordersAndDividers());
+        setColorCode(colourScheme, ColourScheme.HEADER_BUTTON_BASE_BACKGROUND, schemeBean.getHeaderButtonBackground());
+        setColorCode(colourScheme, ColourScheme.HEADER_BUTTON_TEXT, schemeBean.getHeaderButtonText());
+        setColorCode(colourScheme, ColourScheme.HEADING_TEXT, schemeBean.getHeadingText());
+        setColorCode(colourScheme, ColourScheme.LINK, schemeBean.getLinks());
+        setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_BACKGROUND, schemeBean.getMenuItemSelectedBackground());
+        setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_TEXT, schemeBean.getMenuItemSelectedText());
+        setColorCode(colourScheme, ColourScheme.MENU_ITEM_TEXT, schemeBean.getPageMenuItemText());
+        setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_BACKGROUND, schemeBean.getPageMenuSelectedBackground());
+        setColorCode(colourScheme, ColourScheme.SEARCH_FIELD_BACKGROUND, schemeBean.getSearchFieldBackground());
+        setColorCode(colourScheme, ColourScheme.SEARCH_FIELD_TEXT, schemeBean.getSearchFieldText());
+
         return colourScheme;
     }
 
-    private static void setColorCode(BaseColourScheme colorScheme, String key, String value, final boolean setNullValues) {
-        if (setNullValues || !isBlank(value)) {
+    private static void setColorCode(BaseColourScheme colorScheme, String key, String value) {
+        if (value != null) {
             colorScheme.set(key, value);
         }
     }
