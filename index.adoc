@@ -31,6 +31,98 @@ This plugin provides methods for accessing configuration for Crowd.
 == Endpoints
 
 
+[.All]
+=== All
+
+
+[.setAll]
+==== setAll
+    
+`PUT /all`
+
+Set the whole configuration
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}all/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| AllBean 
+|  <<AllBean>> 
+| - 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* */*
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| When setting whole configuration was successful.
+|  <<>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}all/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}all/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :all/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}all/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.ApplicationLinks]
 === ApplicationLinks
 
@@ -2063,7 +2155,7 @@ Set the login-page settings
 
 ===== Return Type
 
-<<ErrorCollection>>
+<<SettingsBrandingLoginPageBean>>
 
 
 ===== Content Type
@@ -2076,6 +2168,11 @@ Set the login-page settings
 [cols="2,3,1"]
 |===         
 | Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<SettingsBrandingLoginPageBean>>
 
 
 | 0
@@ -2145,7 +2242,7 @@ Set the logo
 
 ===== Return Type
 
-<<SettingsBrandingLoginPageBean>>
+<<ErrorCollection>>
 
 
 ===== Content Type
@@ -2158,11 +2255,6 @@ Set the logo
 [cols="2,3,1"]
 |===         
 | Code | Message | Datatype 
-
-
-| 200
-| 
-|  <<SettingsBrandingLoginPageBean>>
 
 
 | 0
@@ -2357,6 +2449,31 @@ endif::internal-generation[]
 | schema 
 |  
 | DirectoryLdapSchema  
+| 
+|  
+
+|===
+
+
+[#AllBean]
+=== _AllBean_ 
+
+
+
+[.fields-AllBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| settings 
+|  
+| SettingsBean  
+| 
+|  
+
+| applications 
+|  
+| ApplicationsBean  
 | 
 |  
 
