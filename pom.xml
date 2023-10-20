@@ -6,7 +6,7 @@
     <parent>
         <groupId>de.aservo</groupId>
         <artifactId>parent-pom</artifactId>
-        <version>1.0.0-SNAPSHOT</version>
+        <version>0.0.11</version>
     </parent>
 
     <artifactId>confapi-commons</artifactId>
