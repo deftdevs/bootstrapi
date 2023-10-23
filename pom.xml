@@ -73,7 +73,7 @@
         <mockito.version>2.28.2</mockito.version>
         <spring-context.version>5.2.4.RELEASE</spring-context.version>
         <swagger.version>2.1.1</swagger.version>
-        <validation-api.version>1.1.0.FINAL</validation-api.version>
+        <validation-api.version>1.1.0.Final</validation-api.version>
         <wink-client.version>1.4</wink-client.version>
     </properties>
 
