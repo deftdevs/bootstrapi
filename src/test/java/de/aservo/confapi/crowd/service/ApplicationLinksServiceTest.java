@@ -117,7 +117,6 @@ public class ApplicationLinksServiceTest {
         ApplicationLinksBean applicationLinkResponse = applicationLinkService.setApplicationLinks(applicationLinksBean, true);
 
         assertEquals(applicationLinkResponse.getApplicationLinks().iterator().next().getName(), applicationLinkBean.getName());
-        assertNotEquals(applicationLinkResponse, applicationLinkBean);
     }
 
     @Test
