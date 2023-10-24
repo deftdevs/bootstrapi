@@ -2372,6 +2372,297 @@ ifdef::internal-generation[]
 endif::internal-generation[]
 
 
+[.Users]
+=== Users
+
+
+[.getUser]
+==== getUser
+    
+`GET /users`
+
+Get a user
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}users/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| username 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<UserBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the requested user details
+|  <<UserBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}users/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}users/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :users/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}users/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setUser]
+==== setUser
+    
+`PUT /users`
+
+Update an user
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}users/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| UserBean 
+|  <<UserBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| username 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<UserBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the updated user details
+|  <<UserBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}users/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}users/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :users/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}users/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setUserPassword]
+==== setUserPassword
+    
+`PUT /users/password`
+
+Update a user password
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}users/password/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| body 
+|  <<string>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| username 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<UserBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the user details
+|  <<UserBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}users/password/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}users/password/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :users/password/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}users/password/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [#models]
 == Models
 
@@ -3541,6 +3832,43 @@ endif::internal-generation[]
 |  
 
 | buttonColor 
+|  
+| String  
+| 
+|  
+
+|===
+
+
+[#UserBean]
+=== _UserBean_ 
+
+
+
+[.fields-UserBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| username 
+|  
+| String  
+| 
+|  
+
+| fullName 
+|  
+| String  
+| 
+|  
+
+| email 
+|  
+| String  
+| 
+|  
+
+| password 
 |  
 | String  
 | 
