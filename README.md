@@ -4,7 +4,7 @@ ConfAPI for Crowd
 =================
 
 [![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.aservo/confapi-crowd-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.aservo/confapi-crowd-plugin)
-[![Build Status](https://github.com/aservo/confapi-crowd-plugin/actions/workflows/ci_main.yaml/badge.svg)](https://github.com/aservo/confapi-crowd-plugin/actions/workflows/ci_main.yaml)
+[![Build Status](https://github.com/aservo/confapi-crowd-plugin/actions/workflows/ci.yaml/badge.svg)](https://github.com/aservo/confapi-crowd-plugin/actions/workflows/ci.yaml)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=aservo_confapi-crowd-plugin&metric=coverage)](https://sonarcloud.io/dashboard?id=aservo_confapi-crowd-plugin)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=aservo_confapi-crowd-plugin&metric=alert_status)](https://sonarcloud.io/dashboard?id=aservo_confapi-crowd-plugin)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
