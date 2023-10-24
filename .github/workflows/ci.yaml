@@ -1,7 +1,10 @@
-name: CI Main
+name: CI
 
 on:
   push:
+    branches:
+      - 'main'
+  pull_request:
     branches:
       - 'main'
 
@@ -87,6 +90,8 @@ jobs:
   deploy:
     needs: [unit-tests, integration-tests]
 
+    if: github.event_name == 'push' # to 'main'
+
     runs-on: ubuntu-20.04
 
     env:
@@ -124,7 +129,7 @@ jobs:
       run: export GPG_TTY=$(tty) && ./mvnw -s .github/workflows/settings.xml -DskipTests deploy -B
 
   apcc:
-    needs: deploy
+    needs: package
 
     runs-on: ubuntu-20.04
 
