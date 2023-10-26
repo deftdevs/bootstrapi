@@ -1893,6 +1893,171 @@ ifdef::internal-generation[]
 endif::internal-generation[]
 
 
+[.MailTemplates]
+=== MailTemplates
+
+
+[.getMailTemplates]
+==== getMailTemplates
+    
+`GET /mail-templates`
+
+Get the mail templates
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}mail-templates/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<MailTemplatesBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<MailTemplatesBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}mail-templates/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}mail-templates/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :mail-templates/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}mail-templates/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setMailTemplates]
+==== setMailTemplates
+    
+`PUT /mail-templates`
+
+Set the mail templates
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}mail-templates/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| MailTemplatesBean 
+|  <<MailTemplatesBean>> 
+| - 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+<<MailTemplatesBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<MailTemplatesBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}mail-templates/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}mail-templates/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :mail-templates/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}mail-templates/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.Ping]
 === Ping
 
@@ -3463,6 +3628,49 @@ endif::internal-generation[]
 | useTls 
 |  
 | Boolean  
+| 
+|  
+
+|===
+
+
+[#MailTemplatesBean]
+=== _MailTemplatesBean_ 
+
+
+
+[.fields-MailTemplatesBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| forgottenPassword 
+|  
+| String  
+| 
+|  
+
+| forgottenUsername 
+|  
+| String  
+| 
+|  
+
+| passwordExpirationReminder 
+|  
+| String  
+| 
+|  
+
+| emailChangeValidation 
+|  
+| String  
+| 
+|  
+
+| emailChangeInfo 
+|  
+| String  
 | 
 |  
 
