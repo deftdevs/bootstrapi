@@ -4,6 +4,9 @@ on:
   push:
     branches:
       - 'main'
+  pull_request:
+    branches:
+      - 'main'
 
 jobs:
   package:
@@ -62,6 +65,8 @@ jobs:
 
   deploy:
     needs: unit-tests
+
+    if: github.event_name == 'push' # to 'main'
 
     runs-on: ubuntu-20.04
 
