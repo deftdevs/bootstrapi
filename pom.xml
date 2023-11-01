@@ -68,13 +68,18 @@
         <jsr311-api.version>1.1.1</jsr311-api.version>
         <junit.version>4.13.1</junit.version>
         <log4j.version>2.17.1</log4j.version>
-        <lombok.version>1.18.10</lombok.version>
+        <lombok.version>1.18.28</lombok.version>
         <maven-jar-plugin.version>3.0.2</maven-jar-plugin.version>
         <mockito.version>2.28.2</mockito.version>
         <spring-context.version>5.2.4.RELEASE</spring-context.version>
         <swagger.version>2.1.1</swagger.version>
         <validation-api.version>1.1.0.Final</validation-api.version>
         <wink-client.version>1.4</wink-client.version>
+        <!-- Compiler must be 8 so that the plugin can run on Atlassian instances using Java 8 -->
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencyManagement>
