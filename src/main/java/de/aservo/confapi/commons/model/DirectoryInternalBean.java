@@ -81,5 +81,14 @@ public class DirectoryInternalBean extends AbstractDirectoryBean {
         EXAMPLE_1.getCredentialPolicy().setPasswordMaxChangeTime(60L);
         EXAMPLE_1.getCredentialPolicy().setPasswordExpiryNotificationDays(Arrays.asList(1, 7));
         EXAMPLE_1.getCredentialPolicy().setPasswordEncryptionMethod("ATLASSIAN_SECURITY_ENCODER");
+        EXAMPLE_1.setPermissions(new DirectoryPermissions());
+        EXAMPLE_1.getPermissions().setAddGroup(true);
+        EXAMPLE_1.getPermissions().setAddUser(true);
+        EXAMPLE_1.getPermissions().setModifyGroup(true);
+        EXAMPLE_1.getPermissions().setModifyUser(true);
+        EXAMPLE_1.getPermissions().setModifyGroupAttributes(true);
+        EXAMPLE_1.getPermissions().setModifyUserAttributes(true);
+        EXAMPLE_1.getPermissions().setRemoveGroup(true);
+        EXAMPLE_1.getPermissions().setRemoveUser(true);
     }
 }
