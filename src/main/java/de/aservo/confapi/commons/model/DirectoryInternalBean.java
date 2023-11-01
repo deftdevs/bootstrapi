@@ -1,6 +1,7 @@
 package de.aservo.confapi.commons.model;
 
 import de.aservo.confapi.commons.constants.ConfAPI;
+import de.aservo.confapi.commons.model.type.DirectoryPermissions;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -26,7 +27,7 @@ public class DirectoryInternalBean extends AbstractDirectoryBean {
     private DirectoryInternalAdvanced advanced;
 
     @XmlElement
-    private DirectoryInternalPermissions permissions;
+    private DirectoryPermissions permissions;
 
     @Data
     @NoArgsConstructor
@@ -62,35 +63,6 @@ public class DirectoryInternalBean extends AbstractDirectoryBean {
         private Boolean enableNestedGroups;
     }
 
-    @Data
-    @NoArgsConstructor
-    public static class DirectoryInternalPermissions {
-
-        @XmlElement
-        private Boolean addGroup;               //Allow groups to be added to the directory.
-
-        @XmlElement
-        private Boolean addUser;                //Allow users to be added to the directory.
-
-        @XmlElement
-        private Boolean modifyGroup;            //Allow groups to be modified in the directory.
-
-        @XmlElement
-        private Boolean modifyUser;             //Allow users to be modified in the directory.
-
-        @XmlElement
-        private Boolean modifyGroupAttributes;  //Allow group attributes to be modified in the directory.
-
-        @XmlElement
-        private Boolean modifyUserAttributes;   //Allow user attributes to be modified in the directory.
-
-        @XmlElement
-        private Boolean removeGroup;            //Allow groups to be removed from the directory.
-
-        @XmlElement
-        private Boolean removeUser;             //Allow users to be removed from the directory.
-    }
-
     // examples
 
     public static final DirectoryInternalBean EXAMPLE_1;
@@ -109,5 +81,14 @@ public class DirectoryInternalBean extends AbstractDirectoryBean {
         EXAMPLE_1.getCredentialPolicy().setPasswordMaxChangeTime(60L);
         EXAMPLE_1.getCredentialPolicy().setPasswordExpiryNotificationDays(Arrays.asList(1, 7));
         EXAMPLE_1.getCredentialPolicy().setPasswordEncryptionMethod("ATLASSIAN_SECURITY_ENCODER");
+        EXAMPLE_1.setPermissions(new DirectoryPermissions());
+        EXAMPLE_1.getPermissions().setAddGroup(true);
+        EXAMPLE_1.getPermissions().setAddUser(true);
+        EXAMPLE_1.getPermissions().setModifyGroup(true);
+        EXAMPLE_1.getPermissions().setModifyUser(true);
+        EXAMPLE_1.getPermissions().setModifyGroupAttributes(true);
+        EXAMPLE_1.getPermissions().setModifyUserAttributes(true);
+        EXAMPLE_1.getPermissions().setRemoveGroup(true);
+        EXAMPLE_1.getPermissions().setRemoveUser(true);
     }
 }

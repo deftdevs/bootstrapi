@@ -19,6 +19,7 @@ public class ConfAPI {
     public static final String DIRECTORIES                  = "directories";
     public static final String DIRECTORY                    = "directory";
     public static final String DIRECTORY_CROWD              = "crowd";
+    public static final String DIRECTORY_DELEGATING         = "delegating";
     public static final String DIRECTORY_GENERIC            = "generic";
     public static final String DIRECTORY_INTERNAL           = "internal";
     public static final String DIRECTORY_LDAP               = "ldap";

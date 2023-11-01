@@ -24,6 +24,7 @@ import java.util.Date;
 )
 @JsonSubTypes({
         @JsonSubTypes.Type(value = DirectoryCrowdBean.class, name = ConfAPI.DIRECTORY_CROWD),
+        @JsonSubTypes.Type(value = DirectoryDelegatingBean.class, name = ConfAPI.DIRECTORY_DELEGATING),
         @JsonSubTypes.Type(value = DirectoryGenericBean.class, name = ConfAPI.DIRECTORY_GENERIC),
         @JsonSubTypes.Type(value = DirectoryInternalBean.class, name = ConfAPI.DIRECTORY_INTERNAL),
         @JsonSubTypes.Type(value = DirectoryLdapBean.class, name = ConfAPI.DIRECTORY_LDAP),
