@@ -1,20 +1,30 @@
 package de.aservo.confapi.crowd.model.util;
 
+import com.atlassian.crowd.directory.DelegatedAuthenticationDirectory;
+import com.atlassian.crowd.directory.SynchronisableDirectoryProperties;
+import com.atlassian.crowd.directory.ldap.LDAPPropertiesMapper;
+import com.atlassian.crowd.directory.ldap.LdapSecureMode;
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.embedded.api.MockDirectoryInternal;
 import com.atlassian.crowd.embedded.api.OperationType;
+import com.atlassian.crowd.model.directory.ImmutableDirectory;
 import de.aservo.confapi.commons.model.AbstractDirectoryBean;
+import de.aservo.confapi.commons.model.DirectoryDelegatingBean;
 import de.aservo.confapi.commons.model.DirectoryInternalBean;
+import de.aservo.confapi.commons.model.type.DirectoryPermissions;
+import de.aservo.confapi.crowd.model.util.DirectoryBeanUtil.DirectoryDelegatingConnectorTypeImplClass;
+import de.aservo.confapi.crowd.util.AssertUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;
 
-import java.util.Map;
+import java.util.Collections;
 import java.util.Set;
 
 import static com.atlassian.crowd.directory.AbstractInternalDirectory.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
@@ -24,76 +34,171 @@ public class DirectoryBeanUtilTest {
     @Test
     public void testToDirectoryInternalBean() {
         final Directory directory = new MockDirectoryInternal();
-        final AbstractDirectoryBean directoryBean = DirectoryBeanUtil.toDirectoryBean(directory);
 
-        assertNotNull(directoryBean);
-        assertEquals(directoryBean.getId(), directory.getId());
-        assertEquals(directoryBean.getName(), directory.getName());
-        assertEquals(directoryBean.getDescription(), directory.getDescription());
-        assertEquals(directoryBean.getActive(), directory.isActive());
-
-        final DirectoryInternalBean directoryInternalBean = (DirectoryInternalBean) directoryBean;
-        final Map<String, String> attributes = directory.getAttributes();
-        assertNotNull(directoryInternalBean.getCredentialPolicy());
-        assertEquals(attributes.get(ATTRIBUTE_PASSWORD_REGEX), directoryInternalBean.getCredentialPolicy().getPasswordRegex());
-        assertEquals(attributes.get(ATTRIBUTE_PASSWORD_COMPLEXITY_MESSAGE), directoryInternalBean.getCredentialPolicy().getPasswordComplexityMessage());
-        assertEquals(Long.valueOf(attributes.get(ATTRIBUTE_PASSWORD_MAX_ATTEMPTS)), directoryInternalBean.getCredentialPolicy().getPasswordMaxAttempts());
-        assertNull(directoryInternalBean.getCredentialPolicy().getPasswordHistoryCount());
-        assertEquals(Long.valueOf(attributes.get(ATTRIBUTE_PASSWORD_MAX_CHANGE_TIME)), directoryInternalBean.getCredentialPolicy().getPasswordMaxChangeTime());
-        assertNotNull(directoryInternalBean.getCredentialPolicy().getPasswordMaxChangeTime());
-        assertEquals(attributes.get(ATTRIBUTE_USER_ENCRYPTION_METHOD), directoryInternalBean.getCredentialPolicy().getPasswordEncryptionMethod());
+        final DirectoryInternalBean directoryInternalBean = (DirectoryInternalBean) DirectoryBeanUtil.toDirectoryBean(directory);
+        assertDirectoryDetailsMatch(directory, directoryInternalBean, true);
+        assertDirectoryInternalAttributesForCredentialPolicyMatch(directory, directoryInternalBean, true);
     }
 
     @Test
-    public void testToDirectoryGenericBean() {
+    public void testToDirectoryDelegatingBean() {
+        final Directory directory = getDirectoryDelegating();
+
+        final DirectoryDelegatingBean directoryDelegatingBean = (DirectoryDelegatingBean) DirectoryBeanUtil.toDirectoryBean(directory);
+        assertDirectoryDetailsMatch(directory, directoryDelegatingBean, true);
+        assertDirectoryDelegatingAttributesForConnectorMatch(directory, directoryDelegatingBean, true);
+        assertDirectoryDelegatingAttributesForConfigurationMatch(directory, directoryDelegatingBean, true);
+        assertDirectoryAllowedOperationsMatches(directory.getAllowedOperations(), directoryDelegatingBean.getPermissions(), true);
+    }
+
+    @Test
+    public void testDirectoryToDirectoryGenericBean() {
         final Directory directory = spy(new MockDirectoryInternal());
         doReturn(DirectoryType.CUSTOM).when(directory).getType();
-        final AbstractDirectoryBean directoryBean = DirectoryBeanUtil.toDirectoryBean(directory);
 
-        assertNotNull(directoryBean);
-        assertEquals(directoryBean.getId(), directory.getId());
-        assertEquals(directoryBean.getName(), directory.getName());
-        assertEquals(directoryBean.getDescription(), directory.getDescription());
-        assertEquals(directoryBean.getActive(), directory.isActive());
+        final AbstractDirectoryBean directoryBean = DirectoryBeanUtil.toDirectoryBean(directory);
+        assertDirectoryDetailsMatch(directory, directoryBean, true);
     }
 
     @Test
-    public void testToDirectory() {
-        final DirectoryInternalBean directoryBean = DirectoryInternalBean.EXAMPLE_1;
-        directoryBean.setPermissions(new DirectoryInternalBean.DirectoryInternalPermissions());
-        directoryBean.getPermissions().setAddGroup(true);
-        directoryBean.getPermissions().setAddUser(true);
-        directoryBean.getPermissions().setModifyGroup(true);
-        directoryBean.getPermissions().setModifyUser(true);
-        directoryBean.getPermissions().setModifyGroupAttributes(true);
-        directoryBean.getPermissions().setModifyUserAttributes(true);
-        directoryBean.getPermissions().setRemoveGroup(true);
-        directoryBean.getPermissions().setRemoveUser(true);
+    public void testDirectoryInternalBeanToDirectory() {
+        final DirectoryInternalBean directoryInternalBean = DirectoryInternalBean.EXAMPLE_1;
 
-        final Directory directory = DirectoryBeanUtil.toDirectory(directoryBean);
-        assertNotNull(directory);
-        assertEquals(directory.getName(), directoryBean.getName());
+        final Directory directory = DirectoryBeanUtil.toDirectory(directoryInternalBean);
+        assertEquals(DirectoryType.INTERNAL, directory.getType());
+        assertDirectoryDetailsMatch(directory, directoryInternalBean, false);
+        assertDirectoryInternalAttributesForCredentialPolicyMatch(directory, directoryInternalBean, false);
+        assertDirectoryAllowedOperationsMatches(directory.getAllowedOperations(), directoryInternalBean.getPermissions(), false);
+    }
 
-        final Map<String, String> attributes = directory.getAttributes();
-        assertNotNull(attributes);
-        assertEquals(directoryBean.getCredentialPolicy().getPasswordRegex(), attributes.get(ATTRIBUTE_PASSWORD_REGEX));
-        assertEquals(directoryBean.getCredentialPolicy().getPasswordComplexityMessage(), attributes.get(ATTRIBUTE_PASSWORD_COMPLEXITY_MESSAGE));
-        assertEquals(String.valueOf(directoryBean.getCredentialPolicy().getPasswordMaxAttempts()), attributes.get(ATTRIBUTE_PASSWORD_MAX_ATTEMPTS));
-        assertEquals(String.valueOf(directoryBean.getCredentialPolicy().getPasswordHistoryCount()), attributes.get(ATTRIBUTE_PASSWORD_HISTORY_COUNT));
-        assertEquals(String.valueOf(directoryBean.getCredentialPolicy().getPasswordMaxChangeTime()), attributes.get(ATTRIBUTE_PASSWORD_MAX_CHANGE_TIME));
-        assertNotNull(attributes.get(ATTRIBUTE_PASSWORD_EXPIRATION_NOTIFICATION_PERIODS));
-        assertEquals(directoryBean.getCredentialPolicy().getPasswordEncryptionMethod(), attributes.get(ATTRIBUTE_USER_ENCRYPTION_METHOD));
+    @Test
+    public void testDirectoryDelegatingBeanToDirectory() {
+        final DirectoryDelegatingBean directoryDelegatingBean = DirectoryDelegatingBean.EXAMPLE_1;
 
-        final Set<OperationType> allowedOperations = directory.getAllowedOperations();
-        assertNotNull(allowedOperations);
-        assertEquals(directoryBean.getPermissions().getAddGroup(), allowedOperations.contains(OperationType.CREATE_GROUP));
-        assertEquals(directoryBean.getPermissions().getAddUser(), allowedOperations.contains(OperationType.CREATE_USER));
-        assertEquals(directoryBean.getPermissions().getModifyGroup(), allowedOperations.contains(OperationType.UPDATE_GROUP));
-        assertEquals(directoryBean.getPermissions().getModifyUser(), allowedOperations.contains(OperationType.UPDATE_USER));
-        assertEquals(directoryBean.getPermissions().getModifyGroup(), allowedOperations.contains(OperationType.UPDATE_GROUP_ATTRIBUTE));
-        assertEquals(directoryBean.getPermissions().getModifyUser(), allowedOperations.contains(OperationType.UPDATE_USER_ATTRIBUTE));
-        assertEquals(directoryBean.getPermissions().getRemoveGroup(), allowedOperations.contains(OperationType.DELETE_GROUP));
-        assertEquals(directoryBean.getPermissions().getRemoveUser(), allowedOperations.contains(OperationType.DELETE_USER));
+        final Directory directory = DirectoryBeanUtil.toDirectory(directoryDelegatingBean);
+        assertEquals(DirectoryType.DELEGATING, directory.getType());
+        assertDirectoryDetailsMatch(directory, directoryDelegatingBean, false);
+        assertDirectoryDelegatingAttributesForConnectorMatch(directory, directoryDelegatingBean, false);
+        assertDirectoryDelegatingAttributesForConfigurationMatch(directory, directoryDelegatingBean, false);
+        assertDirectoryAllowedOperationsMatches(directory.getAllowedOperations(), directoryDelegatingBean.getPermissions(), false);
+    }
+
+    private void assertDirectoryInternalAttributesForCredentialPolicyMatch(
+            final Directory directory,
+            final DirectoryInternalBean directoryInternalBean,
+            final boolean firstParameterIsExpected) {
+
+        AssertUtil.assertEquals(directory.getAttributes().get(ATTRIBUTE_PASSWORD_REGEX), directoryInternalBean.getCredentialPolicy().getPasswordRegex(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getAttributes().get(ATTRIBUTE_PASSWORD_COMPLEXITY_MESSAGE), directoryInternalBean.getCredentialPolicy().getPasswordComplexityMessage(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getAttributes().get(ATTRIBUTE_PASSWORD_MAX_ATTEMPTS), String.valueOf(directoryInternalBean.getCredentialPolicy().getPasswordMaxAttempts()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getAttributes().get(ATTRIBUTE_PASSWORD_HISTORY_COUNT), String.valueOf(directoryInternalBean.getCredentialPolicy().getPasswordHistoryCount()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getAttributes().get(ATTRIBUTE_PASSWORD_MAX_CHANGE_TIME), String.valueOf(directoryInternalBean.getCredentialPolicy().getPasswordMaxChangeTime()), firstParameterIsExpected);
+        assertNotNull(directory.getAttributes().get(ATTRIBUTE_PASSWORD_EXPIRATION_NOTIFICATION_PERIODS));
+        AssertUtil.assertEquals(directory.getAttributes().get(ATTRIBUTE_USER_ENCRYPTION_METHOD), directoryInternalBean.getCredentialPolicy().getPasswordEncryptionMethod(), firstParameterIsExpected);
+    }
+
+    private void assertDirectoryDetailsMatch(
+            final Directory directoryActual,
+            final AbstractDirectoryBean directoryBeanExpected,
+            final boolean firstParameterIsExpected) {
+
+        AssertUtil.assertEquals(directoryActual.getId(), directoryBeanExpected.getId(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getName(), directoryBeanExpected.getName(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getDescription(), directoryBeanExpected.getDescription(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.isActive(), directoryBeanExpected.getActive(), firstParameterIsExpected);
+    }
+
+    private void assertDirectoryDelegatingAttributesForConnectorMatch(
+            final Directory directory,
+            final DirectoryDelegatingBean directoryDelegatingBean,
+            final boolean firstParameterIsExpected) {
+
+        AssertUtil.assertEquals(directory.getValue(DelegatedAuthenticationDirectory.ATTRIBUTE_LDAP_DIRECTORY_CLASS), DirectoryDelegatingConnectorTypeImplClass.MICROSOFT_ACTIVE_DIRECTORY.getImplClass(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_URL_KEY), directoryDelegatingBean.getConnector().getUrl(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_SECURE_KEY), LdapSecureMode.valueOf(directoryDelegatingBean.getConnector().getSsl().name()).getName(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_REFERRAL_KEY), String.valueOf(directoryDelegatingBean.getConnector().getUseNodeReferrals()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_NESTED_GROUPS_DISABLED), String.valueOf(directoryDelegatingBean.getConnector().getNestedGroupsDisabled()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(SynchronisableDirectoryProperties.INCREMENTAL_SYNC_ENABLED), String.valueOf(directoryDelegatingBean.getConnector().getSynchronizeUserDetails()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE_FOR_GROUP_MEMBERSHIP), String.valueOf(directoryDelegatingBean.getConnector().getSynchronizeGroupMemberships()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_PAGEDRESULTS_KEY), String.valueOf(directoryDelegatingBean.getConnector().getUsePagedResults()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_PAGEDRESULTS_SIZE), String.valueOf(directoryDelegatingBean.getConnector().getPagedResultsSize()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(SynchronisableDirectoryProperties.READ_TIMEOUT_IN_MILLISECONDS), String.valueOf(directoryDelegatingBean.getConnector().getReadTimeoutInMillis()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_SEARCH_TIMELIMIT), String.valueOf(directoryDelegatingBean.getConnector().getSearchTimeoutInMillis()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(SynchronisableDirectoryProperties.CONNECTION_TIMEOUT_IN_MILLISECONDS), String.valueOf(directoryDelegatingBean.getConnector().getConnectionTimeoutInMillis()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_BASEDN_KEY), directoryDelegatingBean.getConnector().getBaseDn(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_USERDN_KEY), directoryDelegatingBean.getConnector().getUsername(), firstParameterIsExpected);
+    }
+
+    private void assertDirectoryDelegatingAttributesForConfigurationMatch(
+            final Directory directoryActual,
+            final DirectoryDelegatingBean directoryDelegatingBeanExpected,
+            final boolean firstParameterIsExpected) {
+
+        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_DN_ADDITION), directoryDelegatingBeanExpected.getConfiguration().getUserDn(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_OBJECTCLASS_KEY), directoryDelegatingBeanExpected.getConfiguration().getUserObjectClass(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_OBJECTFILTER_KEY), directoryDelegatingBeanExpected.getConfiguration().getUserObjectFilter(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_USERNAME_KEY), directoryDelegatingBeanExpected.getConfiguration().getUserNameAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_USERNAME_RDN_KEY), directoryDelegatingBeanExpected.getConfiguration().getUserNameRdnAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_FIRSTNAME_KEY), directoryDelegatingBeanExpected.getConfiguration().getUserFirstNameAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_LASTNAME_KEY), directoryDelegatingBeanExpected.getConfiguration().getUserLastNameAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_DISPLAYNAME_KEY), directoryDelegatingBeanExpected.getConfiguration().getUserDisplayNameAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_EMAIL_KEY), directoryDelegatingBeanExpected.getConfiguration().getUserEmailAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_GROUP_KEY), directoryDelegatingBeanExpected.getConfiguration().getUserGroupAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.LDAP_EXTERNAL_ID), directoryDelegatingBeanExpected.getConfiguration().getUserUniqueIdAttribute(), firstParameterIsExpected);
+    }
+
+    private void assertDirectoryAllowedOperationsMatches(
+            final Set<OperationType> operationTypes,
+            final DirectoryPermissions permissions,
+            final boolean firstParameterIsExpected) {
+
+        AssertUtil.assertEquals(operationTypes.contains(OperationType.CREATE_GROUP), permissions.getAddGroup(), firstParameterIsExpected);
+        AssertUtil.assertEquals(operationTypes.contains(OperationType.CREATE_USER), permissions.getAddUser(), firstParameterIsExpected);
+        AssertUtil.assertEquals(operationTypes.contains(OperationType.UPDATE_GROUP), permissions.getModifyGroup(), firstParameterIsExpected);
+        AssertUtil.assertEquals(operationTypes.contains(OperationType.UPDATE_USER), permissions.getModifyUser(), firstParameterIsExpected);
+        AssertUtil.assertEquals(operationTypes.contains(OperationType.UPDATE_GROUP_ATTRIBUTE), permissions.getModifyGroup(), firstParameterIsExpected);
+        AssertUtil.assertEquals(operationTypes.contains(OperationType.UPDATE_USER_ATTRIBUTE), permissions.getModifyUser(), firstParameterIsExpected);
+        AssertUtil.assertEquals(operationTypes.contains(OperationType.DELETE_GROUP), permissions.getRemoveGroup(), firstParameterIsExpected);
+        AssertUtil.assertEquals(operationTypes.contains(OperationType.DELETE_USER), permissions.getRemoveUser(), firstParameterIsExpected);
+    }
+
+    private Directory getDirectoryDelegating() {
+        final ImmutableDirectory.Builder directoryBuilder = ImmutableDirectory.builder("Delegating Directory", DirectoryType.DELEGATING,
+                        DirectoryDelegatingConnectorTypeImplClass.MICROSOFT_ACTIVE_DIRECTORY.getImplClass())
+                .setId(2L)
+                // Don't set any allowed operations, because we have all enabled in the DirectoryDelegatingBean example
+                .setAllowedOperations(Collections.emptySet())
+                // Connector attributes
+                .setAttribute(DelegatedAuthenticationDirectory.ATTRIBUTE_LDAP_DIRECTORY_CLASS, DirectoryDelegatingConnectorTypeImplClass.MICROSOFT_ACTIVE_DIRECTORY.getImplClass())
+                .setAttribute(LDAPPropertiesMapper.LDAP_URL_KEY, "ldap://example.com:389")
+                .setAttribute(LDAPPropertiesMapper.LDAP_SECURE_KEY, LdapSecureMode.START_TLS.getName())
+                .setAttribute(LDAPPropertiesMapper.LDAP_REFERRAL_KEY, String.valueOf(true))
+                .setAttribute(LDAPPropertiesMapper.LDAP_NESTED_GROUPS_DISABLED, String.valueOf(false))
+                .setAttribute(SynchronisableDirectoryProperties.INCREMENTAL_SYNC_ENABLED, String.valueOf(true))
+                .setAttribute(LDAPPropertiesMapper.LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE_FOR_GROUP_MEMBERSHIP, String.valueOf(true))
+                .setAttribute(LDAPPropertiesMapper.LDAP_PAGEDRESULTS_KEY, String.valueOf(true))
+                .setAttribute(LDAPPropertiesMapper.LDAP_PAGEDRESULTS_SIZE, String.valueOf(999L))
+                .setAttribute(SynchronisableDirectoryProperties.READ_TIMEOUT_IN_MILLISECONDS, String.valueOf(123000L))
+                .setAttribute(LDAPPropertiesMapper.LDAP_SEARCH_TIMELIMIT, String.valueOf(456000L))
+                .setAttribute(SynchronisableDirectoryProperties.CONNECTION_TIMEOUT_IN_MILLISECONDS, String.valueOf(789000L))
+                .setAttribute(LDAPPropertiesMapper.LDAP_BASEDN_KEY, "baseDn")
+                .setAttribute(LDAPPropertiesMapper.LDAP_USERDN_KEY, "userDn")
+                .setAttribute(LDAPPropertiesMapper.LDAP_PASSWORD_KEY, "password")
+                // Configuration attributes
+                .setAttribute(LDAPPropertiesMapper.USER_DN_ADDITION, "userDnAddition")
+                .setAttribute(LDAPPropertiesMapper.USER_OBJECTCLASS_KEY, "userObjectClass")
+                .setAttribute(LDAPPropertiesMapper.USER_OBJECTFILTER_KEY, "userObjectFilter")
+                .setAttribute(LDAPPropertiesMapper.USER_USERNAME_KEY, "userName")
+                .setAttribute(LDAPPropertiesMapper.USER_USERNAME_RDN_KEY, "userNameRdn")
+                .setAttribute(LDAPPropertiesMapper.USER_FIRSTNAME_KEY, "userFirstName")
+                .setAttribute(LDAPPropertiesMapper.USER_LASTNAME_KEY, "userLastName")
+                .setAttribute(LDAPPropertiesMapper.USER_DISPLAYNAME_KEY, "userDisplayName")
+                .setAttribute(LDAPPropertiesMapper.USER_EMAIL_KEY, "userEmail")
+                .setAttribute(LDAPPropertiesMapper.USER_GROUP_KEY, "userGroup")
+                .setAttribute(LDAPPropertiesMapper.LDAP_EXTERNAL_ID, "userUniqueId")
+                ;
+
+        return directoryBuilder.build();
     }
 
 }

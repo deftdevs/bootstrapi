@@ -19,7 +19,7 @@ public class MockDirectoryInternal implements Directory {
     public static final String ATTRIBUTE_PASSWORD_REGEX_VALUE                           = ".*";
     public static final String ATTRIBUTE_PASSWORD_COMPLEXITY_MESSAGE_VALUE              = "complex";
     public static final long   ATTRIBUTE_PASSWORD_MAX_ATTEMPTS_VALUE                    = 10L;
-    public static final String ATTRIBUTE_PASSWORD_HISTORY_COUNT_VALUE                   = null;
+    public static final String ATTRIBUTE_PASSWORD_HISTORY_COUNT_VALUE                   = "1";
     public static final long   ATTRIBUTE_PASSWORD_MAX_CHANGE_TIME_VALUE                 = 60L;
     public static final List<String> ATTRIBUTE_PASSWORD_EXPIRATION_NOTIFICATION_PERIODS_VALUE = Arrays.asList("1", "7");
 
@@ -30,7 +30,7 @@ public class MockDirectoryInternal implements Directory {
         this.attributes = Stream.of(new String[][] {
                 { ATTRIBUTE_PASSWORD_REGEX, ATTRIBUTE_PASSWORD_REGEX_VALUE },
                 { ATTRIBUTE_PASSWORD_COMPLEXITY_MESSAGE, ATTRIBUTE_PASSWORD_COMPLEXITY_MESSAGE_VALUE },
-                // don't add ATTRIBUTE_PASSWORD_MAX_ATTEMPTS attribute
+                { ATTRIBUTE_PASSWORD_HISTORY_COUNT, ATTRIBUTE_PASSWORD_HISTORY_COUNT_VALUE },
                 { ATTRIBUTE_PASSWORD_MAX_ATTEMPTS, String.valueOf(ATTRIBUTE_PASSWORD_MAX_ATTEMPTS_VALUE) },
                 { ATTRIBUTE_PASSWORD_MAX_CHANGE_TIME, String.valueOf(ATTRIBUTE_PASSWORD_MAX_CHANGE_TIME_VALUE) },
                 { ATTRIBUTE_PASSWORD_EXPIRATION_NOTIFICATION_PERIODS, String.join(",", ATTRIBUTE_PASSWORD_EXPIRATION_NOTIFICATION_PERIODS_VALUE) },
