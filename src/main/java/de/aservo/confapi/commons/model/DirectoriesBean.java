@@ -22,6 +22,7 @@ public class DirectoriesBean {
     @XmlElement
     @Schema(anyOf = {
             DirectoryCrowdBean.class,
+            DirectoryDelegatingBean.class,
             DirectoryGenericBean.class,
             DirectoryInternalBean.class,
             DirectoryLdapBean.class,

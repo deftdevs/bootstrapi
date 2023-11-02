@@ -22,6 +22,7 @@ import java.util.Date;
         include = JsonTypeInfo.As.PROPERTY,
         property = "type"
 )
+// Note: New subtypes must also be registered in DirectoriesBean.java to be considered in the REST API documentation
 @JsonSubTypes({
         @JsonSubTypes.Type(value = DirectoryCrowdBean.class, name = ConfAPI.DIRECTORY_CROWD),
         @JsonSubTypes.Type(value = DirectoryDelegatingBean.class, name = ConfAPI.DIRECTORY_DELEGATING),
