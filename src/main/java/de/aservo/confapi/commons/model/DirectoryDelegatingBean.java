@@ -56,16 +56,16 @@ public class DirectoryDelegatingBean extends AbstractDirectoryBean {
         private Boolean usePagedResults;
 
         @XmlElement
-        private Integer pagedResultsSize;
+        private Long pagedResultsSize;
 
         @XmlElement
-        private Integer readTimeoutInMillis;
+        private Long readTimeoutInMillis;
 
         @XmlElement
-        private Integer searchTimeoutInMillis;
+        private Long searchTimeoutInMillis;
 
         @XmlElement
-        private Integer connectionTimeoutInMillis;
+        private Long connectionTimeoutInMillis;
 
         @XmlElement
         private String baseDn;
@@ -146,10 +146,10 @@ public class DirectoryDelegatingBean extends AbstractDirectoryBean {
         EXAMPLE_1.getConnector().setSynchronizeUserDetails(false);
         EXAMPLE_1.getConnector().setSynchronizeGroupMemberships(false);
         EXAMPLE_1.getConnector().setUsePagedResults(true);
-        EXAMPLE_1.getConnector().setPagedResultsSize(999);
-        EXAMPLE_1.getConnector().setReadTimeoutInMillis(120000);
-        EXAMPLE_1.getConnector().setSearchTimeoutInMillis(60000);
-        EXAMPLE_1.getConnector().setConnectionTimeoutInMillis(10000);
+        EXAMPLE_1.getConnector().setPagedResultsSize(999L);
+        EXAMPLE_1.getConnector().setReadTimeoutInMillis(120000L);
+        EXAMPLE_1.getConnector().setSearchTimeoutInMillis(60000L);
+        EXAMPLE_1.getConnector().setConnectionTimeoutInMillis(10000L);
         EXAMPLE_1.getConnector().setBaseDn("DC=example,DC=com");
         EXAMPLE_1.getConnector().setUsername("domain\\example");
         EXAMPLE_1.getConnector().setPassword("p455w0rd");
