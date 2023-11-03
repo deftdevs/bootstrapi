@@ -16,7 +16,6 @@ import de.aservo.confapi.commons.exception.NotFoundException;
 import de.aservo.confapi.commons.exception.ServiceUnavailableException;
 import de.aservo.confapi.commons.model.AbstractDirectoryBean;
 import de.aservo.confapi.commons.model.DirectoriesBean;
-import de.aservo.confapi.commons.model.DirectoryInternalBean;
 import de.aservo.confapi.commons.service.api.DirectoriesService;
 import de.aservo.confapi.crowd.model.util.DirectoryBeanUtil;
 import org.springframework.stereotype.Component;
@@ -89,17 +88,15 @@ public class DirectoriesServiceImpl implements DirectoriesService {
             @NotNull final AbstractDirectoryBean directoryBean,
             final boolean testConnection) {
 
-        if (!(directoryBean instanceof DirectoryInternalBean)) {
-            throw new BadRequestException(String.format(
-                    "Setting directory type '%s' is not supported (yet)", directoryBean.getClass()));
-        }
-
         final Directory existingDirectory = findDirectory(id);
 
         try {
             final Directory mergedDirectory = DirectoryBeanUtil.toDirectory(directoryBean, existingDirectory);
             final Directory updatedDirectory = directoryManager.updateDirectory(mergedDirectory);
             return DirectoryBeanUtil.toDirectoryInternalBean(updatedDirectory);
+        } catch (DirectoryBeanUtil.UnsupportedDirectoryBeanException e) {
+            throw new BadRequestException(String.format(
+                    "Setting directory type '%s' is not supported (yet)", e.getMessage()));
         } catch (DirectoryNotFoundException e) {
             // this should not happen
             throw new InternalServerErrorException(String.format(
@@ -112,15 +109,13 @@ public class DirectoriesServiceImpl implements DirectoriesService {
             final @NotNull AbstractDirectoryBean directoryBean,
             final boolean testConnection) {
 
-        if (!(directoryBean instanceof DirectoryInternalBean)) {
-            throw new BadRequestException(String.format(
-                    "Adding directory type '%s' is not supported (yet)", directoryBean.getClass()));
-        }
-
         try {
             final Directory directory = DirectoryBeanUtil.toDirectory(directoryBean);
             final Directory addedDirectory = directoryManager.addDirectory(directory);
             return DirectoryBeanUtil.toDirectoryBean(addedDirectory);
+        } catch (DirectoryBeanUtil.UnsupportedDirectoryBeanException e) {
+            throw new BadRequestException(String.format(
+                    "Adding directory type '%s' is not supported (yet)", e.getMessage()));
         } catch (DirectoryInstantiationException e) {
             throw new InternalServerErrorException(String.format("Could not create directory '%s'", directoryBean.getName()));
         }

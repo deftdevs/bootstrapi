@@ -14,6 +14,7 @@ import de.aservo.confapi.commons.model.DirectoryDelegatingBean;
 import de.aservo.confapi.commons.model.DirectoryInternalBean;
 import de.aservo.confapi.commons.model.type.DirectoryPermissions;
 import de.aservo.confapi.crowd.model.util.DirectoryBeanUtil.DirectoryDelegatingConnectorTypeImplClass;
+import de.aservo.confapi.crowd.model.util.DirectoryBeanUtil.UnsupportedDirectoryBeanException;
 import de.aservo.confapi.crowd.util.AssertUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -61,7 +62,7 @@ public class DirectoryBeanUtilTest {
     }
 
     @Test
-    public void testDirectoryInternalBeanToDirectory() {
+    public void testDirectoryInternalBeanToDirectory() throws UnsupportedDirectoryBeanException {
         final DirectoryInternalBean directoryInternalBean = DirectoryInternalBean.EXAMPLE_1;
 
         final Directory directory = DirectoryBeanUtil.toDirectory(directoryInternalBean);
@@ -72,7 +73,7 @@ public class DirectoryBeanUtilTest {
     }
 
     @Test
-    public void testDirectoryDelegatingBeanToDirectory() {
+    public void testDirectoryDelegatingBeanToDirectory() throws UnsupportedDirectoryBeanException {
         final DirectoryDelegatingBean directoryDelegatingBean = DirectoryDelegatingBean.EXAMPLE_1;
 
         final Directory directory = DirectoryBeanUtil.toDirectory(directoryDelegatingBean);
