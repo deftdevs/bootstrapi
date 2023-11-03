@@ -11,7 +11,7 @@
     </parent>
 
     <artifactId>confapi-crowd-plugin</artifactId>
-    <version>0.2.0</version>
+    <version>0.2.1-SNAPSHOT</version>
     <packaging>atlassian-plugin</packaging>
 
     <name>ConfAPI for Crowd</name>
