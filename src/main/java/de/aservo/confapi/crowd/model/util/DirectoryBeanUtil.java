@@ -20,6 +20,7 @@ import lombok.Getter;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -31,6 +32,15 @@ import static java.lang.Boolean.TRUE;
 public class DirectoryBeanUtil {
 
     public static final String ATTRIBUTE_USE_NESTED_GROUPS = "useNestedGroups";
+
+    private static final Set<Class<? extends AbstractDirectoryBean>> SUPPORTED_DIRECTORY_BEAN_TYPES;
+
+    static {
+        final Set<Class<? extends AbstractDirectoryBean>> supportedDirectoryBeanTypes = new HashSet<>();
+        supportedDirectoryBeanTypes.add(DirectoryInternalBean.class);
+        supportedDirectoryBeanTypes.add(DirectoryDelegatingBean.class);
+        SUPPORTED_DIRECTORY_BEAN_TYPES = Collections.unmodifiableSet(supportedDirectoryBeanTypes);
+    }
 
     /*
      * Methods for converting directories to directory beans.
@@ -154,7 +164,7 @@ public class DirectoryBeanUtil {
      */
     @Nonnull
     public static Directory toDirectory(
-            @Nonnull final AbstractDirectoryBean directoryBean) {
+            @Nonnull final AbstractDirectoryBean directoryBean) throws UnsupportedDirectoryBeanException {
 
         final ImmutableDirectory.Builder directoryBuilder = ImmutableDirectory.builder(
                 directoryBean.getName(), toDirectoryType(directoryBean), toDirectoryImplClass(directoryBean));
@@ -171,7 +181,11 @@ public class DirectoryBeanUtil {
     @Nonnull
     public static Directory toDirectory(
             @Nonnull final AbstractDirectoryBean directoryBean,
-            @Nonnull final Directory directory) {
+            @Nonnull final Directory directory) throws UnsupportedDirectoryBeanException {
+
+        if (!SUPPORTED_DIRECTORY_BEAN_TYPES.contains(directoryBean.getClass())) {
+            throw new UnsupportedDirectoryBeanException(directoryBean.getClass());
+        }
 
         final ImmutableDirectory.Builder directoryBuilder = ImmutableDirectory.builder(directory);
 
@@ -464,6 +478,12 @@ public class DirectoryBeanUtil {
                 }
             }
             return null;
+        }
+    }
+
+    public static class UnsupportedDirectoryBeanException extends Exception {
+        public UnsupportedDirectoryBeanException(Class<? extends AbstractDirectoryBean> directoryBeanClass) {
+            super(directoryBeanClass.getName());
         }
     }
 

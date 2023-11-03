@@ -110,6 +110,7 @@ public class DirectoriesServiceTest {
         final Directory directoryAzureAd = getTestDirectoryAzureAd();
         final DirectoriesServiceImpl spy = spy(directoriesService);
         doReturn(List.of(directoryInternal, directoryAzureAd)).when(spy).findAllDirectories();
+        doReturn(directoryAzureAd).when(spy).findDirectory(directoryAzureAd.getId());
 
         final AbstractDirectoryBean directoryBean = DirectoryBeanUtil.toDirectoryBean(directoryAzureAd);
         final DirectoriesBean directoriesBean = new DirectoriesBean(Collections.singletonList(directoryBean));
