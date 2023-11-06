@@ -9,10 +9,11 @@ import lombok.NoArgsConstructor;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
- * Bean for user directory settings in REST requests.
+ * Bean for directory settings in REST requests.
  */
 @Data
 @NoArgsConstructor
@@ -28,6 +29,15 @@ public class DirectoryInternalBean extends AbstractDirectoryBean {
 
     @XmlElement
     private DirectoryPermissions permissions;
+
+    // It is not clear yet whether we want to support setting directory groups and users
+    // in external directories also, so we just start with the internal directory for now.
+
+    @XmlElement
+    private List<GroupBean> groups;
+
+    @XmlElement
+    private List<UserBean> users;
 
     @Data
     @NoArgsConstructor
@@ -90,5 +100,7 @@ public class DirectoryInternalBean extends AbstractDirectoryBean {
         EXAMPLE_1.getPermissions().setModifyUserAttributes(true);
         EXAMPLE_1.getPermissions().setRemoveGroup(true);
         EXAMPLE_1.getPermissions().setRemoveUser(true);
+        EXAMPLE_1.setGroups(Collections.singletonList(GroupBean.EXAMPLE_1));
+        EXAMPLE_1.setUsers(Collections.singletonList(UserBean.EXAMPLE_1));
     }
 }
