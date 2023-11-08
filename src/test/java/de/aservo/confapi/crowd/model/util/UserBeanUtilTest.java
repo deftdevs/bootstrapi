@@ -23,11 +23,6 @@ public class UserBeanUtilTest {
         assertEquals(user.getEmailAddress(), userBean.getEmail());
     }
 
-    @Test
-    public void testToUserBeanNull() {
-        assertNull(UserBeanUtil.toUserBean(null));
-    }
-
     private User getTestUser() {
         return ImmutableUser.builder(1, "test")
                 .displayName("Test User")

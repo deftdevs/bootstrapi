@@ -3402,6 +3402,18 @@ endif::internal-generation[]
 | 
 |  
 
+| groups 
+|  
+| List  of <<GroupBean>> 
+| 
+|  
+
+| users 
+|  
+| List  of <<UserBean>> 
+| 
+|  
+
 | schema 
 |  
 | DirectoryLdapSchema  
@@ -4205,6 +4217,18 @@ endif::internal-generation[]
 | 
 |  
 
+| groups 
+|  
+| List  of <<GroupBean>> 
+| 
+|  
+
+| users 
+|  
+| List  of <<UserBean>> 
+| 
+|  
+
 |===
 
 
@@ -4515,6 +4539,37 @@ endif::internal-generation[]
 |===
 
 
+[#GroupBean]
+=== _GroupBean_ 
+
+
+
+[.fields-GroupBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| name 
+|  
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| active 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
 [#LicenseBean]
 === _LicenseBean_ 
 
@@ -4813,6 +4868,18 @@ endif::internal-generation[]
 | 
 |  
 
+| firstName 
+|  
+| String  
+| 
+|  
+
+| lastName 
+|  
+| String  
+| 
+|  
+
 | fullName 
 |  
 | String  
@@ -4828,6 +4895,12 @@ endif::internal-generation[]
 | password 
 |  
 | String  
+| 
+|  
+
+| groups 
+|  
+| List  of <<GroupBean>> 
 | 
 |  
 
