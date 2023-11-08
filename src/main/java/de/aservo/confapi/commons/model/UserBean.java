@@ -33,6 +33,9 @@ public class UserBean {
     private String email;
 
     @XmlElement
+    private Boolean active;
+
+    @XmlElement
     @EqualsAndHashCode.Exclude
     private String password;
 
@@ -50,6 +53,7 @@ public class UserBean {
         EXAMPLE_1.setLastName("User");
         EXAMPLE_1.setFullName("Example User");
         EXAMPLE_1.setEmail("user@example.com");
+        EXAMPLE_1.setActive(true);
         EXAMPLE_1.setPassword("3x4mpl3");
     }
 
@@ -61,6 +65,7 @@ public class UserBean {
         EXAMPLE_2.setFirstName("Changed");
         EXAMPLE_2.setLastName("Example User");
         EXAMPLE_2.setFullName("Changed Example User");
+        EXAMPLE_2.setActive(false);
         EXAMPLE_2.setEmail("user@new-example.com");
     }
 
@@ -73,6 +78,7 @@ public class UserBean {
         EXAMPLE_3_ADMIN.setFullName("Administrator");
         EXAMPLE_3_ADMIN.setUsername("admin");
         EXAMPLE_3_ADMIN.setEmail("admin@admin.de");
+        EXAMPLE_3_ADMIN.setActive(true);
         EXAMPLE_3_ADMIN.setPassword("admin");
     }
 }
