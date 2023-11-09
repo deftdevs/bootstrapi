@@ -2,12 +2,17 @@ package de.aservo.confapi.crowd.model.util;
 
 import com.atlassian.crowd.directory.AbstractInternalDirectory;
 import com.atlassian.crowd.directory.DelegatedAuthenticationDirectory;
+import com.atlassian.crowd.directory.DirectoryProperties;
+import com.atlassian.crowd.directory.InternalDirectory;
+import com.atlassian.crowd.directory.MicrosoftActiveDirectory;
 import com.atlassian.crowd.directory.SynchronisableDirectoryProperties;
 import com.atlassian.crowd.directory.ldap.LDAPPropertiesMapper;
 import com.atlassian.crowd.directory.ldap.LdapSecureMode;
+import com.atlassian.crowd.directory.monitor.poller.PollerConfig;
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.embedded.api.OperationType;
+import com.atlassian.crowd.model.directory.DirectoryImpl;
 import com.atlassian.crowd.model.directory.ImmutableDirectory;
 import de.aservo.confapi.commons.model.AbstractDirectoryBean;
 import de.aservo.confapi.commons.model.DirectoryCrowdBean;
@@ -104,8 +109,10 @@ public class DirectoryBeanUtil {
         directoryBean.getConnector().setSsl(toDirectoryDelegatingConnectorSslType(directory));
         directoryBean.getConnector().setUseNodeReferrals(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_REFERRAL_KEY)));
         directoryBean.getConnector().setNestedGroupsDisabled(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_NESTED_GROUPS_DISABLED)));
-        directoryBean.getConnector().setSynchronizeUserDetails(toBoolean(directory.getAttributes().get(SynchronisableDirectoryProperties.INCREMENTAL_SYNC_ENABLED)));
-        directoryBean.getConnector().setSynchronizeGroupMemberships(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE_FOR_GROUP_MEMBERSHIP)));
+        directoryBean.getConnector().setSynchronizeUsers(toBoolean(directory.getAttributes().get(DelegatedAuthenticationDirectory.ATTRIBUTE_CREATE_USER_ON_AUTH)));
+        directoryBean.getConnector().setSynchronizeUserDetails(toBoolean(directory.getAttributes().get(DelegatedAuthenticationDirectory.ATTRIBUTE_UPDATE_USER_ON_AUTH)));
+        directoryBean.getConnector().setSynchronizeGroupMemberships(toBoolean(directory.getAttributes().get(DelegatedAuthenticationDirectory.ATTRIBUTE_KEY_IMPORT_GROUPS)));
+        directoryBean.getConnector().setUseUserMembershipAttribute(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE)));
         directoryBean.getConnector().setUsePagedResults(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_PAGEDRESULTS_KEY)));
         directoryBean.getConnector().setPagedResultsSize(toLong(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_PAGEDRESULTS_SIZE)));
         directoryBean.getConnector().setReadTimeoutInMillis(toLong(directory.getAttributes().get(SynchronisableDirectoryProperties.READ_TIMEOUT_IN_MILLISECONDS)));
@@ -126,6 +133,12 @@ public class DirectoryBeanUtil {
         directoryBean.getConfiguration().setUserEmailAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_EMAIL_KEY));
         directoryBean.getConfiguration().setUserGroupAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_GROUP_KEY));
         directoryBean.getConfiguration().setUserUniqueIdAttribute(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_EXTERNAL_ID));
+        directoryBean.getConfiguration().setGroupDn(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_DN_ADDITION));
+        directoryBean.getConfiguration().setGroupObjectClass(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_OBJECTCLASS_KEY));
+        directoryBean.getConfiguration().setGroupObjectFilter(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_OBJECTFILTER_KEY));
+        directoryBean.getConfiguration().setGroupNameAttribute(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_NAME_KEY));
+        directoryBean.getConfiguration().setGroupDescriptionAttribute(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_DESCRIPTION_KEY));
+        directoryBean.getConfiguration().setGroupMembersAttribute(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_USERNAMES_KEY));
 
         setDirectoryBeanPermissions(directoryBean, directory);
 
@@ -316,17 +329,16 @@ public class DirectoryBeanUtil {
             @Nonnull final AbstractDirectoryBean directoryBean) {
 
         if (DirectoryDelegatingBean.class.equals(directoryBean.getClass())) {
-            final DirectoryDelegatingBean directoryDelegatingBean = (DirectoryDelegatingBean) directoryBean;
-            return toDirectoryDelegatedConnectorTypeImplClass(directoryDelegatingBean.getConnector().getType());
+            return DelegatedAuthenticationDirectory.class.getCanonicalName();
         } else if (DirectoryInternalBean.class.equals(directoryBean.getClass())) {
-            return "com.atlassian.crowd.directory.InternalDirectory";
+            return InternalDirectory.class.getCanonicalName();
         }
 
         return null;
     }
 
     @Nullable
-    private static String toDirectoryDelegatedConnectorTypeImplClass(
+    private static String toDirectoryDelegatedConnectorTypeClass(
             @Nullable final DirectoryDelegatingBean.DirectoryDelegatingConnector.ConnectorType connectorType) {
 
         if (connectorType == null) {
@@ -368,19 +380,22 @@ public class DirectoryBeanUtil {
         }
     }
 
+    @SuppressWarnings("deprecation")
     private static void setDirectoryAttributes(
             @Nonnull final Map<String, String> attributes,
             @Nonnull final DirectoryDelegatingBean directoryDelegatingBean) {
 
         final DirectoryDelegatingBean.DirectoryDelegatingConnector connector = directoryDelegatingBean.getConnector();
         if (connector != null) {
-            setAttributeIfNotNull(attributes, DelegatedAuthenticationDirectory.ATTRIBUTE_LDAP_DIRECTORY_CLASS, toDirectoryDelegatedConnectorTypeImplClass(connector.getType()));
+            setAttributeIfNotNull(attributes, DelegatedAuthenticationDirectory.ATTRIBUTE_LDAP_DIRECTORY_CLASS, toDirectoryDelegatedConnectorTypeClass(connector.getType()));
             setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_URL_KEY, connector.getUrl());
             setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_SECURE_KEY, toDirectoryDelegatingConnectorSecureModeName(connector.getSsl()));
             setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_REFERRAL_KEY, fromBoolean(connector.getUseNodeReferrals()));
             setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_NESTED_GROUPS_DISABLED, fromBoolean(connector.getNestedGroupsDisabled()));
-            setAttributeIfNotNull(attributes, SynchronisableDirectoryProperties.INCREMENTAL_SYNC_ENABLED, fromBoolean(connector.getSynchronizeUserDetails()));
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE_FOR_GROUP_MEMBERSHIP, fromBoolean(connector.getSynchronizeGroupMemberships()));
+            setAttributeIfNotNull(attributes, DelegatedAuthenticationDirectory.ATTRIBUTE_CREATE_USER_ON_AUTH, fromBoolean(connector.getSynchronizeUsers()));
+            setAttributeIfNotNull(attributes, DelegatedAuthenticationDirectory.ATTRIBUTE_UPDATE_USER_ON_AUTH, fromBoolean(connector.getSynchronizeUserDetails()));
+            setAttributeIfNotNull(attributes, DelegatedAuthenticationDirectory.ATTRIBUTE_KEY_IMPORT_GROUPS, fromBoolean(connector.getSynchronizeGroupMemberships()));
+            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE, fromBoolean(connector.getUseUserMembershipAttribute()));
             setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_PAGEDRESULTS_KEY, fromBoolean(connector.getUsePagedResults()));
             setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_PAGEDRESULTS_SIZE, fromLong(connector.getPagedResultsSize()));
             setAttributeIfNotNull(attributes, SynchronisableDirectoryProperties.READ_TIMEOUT_IN_MILLISECONDS, fromLong(connector.getReadTimeoutInMillis()));
@@ -404,7 +419,31 @@ public class DirectoryBeanUtil {
             setAttributeIfNotNull(attributes, LDAPPropertiesMapper.USER_EMAIL_KEY, configuration.getUserEmailAttribute());
             setAttributeIfNotNull(attributes, LDAPPropertiesMapper.USER_GROUP_KEY, configuration.getUserGroupAttribute());
             setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_EXTERNAL_ID, configuration.getUserUniqueIdAttribute());
+            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.GROUP_DN_ADDITION, configuration.getGroupDn());
+            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.GROUP_OBJECTCLASS_KEY, configuration.getGroupObjectClass());
+            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.GROUP_OBJECTFILTER_KEY, configuration.getGroupObjectFilter());
+            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.GROUP_NAME_KEY, configuration.getGroupNameAttribute());
+            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.GROUP_DESCRIPTION_KEY, configuration.getGroupDescriptionAttribute());
+            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.GROUP_USERNAMES_KEY, configuration.getGroupMembersAttribute());
         }
+
+        // Also set some defaults for directory delegating.
+        // It is unclear yet how exactly they are set and whether they can change...
+        final PollerConfig pollerConfig = new PollerConfig();
+        attributes.putIfAbsent(DirectoryImpl.ATTRIBUTE_KEY_LOCAL_USER_STATUS, Boolean.toString(false));
+        attributes.putIfAbsent(DirectoryImpl.ATTRIBUTE_KEY_USE_PRIMARY_GROUP, Boolean.toString(false));
+        attributes.putIfAbsent(DirectoryProperties.CACHE_ENABLED, Boolean.toString(false));
+        attributes.putIfAbsent(LDAPPropertiesMapper.LDAP_FILTER_EXPIRED_USERS, Boolean.toString(false));
+        attributes.putIfAbsent(LDAPPropertiesMapper.LDAP_POOL_TYPE, "JNDI");
+        attributes.putIfAbsent(LDAPPropertiesMapper.LDAP_RELAXED_DN_STANDARDISATION, Boolean.toString(false));
+        attributes.putIfAbsent(LDAPPropertiesMapper.LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE_FOR_GROUP_MEMBERSHIP, Boolean.toString(false));
+        attributes.putIfAbsent(LDAPPropertiesMapper.LOCAL_GROUPS, Boolean.toString(false));
+        attributes.putIfAbsent(LDAPPropertiesMapper.ROLES_DISABLED, Boolean.toString(true));
+        attributes.putIfAbsent(SynchronisableDirectoryProperties.INCREMENTAL_SYNC_ENABLED, Boolean.toString(false));
+        attributes.putIfAbsent(SynchronisableDirectoryProperties.CACHE_SYNCHRONISE_CRON, pollerConfig.getCronExpression());
+        attributes.putIfAbsent(SynchronisableDirectoryProperties.CACHE_SYNCHRONISE_INTERVAL, Long.toString(pollerConfig.getPollingIntervalInMin() * 60));
+        attributes.putIfAbsent(SynchronisableDirectoryProperties.CACHE_SYNCHRONISATION_TYPE, pollerConfig.getSynchronisationType());
+        attributes.putIfAbsent(SynchronisableDirectoryProperties.SYNC_GROUP_MEMBERSHIP_AFTER_SUCCESSFUL_USER_AUTH_ENABLED, SynchronisableDirectoryProperties.SyncGroupMembershipsAfterAuth.DEFAULT.getValue());
     }
 
     private static void setDirectoryAllowedOperations(
@@ -463,7 +502,7 @@ public class DirectoryBeanUtil {
 
     @Getter
     enum DirectoryDelegatingConnectorTypeImplClass {
-        MICROSOFT_ACTIVE_DIRECTORY("com.atlassian.crowd.directory.MicrosoftActiveDirectory");
+        MICROSOFT_ACTIVE_DIRECTORY(MicrosoftActiveDirectory.class.getCanonicalName());
 
         private final String implClass;
 
