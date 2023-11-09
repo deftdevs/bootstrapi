@@ -47,10 +47,16 @@ public class DirectoryDelegatingBean extends AbstractDirectoryBean {
         private Boolean nestedGroupsDisabled;
 
         @XmlElement
+        private Boolean synchronizeUsers;
+
+        @XmlElement
         private Boolean synchronizeUserDetails;
 
         @XmlElement
         private Boolean synchronizeGroupMemberships;
+
+        @XmlElement
+        private Boolean useUserMembershipAttribute;
 
         @XmlElement
         private Boolean usePagedResults;
@@ -125,6 +131,24 @@ public class DirectoryDelegatingBean extends AbstractDirectoryBean {
 
         @XmlElement
         private String userUniqueIdAttribute;
+
+        @XmlElement
+        private String groupDn;
+
+        @XmlElement
+        private String groupObjectClass;
+
+        @XmlElement
+        private String groupObjectFilter;
+
+        @XmlElement
+        private String groupNameAttribute;
+
+        @XmlElement
+        private String groupDescriptionAttribute;
+
+        @XmlElement
+        private String groupMembersAttribute;
     }
 
     // Example instances for documentation and tests
@@ -143,8 +167,10 @@ public class DirectoryDelegatingBean extends AbstractDirectoryBean {
         EXAMPLE_1.getConnector().setSsl(DirectoryDelegatingConnector.SslType.LDAPS);
         EXAMPLE_1.getConnector().setUseNodeReferrals(false);
         EXAMPLE_1.getConnector().setNestedGroupsDisabled(true);
+        EXAMPLE_1.getConnector().setSynchronizeUsers(false);
         EXAMPLE_1.getConnector().setSynchronizeUserDetails(false);
         EXAMPLE_1.getConnector().setSynchronizeGroupMemberships(false);
+        EXAMPLE_1.getConnector().setUseUserMembershipAttribute(false);
         EXAMPLE_1.getConnector().setUsePagedResults(true);
         EXAMPLE_1.getConnector().setPagedResultsSize(999L);
         EXAMPLE_1.getConnector().setReadTimeoutInMillis(120000L);
@@ -156,7 +182,7 @@ public class DirectoryDelegatingBean extends AbstractDirectoryBean {
         EXAMPLE_1.setConfiguration(new DirectoryDelegatingConfiguration());
         EXAMPLE_1.getConfiguration().setUserDn("");
         EXAMPLE_1.getConfiguration().setUserObjectClass("user");
-        EXAMPLE_1.getConfiguration().setUserObjectFilter("TODO");
+        EXAMPLE_1.getConfiguration().setUserObjectFilter("(objectClass=user)");
         EXAMPLE_1.getConfiguration().setUserNameAttribute("sAMAccountName");
         EXAMPLE_1.getConfiguration().setUserNameRdnAttribute("cn");
         EXAMPLE_1.getConfiguration().setUserFirstNameAttribute("givenName");
@@ -165,6 +191,12 @@ public class DirectoryDelegatingBean extends AbstractDirectoryBean {
         EXAMPLE_1.getConfiguration().setUserEmailAttribute("email");
         EXAMPLE_1.getConfiguration().setUserGroupAttribute("memberOf");
         EXAMPLE_1.getConfiguration().setUserUniqueIdAttribute("userID");
+        EXAMPLE_1.getConfiguration().setGroupDn("");
+        EXAMPLE_1.getConfiguration().setGroupObjectClass("group");
+        EXAMPLE_1.getConfiguration().setGroupObjectFilter("(objectClass=group)");
+        EXAMPLE_1.getConfiguration().setGroupNameAttribute("gn");
+        EXAMPLE_1.getConfiguration().setGroupDescriptionAttribute("description");
+        EXAMPLE_1.getConfiguration().setGroupMembersAttribute("member");
         EXAMPLE_1.setPermissions(new DirectoryPermissions());
         EXAMPLE_1.getPermissions().setAddGroup(true);
         EXAMPLE_1.getPermissions().setAddUser(true);
