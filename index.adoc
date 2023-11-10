@@ -3979,6 +3979,42 @@ endif::internal-generation[]
 | 
 |  
 
+| groupDn 
+|  
+| String  
+| 
+|  
+
+| groupObjectClass 
+|  
+| String  
+| 
+|  
+
+| groupObjectFilter 
+|  
+| String  
+| 
+|  
+
+| groupNameAttribute 
+|  
+| String  
+| 
+|  
+
+| groupDescriptionAttribute 
+|  
+| String  
+| 
+|  
+
+| groupMembersAttribute 
+|  
+| String  
+| 
+|  
+
 |===
 
 
@@ -4022,6 +4058,12 @@ endif::internal-generation[]
 | 
 |  
 
+| synchronizeUsers 
+|  
+| Boolean  
+| 
+|  
+
 | synchronizeUserDetails 
 |  
 | Boolean  
@@ -4029,6 +4071,12 @@ endif::internal-generation[]
 |  
 
 | synchronizeGroupMemberships 
+|  
+| Boolean  
+| 
+|  
+
+| useUserMembershipAttribute 
 |  
 | Boolean  
 | 
@@ -4889,6 +4937,12 @@ endif::internal-generation[]
 | email 
 |  
 | String  
+| 
+|  
+
+| active 
+|  
+| Boolean  
 | 
 |  
 
