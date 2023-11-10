@@ -31,6 +31,7 @@ import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -79,6 +80,10 @@ public class UsersServiceImpl implements UsersService {
     public List<UserBean> setUsers(
             final long directoryId,
             final Collection<UserBean> userBeans) {
+
+        if (userBeans == null) {
+            return Collections.emptyList();
+        }
 
         return userBeans.stream()
                 .map(userBean -> setUser(directoryId, userBean))
