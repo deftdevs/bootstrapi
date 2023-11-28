@@ -136,6 +136,11 @@ public class UsersServiceTest {
     }
 
     @Test
+    public void testSetUsersNull() {
+        assertEquals(Collections.emptyList(), usersService.setUsers(getTestDirectory().getId(), null));
+    }
+
+    @Test
     public void testAddUser() throws CrowdException, DirectoryPermissionException {
         final User user = getTestUser();
         doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
