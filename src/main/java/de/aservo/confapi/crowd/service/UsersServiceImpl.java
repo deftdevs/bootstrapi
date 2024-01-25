@@ -1,8 +1,10 @@
 package de.aservo.confapi.crowd.service;
 
+import com.atlassian.crowd.embedded.api.CrowdService;
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.PasswordCredential;
 import com.atlassian.crowd.exception.DirectoryNotFoundException;
+import com.atlassian.crowd.exception.FailedAuthenticationException;
 import com.atlassian.crowd.exception.InvalidCredentialException;
 import com.atlassian.crowd.exception.InvalidUserException;
 import com.atlassian.crowd.exception.OperationFailedException;
@@ -40,12 +42,17 @@ import java.util.stream.Collectors;
 public class UsersServiceImpl implements UsersService {
 
     @ComponentImport
+    private final CrowdService crowdService;
+
+    @ComponentImport
     private final DirectoryManager directoryManager;
 
     @Inject
     public UsersServiceImpl(
+            final CrowdService crowdService,
             final DirectoryManager directoryManager) {
 
+        this.crowdService = crowdService;
         this.directoryManager = directoryManager;
     }
 
@@ -310,6 +317,19 @@ public class UsersServiceImpl implements UsersService {
     void updatePassword(
             final User user,
             final String password) {
+
+        // If the password is the same as the current one, do nothing,
+        // to avoid clashing with Crowd's password history count mechanisms
+        try {
+            final com.atlassian.crowd.embedded.api.User authenticatedUser = crowdService.authenticate(user.getName(), password);
+
+            // The null check is unnecessary (return would be enough), but it simplifies mocking in tests
+            if (authenticatedUser != null) {
+                return;
+            }
+        } catch (FailedAuthenticationException e) {
+            // Ignore - if the password is wrong, we can actually try to update it
+        }
 
         try {
             directoryManager.updateUserCredential(user.getDirectoryId(), user.getName(), PasswordCredential.unencrypted(password));

@@ -1,5 +1,6 @@
 package de.aservo.confapi.crowd.service;
 
+import com.atlassian.crowd.embedded.api.CrowdService;
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.MockDirectoryInternal;
 import com.atlassian.crowd.embedded.api.PasswordCredential;
@@ -43,13 +44,16 @@ import static org.mockito.Mockito.spy;
 public class UsersServiceTest {
 
     @Mock
+    private CrowdService crowdService;
+
+    @Mock
     private DirectoryManager directoryManager;
 
     private UsersServiceImpl usersService;
 
     @Before
     public void setup() {
-        usersService = new UsersServiceImpl(directoryManager);
+        usersService = new UsersServiceImpl(crowdService, directoryManager);
 
         setupDirectoryManager();
     }
@@ -342,6 +346,21 @@ public class UsersServiceTest {
         usersService.updatePassword(user.getName(), password);
         verify(directoryManager).updateUserCredential(anyLong(), anyString(), passwordCredentialArgumentCaptor.capture());
         assertEquals(password, passwordCredentialArgumentCaptor.getValue().getCredential());
+    }
+
+    @Test
+    public void testChangePasswordWithSamePassword() throws CrowdException, PermissionException {
+        final User user = getTestUser();
+        doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
+
+        final String password = "pa55w0rd";
+        final com.atlassian.crowd.embedded.api.User authenticatedUserMock = mock(com.atlassian.crowd.embedded.api.User.class);
+        when(authenticatedUserMock.getName()).thenReturn(user.getName());
+        when(crowdService.getUser(user.getName())).thenReturn(authenticatedUserMock);
+        when(crowdService.authenticate(user.getName(), password)).thenReturn(authenticatedUserMock);
+
+        usersService.updatePassword(user.getName(), password);
+        verify(directoryManager, never()).updateUserCredential(anyLong(), anyString(), any());
     }
 
     // We kind of need to test all the exceptions here, but it's also pointless to test
