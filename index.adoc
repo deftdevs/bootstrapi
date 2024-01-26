@@ -3025,6 +3025,345 @@ ifdef::internal-generation[]
 endif::internal-generation[]
 
 
+[.TrustedProxies]
+=== TrustedProxies
+
+
+[.addTrustedProxy]
+==== addTrustedProxy
+    
+`POST /trusted-proxies`
+
+Add a trusted proxy
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}trusted-proxies/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| body 
+|  <<string>> 
+| - 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+<<TrustedProxiesBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<TrustedProxiesBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}trusted-proxies/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}trusted-proxies/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :trusted-proxies/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}trusted-proxies/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getTrustedProxies]
+==== getTrustedProxies
+    
+`GET /trusted-proxies`
+
+Get the trusted proxies
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}trusted-proxies/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<TrustedProxiesBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<TrustedProxiesBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}trusted-proxies/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}trusted-proxies/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :trusted-proxies/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}trusted-proxies/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.removeTrustedProxy]
+==== removeTrustedProxy
+    
+`DELETE /trusted-proxies`
+
+Remove a trusted proxy
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}trusted-proxies/DELETE/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| body 
+|  <<string>> 
+| - 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+<<TrustedProxiesBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<TrustedProxiesBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}trusted-proxies/DELETE/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}trusted-proxies/DELETE/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :trusted-proxies/DELETE/DELETE.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}trusted-proxies/DELETE/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setTrustedProxies]
+==== setTrustedProxies
+    
+`PUT /trusted-proxies`
+
+Set the trusted proxies
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}trusted-proxies/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| TrustedProxiesBean 
+|  <<TrustedProxiesBean>> 
+| - 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+<<TrustedProxiesBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<TrustedProxiesBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}trusted-proxies/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}trusted-proxies/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :trusted-proxies/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}trusted-proxies/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.Users]
 === Users
 
@@ -4894,6 +5233,25 @@ endif::internal-generation[]
 | buttonColor 
 |  
 | String  
+| 
+|  
+
+|===
+
+
+[#TrustedProxiesBean]
+=== _TrustedProxiesBean_ 
+
+
+
+[.fields-TrustedProxiesBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| trustedProxies 
+|  
+| List  of <<string>> 
 | 
 |  
 
