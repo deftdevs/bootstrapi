@@ -2617,6 +2617,171 @@ ifdef::internal-generation[]
 endif::internal-generation[]
 
 
+[.SessionConfig]
+=== SessionConfig
+
+
+[.getSessionConfig]
+==== getSessionConfig
+    
+`GET /session-config`
+
+Get the session config
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}session-config/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<SessionConfigBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<SessionConfigBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}session-config/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}session-config/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :session-config/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}session-config/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setSessionConfig]
+==== setSessionConfig
+    
+`PUT /session-config`
+
+Set the session config
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}session-config/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| SessionConfigBean 
+|  <<SessionConfigBean>> 
+| - 
+|  
+|  
+
+|===         
+
+
+
+
+
+===== Return Type
+
+<<SessionConfigBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| 
+|  <<SessionConfigBean>>
+
+
+| 0
+| 
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}session-config/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}session-config/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :session-config/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}session-config/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.Settings]
 === Settings
 
@@ -5153,6 +5318,31 @@ endif::internal-generation[]
 | emailChangeInfo 
 |  
 | String  
+| 
+|  
+
+|===
+
+
+[#SessionConfigBean]
+=== _SessionConfigBean_ 
+
+
+
+[.fields-SessionConfigBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| sessionTimeoutInMinutes 
+|  
+| Long  
+| 
+| int64 
+
+| requireConsistentClientIP 
+|  
+| Boolean  
 | 
 |  
 
