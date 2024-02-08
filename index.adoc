@@ -2046,6 +2046,303 @@ ifdef::internal-generation[]
 endif::internal-generation[]
 
 
+[.Groups]
+=== Groups
+
+
+[.createGroup]
+==== createGroup
+    
+`POST /groups`
+
+Create a group
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}groups/POST/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| GroupBean 
+|  <<GroupBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| directoryId 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<GroupBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the updated group details
+|  <<GroupBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}groups/POST/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}groups/POST/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :groups/POST/POST.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}groups/POST/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.getGroup]
+==== getGroup
+    
+`GET /groups`
+
+Get a group
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}groups/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| directoryId 
+|   
+| X 
+| null 
+|  
+
+| name 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<GroupBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the requested group details
+|  <<GroupBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}groups/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}groups/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :groups/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}groups/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setGroups]
+==== setGroups
+    
+`PUT /groups`
+
+Set groups
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}groups/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| GroupsBean 
+|  <<GroupsBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| directoryId 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<GroupBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the updated groups details
+|  <<GroupBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}groups/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}groups/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :groups/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}groups/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.Licenses]
 === Licenses
 
@@ -3998,6 +4295,12 @@ endif::internal-generation[]
 | 
 |  
 
+| remoteAddresses 
+|  
+| List  of <<string>> 
+| 
+|  
+
 |===
 
 
@@ -5116,6 +5419,25 @@ endif::internal-generation[]
 | active 
 |  
 | Boolean  
+| 
+|  
+
+|===
+
+
+[#GroupsBean]
+=== _GroupsBean_ 
+
+
+
+[.fields-GroupsBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| groups 
+|  
+| List  of <<GroupBean>> 
 | 
 |  
 
