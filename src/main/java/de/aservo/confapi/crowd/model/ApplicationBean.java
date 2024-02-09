@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import java.util.*;
+
 @Data
 @NoArgsConstructor
 @XmlRootElement(name = ConfAPI.APPLICATION)
@@ -43,6 +45,9 @@ public class ApplicationBean {
     @XmlElement
     private String password;
 
+    @XmlElement
+    private Collection<String> remoteAddresses;
+
     public static final ApplicationBean EXAMPLE_1;
     public static final ApplicationBean EXAMPLE_2;
 
@@ -54,6 +59,7 @@ public class ApplicationBean {
         EXAMPLE_1.setPassword("3x4mpl3");
         EXAMPLE_1.setType(ApplicationType.GENERIC);
         EXAMPLE_1.setId(1L);
+        EXAMPLE_1.setRemoteAddresses(Collections.singletonList("127.0.0.1"));
     }
 
     static {
@@ -63,6 +69,7 @@ public class ApplicationBean {
         EXAMPLE_2.setActive(false);
         EXAMPLE_2.setPassword("3x4mpl32");
         EXAMPLE_2.setType(ApplicationType.BAMBOO);
-        EXAMPLE_1.setId(2L);
+        EXAMPLE_2.setId(2L);
+        EXAMPLE_2.setRemoteAddresses(Collections.singletonList("127.0.0.3"));
     }
 }
