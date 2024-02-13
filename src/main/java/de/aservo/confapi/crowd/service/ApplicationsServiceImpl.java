@@ -97,6 +97,9 @@ public class ApplicationsServiceImpl implements ApplicationsService {
             if (applicationBean.getPassword() != null) {
                 applicationManager.updateCredential(existingApplication, PasswordCredential.unencrypted(applicationBean.getPassword()));
             }
+            if (applicationBean.getRemoteAddresses() != null) {
+                applicationBuilder.setRemoteAddresses(ApplicationBeanUtil.toAddressSet(applicationBean.getRemoteAddresses()));
+            }
 
             return ApplicationBeanUtil.toApplicationBean(applicationManager.update(applicationBuilder.build()));
         } catch (ApplicationNotFoundException e) {

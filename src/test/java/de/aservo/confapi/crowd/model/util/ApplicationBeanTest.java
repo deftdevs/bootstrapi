@@ -2,6 +2,7 @@ package de.aservo.confapi.crowd.model.util;
 
 import com.atlassian.crowd.model.application.Application;
 import com.atlassian.crowd.model.application.ApplicationType;
+import de.aservo.confapi.crowd.model.util.ApplicationBeanUtil;
 import de.aservo.confapi.crowd.model.ApplicationBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,6 +41,7 @@ public class ApplicationBeanTest {
         assertEquals(EXAMPLE_1.getDescription(), application.getDescription());
         assertEquals(EXAMPLE_1.getActive().booleanValue(), application.isActive());
         assertEquals(application.getCredential().getCredential(), EXAMPLE_1.getPassword());
+        assertEquals(EXAMPLE_1.getRemoteAddresses(), toStringCollection(application.getRemoteAddresses()));
     }
 
     @Test
@@ -51,5 +53,6 @@ public class ApplicationBeanTest {
         assertEquals(application.getDescription(), applicationBean.getDescription());
         assertEquals(application.isActive(), applicationBean.getActive().booleanValue());
         assertEquals(toApplicationBeanType(application.getType()), applicationBean.getType());
+        assertEquals(application.getRemoteAddresses(), toAddressSet(applicationBean.getRemoteAddresses()));
     }
 }

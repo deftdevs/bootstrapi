@@ -4,9 +4,14 @@ import com.atlassian.crowd.embedded.api.PasswordCredential;
 import com.atlassian.crowd.model.application.Application;
 import com.atlassian.crowd.model.application.ApplicationType;
 import com.atlassian.crowd.model.application.ImmutableApplication;
+import com.atlassian.crowd.model.application.RemoteAddress;
 import de.aservo.confapi.crowd.model.ApplicationBean;
 
 import javax.annotation.Nullable;
+import javax.validation.constraints.NotNull;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ApplicationBeanUtil {
 
@@ -20,6 +25,7 @@ public class ApplicationBeanUtil {
         applicationBean.setDescription(application.getDescription());
         applicationBean.setActive(application.isActive());
         applicationBean.setType(toApplicationBeanType(application.getType()));
+        applicationBean.setRemoteAddresses(toStringCollection(application.getRemoteAddresses()));
 
         return applicationBean;
     }
@@ -32,6 +38,7 @@ public class ApplicationBeanUtil {
                 .setDescription(applicationBean.getDescription())
                 .setActive(applicationBean.getActive())
                 .setPasswordCredential(PasswordCredential.unencrypted(applicationBean.getPassword()))
+                .setRemoteAddresses(toAddressSet(applicationBean.getRemoteAddresses()))
                 .build();
     }
 
@@ -87,6 +94,29 @@ public class ApplicationBeanUtil {
         }
 
         return null;
+    }
+
+    @NotNull
+    public static Set<RemoteAddress> toAddressSet(
+            @Nullable final Collection<String> remoteAddresses) {
+
+        if (remoteAddresses == null) {
+            return new HashSet<>();
+        }
+
+        return remoteAddresses.stream()
+                .map(RemoteAddress::new)
+                .collect(Collectors.toSet());
+    }
+
+    @NotNull
+    public static Collection<String> toStringCollection(
+            @NotNull final Set<RemoteAddress> remoteAddresses) {
+
+        return remoteAddresses.stream()
+                .map(RemoteAddress::getAddress)
+                .sorted()
+                .collect(Collectors.toList());
     }
 
     private ApplicationBeanUtil() {

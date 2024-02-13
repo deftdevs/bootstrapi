@@ -50,6 +50,7 @@ public class ApplicationsServiceImplTest {
         assertEquals(EXAMPLE_1.getName(), resultApplicationBean.getName());
         assertEquals(EXAMPLE_1.getDescription(), resultApplicationBean.getDescription());
         assertEquals(EXAMPLE_1.getType(), resultApplicationBean.getType());
+        assertEquals(EXAMPLE_1.getRemoteAddresses(), resultApplicationBean.getRemoteAddresses());
     }
 
     @Test
@@ -60,6 +61,7 @@ public class ApplicationsServiceImplTest {
         requestApplicationBean.setDescription("Changed Description");
         requestApplicationBean.setActive(false);
         requestApplicationBean.setType(ApplicationBean.ApplicationType.BAMBOO);
+        requestApplicationBean.setRemoteAddresses(Collections.singletonList("127.0.0.5"));
         Application application2 = toApplication(requestApplicationBean);
 
         doReturn(application1).when(applicationManager).findById(anyLong());
@@ -75,6 +77,7 @@ public class ApplicationsServiceImplTest {
         assertEquals(requestApplicationBean.getDescription(), updatedApplication.getDescription());
         assertEquals(requestApplicationBean.getActive(), updatedApplication.isActive());
         assertEquals(requestApplicationBean.getType(), toApplicationBeanType(updatedApplication.getType()));
+        assertEquals(requestApplicationBean.getRemoteAddresses() , toStringCollection(updatedApplication.getRemoteAddresses()));
     }
 
     @Test
@@ -94,6 +97,7 @@ public class ApplicationsServiceImplTest {
         assertEquals(application.getDescription(), updatedApplication.getDescription());
         assertEquals(application.isActive(), updatedApplication.isActive());
         assertEquals(application.getType(), updatedApplication.getType());
+        assertEquals(application.getRemoteAddresses() , updatedApplication.getRemoteAddresses());
     }
 
     @Test
@@ -205,6 +209,7 @@ public class ApplicationsServiceImplTest {
         assertEquals(EXAMPLE_1.getDescription(), resultingApplicationBean.getDescription());
         assertEquals(EXAMPLE_1.getActive(), resultingApplicationBean.getActive());
         assertEquals(EXAMPLE_1.getType(), resultingApplicationBean.getType());
+        assertEquals(EXAMPLE_1.getRemoteAddresses(), resultingApplicationBean.getRemoteAddresses());
     }
 
     @Test(expected = NotFoundException.class)
@@ -232,5 +237,6 @@ public class ApplicationsServiceImplTest {
         assertEquals(EXAMPLE_1.getDescription(), resultApplicationBean.getDescription());
         assertEquals(EXAMPLE_1.getActive(), resultApplicationBean.getActive());
         assertEquals(EXAMPLE_1.getType(), resultApplicationBean.getType());
+        assertEquals(EXAMPLE_1.getRemoteAddresses(), resultApplicationBean.getRemoteAddresses());
     }
 }
