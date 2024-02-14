@@ -19,9 +19,11 @@ import com.atlassian.crowd.model.user.User;
 import com.atlassian.crowd.model.user.UserTemplate;
 import com.atlassian.crowd.model.user.UserTemplateWithAttributes;
 import de.aservo.confapi.commons.exception.BadRequestException;
+import de.aservo.confapi.commons.model.GroupBean;
 import de.aservo.confapi.commons.model.UserBean;
 import de.aservo.confapi.crowd.exception.NotFoundExceptionForUser;
 import de.aservo.confapi.crowd.model.util.UserBeanUtil;
+import de.aservo.confapi.crowd.service.api.GroupsService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,6 +33,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import javax.ws.rs.WebApplicationException;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
@@ -48,11 +51,14 @@ public class UsersServiceTest {
     @Mock
     private DirectoryManager directoryManager;
 
+    @Mock
+    private GroupsService groupsService;
+
     private UsersServiceImpl usersService;
 
     @Before
     public void setup() {
-        usersService = new UsersServiceImpl(crowdService, directoryManager);
+        usersService = new UsersServiceImpl(crowdService, directoryManager, groupsService);
 
         setupDirectoryManager();
     }
@@ -177,6 +183,21 @@ public class UsersServiceTest {
         assertTrue(userTemplateArgumentCaptor.getValue().isActive());
     }
 
+    @Test
+    public void testAddUserWithGroups() throws CrowdException, DirectoryPermissionException {
+        doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
+        // return the same user as the one we are adding
+        doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addUser(anyLong(), any(), any());
+
+        final UserBean userBean = UserBeanUtil.toUserBean(getTestUser());
+        final Collection<GroupBean> groupBeans = Collections.singletonList(GroupBean.EXAMPLE_1);
+        userBean.setPassword("12345");
+        userBean.setGroups(groupBeans);
+
+        usersService.addUser(1L, userBean);
+        verify(groupsService, times(groupBeans.size())).setGroup(anyLong(), anyString(), any());
+    }
+
     @Test(expected = BadRequestException.class)
     public void testAddUserAlreadyExists() throws CrowdException {
         final User user = getTestUser();
@@ -253,6 +274,22 @@ public class UsersServiceTest {
         assertEquals(userBean.getFullName(), userTemplateArgumentCaptor.getValue().getDisplayName());
         assertEquals(userBean.getEmail(), userTemplateArgumentCaptor.getValue().getEmailAddress());
         assertEquals(userBean.getActive(), userTemplateArgumentCaptor.getValue().isActive());
+    }
+
+    @Test
+    public void updateUserWithGroups() throws CrowdException, DirectoryPermissionException {
+        final User user = getTestUser();
+        doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
+        doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
+        // return the same user as the one we are updating
+        doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).updateUser(anyLong(), any());
+
+        final UserBean userBean = UserBeanUtil.toUserBean(getTestUser());
+        final Collection<GroupBean> groupBeans = Collections.singletonList(GroupBean.EXAMPLE_1);
+        userBean.setGroups(groupBeans);
+
+        usersService.updateUser(1L, user.getName(), userBean);
+        verify(groupsService, times(groupBeans.size())).setGroup(anyLong(), anyString(), any());
     }
 
     @Test

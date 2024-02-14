@@ -16,9 +16,12 @@ import de.aservo.confapi.commons.exception.ServiceUnavailableException;
 import de.aservo.confapi.commons.model.AbstractDirectoryBean;
 import de.aservo.confapi.commons.model.DirectoriesBean;
 import de.aservo.confapi.commons.model.DirectoryInternalBean;
+import de.aservo.confapi.commons.model.GroupBean;
 import de.aservo.confapi.commons.model.UserBean;
 import de.aservo.confapi.commons.service.api.UsersService;
+import de.aservo.confapi.crowd.model.GroupsBean;
 import de.aservo.confapi.crowd.model.util.DirectoryBeanUtil;
+import de.aservo.confapi.crowd.service.api.GroupsService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -28,6 +31,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -45,13 +49,16 @@ public class DirectoriesServiceTest {
     private DirectoryManager directoryManager;
 
     @Mock
+    private GroupsService groupsService;
+
+    @Mock
     private UsersService usersService;
 
     private DirectoriesServiceImpl directoriesService;
 
     @Before
     public void setup() {
-        directoriesService = new DirectoriesServiceImpl(directoryManager, usersService);
+        directoriesService = new DirectoriesServiceImpl(directoryManager, groupsService, usersService);
     }
 
     @Test
@@ -136,19 +143,25 @@ public class DirectoriesServiceTest {
     }
 
     @Test
-    public void testAddDirectoryWithUsers() throws CrowdException {
+    public void testAddDirectoryWithGroupsAndUsers() throws CrowdException {
         final Directory directory = getTestDirectoryInternalOther();
         final AbstractDirectoryBean directoryBean = DirectoryBeanUtil.toDirectoryBean(directory);
         assertEquals(DirectoryInternalBean.class, directoryBean.getClass());
 
         final DirectoryInternalBean directoryInternalBean = (DirectoryInternalBean) directoryBean;
+        directoryInternalBean.setGroups(Collections.singletonList(GroupBean.EXAMPLE_1));
         directoryInternalBean.setUsers(Collections.singletonList(UserBean.EXAMPLE_1));
 
         // Return the same directory as passed as argument
         doAnswer(invocation -> invocation.getArgumentAt(0, Directory.class)).when(directoryManager).addDirectory(any());
+        // Return the same groups bean as passed as argument
+        doAnswer(invocation -> invocation.getArgumentAt(1, GroupsBean.class)).when(groupsService).setGroups(anyLong(), any());
+        // Return the same user beans as passed as argument
+        doAnswer(invocation -> invocation.getArgumentAt(1, Collection.class)).when(usersService).setUsers(anyLong(), any());
 
         directoriesService.addDirectory(directoryInternalBean, false);
         verify(directoryManager).addDirectory(any());
+        verify(groupsService).setGroups(anyLong(), any());
         verify(usersService).setUsers(anyLong(), any());
     }
 
@@ -176,7 +189,7 @@ public class DirectoriesServiceTest {
     }
 
     @Test
-    public void testUpdateDirectoryWithUsers() throws CrowdException {
+    public void testUpdateDirectoryWithGroupsAndUsers() throws CrowdException {
         final Directory directory = getTestDirectoryInternal();
         doReturn(directory).when(directoryManager).findDirectoryById(directory.getId());
 
@@ -184,13 +197,20 @@ public class DirectoriesServiceTest {
         assertEquals(DirectoryInternalBean.class, directoryBean.getClass());
 
         final DirectoryInternalBean directoryInternalBean = (DirectoryInternalBean) directoryBean;
+        directoryInternalBean.setGroups(Collections.singletonList(GroupBean.EXAMPLE_1));
         directoryInternalBean.setUsers(Collections.singletonList(UserBean.EXAMPLE_1));
 
         // Return the same directory as passed as argument
         doAnswer(invocation -> invocation.getArgumentAt(0, Directory.class)).when(directoryManager).updateDirectory(any());
+        // Return the same groups bean as passed as argument
+        doAnswer(invocation -> invocation.getArgumentAt(1, GroupsBean.class)).when(groupsService).setGroups(anyLong(), any());
+        // Return the same user beans as passed as argument
+        doAnswer(invocation -> invocation.getArgumentAt(1, Collection.class)).when(usersService).setUsers(anyLong(), any());
 
         directoriesService.setDirectory(directory.getId(), directoryInternalBean, false);
         verify(directoryManager).updateDirectory(any());
+        verify(groupsService).setGroups(anyLong(), any());
+        verify(usersService).setUsers(anyLong(), any());
     }
 
     @Test(expected = NotFoundException.class)

@@ -32,7 +32,7 @@ public class AttributeUtil {
         return String.valueOf(value.booleanValue());
     }
 
-    public static String fromIntegerList(
+    public static String fromIntegerCollection(
             @Nullable final Collection<Integer> value) {
 
         if (value == null) {

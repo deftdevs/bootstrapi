@@ -370,7 +370,7 @@ public class DirectoryBeanUtil {
             setAttributeIfNotNull(attributes, AbstractInternalDirectory.ATTRIBUTE_PASSWORD_MAX_ATTEMPTS, fromLong(credentialPolicy.getPasswordMaxAttempts()));
             setAttributeIfNotNull(attributes, AbstractInternalDirectory.ATTRIBUTE_PASSWORD_HISTORY_COUNT, fromLong(credentialPolicy.getPasswordHistoryCount()));
             setAttributeIfNotNull(attributes, AbstractInternalDirectory.ATTRIBUTE_PASSWORD_MAX_CHANGE_TIME, fromLong(credentialPolicy.getPasswordMaxChangeTime()));
-            setAttributeIfNotNull(attributes, AbstractInternalDirectory.ATTRIBUTE_PASSWORD_EXPIRATION_NOTIFICATION_PERIODS, fromIntegerList(credentialPolicy.getPasswordExpiryNotificationDays()));
+            setAttributeIfNotNull(attributes, AbstractInternalDirectory.ATTRIBUTE_PASSWORD_EXPIRATION_NOTIFICATION_PERIODS, fromIntegerCollection(credentialPolicy.getPasswordExpiryNotificationDays()));
             setAttributeIfNotNull(attributes, AbstractInternalDirectory.ATTRIBUTE_USER_ENCRYPTION_METHOD, credentialPolicy.getPasswordEncryptionMethod());
         }
 

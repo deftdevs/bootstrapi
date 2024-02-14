@@ -5,9 +5,12 @@ import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.PasswordCredential;
 import com.atlassian.crowd.exception.DirectoryNotFoundException;
 import com.atlassian.crowd.exception.FailedAuthenticationException;
+import com.atlassian.crowd.exception.GroupNotFoundException;
 import com.atlassian.crowd.exception.InvalidCredentialException;
 import com.atlassian.crowd.exception.InvalidUserException;
+import com.atlassian.crowd.exception.MembershipAlreadyExistsException;
 import com.atlassian.crowd.exception.OperationFailedException;
+import com.atlassian.crowd.exception.ReadOnlyGroupException;
 import com.atlassian.crowd.exception.UserAlreadyExistsException;
 import com.atlassian.crowd.exception.UserNotFoundException;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
@@ -22,16 +25,20 @@ import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.aservo.confapi.commons.exception.BadRequestException;
 import de.aservo.confapi.commons.exception.InternalServerErrorException;
+import de.aservo.confapi.commons.model.GroupBean;
 import de.aservo.confapi.commons.model.UserBean;
 import de.aservo.confapi.commons.service.api.UsersService;
 import de.aservo.confapi.crowd.exception.NotFoundExceptionForDirectory;
 import de.aservo.confapi.crowd.exception.NotFoundExceptionForUser;
+import de.aservo.confapi.crowd.model.GroupsBean;
 import de.aservo.confapi.crowd.model.util.UserBeanUtil;
+import de.aservo.confapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
@@ -47,13 +54,17 @@ public class UsersServiceImpl implements UsersService {
     @ComponentImport
     private final DirectoryManager directoryManager;
 
+    private final GroupsService groupsService;
+
     @Inject
     public UsersServiceImpl(
             final CrowdService crowdService,
-            final DirectoryManager directoryManager) {
+            final DirectoryManager directoryManager,
+            final GroupsService groupsService) {
 
         this.crowdService = crowdService;
         this.directoryManager = directoryManager;
+        this.groupsService = groupsService;
     }
 
     @Override
@@ -109,9 +120,9 @@ public class UsersServiceImpl implements UsersService {
             final String username,
             final UserBean userBean) {
 
-        User user = findUser(directoryId, userBean.getUsername());
+        final User existingUser = findUser(directoryId, userBean.getUsername());
 
-        if (user != null) {
+        if (existingUser != null) {
             throw new BadRequestException(String.format("User '%s' already exists", userBean.getUsername()));
         }
 
@@ -142,17 +153,15 @@ public class UsersServiceImpl implements UsersService {
         userTemplate.setEmailAddress(userBean.getEmail());
         userTemplate.setActive(userBean.getActive() == null || userBean.getActive());
 
-        final PasswordCredential passwordCredential = PasswordCredential.unencrypted(userBean.getPassword());
+        final User user = createUser(directoryId, userTemplate, userBean.getPassword());
+        final UserBean resultUserBean = UserBeanUtil.toUserBean(user);
 
-        try {
-            return UserBeanUtil.toUserBean(directoryManager.addUser(directoryId, userTemplate, passwordCredential));
-        } catch (InvalidCredentialException | InvalidUserException | DirectoryPermissionException | UserAlreadyExistsException e) {
-            throw new BadRequestException(e);
-        } catch (DirectoryNotFoundException e) {
-            throw new NotFoundExceptionForDirectory(directoryId);
-        } catch (OperationFailedException e) {
-            throw new InternalServerErrorException(e);
+        if (userBean.getGroups() != null) {
+            final GroupsBean resultGroupsBean = addUserToGroups(directoryId, userBean.getUsername(), userBean.getGroups());
+            resultUserBean.setGroups(resultGroupsBean.getGroups());
         }
+
+        return resultUserBean;
     }
 
     UserBean updateUser(
@@ -178,7 +187,14 @@ public class UsersServiceImpl implements UsersService {
             updatePassword(user, userBean.getPassword());
         }
 
-        return UserBeanUtil.toUserBean(user);
+        final UserBean resultUserBean = UserBeanUtil.toUserBean(user);
+
+        if (userBean.getGroups() != null) {
+            final GroupsBean resultGroupsBean = addUserToGroups(directoryId, userBean.getUsername(), userBean.getGroups());
+            resultUserBean.setGroups(resultGroupsBean.getGroups());
+        }
+
+        return resultUserBean;
     }
 
     @Nullable
@@ -280,11 +296,11 @@ public class UsersServiceImpl implements UsersService {
 
     @NotNull
     private User renameUser(
-            final User username,
+            final User user,
             final String newUsername) {
 
         try {
-            return directoryManager.renameUser(username.getDirectoryId(), username.getName(), newUsername);
+            return directoryManager.renameUser(user.getDirectoryId(), user.getName(), newUsername);
         } catch (DirectoryPermissionException | UserAlreadyExistsException | InvalidUserException e) {
             // A permission exception should only happen if we try change the name
             // of a user in a read-only directory, so treat this as a bad request
@@ -292,6 +308,28 @@ public class UsersServiceImpl implements UsersService {
         } catch (DirectoryNotFoundException | UserNotFoundException | OperationFailedException e) {
             // At this point, we know the user exists, thus directory or user not found
             // should never happen, so if it does, treat it as an internal server error
+            throw new InternalServerErrorException(e);
+        }
+    }
+
+    @NotNull
+    private User createUser(
+            final long directoryId,
+            final UserTemplateWithAttributes userTemplate,
+            final String password) {
+
+        final PasswordCredential passwordCredential = PasswordCredential.unencrypted(password);
+
+        try {
+            return directoryManager.addUser(directoryId, userTemplate, passwordCredential);
+        } catch (InvalidCredentialException | InvalidUserException | DirectoryPermissionException |
+                 UserAlreadyExistsException e) {
+            // A permission exception should only happen if we try change the name
+            // of a user in a read-only directory, so treat this as a bad request
+            throw new BadRequestException(e);
+        } catch (OperationFailedException | DirectoryNotFoundException e) {
+            // At this point, we know the directory, thus directory not found should
+            // never happen, so if it does, treat it as an internal server error
             throw new InternalServerErrorException(e);
         }
     }
@@ -342,6 +380,34 @@ public class UsersServiceImpl implements UsersService {
             // should never happen, so if it does, treat it as an internal server error
             throw new InternalServerErrorException(e);
         }
+    }
+
+    GroupsBean addUserToGroups(
+            final long directoryId,
+            final String username,
+            final Collection<GroupBean> groupBeans) {
+
+        final Collection<GroupBean> resultGroupBeans = new ArrayList<>();
+
+        if (groupBeans != null) {
+            for (GroupBean groupBean : groupBeans) {
+                final GroupBean resultGroupBean = groupsService.setGroup(directoryId, groupBean.getName(), groupBean);
+
+                try {
+                    directoryManager.addUserToGroup(directoryId, username, groupBean.getName());
+                    resultGroupBeans.add(resultGroupBean);
+                } catch (DirectoryPermissionException | ReadOnlyGroupException e) {
+                    throw new BadRequestException(e);
+                } catch (DirectoryNotFoundException | UserNotFoundException | GroupNotFoundException |
+                         OperationFailedException e) {
+                    throw new InternalServerErrorException(e);
+                } catch (MembershipAlreadyExistsException e) {
+                    // ignore
+                }
+            }
+        }
+
+        return new GroupsBean(resultGroupBeans);
     }
 
     private static UserTemplate getUserTemplate(
