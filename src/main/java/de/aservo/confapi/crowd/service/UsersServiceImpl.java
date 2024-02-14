@@ -140,7 +140,7 @@ public class UsersServiceImpl implements UsersService {
         userTemplate.setLastName(userBean.getLastName());
         userTemplate.setDisplayName(userBean.getFullName());
         userTemplate.setEmailAddress(userBean.getEmail());
-        userTemplate.setActive(userBean.getActive() != null || userBean.getActive());
+        userTemplate.setActive(userBean.getActive() == null || userBean.getActive());
 
         final PasswordCredential passwordCredential = PasswordCredential.unencrypted(userBean.getPassword());
 
