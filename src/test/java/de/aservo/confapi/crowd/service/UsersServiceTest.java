@@ -34,8 +34,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
 import static org.mockito.Mockito.spy;
@@ -146,22 +145,36 @@ public class UsersServiceTest {
 
     @Test
     public void testAddUser() throws CrowdException, DirectoryPermissionException {
-        final User user = getTestUser();
         doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
         // return the same user as the one we are adding
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addUser(anyLong(), any(), any());
 
-        final UserBean userBean = UserBeanUtil.toUserBean(user);
+        final UserBean userBean = UserBean.EXAMPLE_1;
         userBean.setPassword("s3cr3t");
 
         final ArgumentCaptor<UserTemplateWithAttributes> userTemplateArgumentCaptor = ArgumentCaptor.forClass(UserTemplateWithAttributes.class);
-        usersService.addUser(user.getDirectoryId(), userBean);
+        usersService.addUser(1L, userBean);
         verify(directoryManager).addUser(anyLong(), userTemplateArgumentCaptor.capture(), any());
         assertEquals(userBean.getFirstName(), userTemplateArgumentCaptor.getValue().getFirstName());
         assertEquals(userBean.getLastName(), userTemplateArgumentCaptor.getValue().getLastName());
         assertEquals(userBean.getFullName(), userTemplateArgumentCaptor.getValue().getDisplayName());
         assertEquals(userBean.getEmail(), userTemplateArgumentCaptor.getValue().getEmailAddress());
         assertEquals(userBean.getActive(), userTemplateArgumentCaptor.getValue().isActive());
+    }
+
+    @Test
+    public void testAddUserActiveByDefault() throws CrowdException, DirectoryPermissionException {
+        doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
+        // return the same user as the one we are adding
+        doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addUser(anyLong(), any(), any());
+
+        final UserBean userBean = UserBean.EXAMPLE_1;
+        userBean.setActive(null);
+
+        final ArgumentCaptor<UserTemplateWithAttributes> userTemplateArgumentCaptor = ArgumentCaptor.forClass(UserTemplateWithAttributes.class);
+        usersService.addUser(1L, userBean);
+        verify(directoryManager).addUser(anyLong(), userTemplateArgumentCaptor.capture(), any());
+        assertTrue(userTemplateArgumentCaptor.getValue().isActive());
     }
 
     @Test(expected = BadRequestException.class)
