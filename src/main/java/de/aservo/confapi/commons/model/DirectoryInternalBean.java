@@ -9,8 +9,8 @@ import lombok.NoArgsConstructor;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 /**
  * Bean for directory settings in REST requests.
@@ -34,10 +34,10 @@ public class DirectoryInternalBean extends AbstractDirectoryBean {
     // in external directories also, so we just start with the internal directory for now.
 
     @XmlElement
-    private List<GroupBean> groups;
+    private Collection<GroupBean> groups;
 
     @XmlElement
-    private List<UserBean> users;
+    private Collection<UserBean> users;
 
     @Data
     @NoArgsConstructor
@@ -59,7 +59,7 @@ public class DirectoryInternalBean extends AbstractDirectoryBean {
         private Long passwordMaxChangeTime;
 
         @XmlElement
-        private List<Integer> passwordExpiryNotificationDays;
+        private Collection<Integer> passwordExpiryNotificationDays;
 
         @XmlElement
         private String passwordEncryptionMethod;
