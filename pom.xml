@@ -66,7 +66,7 @@
         <amps.version>8.0.2</amps.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
-        <confapi-commons.version>0.2.2</confapi-commons.version>
+        <confapi-commons.version>0.3.0</confapi-commons.version>
         <plugin.testrunner.version>2.0.1</plugin.testrunner.version>
         <!-- Compiler must be 8 so that the plugin can run on Crowd instances using Java 8 -->
         <maven.compiler.source>8</maven.compiler.source>

@@ -2246,7 +2246,7 @@ endif::internal-generation[]
 [.setGroups]
 ==== setGroups
     
-`PUT /groups`
+`PATCH /groups`
 
 Set groups
 
@@ -2255,7 +2255,7 @@ Set groups
 
 
 
-// markup not found, no include::{specDir}groups/PUT/spec.adoc[opts=optional]
+// markup not found, no include::{specDir}groups/PATCH/spec.adoc[opts=optional]
 
 
 
@@ -2312,6 +2312,112 @@ Set groups
 
 | 200
 | Returns the updated groups details
+|  <<GroupBean>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===         
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}groups/PATCH/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}groups/PATCH/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :groups/PATCH/PATCH.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}groups/PATCH/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.updateGroup]
+==== updateGroup
+    
+`PUT /groups`
+
+Update a group
+
+===== Description 
+
+
+
+
+// markup not found, no include::{specDir}groups/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+===== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| GroupBean 
+|  <<GroupBean>> 
+| X 
+|  
+|  
+
+|===         
+
+
+
+====== Query Parameters
+
+[cols="2,3,1,1,1"]
+|===         
+|Name| Description| Required| Default| Pattern
+
+| directoryId 
+|   
+| X 
+| null 
+|  
+
+| name 
+|   
+| X 
+| null 
+|  
+
+|===         
+
+
+===== Return Type
+
+<<GroupBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.http response codes
+[cols="2,3,1"]
+|===         
+| Code | Message | Datatype 
+
+
+| 200
+| Returns the updated group details
 |  <<GroupBean>>
 
 
