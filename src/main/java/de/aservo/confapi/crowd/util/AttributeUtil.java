@@ -1,6 +1,7 @@
 package de.aservo.confapi.crowd.util;
 
 import javax.annotation.Nullable;
+import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -32,7 +33,7 @@ public class AttributeUtil {
     }
 
     public static String fromIntegerList(
-            @Nullable final List<Integer> value) {
+            @Nullable final Collection<Integer> value) {
 
         if (value == null) {
             return null;
