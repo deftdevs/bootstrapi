@@ -715,6 +715,18 @@ Initiates an asynchronous import if enabled by server, synchronous otherwise
 |===         
 |Name| Description| Required| Default| Pattern
 
+| contentType 
+|  <<string>> 
+| - 
+| null 
+|  
+
+| formField 
+|  <<boolean>> 
+| - 
+| null 
+|  
+
 | name 
 |  <<string>> 
 | - 
@@ -735,18 +747,6 @@ Initiates an asynchronous import if enabled by server, synchronous otherwise
 
 | inputStream 
 |  <<object>> 
-| - 
-| null 
-|  
-
-| contentType 
-|  <<string>> 
-| - 
-| null 
-|  
-
-| formField 
-|  <<boolean>> 
 | - 
 | null 
 |  
@@ -4490,9 +4490,33 @@ endif::internal-generation[]
 | 
 |  
 
+| connector 
+|  
+| DirectoryDelegatingConnector  
+| 
+|  
+
+| configuration 
+|  
+| DirectoryDelegatingConfiguration  
+| 
+|  
+
 | credentialPolicy 
 |  
 | DirectoryInternalCredentialPolicy  
+| 
+|  
+
+| groups 
+|  
+| List  of <<GroupBean>> 
+| 
+|  
+
+| users 
+|  
+| List  of <<UserBean>> 
 | 
 |  
 
@@ -4967,6 +4991,303 @@ endif::internal-generation[]
 |===
 
 
+[#DirectoryDelegatingBean]
+=== _DirectoryDelegatingBean_ 
+
+
+
+[.fields-DirectoryDelegatingBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| id 
+|  
+| Long  
+| 
+| int64 
+
+| name 
+| X 
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| active 
+|  
+| Boolean  
+| 
+|  
+
+| createdDate 
+|  
+| Date  
+| 
+| date-time 
+
+| updatedDate 
+|  
+| Date  
+| 
+| date-time 
+
+| connector 
+|  
+| DirectoryDelegatingConnector  
+| 
+|  
+
+| configuration 
+|  
+| DirectoryDelegatingConfiguration  
+| 
+|  
+
+| permissions 
+|  
+| DirectoryPermissions  
+| 
+|  
+
+|===
+
+
+[#DirectoryDelegatingConfiguration]
+=== _DirectoryDelegatingConfiguration_ 
+
+
+
+[.fields-DirectoryDelegatingConfiguration]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| userDn 
+|  
+| String  
+| 
+|  
+
+| userObjectClass 
+|  
+| String  
+| 
+|  
+
+| userObjectFilter 
+|  
+| String  
+| 
+|  
+
+| userNameAttribute 
+|  
+| String  
+| 
+|  
+
+| userNameRdnAttribute 
+|  
+| String  
+| 
+|  
+
+| userFirstNameAttribute 
+|  
+| String  
+| 
+|  
+
+| userLastNameAttribute 
+|  
+| String  
+| 
+|  
+
+| userDisplayNameAttribute 
+|  
+| String  
+| 
+|  
+
+| userEmailAttribute 
+|  
+| String  
+| 
+|  
+
+| userGroupAttribute 
+|  
+| String  
+| 
+|  
+
+| userUniqueIdAttribute 
+|  
+| String  
+| 
+|  
+
+| groupDn 
+|  
+| String  
+| 
+|  
+
+| groupObjectClass 
+|  
+| String  
+| 
+|  
+
+| groupObjectFilter 
+|  
+| String  
+| 
+|  
+
+| groupNameAttribute 
+|  
+| String  
+| 
+|  
+
+| groupDescriptionAttribute 
+|  
+| String  
+| 
+|  
+
+| groupMembersAttribute 
+|  
+| String  
+| 
+|  
+
+|===
+
+
+[#DirectoryDelegatingConnector]
+=== _DirectoryDelegatingConnector_ 
+
+
+
+[.fields-DirectoryDelegatingConnector]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| type 
+|  
+| String  
+| 
+|  _Enum:_ MICROSOFT_ACTIVE_DIRECTORY, 
+
+| url 
+|  
+| String  
+| 
+|  
+
+| ssl 
+|  
+| String  
+| 
+|  _Enum:_ NONE, LDAPS, START_TLS, 
+
+| useNodeReferrals 
+|  
+| Boolean  
+| 
+|  
+
+| nestedGroupsDisabled 
+|  
+| Boolean  
+| 
+|  
+
+| synchronizeUsers 
+|  
+| Boolean  
+| 
+|  
+
+| synchronizeUserDetails 
+|  
+| Boolean  
+| 
+|  
+
+| synchronizeGroupMemberships 
+|  
+| Boolean  
+| 
+|  
+
+| useUserMembershipAttribute 
+|  
+| Boolean  
+| 
+|  
+
+| usePagedResults 
+|  
+| Boolean  
+| 
+|  
+
+| pagedResultsSize 
+|  
+| Long  
+| 
+| int64 
+
+| readTimeoutInMillis 
+|  
+| Long  
+| 
+| int64 
+
+| searchTimeoutInMillis 
+|  
+| Long  
+| 
+| int64 
+
+| connectionTimeoutInMillis 
+|  
+| Long  
+| 
+| int64 
+
+| baseDn 
+|  
+| String  
+| 
+|  
+
+| username 
+|  
+| String  
+| 
+|  
+
+| password 
+|  
+| String  
+| 
+|  
+
+|===
+
+
 [#DirectoryGenericBean]
 === _DirectoryGenericBean_ 
 
@@ -5095,7 +5416,19 @@ endif::internal-generation[]
 
 | permissions 
 |  
-| DirectoryInternalPermissions  
+| DirectoryPermissions  
+| 
+|  
+
+| groups 
+|  
+| List  of <<GroupBean>> 
+| 
+|  
+
+| users 
+|  
+| List  of <<UserBean>> 
 | 
 |  
 
@@ -5151,67 +5484,6 @@ endif::internal-generation[]
 | passwordEncryptionMethod 
 |  
 | String  
-| 
-|  
-
-|===
-
-
-[#DirectoryInternalPermissions]
-=== _DirectoryInternalPermissions_ 
-
-
-
-[.fields-DirectoryInternalPermissions]
-[cols="2,1,2,4,1"]
-|===         
-| Field Name| Required| Type| Description| Format
-
-| addGroup 
-|  
-| Boolean  
-| 
-|  
-
-| addUser 
-|  
-| Boolean  
-| 
-|  
-
-| modifyGroup 
-|  
-| Boolean  
-| 
-|  
-
-| modifyUser 
-|  
-| Boolean  
-| 
-|  
-
-| modifyGroupAttributes 
-|  
-| Boolean  
-| 
-|  
-
-| modifyUserAttributes 
-|  
-| Boolean  
-| 
-|  
-
-| removeGroup 
-|  
-| Boolean  
-| 
-|  
-
-| removeUser 
-|  
-| Boolean  
 | 
 |  
 
@@ -5390,6 +5662,67 @@ endif::internal-generation[]
 |===
 
 
+[#DirectoryPermissions]
+=== _DirectoryPermissions_ 
+
+
+
+[.fields-DirectoryPermissions]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| addGroup 
+|  
+| Boolean  
+| 
+|  
+
+| addUser 
+|  
+| Boolean  
+| 
+|  
+
+| modifyGroup 
+|  
+| Boolean  
+| 
+|  
+
+| modifyUser 
+|  
+| Boolean  
+| 
+|  
+
+| modifyGroupAttributes 
+|  
+| Boolean  
+| 
+|  
+
+| modifyUserAttributes 
+|  
+| Boolean  
+| 
+|  
+
+| removeGroup 
+|  
+| Boolean  
+| 
+|  
+
+| removeUser 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
 [#ErrorCollection]
 === _ErrorCollection_ 
 
@@ -5419,6 +5752,18 @@ endif::internal-generation[]
 |===         
 | Field Name| Required| Type| Description| Format
 
+| contentType 
+|  
+| String  
+| 
+|  
+
+| formField 
+|  
+| Boolean  
+| 
+|  
+
 | name 
 |  
 | String  
@@ -5440,18 +5785,6 @@ endif::internal-generation[]
 | inputStream 
 |  
 | Object  
-| 
-|  
-
-| contentType 
-|  
-| String  
-| 
-|  
-
-| formField 
-|  
-| Boolean  
 | 
 |  
 
@@ -5496,6 +5829,37 @@ endif::internal-generation[]
 | gadgets 
 |  
 | List  of <<GadgetBean>> 
+| 
+|  
+
+|===
+
+
+[#GroupBean]
+=== _GroupBean_ 
+
+
+
+[.fields-GroupBean]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| name 
+|  
+| String  
+| 
+|  
+
+| description 
+|  
+| String  
+| 
+|  
+
+| active 
+|  
+| Boolean  
 | 
 |  
 
@@ -5915,6 +6279,18 @@ endif::internal-generation[]
 | 
 |  
 
+| firstName 
+|  
+| String  
+| 
+|  
+
+| lastName 
+|  
+| String  
+| 
+|  
+
 | fullName 
 |  
 | String  
@@ -5927,9 +6303,21 @@ endif::internal-generation[]
 | 
 |  
 
+| active 
+|  
+| Boolean  
+| 
+|  
+
 | password 
 |  
 | String  
+| 
+|  
+
+| groups 
+|  
+| List  of <<GroupBean>> 
 | 
 |  
 

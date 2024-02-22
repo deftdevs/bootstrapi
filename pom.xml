@@ -67,13 +67,18 @@
         <atlassian.gadgets.version>4.3.2.1</atlassian.gadgets.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
-        <confapi-commons.version>0.0.32-SNAPSHOT</confapi-commons.version>
+        <confapi-commons.version>0.3.0</confapi-commons.version>
         <confluence-lookandfeel.version>5.9.1-issue-CONF-38693-m2</confluence-lookandfeel.version>
         <custom-favicon-api.version>2.0.2</custom-favicon-api.version>
         <javax.el-api.version>3.0.0</javax.el-api.version>
         <log4j.version>2.8.2</log4j.version>
         <plugin.testrunner.version>2.0.1</plugin.testrunner.version>
         <slf4j.version>1.7.30</slf4j.version>
+        <!-- Compiler must be 8 so that the plugin can run on Crowd instances using Java 8 -->
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencyManagement>

@@ -47,7 +47,7 @@ public class UserServiceTest {
         UserBean userBean = toUserBean(user);
         UserBean gotUserBean = userService.getUser(user.getName());
 
-        assertEquals(userBean, gotUserBean);
+        assertUserBeanEquals(userBean, gotUserBean);
         assertNull(userBean.getPassword());
     }
 
@@ -66,7 +66,7 @@ public class UserServiceTest {
         final UserBean updateUserBean = UserBean.EXAMPLE_2;
         final UserBean updatedUserBean = userService.updateUser(user.getName(), updateUserBean);
 
-        assertEquals(updateUserBean, updatedUserBean);
+        assertUserBeanEquals(updateUserBean, updatedUserBean);
     }
 
     @Test
@@ -106,7 +106,7 @@ public class UserServiceTest {
         final UserBean updateUserBean = new UserBean();
         final UserBean notUpdatedUserBean = userService.updateUser(user.getName(), updateUserBean);
 
-        assertEquals(UserBean.EXAMPLE_1, notUpdatedUserBean);
+        assertUserBeanEquals(UserBean.EXAMPLE_1, notUpdatedUserBean);
     }
 
     @Test(expected = NotFoundException.class)
@@ -126,7 +126,7 @@ public class UserServiceTest {
         updateUserBean.setPassword("new password");
 
         final UserBean updatedUserBean = userService.updateUser(userBean.getUsername(), userBean);
-        assertEquals(userBean, updatedUserBean);
+        assertUserBeanEquals(userBean, updatedUserBean);
         // user password is not returned here, getting user bean shows update was successful
         assertNull(updatedUserBean.getPassword());
     }
@@ -137,6 +137,38 @@ public class UserServiceTest {
         doReturn(user).when(userManager).getUser(user.getName());
 
         userService.updatePassword(user.getName(), "newPW");
+    }
+
+    /*
+     * Not yet implemented methods
+     */
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testGetUserByDirectoryIdNotImplemented() {
+        userService.getUser(0, null);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testSetUserByDirectoryIdNotImplemented() {
+        userService.setUser(0, null);
+    }
+
+    @Test(expected = UnsupportedOperationException.class)
+    public void testSetUsersByDirectoryIdNotImplemented() {
+        userService.setUsers(0, null);
+    }
+
+    /*
+     * A user in confluence only holds the attributes `username`, `fullName` and `email`,
+     * so create this method to easily compare users without custom comparators.
+     */
+    public static void assertUserBeanEquals(
+            final UserBean expected,
+            final UserBean actual) {
+
+        assertEquals(expected.getUsername(), actual.getUsername());
+        assertEquals(expected.getFullName(), actual.getFullName());
+        assertEquals(expected.getEmail(), actual.getEmail());
     }
 
 }
