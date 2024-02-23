@@ -16,10 +16,13 @@ import de.aservo.confapi.commons.exception.ServiceUnavailableException;
 import de.aservo.confapi.commons.model.AbstractDirectoryBean;
 import de.aservo.confapi.commons.model.DirectoriesBean;
 import de.aservo.confapi.commons.model.DirectoryInternalBean;
+import de.aservo.confapi.commons.model.UserBean;
 import de.aservo.confapi.commons.service.api.DirectoriesService;
 import de.aservo.confapi.commons.service.api.UsersService;
 import de.aservo.confapi.crowd.exception.NotFoundExceptionForDirectory;
+import de.aservo.confapi.crowd.model.GroupsBean;
 import de.aservo.confapi.crowd.model.util.DirectoryBeanUtil;
+import de.aservo.confapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Nonnull;
@@ -44,14 +47,18 @@ public class DirectoriesServiceImpl implements DirectoriesService {
     @ComponentImport
     private final DirectoryManager directoryManager;
 
+    private final GroupsService groupsService;
+
     private final UsersService usersService;
 
     @Inject
     public DirectoriesServiceImpl(
             final DirectoryManager directoryManager,
+            final GroupsService groupsService,
             final UsersService usersService) {
 
         this.directoryManager = directoryManager;
+        this.groupsService = groupsService;
         this.usersService = usersService;
     }
 
@@ -114,12 +121,7 @@ public class DirectoriesServiceImpl implements DirectoriesService {
                     "When trying to update directory '%s', it could not be found anymore", existingDirectory.getName()));
         }
 
-        if (DirectoryInternalBean.class.equals(directoryBean.getClass()) && directoryBean.getClass().equals(resultDirectoryBean.getClass())) {
-            final DirectoryInternalBean directoryInternalBean = (DirectoryInternalBean) directoryBean;
-            final DirectoryInternalBean resultDirectoryInternalBean = (DirectoryInternalBean) resultDirectoryBean;
-
-            resultDirectoryInternalBean.setUsers(usersService.setUsers(resultDirectoryInternalBean.getId(), directoryInternalBean.getUsers()));
-        }
+        handleGroupsAndUsers(directoryBean, resultDirectoryBean);
 
         return resultDirectoryBean;
     }
@@ -142,12 +144,7 @@ public class DirectoriesServiceImpl implements DirectoriesService {
             throw new InternalServerErrorException(String.format("Could not create directory '%s'", directoryBean.getName()));
         }
 
-        if (DirectoryInternalBean.class.equals(directoryBean.getClass()) && directoryBean.getClass().equals(resultDirectoryBean.getClass())) {
-            final DirectoryInternalBean directoryInternalBean = (DirectoryInternalBean) directoryBean;
-            final DirectoryInternalBean resultDirectoryInternalBean = (DirectoryInternalBean) resultDirectoryBean;
-
-            resultDirectoryInternalBean.setUsers(usersService.setUsers(resultDirectoryInternalBean.getId(), directoryInternalBean.getUsers()));
-        }
+        handleGroupsAndUsers(directoryBean, resultDirectoryBean);
 
         return resultDirectoryBean;
     }
@@ -206,6 +203,25 @@ public class DirectoriesServiceImpl implements DirectoriesService {
                 .returningAtMost(EntityQuery.ALL_RESULTS);
 
         return directoryManager.searchDirectories(allDirectoriesEntityQuery);
+    }
+
+    private void handleGroupsAndUsers(AbstractDirectoryBean directoryBean, AbstractDirectoryBean resultDirectoryBean) {
+        if (DirectoryInternalBean.class.equals(directoryBean.getClass()) && directoryBean.getClass().equals(resultDirectoryBean.getClass())) {
+            final DirectoryInternalBean directoryInternalBean = (DirectoryInternalBean) directoryBean;
+            final DirectoryInternalBean resultDirectoryInternalBean = (DirectoryInternalBean) resultDirectoryBean;
+
+            if (directoryInternalBean.getGroups() != null) {
+                // this is the new implementation using a groups bean
+                final GroupsBean resultGroupsBean = groupsService.setGroups(resultDirectoryInternalBean.getId(), new GroupsBean(directoryInternalBean.getGroups()));
+                resultDirectoryInternalBean.setGroups(resultGroupsBean.getGroups());
+            }
+
+            if (directoryInternalBean.getUsers() != null) {
+                // this is the old implementation using a list of users
+                final List<UserBean> resultUserBeans = usersService.setUsers(resultDirectoryInternalBean.getId(), directoryInternalBean.getUsers());
+                resultDirectoryInternalBean.setUsers(resultUserBeans);
+            }
+        }
     }
 
     /**
