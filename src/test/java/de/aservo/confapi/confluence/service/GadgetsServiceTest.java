@@ -21,9 +21,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.Mock;
-import org.powermock.api.easymock.PowerMock;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.MockedStatic;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -31,29 +30,27 @@ import java.util.Collections;
 import java.util.Locale;
 import java.util.UUID;
 
-import static org.easymock.EasyMock.expect;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-//power mockito required here for mocking static methods of AuthenticatedUserThreadLocal
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(AuthenticatedUserThreadLocal.class)
+@RunWith(MockitoJUnitRunner.class)
 public class GadgetsServiceTest {
 
     @Mock
     private ExternalGadgetSpecStore externalGadgetSpecStore;
+
+    @Mock
     private GadgetSpecFactory gadgetSpecFactory;
+
+    @Mock
     private LocaleManager localeManager;
 
     private GadgetsService gadgetsService;
 
     @Before
     public void setup() {
-        externalGadgetSpecStore = mock(ExternalGadgetSpecStore.class);
-        gadgetSpecFactory = mock(GadgetSpecFactory.class);
-        localeManager = mock(LocaleManager.class);
         gadgetsService = new GadgetsServiceImpl(externalGadgetSpecStore, gadgetSpecFactory, localeManager);
     }
 
@@ -94,15 +91,14 @@ public class GadgetsServiceTest {
 
         GadgetSpec gadgetSpec = GadgetSpec.gadgetSpec(externalGadgetSpec.getSpecUri()).build();
 
-        PowerMock.mockStatic(AuthenticatedUserThreadLocal.class);
-        expect(AuthenticatedUserThreadLocal.get()).andReturn(user);
-        PowerMock.replay(AuthenticatedUserThreadLocal.class);
-
-        doReturn(Locale.GERMAN).when(localeManager).getLocale(user);
         doReturn(gadgetSpec).when(gadgetSpecFactory).getGadgetSpec(externalGadgetSpec.getSpecUri(), null);
 
-        GadgetBean gadgetsBean = gadgetsService.addGadget(gadgetBean);
-        assertEquals(externalGadgetSpec.getSpecUri(), gadgetsBean.getUrl());
+        try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
+            authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
+
+            final GadgetBean gadgetsBean = gadgetsService.addGadget(gadgetBean);
+            assertEquals(externalGadgetSpec.getSpecUri(), gadgetsBean.getUrl());
+        }
     }
 
     @Test(expected = BadRequestException.class)
@@ -115,14 +111,14 @@ public class GadgetsServiceTest {
         GadgetBean gadgetBean = new GadgetBean();
         gadgetBean.setUrl(externalGadgetSpec.getSpecUri());
 
-        PowerMock.mockStatic(AuthenticatedUserThreadLocal.class);
-        expect(AuthenticatedUserThreadLocal.get()).andReturn(user);
-        PowerMock.replay(AuthenticatedUserThreadLocal.class);
-
         doReturn(Locale.GERMAN).when(localeManager).getLocale(user);
         doThrow(new GadgetParsingException("")).when(gadgetSpecFactory).getGadgetSpec((URI) any(), any());
 
-        gadgetsService.addGadget(gadgetBean);
+        try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
+            authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
+
+            gadgetsService.addGadget(gadgetBean);
+        }
     }
 
     @Test
@@ -138,15 +134,15 @@ public class GadgetsServiceTest {
 
         GadgetSpec gadgetSpec = GadgetSpec.gadgetSpec(externalGadgetSpec.getSpecUri()).build();
 
-        PowerMock.mockStatic(AuthenticatedUserThreadLocal.class);
-        expect(AuthenticatedUserThreadLocal.get()).andReturn(user);
-        PowerMock.replay(AuthenticatedUserThreadLocal.class);
-
         doReturn(Locale.GERMAN).when(localeManager).getLocale(user);
         doReturn(gadgetSpec).when(gadgetSpecFactory).getGadgetSpec(externalGadgetSpec.getSpecUri(), null);
 
-        GadgetsBean gadgetsBean = gadgetsService.setGadgets(gadgetsBeanToSet);
-        assertEquals(externalGadgetSpec.getSpecUri(), gadgetsBean.getGadgets().iterator().next().getUrl());
+        try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
+            authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
+
+            final GadgetsBean gadgetsBean = gadgetsService.setGadgets(gadgetsBeanToSet);
+            assertEquals(externalGadgetSpec.getSpecUri(), gadgetsBean.getGadgets().iterator().next().getUrl());
+        }
     }
 
     @Test
@@ -161,15 +157,15 @@ public class GadgetsServiceTest {
         gadgetBean.setUrl(externalGadgetSpec.getSpecUri());
         GadgetSpec gadgetSpec = GadgetSpec.gadgetSpec(externalGadgetSpec.getSpecUri()).build();
 
-        PowerMock.mockStatic(AuthenticatedUserThreadLocal.class);
-        expect(AuthenticatedUserThreadLocal.get()).andReturn(user);
-        PowerMock.replay(AuthenticatedUserThreadLocal.class);
-
         doReturn(Locale.GERMAN).when(localeManager).getLocale(user);
         doReturn(gadgetSpec).when(gadgetSpecFactory).getGadgetSpec(externalGadgetSpec.getSpecUri(), null);
 
-        GadgetBean responseGadgetBean = gadgetsService.setGadget(1L, gadgetBean);
-        assertEquals(externalGadgetSpec.getSpecUri(), responseGadgetBean.getUrl());
+        try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
+            authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
+
+            GadgetBean responseGadgetBean = gadgetsService.setGadget(1L, gadgetBean);
+            assertEquals(externalGadgetSpec.getSpecUri(), responseGadgetBean.getUrl());
+        }
     }
 
     @Test

@@ -43,7 +43,7 @@ import static de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLin
 import static de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus.CONFIGURATION_ERROR;
 import static de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkType.CROWD;
 import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)

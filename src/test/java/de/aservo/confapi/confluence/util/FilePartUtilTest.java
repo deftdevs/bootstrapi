@@ -3,25 +3,20 @@ package de.aservo.confapi.confluence.util;
 import com.atlassian.plugins.rest.common.multipart.FilePart;
 import com.opensymphony.webwork.config.Configuration;
 import de.aservo.confapi.commons.exception.InternalServerErrorException;
-import org.easymock.EasyMock;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.powermock.api.easymock.PowerMock;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.MockedStatic;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.lang.reflect.Method;
 
 import static com.atlassian.confluence.setup.ConfluenceBootstrapConstants.TEMP_DIR_PROP;
-import static org.easymock.EasyMock.expect;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest({Configuration.class, FilePartUtil.class})
+@RunWith(MockitoJUnitRunner.class)
 public class FilePartUtilTest {
 
     public static final String EXPORT_FILE_NAME = "confluence-export.zip";
@@ -39,15 +34,11 @@ public class FilePartUtilTest {
 
         final File writtenFile = new File(uploadDirectory, EXPORT_FILE_NAME);
 
-        final Method getUploadDirectoryMethod = FilePartUtil.class.getDeclaredMethod("getUploadDirectory");
-        final Method writeToFileMethod = FilePartUtil.class.getDeclaredMethod("writeToFile", InputStream.class, File.class, String.class);
-
-        PowerMock.mockStatic(FilePartUtil.class, getUploadDirectoryMethod, writeToFileMethod);
-        expect(FilePartUtil.getUploadDirectory()).andReturn(uploadDirectory).anyTimes();
-        expect(FilePartUtil.writeToFile(EasyMock.anyObject(), EasyMock.anyObject(), EasyMock.anyString())).andReturn(writtenFile).anyTimes();
-        PowerMock.replay(FilePartUtil.class);
-
-        assertNotNull(FilePartUtil.createFile(filePart));
+        try (MockedStatic<FilePartUtil> filePartUtilMockedStatic = mockStatic(FilePartUtil.class)) {
+            filePartUtilMockedStatic.when(FilePartUtil::getUploadDirectory).thenReturn(uploadDirectory);
+            filePartUtilMockedStatic.when(() -> FilePartUtil.writeToFile(any(), any(), anyString())).thenReturn(writtenFile);
+            assertNotNull(FilePartUtil.createFile(filePart));
+        }
     }
 
     @Test(expected = InternalServerErrorException.class)
@@ -60,13 +51,10 @@ public class FilePartUtilTest {
         doReturn(false).when(uploadDirectory).exists();
         doReturn(false).when(uploadDirectory).mkdirs();
 
-        final Method getUploadDirectoryMethod = FilePartUtil.class.getDeclaredMethod("getUploadDirectory");
-
-        PowerMock.mockStatic(FilePartUtil.class, getUploadDirectoryMethod);
-        expect(FilePartUtil.getUploadDirectory()).andReturn(uploadDirectory).anyTimes();
-        PowerMock.replay(FilePartUtil.class);
-
-        FilePartUtil.createFile(filePart);
+        try (MockedStatic<FilePartUtil> filePartUtilMockedStatic = mockStatic(FilePartUtil.class)) {
+            filePartUtilMockedStatic.when(FilePartUtil::getUploadDirectory).thenReturn(uploadDirectory);
+            FilePartUtil.createFile(filePart);
+        }
     }
 
     @Test(expected = InternalServerErrorException.class)
@@ -79,24 +67,18 @@ public class FilePartUtilTest {
         doReturn(true).when(uploadDirectory).exists();
         doReturn(true).when(uploadDirectory).isFile();
 
-        final Method getUploadDirectoryMethod = FilePartUtil.class.getDeclaredMethod("getUploadDirectory");
-
-        PowerMock.mockStatic(FilePartUtil.class, getUploadDirectoryMethod);
-        expect(FilePartUtil.getUploadDirectory()).andReturn(uploadDirectory).anyTimes();
-        PowerMock.replay(FilePartUtil.class);
-
-        FilePartUtil.createFile(filePart);
+        try (MockedStatic<FilePartUtil> filePartUtilMockedStatic = mockStatic(FilePartUtil.class)) {
+            filePartUtilMockedStatic.when(FilePartUtil::getUploadDirectory).thenReturn(uploadDirectory);
+            FilePartUtil.createFile(filePart);
+        }
     }
 
     @Test
     public void testGetUploadDirectory() {
-        PowerMock.mockStatic(Configuration.class);
-        expect(Configuration.getString(TEMP_DIR_PROP)).andReturn(DOWNLOAD_PATH).anyTimes();
-        PowerMock.replay(Configuration.class);
-
-        final File uploadDirectory = FilePartUtil.getUploadDirectory();
-        assertNotNull(uploadDirectory);
-        //assertEquals(DOWNLOAD_PATH, uploadDirectory.getAbsolutePath());
+        try (MockedStatic<Configuration> configurationMockedStatic = mockStatic(Configuration.class)) {
+            configurationMockedStatic.when(() -> Configuration.getString(TEMP_DIR_PROP)).thenReturn(DOWNLOAD_PATH);
+            assertNotNull(FilePartUtil.getUploadDirectory());
+        }
     }
 
 }

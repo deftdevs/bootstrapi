@@ -15,9 +15,9 @@ import de.aservo.confapi.commons.model.SettingsBrandingColorSchemeBean;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.powermock.api.easymock.PowerMock;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.Mock;
+import org.mockito.MockedStatic;
+import org.mockito.junit.MockitoJUnitRunner;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -25,26 +25,27 @@ import java.io.InputStream;
 import java.util.Optional;
 
 import static de.aservo.confapi.confluence.model.util.SettingsBrandingColorSchemeBeanUtil.toGlobalColorScheme;
-import static org.easymock.EasyMock.expect;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(ImageType.class)
+@RunWith(MockitoJUnitRunner.class)
 public class SettingsBrandingServiceTest {
 
+    @Mock
     private ColourSchemeManager colourSchemeManager;
+
+    @Mock
     private FaviconManager faviconManager;
+
+    @Mock
     private SiteLogoManager siteLogoManager;
+
+    @Mock
     private SettingsBrandingServiceImpl settingsBrandingService;
 
     @Before
     public void setup() {
-        //when using powermock we cannot initialize with @Mock or @InjectMocks unfortunately
-        colourSchemeManager = mock(ColourSchemeManager.class);
-        siteLogoManager = mock(SiteLogoManager.class);
-        faviconManager = mock(FaviconManager.class);
         settingsBrandingService = new SettingsBrandingServiceImpl(colourSchemeManager, siteLogoManager, faviconManager);
     }
 
@@ -111,13 +112,12 @@ public class SettingsBrandingServiceTest {
 
         InputStream is = new ByteArrayInputStream("".getBytes());
 
-        PowerMock.mockStatic(ImageType.class);
-        expect(ImageType.parseFromContentType("content/unknown")).andReturn(Optional.of(ImageType.PNG));
-        PowerMock.replay(ImageType.class);
+        try (MockedStatic<ImageType> TODO = mockStatic(ImageType.class)) {
+            TODO.when(() -> ImageType.parseFromContentType("content/unknown")).thenReturn(ImageType.PNG);
 
-        settingsBrandingService.setFavicon(is);
-
-        verify(faviconManager).setFavicon(any());
+            settingsBrandingService.setFavicon(is);
+            verify(faviconManager).setFavicon(any());
+        }
     }
 
     @Test(expected = BadRequestException.class)
