@@ -9,19 +9,15 @@ import com.sun.jersey.spi.container.ContainerRequest;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.powermock.api.easymock.PowerMock;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.mockito.MockedStatic;
+import org.mockito.junit.MockitoJUnitRunner;
 
-import static org.easymock.EasyMock.expect;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
-//power mockito required here for mocking static methods of AuthenticatedUserThreadLocal
-@RunWith(PowerMockRunner.class)
-@PrepareForTest(AuthenticatedUserThreadLocal.class)
+@RunWith(MockitoJUnitRunner.class)
 public class SysAdminOnlyResourceFilterTest {
 
     private ConfluenceUserImpl user;
@@ -48,24 +44,24 @@ public class SysAdminOnlyResourceFilterTest {
 
     @Test
     public void testSysAdminAccess() {
-        PowerMock.mockStatic(AuthenticatedUserThreadLocal.class);
-        expect(AuthenticatedUserThreadLocal.get()).andReturn(user);
-        PowerMock.replay(AuthenticatedUserThreadLocal.class);
-
         when(permissionManager.isSystemAdministrator(user)).thenReturn(Boolean.TRUE);
 
-        ContainerRequest filterResponse = filter.filter(null);
-        assertNull(filterResponse);
+        try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
+            authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
+
+            ContainerRequest filterResponse = filter.filter(null);
+            assertNull(filterResponse);
+        }
     }
 
     @Test(expected = AuthorisationException.class)
     public void testNonSysAdminAccess() {
-        PowerMock.mockStatic(AuthenticatedUserThreadLocal.class);
-        expect(AuthenticatedUserThreadLocal.get()).andReturn(user);
-        PowerMock.replay(AuthenticatedUserThreadLocal.class);
-
         when(permissionManager.isSystemAdministrator(user)).thenReturn(Boolean.FALSE);
 
-        filter.filter(any(ContainerRequest.class));
+        try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
+            authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
+
+            filter.filter(any(ContainerRequest.class));
+        }
     }
 }
