@@ -16,6 +16,8 @@ import de.aservo.confapi.confluence.model.util.UserBeanUtil;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
+import java.util.Collection;
+import java.util.List;
 
 import static de.aservo.confapi.commons.util.BeanValidationUtil.validate;
 
@@ -42,6 +44,15 @@ public class UsersServiceImpl implements UsersService {
 
         final User user = findConfluenceUser(userName);
         return UserBeanUtil.toUserBean(user);
+    }
+
+    @Override
+    public UserBean getUser(
+            final long directoryId,
+            final String username) {
+
+        // Not yet implemented
+        throw new UnsupportedOperationException();
     }
 
     @Override
@@ -81,6 +92,24 @@ public class UsersServiceImpl implements UsersService {
         }
 
         return UserBeanUtil.toUserBean(updateUser);
+    }
+
+    @Override
+    public UserBean setUser(
+            final long directoryId,
+            final UserBean userBean) {
+
+        // Not yet implemented
+        throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public List<UserBean> setUsers(
+            final long directoryId,
+            final Collection<UserBean> userBeans) {
+
+        // Not yet implemented
+        throw new UnsupportedOperationException();
     }
 
     @Override
