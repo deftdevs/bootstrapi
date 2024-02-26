@@ -16,3 +16,5 @@ Resources
 ---------
 
 The documentation can be found [HERE](index.adoc).
+
+For a detailed list of breaking changes in specific versions, please refer to our [Version History](VERSIONS.md).
