@@ -5,63 +5,67 @@ import com.atlassian.confluence.user.AuthenticatedUserThreadLocal;
 import com.atlassian.confluence.user.ConfluenceUserImpl;
 import com.atlassian.plugins.rest.common.security.AuthenticationRequiredException;
 import com.atlassian.plugins.rest.common.security.AuthorisationException;
-import com.sun.jersey.spi.container.ContainerRequest;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
 import org.mockito.MockedStatic;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.mockStatic;
+import static org.mockito.Mockito.when;
 
-@RunWith(MockitoJUnitRunner.class)
-public class SysAdminOnlyResourceFilterTest {
+@ExtendWith(MockitoExtension.class)
+class SysAdminOnlyResourceFilterTest {
 
     private ConfluenceUserImpl user;
+
+    @Mock
     private PermissionManager permissionManager;
-    private SysAdminOnlyResourceFilter filter;
 
-    @Before
+    private SysAdminOnlyResourceFilter sysAdminOnlyResourceFilter;
+
+    @BeforeEach
     public void setup() {
-        user  = new ConfluenceUserImpl("test", "test test", "test@test.de");
-        permissionManager = mock(PermissionManager.class);
-        filter = new SysAdminOnlyResourceFilter(permissionManager);
+        user = new ConfluenceUserImpl("test", "test test", "test@test.de");
+        sysAdminOnlyResourceFilter = new SysAdminOnlyResourceFilter(permissionManager);
     }
 
     @Test
-    public void testFilterDefaults() {
-        assertNull(filter.getResponseFilter());
-        assertEquals(filter, filter.getRequestFilter());
-    }
-
-    @Test(expected = AuthenticationRequiredException.class)
-    public void testAdminAccessNoUser() {
-        filter.filter(null);
+    void testFilterDefaults() {
+        assertNull(sysAdminOnlyResourceFilter.getResponseFilter());
+        assertEquals(sysAdminOnlyResourceFilter, sysAdminOnlyResourceFilter.getRequestFilter());
     }
 
     @Test
-    public void testSysAdminAccess() {
+    void testAdminAccessNoUser() {
+        assertThrows(AuthenticationRequiredException.class, () -> {
+            sysAdminOnlyResourceFilter.filter(null);
+        });
+    }
+
+    @Test
+    void testSysAdminAccess() {
         when(permissionManager.isSystemAdministrator(user)).thenReturn(Boolean.TRUE);
 
         try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
             authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
 
-            ContainerRequest filterResponse = filter.filter(null);
-            assertNull(filterResponse);
+            assertNull(sysAdminOnlyResourceFilter.filter(null));
         }
     }
 
-    @Test(expected = AuthorisationException.class)
-    public void testNonSysAdminAccess() {
+    @Test
+    void testNonSysAdminAccess() {
         when(permissionManager.isSystemAdministrator(user)).thenReturn(Boolean.FALSE);
 
         try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
             authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
 
-            filter.filter(any(ContainerRequest.class));
+            assertThrows(AuthorisationException.class, () -> {
+                sysAdminOnlyResourceFilter.filter(null);
+            });
         }
     }
 }

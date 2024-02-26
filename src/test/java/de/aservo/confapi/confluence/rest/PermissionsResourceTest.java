@@ -2,32 +2,32 @@ package de.aservo.confapi.confluence.rest;
 
 import de.aservo.confapi.confluence.model.PermissionAnonymousAccessBean;
 import de.aservo.confapi.confluence.service.api.PermissionsService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.core.Response;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
-public class PermissionsResourceTest {
+@ExtendWith(MockitoExtension.class)
+class PermissionsResourceTest {
 
     private PermissionsResourceImpl resource;
 
     @Mock
     private PermissionsService permissionsService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         resource = new PermissionsResourceImpl(permissionsService);
     }
 
     @Test
-    public void testGetAnonymousPermissions() {
+    void testGetAnonymousPermissions() {
         doReturn(PermissionAnonymousAccessBean.EXAMPLE_1).when(permissionsService).getPermissionAnonymousAccess();
 
         Response response = resource.getPermissionAnonymousAccess();
@@ -39,7 +39,7 @@ public class PermissionsResourceTest {
     }
 
     @Test
-    public void testSetAnonymousPermissions() {
+    void testSetAnonymousPermissions() {
         Response response = resource.setPermissionAnonymousAccess(PermissionAnonymousAccessBean.EXAMPLE_1);
         assertEquals(200, response.getStatus());
     }

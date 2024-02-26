@@ -1,44 +1,38 @@
 package de.aservo.confapi.confluence.service;
 
 import com.atlassian.mail.MailException;
-import com.atlassian.mail.server.DefaultTestPopMailServerImpl;
-import com.atlassian.mail.server.DefaultTestSmtpMailServerImpl;
-import com.atlassian.mail.server.MailServerManager;
-import com.atlassian.mail.server.OtherTestPopMailServerImpl;
-import com.atlassian.mail.server.OtherTestSmtpMailServerImpl;
-import com.atlassian.mail.server.PopMailServer;
-import com.atlassian.mail.server.SMTPMailServer;
-import de.aservo.confapi.confluence.model.util.MailServerPopBeanUtil;
-import de.aservo.confapi.confluence.model.util.MailServerSmtpBeanUtil;
+import com.atlassian.mail.server.*;
 import de.aservo.confapi.commons.exception.BadRequestException;
 import de.aservo.confapi.commons.model.MailServerPopBean;
 import de.aservo.confapi.commons.model.MailServerSmtpBean;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import de.aservo.confapi.confluence.model.util.MailServerPopBeanUtil;
+import de.aservo.confapi.confluence.model.util.MailServerSmtpBeanUtil;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class MailServerServiceTest {
+@ExtendWith(MockitoExtension.class)
+class MailServerServiceTest {
 
     @Mock
     private MailServerManager mailServerManager;
 
     private MailServerServiceImpl mailServerService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         mailServerService = new MailServerServiceImpl(mailServerManager);
     }
 
     @Test
-    public void testGetSmtpMailServer() {
+    void testGetSmtpMailServer() {
         final SMTPMailServer smtpMailServer = new DefaultTestSmtpMailServerImpl();
         doReturn(smtpMailServer).when(mailServerManager).getDefaultSMTPMailServer();
 
@@ -58,7 +52,7 @@ public class MailServerServiceTest {
     }
 
     @Test
-    public void testPutSmtpMaiLServerUpdate() throws Exception {
+    void testPutSmtpMaiLServerUpdate() throws Exception {
         final SMTPMailServer defaultSmtpMailServer = new DefaultTestSmtpMailServerImpl();
         doReturn(true).when(mailServerManager).isDefaultSMTPMailServerDefined();
         doReturn(defaultSmtpMailServer).when(mailServerManager).getDefaultSMTPMailServer();
@@ -76,7 +70,7 @@ public class MailServerServiceTest {
     }
 
     @Test
-    public void testPutSmtpMaiLServerCreate() throws Exception {
+    void testPutSmtpMaiLServerCreate() throws Exception {
         doReturn(false).when(mailServerManager).isDefaultSMTPMailServerDefined();
         doReturn(null).when(mailServerManager).getDefaultSMTPMailServer();
 
@@ -92,7 +86,7 @@ public class MailServerServiceTest {
     }
 
     @Test
-    public void testPutSmtpMaiLServerWithoutPort() throws Exception {
+    void testPutSmtpMaiLServerWithoutPort() throws Exception {
         doReturn(false).when(mailServerManager).isDefaultSMTPMailServerDefined();
         doReturn(null).when(mailServerManager).getDefaultSMTPMailServer();
 
@@ -109,18 +103,21 @@ public class MailServerServiceTest {
         assertEquals(createSmtpMailServer.getMailProtocol().getDefaultPort(), smtpMailServer.getPort());
     }
 
-    @Test (expected = BadRequestException.class)
-    public void testPutSmtpMaiLServerException() throws Exception {
+    @Test
+    void testPutSmtpMaiLServerException() throws Exception {
         doReturn(false).when(mailServerManager).isDefaultSMTPMailServerDefined();
         doThrow(new MailException("SMTP test exception")).when(mailServerManager).create(any());
 
         final SMTPMailServer createSmtpMailServer = new DefaultTestSmtpMailServerImpl();
         final MailServerSmtpBean requestMailServerSmtpBean = MailServerSmtpBeanUtil.toMailServerSmtpBean(createSmtpMailServer);
-        mailServerService.setMailServerSmtp(requestMailServerSmtpBean);
+
+        assertThrows(BadRequestException.class, () -> {
+            mailServerService.setMailServerSmtp(requestMailServerSmtpBean);
+        });
     }
 
     @Test
-    public void testPutSmtpServerDefaultConfig() throws MailException {
+    void testPutSmtpServerDefaultConfig() throws MailException {
         final MailServerSmtpBean mailServerSmtpBean = new MailServerSmtpBean();
 
         mailServerService.setMailServerSmtp(mailServerSmtpBean);
@@ -139,7 +136,7 @@ public class MailServerServiceTest {
     }
 
     @Test
-    public void testGetPopMailServer() {
+    void testGetPopMailServer() {
         final PopMailServer popMailServer = new DefaultTestPopMailServerImpl();
         doReturn(popMailServer).when(mailServerManager).getDefaultPopMailServer();
 
@@ -148,7 +145,7 @@ public class MailServerServiceTest {
         assertEquals(popMailServer.getName(), bean.getName());
         assertEquals(popMailServer.getDescription(), bean.getDescription());
         assertEquals(popMailServer.getHostname(), bean.getHost());
-        assertTrue(popMailServer.getTimeout() == bean.getTimeout());
+        assertEquals(popMailServer.getTimeout(), (long) bean.getTimeout());
         assertEquals(popMailServer.getUsername(), bean.getUsername());
         assertNull(bean.getPassword());
         assertEquals(popMailServer.getMailProtocol().getProtocol(), bean.getProtocol());
@@ -156,7 +153,7 @@ public class MailServerServiceTest {
     }
 
     @Test
-    public void testPutPopMaiLServerUpdate() throws Exception {
+    void testPutPopMaiLServerUpdate() throws Exception {
         final PopMailServer defaultPopMailServer = new DefaultTestPopMailServerImpl();
         doReturn(defaultPopMailServer).when(mailServerManager).getDefaultPopMailServer();
 
@@ -173,7 +170,7 @@ public class MailServerServiceTest {
     }
 
     @Test
-    public void testPutPopMaiLServerCreate() throws Exception {
+    void testPutPopMaiLServerCreate() throws Exception {
         doReturn(null).when(mailServerManager).getDefaultPopMailServer();
 
         final PopMailServer createPopMailServer = new DefaultTestPopMailServerImpl();
@@ -191,7 +188,7 @@ public class MailServerServiceTest {
     }
 
     @Test
-    public void testPutPopMaiLServerWithoutPort() throws Exception {
+    void testPutPopMaiLServerWithoutPort() throws Exception {
         doReturn(null).when(mailServerManager).getDefaultPopMailServer();
 
         final PopMailServer createPopMailServer = new DefaultTestPopMailServerImpl();
@@ -207,13 +204,16 @@ public class MailServerServiceTest {
         assertEquals(createPopMailServer.getMailProtocol().getDefaultPort(), popMailServer.getPort());
     }
 
-    @Test (expected = BadRequestException.class)
-    public void testPutPopMaiLServerException() throws Exception {
+    @Test
+    void testPutPopMaiLServerException() throws Exception {
         doReturn(null).when(mailServerManager).getDefaultPopMailServer();
         doThrow(new MailException("POP test exception")).when(mailServerManager).create(any());
 
         final PopMailServer createPopMailServer = new DefaultTestPopMailServerImpl();
         final MailServerPopBean requestMailServerPopBean = MailServerPopBeanUtil.toMailServerPopBean(createPopMailServer);
-        mailServerService.setMailServerPop(requestMailServerPopBean);
+
+        assertThrows(BadRequestException.class, () -> {
+            mailServerService.setMailServerPop(requestMailServerPopBean);
+        });
     }
 }

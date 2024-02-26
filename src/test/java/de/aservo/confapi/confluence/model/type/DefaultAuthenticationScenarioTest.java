@@ -1,17 +1,17 @@
 package de.aservo.confapi.confluence.model.type;
 
 import de.aservo.confapi.confluence.model.DefaultAuthenticationScenario;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-@RunWith(MockitoJUnitRunner.class)
-public class DefaultAuthenticationScenarioTest {
+@ExtendWith(MockitoExtension.class)
+class DefaultAuthenticationScenarioTest {
 
     @Test
-    public void testDefaultReturnValues() {
+    void testDefaultReturnValues() {
         DefaultAuthenticationScenario scenario = new DefaultAuthenticationScenario();
         assertTrue(scenario.isCommonUserBase());
         assertTrue(scenario.isTrusted());

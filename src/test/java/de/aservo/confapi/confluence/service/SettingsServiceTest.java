@@ -5,34 +5,34 @@ import com.atlassian.confluence.settings.setup.OtherTestSettings;
 import com.atlassian.confluence.setup.settings.Settings;
 import com.atlassian.confluence.setup.settings.SettingsManager;
 import de.aservo.confapi.commons.model.SettingsBean;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.URI;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
-public class SettingsServiceTest {
+@ExtendWith(MockitoExtension.class)
+class SettingsServiceTest {
 
     @Mock
     private SettingsManager settingsManager;
 
     private SettingsServiceImpl settingsService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         settingsService = new SettingsServiceImpl(settingsManager);
     }
 
     @Test
-    public void testGetSettings() {
+    void testGetSettings() {
         final Settings settings = new DefaultTestSettings();
 
         doReturn(settings).when(settingsManager).getGlobalSettings();
@@ -49,7 +49,7 @@ public class SettingsServiceTest {
     }
 
     @Test
-    public void testPutSettings() {
+    void testPutSettings() {
         final Settings defaultSettings = new DefaultTestSettings();
         doReturn(defaultSettings).when(settingsManager).getGlobalSettings();
 
@@ -78,7 +78,7 @@ public class SettingsServiceTest {
     }
 
     @Test
-    public void testPutSettingsDefaultConfig(){
+    void testPutSettingsDefaultConfig(){
         final SettingsBean settingsBean = new SettingsBean();
         
         final Settings defaultSettings = new DefaultTestSettings();

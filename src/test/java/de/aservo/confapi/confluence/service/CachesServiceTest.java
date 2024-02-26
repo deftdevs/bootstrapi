@@ -7,11 +7,11 @@ import de.aservo.confapi.commons.exception.BadRequestException;
 import de.aservo.confapi.commons.exception.NotFoundException;
 import de.aservo.confapi.confluence.model.CacheBean;
 import de.aservo.confapi.confluence.model.util.CacheBeanUtil;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,24 +19,25 @@ import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.function.Supplier;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class CachesServiceTest {
+@ExtendWith(MockitoExtension.class)
+class CachesServiceTest {
 
     @Mock
     private CacheManager cacheManager;
 
     private CachesServiceImpl cachesService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         cachesService = new CachesServiceImpl(cacheManager);
     }
 
     @Test
-    public void testGetAllCaches() {
+    void testGetAllCaches() {
 
         ManagedCache cache = mock(ManagedCache.class);
         doReturn("test_cache").when(cache).getName();
@@ -54,7 +55,7 @@ public class CachesServiceTest {
     }
 
     @Test
-    public void testGetCache() {
+    void testGetCache() {
 
         ManagedCache cache = mock(ManagedCache.class);
         doReturn("test_cache").when(cache).getName();
@@ -70,26 +71,27 @@ public class CachesServiceTest {
 
     }
 
-    @Test(expected = NotFoundException.class)
-    public void testGetCacheNotExisting() {
-
-        cachesService.getCache("not_existing_test_cache");
-
+    @Test
+    void testGetCacheNotExisting() {
+        assertThrows(NotFoundException.class, () -> {
+            cachesService.getCache("not_existing_test_cache");
+        });
     }
 
-    @Test (expected = BadRequestException.class)
-    public void testSetMaxCacheSizeNotSupported() {
+    @Test
+    void testSetMaxCacheSizeNotSupported() {
         ManagedCache cache = mock(ManagedCache.class);
         int newSize = 500;
         doReturn(cache).when(cacheManager).getManagedCache("test_cache");
         doReturn(false).when(cache).updateMaxEntries(newSize);
 
-        cachesService.setMaxCacheSize("test_cache", newSize);
-
+        assertThrows(BadRequestException.class, () -> {
+            cachesService.setMaxCacheSize("test_cache", newSize);
+        });
     }
 
     @Test
-    public void testSetMaxCacheSize() {
+    void testSetMaxCacheSize() {
         ManagedCache cache = mock(ManagedCache.class);
 
         int newSize = 500;
@@ -102,7 +104,7 @@ public class CachesServiceTest {
     }
 
     @Test
-    public void testFlushCache() {
+    void testFlushCache() {
         ManagedCache cache = mock(ManagedCache.class);
         doReturn(true).when(cache).isFlushable();
         doReturn(cache).when(cacheManager).getManagedCache("test_cache");
@@ -112,14 +114,15 @@ public class CachesServiceTest {
 
     }
 
-    @Test(expected = BadRequestException.class)
-    public void testFlushCacheNotFlushable() {
+    @Test
+    void testFlushCacheNotFlushable() {
         ManagedCache cache = mock(ManagedCache.class);
         doReturn(false).when(cache).isFlushable();
         doReturn(cache).when(cacheManager).getManagedCache("test_cache");
 
-        cachesService.flushCache("test_cache");
-
+        assertThrows(BadRequestException.class, () -> {
+            cachesService.flushCache("test_cache");
+        });
     }
 
     private SortedMap<CacheStatisticsKey, Supplier<Long>> createStatistics(long heapSize, long missCount, long hitCount, long size) {
