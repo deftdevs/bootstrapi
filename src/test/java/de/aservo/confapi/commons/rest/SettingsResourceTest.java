@@ -1,33 +1,34 @@
 package de.aservo.confapi.commons.rest;
 
 import de.aservo.confapi.commons.model.SettingsBean;
+import de.aservo.confapi.commons.rest.impl.TestSettingsResourceImpl;
 import de.aservo.confapi.commons.service.api.SettingsService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.core.Response;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
-public class AbstractSettingsResourceTest {
+@ExtendWith(MockitoExtension.class)
+class SettingsResourceTest {
 
     @Mock
     private SettingsService settingsService;
 
     private TestSettingsResourceImpl resource;
 
-    @Before
+    @BeforeEach
     public void setup() {
         resource = new TestSettingsResourceImpl(settingsService);
     }
 
     @Test
-    public void testGetSettings() {
+    void testGetSettings() {
         final SettingsBean bean = SettingsBean.EXAMPLE_1;
 
         doReturn(bean).when(settingsService).getSettings();
@@ -40,7 +41,7 @@ public class AbstractSettingsResourceTest {
     }
 
     @Test
-    public void testSetSettings() {
+    void testSetSettings() {
         final SettingsBean bean = SettingsBean.EXAMPLE_1;
 
         doReturn(bean).when(settingsService).setSettings(bean);

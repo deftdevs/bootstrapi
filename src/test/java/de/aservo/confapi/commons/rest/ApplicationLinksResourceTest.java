@@ -2,36 +2,36 @@ package de.aservo.confapi.commons.rest;
 
 import de.aservo.confapi.commons.model.ApplicationLinkBean;
 import de.aservo.confapi.commons.model.ApplicationLinksBean;
+import de.aservo.confapi.commons.rest.impl.TestApplicationLinksResourceImpl;
 import de.aservo.confapi.commons.service.api.ApplicationLinksService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.core.Response;
-
 import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
-public class AbstractApplicationLinksResourceTest {
+@ExtendWith(MockitoExtension.class)
+class ApplicationLinksResourceTest {
 
     @Mock
     private ApplicationLinksService applicationLinksService;
 
     private TestApplicationLinksResourceImpl resource;
 
-    @Before
+    @BeforeEach
     public void setup() {
         resource = new TestApplicationLinksResourceImpl(applicationLinksService);
     }
 
     @Test
-    public void testGetApplicationLinks() {
+    void testGetApplicationLinks() {
         final ApplicationLinksBean bean = ApplicationLinksBean.EXAMPLE_1;
 
         doReturn(bean).when(applicationLinksService).getApplicationLinks();
@@ -44,7 +44,7 @@ public class AbstractApplicationLinksResourceTest {
     }
 
     @Test
-    public void testGetApplicationLink() {
+    void testGetApplicationLink() {
         final ApplicationLinkBean bean = ApplicationLinkBean.EXAMPLE_1;
 
         UUID id = UUID.randomUUID();
@@ -59,7 +59,7 @@ public class AbstractApplicationLinksResourceTest {
     }
 
     @Test
-    public void testSetApplicationLinks() {
+    void testSetApplicationLinks() {
         final ApplicationLinksBean bean = ApplicationLinksBean.EXAMPLE_1;
 
         doReturn(bean).when(applicationLinksService).setApplicationLinks(bean, true);
@@ -72,7 +72,7 @@ public class AbstractApplicationLinksResourceTest {
     }
 
     @Test
-    public void testSetApplicationLink() {
+    void testSetApplicationLink() {
         final ApplicationLinkBean bean = ApplicationLinkBean.EXAMPLE_1;
         UUID id = UUID.randomUUID();
 
@@ -86,7 +86,7 @@ public class AbstractApplicationLinksResourceTest {
     }
 
     @Test
-    public void testAddApplicationLink() {
+    void testAddApplicationLink() {
         final ApplicationLinkBean bean = ApplicationLinkBean.EXAMPLE_1;
 
         doReturn(bean).when(applicationLinksService).addApplicationLink(bean, true);
@@ -99,14 +99,14 @@ public class AbstractApplicationLinksResourceTest {
     }
 
     @Test
-    public void testDeleteApplicationLinks() {
+    void testDeleteApplicationLinks() {
         resource.deleteApplicationLinks(true);
-        assertTrue("Delete Successful", true);
+        assertTrue(true, "Delete Successful");
     }
 
     @Test
-    public void testDeleteApplicationLink() {
+    void testDeleteApplicationLink() {
         resource.deleteApplicationLink(UUID.randomUUID());
-        assertTrue("Delete Successful", true);
+        assertTrue(true, "Delete Successful");
     }
 }

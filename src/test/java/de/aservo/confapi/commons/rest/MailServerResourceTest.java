@@ -2,33 +2,33 @@ package de.aservo.confapi.commons.rest;
 
 import de.aservo.confapi.commons.model.MailServerPopBean;
 import de.aservo.confapi.commons.model.MailServerSmtpBean;
+import de.aservo.confapi.commons.rest.impl.TestMailServerResourceImpl;
 import de.aservo.confapi.commons.service.api.MailServerService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import javax.ws.rs.core.Response;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
-public class AbstractMailServerResourceTest {
+@ExtendWith(MockitoExtension.class)
+class MailServerResourceTest {
 
     @Mock
     private MailServerService mailServerService;
 
     private TestMailServerResourceImpl resource;
 
-    @Before
+    @BeforeEach
     public void setup() {
         resource = new TestMailServerResourceImpl(mailServerService);
     }
 
     @Test
-    public void testGetMailServerSmtpSettings() {
+    void testGetMailServerSmtpSettings() {
         final MailServerSmtpBean bean = MailServerSmtpBean.EXAMPLE_1;
 
         doReturn(bean).when(mailServerService).getMailServerSmtp();
@@ -41,7 +41,7 @@ public class AbstractMailServerResourceTest {
     }
 
     @Test
-    public void testSetMailServerSmtpSettings() {
+    void testSetMailServerSmtpSettings() {
         final MailServerSmtpBean bean = MailServerSmtpBean.EXAMPLE_1;
 
         doReturn(bean).when(mailServerService).setMailServerSmtp(bean);
@@ -54,7 +54,7 @@ public class AbstractMailServerResourceTest {
     }
 
     @Test
-    public void testGetMailServerPopSettings() {
+    void testGetMailServerPopSettings() {
         final MailServerPopBean bean = MailServerPopBean.EXAMPLE_1;
 
         doReturn(bean).when(mailServerService).getMailServerPop();
@@ -67,7 +67,7 @@ public class AbstractMailServerResourceTest {
     }
 
     @Test
-    public void testSetMailServerPopSettings() {
+    void testSetMailServerPopSettings() {
         final MailServerPopBean bean = MailServerPopBean.EXAMPLE_1;
 
         doReturn(bean).when(mailServerService).setMailServerPop(bean);
