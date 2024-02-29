@@ -1,36 +1,37 @@
 package de.aservo.confapi.commons.rest;
 
 import de.aservo.confapi.commons.model.SettingsBrandingColorSchemeBean;
+import de.aservo.confapi.commons.rest.impl.TestSettingsBrandingResourceImpl;
 import de.aservo.confapi.commons.service.api.SettingsBrandingService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import javax.ws.rs.core.Response;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
-public class AbstractSettingsBrandingResourceTest {
+@ExtendWith(MockitoExtension.class)
+class SettingsBrandingResourceTest {
 
     @Mock
     private SettingsBrandingService brandingService;
 
     private TestSettingsBrandingResourceImpl resource;
 
-    @Before
+    @BeforeEach
     public void setup() {
         resource = new TestSettingsBrandingResourceImpl(brandingService);
     }
 
     @Test
-    public void testGetColourScheme() {
+    void testGetColourScheme() {
         final SettingsBrandingColorSchemeBean bean = SettingsBrandingColorSchemeBean.EXAMPLE_1;
 
         doReturn(bean).when(brandingService).getColourScheme();
@@ -43,7 +44,7 @@ public class AbstractSettingsBrandingResourceTest {
     }
 
     @Test
-    public void testSetColourScheme() {
+    void testSetColourScheme() {
         final SettingsBrandingColorSchemeBean bean = SettingsBrandingColorSchemeBean.EXAMPLE_1;
 
         doReturn(bean).when(brandingService).setColourScheme(bean);
@@ -56,7 +57,7 @@ public class AbstractSettingsBrandingResourceTest {
     }
 
     @Test
-    public void testGetLogo() {
+    void testGetLogo() {
         final InputStream stream = createDummyInputStream();
 
         doReturn(stream).when(brandingService).getLogo();
@@ -69,7 +70,7 @@ public class AbstractSettingsBrandingResourceTest {
     }
 
     @Test
-    public void testSetLogo() {
+    void testSetLogo() {
         final InputStream stream = createDummyInputStream();
 
         final Response response = resource.setBrandingLogo(stream);
@@ -78,7 +79,7 @@ public class AbstractSettingsBrandingResourceTest {
     }
 
     @Test
-    public void testGetFavicon() {
+    void testGetFavicon() {
         final InputStream stream = createDummyInputStream();
 
         doReturn(stream).when(brandingService).getFavicon();
@@ -91,7 +92,7 @@ public class AbstractSettingsBrandingResourceTest {
     }
 
     @Test
-    public void testSetFavicon() {
+    void testSetFavicon() {
         final InputStream stream = createDummyInputStream();
 
         final Response response = resource.setBrandingFavicon(stream);

@@ -2,33 +2,33 @@ package de.aservo.confapi.commons.rest;
 
 import de.aservo.confapi.commons.model.LicenseBean;
 import de.aservo.confapi.commons.model.LicensesBean;
+import de.aservo.confapi.commons.rest.impl.TestLicensesResourceImpl;
 import de.aservo.confapi.commons.service.api.LicensesService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import javax.ws.rs.core.Response;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
-public class AbstractLicensesResourceTest {
+@ExtendWith(MockitoExtension.class)
+class LicensesResourceTest {
 
     @Mock
     private LicensesService licensesService;
 
     private TestLicensesResourceImpl resource;
 
-    @Before
+    @BeforeEach
     public void setup() {
         resource = new TestLicensesResourceImpl(licensesService);
     }
 
     @Test
-    public void testGetLicenses() {
+    void testGetLicenses() {
         final LicensesBean bean = LicensesBean.EXAMPLE_1;
 
         doReturn(bean).when(licensesService).getLicenses();
@@ -41,7 +41,7 @@ public class AbstractLicensesResourceTest {
     }
 
     @Test
-    public void testAddLicense() {
+    void testAddLicense() {
         final LicenseBean bean = LicenseBean.EXAMPLE_1;
 
         doReturn(bean).when(licensesService).addLicense(bean);

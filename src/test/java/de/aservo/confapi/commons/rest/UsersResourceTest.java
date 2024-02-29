@@ -1,33 +1,33 @@
 package de.aservo.confapi.commons.rest;
 
 import de.aservo.confapi.commons.model.UserBean;
+import de.aservo.confapi.commons.rest.impl.TestUsersResourceImpl;
 import de.aservo.confapi.commons.service.api.UsersService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
-
 import javax.ws.rs.core.Response;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
-public class AbstractUsersResourceTest {
+@ExtendWith(MockitoExtension.class)
+class UsersResourceTest {
 
     @Mock
     private UsersService usersService;
 
     private TestUsersResourceImpl resource;
 
-    @Before
+    @BeforeEach
     public void setup() {
         resource = new TestUsersResourceImpl(usersService);
     }
 
     @Test
-    public void testGetUser() {
+    void testGetUser() {
         final UserBean bean = UserBean.EXAMPLE_1;
 
         doReturn(bean).when(usersService).getUser(bean.getUsername());
@@ -40,7 +40,7 @@ public class AbstractUsersResourceTest {
     }
 
     @Test
-    public void testUpdateUser() {
+    void testUpdateUser() {
         final UserBean bean = UserBean.EXAMPLE_1;
 
         doReturn(bean).when(usersService).updateUser(bean.getUsername(), bean);
@@ -53,7 +53,7 @@ public class AbstractUsersResourceTest {
     }
 
     @Test
-    public void testUpdateUserPassword() {
+    void testUpdateUserPassword() {
         final UserBean bean = UserBean.EXAMPLE_1;
 
         doReturn(bean).when(usersService).updatePassword(bean.getUsername(), bean.getPassword());

@@ -1,77 +1,73 @@
 package de.aservo.confapi.commons.model;
 
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
 
-import static org.hamcrest.CoreMatchers.hasItems;
-import static org.hamcrest.Matchers.containsInAnyOrder;
-import static org.hamcrest.core.Is.is;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class ErrorCollectionTest {
+@ExtendWith(MockitoExtension.class)
+class ErrorCollectionTest {
 
     public static final String FIRST_ERROR_MESSAGE = "First error message";
     public static final String SECOND_ERROR_MESSAGE = "Second error message";
 
     private ErrorCollection errorCollection;
 
-    @Before
+    @BeforeEach
     public void setup() {
         errorCollection = new ErrorCollection();
     }
 
     @Test
-    public void testDefaultConstructor() {
+    void testDefaultConstructor() {
         assertFalse(errorCollection.hasAnyErrors());
     }
 
     @Test
-    public void testAddErrorMessage() {
+    void testAddErrorMessage() {
         errorCollection.addErrorMessage(FIRST_ERROR_MESSAGE);
         assertTrue(errorCollection.hasAnyErrors());
-        assertThat(errorCollection.getErrorMessages().size(), is(1));
-        assertThat(errorCollection.getErrorMessages(), hasItems(FIRST_ERROR_MESSAGE));
+        assertEquals(1, errorCollection.getErrorMessages().size());
+        assertTrue(errorCollection.getErrorMessages().contains(FIRST_ERROR_MESSAGE));
     }
 
     @Test
-    public void testAddNullErrorMessage() {
+    void testAddNullErrorMessage() {
         errorCollection.addErrorMessage(null);
         assertFalse(errorCollection.hasAnyErrors());
     }
 
     @Test
-    public void testAddErrorMessageList() {
+    void testAddErrorMessageList() {
         errorCollection.addErrorMessages(Arrays.asList(FIRST_ERROR_MESSAGE, SECOND_ERROR_MESSAGE));
         assertTrue(errorCollection.hasAnyErrors());
-        assertThat(errorCollection.getErrorMessages().size(), is(2));
-        assertThat(errorCollection.getErrorMessages(), containsInAnyOrder(FIRST_ERROR_MESSAGE, SECOND_ERROR_MESSAGE));
+        assertEquals(2, errorCollection.getErrorMessages().size());
+        assertTrue(errorCollection.getErrorMessages().containsAll(Arrays.asList(FIRST_ERROR_MESSAGE, SECOND_ERROR_MESSAGE)));
     }
 
     @Test
-    public void testAddNullErrorMessageList() {
+    void testAddNullErrorMessageList() {
         errorCollection.addErrorMessages(null);
         assertFalse(errorCollection.hasAnyErrors());
     }
 
     @Test
-    public void testOfErrorMessages() {
+    void testOfErrorMessages() {
         errorCollection = ErrorCollection.of(FIRST_ERROR_MESSAGE, SECOND_ERROR_MESSAGE);
         assertTrue(errorCollection.hasAnyErrors());
-        assertThat(errorCollection.getErrorMessages().size(), is(2));
-        assertThat(errorCollection.getErrorMessages(), containsInAnyOrder(FIRST_ERROR_MESSAGE, SECOND_ERROR_MESSAGE));
+        assertEquals(2, errorCollection.getErrorMessages().size());
+        assertTrue(errorCollection.getErrorMessages().containsAll(Arrays.asList(FIRST_ERROR_MESSAGE, SECOND_ERROR_MESSAGE)));
     }
 
     @Test
-    public void testOfErrorMessageList() {
+    void testOfErrorMessageList() {
         errorCollection = ErrorCollection.of(Arrays.asList(FIRST_ERROR_MESSAGE, SECOND_ERROR_MESSAGE));
         assertTrue(errorCollection.hasAnyErrors());
-        assertThat(errorCollection.getErrorMessages().size(), is(2));
-        assertThat(errorCollection.getErrorMessages(), containsInAnyOrder(FIRST_ERROR_MESSAGE, SECOND_ERROR_MESSAGE));
+        assertEquals(2, errorCollection.getErrorMessages().size());
+        assertTrue(errorCollection.getErrorMessages().containsAll(Arrays.asList(FIRST_ERROR_MESSAGE, SECOND_ERROR_MESSAGE)));
     }
-
 }

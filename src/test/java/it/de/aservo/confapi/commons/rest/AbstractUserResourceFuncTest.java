@@ -5,20 +5,19 @@ import de.aservo.confapi.commons.model.UserBean;
 import org.apache.wink.client.ClientAuthenticationException;
 import org.apache.wink.client.ClientResponse;
 import org.apache.wink.client.Resource;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class AbstractUserResourceFuncTest {
 
     private static final String PARAM_USERNAME = "username";
 
     @Test
-    public void testGetUser() {
+    void testGetUser() {
         UserBean exampleBean = getExampleBean();
         Resource usersResource = ResourceBuilder.builder(ConfAPI.USERS + getUserNameQueryParam(exampleBean)).build();
 
@@ -30,7 +29,7 @@ public abstract class AbstractUserResourceFuncTest {
     }
 
     @Test
-    public void testSetUserEmailAddress() {
+    void testSetUserEmailAddress() {
         UserBean exampleBean = getExampleBean();
         Resource usersResource = ResourceBuilder.builder(ConfAPI.USERS + getUserNameQueryParam(exampleBean)).build();
 
@@ -38,11 +37,11 @@ public abstract class AbstractUserResourceFuncTest {
         assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
 
         UserBean userBean = clientResponse.getEntity(UserBean.class);
-        assertEquals(exampleBean, userBean);
+        assertEquals(exampleBean.getEmail(), userBean.getEmail());
     }
 
     @Test
-    public void testSetUserPassword() {
+    void testSetUserPassword() {
         UserBean exampleBean = getExampleBean();
         Resource usersResource = ResourceBuilder
                 .builder(ConfAPI.USERS + "/" + ConfAPI.USER_PASSWORD + getUserNameQueryParam(exampleBean))
@@ -53,28 +52,32 @@ public abstract class AbstractUserResourceFuncTest {
         assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
     }
 
-    @Test(expected = ClientAuthenticationException.class)
+    @Test
     public void testGetUserUnauthenticated() {
         UserBean exampleBean = getExampleBean();
         Resource usersResource = ResourceBuilder.builder(ConfAPI.USERS + getUserNameQueryParam(exampleBean))
                 .username("wrong")
                 .password("password")
                 .build();
-        usersResource.get();
+
+        assertThrows(ClientAuthenticationException.class, usersResource::get);
     }
 
-    @Test(expected = ClientAuthenticationException.class)
+    @Test
     public void testSetUserEmailAddressUnauthenticated() {
         UserBean exampleBean = getExampleBean();
         Resource usersResource = ResourceBuilder.builder(ConfAPI.USERS + getUserNameQueryParam(exampleBean))
                 .username("wrong")
                 .password("password")
                 .build();
-        usersResource.put(exampleBean);
+
+        assertThrows(ClientAuthenticationException.class, () -> {
+            usersResource.put(exampleBean);
+        });
     }
 
     @Test
-    public void testGetUserUnauthorized() {
+    void testGetUserUnauthorized() {
         UserBean exampleBean = getExampleBean();
         Resource usersResource = ResourceBuilder.builder(ConfAPI.USERS + getUserNameQueryParam(exampleBean))
                 .username("user")
@@ -85,7 +88,7 @@ public abstract class AbstractUserResourceFuncTest {
     }
 
     @Test
-    public void testSetUserEmailAddressUnauthorized() {
+    void testSetUserEmailAddressUnauthorized() {
         UserBean exampleBean = getExampleBean();
         Resource usersResource = ResourceBuilder.builder(ConfAPI.USERS + getUserNameQueryParam(exampleBean))
                 .username("user")

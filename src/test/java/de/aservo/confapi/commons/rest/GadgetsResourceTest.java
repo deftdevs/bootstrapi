@@ -2,34 +2,35 @@ package de.aservo.confapi.commons.rest;
 
 import de.aservo.confapi.commons.model.GadgetBean;
 import de.aservo.confapi.commons.model.GadgetsBean;
+import de.aservo.confapi.commons.rest.impl.TestGadgetsResourceImpl;
 import de.aservo.confapi.commons.service.api.GadgetsService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.core.Response;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
-public class AbstractGadgetsResourceTest {
+@ExtendWith(MockitoExtension.class)
+class GadgetsResourceTest {
 
     @Mock
     private GadgetsService gadgetsService;
 
     private TestGadgetsResourceImpl resource;
 
-    @Before
+    @BeforeEach
     public void setup() {
         resource = new TestGadgetsResourceImpl(gadgetsService);
     }
 
     @Test
-    public void testGetGadgets() {
+    void testGetGadgets() {
         final GadgetsBean bean = GadgetsBean.EXAMPLE_1;
 
         doReturn(bean).when(gadgetsService).getGadgets();
@@ -42,7 +43,7 @@ public class AbstractGadgetsResourceTest {
     }
 
     @Test
-    public void testGetGadget() {
+    void testGetGadget() {
         final GadgetBean bean = GadgetBean.EXAMPLE_1;
 
         doReturn(bean).when(gadgetsService).getGadget(1L);
@@ -55,7 +56,7 @@ public class AbstractGadgetsResourceTest {
     }
 
     @Test
-    public void testSetGadgets() {
+    void testSetGadgets() {
         final GadgetsBean bean = GadgetsBean.EXAMPLE_1;
 
         doReturn(bean).when(gadgetsService).setGadgets(bean);
@@ -68,7 +69,7 @@ public class AbstractGadgetsResourceTest {
     }
 
     @Test
-    public void testSetGadget() {
+    void testSetGadget() {
         final GadgetBean bean = GadgetBean.EXAMPLE_1;
 
         doReturn(bean).when(gadgetsService).setGadget(1L, bean);
@@ -81,7 +82,7 @@ public class AbstractGadgetsResourceTest {
     }
 
     @Test
-    public void testAddGadget() {
+    void testAddGadget() {
         final GadgetBean bean = GadgetBean.EXAMPLE_1;
 
         doReturn(bean).when(gadgetsService).addGadget(bean);
@@ -94,14 +95,14 @@ public class AbstractGadgetsResourceTest {
     }
 
     @Test
-    public void testDeleteGadgets() {
+    void testDeleteGadgets() {
         resource.deleteGadgets(true);
-        assertTrue("Delete Successful", true);
+        assertTrue(true, "Delete Successful");
     }
 
     @Test
-    public void testDeleteGadget() {
+    void testDeleteGadget() {
         resource.deleteGadget(1L);
-        assertTrue("Delete Successful", true);
+        assertTrue(true, "Delete Successful");
     }
 }

@@ -6,17 +6,17 @@ import de.aservo.confapi.commons.model.LicensesBean;
 import org.apache.wink.client.ClientAuthenticationException;
 import org.apache.wink.client.ClientResponse;
 import org.apache.wink.client.Resource;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
 import java.util.Collection;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class AbstractLicenseResourceFuncTest {
 
     @Test
-    public void testGetLicenses() {
+    void testGetLicenses() {
         Resource licensesResource = ResourceBuilder.builder(ConfAPI.LICENSES).build();
 
         ClientResponse clientResponse = licensesResource.get();
@@ -29,7 +29,7 @@ public abstract class AbstractLicenseResourceFuncTest {
     }
 
     @Test
-    public void testSetLicenses() {
+    void testSetLicenses() {
         Resource licensesResource = ResourceBuilder.builder(ConfAPI.LICENSES).build();
 
         ClientResponse response = licensesResource.put(getExampleBean());
@@ -42,7 +42,7 @@ public abstract class AbstractLicenseResourceFuncTest {
     }
 
     @Test
-    public void testAddLicenses() {
+    void testAddLicenses() {
         Resource licensesResource = ResourceBuilder.builder(ConfAPI.LICENSES).build();
 
         LicenseBean licenseBean = getExampleBean().getLicenses().iterator().next();
@@ -55,39 +55,45 @@ public abstract class AbstractLicenseResourceFuncTest {
                 response.getEntity(LicensesBean.class).getLicenses().iterator().next().getDescription());
     }
 
-    @Test(expected = ClientAuthenticationException.class)
+    @Test
     public void testGetLicensesUnauthenticated() {
         Resource licensesResource = ResourceBuilder.builder(ConfAPI.LICENSES)
                 .username("wrong")
                 .password("password")
                 .build();
-        licensesResource.get();
+
+        assertThrows(ClientAuthenticationException.class, licensesResource::get);
     }
 
-    @Test(expected = ClientAuthenticationException.class)
+    @Test
     public void testSetLicensesUnauthenticated() {
         Resource licensesResource = ResourceBuilder.builder(ConfAPI.LICENSES)
                 .username("wrong")
                 .password("password")
                 .build();
-        licensesResource.put(getExampleBean());
+
+        assertThrows(ClientAuthenticationException.class, () -> {
+            licensesResource.put(getExampleBean());
+        });
     }
 
     @Test
-    public void testGetLicensesUnauthorized() {
+    void testGetLicensesUnauthorized() {
         Resource licensesResource = ResourceBuilder.builder(ConfAPI.LICENSES)
                 .username("user")
                 .password("user")
                 .build();
+
         assertEquals(Response.Status.FORBIDDEN.getStatusCode(), licensesResource.get().getStatusCode());
     }
 
     @Test
-    public void testSetLicensesUnauthorized() {
+    void testSetLicensesUnauthorized() {
         Resource licensesResource = ResourceBuilder.builder(ConfAPI.LICENSES)
                 .username("user")
                 .password("user")
                 .build();
+
         assertEquals(Response.Status.FORBIDDEN.getStatusCode(), licensesResource.put(getExampleBean()).getStatusCode());
     }
 

@@ -5,17 +5,16 @@ import de.aservo.confapi.commons.model.MailServerPopBean;
 import org.apache.wink.client.ClientAuthenticationException;
 import org.apache.wink.client.ClientResponse;
 import org.apache.wink.client.Resource;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class AbstractMailServerPopResourceFuncTest {
 
     @Test
-    public void testGetMailserverPop() {
+    void testGetMailServerPop() {
         Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_POP).build();
 
         ClientResponse clientResponse = mailserverResource.get();
@@ -26,55 +25,62 @@ public abstract class AbstractMailServerPopResourceFuncTest {
     }
 
     @Test
-    public void testSetMailserverPop() {
+    void testSetMailServerPop() {
         Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_POP).build();
 
         ClientResponse clientResponse = mailserverResource.put(getExampleBean());
         assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
 
         MailServerPopBean mailServerPopBean = clientResponse.getEntity(MailServerPopBean.class);
-        assertMailserverBeanAgainstExample(mailServerPopBean);
+        assertMailServerBeanAgainstExample(mailServerPopBean);
     }
 
-    @Test(expected = ClientAuthenticationException.class)
-    public void testGetMailserverPopUnauthenticated() {
+    @Test
+    public void testGetMailServerPopUnauthenticated() {
         Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_POP)
                 .username("wrong")
                 .password("password")
                 .build();
-        mailserverResource.get();
+
+
+        assertThrows(ClientAuthenticationException.class, mailserverResource::get);
     }
 
-    @Test(expected = ClientAuthenticationException.class)
-    public void testSetMailserverPopUnauthenticated() {
+    @Test
+    public void testSetMailServerPopUnauthenticated() {
         Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_POP)
                 .username("wrong")
                 .password("password")
                 .build();
-        mailserverResource.put(getExampleBean());
+
+        assertThrows(ClientAuthenticationException.class, () -> {
+            mailserverResource.put(getExampleBean());
+        });
     }
 
     @Test
-    public void testGetMailserverPopUnauthorized() {
+    void testGetMailServerPopUnauthorized() {
         Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_POP)
                 .username("user")
                 .password("user")
                 .build();
-        mailserverResource.get();
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), mailserverResource.put(getExampleBean()).getStatusCode());
+
+        ClientResponse response = mailserverResource.put(getExampleBean());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), response.getStatusCode());
     }
 
     @Test
-    public void testSetMailserverPopUnauthorized() {
+    void testSetMailServerPopUnauthorized() {
         Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_POP)
                 .username("user")
                 .password("user")
                 .build();
-        mailserverResource.put(getExampleBean());
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), mailserverResource.put(getExampleBean()).getStatusCode());
+
+        ClientResponse response = mailserverResource.put(getExampleBean());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), response.getStatusCode());
     }
 
-    protected void assertMailserverBeanAgainstExample(MailServerPopBean bean) {
+    protected void assertMailServerBeanAgainstExample(MailServerPopBean bean) {
         MailServerPopBean exampleBean = getExampleBean();
         //although field 'password' in 'AbstractMailServerProtocolBean' is annotated with '@EqualsExclude' equals still yields false if
         //not the same. Thus, we need to reset the example password manually

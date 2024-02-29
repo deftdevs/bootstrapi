@@ -1,17 +1,17 @@
 package de.aservo.confapi.commons.model;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@RunWith(MockitoJUnitRunner.class)
-public class AbstractMailServerProtocolBeanTest {
+@ExtendWith(MockitoExtension.class)
+class AbstractMailServerProtocolBeanTest {
 
     @Test
-    public void testTimeoutHasDefaultValue() {
+    void testTimeoutHasDefaultValue() {
         final long timeout = 12345L;
 
         final AbstractMailServerProtocolBean beanWithTimeoutSet = new AbstractMailServerProtocolBean() {};
@@ -23,7 +23,7 @@ public class AbstractMailServerProtocolBeanTest {
     }
 
     @Test
-    public void testSetPortUsingIntAndString() {
+    void testSetPortUsingIntAndString() {
         final int port = 1337;
 
         final AbstractMailServerProtocolBean beanUsingInt = new AbstractMailServerProtocolBean() {};

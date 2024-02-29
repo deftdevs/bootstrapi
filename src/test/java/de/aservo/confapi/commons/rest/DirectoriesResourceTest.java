@@ -3,36 +3,37 @@ package de.aservo.confapi.commons.rest;
 import de.aservo.confapi.commons.model.AbstractDirectoryBean;
 import de.aservo.confapi.commons.model.DirectoriesBean;
 import de.aservo.confapi.commons.model.DirectoryCrowdBean;
+import de.aservo.confapi.commons.rest.impl.TestDirectoriesResourceImpl;
 import de.aservo.confapi.commons.service.api.DirectoriesService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.Collections;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
-public class AbstractDirectoriesResourceTest {
+@ExtendWith(MockitoExtension.class)
+class DirectoriesResourceTest {
 
     @Mock
     private DirectoriesService directoriesService;
 
     private TestDirectoriesResourceImpl resource;
 
-    @Before
+    @BeforeEach
     public void setup() {
         resource = new TestDirectoriesResourceImpl(directoriesService);
     }
 
     @Test
-    public void testGetDirectories() {
+    void testGetDirectories() {
         DirectoryCrowdBean initialDirectoryBean = DirectoryCrowdBean.EXAMPLE_1;
         DirectoriesBean directoriesBean = new DirectoriesBean(Collections.singleton(initialDirectoryBean));
 
@@ -46,7 +47,7 @@ public class AbstractDirectoriesResourceTest {
     }
 
     @Test
-    public void testGetDirectory() {
+    void testGetDirectory() {
         DirectoryCrowdBean directoryBean = DirectoryCrowdBean.EXAMPLE_1;
 
         doReturn(directoryBean).when(directoriesService).getDirectory(1L);
@@ -59,7 +60,7 @@ public class AbstractDirectoriesResourceTest {
     }
 
     @Test
-    public void testSetDirectories() {
+    void testSetDirectories() {
         DirectoryCrowdBean directoryBean1 = DirectoryCrowdBean.EXAMPLE_1;
         DirectoryCrowdBean directoryBean2 = DirectoryCrowdBean.EXAMPLE_3;
         DirectoriesBean directoriesBean = new DirectoriesBean(Arrays.asList(directoryBean1, directoryBean2));
@@ -74,7 +75,7 @@ public class AbstractDirectoriesResourceTest {
     }
 
     @Test
-    public void testSetDirectory() {
+    void testSetDirectory() {
         DirectoryCrowdBean directoryBean = DirectoryCrowdBean.EXAMPLE_1;
 
         doReturn(directoryBean).when(directoriesService).setDirectory(1L, directoryBean, false);
@@ -87,7 +88,7 @@ public class AbstractDirectoriesResourceTest {
     }
 
     @Test
-    public void testAddDirectory() {
+    void testAddDirectory() {
         DirectoryCrowdBean bean = DirectoryCrowdBean.EXAMPLE_1;
 
         doReturn(bean).when(directoriesService).addDirectory(bean, false);
@@ -100,15 +101,15 @@ public class AbstractDirectoriesResourceTest {
     }
 
     @Test
-    public void testDeleteDirectories() {
+    void testDeleteDirectories() {
         resource.deleteDirectories(true);
-        assertTrue("Delete Successful", true);
+        assertTrue(true, "Delete Successful");
     }
 
     @Test
-    public void testDeleteDirectory() {
+    void testDeleteDirectory() {
         resource.deleteDirectory(1L);
-        assertTrue("Delete Successful", true);
+        assertTrue(true, "Delete Successful");
     }
 
 }

@@ -5,17 +5,16 @@ import de.aservo.confapi.commons.model.MailServerSmtpBean;
 import org.apache.wink.client.ClientAuthenticationException;
 import org.apache.wink.client.ClientResponse;
 import org.apache.wink.client.Resource;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class AbstractMailServerSmtpResourceFuncTest {
 
     @Test
-    public void testGetMailserverImap() {
+    void testGetMailServerImap() {
         Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_SMTP).build();
 
         ClientResponse clientResponse = mailserverResource.get();
@@ -26,55 +25,61 @@ public abstract class AbstractMailServerSmtpResourceFuncTest {
     }
 
     @Test
-    public void testSetMailserverImap() {
+    void testSetMailServerImap() {
         Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_SMTP).build();
 
         ClientResponse clientResponse = mailserverResource.put(getExampleBean());
         assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
 
         MailServerSmtpBean mailServerSmtpBean = clientResponse.getEntity(MailServerSmtpBean.class);
-        assertMailserverBeanAgainstExample(mailServerSmtpBean);
+        assertMailServerBeanAgainstExample(mailServerSmtpBean);
     }
 
-    @Test(expected = ClientAuthenticationException.class)
-    public void testGetMailserverImapUnauthenticated() {
+    @Test
+    public void testGetMailServerImapUnauthenticated() {
         Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_SMTP)
                 .username("wrong")
                 .password("password")
                 .build();
-        mailserverResource.get();
+
+        assertThrows(ClientAuthenticationException.class, mailserverResource::get);
     }
 
-    @Test(expected = ClientAuthenticationException.class)
-    public void testSetMailserverImapUnauthenticated() {
+    @Test
+    public void testSetMailServerImapUnauthenticated() {
         Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_SMTP)
                 .username("wrong")
                 .password("password")
                 .build();
-        mailserverResource.put(getExampleBean());
+
+        assertThrows(ClientAuthenticationException.class, () -> {
+            mailserverResource.put(getExampleBean());
+        });
     }
 
     @Test
-    public void testGetMailserverImapUnauthorized() {
+    void testGetMailServerImapUnauthorized() {
         Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_SMTP)
                 .username("user")
                 .password("user")
                 .build();
-        mailserverResource.get();
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), mailserverResource.put(getExampleBean()).getStatusCode());
+
+        ClientResponse response = mailserverResource.get();
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), response.getStatusCode());
     }
 
     @Test
-    public void testSetMailserverImapUnauthorized() {
+    void testSetMailServerImapUnauthorized() {
         Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_SMTP)
                 .username("user")
                 .password("user")
                 .build();
-        mailserverResource.put(getExampleBean());
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), mailserverResource.put(getExampleBean()).getStatusCode());
+
+        ClientResponse response = mailserverResource.put(getExampleBean());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), response.getStatusCode());
     }
 
-    protected void assertMailserverBeanAgainstExample(MailServerSmtpBean bean) {
+    protected void assertMailServerBeanAgainstExample(MailServerSmtpBean bean) {
         MailServerSmtpBean exampleBean = getExampleBean();
         //although field 'password' in 'AbstractMailServerProtocolBean' is annotated with '@EqualsExclude' equals still yields false if
         //not the same. Thus, we need to reset the example password manually
