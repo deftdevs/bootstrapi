@@ -68,7 +68,7 @@
         <atlassian.gadgets.version>8.1.4</atlassian.gadgets.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.2.4</atlassian.spring.scanner.version>
-        <confapi-commons.version>0.4.0-SNAPSHOT</confapi-commons.version>
+        <confapi-commons.version>0.5.0</confapi-commons.version>
         <custom-favicon-api.version>2.0.2</custom-favicon-api.version>
         <javax.jaxb-api.version>2.3.1</javax.jaxb-api.version>
         <javax.ws.rs-api.version>2.1.1</javax.ws.rs-api.version>
@@ -243,6 +243,13 @@
                     <artifactId>jsr305</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.plugins.authentication</groupId>
+            <artifactId>atlassian-authentication-plugin</artifactId>
+            <version>4.3.8</version>
+            <scope>provided</scope>
         </dependency>
 
         <dependency>
