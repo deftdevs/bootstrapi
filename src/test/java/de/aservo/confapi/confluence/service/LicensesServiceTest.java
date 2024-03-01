@@ -6,33 +6,34 @@ import com.atlassian.sal.api.license.LicenseHandler;
 import de.aservo.confapi.commons.exception.BadRequestException;
 import de.aservo.confapi.commons.model.LicenseBean;
 import de.aservo.confapi.commons.model.LicensesBean;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static com.atlassian.confluence.setup.ConfluenceBootstrapConstants.DEFAULT_LICENSE_REGISTRY_KEY;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 
-@RunWith(MockitoJUnitRunner.class)
-public class LicensesServiceTest {
+@ExtendWith(MockitoExtension.class)
+class LicensesServiceTest {
 
     @Mock
     private LicenseHandler licenseHandler;
 
     private LicensesServiceImpl licenseService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         licenseService = new LicensesServiceImpl(licenseHandler);
     }
 
     @Test
-    public void testGetLicense() {
+    void testGetLicense() {
         DefaultSingleProductLicenseDetailsView testLicense = new DefaultSingleProductLicenseDetailsView(LicenseBean.EXAMPLE_1);
         doReturn(testLicense).when(licenseHandler).getProductLicenseDetails(DEFAULT_LICENSE_REGISTRY_KEY);
 
@@ -42,7 +43,7 @@ public class LicensesServiceTest {
     }
 
     @Test
-    public void testAddLicense() {
+    void testAddLicense() {
         LicenseBean licenseBean = LicenseBean.EXAMPLE_1;
         DefaultSingleProductLicenseDetailsView testLicense = new DefaultSingleProductLicenseDetailsView(licenseBean);
 
@@ -51,11 +52,13 @@ public class LicensesServiceTest {
         assertEquals(testLicense.getDescription(), updatedLicenseBean.getDescription());
     }
 
-    @Test(expected = BadRequestException.class)
-    public void testAddLicenseWithError() throws InvalidOperationException {
+    @Test
+    void testAddLicenseWithError() throws InvalidOperationException {
         LicenseBean licenseBean = LicenseBean.EXAMPLE_1;
         doThrow(new InvalidOperationException("", "")).when(licenseHandler).addProductLicense(any(), any());
 
-        licenseService.addLicense(licenseBean);
+        assertThrows(BadRequestException.class, () -> {
+            licenseService.addLicense(licenseBean);
+        });
     }
 }

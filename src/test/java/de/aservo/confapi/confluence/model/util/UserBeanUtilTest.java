@@ -4,14 +4,14 @@ import com.atlassian.confluence.user.ConfluenceUser;
 import com.atlassian.confluence.user.ConfluenceUserImpl;
 import com.atlassian.user.User;
 import de.aservo.confapi.commons.model.UserBean;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class UserBeanUtilTest {
+class UserBeanUtilTest {
 
     @Test
-    public void testToUserBean() {
+    void testToUserBean() {
         final ConfluenceUser user = new ConfluenceUserImpl("user", "User Name", "user@localhost");
         final UserBean userBean = UserBeanUtil.toUserBean(user);
 
@@ -21,7 +21,7 @@ public class UserBeanUtilTest {
     }
 
     @Test
-    public void testToUser() {
+    void testToUser() {
         final UserBean userBean = UserBean.EXAMPLE_1;
         final User user = UserBeanUtil.toUser(userBean);
 

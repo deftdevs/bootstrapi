@@ -3,9 +3,9 @@ opensource@aservo.com
 1
 :toc: left
 :numbered:
-:toclevels: 3
+:toclevels: 4
 :source-highlighter: highlightjs
-:keywords: openapi, rest, ConfAPI for Confluence 
+:keywords: openapi, rest, ConfAPI for Confluence
 :specDir: src/main/resources/openapi/specs/
 :snippetDir: src/main/resources/openapi/snippets/
 :generator-template: v1 2019-12-20
@@ -28,6 +28,7 @@ include::{specDir}intro.adoc[opts=optional]
 
 
 
+
 == Endpoints
 
 
@@ -37,12 +38,12 @@ include::{specDir}intro.adoc[opts=optional]
 
 [.addApplicationLink]
 ==== addApplicationLink
-    
+
 `POST /application-links`
 
 Add an application link
 
-===== Description 
+===== Description
 
 
 
@@ -54,35 +55,35 @@ Add an application link
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| ApplicationLinkBean 
-|  <<ApplicationLinkBean>> 
-| X 
-|  
-|  
+| ApplicationLinkBean
+|  <<ApplicationLinkBean>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| ignore-setup-errors 
-|   
-| - 
-| false 
+| ignore-setup-errors
 |  
+| -
+| false
+| 
 
-|===         
+|===
 
 
 ===== Return Type
@@ -96,10 +97,10 @@ Add an application link
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -111,7 +112,7 @@ Add an application link
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -137,12 +138,12 @@ endif::internal-generation[]
 
 [.deleteApplicationLink]
 ==== deleteApplicationLink
-    
+
 `DELETE /application-links/{uuid}`
 
 Delete an application link
 
-===== Description 
+===== Description
 
 
 
@@ -156,16 +157,16 @@ Delete an application link
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| uuid 
-|   
-| X 
-| null 
+| uuid
 |  
+| X
+| null
+| 
 
-|===         
+|===
 
 
 
@@ -184,10 +185,10 @@ Delete an application link
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -199,7 +200,7 @@ Delete an application link
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -225,12 +226,12 @@ endif::internal-generation[]
 
 [.deleteApplicationLinks]
 ==== deleteApplicationLinks
-    
+
 `DELETE /application-links`
 
 Delete all application links
 
-===== Description 
+===== Description
 
 NOTE: The 'force' parameter must be set to 'true' in order to execute this request.
 
@@ -248,16 +249,16 @@ NOTE: The 'force' parameter must be set to 'true' in order to execute this reque
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| force 
-|   
-| - 
-| null 
+| force
 |  
+| -
+| null
+| 
 
-|===         
+|===
 
 
 ===== Return Type
@@ -272,10 +273,10 @@ NOTE: The 'force' parameter must be set to 'true' in order to execute this reque
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -287,7 +288,7 @@ NOTE: The 'force' parameter must be set to 'true' in order to execute this reque
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -313,12 +314,12 @@ endif::internal-generation[]
 
 [.getApplicationLink]
 ==== getApplicationLink
-    
+
 `GET /application-links/{uuid}`
 
 Get an application link
 
-===== Description 
+===== Description
 
 Upon successful request, 
 
@@ -332,16 +333,16 @@ Upon successful request,
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| uuid 
-|   
-| X 
-| null 
+| uuid
 |  
+| X
+| null
+| 
 
-|===         
+|===
 
 
 
@@ -359,10 +360,10 @@ Upon successful request,
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -374,7 +375,7 @@ Upon successful request,
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -400,12 +401,12 @@ endif::internal-generation[]
 
 [.getApplicationLinks]
 ==== getApplicationLinks
-    
+
 `GET /application-links`
 
 Get all application links
 
-===== Description 
+===== Description
 
 
 
@@ -433,10 +434,10 @@ Get all application links
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -448,7 +449,7 @@ Get all application links
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -474,12 +475,12 @@ endif::internal-generation[]
 
 [.setApplicationLink]
 ==== setApplicationLink
-    
+
 `PUT /application-links/{uuid}`
 
 Update an application link
 
-===== Description 
+===== Description
 
 
 
@@ -493,46 +494,46 @@ Update an application link
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| uuid 
-|   
-| X 
-| null 
+| uuid
 |  
+| X
+| null
+| 
 
-|===         
+|===
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| ApplicationLinkBean 
-|  <<ApplicationLinkBean>> 
-| X 
-|  
-|  
+| ApplicationLinkBean
+|  <<ApplicationLinkBean>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| ignore-setup-errors 
-|   
-| - 
-| false 
+| ignore-setup-errors
 |  
+| -
+| false
+| 
 
-|===         
+|===
 
 
 ===== Return Type
@@ -546,10 +547,10 @@ Update an application link
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -561,7 +562,7 @@ Update an application link
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -587,12 +588,12 @@ endif::internal-generation[]
 
 [.setApplicationLinks]
 ==== setApplicationLinks
-    
+
 `PUT /application-links`
 
 Set or update a list of application links
 
-===== Description 
+===== Description
 
 NOTE: All existing application links with the same 'rpcUrl' attribute are updated.
 
@@ -604,35 +605,35 @@ NOTE: All existing application links with the same 'rpcUrl' attribute are update
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| ApplicationLinksBean 
-|  <<ApplicationLinksBean>> 
-| X 
-|  
-|  
+| ApplicationLinksBean
+|  <<ApplicationLinksBean>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| ignore-setup-errors 
-|   
-| - 
-| false 
+| ignore-setup-errors
 |  
+| -
+| false
+| 
 
-|===         
+|===
 
 
 ===== Return Type
@@ -646,10 +647,10 @@ NOTE: All existing application links with the same 'rpcUrl' attribute are update
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -661,7 +662,7 @@ NOTE: All existing application links with the same 'rpcUrl' attribute are update
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -691,12 +692,12 @@ endif::internal-generation[]
 
 [.flushCache]
 ==== flushCache
-    
+
 `POST /caches/{name}/flush`
 
 Flushes a cache
 
-===== Description 
+===== Description
 
 Empties the specified cache
 
@@ -710,16 +711,16 @@ Empties the specified cache
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| name 
-|   
-| X 
-| null 
+| name
 |  
+| X
+| null
+| 
 
-|===         
+|===
 
 
 
@@ -737,10 +738,10 @@ Empties the specified cache
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -752,7 +753,7 @@ Empties the specified cache
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -778,12 +779,12 @@ endif::internal-generation[]
 
 [.getCache]
 ==== getCache
-    
+
 `GET /caches/{name}`
 
 Read cache information for a specified cache
 
-===== Description 
+===== Description
 
 
 
@@ -797,16 +798,16 @@ Read cache information for a specified cache
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| name 
-|   
-| X 
-| null 
+| name
 |  
+| X
+| null
+| 
 
-|===         
+|===
 
 
 
@@ -824,10 +825,10 @@ Read cache information for a specified cache
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -839,7 +840,7 @@ Read cache information for a specified cache
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -865,12 +866,12 @@ endif::internal-generation[]
 
 [.getCaches]
 ==== getCaches
-    
+
 `GET /caches`
 
 Read all cache informations
 
-===== Description 
+===== Description
 
 
 
@@ -898,10 +899,10 @@ Read all cache informations
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -913,7 +914,7 @@ Read all cache informations
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -939,12 +940,12 @@ endif::internal-generation[]
 
 [.updateCache]
 ==== updateCache
-    
+
 `PUT /caches/{name}`
 
 Update an existing cache-size. Only Setting maxObjectCount is supported.
 
-===== Description 
+===== Description
 
 
 
@@ -958,30 +959,30 @@ Update an existing cache-size. Only Setting maxObjectCount is supported.
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| name 
-|   
-| X 
-| null 
+| name
 |  
+| X
+| null
+| 
 
-|===         
+|===
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| CacheBean 
-|  <<CacheBean>> 
-| - 
-|  
-|  
+| CacheBean
+|  <<CacheBean>>
+| -
+| 
+| 
 
-|===         
+|===
 
 
 
@@ -998,10 +999,10 @@ Update an existing cache-size. Only Setting maxObjectCount is supported.
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -1013,7 +1014,7 @@ Update an existing cache-size. Only Setting maxObjectCount is supported.
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1043,12 +1044,12 @@ endif::internal-generation[]
 
 [.addDirectory]
 ==== addDirectory
-    
+
 `POST /directories`
 
 Add a user directory
 
-===== Description 
+===== Description
 
 
 
@@ -1060,35 +1061,35 @@ Add a user directory
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| AbstractDirectoryBean 
-|  <<AbstractDirectoryBean>> 
-| X 
-|  
-|  
+| AbstractDirectoryBean
+|  <<AbstractDirectoryBean>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| test-connection 
-|   
-| - 
-| false 
+| test-connection
 |  
+| -
+| false
+| 
 
-|===         
+|===
 
 
 ===== Return Type
@@ -1102,10 +1103,10 @@ Add a user directory
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -1117,7 +1118,7 @@ Add a user directory
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1143,12 +1144,12 @@ endif::internal-generation[]
 
 [.deleteDirectories]
 ==== deleteDirectories
-    
+
 `DELETE /directories`
 
 Delete all user directories
 
-===== Description 
+===== Description
 
 NOTE: The 'force' parameter must be set to 'true' in order to execute this request.
 
@@ -1166,16 +1167,16 @@ NOTE: The 'force' parameter must be set to 'true' in order to execute this reque
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| force 
-|   
-| - 
-| null 
+| force
 |  
+| -
+| null
+| 
 
-|===         
+|===
 
 
 ===== Return Type
@@ -1190,10 +1191,10 @@ NOTE: The 'force' parameter must be set to 'true' in order to execute this reque
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -1205,7 +1206,7 @@ NOTE: The 'force' parameter must be set to 'true' in order to execute this reque
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1231,12 +1232,12 @@ endif::internal-generation[]
 
 [.deleteDirectory]
 ==== deleteDirectory
-    
+
 `DELETE /directories/{id}`
 
 Delete a user directory
 
-===== Description 
+===== Description
 
 
 
@@ -1250,16 +1251,16 @@ Delete a user directory
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| id 
-|   
-| X 
-| null 
+| id
 |  
+| X
+| null
+| 
 
-|===         
+|===
 
 
 
@@ -1278,10 +1279,10 @@ Delete a user directory
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -1293,7 +1294,7 @@ Delete a user directory
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1319,12 +1320,12 @@ endif::internal-generation[]
 
 [.getDirectories]
 ==== getDirectories
-    
+
 `GET /directories`
 
 Get all user directories
 
-===== Description 
+===== Description
 
 
 
@@ -1352,10 +1353,10 @@ Get all user directories
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -1367,7 +1368,7 @@ Get all user directories
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1393,12 +1394,12 @@ endif::internal-generation[]
 
 [.getDirectory]
 ==== getDirectory
-    
+
 `GET /directories/{id}`
 
 Get a user directory
 
-===== Description 
+===== Description
 
 
 
@@ -1412,16 +1413,16 @@ Get a user directory
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| id 
-|   
-| X 
-| null 
+| id
 |  
+| X
+| null
+| 
 
-|===         
+|===
 
 
 
@@ -1439,10 +1440,10 @@ Get a user directory
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -1454,7 +1455,7 @@ Get a user directory
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1480,12 +1481,12 @@ endif::internal-generation[]
 
 [.setDirectories]
 ==== setDirectories
-    
+
 `PUT /directories`
 
 Set or update a list of user directories
 
-===== Description 
+===== Description
 
 NOTE: All existing directories with the same 'name' attribute are updated.
 
@@ -1497,35 +1498,35 @@ NOTE: All existing directories with the same 'name' attribute are updated.
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| DirectoriesBean 
-|  <<DirectoriesBean>> 
-| X 
-|  
-|  
+| DirectoriesBean
+|  <<DirectoriesBean>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| test-connection 
-|   
-| - 
-| false 
+| test-connection
 |  
+| -
+| false
+| 
 
-|===         
+|===
 
 
 ===== Return Type
@@ -1539,10 +1540,10 @@ NOTE: All existing directories with the same 'name' attribute are updated.
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -1554,7 +1555,7 @@ NOTE: All existing directories with the same 'name' attribute are updated.
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1580,12 +1581,12 @@ endif::internal-generation[]
 
 [.setDirectory]
 ==== setDirectory
-    
+
 `PUT /directories/{id}`
 
 Update a user directory
 
-===== Description 
+===== Description
 
 
 
@@ -1599,46 +1600,46 @@ Update a user directory
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| id 
-|   
-| X 
-| null 
+| id
 |  
+| X
+| null
+| 
 
-|===         
+|===
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| AbstractDirectoryBean 
-|  <<AbstractDirectoryBean>> 
-| X 
-|  
-|  
+| AbstractDirectoryBean
+|  <<AbstractDirectoryBean>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| test-connection 
-|   
-| - 
-| false 
+| test-connection
 |  
+| -
+| false
+| 
 
-|===         
+|===
 
 
 ===== Return Type
@@ -1652,10 +1653,10 @@ Update a user directory
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -1667,7 +1668,7 @@ Update a user directory
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1697,12 +1698,12 @@ endif::internal-generation[]
 
 [.addGadget]
 ==== addGadget
-    
+
 `POST /gadgets`
 
 Add a gadget
 
-===== Description 
+===== Description
 
 Upon successful request, returns a `GadgetBean` object of the created gadget.
 
@@ -1714,19 +1715,19 @@ Upon successful request, returns a `GadgetBean` object of the created gadget.
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| GadgetBean 
-|  <<GadgetBean>> 
-| X 
-|  
-|  
+| GadgetBean
+|  <<GadgetBean>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
@@ -1743,10 +1744,10 @@ Upon successful request, returns a `GadgetBean` object of the created gadget.
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -1758,7 +1759,7 @@ Upon successful request, returns a `GadgetBean` object of the created gadget.
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1784,12 +1785,12 @@ endif::internal-generation[]
 
 [.deleteGadget]
 ==== deleteGadget
-    
+
 `DELETE /gadgets/{id}`
 
 Delete a gadget
 
-===== Description 
+===== Description
 
 
 
@@ -1803,16 +1804,16 @@ Delete a gadget
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| id 
-|   
-| X 
-| null 
+| id
 |  
+| X
+| null
+| 
 
-|===         
+|===
 
 
 
@@ -1831,10 +1832,10 @@ Delete a gadget
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -1846,7 +1847,7 @@ Delete a gadget
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1872,12 +1873,12 @@ endif::internal-generation[]
 
 [.deleteGadgets]
 ==== deleteGadgets
-    
+
 `DELETE /gadgets`
 
 Delete all gadgets
 
-===== Description 
+===== Description
 
 NOTE: The 'force' parameter must be set to 'true' in order to execute this request.
 
@@ -1895,16 +1896,16 @@ NOTE: The 'force' parameter must be set to 'true' in order to execute this reque
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| force 
-|   
-| - 
-| null 
+| force
 |  
+| -
+| null
+| 
 
-|===         
+|===
 
 
 ===== Return Type
@@ -1919,10 +1920,10 @@ NOTE: The 'force' parameter must be set to 'true' in order to execute this reque
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -1934,7 +1935,7 @@ NOTE: The 'force' parameter must be set to 'true' in order to execute this reque
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -1960,12 +1961,12 @@ endif::internal-generation[]
 
 [.getGadget]
 ==== getGadget
-    
+
 `GET /gadgets/{id}`
 
 Get a gadget
 
-===== Description 
+===== Description
 
 
 
@@ -1979,16 +1980,16 @@ Get a gadget
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| id 
-|   
-| X 
-| null 
+| id
 |  
+| X
+| null
+| 
 
-|===         
+|===
 
 
 
@@ -2006,10 +2007,10 @@ Get a gadget
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -2021,7 +2022,7 @@ Get a gadget
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -2047,12 +2048,12 @@ endif::internal-generation[]
 
 [.getGadgets]
 ==== getGadgets
-    
+
 `GET /gadgets`
 
 Get all gadgets
 
-===== Description 
+===== Description
 
 
 
@@ -2080,10 +2081,10 @@ Get all gadgets
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -2095,7 +2096,7 @@ Get all gadgets
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -2121,12 +2122,12 @@ endif::internal-generation[]
 
 [.setGadget]
 ==== setGadget
-    
+
 `PUT /gadgets/{id}`
 
 Update a gadget
 
-===== Description 
+===== Description
 
 
 
@@ -2140,30 +2141,30 @@ Update a gadget
 ====== Path Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| id 
-|   
-| X 
-| null 
+| id
 |  
+| X
+| null
+| 
 
-|===         
+|===
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| GadgetBean 
-|  <<GadgetBean>> 
-| X 
-|  
-|  
+| GadgetBean
+|  <<GadgetBean>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
@@ -2180,10 +2181,10 @@ Update a gadget
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -2195,7 +2196,7 @@ Update a gadget
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -2221,12 +2222,12 @@ endif::internal-generation[]
 
 [.setGadgets]
 ==== setGadgets
-    
+
 `PUT /gadgets`
 
 Set or update a list of gadgets
 
-===== Description 
+===== Description
 
 NOTE: This will only create gadgets that does not exist yet as there is no real 'update'.
 
@@ -2238,19 +2239,19 @@ NOTE: This will only create gadgets that does not exist yet as there is no real 
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| GadgetsBean 
-|  <<GadgetsBean>> 
-| X 
-|  
-|  
+| GadgetsBean
+|  <<GadgetsBean>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
@@ -2267,10 +2268,10 @@ NOTE: This will only create gadgets that does not exist yet as there is no real 
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -2282,7 +2283,7 @@ NOTE: This will only create gadgets that does not exist yet as there is no real 
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -2312,12 +2313,12 @@ endif::internal-generation[]
 
 [.addLicense]
 ==== addLicense
-    
+
 `POST /licenses`
 
 Add a license
 
-===== Description 
+===== Description
 
 
 
@@ -2329,19 +2330,19 @@ Add a license
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| LicenseBean 
-|  <<LicenseBean>> 
-| X 
-|  
-|  
+| LicenseBean
+|  <<LicenseBean>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
@@ -2358,10 +2359,10 @@ Add a license
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -2373,7 +2374,7 @@ Add a license
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -2399,12 +2400,12 @@ endif::internal-generation[]
 
 [.getLicenses]
 ==== getLicenses
-    
+
 `GET /licenses`
 
 Get all licenses information
 
-===== Description 
+===== Description
 
 Upon successful request, returns a `LicensesBean` object containing license details. Be aware that `products` collection of the `LicenseBean` contains the product display names, not the product key names
 
@@ -2432,10 +2433,10 @@ Upon successful request, returns a `LicensesBean` object containing license deta
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -2447,7 +2448,7 @@ Upon successful request, returns a `LicensesBean` object containing license deta
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -2477,12 +2478,12 @@ endif::internal-generation[]
 
 [.getMailServerPop]
 ==== getMailServerPop
-    
+
 `GET /mail-server/pop`
 
 Get the default POP mail server
 
-===== Description 
+===== Description
 
 
 
@@ -2510,10 +2511,10 @@ Get the default POP mail server
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -2530,7 +2531,7 @@ Get the default POP mail server
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -2556,12 +2557,12 @@ endif::internal-generation[]
 
 [.getMailServerSmtp]
 ==== getMailServerSmtp
-    
+
 `GET /mail-server/smtp`
 
 Get the default SMTP mail server
 
-===== Description 
+===== Description
 
 
 
@@ -2589,10 +2590,10 @@ Get the default SMTP mail server
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -2609,7 +2610,7 @@ Get the default SMTP mail server
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -2635,12 +2636,12 @@ endif::internal-generation[]
 
 [.setMailServerPop]
 ==== setMailServerPop
-    
+
 `PUT /mail-server/pop`
 
 Set the default POP mail server
 
-===== Description 
+===== Description
 
 
 
@@ -2652,19 +2653,19 @@ Set the default POP mail server
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| MailServerPopBean 
-|  <<MailServerPopBean>> 
-| X 
-|  
-|  
+| MailServerPopBean
+|  <<MailServerPopBean>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
@@ -2681,10 +2682,10 @@ Set the default POP mail server
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -2696,7 +2697,7 @@ Set the default POP mail server
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -2722,12 +2723,12 @@ endif::internal-generation[]
 
 [.setMailServerSmtp]
 ==== setMailServerSmtp
-    
+
 `PUT /mail-server/smtp`
 
 Set the default SMTP mail server
 
-===== Description 
+===== Description
 
 
 
@@ -2739,19 +2740,19 @@ Set the default SMTP mail server
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| MailServerSmtpBean 
-|  <<MailServerSmtpBean>> 
-| X 
-|  
-|  
+| MailServerSmtpBean
+|  <<MailServerSmtpBean>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
@@ -2768,10 +2769,10 @@ Set the default SMTP mail server
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -2783,7 +2784,7 @@ Set the default SMTP mail server
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -2813,12 +2814,12 @@ endif::internal-generation[]
 
 [.getPermissionAnonymousAccess]
 ==== getPermissionAnonymousAccess
-    
+
 `GET /permissions/anonymous-access`
 
 Retrieve current anonymous access configuration
 
-===== Description 
+===== Description
 
 Gets the current global permissions for anonymous access to public pages and user profiles
 
@@ -2846,10 +2847,10 @@ Gets the current global permissions for anonymous access to public pages and use
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -2861,7 +2862,7 @@ Gets the current global permissions for anonymous access to public pages and use
 | 
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -2887,12 +2888,12 @@ endif::internal-generation[]
 
 [.setPermissionAnonymousAccess]
 ==== setPermissionAnonymousAccess
-    
+
 `PUT /permissions/anonymous-access`
 
 Set anonymous access configuration
 
-===== Description 
+===== Description
 
 Sets global permissions for anonymous access to public pages and user profiles
 
@@ -2904,19 +2905,19 @@ Sets global permissions for anonymous access to public pages and user profiles
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| PermissionAnonymousAccessBean 
-|  <<PermissionAnonymousAccessBean>> 
-| X 
-|  
-|  
+| PermissionAnonymousAccessBean
+|  <<PermissionAnonymousAccessBean>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
@@ -2933,10 +2934,10 @@ Sets global permissions for anonymous access to public pages and user profiles
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -2948,7 +2949,7 @@ Sets global permissions for anonymous access to public pages and user profiles
 | 
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -2978,12 +2979,12 @@ endif::internal-generation[]
 
 [.getPing]
 ==== getPing
-    
+
 `GET /ping`
 
 Ping method for probing the REST API.
 
-===== Description 
+===== Description
 
 
 
@@ -3009,17 +3010,17 @@ Ping method for probing the REST API.
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
 | Returns &#39;pong&#39;
 |  <<>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -3049,12 +3050,12 @@ endif::internal-generation[]
 
 [.getBrandingColorScheme]
 ==== getBrandingColorScheme
-    
+
 `GET /settings/branding/color-scheme`
 
 Get the color scheme
 
-===== Description 
+===== Description
 
 
 
@@ -3082,10 +3083,10 @@ Get the color scheme
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -3097,7 +3098,7 @@ Get the color scheme
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -3123,12 +3124,12 @@ endif::internal-generation[]
 
 [.getBrandingFavicon]
 ==== getBrandingFavicon
-    
+
 `GET /settings/branding/favicon`
 
 Get the favicon
 
-===== Description 
+===== Description
 
 
 
@@ -3157,10 +3158,10 @@ Get the favicon
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -3172,7 +3173,7 @@ Get the favicon
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -3198,12 +3199,12 @@ endif::internal-generation[]
 
 [.getBrandingLogo]
 ==== getBrandingLogo
-    
+
 `GET /settings/branding/logo`
 
 Get the logo
 
-===== Description 
+===== Description
 
 
 
@@ -3232,10 +3233,10 @@ Get the logo
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -3247,7 +3248,7 @@ Get the logo
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -3273,12 +3274,12 @@ endif::internal-generation[]
 
 [.getSettings]
 ==== getSettings
-    
+
 `GET /settings`
 
 Get the application settings
 
-===== Description 
+===== Description
 
 
 
@@ -3306,10 +3307,10 @@ Get the application settings
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -3321,7 +3322,7 @@ Get the application settings
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -3347,12 +3348,12 @@ endif::internal-generation[]
 
 [.setBrandingColorScheme]
 ==== setBrandingColorScheme
-    
+
 `PUT /settings/branding/color-scheme`
 
 Set the color scheme
 
-===== Description 
+===== Description
 
 
 
@@ -3364,19 +3365,19 @@ Set the color scheme
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| SettingsBrandingColorSchemeBean 
-|  <<SettingsBrandingColorSchemeBean>> 
-| X 
-|  
-|  
+| SettingsBrandingColorSchemeBean
+|  <<SettingsBrandingColorSchemeBean>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
@@ -3393,10 +3394,10 @@ Set the color scheme
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -3408,7 +3409,7 @@ Set the color scheme
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -3434,12 +3435,12 @@ endif::internal-generation[]
 
 [.setBrandingFavicon]
 ==== setBrandingFavicon
-    
+
 `PUT /settings/branding/favicon`
 
 Set the favicon
 
-===== Description 
+===== Description
 
 
 
@@ -3451,19 +3452,19 @@ Set the favicon
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| body 
-|  <<object>> 
-| X 
-|  
-|  
+| body
+|  <<object>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
@@ -3481,10 +3482,10 @@ Set the favicon
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -3496,7 +3497,7 @@ Set the favicon
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -3522,12 +3523,12 @@ endif::internal-generation[]
 
 [.setBrandingLogo]
 ==== setBrandingLogo
-    
+
 `PUT /settings/branding/logo`
 
 Set the logo
 
-===== Description 
+===== Description
 
 
 
@@ -3539,19 +3540,19 @@ Set the logo
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| body 
-|  <<object>> 
-| X 
-|  
-|  
+| body
+|  <<object>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
@@ -3569,10 +3570,10 @@ Set the logo
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -3584,7 +3585,7 @@ Set the logo
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -3610,12 +3611,12 @@ endif::internal-generation[]
 
 [.setSettings]
 ==== setSettings
-    
+
 `PUT /settings`
 
 Set the application settings
 
-===== Description 
+===== Description
 
 
 
@@ -3627,19 +3628,19 @@ Set the application settings
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| SettingsBean 
-|  <<SettingsBean>> 
-| X 
-|  
-|  
+| SettingsBean
+|  <<SettingsBean>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
@@ -3656,10 +3657,10 @@ Set the application settings
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -3671,7 +3672,7 @@ Set the application settings
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -3701,12 +3702,12 @@ endif::internal-generation[]
 
 [.getUser]
 ==== getUser
-    
+
 `GET /users`
 
 Get a user
 
-===== Description 
+===== Description
 
 
 
@@ -3724,16 +3725,16 @@ Get a user
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| username 
-|   
-| X 
-| null 
+| username
 |  
+| X
+| null
+| 
 
-|===         
+|===
 
 
 ===== Return Type
@@ -3747,10 +3748,10 @@ Get a user
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -3762,7 +3763,7 @@ Get a user
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -3788,12 +3789,12 @@ endif::internal-generation[]
 
 [.setUser]
 ==== setUser
-    
+
 `PUT /users`
 
 Update an user
 
-===== Description 
+===== Description
 
 
 
@@ -3805,35 +3806,35 @@ Update an user
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| UserBean 
-|  <<UserBean>> 
-| X 
-|  
-|  
+| UserBean
+|  <<UserBean>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| username 
-|   
-| X 
-| null 
+| username
 |  
+| X
+| null
+| 
 
-|===         
+|===
 
 
 ===== Return Type
@@ -3847,10 +3848,10 @@ Update an user
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -3862,7 +3863,7 @@ Update an user
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -3888,12 +3889,12 @@ endif::internal-generation[]
 
 [.setUserPassword]
 ==== setUserPassword
-    
+
 `PUT /users/password`
 
 Update a user password
 
-===== Description 
+===== Description
 
 
 
@@ -3905,35 +3906,35 @@ Update a user password
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| body 
-|  <<string>> 
-| X 
-|  
-|  
+| body
+|  <<string>>
+| X
+| 
+| 
 
-|===         
+|===
 
 
 
 ====== Query Parameters
 
 [cols="2,3,1,1,1"]
-|===         
+|===
 |Name| Description| Required| Default| Pattern
 
-| username 
-|   
-| X 
-| null 
+| username
 |  
+| X
+| null
+| 
 
-|===         
+|===
 
 
 ===== Return Type
@@ -3947,10 +3948,10 @@ Update a user password
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
-|===         
-| Code | Message | Datatype 
+|===
+| Code | Message | Datatype
 
 
 | 200
@@ -3962,7 +3963,7 @@ Update a user password
 | Returns a list of error messages.
 |  <<ErrorCollection>>
 
-|===         
+|===
 
 ===== Samples
 
@@ -3997,98 +3998,44 @@ endif::internal-generation[]
 
 [.fields-AbstractDirectoryBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| id 
-|  
-| Long  
+| id
+| 
+| Long 
 | 
 | int64 
 
-| name 
-| X 
-| String  
+| name
+| X
+| String 
 | 
 |  
 
-| description 
-|  
-| String  
+| description
+| 
+| String 
 | 
 |  
 
-| active 
-|  
-| Boolean  
+| active
+| 
+| Boolean 
 | 
 |  
 
-| createdDate 
-|  
-| Date  
+| createdDate
+| 
+| Date 
 | 
 | date-time 
 
-| updatedDate 
-|  
-| Date  
+| updatedDate
+| 
+| Date 
 | 
 | date-time 
-
-| server 
-|  
-| DirectoryLdapServer  
-| 
-|  
-
-| permissions 
-|  
-| DirectoryLdapPermissions  
-| 
-|  
-
-| advanced 
-|  
-| DirectoryInternalAdvanced  
-| 
-|  
-
-| connector 
-|  
-| DirectoryDelegatingConnector  
-| 
-|  
-
-| configuration 
-|  
-| DirectoryDelegatingConfiguration  
-| 
-|  
-
-| credentialPolicy 
-|  
-| DirectoryInternalCredentialPolicy  
-| 
-|  
-
-| groups 
-|  
-| List  of <<GroupBean>> 
-| 
-|  
-
-| users 
-|  
-| List  of <<UserBean>> 
-| 
-|  
-
-| schema 
-|  
-| DirectoryLdapSchema  
-| 
-|  
 
 |===
 
@@ -4100,60 +4047,60 @@ endif::internal-generation[]
 
 [.fields-ApplicationLinkBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| uuid 
-|  
-| UUID  
+| uuid
+| 
+| UUID 
 | 
 | uuid 
 
-| name 
-| X 
-| String  
+| name
+| X
+| String 
 | 
 |  
 
-| type 
-| X 
-| String  
+| type
+| X
+| String 
 | 
 |  _Enum:_ BAMBOO, JIRA, BITBUCKET, CONFLUENCE, FISHEYE, CROWD, 
 
-| displayUrl 
-| X 
-| URI  
+| displayUrl
+| X
+| URI 
 | 
 | uri 
 
-| rpcUrl 
-| X 
-| URI  
+| rpcUrl
+| X
+| URI 
 | 
 | uri 
 
-| primary 
-|  
-| Boolean  
+| primary
+| 
+| Boolean 
 | 
 |  
 
-| status 
-|  
-| String  
+| status
+| 
+| String 
 | 
 |  _Enum:_ AVAILABLE, UNAVAILABLE, CONFIGURATION_ERROR, 
 
-| username 
-|  
-| String  
+| username
+| 
+| String 
 | 
 |  
 
-| password 
-|  
-| String  
+| password
+| 
+| String 
 | 
 |  
 
@@ -4167,12 +4114,12 @@ endif::internal-generation[]
 
 [.fields-ApplicationLinksBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| applicationLinks 
-|  
-| List  of <<ApplicationLinkBean>> 
+| applicationLinks
+| 
+| List  of <<ApplicationLinkBean>>
 | 
 |  
 
@@ -4186,42 +4133,42 @@ endif::internal-generation[]
 
 [.fields-CacheBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| name 
-| X 
-| String  
+| name
+| X
+| String 
 | 
 |  
 
-| maxObjectCount 
-|  
-| Integer  
+| maxObjectCount
+| 
+| Integer 
 | 
 | int32 
 
-| currentHeapSizeInByte 
-|  
-| Long  
+| currentHeapSizeInByte
+| 
+| Long 
 | 
 | int64 
 
-| effectivenessInPercent 
-|  
-| Double  
+| effectivenessInPercent
+| 
+| Double 
 | 
 | double 
 
-| utilisationInPercent 
-|  
-| Double  
+| utilisationInPercent
+| 
+| Double 
 | 
 | double 
 
-| flushable 
-|  
-| Boolean  
+| flushable
+| 
+| Boolean 
 | 
 |  
 
@@ -4235,12 +4182,12 @@ endif::internal-generation[]
 
 [.fields-CachesBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| caches 
-|  
-| List  of <<CacheBean>> 
+| caches
+| 
+| List  of <<CacheBean>>
 | 
 |  
 
@@ -4254,12 +4201,12 @@ endif::internal-generation[]
 
 [.fields-DirectoriesBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| directories 
-|  
-| List  of <<AbstractDirectoryBean>> 
+| directories
+| 
+| List  of <<AbstractDirectoryBean>>
 | 
 |  
 
@@ -4273,30 +4220,30 @@ endif::internal-generation[]
 
 [.fields-DirectoryCrowdAdvanced]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| enableNestedGroups 
-|  
-| Boolean  
+| enableNestedGroups
+| 
+| Boolean 
 | 
 |  
 
-| enableIncrementalSync 
-|  
-| Boolean  
+| enableIncrementalSync
+| 
+| Boolean 
 | 
 |  
 
-| updateGroupMembershipMethod 
-|  
-| String  
+| updateGroupMembershipMethod
+| 
+| String 
 | 
 |  
 
-| updateSyncIntervalInMinutes 
-|  
-| Integer  
+| updateSyncIntervalInMinutes
+| 
+| Integer 
 | 
 | int32 
 
@@ -4310,60 +4257,60 @@ endif::internal-generation[]
 
 [.fields-DirectoryCrowdBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| id 
-|  
-| Long  
+| id
+| 
+| Long 
 | 
 | int64 
 
-| name 
-| X 
-| String  
+| name
+| X
+| String 
 | 
 |  
 
-| description 
-|  
-| String  
+| description
+| 
+| String 
 | 
 |  
 
-| active 
-|  
-| Boolean  
+| active
+| 
+| Boolean 
 | 
 |  
 
-| createdDate 
-|  
-| Date  
+| createdDate
 | 
-| date-time 
-
-| updatedDate 
-|  
-| Date  
+| Date 
 | 
 | date-time 
 
-| server 
-|  
-| DirectoryCrowdServer  
+| updatedDate
+| 
+| Date 
+| 
+| date-time 
+
+| server
+| 
+| DirectoryCrowdServer 
 | 
 |  
 
-| permissions 
-|  
-| DirectoryCrowdPermissions  
+| permissions
+| 
+| DirectoryCrowdPermissions 
 | 
 |  
 
-| advanced 
-|  
-| DirectoryCrowdAdvanced  
+| advanced
+| 
+| DirectoryCrowdAdvanced 
 | 
 |  
 
@@ -4377,18 +4324,18 @@ endif::internal-generation[]
 
 [.fields-DirectoryCrowdPermissions]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| readOnly 
-|  
-| Boolean  
+| readOnly
+| 
+| Boolean 
 | 
 |  
 
-| fullAccess 
-|  
-| Boolean  
+| fullAccess
+| 
+| Boolean 
 | 
 |  
 
@@ -4402,42 +4349,42 @@ endif::internal-generation[]
 
 [.fields-DirectoryCrowdServer]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| url 
-| X 
-| URI  
+| url
+| X
+| URI 
 | 
 | uri 
 
-| proxy 
-|  
-| DirectoryCrowdServerProxy  
+| proxy
+| 
+| DirectoryCrowdServerProxy 
 | 
 |  
 
-| appUsername 
-| X 
-| String  
+| appUsername
+| X
+| String 
 | 
 |  
 
-| appPassword 
-| X 
-| String  
+| appPassword
+| X
+| String 
 | 
 |  
 
-| connectionTimeoutInMillis 
-|  
-| Long  
+| connectionTimeoutInMillis
+| 
+| Long 
 | 
 | int64 
 
-| maxConnections 
-|  
-| Integer  
+| maxConnections
+| 
+| Integer 
 | 
 | int32 
 
@@ -4451,30 +4398,30 @@ endif::internal-generation[]
 
 [.fields-DirectoryCrowdServerProxy]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| host 
-|  
-| String  
+| host
+| 
+| String 
 | 
 |  
 
-| port 
-|  
-| Integer  
+| port
+| 
+| Integer 
 | 
 | int32 
 
-| username 
-|  
-| String  
+| username
+| 
+| String 
 | 
 |  
 
-| password 
-|  
-| String  
+| password
+| 
+| String 
 | 
 |  
 
@@ -4488,60 +4435,60 @@ endif::internal-generation[]
 
 [.fields-DirectoryDelegatingBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| id 
-|  
-| Long  
+| id
+| 
+| Long 
 | 
 | int64 
 
-| name 
-| X 
-| String  
+| name
+| X
+| String 
 | 
 |  
 
-| description 
-|  
-| String  
+| description
+| 
+| String 
 | 
 |  
 
-| active 
-|  
-| Boolean  
+| active
+| 
+| Boolean 
 | 
 |  
 
-| createdDate 
-|  
-| Date  
+| createdDate
 | 
-| date-time 
-
-| updatedDate 
-|  
-| Date  
+| Date 
 | 
 | date-time 
 
-| connector 
-|  
-| DirectoryDelegatingConnector  
+| updatedDate
+| 
+| Date 
+| 
+| date-time 
+
+| connector
+| 
+| DirectoryDelegatingConnector 
 | 
 |  
 
-| configuration 
-|  
-| DirectoryDelegatingConfiguration  
+| configuration
+| 
+| DirectoryDelegatingConfiguration 
 | 
 |  
 
-| permissions 
-|  
-| DirectoryPermissions  
+| permissions
+| 
+| DirectoryPermissions 
 | 
 |  
 
@@ -4555,108 +4502,108 @@ endif::internal-generation[]
 
 [.fields-DirectoryDelegatingConfiguration]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| userDn 
-|  
-| String  
+| userDn
+| 
+| String 
 | 
 |  
 
-| userObjectClass 
-|  
-| String  
+| userObjectClass
+| 
+| String 
 | 
 |  
 
-| userObjectFilter 
-|  
-| String  
+| userObjectFilter
+| 
+| String 
 | 
 |  
 
-| userNameAttribute 
-|  
-| String  
+| userNameAttribute
+| 
+| String 
 | 
 |  
 
-| userNameRdnAttribute 
-|  
-| String  
+| userNameRdnAttribute
+| 
+| String 
 | 
 |  
 
-| userFirstNameAttribute 
-|  
-| String  
+| userFirstNameAttribute
+| 
+| String 
 | 
 |  
 
-| userLastNameAttribute 
-|  
-| String  
+| userLastNameAttribute
+| 
+| String 
 | 
 |  
 
-| userDisplayNameAttribute 
-|  
-| String  
+| userDisplayNameAttribute
+| 
+| String 
 | 
 |  
 
-| userEmailAttribute 
-|  
-| String  
+| userEmailAttribute
+| 
+| String 
 | 
 |  
 
-| userGroupAttribute 
-|  
-| String  
+| userGroupAttribute
+| 
+| String 
 | 
 |  
 
-| userUniqueIdAttribute 
-|  
-| String  
+| userUniqueIdAttribute
+| 
+| String 
 | 
 |  
 
-| groupDn 
-|  
-| String  
+| groupDn
+| 
+| String 
 | 
 |  
 
-| groupObjectClass 
-|  
-| String  
+| groupObjectClass
+| 
+| String 
 | 
 |  
 
-| groupObjectFilter 
-|  
-| String  
+| groupObjectFilter
+| 
+| String 
 | 
 |  
 
-| groupNameAttribute 
-|  
-| String  
+| groupNameAttribute
+| 
+| String 
 | 
 |  
 
-| groupDescriptionAttribute 
-|  
-| String  
+| groupDescriptionAttribute
+| 
+| String 
 | 
 |  
 
-| groupMembersAttribute 
-|  
-| String  
+| groupMembersAttribute
+| 
+| String 
 | 
 |  
 
@@ -4670,108 +4617,108 @@ endif::internal-generation[]
 
 [.fields-DirectoryDelegatingConnector]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| type 
-|  
-| String  
+| type
+| 
+| String 
 | 
 |  _Enum:_ MICROSOFT_ACTIVE_DIRECTORY, 
 
-| url 
-|  
-| String  
+| url
+| 
+| String 
 | 
 |  
 
-| ssl 
-|  
-| String  
+| ssl
+| 
+| String 
 | 
 |  _Enum:_ NONE, LDAPS, START_TLS, 
 
-| useNodeReferrals 
-|  
-| Boolean  
+| useNodeReferrals
+| 
+| Boolean 
 | 
 |  
 
-| nestedGroupsDisabled 
-|  
-| Boolean  
+| nestedGroupsDisabled
+| 
+| Boolean 
 | 
 |  
 
-| synchronizeUsers 
-|  
-| Boolean  
+| synchronizeUsers
+| 
+| Boolean 
 | 
 |  
 
-| synchronizeUserDetails 
-|  
-| Boolean  
+| synchronizeUserDetails
+| 
+| Boolean 
 | 
 |  
 
-| synchronizeGroupMemberships 
-|  
-| Boolean  
+| synchronizeGroupMemberships
+| 
+| Boolean 
 | 
 |  
 
-| useUserMembershipAttribute 
-|  
-| Boolean  
+| useUserMembershipAttribute
+| 
+| Boolean 
 | 
 |  
 
-| usePagedResults 
-|  
-| Boolean  
+| usePagedResults
+| 
+| Boolean 
 | 
 |  
 
-| pagedResultsSize 
-|  
-| Long  
+| pagedResultsSize
 | 
-| int64 
-
-| readTimeoutInMillis 
-|  
-| Long  
+| Long 
 | 
 | int64 
 
-| searchTimeoutInMillis 
-|  
-| Long  
+| readTimeoutInMillis
+| 
+| Long 
 | 
 | int64 
 
-| connectionTimeoutInMillis 
-|  
-| Long  
+| searchTimeoutInMillis
+| 
+| Long 
 | 
 | int64 
 
-| baseDn 
-|  
-| String  
+| connectionTimeoutInMillis
+| 
+| Long 
+| 
+| int64 
+
+| baseDn
+| 
+| String 
 | 
 |  
 
-| username 
-|  
-| String  
+| username
+| 
+| String 
 | 
 |  
 
-| password 
-|  
-| String  
+| password
+| 
+| String 
 | 
 |  
 
@@ -4785,42 +4732,42 @@ endif::internal-generation[]
 
 [.fields-DirectoryGenericBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| id 
-|  
-| Long  
+| id
+| 
+| Long 
 | 
 | int64 
 
-| name 
-| X 
-| String  
+| name
+| X
+| String 
 | 
 |  
 
-| description 
-|  
-| String  
+| description
+| 
+| String 
 | 
 |  
 
-| active 
-|  
-| Boolean  
+| active
+| 
+| Boolean 
 | 
 |  
 
-| createdDate 
-|  
-| Date  
+| createdDate
+| 
+| Date 
 | 
 | date-time 
 
-| updatedDate 
-|  
-| Date  
+| updatedDate
+| 
+| Date 
 | 
 | date-time 
 
@@ -4834,12 +4781,12 @@ endif::internal-generation[]
 
 [.fields-DirectoryInternalAdvanced]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| enableNestedGroups 
-|  
-| Boolean  
+| enableNestedGroups
+| 
+| Boolean 
 | 
 |  
 
@@ -4853,72 +4800,72 @@ endif::internal-generation[]
 
 [.fields-DirectoryInternalBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| id 
-|  
-| Long  
+| id
+| 
+| Long 
 | 
 | int64 
 
-| name 
-| X 
-| String  
+| name
+| X
+| String 
 | 
 |  
 
-| description 
-|  
-| String  
+| description
+| 
+| String 
 | 
 |  
 
-| active 
-|  
-| Boolean  
+| active
+| 
+| Boolean 
 | 
 |  
 
-| createdDate 
-|  
-| Date  
+| createdDate
 | 
-| date-time 
-
-| updatedDate 
-|  
-| Date  
+| Date 
 | 
 | date-time 
 
-| credentialPolicy 
-|  
-| DirectoryInternalCredentialPolicy  
+| updatedDate
+| 
+| Date 
+| 
+| date-time 
+
+| credentialPolicy
+| 
+| DirectoryInternalCredentialPolicy 
 | 
 |  
 
-| advanced 
-|  
-| DirectoryInternalAdvanced  
+| advanced
+| 
+| DirectoryInternalAdvanced 
 | 
 |  
 
-| permissions 
-|  
-| DirectoryPermissions  
+| permissions
+| 
+| DirectoryPermissions 
 | 
 |  
 
-| groups 
-|  
-| List  of <<GroupBean>> 
+| groups
+| 
+| List  of <<GroupBean>>
 | 
 |  
 
-| users 
-|  
-| List  of <<UserBean>> 
+| users
+| 
+| List  of <<UserBean>>
 | 
 |  
 
@@ -4932,48 +4879,48 @@ endif::internal-generation[]
 
 [.fields-DirectoryInternalCredentialPolicy]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| passwordRegex 
-|  
-| String  
+| passwordRegex
+| 
+| String 
 | 
 |  
 
-| passwordComplexityMessage 
-|  
-| String  
+| passwordComplexityMessage
+| 
+| String 
 | 
 |  
 
-| passwordMaxAttempts 
-|  
-| Long  
+| passwordMaxAttempts
 | 
-| int64 
-
-| passwordHistoryCount 
-|  
-| Long  
+| Long 
 | 
 | int64 
 
-| passwordMaxChangeTime 
-|  
-| Long  
+| passwordHistoryCount
+| 
+| Long 
 | 
 | int64 
 
-| passwordExpiryNotificationDays 
-|  
-| List  of <<integer>> 
+| passwordMaxChangeTime
+| 
+| Long 
+| 
+| int64 
+
+| passwordExpiryNotificationDays
+| 
+| List  of <<integer>>
 | 
 | int32 
 
-| passwordEncryptionMethod 
-|  
-| String  
+| passwordEncryptionMethod
+| 
+| String 
 | 
 |  
 
@@ -4987,60 +4934,60 @@ endif::internal-generation[]
 
 [.fields-DirectoryLdapBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| id 
-|  
-| Long  
+| id
+| 
+| Long 
 | 
 | int64 
 
-| name 
-| X 
-| String  
+| name
+| X
+| String 
 | 
 |  
 
-| description 
-|  
-| String  
+| description
+| 
+| String 
 | 
 |  
 
-| active 
-|  
-| Boolean  
+| active
+| 
+| Boolean 
 | 
 |  
 
-| createdDate 
-|  
-| Date  
+| createdDate
 | 
-| date-time 
-
-| updatedDate 
-|  
-| Date  
+| Date 
 | 
 | date-time 
 
-| server 
-|  
-| DirectoryLdapServer  
+| updatedDate
+| 
+| Date 
+| 
+| date-time 
+
+| server
+| 
+| DirectoryLdapServer 
 | 
 |  
 
-| schema 
-|  
-| DirectoryLdapSchema  
+| schema
+| 
+| DirectoryLdapSchema 
 | 
 |  
 
-| permissions 
-|  
-| DirectoryLdapPermissions  
+| permissions
+| 
+| DirectoryLdapPermissions 
 | 
 |  
 
@@ -5054,24 +5001,24 @@ endif::internal-generation[]
 
 [.fields-DirectoryLdapPermissions]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| readOnly 
-|  
-| Boolean  
+| readOnly
+| 
+| Boolean 
 | 
 |  
 
-| readOnlyForLocalGroups 
-|  
-| Boolean  
+| readOnlyForLocalGroups
+| 
+| Boolean 
 | 
 |  
 
-| fullAccess 
-|  
-| Boolean  
+| fullAccess
+| 
+| Boolean 
 | 
 |  
 
@@ -5085,24 +5032,24 @@ endif::internal-generation[]
 
 [.fields-DirectoryLdapSchema]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| baseDn 
-|  
-| String  
+| baseDn
+| 
+| String 
 | 
 |  
 
-| userDn 
-|  
-| String  
+| userDn
+| 
+| String 
 | 
 |  
 
-| groupDn 
-|  
-| String  
+| groupDn
+| 
+| String 
 | 
 |  
 
@@ -5116,36 +5063,36 @@ endif::internal-generation[]
 
 [.fields-DirectoryLdapServer]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| host 
-| X 
-| String  
+| host
+| X
+| String 
 | 
 |  
 
-| port 
-|  
-| Integer  
+| port
+| 
+| Integer 
 | 
 | int32 
 
-| useSsl 
-|  
-| Boolean  
+| useSsl
+| 
+| Boolean 
 | 
 |  
 
-| username 
-|  
-| String  
+| username
+| 
+| String 
 | 
 |  
 
-| password 
-|  
-| String  
+| password
+| 
+| String 
 | 
 |  
 
@@ -5159,54 +5106,54 @@ endif::internal-generation[]
 
 [.fields-DirectoryPermissions]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| addGroup 
-|  
-| Boolean  
+| addGroup
+| 
+| Boolean 
 | 
 |  
 
-| addUser 
-|  
-| Boolean  
+| addUser
+| 
+| Boolean 
 | 
 |  
 
-| modifyGroup 
-|  
-| Boolean  
+| modifyGroup
+| 
+| Boolean 
 | 
 |  
 
-| modifyUser 
-|  
-| Boolean  
+| modifyUser
+| 
+| Boolean 
 | 
 |  
 
-| modifyGroupAttributes 
-|  
-| Boolean  
+| modifyGroupAttributes
+| 
+| Boolean 
 | 
 |  
 
-| modifyUserAttributes 
-|  
-| Boolean  
+| modifyUserAttributes
+| 
+| Boolean 
 | 
 |  
 
-| removeGroup 
-|  
-| Boolean  
+| removeGroup
+| 
+| Boolean 
 | 
 |  
 
-| removeUser 
-|  
-| Boolean  
+| removeUser
+| 
+| Boolean 
 | 
 |  
 
@@ -5220,12 +5167,12 @@ endif::internal-generation[]
 
 [.fields-ErrorCollection]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| errorMessages 
-|  
-| List  of <<string>> 
+| errorMessages
+| 
+| List  of <<string>>
 | 
 |  
 
@@ -5239,18 +5186,18 @@ endif::internal-generation[]
 
 [.fields-GadgetBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| id 
-|  
-| Long  
+| id
+| 
+| Long 
 | 
 | int64 
 
-| url 
-|  
-| URI  
+| url
+| 
+| URI 
 | 
 | uri 
 
@@ -5264,12 +5211,12 @@ endif::internal-generation[]
 
 [.fields-GadgetsBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| gadgets 
-|  
-| List  of <<GadgetBean>> 
+| gadgets
+| 
+| List  of <<GadgetBean>>
 | 
 |  
 
@@ -5283,24 +5230,24 @@ endif::internal-generation[]
 
 [.fields-GroupBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| name 
-|  
-| String  
+| name
+| 
+| String 
 | 
 |  
 
-| description 
-|  
-| String  
+| description
+| 
+| String 
 | 
 |  
 
-| active 
-|  
-| Boolean  
+| active
+| 
+| Boolean 
 | 
 |  
 
@@ -5314,48 +5261,48 @@ endif::internal-generation[]
 
 [.fields-LicenseBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| products 
-|  
-| List  of <<string>> 
+| products
+| 
+| List  of <<string>>
 | 
 |  
 
-| type 
-|  
-| String  
+| type
+| 
+| String 
 | 
 |  
 
-| organization 
-|  
-| String  
+| organization
+| 
+| String 
 | 
 |  
 
-| description 
-|  
-| String  
+| description
+| 
+| String 
 | 
 |  
 
-| expiryDate 
-|  
-| Date  
+| expiryDate
+| 
+| Date 
 | 
 | date-time 
 
-| maxUsers 
-|  
-| Integer  
+| maxUsers
+| 
+| Integer 
 | 
 | int32 
 
-| key 
-|  
-| String  
+| key
+| 
+| String 
 | 
 |  
 
@@ -5369,12 +5316,12 @@ endif::internal-generation[]
 
 [.fields-LicensesBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| licenses 
-|  
-| List  of <<LicenseBean>> 
+| licenses
+| 
+| List  of <<LicenseBean>>
 | 
 |  
 
@@ -5388,54 +5335,54 @@ endif::internal-generation[]
 
 [.fields-MailServerPopBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| name 
-|  
-| String  
+| name
+| 
+| String 
 | 
 |  
 
-| description 
-|  
-| String  
+| description
+| 
+| String 
 | 
 |  
 
-| host 
-|  
-| String  
+| host
+| 
+| String 
 | 
 |  
 
-| port 
-|  
-| Integer  
+| port
+| 
+| Integer 
 | 
 | int32 
 
-| protocol 
-|  
-| String  
+| protocol
+| 
+| String 
 | 
 |  
 
-| timeout 
-|  
-| Long  
+| timeout
+| 
+| Long 
 | 
 | int64 
 
-| username 
-|  
-| String  
+| username
+| 
+| String 
 | 
 |  
 
-| password 
-|  
-| String  
+| password
+| 
+| String 
 | 
 |  
 
@@ -5449,78 +5396,78 @@ endif::internal-generation[]
 
 [.fields-MailServerSmtpBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| name 
-|  
-| String  
+| name
+| 
+| String 
 | 
 |  
 
-| description 
-|  
-| String  
+| description
+| 
+| String 
 | 
 |  
 
-| host 
-|  
-| String  
+| host
+| 
+| String 
 | 
 |  
 
-| port 
-|  
-| Integer  
+| port
+| 
+| Integer 
 | 
 | int32 
 
-| protocol 
-|  
-| String  
+| protocol
+| 
+| String 
 | 
 |  
 
-| timeout 
-|  
-| Long  
+| timeout
+| 
+| Long 
 | 
 | int64 
 
-| username 
-|  
-| String  
+| username
+| 
+| String 
 | 
 |  
 
-| password 
-|  
-| String  
+| password
+| 
+| String 
 | 
 |  
 
-| adminContact 
-|  
-| String  
+| adminContact
+| 
+| String 
 | 
 |  
 
-| from 
-|  
-| String  
+| from
+| 
+| String 
 | 
 |  
 
-| prefix 
-|  
-| String  
+| prefix
+| 
+| String 
 | 
 |  
 
-| useTls 
-|  
-| Boolean  
+| useTls
+| 
+| Boolean 
 | 
 |  
 
@@ -5534,18 +5481,18 @@ endif::internal-generation[]
 
 [.fields-PermissionAnonymousAccessBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| allowForPages 
-|  
-| Boolean  
+| allowForPages
+| 
+| Boolean 
 | 
 |  
 
-| allowForUserProfiles 
-|  
-| Boolean  
+| allowForUserProfiles
+| 
+| Boolean 
 | 
 |  
 
@@ -5559,36 +5506,36 @@ endif::internal-generation[]
 
 [.fields-SettingsBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| baseUrl 
-|  
-| URI  
+| baseUrl
+| 
+| URI 
 | 
 | uri 
 
-| mode 
-|  
-| String  
+| mode
+| 
+| String 
 | 
 |  
 
-| title 
-|  
-| String  
+| title
+| 
+| String 
 | 
 |  
 
-| contactMessage 
-|  
-| String  
+| contactMessage
+| 
+| String 
 | 
 |  
 
-| externalUserManagement 
-|  
-| Boolean  
+| externalUserManagement
+| 
+| Boolean 
 | 
 |  
 
@@ -5602,102 +5549,102 @@ endif::internal-generation[]
 
 [.fields-SettingsBrandingColorSchemeBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| topBar 
-|  
-| String  
+| topBar
+| 
+| String 
 | 
 |  
 
-| topBarText 
-|  
-| String  
+| topBarText
+| 
+| String 
 | 
 |  
 
-| headerButtonBackground 
-|  
-| String  
+| headerButtonBackground
+| 
+| String 
 | 
 |  
 
-| headerButtonText 
-|  
-| String  
+| headerButtonText
+| 
+| String 
 | 
 |  
 
-| topBarMenuSelectedBackground 
-|  
-| String  
+| topBarMenuSelectedBackground
+| 
+| String 
 | 
 |  
 
-| topBarMenuSelectedText 
-|  
-| String  
+| topBarMenuSelectedText
+| 
+| String 
 | 
 |  
 
-| topBarMenuItemText 
-|  
-| String  
+| topBarMenuItemText
+| 
+| String 
 | 
 |  
 
-| menuItemSelectedBackground 
-|  
-| String  
+| menuItemSelectedBackground
+| 
+| String 
 | 
 |  
 
-| menuItemSelectedText 
-|  
-| String  
+| menuItemSelectedText
+| 
+| String 
 | 
 |  
 
-| searchFieldBackground 
-|  
-| String  
+| searchFieldBackground
+| 
+| String 
 | 
 |  
 
-| searchFieldText 
-|  
-| String  
+| searchFieldText
+| 
+| String 
 | 
 |  
 
-| pageMenuSelectedBackground 
-|  
-| String  
+| pageMenuSelectedBackground
+| 
+| String 
 | 
 |  
 
-| pageMenuItemText 
-|  
-| String  
+| pageMenuItemText
+| 
+| String 
 | 
 |  
 
-| headingText 
-|  
-| String  
+| headingText
+| 
+| String 
 | 
 |  
 
-| links 
-|  
-| String  
+| links
+| 
+| String 
 | 
 |  
 
-| bordersAndDividers 
-|  
-| String  
+| bordersAndDividers
+| 
+| String 
 | 
 |  
 
@@ -5711,54 +5658,54 @@ endif::internal-generation[]
 
 [.fields-UserBean]
 [cols="2,1,2,4,1"]
-|===         
+|===
 | Field Name| Required| Type| Description| Format
 
-| username 
-|  
-| String  
+| username
+| 
+| String 
 | 
 |  
 
-| firstName 
-|  
-| String  
+| firstName
+| 
+| String 
 | 
 |  
 
-| lastName 
-|  
-| String  
+| lastName
+| 
+| String 
 | 
 |  
 
-| fullName 
-|  
-| String  
+| fullName
+| 
+| String 
 | 
 |  
 
-| email 
-|  
-| String  
+| email
+| 
+| String 
 | 
 |  
 
-| active 
-|  
-| Boolean  
+| active
+| 
+| Boolean 
 | 
 |  
 
-| password 
-|  
-| String  
+| password
+| 
+| String 
 | 
 |  
 
-| groups 
-|  
-| List  of <<GroupBean>> 
+| groups
+| 
+| List  of <<GroupBean>>
 | 
 |  
 

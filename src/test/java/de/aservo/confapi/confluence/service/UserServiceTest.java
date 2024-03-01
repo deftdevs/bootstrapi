@@ -10,21 +10,20 @@ import com.atlassian.user.impl.DefaultUser;
 import de.aservo.confapi.commons.exception.BadRequestException;
 import de.aservo.confapi.commons.exception.NotFoundException;
 import de.aservo.confapi.commons.model.UserBean;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static de.aservo.confapi.confluence.model.util.UserBeanUtil.toUser;
 import static de.aservo.confapi.confluence.model.util.UserBeanUtil.toUserBean;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
 
-@RunWith(MockitoJUnitRunner.class)
-public class UserServiceTest {
+@ExtendWith(MockitoExtension.class)
+class UserServiceTest {
 
     @Mock
     private UserManager userManager;
@@ -34,13 +33,13 @@ public class UserServiceTest {
 
     private UsersServiceImpl userService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         userService = new UsersServiceImpl(userManager, userAccessor);
     }
 
     @Test
-    public void testGetUser() throws EntityException, NotFoundException {
+    void testGetUser() throws EntityException, NotFoundException {
         User user = toUser(UserBean.EXAMPLE_1);
         doReturn(user).when(userManager).getUser(user.getName());
 
@@ -51,15 +50,20 @@ public class UserServiceTest {
         assertNull(userBean.getPassword());
     }
 
-    @Test(expected = NotFoundException.class)
-    public void testGetUserIsNotConfluenceUser() throws NotFoundException, EntityException {
-        User user = new DefaultUser(toUser(UserBean.EXAMPLE_1));
+    @Test
+    void testGetUserIsNotConfluenceUser() throws NotFoundException, EntityException {
+        final User user = new DefaultUser(toUser(UserBean.EXAMPLE_1));
         doReturn(user).when(userManager).getUser(user.getName());
-        userService.getUser(user.getName());
+
+        final String userName = user.getName();
+
+        assertThrows(NotFoundException.class, () -> {
+            userService.getUser(userName);
+        });
     }
 
     @Test
-    public void testUpdateUser() throws EntityException, NotFoundException, BadRequestException {
+    void testUpdateUser() throws EntityException, NotFoundException, BadRequestException {
         final User user = toUser(UserBean.EXAMPLE_1);
         doReturn(user).when(userManager).getUser(user.getName());
 
@@ -70,7 +74,7 @@ public class UserServiceTest {
     }
 
     @Test
-    public void testUpdateUsername() throws EntityException {
+    void testUpdateUsername() throws EntityException {
         final UserBean requestUserBean = new UserBean();
         requestUserBean.setUsername("ChangeUsername");
 
@@ -86,8 +90,8 @@ public class UserServiceTest {
         assertEquals(requestUserBean.getUsername(), updatedUserBean.getUsername());
     }
 
-    @Test(expected = BadRequestException.class)
-    public void testUpdateUsernameException() throws EntityException {
+    @Test
+    void testUpdateUsernameException() throws EntityException {
         final UserBean requestUserBean = new UserBean();
         requestUserBean.setUsername("ChangeUsername");
 
@@ -95,11 +99,15 @@ public class UserServiceTest {
         doReturn(existingUser).when(userManager).getUser(existingUser.getName());
         doThrow(new EntityException()).when(userAccessor).renameUser((ConfluenceUser)existingUser, requestUserBean.getUsername());
 
-        userService.updateUser(existingUser.getName(), requestUserBean);
+        final String existingUserName = existingUser.getName();
+
+        assertThrows(BadRequestException.class, () -> {
+            userService.updateUser(existingUserName, requestUserBean);
+        });
     }
 
     @Test
-    public void testUpdateUserEmptyBean() throws EntityException, NotFoundException, BadRequestException {
+    void testUpdateUserEmptyBean() throws EntityException, NotFoundException, BadRequestException {
         final User user = toUser(UserBean.EXAMPLE_1);
         doReturn(user).when(userManager).getUser(user.getName());
 
@@ -109,16 +117,20 @@ public class UserServiceTest {
         assertUserBeanEquals(UserBean.EXAMPLE_1, notUpdatedUserBean);
     }
 
-    @Test(expected = NotFoundException.class)
-    public void testUpdateUserNotConfluenceUser() throws EntityException, NotFoundException, BadRequestException {
+    @Test
+    void testUpdateUserNotConfluenceUser() throws EntityException, NotFoundException, BadRequestException {
         final User user = new DefaultUser(toUser(UserBean.EXAMPLE_1));
         doReturn(user).when(userManager).getUser(user.getName());
 
-        userService.updateUser(user.getName(), UserBean.EXAMPLE_2);
+        final String userName = user.getName();
+
+        assertThrows(NotFoundException.class, () -> {
+            userService.updateUser(userName, UserBean.EXAMPLE_2);
+        });
     }
 
     @Test
-    public void testUpdateUserPassword() throws EntityException, NotFoundException, BadRequestException {
+    void testUpdateUserPassword() throws EntityException, NotFoundException, BadRequestException {
         final UserBean userBean = UserBean.EXAMPLE_1;
         doReturn(toUser(userBean)).when(userManager).getUser(userBean.getUsername());
 
@@ -131,31 +143,41 @@ public class UserServiceTest {
         assertNull(updatedUserBean.getPassword());
     }
 
-    @Test(expected = NotFoundException.class)
-    public void testUpdateUserPasswordNotConfluenceUser() throws EntityException, NotFoundException, BadRequestException {
+    @Test
+    void testUpdateUserPasswordNotConfluenceUser() throws EntityException, NotFoundException, BadRequestException {
         final User user = new DefaultUser(toUser(UserBean.EXAMPLE_1));
         doReturn(user).when(userManager).getUser(user.getName());
 
-        userService.updatePassword(user.getName(), "newPW");
+        final String userName = user.getName();
+
+        assertThrows(NotFoundException.class, () -> {
+            userService.updatePassword(userName, "newPW");
+        });
     }
 
     /*
      * Not yet implemented methods
      */
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void testGetUserByDirectoryIdNotImplemented() {
-        userService.getUser(0, null);
+    @Test
+    void testGetUserByDirectoryIdNotImplemented() {
+        assertThrows(UnsupportedOperationException.class, () -> {
+            userService.getUser(0, null);
+        });
     }
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void testSetUserByDirectoryIdNotImplemented() {
-        userService.setUser(0, null);
+    @Test
+    void testSetUserByDirectoryIdNotImplemented() {
+        assertThrows(UnsupportedOperationException.class, () -> {
+            userService.setUser(0, null);
+        });
     }
 
-    @Test(expected = UnsupportedOperationException.class)
-    public void testSetUsersByDirectoryIdNotImplemented() {
-        userService.setUsers(0, null);
+    @Test
+    void testSetUsersByDirectoryIdNotImplemented() {
+        assertThrows(UnsupportedOperationException.class, () -> {
+            userService.setUsers(0, null);
+        });
     }
 
     /*

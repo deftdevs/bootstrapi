@@ -3,17 +3,17 @@ package de.aservo.confapi.confluence.model.util;
 import com.atlassian.mail.server.DefaultTestPopMailServerImpl;
 import com.atlassian.mail.server.PopMailServer;
 import de.aservo.confapi.commons.model.MailServerPopBean;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class MailServerPopBeanUtilTest {
+@ExtendWith(MockitoExtension.class)
+class MailServerPopBeanUtilTest {
 
     @Test
-    public void testToMailServerPopBean() {
+    void testToMailServerPopBean() {
         final PopMailServer server = new DefaultTestPopMailServerImpl();
         final MailServerPopBean bean = MailServerPopBeanUtil.toMailServerPopBean(server);
 
@@ -23,7 +23,7 @@ public class MailServerPopBeanUtilTest {
         assertEquals(server.getMailProtocol().getProtocol(), bean.getProtocol());
         assertEquals(server.getHostname(), bean.getHost());
         assertEquals(Integer.valueOf(server.getPort()), bean.getPort());
-        assertTrue(server.getTimeout() == bean.getTimeout());
+        assertEquals(server.getTimeout(), (long) bean.getTimeout());
         assertEquals(server.getUsername(), bean.getUsername());
         assertNull(bean.getPassword());
     }

@@ -3,17 +3,17 @@ package de.aservo.confapi.confluence.model.util;
 import com.atlassian.mail.server.DefaultTestSmtpMailServerImpl;
 import com.atlassian.mail.server.SMTPMailServer;
 import de.aservo.confapi.commons.model.MailServerSmtpBean;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class MailServerSmtpBeanUtilTest {
+@ExtendWith(MockitoExtension.class)
+class MailServerSmtpBeanUtilTest {
 
     @Test
-    public void testToMailServerSmtpBean() {
+    void testToMailServerSmtpBean() {
         final SMTPMailServer server = new DefaultTestSmtpMailServerImpl();
         final MailServerSmtpBean bean = MailServerSmtpBeanUtil.toMailServerSmtpBean(server);
 

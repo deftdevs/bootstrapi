@@ -5,6 +5,7 @@ import com.atlassian.confluence.user.AuthenticatedUserThreadLocal;
 import com.atlassian.confluence.user.ConfluenceUser;
 import com.atlassian.confluence.user.ConfluenceUserImpl;
 import com.atlassian.gadgets.GadgetParsingException;
+import com.atlassian.gadgets.GadgetRequestContext;
 import com.atlassian.gadgets.directory.spi.ExternalGadgetSpec;
 import com.atlassian.gadgets.directory.spi.ExternalGadgetSpecId;
 import com.atlassian.gadgets.directory.spi.ExternalGadgetSpecStore;
@@ -17,12 +18,12 @@ import de.aservo.confapi.commons.model.GadgetBean;
 import de.aservo.confapi.commons.model.GadgetsBean;
 import de.aservo.confapi.commons.service.api.GadgetsService;
 import org.apache.commons.lang.reflect.FieldUtils;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.MockedStatic;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -30,13 +31,13 @@ import java.util.Collections;
 import java.util.Locale;
 import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class GadgetsServiceTest {
+@ExtendWith(MockitoExtension.class)
+class GadgetsServiceTest {
 
     @Mock
     private ExternalGadgetSpecStore externalGadgetSpecStore;
@@ -49,13 +50,13 @@ public class GadgetsServiceTest {
 
     private GadgetsService gadgetsService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         gadgetsService = new GadgetsServiceImpl(externalGadgetSpecStore, gadgetSpecFactory, localeManager);
     }
 
     @Test
-    public void testGetGadgets() throws URISyntaxException {
+    void testGetGadgets() throws URISyntaxException {
         ExternalGadgetSpec externalGadgetSpec = createExternalGadgetSpec();
         doReturn(Collections.singletonList(externalGadgetSpec)).when(externalGadgetSpecStore).entries();
 
@@ -65,7 +66,7 @@ public class GadgetsServiceTest {
     }
 
     @Test
-    public void testGetGadget() throws URISyntaxException {
+    void testGetGadget() throws URISyntaxException {
         ExternalGadgetSpec externalGadgetSpec = createExternalGadgetSpec();
         doReturn(Collections.singletonList(externalGadgetSpec)).when(externalGadgetSpecStore).entries();
 
@@ -74,15 +75,16 @@ public class GadgetsServiceTest {
         assertEquals(externalGadgetSpec.getSpecUri(), gadgetBean.getUrl());
     }
 
-    @Test(expected = NotFoundException.class)
-    public void testGetGadgetIdNotExisting() {
-        gadgetsService.getGadget(0L);
+    @Test
+    void testGetGadgetIdNotExisting() {
+        assertThrows(NotFoundException.class, () -> {
+            gadgetsService.getGadget(0L);
+        });
     }
 
     @Test
-    public void testAddGadget() throws URISyntaxException, IllegalAccessException {
+    void testAddGadget() throws URISyntaxException, IllegalAccessException {
         ExternalGadgetSpec externalGadgetSpec = createExternalGadgetSpec();
-        doReturn(Collections.singletonList(externalGadgetSpec)).when(externalGadgetSpecStore).entries();
         doReturn(externalGadgetSpec).when(externalGadgetSpecStore).add(any());
 
         ConfluenceUser user = createConfluenceUser();
@@ -90,8 +92,7 @@ public class GadgetsServiceTest {
         gadgetBean.setUrl(externalGadgetSpec.getSpecUri());
 
         GadgetSpec gadgetSpec = GadgetSpec.gadgetSpec(externalGadgetSpec.getSpecUri()).build();
-
-        doReturn(gadgetSpec).when(gadgetSpecFactory).getGadgetSpec(externalGadgetSpec.getSpecUri(), null);
+        doReturn(gadgetSpec).when(gadgetSpecFactory).getGadgetSpec(any(URI.class), any(GadgetRequestContext.class));
 
         try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
             authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
@@ -101,10 +102,9 @@ public class GadgetsServiceTest {
         }
     }
 
-    @Test(expected = BadRequestException.class)
-    public void testAddGadgetException() throws URISyntaxException, IllegalAccessException {
+    @Test
+    void testAddGadgetException() throws URISyntaxException, IllegalAccessException {
         ExternalGadgetSpec externalGadgetSpec = createExternalGadgetSpec();
-        doReturn(Collections.singletonList(externalGadgetSpec)).when(externalGadgetSpecStore).entries();
         doReturn(externalGadgetSpec).when(externalGadgetSpecStore).add(any());
 
         ConfluenceUser user = createConfluenceUser();
@@ -117,15 +117,16 @@ public class GadgetsServiceTest {
         try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
             authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
 
-            gadgetsService.addGadget(gadgetBean);
+            assertThrows(BadRequestException.class, () -> {
+                gadgetsService.addGadget(gadgetBean);
+            });
         }
     }
 
     @Test
-    public void testSetGadgets() throws URISyntaxException, IllegalAccessException {
+    void testSetGadgets() throws URISyntaxException, IllegalAccessException {
         ExternalGadgetSpec externalGadgetSpec = createExternalGadgetSpec();
         doReturn(Collections.singletonList(externalGadgetSpec)).when(externalGadgetSpecStore).entries();
-        doReturn(externalGadgetSpec).when(externalGadgetSpecStore).add(any());
 
         ConfluenceUser user = createConfluenceUser();
         GadgetBean gadgetBean = new GadgetBean();
@@ -133,9 +134,6 @@ public class GadgetsServiceTest {
         GadgetsBean gadgetsBeanToSet = new GadgetsBean(Collections.singletonList(gadgetBean));
 
         GadgetSpec gadgetSpec = GadgetSpec.gadgetSpec(externalGadgetSpec.getSpecUri()).build();
-
-        doReturn(Locale.GERMAN).when(localeManager).getLocale(user);
-        doReturn(gadgetSpec).when(gadgetSpecFactory).getGadgetSpec(externalGadgetSpec.getSpecUri(), null);
 
         try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
             authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
@@ -146,7 +144,7 @@ public class GadgetsServiceTest {
     }
 
     @Test
-    public void testSetGadget() throws URISyntaxException, IllegalAccessException {
+    void testSetGadget() throws URISyntaxException, IllegalAccessException {
         ExternalGadgetSpec externalGadgetSpec = createExternalGadgetSpec();
         doReturn(Collections.singletonList(externalGadgetSpec)).when(externalGadgetSpecStore).entries();
         doReturn(externalGadgetSpec).when(externalGadgetSpecStore).add(any());
@@ -158,7 +156,7 @@ public class GadgetsServiceTest {
         GadgetSpec gadgetSpec = GadgetSpec.gadgetSpec(externalGadgetSpec.getSpecUri()).build();
 
         doReturn(Locale.GERMAN).when(localeManager).getLocale(user);
-        doReturn(gadgetSpec).when(gadgetSpecFactory).getGadgetSpec(externalGadgetSpec.getSpecUri(), null);
+        doReturn(gadgetSpec).when(gadgetSpecFactory).getGadgetSpec(any(URI.class), any(GadgetRequestContext.class));
 
         try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
             authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
@@ -169,28 +167,30 @@ public class GadgetsServiceTest {
     }
 
     @Test
-    public void testDeleteGadgets() {
+    void testDeleteGadgets() {
         gadgetsService.deleteGadgets(true);
-        assertTrue("Delete Successful", true);
-    }
-
-    @Test(expected = BadRequestException.class)
-    public void testDeleteGadgetsWithoutForceParameter() {
-        gadgetsService.deleteGadgets(false);
     }
 
     @Test
-    public void testDeleteGadget() throws URISyntaxException {
+    void testDeleteGadgetsWithoutForceParameter() {
+        assertThrows(BadRequestException.class, () -> {
+            gadgetsService.deleteGadgets(false);
+        });
+    }
+
+    @Test
+    void testDeleteGadget() throws URISyntaxException {
         ExternalGadgetSpec externalGadgetSpec = createExternalGadgetSpec();
         doReturn(Collections.singletonList(externalGadgetSpec)).when(externalGadgetSpecStore).entries();
 
         gadgetsService.deleteGadget(1L);
-        assertTrue("Delete Successful", true);
     }
 
-    @Test(expected = NotFoundException.class)
-    public void testDeleteGadgetsIdNotExisting() {
-        gadgetsService.deleteGadget(0L);
+    @Test
+    void testDeleteGadgetsIdNotExisting() {
+        assertThrows(NotFoundException.class, () -> {
+            gadgetsService.deleteGadget(0L);
+        });
     }
 
     private ExternalGadgetSpec createExternalGadgetSpec() throws URISyntaxException {

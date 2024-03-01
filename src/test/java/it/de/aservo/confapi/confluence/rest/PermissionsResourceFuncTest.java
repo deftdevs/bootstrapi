@@ -1,23 +1,22 @@
 package it.de.aservo.confapi.confluence.rest;
 
-import de.aservo.confapi.confluence.model.PermissionAnonymousAccessBean;
 import de.aservo.confapi.commons.constants.ConfAPI;
+import de.aservo.confapi.confluence.model.PermissionAnonymousAccessBean;
 import it.de.aservo.confapi.commons.rest.ResourceBuilder;
 import org.apache.wink.client.ClientAuthenticationException;
 import org.apache.wink.client.ClientResponse;
 import org.apache.wink.client.Resource;
-import org.junit.Ignore;
-import org.junit.Test;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 
-public class PermissionsResourceFuncTest {
+class PermissionsResourceFuncTest {
 
     @Test
-    public void testGetAnonymousPermissions() {
+    void testGetAnonymousPermissions() {
         Resource permissionsResource = ResourceBuilder.builder(ConfAPI.PERMISSIONS + "/" + ConfAPI.PERMISSION_ANONYMOUS_ACCESS).build();
 
         ClientResponse clientResponse = permissionsResource.get();
@@ -28,7 +27,7 @@ public class PermissionsResourceFuncTest {
     }
 
     @Test
-    public void testSetAnonymousPermissions() {
+    void testSetAnonymousPermissions() {
         Resource permissionsResource = ResourceBuilder.builder(ConfAPI.PERMISSIONS + "/" + ConfAPI.PERMISSION_ANONYMOUS_ACCESS).build();
 
         ClientResponse clientResponse = permissionsResource.put(getExampleBean());
@@ -38,27 +37,33 @@ public class PermissionsResourceFuncTest {
         assertEquals(getExampleBean(), accessBean);
     }
 
-    @Test(expected = ClientAuthenticationException.class)
-    public void testGetAnonymousPermissionsUnauthenticated() {
+    @Test
+    void testGetAnonymousPermissionsUnauthenticated() {
         Resource permissionsResource = ResourceBuilder.builder(ConfAPI.PERMISSIONS + "/" + ConfAPI.PERMISSION_ANONYMOUS_ACCESS)
                 .username("wrong")
                 .password("password")
                 .build();
-        permissionsResource.get();
-    }
 
-    @Test(expected = ClientAuthenticationException.class)
-    public void testSetAnonymousPermissionsUnauthenticated() {
-        Resource permissionsResource = ResourceBuilder.builder(ConfAPI.PERMISSIONS + "/" + ConfAPI.PERMISSION_ANONYMOUS_ACCESS)
-                .username("wrong")
-                .password("password")
-                .build();
-        permissionsResource.put(getExampleBean());
+        assertThrows(ClientAuthenticationException.class, permissionsResource::get);
     }
 
     @Test
-    @Ignore("cannot be executed because there is no default user with restricted access rights")
-    public void testGetAnonymousPermissionsUnauthorized() {
+    void testSetAnonymousPermissionsUnauthenticated() {
+        Resource permissionsResource = ResourceBuilder.builder(ConfAPI.PERMISSIONS + "/" + ConfAPI.PERMISSION_ANONYMOUS_ACCESS)
+                .username("wrong")
+                .password("password")
+                .build();
+
+        final PermissionAnonymousAccessBean permissionAnonymousAccessBean = getExampleBean();
+
+        assertThrows(ClientAuthenticationException.class, () -> {
+            permissionsResource.put(permissionAnonymousAccessBean);
+        });
+    }
+
+    @Test
+    @Disabled("cannot be executed because there is no default user with restricted access rights")
+    void testGetAnonymousPermissionsUnauthorized() {
         Resource permissionsResource = ResourceBuilder.builder(ConfAPI.PERMISSIONS + "/" + ConfAPI.PERMISSION_ANONYMOUS_ACCESS)
                 .username("user")
                 .password("user")
@@ -68,8 +73,8 @@ public class PermissionsResourceFuncTest {
     }
 
     @Test
-    @Ignore("cannot be executed because there is no default user with restricted access rights")
-    public void testSetAnonymousPermissionsUnauthorized() {
+    @Disabled("cannot be executed because there is no default user with restricted access rights")
+    void testSetAnonymousPermissionsUnauthorized() {
         Resource permissionsResource = ResourceBuilder.builder(ConfAPI.PERMISSIONS + "/" + ConfAPI.PERMISSION_ANONYMOUS_ACCESS)
                 .username("user")
                 .password("user")

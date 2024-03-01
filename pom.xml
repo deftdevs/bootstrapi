@@ -60,25 +60,29 @@
     </developers>
 
     <properties>
-        <confluence.version>7.5.0</confluence.version>
+        <confluence.version>8.5.6</confluence.version>
+        <confluence.data.version>8.5.6</confluence.data.version>
         <!-- other properties -->
         <ajp.port>8109</ajp.port>
-        <amps.version>8.0.2</amps.version>
-        <atlassian.gadgets.version>4.3.2.1</atlassian.gadgets.version>
+        <amps.version>8.12.4</amps.version>
+        <atlassian.gadgets.version>8.1.4</atlassian.gadgets.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
-        <confapi-commons.version>0.3.0</confapi-commons.version>
-        <confluence-lookandfeel.version>5.9.1-issue-CONF-38693-m2</confluence-lookandfeel.version>
+        <atlassian.spring.scanner.version>2.2.4</atlassian.spring.scanner.version>
+        <confapi-commons.version>0.4.0-SNAPSHOT</confapi-commons.version>
         <custom-favicon-api.version>2.0.2</custom-favicon-api.version>
+        <javax.jaxb-api.version>2.3.1</javax.jaxb-api.version>
+        <javax.ws.rs-api.version>2.1.1</javax.ws.rs-api.version>
         <javax.el-api.version>3.0.0</javax.el-api.version>
-        <log4j.version>2.8.2</log4j.version>
-        <plugin.testrunner.version>2.0.1</plugin.testrunner.version>
-        <slf4j.version>1.7.30</slf4j.version>
+        <plugin.testrunner.version>2.0.4</plugin.testrunner.version>
+        <log4j.version>2.23.0</log4j.version>
+        <slf4j.version>2.0.12</slf4j.version>
+        <swagger.version>2.2.20</swagger.version>
+        <openai-generator.version>7.3.0</openai-generator.version>
         <!-- Compiler must be 8 so that the plugin can run on Crowd instances using Java 8 -->
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencyManagement>
@@ -107,14 +111,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
-            <dependency>
-                <groupId>org.junit</groupId>
-                <artifactId>junit-bom</artifactId>
-                <version>5.10.2</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
         </dependencies>
     </dependencyManagement>
 
@@ -126,12 +122,6 @@
             <groupId>de.aservo</groupId>
             <artifactId>confapi-commons</artifactId>
             <version>${confapi-commons.version}</version>
-            <scope>compile</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-annotations</artifactId>
             <scope>compile</scope>
         </dependency>
 
@@ -161,7 +151,7 @@
         <dependency>
             <groupId>com.atlassian.confluence.plugins</groupId>
             <artifactId>confluence-lookandfeel</artifactId>
-            <version>${confluence-lookandfeel.version}</version>
+            <version>${confluence.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -211,12 +201,14 @@
         <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
+            <version>${javax.jaxb-api.version}</version>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
             <groupId>javax.ws.rs</groupId>
             <artifactId>javax.ws.rs-api</artifactId>
+            <version>${javax.ws.rs-api.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -253,6 +245,20 @@
             </exclusions>
         </dependency>
 
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <version>${swagger.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-jaxrs2</artifactId>
+            <version>${swagger.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- test dependencies -->
 
         <dependency>
@@ -272,7 +278,12 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>5.10.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -290,8 +301,9 @@
         </dependency>
 
         <dependency>
-            <groupId>org.glassfish.web</groupId>
+            <groupId>org.glassfish</groupId>
             <artifactId>javax.el</artifactId>
+            <version>${javax.el-api.version}</version>
             <scope>test</scope>
         </dependency>
 
@@ -319,9 +331,6 @@
     </dependencies>
 
     <build>
-
-        <!-- plugins -->
-
         <plugins>
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
@@ -332,7 +341,7 @@
                     <ajpPort>${ajp.port}</ajpPort>
                     <productVersion>${confluence.version}</productVersion>
                     <!-- the following version may only be adjusted, when a new home zip has been generated -->
-                    <productDataVersion>7.5.0</productDataVersion>
+                    <productDataVersion>${confluence.data.version}</productDataVersion>
                     <!-- in case new home zip should be generated, please add your executed steps to generated-test-resources.md -->
                     <productDataPath>${project.basedir}/src/test/resources/generated-test-resources.zip</productDataPath>
                     <enableQuickReload>true</enableQuickReload>
@@ -398,7 +407,7 @@
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>${openapi-generator-maven-plugin.version}</version>
+                <version>${openai-generator.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -422,7 +431,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.10</version>
+                <version>${jacoco.plugin.version}</version>
             </plugin>
         </plugins>
     </build>

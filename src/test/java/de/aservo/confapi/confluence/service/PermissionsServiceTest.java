@@ -4,21 +4,21 @@ import com.atlassian.confluence.security.SpacePermission;
 import com.atlassian.confluence.security.SpacePermissionManager;
 import com.atlassian.confluence.security.service.AnonymousUserPermissionsService;
 import de.aservo.confapi.confluence.model.PermissionAnonymousAccessBean;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import static com.atlassian.confluence.security.SpacePermission.USE_CONFLUENCE_PERMISSION;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
-public class PermissionsServiceTest {
+@ExtendWith(MockitoExtension.class)
+class PermissionsServiceTest {
 
     @Mock
     private AnonymousUserPermissionsService anonymousUserPermissionsService;
@@ -28,13 +28,13 @@ public class PermissionsServiceTest {
 
     private PermissionsServiceImpl permissionsService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         permissionsService = new PermissionsServiceImpl(anonymousUserPermissionsService, spacePermissionManager);
     }
 
     @Test
-    public void testGetAnonymousPermissions() {
+    void testGetAnonymousPermissions() {
         List<SpacePermission> globalPermissions = new ArrayList<>();
         globalPermissions.add(SpacePermission.createGroupSpacePermission(USE_CONFLUENCE_PERMISSION, null, null));
 
@@ -45,7 +45,7 @@ public class PermissionsServiceTest {
     }
 
     @Test
-    public void testSetAnonymousPermissions() {
+    void testSetAnonymousPermissions() {
         PermissionAnonymousAccessBean accessBean = new PermissionAnonymousAccessBean(true, true);
         PermissionAnonymousAccessBean response = permissionsService.setPermissionAnonymousAccess(accessBean);
         assertNotNull(response);

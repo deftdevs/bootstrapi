@@ -3,19 +3,19 @@ package de.aservo.confapi.confluence.model.util;
 import com.atlassian.confluence.themes.BaseColourScheme;
 import com.atlassian.confluence.themes.ColourScheme;
 import de.aservo.confapi.commons.model.SettingsBrandingColorSchemeBean;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import static de.aservo.confapi.confluence.model.util.SettingsBrandingColorSchemeBeanUtil.toGlobalColorScheme;
 import static de.aservo.confapi.confluence.model.util.SettingsBrandingColorSchemeBeanUtil.toSettingsBrandingColorSchemeBean;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class SettingsColourSchemeBeanUtilTest {
+@ExtendWith(MockitoExtension.class)
+class SettingsColourSchemeBeanUtilTest {
 
     @Test
-    public void testToGlobalColorScheme() {
+    void testToGlobalColorScheme() {
 
         SettingsBrandingColorSchemeBean schemeBean = SettingsBrandingColorSchemeBean.EXAMPLE_1;
         BaseColourScheme baseColourScheme = toGlobalColorScheme(schemeBean, null);
@@ -27,7 +27,7 @@ public class SettingsColourSchemeBeanUtilTest {
     }
 
     @Test
-    public void testToGlobalColorSchemeSetNullValues() {
+    void testToGlobalColorSchemeSetNullValues() {
 
         SettingsBrandingColorSchemeBean schemeBean = new SettingsBrandingColorSchemeBean();
         BaseColourScheme baseColourScheme = toGlobalColorScheme(schemeBean, null);
@@ -39,7 +39,7 @@ public class SettingsColourSchemeBeanUtilTest {
     }
 
     @Test
-    public void testToSettingsBrandingColorSchemeBean() {
+    void testToSettingsBrandingColorSchemeBean() {
 
         final BaseColourScheme colourScheme = getDummyBaseColourScheme();
 
