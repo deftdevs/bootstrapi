@@ -1,7 +1,7 @@
 package de.aservo.confapi.confluence.service;
 
+import com.atlassian.confluence.setup.settings.GlobalSettingsManager;
 import com.atlassian.confluence.setup.settings.Settings;
-import com.atlassian.confluence.setup.settings.SettingsManager;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.aservo.confapi.commons.model.SettingsBean;
@@ -15,16 +15,19 @@ import java.net.URI;
 @ExportAsService(SettingsService.class)
 public class SettingsServiceImpl implements SettingsService {
 
-    private final SettingsManager settingsManager;
+    @ComponentImport
+    private final GlobalSettingsManager globalSettingsManager;
 
     @Inject
-    public SettingsServiceImpl(@ComponentImport final SettingsManager settingsManager) {
-        this.settingsManager = settingsManager;
+    public SettingsServiceImpl(
+            final GlobalSettingsManager globalSettingsManager) {
+
+        this.globalSettingsManager = globalSettingsManager;
     }
 
     @Override
     public SettingsBean getSettings() {
-        final Settings settings = settingsManager.getGlobalSettings();
+        final Settings settings = globalSettingsManager.getGlobalSettings();
 
         final SettingsBean settingsBean = new SettingsBean();
         settingsBean.setBaseUrl(URI.create(settings.getBaseUrl()));
@@ -37,7 +40,7 @@ public class SettingsServiceImpl implements SettingsService {
 
     @Override
     public SettingsBean setSettings(SettingsBean settingsBean) {
-        final Settings settings = settingsManager.getGlobalSettings();
+        final Settings settings = globalSettingsManager.getGlobalSettings();
 
         if (settingsBean.getBaseUrl() != null) {
             settings.setBaseUrl(settingsBean.getBaseUrl().toString());
@@ -55,7 +58,7 @@ public class SettingsServiceImpl implements SettingsService {
             settings.setExternalUserManagement(settingsBean.getExternalUserManagement());
         }
 
-        settingsManager.updateGlobalSettings(settings);
+        globalSettingsManager.updateGlobalSettings(settings);
 
         return getSettings();
     }
