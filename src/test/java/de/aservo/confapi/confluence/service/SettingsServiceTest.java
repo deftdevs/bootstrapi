@@ -2,8 +2,8 @@ package de.aservo.confapi.confluence.service;
 
 import com.atlassian.confluence.settings.setup.DefaultTestSettings;
 import com.atlassian.confluence.settings.setup.OtherTestSettings;
+import com.atlassian.confluence.setup.settings.GlobalSettingsManager;
 import com.atlassian.confluence.setup.settings.Settings;
-import com.atlassian.confluence.setup.settings.SettingsManager;
 import de.aservo.confapi.commons.model.SettingsBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,20 +22,20 @@ import static org.mockito.Mockito.verify;
 class SettingsServiceTest {
 
     @Mock
-    private SettingsManager settingsManager;
+    private GlobalSettingsManager globalSettingsManager;
 
     private SettingsServiceImpl settingsService;
 
     @BeforeEach
     public void setup() {
-        settingsService = new SettingsServiceImpl(settingsManager);
+        settingsService = new SettingsServiceImpl(globalSettingsManager);
     }
 
     @Test
     void testGetSettings() {
         final Settings settings = new DefaultTestSettings();
 
-        doReturn(settings).when(settingsManager).getGlobalSettings();
+        doReturn(settings).when(globalSettingsManager).getGlobalSettings();
 
         final SettingsBean settingsBean = settingsService.getSettings();
 
@@ -51,7 +51,7 @@ class SettingsServiceTest {
     @Test
     void testPutSettings() {
         final Settings defaultSettings = new DefaultTestSettings();
-        doReturn(defaultSettings).when(settingsManager).getGlobalSettings();
+        doReturn(defaultSettings).when(globalSettingsManager).getGlobalSettings();
 
         final Settings updateSettings = new OtherTestSettings();
 
@@ -64,7 +64,7 @@ class SettingsServiceTest {
         final SettingsBean responseBean = settingsService.setSettings(requestBean);
 
         final ArgumentCaptor<Settings> settingsCaptor = ArgumentCaptor.forClass(Settings.class);
-        verify(settingsManager).updateGlobalSettings(settingsCaptor.capture());
+        verify(globalSettingsManager).updateGlobalSettings(settingsCaptor.capture());
         final Settings settings = settingsCaptor.getValue();
 
         final SettingsBean settingsBean = new SettingsBean();
@@ -82,12 +82,12 @@ class SettingsServiceTest {
         final SettingsBean settingsBean = new SettingsBean();
         
         final Settings defaultSettings = new DefaultTestSettings();
-        doReturn(defaultSettings).when(settingsManager).getGlobalSettings();
+        doReturn(defaultSettings).when(globalSettingsManager).getGlobalSettings();
 
         settingsService.setSettings(settingsBean);
 
         final ArgumentCaptor<Settings> settingsCaptor = ArgumentCaptor.forClass(Settings.class);
-        verify(settingsManager).updateGlobalSettings(settingsCaptor.capture());
+        verify(globalSettingsManager).updateGlobalSettings(settingsCaptor.capture());
         final Settings settings = settingsCaptor.getValue();
 
         assertEquals(defaultSettings.getBaseUrl(), settings.getBaseUrl());
