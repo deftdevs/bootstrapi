@@ -7,6 +7,12 @@ public class ConfAPI {
     public static final String APPLICATIONS                 = "applications";
     public static final String APPLICATION_LINK             = "application-link";
     public static final String APPLICATION_LINKS            = "application-links";
+    public static final String AUTHENTICATION               = "authentication";
+    public static final String AUTHENTICATION_IDP           = "idp";
+    public static final String AUTHENTICATION_IDPS          = "idps";
+    public static final String AUTHENTICATION_IDP_OIDC      = "oidc";
+    public static final String AUTHENTICATION_IDP_SAML      = "saml";
+    public static final String AUTHENTICATION_SSO           = "sso";
     public static final String BACKUP                       = "backup";
     public static final String BACKUP_EXPORT                = "export";
     public static final String BACKUP_IMPORT                = "import";
