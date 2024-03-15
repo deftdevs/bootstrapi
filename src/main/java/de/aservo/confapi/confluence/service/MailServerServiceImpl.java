@@ -1,12 +1,12 @@
 package de.aservo.confapi.confluence.service;
 
+import com.atlassian.confluence.jmx.JmxSMTPMailServer;
 import com.atlassian.mail.MailException;
 import com.atlassian.mail.MailProtocol;
 import com.atlassian.mail.server.MailServerManager;
 import com.atlassian.mail.server.PopMailServer;
 import com.atlassian.mail.server.SMTPMailServer;
 import com.atlassian.mail.server.impl.PopMailServerImpl;
-import com.atlassian.mail.server.impl.SMTPMailServerImpl;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import de.aservo.confapi.commons.exception.BadRequestException;
@@ -41,7 +41,7 @@ public class MailServerServiceImpl implements MailServerService {
     public MailServerSmtpBean setMailServerSmtp(MailServerSmtpBean mailServerSmtpBean) {
         final SMTPMailServer smtpMailServer = mailServerManager.isDefaultSMTPMailServerDefined()
                 ? mailServerManager.getDefaultSMTPMailServer()
-                : new SMTPMailServerImpl();
+                : new JmxSMTPMailServer();
 
         assert smtpMailServer != null;
 
