@@ -65,7 +65,11 @@
         <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
         <javax.el-api.version>3.0.0</javax.el-api.version>
         <jira-lookandfeel-plugin.version>7.13.0</jira-lookandfeel-plugin.version>
-        <powermock-api-easymock.version>2.0.7</powermock-api-easymock.version>
+        <!-- Compiler must be 8 so that the plugin can run on jIRA instances using Java 11 -->
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <maven.compiler.source>11</maven.compiler.source>
+        <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
     <dependencyManagement>
@@ -124,6 +128,7 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <version>1.18.28</version>
             <scope>provided</scope>
         </dependency>
 
@@ -298,20 +303,6 @@
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator-annotation-processor</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-api-easymock</artifactId>
-            <version>${powermock-api-easymock.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.powermock</groupId>
-            <artifactId>powermock-module-junit4</artifactId>
-            <version>${powermock-api-easymock.version}</version>
             <scope>test</scope>
         </dependency>
 
