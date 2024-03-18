@@ -3,7 +3,7 @@
 ConfAPI for Jira
 ================
 
-[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.aservo.atlassian/confapi-jira-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.aservo.atlassian/confapi-jira-plugin)
+[![Maven Central](https://maven-badges.herokuapp.com/maven-central/de.aservo/confapi-jira-plugin/badge.svg)](https://maven-badges.herokuapp.com/maven-central/de.aservo/confapi-jira-plugin)
 [![Build Status](https://github.com/aservo/confapi-jira-plugin/actions/workflows/ci.yaml/badge.svg)](https://github.com/aservo/confapi-jira-plugin/actions/workflows/ci.yaml)
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=aservo_confapi-jira-plugin&metric=coverage)](https://sonarcloud.io/dashboard?id=aservo_confapi-jira-plugin)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=aservo_confapi-jira-plugin&metric=alert_status)](https://sonarcloud.io/dashboard?id=aservo_confapi-jira-plugin)
