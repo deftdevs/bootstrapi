@@ -440,6 +440,13 @@
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.plugin.version}</version>
             </plugin>
+
+            <!-- Override Nexus Staging version from parent pom -->
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.13</version>
+            </plugin>
         </plugins>
     </build>
 
