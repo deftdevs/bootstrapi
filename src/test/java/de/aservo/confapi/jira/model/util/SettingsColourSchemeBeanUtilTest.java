@@ -3,27 +3,27 @@ package de.aservo.confapi.jira.model.util;
 import com.atlassian.jira.config.properties.APKeys;
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import de.aservo.confapi.commons.model.SettingsBrandingColorSchemeBean;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class SettingsColourSchemeBeanUtilTest {
 
     @Mock
     private ApplicationProperties applicationProperties;
 
     @Test
-    public void testToGlobalColorScheme() {
+    void testToGlobalColorScheme() {
 
         SettingsBrandingColorSchemeBean schemeBean = SettingsBrandingColorSchemeBean.EXAMPLE_1;
         SettingsBrandingColorSchemeBeanUtil.setGlobalColorScheme(schemeBean, true, applicationProperties);
@@ -34,7 +34,7 @@ public class SettingsColourSchemeBeanUtilTest {
     }
 
     @Test
-    public void testToSettingsBrandingColorSchemeBean() {
+    void testToSettingsBrandingColorSchemeBean() {
 
         Map<String, Object> dummyBaseColourScheme = getDummyBaseColourScheme();
         doReturn(dummyBaseColourScheme).when(applicationProperties).asMap();

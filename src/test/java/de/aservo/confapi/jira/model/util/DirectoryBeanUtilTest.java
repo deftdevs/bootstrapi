@@ -4,22 +4,22 @@ import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.model.directory.DirectoryImpl;
 import de.aservo.confapi.commons.model.DirectoryCrowdBean;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Map;
 
 import static com.atlassian.crowd.directory.RemoteCrowdDirectory.*;
 import static com.atlassian.crowd.directory.SynchronisableDirectoryProperties.INCREMENTAL_SYNC_ENABLED;
 import static com.atlassian.crowd.model.directory.DirectoryImpl.ATTRIBUTE_KEY_USE_NESTED_GROUPS;
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class DirectoryBeanUtilTest {
+@ExtendWith(MockitoExtension.class)
+class DirectoryBeanUtilTest {
 
     @Test
-    public void testToDirectoryWithoutProxy() {
+    void testToDirectoryWithoutProxy() {
         final DirectoryCrowdBean bean = DirectoryCrowdBean.EXAMPLE_1;
         final Directory directory = DirectoryBeanUtil.toDirectory(bean);
 
@@ -32,7 +32,7 @@ public class DirectoryBeanUtilTest {
     }
 
     @Test
-    public void testToDirectoryWithProxy() {
+    void testToDirectoryWithProxy() {
         final DirectoryCrowdBean bean = DirectoryCrowdBean.EXAMPLE_1_WITH_PROXY;
         final Directory directory = DirectoryBeanUtil.toDirectory(bean);
 
@@ -50,7 +50,7 @@ public class DirectoryBeanUtilTest {
     }
 
     @Test
-    public void testToDirectoryBeanWithProxy() {
+    void testToDirectoryBeanWithProxy() {
         final DirectoryImpl directory = new DirectoryImpl("test", DirectoryType.CROWD, "test.class");
         directory.setAttribute(CROWD_SERVER_URL, "http://localhost");
         directory.setAttribute(APPLICATION_PASSWORD, "test");

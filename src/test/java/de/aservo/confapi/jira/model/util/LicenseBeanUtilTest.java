@@ -4,22 +4,22 @@ import com.atlassian.application.api.ApplicationKey;
 import com.atlassian.jira.license.LicenseDetails;
 import com.atlassian.jira.license.LicensedApplications;
 import de.aservo.confapi.commons.model.LicenseBean;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
-@RunWith(MockitoJUnitRunner.class)
-public class LicenseBeanUtilTest {
+@ExtendWith(MockitoExtension.class)
+class LicenseBeanUtilTest {
 
     @Test
-    public void testToLicenseBean() {
+    void testToLicenseBean() {
         final LicenseBean exampleLicenseBean = LicenseBean.EXAMPLE_1;
 
         final LicensedApplications licensedApplications = mock(LicensedApplications.class);

@@ -6,21 +6,21 @@ import com.atlassian.jira.license.LicenseDetails;
 import com.atlassian.jira.license.LicensedApplications;
 import de.aservo.confapi.commons.model.LicenseBean;
 import de.aservo.confapi.commons.model.LicensesBean;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
 
 import static com.atlassian.extras.api.LicenseType.TESTING;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class LicensesServiceTest {
+@ExtendWith(MockitoExtension.class)
+class LicensesServiceTest {
 
     private static final String LICENSE_KEY = "Aaa...";
 
@@ -29,13 +29,13 @@ public class LicensesServiceTest {
 
     private LicensesServiceImpl licensesService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         licensesService = new LicensesServiceImpl(licenseManager);
     }
 
     @Test
-    public void testGetLicenses() {
+    void testGetLicenses() {
         final LicensedApplications licensedApplications = mock(LicensedApplications.class);
         doReturn(Collections.singleton(ApplicationKey.valueOf("jira"))).when(licensedApplications).getKeys();
 
@@ -53,7 +53,7 @@ public class LicensesServiceTest {
     }
 
     @Test
-    public void testSetLicenses() {
+    void testSetLicenses() {
         final LicenseBean licenseBean = new LicenseBean();
 
         final LicensesServiceImpl spy = spy(licensesService);
