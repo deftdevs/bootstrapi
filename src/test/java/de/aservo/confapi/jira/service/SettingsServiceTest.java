@@ -3,20 +3,21 @@ package de.aservo.confapi.jira.service;
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import de.aservo.confapi.commons.exception.BadRequestException;
 import de.aservo.confapi.commons.model.SettingsBean;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.URI;
 
 import static com.atlassian.jira.config.properties.APKeys.*;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class SettingsServiceTest {
+@ExtendWith(MockitoExtension.class)
+class SettingsServiceTest {
 
     private static final URI BASE_URL = URI.create("https://jira.atlassian.com");
     private static final String MODE_PUBLIC = "public";
@@ -29,13 +30,13 @@ public class SettingsServiceTest {
 
     private SettingsServiceImpl settingsService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         settingsService = new SettingsServiceImpl(applicationProperties);
     }
 
     @Test
-    public void testGetSettings() {
+    void testGetSettings() {
         doReturn(BASE_URL.toString()).when(applicationProperties).getString(JIRA_BASEURL);
         doReturn(MODE_PUBLIC).when(applicationProperties).getString(JIRA_MODE);
         doReturn(TITLE).when(applicationProperties).getString(JIRA_TITLE);
@@ -52,7 +53,7 @@ public class SettingsServiceTest {
     }
 
     @Test
-    public void testSetSettings() {
+    void testSetSettings() {
         final SettingsBean settingsBean = new SettingsBean();
         settingsBean.setBaseUrl(BASE_URL);
         settingsBean.setMode(MODE_PUBLIC);
@@ -70,7 +71,7 @@ public class SettingsServiceTest {
     }
 
     @Test
-    public void testSetSettingsEmptyBean() {
+    void testSetSettingsEmptyBean() {
         final SettingsBean settingsBean = new SettingsBean();
 
         settingsService.setSettings(settingsBean);
@@ -81,22 +82,25 @@ public class SettingsServiceTest {
         verify(applicationProperties, never()).setString(JIRA_CONTACT_ADMINISTRATORS_MESSSAGE, CONTACT_MESSAGE);
     }
 
-    @Test(expected = BadRequestException.class)
-    public void testSetSettingsUnsupportedMode() {
+    @Test
+    void testSetSettingsUnsupportedMode() {
         final SettingsBean settingsBean = new SettingsBean();
         settingsBean.setMode("unsupported");
 
-        settingsService.setSettings(settingsBean);
+        assertThrows(BadRequestException.class, () -> {
+            settingsService.setSettings(settingsBean);
+        });
     }
 
-    @Test(expected = BadRequestException.class)
-    public void testSetSettingsInvalidCombination() {
+    @Test
+    void testSetSettingsInvalidCombination() {
         final SettingsBean settingsBean = new SettingsBean();
         settingsBean.setMode(MODE_PUBLIC);
-
         doReturn(true).when(applicationProperties).getOption(JIRA_OPTION_USER_EXTERNALMGT);
 
-        settingsService.setSettings(settingsBean);
+        assertThrows(BadRequestException.class, () -> {
+            settingsService.setSettings(settingsBean);
+        });
     }
 
 }

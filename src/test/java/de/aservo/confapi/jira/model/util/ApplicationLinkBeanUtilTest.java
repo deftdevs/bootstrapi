@@ -16,23 +16,22 @@ import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
 import de.aservo.confapi.commons.model.ApplicationLinkBean;
 import de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
 import org.apache.commons.lang3.NotImplementedException;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
-@RunWith(MockitoJUnitRunner.class)
-public class ApplicationLinkBeanUtilTest {
+@ExtendWith(MockitoExtension.class)
+class ApplicationLinkBeanUtilTest {
 
     @Test
-    public void testToApplicationLinkBean() throws URISyntaxException {
+    void testToApplicationLinkBean() throws URISyntaxException {
         final ApplicationId applicationId = new ApplicationId(UUID.randomUUID().toString());
         final URI displayUri = new URI("http://localhost");
         final URI rpcUri = new URI("http://rpc.example.com");
@@ -48,7 +47,7 @@ public class ApplicationLinkBeanUtilTest {
     }
 
     @Test
-    public void testToApplicationLinkDetails() {
+    void testToApplicationLinkDetails() {
         final ApplicationLinkBean bean = ApplicationLinkBean.EXAMPLE_1;
         final ApplicationLinkDetails linkDetails = ApplicationLinkBeanUtil.toApplicationLinkDetails(bean);
 
@@ -60,7 +59,7 @@ public class ApplicationLinkBeanUtilTest {
     }
 
     @Test
-    public void testLinkTypeGenerator() throws URISyntaxException {
+    void testLinkTypeGenerator() throws URISyntaxException {
         for (ApplicationLinkType linkType : ApplicationLinkType.values()) {
             ApplicationType applicationType = null;
             switch (linkType) {
@@ -92,14 +91,17 @@ public class ApplicationLinkBeanUtilTest {
         }
     }
 
-    @Test(expected = NotImplementedException.class)
-    public void testNonImplementedLinkTypeGenerator() throws URISyntaxException {
+    @Test
+    void testNonImplementedLinkTypeGenerator() throws URISyntaxException {
         ApplicationType applicationType = mock(RefAppApplicationType.class);
         ApplicationId applicationId = new ApplicationId(UUID.randomUUID().toString());
         URI uri = new URI("http://localhost");
         ApplicationLink applicationLink = new DefaultApplicationLink(
                 applicationId, applicationType, "test", uri, uri, false, false);
-        ApplicationLinkBeanUtil.toApplicationLinkBean(applicationLink);
+
+        assertThrows(NotImplementedException.class, () -> {
+            ApplicationLinkBeanUtil.toApplicationLinkBean(applicationLink);
+        });
     }
 
 }

@@ -1,7 +1,12 @@
 package de.aservo.confapi.jira.service;
 
+import com.atlassian.event.api.EventPublisher;
+import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.config.properties.ApplicationProperties;
+import com.atlassian.jira.config.properties.LnFDefaultColorProvider;
+import com.atlassian.jira.config.properties.LogoProvider;
 import com.atlassian.jira.config.util.JiraHome;
+import com.atlassian.jira.lookandfeel.LogoChoice;
 import com.atlassian.jira.lookandfeel.LookAndFeelProperties;
 import com.atlassian.jira.lookandfeel.upload.UploadService;
 import com.atlassian.jira.security.JiraAuthenticationContext;
@@ -9,26 +14,29 @@ import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import de.aservo.confapi.commons.exception.InternalServerErrorException;
 import de.aservo.confapi.commons.model.SettingsBrandingColorSchemeBean;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.MockedStatic;
+import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
 import java.util.Map;
 
 import static de.aservo.confapi.jira.model.util.SettingsColourSchemeBeanUtilTest.getDummyBaseColourScheme;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class SettingsBrandingServiceTest {
+@ExtendWith(MockitoExtension.class)
+class SettingsBrandingServiceTest {
 
     private ApplicationProperties applicationProperties;
     private UploadService uploadService;
     private LookAndFeelProperties lookAndFeelProperties;
     private SettingsBrandingServiceImpl settingsBrandingService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         //when using powermock we cannot initialize with @Mock or @InjectMocks unfortunately
         applicationProperties = mock(ApplicationProperties.class);
@@ -46,7 +54,7 @@ public class SettingsBrandingServiceTest {
     }
 
     @Test
-    public void testGetColourScheme() {
+    void testGetColourScheme() {
 
         Map<String, Object> dummyBaseColourScheme = getDummyBaseColourScheme();
         doReturn(dummyBaseColourScheme).when(applicationProperties).asMap();
@@ -57,7 +65,7 @@ public class SettingsBrandingServiceTest {
     }
 
     @Test
-    public void testSetColourScheme() {
+    void testSetColourScheme() {
 
         SettingsBrandingColorSchemeBean schemeBean = SettingsBrandingColorSchemeBean.EXAMPLE_1;
 
@@ -70,44 +78,48 @@ public class SettingsBrandingServiceTest {
     }
 
     //InternalServerErrorException -> FileNotFoundException is expected because no logofile is present in the filesystem at test time
-    @Test(expected = InternalServerErrorException.class)
-    public void testGetLogo() {
-         settingsBrandingService.getLogo();
-         verify(uploadService).getLogoDirectory();
+    @Test
+    void testGetLogo() {
+        assertThrows(InternalServerErrorException.class, () -> {
+            settingsBrandingService.getLogo();
+        });
     }
 
-    // @Test
-    // public void testSetLogo() {
-    //     PowerMock.mockStatic(ComponentAccessor.class);
-    //     expect(ComponentAccessor.getComponent(LnFDefaultColorProvider.class)).andStubReturn(mock(LnFDefaultColorProvider.class));
-    //     expect(ComponentAccessor.getComponent(LogoProvider.class)).andStubReturn(mock(LogoProvider.class));
-    //     expect(ComponentAccessor.getComponent(EventPublisher.class)).andStubReturn(mock(EventPublisher.class));
-    //     PowerMock.replay(ComponentAccessor.class);
-    //
-    //     InputStream is = new ByteArrayInputStream("".getBytes());
-    //     settingsBrandingService.setLogo(is);
-    //
-    //     verify(lookAndFeelProperties).setLogoChoice(LogoChoice.UPLOAD);
-    // }
+    @Test
+    void testSetLogo() {
+        InputStream is = new ByteArrayInputStream("".getBytes());
+
+        try (MockedStatic<ComponentAccessor> componentAccessorMockedStatic = mockStatic(ComponentAccessor.class)) {
+            componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(LnFDefaultColorProvider.class)).thenReturn(mock(LnFDefaultColorProvider.class));
+            componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(LogoProvider.class)).thenReturn(mock(LogoProvider.class));
+            componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(EventPublisher.class)).thenReturn(mock(EventPublisher.class));
+
+            settingsBrandingService.setLogo(is);
+        }
+
+        verify(lookAndFeelProperties).setLogoChoice(LogoChoice.UPLOAD);
+    }
 
     //InternalServerErrorException -> FileNotFoundException is expected because no logofile is present in the filesystem at test time
-    @Test(expected = InternalServerErrorException.class)
-    public void testGetFavicon() {
-        settingsBrandingService.getFavicon();
-        verify(uploadService).getLogoDirectory();
+    @Test
+    void testGetFavicon() {
+        assertThrows(InternalServerErrorException.class, () -> {
+            settingsBrandingService.getFavicon();
+        });
     }
 
-    // @Test
-    // public void testSetFavicon() {
-    //     PowerMock.mockStatic(ComponentAccessor.class);
-    //     expect(ComponentAccessor.getComponent(LnFDefaultColorProvider.class)).andStubReturn(mock(LnFDefaultColorProvider.class));
-    //     expect(ComponentAccessor.getComponent(LogoProvider.class)).andStubReturn(mock(LogoProvider.class));
-    //     expect(ComponentAccessor.getComponent(EventPublisher.class)).andStubReturn(mock(EventPublisher.class));
-    //     PowerMock.replay(ComponentAccessor.class);
-    //
-    //     InputStream is = new ByteArrayInputStream("".getBytes());
-    //     settingsBrandingService.setFavicon(is);
-    //
-    //     verify(lookAndFeelProperties).setFaviconChoice(LogoChoice.UPLOAD);
-    // }
+    @Test
+    void testSetFavicon() {
+        final InputStream is = new ByteArrayInputStream("".getBytes());
+
+        try (MockedStatic<ComponentAccessor> componentAccessorMockedStatic = mockStatic(ComponentAccessor.class)) {
+            componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(LnFDefaultColorProvider.class)).thenReturn(mock(LnFDefaultColorProvider.class));
+            componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(LogoProvider.class)).thenReturn(mock(LogoProvider.class));
+            componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(EventPublisher.class)).thenReturn(mock(EventPublisher.class));
+
+            settingsBrandingService.setFavicon(is);
+        }
+
+        verify(lookAndFeelProperties).setFaviconChoice(LogoChoice.UPLOAD);
+    }
 }

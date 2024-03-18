@@ -14,11 +14,11 @@ import de.aservo.confapi.commons.model.DirectoriesBean;
 import de.aservo.confapi.commons.model.DirectoryCrowdBean;
 import de.aservo.confapi.commons.model.DirectoryLdapBean;
 import de.aservo.confapi.jira.model.util.DirectoryBeanUtil;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
 import java.util.Date;
@@ -29,26 +29,25 @@ import static com.atlassian.crowd.directory.RemoteCrowdDirectory.*;
 import static com.atlassian.crowd.directory.SynchronisableDirectoryProperties.*;
 import static com.atlassian.crowd.directory.SynchronisableDirectoryProperties.SyncGroupMembershipsAfterAuth.WHEN_AUTHENTICATION_CREATED_THE_USER;
 import static com.atlassian.crowd.model.directory.DirectoryImpl.ATTRIBUTE_KEY_USE_NESTED_GROUPS;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
-public class DirectoryServiceTest {
+@ExtendWith(MockitoExtension.class)
+class DirectoryServiceTest {
 
     @Mock
     private CrowdDirectoryService crowdDirectoryService;
 
     private DirectoryServiceImpl directoryService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         directoryService = new DirectoryServiceImpl(crowdDirectoryService);
     }
 
     @Test
-    public void testGetDirectories() {
+    void testGetDirectories() {
         Directory directory = createDirectory();
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
 
@@ -57,15 +56,18 @@ public class DirectoryServiceTest {
         assertEquals(directories.getDirectories().iterator().next(), DirectoryBeanUtil.toDirectoryBean(directory));
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testGetDirectoriesUriException() {
+    @Test
+    void testGetDirectoriesUriException() {
         Directory directory = createDirectory("öäöää://uhveuehvde");
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
-        directoryService.getDirectories();
+
+        assertThrows(IllegalArgumentException.class, () -> {
+            directoryService.getDirectories();
+        });
     }
 
     @Test
-    public void testGetDirectory() {
+    void testGetDirectory() {
         Directory directory = createDirectory();
         doReturn(directory).when(crowdDirectoryService).findDirectoryById(1L);
 
@@ -74,13 +76,15 @@ public class DirectoryServiceTest {
         assertEquals(DirectoryBeanUtil.toDirectoryBean(directory), directoryBean);
     }
 
-    @Test(expected = NotFoundException.class)
-    public void testGetDirectoryNotExisting() {
-        directoryService.getDirectory(1L);
+    @Test
+    void testGetDirectoryNotExisting() {
+        assertThrows(NotFoundException.class, () -> {
+            directoryService.getDirectory(1L);
+        });
     }
 
     @Test
-    public void testSetDirectoriesWithoutExistingDirectory() {
+    void testSetDirectoriesWithoutExistingDirectory() {
         Directory directory = createDirectory();
 
         doReturn(directory).when(crowdDirectoryService).addDirectory(any());
@@ -90,11 +94,11 @@ public class DirectoryServiceTest {
         directoryBean.getServer().setAppPassword("test");
         directoryService.setDirectories(new DirectoriesBean(Collections.singletonList(directoryBean)), false);
 
-        assertTrue("Update Successful", true);
+        assertTrue(true, "Update Successful");
     }
 
     @Test
-    public void testSetDirectoriesWithExistingDirectory() {
+    void testSetDirectoriesWithExistingDirectory() {
         Directory directory = createDirectory();
 
         doReturn(directory).when(crowdDirectoryService).findDirectoryById(1L);
@@ -109,7 +113,7 @@ public class DirectoryServiceTest {
     }
 
     @Test
-    public void testSetDirectoriesWithConnectionTest() {
+    void testSetDirectoriesWithConnectionTest() {
         Directory directory = createDirectory();
 
         doReturn(directory).when(crowdDirectoryService).findDirectoryById(1L);
@@ -124,7 +128,7 @@ public class DirectoryServiceTest {
     }
 
     @Test
-    public void testSetDirectoryDefault() {
+    void testSetDirectoryDefault() {
         Directory directory = createDirectory();
 
         doReturn(directory).when(crowdDirectoryService).findDirectoryById(1L);
@@ -142,7 +146,7 @@ public class DirectoryServiceTest {
     }
 
     @Test
-    public void testSetDirectoryWithConnectionTest() {
+    void testSetDirectoryWithConnectionTest() {
         Directory directory = createDirectory();
 
         doReturn(directory).when(crowdDirectoryService).findDirectoryById(1L);
@@ -156,30 +160,40 @@ public class DirectoryServiceTest {
         assertEquals(directoryBean.getId(), directoryAdded.getId());
     }
 
-    @Test(expected = BadRequestException.class)
-    public void testSetDirectoryUnsupportedType() {
-        directoryService.setDirectory(1L, new DirectoryLdapBean(), false);
+    @Test
+    void testSetDirectoryUnsupportedType() {
+        final DirectoryLdapBean directoryLdapBean = new DirectoryLdapBean();
+
+        assertThrows(BadRequestException.class, () -> {
+            directoryService.setDirectory(1L, directoryLdapBean, false);
+        });
     }
 
-    @Test(expected = NotFoundException.class)
-    public void testSetDirectoryNotExisting() {
-        Directory directory = createDirectory();
-        directoryService.setDirectory(1L, DirectoryBeanUtil.toDirectoryBean(directory), false);
+    @Test
+    void testSetDirectoryNotExisting() {
+        final Directory directory = createDirectory();
+        final AbstractDirectoryBean directoryBean = DirectoryBeanUtil.toDirectoryBean(directory);
+
+        assertThrows(NotFoundException.class, () -> {
+            directoryService.setDirectory(1L, directoryBean, false);
+        });
     }
 
-    @Test(expected = IllegalArgumentException.class)
-    public void testAddDirectoryUriException() {
+    @Test
+    void testAddDirectoryUriException() {
         Directory responseDirectory = createDirectory("öäöää://uhveuehvde");
         doReturn(responseDirectory).when(crowdDirectoryService).addDirectory(any());
 
         Directory directory = createDirectory();
         DirectoryCrowdBean directoryBean = (DirectoryCrowdBean) DirectoryBeanUtil.toDirectoryBean(directory);
 
-        directoryService.addDirectory(directoryBean, false);
+        assertThrows(IllegalArgumentException.class, () -> {
+            directoryService.addDirectory(directoryBean, false);
+        });
     }
 
     @Test
-    public void testAddDirectory() {
+    void testAddDirectory() {
         Directory directory = createDirectory();
         doReturn(directory).when(crowdDirectoryService).addDirectory(any(Directory.class));
 
@@ -191,18 +205,24 @@ public class DirectoryServiceTest {
         assertEquals(directoryAdded.getId(), directoryBean.getId());
     }
 
-    @Test(expected = BadRequestException.class)
-    public void testAddDirectoryUnsupportedType() {
-        directoryService.addDirectory(new DirectoryLdapBean(), false);
-    }
+    @Test
+    void testAddDirectoryUnsupportedType() {
+        final DirectoryLdapBean directoryLdapBean = new DirectoryLdapBean();
 
-    @Test(expected = BadRequestException.class)
-    public void testDeleteDirectoriesWithoutForceParameter() {
-        directoryService.deleteDirectories(false);
+        assertThrows(BadRequestException.class, () -> {
+            directoryService.addDirectory(directoryLdapBean, false);
+        });
     }
 
     @Test
-    public void testDeleteDirectories() throws DirectoryCurrentlySynchronisingException {
+    void testDeleteDirectoriesWithoutForceParameter() {
+        assertThrows(BadRequestException.class, () -> {
+            directoryService.deleteDirectories(false);
+        });
+    }
+
+    @Test
+    void testDeleteDirectories() throws DirectoryCurrentlySynchronisingException {
         Directory directory = createDirectory();
         doReturn(directory).when(crowdDirectoryService).findDirectoryById(1L);
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
@@ -213,7 +233,7 @@ public class DirectoryServiceTest {
     }
 
     @Test
-    public void testDeleteDirectoriesWithoutInternalDirectory() {
+    void testDeleteDirectoriesWithoutInternalDirectory() {
         Directory directory = createDirectory("http://localhost", DirectoryType.INTERNAL);
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
 
@@ -223,7 +243,7 @@ public class DirectoryServiceTest {
     }
 
     @Test
-    public void testDeleteDirectory() throws DirectoryCurrentlySynchronisingException {
+    void testDeleteDirectory() throws DirectoryCurrentlySynchronisingException {
         doReturn(createDirectory()).when(crowdDirectoryService).findDirectoryById(1L);
 
         directoryService.deleteDirectory(1L);
@@ -231,16 +251,21 @@ public class DirectoryServiceTest {
         verify(crowdDirectoryService).removeDirectory(1L);
     }
 
-    @Test(expected = NotFoundException.class)
-    public void testDeleteDirectoryNotExisting() {
-        directoryService.deleteDirectory(1L);
+    @Test
+    void testDeleteDirectoryNotExisting() {
+        assertThrows(NotFoundException.class, () -> {
+            directoryService.deleteDirectory(1L);
+        });
     }
 
-    @Test(expected = ServiceUnavailableException.class)
-    public void testDeleteDirectoryCurrentlySynchronisingException() throws DirectoryCurrentlySynchronisingException {
+    @Test
+    void testDeleteDirectoryCurrentlySynchronisingException() throws DirectoryCurrentlySynchronisingException {
         doReturn(createDirectory()).when(crowdDirectoryService).findDirectoryById(1L);
         doThrow(new DirectoryCurrentlySynchronisingException(1L)).when(crowdDirectoryService).removeDirectory(1L);
-        directoryService.deleteDirectory(1L);
+
+        assertThrows(ServiceUnavailableException.class, () -> {
+            directoryService.deleteDirectory(1L);
+        });
     }
 
     private Directory createDirectory() {

@@ -5,52 +5,55 @@ import com.atlassian.plugins.rest.common.security.AuthorisationException;
 import com.atlassian.sal.api.user.UserKey;
 import com.atlassian.sal.api.user.UserManager;
 import com.atlassian.sal.api.user.UserProfile;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
-import static org.mockito.Matchers.any;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.mock;
 
-@RunWith(MockitoJUnitRunner.class)
-public class SysadminOnlyResourceFilterTest {
+@ExtendWith(MockitoExtension.class)
+class SysadminOnlyResourceFilterTest {
 
     @Mock
     private UserManager userManager;
 
     private SysadminOnlyResourceFilter sysadminOnlyResourceFilter;
 
-    @Before
+    @BeforeEach
     public void setup() {
         sysadminOnlyResourceFilter = new SysadminOnlyResourceFilter(userManager);
     }
 
     @Test
-    public void testFilterDefaults() {
+    void testFilterDefaults() {
         assertNull(sysadminOnlyResourceFilter.getResponseFilter());
         assertEquals(sysadminOnlyResourceFilter, sysadminOnlyResourceFilter.getRequestFilter());
     }
 
-    @Test(expected = AuthenticationRequiredException.class)
-    public void testAdminAccessNoUser() {
-        sysadminOnlyResourceFilter.filter(null);
-    }
-
-    @Test(expected = AuthorisationException.class)
-    public void testNonSysadminAccess() {
-        final UserProfile userProfile = mock(UserProfile.class);
-        doReturn(userProfile).when(userManager).getRemoteUser();
-
-        sysadminOnlyResourceFilter.filter(null);
+    @Test
+    void testAdminAccessNoUser() {
+        assertThrows(AuthenticationRequiredException.class, () -> {
+            sysadminOnlyResourceFilter.filter(null);
+        });
     }
 
     @Test
-    public void testSysadminAccess() {
+    void testNonSysadminAccess() {
+        final UserProfile userProfile = mock(UserProfile.class);
+        doReturn(userProfile).when(userManager).getRemoteUser();
+
+        assertThrows(AuthorisationException.class, () -> {
+            sysadminOnlyResourceFilter.filter(null);
+        });
+    }
+
+    @Test
+    void testSysadminAccess() {
         final UserProfile userProfile = mock(UserProfile.class);
         doReturn(new UserKey("user")).when(userProfile).getUserKey();
         doReturn(userProfile).when(userManager).getRemoteUser();
