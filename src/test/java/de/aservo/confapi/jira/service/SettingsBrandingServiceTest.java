@@ -5,14 +5,15 @@ import com.atlassian.jira.component.ComponentAccessor;
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.atlassian.jira.config.properties.LnFDefaultColorProvider;
 import com.atlassian.jira.config.properties.LogoProvider;
+import com.atlassian.jira.config.properties.UiSettingsStateManager;
 import com.atlassian.jira.config.util.JiraHome;
 import com.atlassian.jira.lookandfeel.LogoChoice;
+import com.atlassian.jira.lookandfeel.LookAndFeelConstants;
 import com.atlassian.jira.lookandfeel.LookAndFeelProperties;
 import com.atlassian.jira.lookandfeel.upload.UploadService;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
-import de.aservo.confapi.commons.exception.InternalServerErrorException;
 import de.aservo.confapi.commons.model.SettingsBrandingColorSchemeBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,12 +21,17 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Files;
 import java.util.Map;
 
 import static de.aservo.confapi.jira.model.util.SettingsColourSchemeBeanUtilTest.getDummyBaseColourScheme;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -77,49 +83,63 @@ class SettingsBrandingServiceTest {
         assertEquals(schemeBean.getTopBar(), colourScheme.getTopBar());
     }
 
-    //InternalServerErrorException -> FileNotFoundException is expected because no logofile is present in the filesystem at test time
     @Test
-    void testGetLogo() {
-        assertThrows(InternalServerErrorException.class, () -> {
-            settingsBrandingService.getLogo();
-        });
+    void testGetLogo() throws URISyntaxException {
+        final URL logoUrl = getClass().getResource("/images/" + LookAndFeelConstants.JIRA_SCALED_LOGO_FILENAME);
+        assert logoUrl != null;
+        final File imagesDirectory = new File(logoUrl.toURI()).getParentFile();
+
+        doReturn(imagesDirectory).when(uploadService).getLogoDirectory();
+        assertNotNull(settingsBrandingService.getLogo());
     }
 
     @Test
-    void testSetLogo() {
-        InputStream is = new ByteArrayInputStream("".getBytes());
+    void testSetLogo() throws IOException {
+        final File logoDirectory = new File("target/logos");
+        Files.createDirectories(logoDirectory.toPath());
+        doReturn(logoDirectory).when(uploadService).getLogoDirectory();
 
-        try (MockedStatic<ComponentAccessor> componentAccessorMockedStatic = mockStatic(ComponentAccessor.class)) {
-            componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(LnFDefaultColorProvider.class)).thenReturn(mock(LnFDefaultColorProvider.class));
-            componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(LogoProvider.class)).thenReturn(mock(LogoProvider.class));
-            componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(EventPublisher.class)).thenReturn(mock(EventPublisher.class));
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("images/" + LookAndFeelConstants.JIRA_SCALED_LOGO_FILENAME)) {
+            try (MockedStatic<ComponentAccessor> componentAccessorMockedStatic = mockStatic(ComponentAccessor.class)) {
+                componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(LnFDefaultColorProvider.class)).thenReturn(mock(LnFDefaultColorProvider.class));
+                componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(LogoProvider.class)).thenReturn(mock(LogoProvider.class));
+                componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(EventPublisher.class)).thenReturn(mock(EventPublisher.class));
+                componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(UiSettingsStateManager.class)).thenReturn(mock(UiSettingsStateManager.class));
 
-            settingsBrandingService.setLogo(is);
+                settingsBrandingService.setLogo(is);
+            }
+
+            verify(lookAndFeelProperties).setLogoChoice(LogoChoice.UPLOAD);
         }
-
-        verify(lookAndFeelProperties).setLogoChoice(LogoChoice.UPLOAD);
-    }
-
-    //InternalServerErrorException -> FileNotFoundException is expected because no logofile is present in the filesystem at test time
-    @Test
-    void testGetFavicon() {
-        assertThrows(InternalServerErrorException.class, () -> {
-            settingsBrandingService.getFavicon();
-        });
     }
 
     @Test
-    void testSetFavicon() {
-        final InputStream is = new ByteArrayInputStream("".getBytes());
+    void testGetFavicon() throws URISyntaxException {
+        final URL faviconUrl = getClass().getResource("/images/" + LookAndFeelConstants.JIRA_SCALED_FAVICON_FILENAME);
+        assert faviconUrl != null;
+        final File imagesDirectory = new File(faviconUrl.toURI()).getParentFile();
 
-        try (MockedStatic<ComponentAccessor> componentAccessorMockedStatic = mockStatic(ComponentAccessor.class)) {
-            componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(LnFDefaultColorProvider.class)).thenReturn(mock(LnFDefaultColorProvider.class));
-            componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(LogoProvider.class)).thenReturn(mock(LogoProvider.class));
-            componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(EventPublisher.class)).thenReturn(mock(EventPublisher.class));
+        doReturn(imagesDirectory).when(uploadService).getLogoDirectory();
+        assertNotNull(settingsBrandingService.getFavicon());
+    }
 
-            settingsBrandingService.setFavicon(is);
+    @Test
+    void testSetFavicon() throws IOException {
+        final File logoDirectory = new File("target/logos");
+        Files.createDirectories(logoDirectory.toPath());
+        doReturn(logoDirectory).when(uploadService).getLogoDirectory();
+
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("images/" + LookAndFeelConstants.JIRA_SCALED_FAVICON_FILENAME)) {
+            try (MockedStatic<ComponentAccessor> componentAccessorMockedStatic = mockStatic(ComponentAccessor.class)) {
+                componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(LnFDefaultColorProvider.class)).thenReturn(mock(LnFDefaultColorProvider.class));
+                componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(LogoProvider.class)).thenReturn(mock(LogoProvider.class));
+                componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(EventPublisher.class)).thenReturn(mock(EventPublisher.class));
+                componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(UiSettingsStateManager.class)).thenReturn(mock(UiSettingsStateManager.class));
+
+                settingsBrandingService.setFavicon(is);
+            }
+
+            verify(lookAndFeelProperties).setFaviconChoice(LogoChoice.UPLOAD);
         }
-
-        verify(lookAndFeelProperties).setFaviconChoice(LogoChoice.UPLOAD);
     }
 }
