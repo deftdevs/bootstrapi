@@ -57,17 +57,18 @@
         <jira.data.version>9.12.5</jira.data.version>
         <!-- other properties -->
         <atlassian.ajp.port>8209</atlassian.ajp.port>
-        <atlassian.amps.version>8.0.2</atlassian.amps.version>
+        <atlassian.amps.version>8.12.4</atlassian.amps.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
+        <atlassian.spring.scanner.version>2.2.4</atlassian.spring.scanner.version>
         <confapi-commons.version>0.5.0</confapi-commons.version>
         <glassfish.el-api.version>2.2.4</glassfish.el-api.version>
         <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
-        <jacoco.plugin.version>0.8.5</jacoco.plugin.version>
         <javax.el-api.version>3.0.0</javax.el-api.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <jira-lookandfeel-plugin.version>7.13.0</jira-lookandfeel-plugin.version>
         <mockito.version>5.10.0</mockito.version>
+        <openapi-generator.version>7.3.0</openapi-generator.version>
+        <swagger.version>2.2.20</swagger.version>
         <!-- Compiler must be 8 so that the plugin can run on jIRA instances using Java 11 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -399,7 +400,7 @@
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>${openapi-generator-maven-plugin.version}</version>
+                <version>${openapi-generator.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -411,7 +412,10 @@
                             <generatorName>asciidoc</generatorName>
                             <output>${project.basedir}</output>
                             <skipValidateSpec>true</skipValidateSpec>
-                            <additionalProperties>specDir=src/main/resources/doc/</additionalProperties>
+                            <additionalProperties>
+                                <additionalProperty>specDir=src/main/resources/openapi/specs/</additionalProperty>
+                                <additionalProperty>snippetDir=src/main/resources/openapi/snippets/</additionalProperty>
+                            </additionalProperties>
                         </configuration>
                     </execution>
                 </executions>
@@ -421,6 +425,13 @@
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
                 <version>${jacoco.plugin.version}</version>
+            </plugin>
+
+            <!-- Override Nexus Staging version from parent pom -->
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.13</version>
             </plugin>
         </plugins>
     </build>
