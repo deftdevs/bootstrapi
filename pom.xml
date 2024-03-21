@@ -12,7 +12,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>confapi-jira-plugin</artifactId>
-    <version>0.0.7-SNAPSHOT</version>
+    <version>0.1.0-SNAPSHOT</version>
     <packaging>atlassian-plugin</packaging>
 
     <name>ConfAPI for Jira</name>
@@ -218,6 +218,12 @@
             <groupId>com.atlassian.jira</groupId>
             <artifactId>jira-lookandfeel-plugin</artifactId>
             <version>${jira-lookandfeel-plugin.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.plugins.authentication</groupId>
+            <artifactId>atlassian-authentication-plugin</artifactId>
             <scope>provided</scope>
         </dependency>
 
