@@ -3,16 +3,7 @@ package de.aservo.confapi.crowd.service;
 import com.atlassian.crowd.embedded.api.CrowdService;
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.PasswordCredential;
-import com.atlassian.crowd.exception.DirectoryNotFoundException;
-import com.atlassian.crowd.exception.FailedAuthenticationException;
-import com.atlassian.crowd.exception.GroupNotFoundException;
-import com.atlassian.crowd.exception.InvalidCredentialException;
-import com.atlassian.crowd.exception.InvalidUserException;
-import com.atlassian.crowd.exception.MembershipAlreadyExistsException;
-import com.atlassian.crowd.exception.OperationFailedException;
-import com.atlassian.crowd.exception.ReadOnlyGroupException;
-import com.atlassian.crowd.exception.UserAlreadyExistsException;
-import com.atlassian.crowd.exception.UserNotFoundException;
+import com.atlassian.crowd.exception.*;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.crowd.manager.directory.DirectoryPermissionException;
 import com.atlassian.crowd.model.user.User;
@@ -38,11 +29,15 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import static com.atlassian.crowd.model.user.UserConstants.*;
 
 @Component
 @ExportAsService(UsersService.class)
@@ -356,6 +351,10 @@ public class UsersServiceImpl implements UsersService {
             final User user,
             final String password) {
 
+        // In order to be able to set a password in a declarative way, we need to reset all password-related
+        // user attributes to make sure the password is expired...
+        resetUserPasswordAttributes(user);
+
         // If the password is the same as the current one, do nothing,
         // to avoid clashing with Crowd's password history count mechanisms
         try {
@@ -376,6 +375,27 @@ public class UsersServiceImpl implements UsersService {
             // of a user in a read-only directory, so treat this as a bad request
             throw new BadRequestException(e);
         } catch (DirectoryNotFoundException | UserNotFoundException | OperationFailedException e) {
+            // At this point, we know the user exists, thus directory or user not found
+            // should never happen, so if it does, treat it as an internal server error
+            throw new InternalServerErrorException(e);
+        }
+    }
+
+    void resetUserPasswordAttributes(
+            final User user) {
+
+        final UserTemplateWithAttributes userTemplate = UserTemplateWithAttributes.toUserWithNoAttributes(user);
+        userTemplate.setAttribute(INVALID_PASSWORD_ATTEMPTS, String.valueOf(0));
+        userTemplate.setAttribute(REQUIRES_PASSWORD_CHANGE, String.valueOf(false));
+        userTemplate.setAttribute(PASSWORD_LASTCHANGED, String.valueOf(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
+
+        try {
+            directoryManager.updateUser(user.getDirectoryId(), userTemplate);
+        } catch (DirectoryPermissionException e) {
+            // A permission exception should only happen if we try to update a user
+            // in a read-only directory, so treat this as a bad request
+            throw new BadRequestException(e);
+        } catch (DirectoryNotFoundException | UserNotFoundException | InvalidUserException | OperationFailedException e) {
             // At this point, we know the user exists, thus directory or user not found
             // should never happen, so if it does, treat it as an internal server error
             throw new InternalServerErrorException(e);

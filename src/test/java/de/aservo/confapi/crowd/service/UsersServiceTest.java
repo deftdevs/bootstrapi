@@ -37,6 +37,7 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
+import static com.atlassian.crowd.model.user.UserConstants.*;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.any;
 import static org.mockito.Mockito.*;
@@ -386,20 +387,22 @@ public class UsersServiceTest {
     }
 
     @Test
-    public void testChangePassword() throws CrowdException, PermissionException {
+    public void testUpdatePassword() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
         final String password = "pa55w0rd";
 
+        final UsersServiceImpl spyUsersService = spy(usersService);
         final ArgumentCaptor<PasswordCredential> passwordCredentialArgumentCaptor = ArgumentCaptor.forClass(PasswordCredential.class);
-        usersService.updatePassword(user.getName(), password);
+        spyUsersService.updatePassword(user.getName(), password);
+        verify(spyUsersService).resetUserPasswordAttributes(any());
         verify(directoryManager).updateUserCredential(anyLong(), anyString(), passwordCredentialArgumentCaptor.capture());
         assertEquals(password, passwordCredentialArgumentCaptor.getValue().getCredential());
     }
 
     @Test
-    public void testChangePasswordWithSamePassword() throws CrowdException, PermissionException {
+    public void testUpdatePasswordWithSamePassword() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
@@ -411,6 +414,19 @@ public class UsersServiceTest {
 
         usersService.updatePassword(user.getName(), password);
         verify(directoryManager, never()).updateUserCredential(anyLong(), anyString(), any());
+    }
+
+    @Test
+    public void testResetUserPasswordAttributes() throws CrowdException, PermissionException {
+        final User user = getTestUser();
+
+        usersService.resetUserPasswordAttributes(user);
+        final ArgumentCaptor<UserTemplateWithAttributes> userTemplateArgumentCaptor = ArgumentCaptor.forClass(UserTemplateWithAttributes.class);
+        verify(directoryManager).updateUser(anyLong(), userTemplateArgumentCaptor.capture());
+
+        assertNotNull(userTemplateArgumentCaptor.getValue().getValue(INVALID_PASSWORD_ATTEMPTS));
+        assertNotNull(userTemplateArgumentCaptor.getValue().getValue(REQUIRES_PASSWORD_CHANGE));
+        assertNotNull(userTemplateArgumentCaptor.getValue().getValue(PASSWORD_LASTCHANGED));
     }
 
     // We kind of need to test all the exceptions here, but it's also pointless to test
@@ -693,6 +709,41 @@ public class UsersServiceTest {
 
         doThrow(new OperationFailedException()).when(directoryManager).updateUserCredential(anyLong(), anyString(), any());
         usersService.updatePassword(user.getName(), password);
+    }
+
+    @Test(expected = WebApplicationException.class)
+    public void testResetUserPasswordAttributesDirectoryPermissionException() throws CrowdException, PermissionException {
+        final User user = getTestUser();
+        doThrow(new DirectoryPermissionException()).when(directoryManager).updateUser(anyLong(), any());
+        usersService.resetUserPasswordAttributes(user);
+    }
+
+    @Test(expected = WebApplicationException.class)
+    public void testResetUserPasswordAttributesDirectoryNotFoundException() throws CrowdException, PermissionException {
+        final User user = getTestUser();
+        doThrow(new DirectoryNotFoundException(user.getDirectoryId())).when(directoryManager).updateUser(anyLong(), any());
+        usersService.resetUserPasswordAttributes(user);
+    }
+
+    @Test(expected = WebApplicationException.class)
+    public void testResetUserPasswordAttributesUserNotFoundException() throws CrowdException, PermissionException {
+        final User user = getTestUser();
+        doThrow(new UserNotFoundException(user.getName())).when(directoryManager).updateUser(anyLong(), any());
+        usersService.resetUserPasswordAttributes(user);
+    }
+
+    @Test(expected = WebApplicationException.class)
+    public void testResetUserPasswordAttributesInvalidUserException() throws CrowdException, PermissionException {
+        final User user = getTestUser();
+        doThrow(new InvalidUserException(user, "invalid")).when(directoryManager).updateUser(anyLong(), any());
+        usersService.resetUserPasswordAttributes(user);
+    }
+
+    @Test(expected = WebApplicationException.class)
+    public void testResetUserPasswordAttributesOperationFailedException() throws CrowdException, PermissionException {
+        final User user = getTestUser();
+        doThrow(new OperationFailedException()).when(directoryManager).updateUser(anyLong(), any());
+        usersService.resetUserPasswordAttributes(user);
     }
 
     private Directory getTestDirectory() {
