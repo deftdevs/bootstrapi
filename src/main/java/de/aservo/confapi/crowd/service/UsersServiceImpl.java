@@ -31,10 +31,7 @@ import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static com.atlassian.crowd.model.user.UserConstants.*;
@@ -384,18 +381,19 @@ public class UsersServiceImpl implements UsersService {
     void resetUserPasswordAttributes(
             final User user) {
 
-        final UserTemplateWithAttributes userTemplate = UserTemplateWithAttributes.toUserWithNoAttributes(user);
-        userTemplate.setAttribute(INVALID_PASSWORD_ATTEMPTS, String.valueOf(0));
-        userTemplate.setAttribute(REQUIRES_PASSWORD_CHANGE, String.valueOf(false));
-        userTemplate.setAttribute(PASSWORD_LASTCHANGED, String.valueOf(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
+        final Map<String, String> userAttributes = new HashMap<>();
+        userAttributes.put(INVALID_PASSWORD_ATTEMPTS, String.valueOf(0));
+        userAttributes.put(REQUIRES_PASSWORD_CHANGE, String.valueOf(false));
+        userAttributes.put(PASSWORD_LASTCHANGED, String.valueOf(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()));
 
         try {
-            directoryManager.updateUser(user.getDirectoryId(), userTemplate);
+            directoryManager.storeUserAttributes(user.getDirectoryId(), user.getName(), userAttributes.entrySet().stream()
+                    .collect(Collectors.toMap(Map.Entry::getKey, e -> Collections.singleton(e.getValue()))));
         } catch (DirectoryPermissionException e) {
             // A permission exception should only happen if we try to update a user
             // in a read-only directory, so treat this as a bad request
             throw new BadRequestException(e);
-        } catch (DirectoryNotFoundException | UserNotFoundException | InvalidUserException | OperationFailedException e) {
+        } catch (DirectoryNotFoundException | UserNotFoundException | OperationFailedException e) {
             // At this point, we know the user exists, thus directory or user not found
             // should never happen, so if it does, treat it as an internal server error
             throw new InternalServerErrorException(e);
