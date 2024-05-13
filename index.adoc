@@ -4401,11 +4401,96 @@ endif::internal-generation[]
 | 
 |  
 
+| cachedDirectoriesAuthenticationOrderOptimisationEnabled 
+|  
+| Boolean  
+| 
+|  
+
+| directoryMappings 
+|  
+| List  of <<ApplicationDirectoryMapping>> 
+| 
+|  
+
+| accessBasedSynchronisation 
+|  
+| String  
+| 
+|  _Enum:_ NO_FILTERING, USER_ONLY_FILTERING, USER_AND_GROUP_FILTERING, 
+
+| membershipAggregationEnabled 
+|  
+| Boolean  
+| 
+|  
+
 | remoteAddresses 
 |  
 | List  of <<string>> 
 | 
 |  
+
+| aliasingEnabled 
+|  
+| Boolean  
+| 
+|  
+
+| lowercaseOutputEnabled 
+|  
+| Boolean  
+| 
+|  
+
+| authenticationWithoutPasswordEnabled 
+|  
+| Boolean  
+| 
+|  
+
+|===
+
+
+[#ApplicationDirectoryMapping]
+=== _ApplicationDirectoryMapping_ 
+
+
+
+[.fields-ApplicationDirectoryMapping]
+[cols="2,1,2,4,1"]
+|===         
+| Field Name| Required| Type| Description| Format
+
+| directoryName 
+|  
+| String  
+| 
+|  
+
+| authenticationAllowAll 
+|  
+| Boolean  
+| 
+|  
+
+| authenticationGroups 
+|  
+| List  of <<string>> 
+| 
+|  
+
+| autoAssignmentGroups 
+|  
+| List  of <<string>> 
+| 
+|  
+
+| allowedOperations 
+|  
+| List  of <<string>> 
+| 
+|  _Enum:_ 
 
 |===
 
