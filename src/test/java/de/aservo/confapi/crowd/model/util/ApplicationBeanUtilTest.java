@@ -14,7 +14,7 @@ import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ApplicationBeanTest {
+public class ApplicationBeanUtilTest {
 
     @Test
     public void testMapTypesApplication() {

@@ -24,7 +24,7 @@ import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class LicensesServiceImplTest {
+public class LicensesServiceTest {
 
     @Mock
     private CrowdLicenseManager licenseManager;
@@ -37,8 +37,8 @@ public class LicensesServiceImplTest {
     }
 
     @Test
-    public void testGetLicenses() throws CrowdLicenseManagerException {
-        CrowdLicense license = toMockCrowdLicense(EXAMPLE_2_DEVELOPER_LICENSE);
+    public void testGetLicenses() {
+        CrowdLicense license = toMockCrowdLicense();
 
         doReturn(license).when(licenseManager).getLicense();
 
@@ -54,7 +54,7 @@ public class LicensesServiceImplTest {
 
     @Test
     public void testAddLicense() throws CrowdLicenseManagerException {
-        CrowdLicense license = toMockCrowdLicense(EXAMPLE_2_DEVELOPER_LICENSE);
+        CrowdLicense license = toMockCrowdLicense();
 
         doReturn(license).when(licenseManager).storeLicense(EXAMPLE_2_DEVELOPER_LICENSE.getKey());
 
@@ -74,7 +74,7 @@ public class LicensesServiceImplTest {
         licensesService.addLicense(EXAMPLE_2_DEVELOPER_LICENSE);
     }
 
-    private CrowdLicense toMockCrowdLicense(LicenseBean licenseBean) throws CrowdLicenseManagerException {
+    private CrowdLicense toMockCrowdLicense() {
         CrowdLicense license = mock(CrowdLicense.class);
 
         Organisation organisation = mock(Organisation.class);

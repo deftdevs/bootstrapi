@@ -27,7 +27,7 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 @RunWith(MockitoJUnitRunner.class)
-public class ApplicationsServiceImplTest {
+public class ApplicationsServiceTest {
 
     @Mock
     private ApplicationManager applicationManager;
