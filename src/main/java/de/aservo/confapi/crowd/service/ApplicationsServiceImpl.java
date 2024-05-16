@@ -223,7 +223,9 @@ public class ApplicationsServiceImpl implements ApplicationsService {
         }
 
         final Map<String, Collection<String>> autoAssignmentGroupsByDirectoryName = applicationBean.getDirectoryMappings().stream()
-                .collect(Collectors.toMap(ApplicationBean.ApplicationDirectoryMapping::getDirectoryName, ApplicationBean.ApplicationDirectoryMapping::getAutoAssignmentGroups));
+                .collect(Collectors.toMap(
+                        ApplicationBean.ApplicationDirectoryMapping::getDirectoryName,
+                        adm -> adm.getAutoAssignmentGroups() != null ? adm.getAutoAssignmentGroups() : Collections.emptyList()));
 
         for (ApplicationDirectoryMapping applicationDirectoryMapping : application.getApplicationDirectoryMappings()) {
             final Collection<String> autoAssignmentGroups = autoAssignmentGroupsByDirectoryName.getOrDefault(
