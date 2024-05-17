@@ -27,7 +27,9 @@ public class ApplicationBeanUtil {
         applicationBean.setActive(application.isActive());
         applicationBean.setType(toApplicationBeanType(application.getType()));
         applicationBean.setCachedDirectoriesAuthenticationOrderOptimisationEnabled(application.isCachedDirectoriesAuthenticationOrderOptimisationEnabled());
-        applicationBean.setDirectoryMappings(toApplicationBeanDirectoryMappings(application, defaultGroupMembershipService));
+        applicationBean.setDirectoryMappings(toApplicationBeanDirectoryMappings(application, defaultGroupMembershipService).stream()
+                .sorted(Comparator.comparing(ApplicationBean.ApplicationDirectoryMapping::getDirectoryName))
+                .collect(Collectors.toList()));
         applicationBean.setAccessBasedSynchronisation(toApplicationBeanAccessBasedSynchronisation(application));
         applicationBean.setMembershipAggregationEnabled(application.isMembershipAggregationEnabled());
         applicationBean.setRemoteAddresses(toStringCollection(application.getRemoteAddresses()));

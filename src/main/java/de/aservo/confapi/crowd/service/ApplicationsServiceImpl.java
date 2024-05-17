@@ -223,7 +223,9 @@ public class ApplicationsServiceImpl implements ApplicationsService {
         }
 
         final Map<String, Collection<String>> autoAssignmentGroupsByDirectoryName = applicationBean.getDirectoryMappings().stream()
-                .collect(Collectors.toMap(ApplicationBean.ApplicationDirectoryMapping::getDirectoryName, ApplicationBean.ApplicationDirectoryMapping::getAutoAssignmentGroups));
+                .collect(Collectors.toMap(
+                        ApplicationBean.ApplicationDirectoryMapping::getDirectoryName,
+                        adm -> adm.getAutoAssignmentGroups() != null ? adm.getAutoAssignmentGroups() : Collections.emptyList()));
 
         for (ApplicationDirectoryMapping applicationDirectoryMapping : application.getApplicationDirectoryMappings()) {
             final Collection<String> autoAssignmentGroups = autoAssignmentGroupsByDirectoryName.getOrDefault(
@@ -269,9 +271,16 @@ public class ApplicationsServiceImpl implements ApplicationsService {
         applicationDirectoryMappingBuilder.setDirectory(findDirectory(applicationBeanDirectoryMapping.getDirectoryName(), directoryManager));
 
         if (applicationBeanDirectoryMapping.getAuthenticationAllowAll() != null) {
-            applicationDirectoryMappingBuilder.setAllowAllToAuthenticate(applicationBeanDirectoryMapping.getAuthenticationAllowAll());
+            final boolean authenticationAllowAll = applicationBeanDirectoryMapping.getAuthenticationAllowAll();
+            applicationDirectoryMappingBuilder.setAllowAllToAuthenticate(authenticationAllowAll);
+
+            // don't require to set authentication groups if all users are allowed to authenticate
+            if (authenticationAllowAll) {
+                applicationDirectoryMappingBuilder.setAuthorisedGroupNames(Collections.emptySet());
+            }
         }
 
+        // even if all users are allowed to authenticate, it does not hurt to set (ignored) authentication groups if they got passed
         if (applicationBeanDirectoryMapping.getAuthenticationGroups() != null) {
             applicationDirectoryMappingBuilder.setAuthorisedGroupNames(new HashSet<>(applicationBeanDirectoryMapping.getAuthenticationGroups()));
         }
