@@ -63,7 +63,7 @@ jobs:
         restore-keys: confapi-plugin
 
     - name: Run Unit Tests and analyze on SonarCloud
-      run: ./mvnw test sonar:sonar -B
+      run: ./mvnw test sonar:sonar -B --settings ./.github/workflows/settings.xml -P analyzing
 
   deploy:
     needs: unit-tests
