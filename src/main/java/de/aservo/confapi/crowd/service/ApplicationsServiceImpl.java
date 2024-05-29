@@ -2,6 +2,7 @@ package de.aservo.confapi.crowd.service;
 
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.OperationType;
+import com.atlassian.crowd.embedded.api.PasswordCredential;
 import com.atlassian.crowd.exception.*;
 import com.atlassian.crowd.manager.application.ApplicationManager;
 import com.atlassian.crowd.manager.application.ApplicationManagerException;
@@ -108,6 +109,11 @@ public class ApplicationsServiceImpl implements ApplicationsService {
             final Application existingApplication = applicationManager.findById(id);
             final Application modifiedApplication = ApplicationBeanUtil.toApplication(applicationBean, existingApplication);
             final Application updatedApplication = applicationManager.update(modifiedApplication);
+
+            if (applicationBean.getPassword() != null) {
+                applicationManager.updateCredential(updatedApplication, PasswordCredential.unencrypted(applicationBean.getPassword()));
+            }
+
             persistApplicationDirectoryMappings(updatedApplication, applicationBean);
             persistApplicationBeanAuthenticationGroups(updatedApplication, applicationBean);
             persistApplicationBeanAutoAssignmentGroups(updatedApplication, applicationBean);
