@@ -134,6 +134,7 @@ public class ApplicationsServiceTest {
         requestApplicationBean.setName("Changed Name");
         requestApplicationBean.setDescription("Changed Description");
         requestApplicationBean.setActive(false);
+        requestApplicationBean.setPassword("password1");
         requestApplicationBean.setRemoteAddresses(Collections.singletonList("127.0.0.5"));
         Application application2 = toApplication(requestApplicationBean);
 
@@ -143,6 +144,7 @@ public class ApplicationsServiceTest {
         final ArgumentCaptor<Application> applicationCaptor = ArgumentCaptor.forClass(Application.class);
         applicationsService.setApplication(EXAMPLE_1.getId(), requestApplicationBean);
         verify(applicationManager).update(applicationCaptor.capture());
+        verify(applicationManager).updateCredential(any(), any());
         final Application updatedApplication = applicationCaptor.getValue();
 
         assertNotNull(updatedApplication);
