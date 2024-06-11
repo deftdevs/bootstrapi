@@ -48,6 +48,7 @@ public class ConfAPI {
     public static final String PERMISSION                   = "permission";
     public static final String PERMISSIONS                  = "permissions";
     public static final String PERMISSION_ANONYMOUS_ACCESS  = "anonymous-access";
+    public static final String PERMISSION_GLOBAL            = "global";
     public static final String PING                         = "ping";
     public static final String SETTINGS                     = "settings";
     public static final String SETTINGS_BRANDING            = "branding";
