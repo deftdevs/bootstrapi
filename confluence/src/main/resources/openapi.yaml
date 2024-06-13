@@ -1,0 +1,25 @@
+openapi: 3.0.0
+info:
+  version: '1'
+  title: ConfAPI for Confluence
+  description: This plugin provides methods for accessing configuration for Confluence.
+  contact:
+    url: https://github.com/aservo/confapi-confluence-plugin
+    email: opensource@aservo.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+security:
+  - basicAuth: []
+servers:
+  - url: "{url}/rest/confapi/1/"
+    variables:
+      url:
+        default: http://localhost:1990/confluence
+        description: URL with protocol, domain, port and path
+components:
+  securitySchemes:
+    basicAuth:
+      type: http
+      scheme: basic
+paths: {}
