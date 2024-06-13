@@ -1,0 +1,18 @@
+# Build files
+/target
+
+# Temp files
+.*.sw[a-p]
+*~
+
+# IDEA files
+/.idea
+*.iml
+
+# Private keys
+*.asc
+
+.openapi-generator*
+
+# osx specific
+.DS_Store
