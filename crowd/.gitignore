@@ -1,0 +1,21 @@
+# Build files
+/target
+
+# Temp files
+.*.sw[a-p]
+*~
+
+# IDEA files
+/.idea
+*.iml
+
+# Private keys
+*.asc
+
+# auto generated eclipse stuff
+.classpath
+.project
+/.settings
+
+.openapi-generator*
+.swagger-codegen*
