@@ -13,7 +13,19 @@
     <name>BootstrAPI parent</name>
 
     <modules>
+        <module>commons</module>
     </modules>
+
+    <issueManagement>
+        <system>GitHub</system>
+        <url>https://github.com/deftdevs/bootstrapi/issues</url>
+    </issueManagement>
+
+    <scm>
+        <connection>scm:git:git://github.com/deftdevs/bootstrapi.git</connection>
+        <developerConnection>scm:git:git@github.com:deftdevs/bootstrapi.git</developerConnection>
+        <url>https://github.com/deftdevs/bootstrapi</url>
+    </scm>
 
     <properties>
     </properties>

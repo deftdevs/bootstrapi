@@ -4,22 +4,15 @@
     <modelVersion>4.0.0</modelVersion>
 
     <parent>
-        <groupId>de.aservo</groupId>
-        <artifactId>parent-pom</artifactId>
-        <version>0.0.11</version>
+        <groupId>com.deftdevs</groupId>
+        <artifactId>bootstrapi-parent</artifactId>
+        <version>0.7.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>confapi-commons</artifactId>
-    <version>0.5.1-SNAPSHOT</version>
+    <artifactId>bootstrapi-commons</artifactId>
     <packaging>jar</packaging>
 
-    <name>ConfAPI Commons</name>
-    <description>Common sources for the ASERVO ConfAPI plugins</description>
-
-    <organization>
-        <name>ASERVO Software GmbH</name>
-        <url>https://www.aservo.com</url>
-    </organization>
+    <name>BootstrAPI commons</name>
 
     <licenses>
         <license>
@@ -28,17 +21,6 @@
             <distribution>repo</distribution>
         </license>
     </licenses>
-
-    <issueManagement>
-        <system>Github</system>
-        <url>https://github.com/aservo/confapi-commons/issues</url>
-    </issueManagement>
-
-    <scm>
-        <connection>scm:git:git://github.com/aservo/confapi-commons.git</connection>
-        <developerConnection>scm:git:git@github.com:aservo/confapi-commons.git</developerConnection>
-        <url>https://github.com/aservo/confapi-commons</url>
-    </scm>
 
     <developers>
         <developer>
