@@ -1,0 +1,223 @@
+= Code Conventions
+
+The code conventions are valid for all ConfAPI projects for now.
+
+:toc:
+
+== Naming and Structure
+
+=== Quick Reference
+
+* Model Class: `EntityBean`
+* Model JSON Name: `entity` (`@XmlRootElement(name = ConfAPI.ENTITY)`)
+* Model Collection Class: `EntitiesBean`
+* Model JSON Name: `entities` (`@XmlRootElement(name = ConfAPI.ENTITIES)`)
+* REST Endpoint Class: `EntitiesResource`
+* REST Endpoint Name: `entities` (`@Path(ConfAPI.ENTITIES)`)
+* Service Class: `EntitiesService`
+
+=== Model
+
+We are using [Lombok](https://projectlombok.org/) for generating constructors, getters and setters.
+They always have to be annotated with the `@Data` annotation.
+
+The `@XmlRootElement` should always be named by a constant defined in the `ConfAPI` class.
+
+==== Entities
+
+Entity beans should only use the `@NoArgsConstructor` to make sure reordering, adding and removing member variables does
+not break the build or behaviour of any dependent because the parametrized constructor was used to create instances.
+
+Example:
+
+[source]
+----
+@Data
+@NoArgsConstructor
+@XmlRootElement(name = ConfAPI.ENTITY)
+public class EntityBean {
+
+    @XmlElement
+    @NotNull
+    private String name;
+
+    @XmlElement
+    private String description;
+
+}
+----
+
+Please note that the constant `ConfAPI.ENTITY` defines a string `entity`.
+The name of the model class has to match the name of that constant.
+
+Be careful with using validators like `@NotNull`.
+Make sure that the attribute really has to be set in all possible cases when you use it.
+
+Whenever necessary, the auto-generated methods may be overridden manually to enforce a specific behaviour.
+For example, if you want to make sure that an empty description is considered null, you may add:
+
+[source]
+----
+    public String getDescription() {
+        if (StringUtils.isNotBlank(description)) {
+            return description;
+        }
+
+        return null;
+    }
+----
+
+==== Entity Collections
+
+We use entity collection beans to hold a collection of entity beans and to specify the return type when the REST API
+returns such a collection.
+
+Thus, there is always only a single attribute necessary which allows using an `@AllArgsConstructor`.
+The pattern of an entity collection always looks like this:
+
+[source]
+----
+@Data
+@AllArgsConstructor
+@XmlRootElement(name = ConfAPI.ENTITIES)
+public class EntitiesBean {
+
+    @XmlElement
+    private Collection<EntityBean> entities;
+
+}
+----
+
+=== Resource Interface
+
+Resource interface classes represent the REST endpoints and thus define the REST API.
+
+Usually, we name the resource's classes and the endpoint's path in a plural form.
+This is especially always the case when the endpoint represents a collection of entities.
+There are cases where it does not make sense as the endpoint only maintains a fixed set of attributes or does not
+actually represent entities at all.
+
+Examples:
+
+* `MailServerResource`: While technically possible, we only allow setting a single (default) incoming and a single
+(default) outgoing mail server. Thus, we named the common endpoint only `/mail-server`.
+* `SettingsResource`: Although we named the endpoint in a plural form, there is only one set of attributes that can be
+set - one title, one base-url etc. We think that `/settings` just sounds more intuitive than `/setting`.
+* The upcoming endpoint for exports and imports.
+
+Whenever it makes sense, the resource interface should be defined in the ConfAPI Commons library, so we can define a
+common API for all ConfAPI products.
+
+==== Annotations
+
+Resource interfaces have to contain all necessary `javax.ws.rs` and Swagger annotations (used for automated
+documentation generation).
+The only exception is the `@Path` annotation for the resource class itself as otherwise the framework will try to
+instantiate the resource interface.
+
+The annotations should be ordered as follows:
+
+* `@GET`, `@POST`, etc.: The HTTP method used by the declared method
+* `@Path`: The sub-path for the declared method (if any)
+* `@Consumes`: The media type that is consumes by the declared method (if any)
+* `@Produces`: The media type that is produces by the declared method
+* `@Operation`: The main Swagger annotation
+** `tags`: The tag that endpoint will be grouped with, matches resource name
+** `summary`: A short summary of what the endpoint does
+** `description`: A longer description of what the endpoint does
+** `responses`: The possible response codes and their schemes
+
+See the following code for an example:
+
+[source]
+----
+public interface EntitiesResource {
+
+    @GET
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            tags = { ConfAPI.ENTITIES },
+            summary = "Get the list of entities",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = EntitiesBean.class)),
+                            description = ""
+                    ),
+                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+            }
+    )
+    Response getEntities();
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            tags = { ConfAPI.ENTITIES },
+            summary = "Add a new entity",
+            description = "A new entity can be added here if no other entity with the same name already exists",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = EntityBean.class)),
+                            description = ""
+                    ),
+                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+            }
+    )
+    Response addEntity(
+            @QueryParam("doSomethingAfterAdding") @DefaultValue("false") final boolean doSomethingAfterAdding,
+            @NotNull final EntityBean entity);
+
+}
+----
+
+==== Parameters
+
+
+
+=== Resource Implementation
+
+[source]
+----
+@Path(ConfAPI.ENTITIES)
+@ResourceFilters(AdminOnlyResourceFilter.class)
+@Component
+public class EntitiesResourceImpl implements EntitiesResource {
+
+    private static final Logger log = LoggerFactory.getLogger(EntitiesResourceImpl.class);
+
+    private final EntitiesService entitiesService;
+
+    @Inject
+    public EntitiesResourceImpl(EntitiesService entitiesService) {
+        this.entitiesService = checkNotNull(entitiesService);
+    }
+
+    @Override
+    public Response getEntities() {
+        final ErrorCollection errorCollection = new ErrorCollection();
+        try {
+            final EntitiesBean entitiesBean = new EntitiesBean(entitiesService.getEntities());
+            return Response.ok(entitiesBean).build();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            errorCollection.addErrorMessage(e.getMessage());
+        }
+        return Response.status(INTERNAL_SERVER_ERROR).entity(errorCollection).build();
+    }
+
+    @Override
+    public Response addEntity(
+            final boolean doSomethingAfterAdding,
+            @NotNull final EntityBean entity) {
+
+        final ErrorCollection errorCollection = new ErrorCollection();
+        try {
+            EntityBean addedEntity = entitiesService.addEntity(entity, doSomethingAfterAdding);
+            return Response.ok(addedEntity).build();
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+            errorCollection.addErrorMessage(e.getMessage());
+        }
+        return Response.status(BAD_REQUEST).entity(errorCollection).build();
+    }
+----

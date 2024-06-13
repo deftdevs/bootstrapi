@@ -1,0 +1,16 @@
+# Build files
+/target
+
+# Temp files
+.*.sw[a-p]
+*~
+
+# IDEA files
+/.idea
+*.iml
+
+# Private keys
+*.asc
+
+# osx specific
+.DS_Store
