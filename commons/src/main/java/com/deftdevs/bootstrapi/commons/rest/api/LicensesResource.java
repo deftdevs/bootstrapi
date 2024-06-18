@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
 import com.deftdevs.bootstrapi.commons.model.LicensesBean;
@@ -22,7 +22,7 @@ public interface LicensesResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.LICENSES },
+            tags = { BootstrAPI.LICENSES },
             summary = "Get all licenses information",
             description = "Upon successful request, returns a `LicensesBean` object containing license details. Be aware that `products` collection of the `LicenseBean` contains the product display names, not the product key names",
             responses = {
@@ -42,7 +42,7 @@ public interface LicensesResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.LICENSES },
+            tags = { BootstrAPI.LICENSES },
             summary = "Add a license",
             responses = {
                     @ApiResponse(

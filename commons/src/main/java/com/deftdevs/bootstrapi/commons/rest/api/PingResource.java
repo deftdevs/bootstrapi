@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
@@ -16,7 +16,7 @@ public interface PingResource {
     @GET
     @Produces(MediaType.TEXT_PLAIN)
     @Operation(
-            tags = { ConfAPI.PING },
+            tags = { BootstrAPI.PING },
             summary = "Ping method for probing the REST API.",
             responses = {
                     @ApiResponse(

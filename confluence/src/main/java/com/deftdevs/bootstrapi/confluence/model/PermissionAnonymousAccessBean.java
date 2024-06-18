@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.confluence.model;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement(name = ConfAPI.PERMISSION_ANONYMOUS_ACCESS)
+@XmlRootElement(name = BootstrAPI.PERMISSION_ANONYMOUS_ACCESS)
 public class PermissionAnonymousAccessBean {
 
     @XmlElement

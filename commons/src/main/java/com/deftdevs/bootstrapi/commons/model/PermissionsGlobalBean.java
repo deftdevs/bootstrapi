@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.model;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -11,7 +11,7 @@ import java.util.Map;
 
 @Data
 @NoArgsConstructor
-@XmlRootElement(name = ConfAPI.PERMISSIONS + "-" + ConfAPI.PERMISSIONS_GLOBAL)
+@XmlRootElement(name = BootstrAPI.PERMISSIONS + "-" + BootstrAPI.PERMISSIONS_GLOBAL)
 public class PermissionsGlobalBean {
 
     @XmlElement

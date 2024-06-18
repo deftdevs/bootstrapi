@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.model;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -16,7 +16,7 @@ import java.util.Collections;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement(name = ConfAPI.GADGETS)
+@XmlRootElement(name = BootstrAPI.GADGETS)
 public class GadgetsBean {
 
     @XmlElement

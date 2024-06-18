@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.model;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -13,7 +13,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@XmlRootElement(name = ConfAPI.AUTHENTICATION + "-" + ConfAPI.AUTHENTICATION_IDP + "-" + ConfAPI.AUTHENTICATION_IDP_OIDC)
+@XmlRootElement(name = BootstrAPI.AUTHENTICATION + "-" + BootstrAPI.AUTHENTICATION_IDP + "-" + BootstrAPI.AUTHENTICATION_IDP_OIDC)
 public class AuthenticationIdpOidcBean extends AbstractAuthenticationIdpBean {
 
     @XmlElement

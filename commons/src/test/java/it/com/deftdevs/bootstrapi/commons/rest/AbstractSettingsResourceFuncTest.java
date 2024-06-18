@@ -1,6 +1,6 @@
 package it.com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
 import org.apache.wink.client.ClientAuthenticationException;
 import org.apache.wink.client.ClientResponse;
@@ -15,7 +15,7 @@ public abstract class AbstractSettingsResourceFuncTest {
 
     @Test
     void testGetSettings() {
-        Resource settingsResource = ResourceBuilder.builder(ConfAPI.SETTINGS).build();
+        Resource settingsResource = ResourceBuilder.builder(BootstrAPI.SETTINGS).build();
         ClientResponse clientResponse = settingsResource.get();
         assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
         assertNotNull(clientResponse.getEntity(SettingsBean.class).getTitle());
@@ -23,7 +23,7 @@ public abstract class AbstractSettingsResourceFuncTest {
 
     @Test
     void testSetSettings() {
-        Resource settingsResource = ResourceBuilder.builder(ConfAPI.SETTINGS).build();
+        Resource settingsResource = ResourceBuilder.builder(BootstrAPI.SETTINGS).build();
         assertEquals(Response.Status.OK.getStatusCode(), settingsResource.put(getExampleBean()).getStatusCode());
 
         ClientResponse clientResponse = settingsResource.get();
@@ -33,7 +33,7 @@ public abstract class AbstractSettingsResourceFuncTest {
 
     @Test
     public void testGetSettingsUnauthenticated() {
-        Resource settingsResource = ResourceBuilder.builder(ConfAPI.SETTINGS)
+        Resource settingsResource = ResourceBuilder.builder(BootstrAPI.SETTINGS)
                 .username("wrong")
                 .password("password")
                 .build();
@@ -43,7 +43,7 @@ public abstract class AbstractSettingsResourceFuncTest {
 
     @Test
     public void testSetSettingsUnauthenticated() {
-        Resource settingsResource = ResourceBuilder.builder(ConfAPI.SETTINGS)
+        Resource settingsResource = ResourceBuilder.builder(BootstrAPI.SETTINGS)
                 .username("wrong")
                 .password("password")
                 .build();
@@ -56,7 +56,7 @@ public abstract class AbstractSettingsResourceFuncTest {
 
     @Test
     void testGetSettingsUnauthorized() {
-        Resource settingsResource = ResourceBuilder.builder(ConfAPI.SETTINGS)
+        Resource settingsResource = ResourceBuilder.builder(BootstrAPI.SETTINGS)
                 .username("user")
                 .password("user")
                 .build();
@@ -66,7 +66,7 @@ public abstract class AbstractSettingsResourceFuncTest {
 
     @Test
     void testSetSettingsUnauthorized() {
-        Resource settingsResource = ResourceBuilder.builder(ConfAPI.SETTINGS)
+        Resource settingsResource = ResourceBuilder.builder(BootstrAPI.SETTINGS)
                 .username("user")
                 .password("user")
                 .build();

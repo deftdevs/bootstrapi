@@ -4,9 +4,9 @@
         <version>${project.version}</version>
         <vendor name="${project.organization.name}" url="${project.organization.url}" />
         <param name="plugin-icon">images/plugin-icon.png</param>
-        <param name="plugin-logo">images/aservo.png</param>
+        <param name="plugin-logo">images/deftdevs.png</param>
     </plugin-info>
 
-    <rest key="aservo-confapi-rest" name="ConfAPI REST" path="/confapi" version="1"/>
+    <rest key="deftdevs-bootstrapi-rest" name="BootstrAPI REST" path="/bootstrapi" version="1"/>
 
 </atlassian-plugin>

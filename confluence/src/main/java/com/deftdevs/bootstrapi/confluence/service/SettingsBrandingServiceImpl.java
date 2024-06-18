@@ -74,7 +74,7 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
     public void setLogo(
             @NotNull InputStream inputStream) {
         try {
-            File file = File.createTempFile("confapi-temp", null);
+            File file = File.createTempFile("bootstrapi-temp", null);
             FileUtils.copyInputStreamToFile(inputStream, file);
 
             String contentType = file.toURI().toURL().openConnection().getContentType();
@@ -102,7 +102,7 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
     public void setFavicon(
             @NotNull InputStream inputStream) {
         try {
-            File file = File.createTempFile("confapi-temp", null);
+            File file = File.createTempFile("bootstrapi-temp", null);
             FileUtils.copyInputStreamToFile(inputStream, file);
 
             String contentType = file.toURI().toURL().openConnection().getContentType();

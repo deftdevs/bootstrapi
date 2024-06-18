@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
 import com.deftdevs.bootstrapi.commons.model.DirectoriesBean;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
@@ -28,7 +28,7 @@ public interface DirectoriesResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.DIRECTORIES },
+            tags = { BootstrAPI.DIRECTORIES },
             summary = "Get all user directories",
             responses = {
                     @ApiResponse(
@@ -47,7 +47,7 @@ public interface DirectoriesResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.DIRECTORIES },
+            tags = { BootstrAPI.DIRECTORIES },
             summary = "Get a user directory",
             responses = {
                     @ApiResponse(
@@ -67,7 +67,7 @@ public interface DirectoriesResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.DIRECTORIES },
+            tags = { BootstrAPI.DIRECTORIES },
             summary = "Set or update a list of user directories",
             description = "NOTE: All existing directories with the same 'name' attribute are updated.",
             responses = {
@@ -90,7 +90,7 @@ public interface DirectoriesResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.DIRECTORIES },
+            tags = { BootstrAPI.DIRECTORIES },
             summary = "Update a user directory",
             responses = {
                     @ApiResponse(
@@ -112,7 +112,7 @@ public interface DirectoriesResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.DIRECTORIES },
+            tags = { BootstrAPI.DIRECTORIES },
             summary = "Add a user directory",
             responses = {
                     @ApiResponse(
@@ -131,7 +131,7 @@ public interface DirectoriesResource {
 
     @DELETE
     @Operation(
-            tags = { ConfAPI.DIRECTORIES },
+            tags = { BootstrAPI.DIRECTORIES },
             summary = "Delete all user directories",
             description = "NOTE: The 'force' parameter must be set to 'true' in order to execute this request.",
             responses = {
@@ -151,7 +151,7 @@ public interface DirectoriesResource {
     @DELETE
     @Path("{id}")
     @Operation(
-            tags = { ConfAPI.DIRECTORIES },
+            tags = { BootstrAPI.DIRECTORIES },
             summary = "Delete a user directory",
             responses = {
                     @ApiResponse(

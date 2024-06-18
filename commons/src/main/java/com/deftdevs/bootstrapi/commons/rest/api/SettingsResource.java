@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,7 +21,7 @@ public interface SettingsResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.SETTINGS },
+            tags = { BootstrAPI.SETTINGS },
             summary = "Get the application settings",
             responses = {
                     @ApiResponse(
@@ -40,7 +40,7 @@ public interface SettingsResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.SETTINGS },
+            tags = { BootstrAPI.SETTINGS },
             summary = "Set the application settings",
             responses = {
                     @ApiResponse(

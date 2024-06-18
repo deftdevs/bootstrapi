@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.sun.jersey.spi.container.ResourceFilters;
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
 import com.deftdevs.bootstrapi.crowd.filter.SysadminOnlyResourceFilter;
 import com.deftdevs.bootstrapi.crowd.model.GroupsBean;
@@ -13,7 +13,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-@Path(ConfAPI.GROUPS)
+@Path(BootstrAPI.GROUPS)
 @ResourceFilters(SysadminOnlyResourceFilter.class)
 @Component
 public class GroupsResourceImpl implements GroupsResource {

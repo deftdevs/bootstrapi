@@ -11,7 +11,7 @@ import java.util.Collections;
 
 public class ResourceBuilder {
 
-    private static final String REST_PATH = "/rest/confapi/1/";
+    private static final String REST_PATH = "/rest/bootstrapi/1/";
     private final String baseUrl = System.getProperty("baseurl");
 
     private String username = "admin";

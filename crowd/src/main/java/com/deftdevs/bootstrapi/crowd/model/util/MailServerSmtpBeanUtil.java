@@ -39,9 +39,9 @@ public class MailServerSmtpBeanUtil {
         // don't return password here
         mailServerSmtpBean.setTimeout((long) mailConfigurationSmtp.getTimeout());
 
-        // TODO: After the build blocker in ConfAPI commons has been removed,
+        // TODO: After the build blocker in BootstrAPI commons has been removed,
         //  implement proper distinguishing between useTls and startTls,
-        //  see https://github.com/aservo/confapi-commons/issues/153
+        //  see https://github.com/deftdevs/bootstrapi-commons/issues/153
 
         return mailServerSmtpBean;
     }
@@ -114,9 +114,9 @@ public class MailServerSmtpBeanUtil {
             smtpServerBuilder.setTimeout(mailServerSmtpBean.getTimeout().intValue());
         }
 
-        // TODO: After the build blocker in ConfAPI commons has been removed,
+        // TODO: After the build blocker in BootstrAPI commons has been removed,
         //  implement proper distinguishing between useTls and startTls,
-        //  see https://github.com/aservo/confapi-commons/issues/153
+        //  see https://github.com/deftdevs/bootstrapi-commons/issues/153
         smtpServerBuilder.setStartTLS(mailServerSmtpBean.getUseTls());
 
         mailConfigurationBuilder.setSmtpServer(smtpServerBuilder.build());

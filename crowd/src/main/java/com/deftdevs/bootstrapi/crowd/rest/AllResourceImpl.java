@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.sun.jersey.spi.container.ResourceFilters;
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.crowd.filter.SysadminOnlyResourceFilter;
 import com.deftdevs.bootstrapi.crowd.model.AllBean;
 import com.deftdevs.bootstrapi.crowd.rest.api.AllResource;
@@ -13,7 +13,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 @Named
-@Path(ConfAPI.ALL)
+@Path(BootstrAPI.ALL)
 @ResourceFilters(SysadminOnlyResourceFilter.class)
 public class AllResourceImpl implements AllResource {
 

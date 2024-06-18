@@ -1,6 +1,6 @@
 package it.com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import org.apache.wink.client.Resource;
 import org.junit.jupiter.api.Test;
 
@@ -13,7 +13,7 @@ public abstract class AbstractPingResourceFuncTest {
 
     @Test
     void testGetPing() {
-        Resource pingResource = ResourceBuilder.builder(ConfAPI.PING).acceptMediaType(MediaType.TEXT_PLAIN).build();
+        Resource pingResource = ResourceBuilder.builder(BootstrAPI.PING).acceptMediaType(MediaType.TEXT_PLAIN).build();
         assertEquals(Response.Status.OK.getStatusCode(), pingResource.get().getStatusCode());
     }
 }

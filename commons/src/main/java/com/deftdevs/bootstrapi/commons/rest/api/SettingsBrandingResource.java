@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import io.swagger.v3.oas.annotations.Operation;
@@ -21,10 +21,10 @@ import java.io.InputStream;
 public interface SettingsBrandingResource {
 
     @GET
-    @Path(ConfAPI.COLOR_SCHEME)
+    @Path(BootstrAPI.COLOR_SCHEME)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.SETTINGS },
+            tags = { BootstrAPI.SETTINGS },
             summary = "Get the color scheme",
             responses = {
                     @ApiResponse(
@@ -40,11 +40,11 @@ public interface SettingsBrandingResource {
     Response getBrandingColorScheme();
 
     @PUT
-    @Path(ConfAPI.COLOR_SCHEME)
+    @Path(BootstrAPI.COLOR_SCHEME)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.SETTINGS },
+            tags = { BootstrAPI.SETTINGS },
             summary = "Set the color scheme",
             responses = {
                     @ApiResponse(
@@ -61,10 +61,10 @@ public interface SettingsBrandingResource {
             @NotNull final SettingsBrandingColorSchemeBean bean);
 
     @GET
-    @Path(ConfAPI.LOGO)
+    @Path(BootstrAPI.LOGO)
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     @Operation(
-            tags = { ConfAPI.SETTINGS },
+            tags = { BootstrAPI.SETTINGS },
             summary = "Get the logo",
             responses = {
                     @ApiResponse(
@@ -80,11 +80,11 @@ public interface SettingsBrandingResource {
     Response getBrandingLogo();
 
     @PUT
-    @Path(ConfAPI.LOGO)
+    @Path(BootstrAPI.LOGO)
     @Consumes(MediaType.APPLICATION_OCTET_STREAM)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.SETTINGS },
+            tags = { BootstrAPI.SETTINGS },
             summary = "Set the logo",
             responses = {
                     @ApiResponse(
@@ -101,10 +101,10 @@ public interface SettingsBrandingResource {
             @NotNull final InputStream binaryInputStream);
 
     @GET
-    @Path(ConfAPI.FAVICON)
+    @Path(BootstrAPI.FAVICON)
     @Produces(MediaType.APPLICATION_OCTET_STREAM)
     @Operation(
-            tags = { ConfAPI.SETTINGS },
+            tags = { BootstrAPI.SETTINGS },
             summary = "Get the favicon",
             responses = {
                     @ApiResponse(
@@ -120,11 +120,11 @@ public interface SettingsBrandingResource {
     Response getBrandingFavicon();
 
     @PUT
-    @Path(ConfAPI.FAVICON)
+    @Path(BootstrAPI.FAVICON)
     @Consumes(MediaType.APPLICATION_OCTET_STREAM)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.SETTINGS },
+            tags = { BootstrAPI.SETTINGS },
             summary = "Set the favicon",
             responses = {
                     @ApiResponse(

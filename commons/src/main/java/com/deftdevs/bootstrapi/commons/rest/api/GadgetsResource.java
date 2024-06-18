@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import com.deftdevs.bootstrapi.commons.model.GadgetBean;
 import com.deftdevs.bootstrapi.commons.model.GadgetsBean;
@@ -27,7 +27,7 @@ public interface GadgetsResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.GADGETS },
+            tags = { BootstrAPI.GADGETS },
             summary = "Get all gadgets",
             responses = {
                     @ApiResponse(
@@ -46,7 +46,7 @@ public interface GadgetsResource {
     @Path("{id}")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.GADGETS },
+            tags = { BootstrAPI.GADGETS },
             summary = "Get a gadget",
             responses = {
                     @ApiResponse(
@@ -66,7 +66,7 @@ public interface GadgetsResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.GADGETS },
+            tags = { BootstrAPI.GADGETS },
             summary = "Set or update a list of gadgets",
             description = "NOTE: This will only create gadgets that does not exist yet as there is no real 'update'.",
             responses = {
@@ -88,7 +88,7 @@ public interface GadgetsResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.GADGETS },
+            tags = { BootstrAPI.GADGETS },
             summary = "Update a gadget",
             responses = {
                     @ApiResponse(
@@ -109,7 +109,7 @@ public interface GadgetsResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.GADGETS },
+            tags = { BootstrAPI.GADGETS },
             summary = "Add a gadget",
             description = "Upon successful request, returns a `GadgetBean` object of the created gadget.",
             responses = {
@@ -128,7 +128,7 @@ public interface GadgetsResource {
 
     @DELETE
     @Operation(
-            tags = { ConfAPI.GADGETS },
+            tags = { BootstrAPI.GADGETS },
             summary = "Delete all gadgets",
             description = "NOTE: The 'force' parameter must be set to 'true' in order to execute this request.",
             responses = {
@@ -148,7 +148,7 @@ public interface GadgetsResource {
     @DELETE
     @Path("{id}")
     @Operation(
-            tags = { ConfAPI.GADGETS },
+            tags = { BootstrAPI.GADGETS },
             summary = "Delete a gadget",
             responses = {
                     @ApiResponse(

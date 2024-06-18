@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.constants;
 
-public class ConfAPI {
+public class BootstrAPI {
 
     public static final String ALL                          = "all";
     public static final String APPLICATION                  = "application";
@@ -60,7 +60,7 @@ public class ConfAPI {
 
     public static final String MEDIA_TYPE_IMAGE             = "image/*";
 
-    private ConfAPI() {
+    private BootstrAPI() {
     }
 
 }

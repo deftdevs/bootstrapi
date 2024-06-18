@@ -1,6 +1,6 @@
 package it.com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.UserBean;
 import org.apache.wink.client.ClientAuthenticationException;
 import org.apache.wink.client.ClientResponse;
@@ -19,7 +19,7 @@ public abstract class AbstractUserResourceFuncTest {
     @Test
     void testGetUser() {
         UserBean exampleBean = getExampleBean();
-        Resource usersResource = ResourceBuilder.builder(ConfAPI.USERS + getUserNameQueryParam(exampleBean)).build();
+        Resource usersResource = ResourceBuilder.builder(BootstrAPI.USERS + getUserNameQueryParam(exampleBean)).build();
 
         ClientResponse clientResponse = usersResource.get();
         assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
@@ -31,7 +31,7 @@ public abstract class AbstractUserResourceFuncTest {
     @Test
     void testSetUserEmailAddress() {
         UserBean exampleBean = getExampleBean();
-        Resource usersResource = ResourceBuilder.builder(ConfAPI.USERS + getUserNameQueryParam(exampleBean)).build();
+        Resource usersResource = ResourceBuilder.builder(BootstrAPI.USERS + getUserNameQueryParam(exampleBean)).build();
 
         ClientResponse clientResponse = usersResource.put(exampleBean);
         assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
@@ -44,7 +44,7 @@ public abstract class AbstractUserResourceFuncTest {
     void testSetUserPassword() {
         UserBean exampleBean = getExampleBean();
         Resource usersResource = ResourceBuilder
-                .builder(ConfAPI.USERS + "/" + ConfAPI.USER_PASSWORD + getUserNameQueryParam(exampleBean))
+                .builder(BootstrAPI.USERS + "/" + BootstrAPI.USER_PASSWORD + getUserNameQueryParam(exampleBean))
                 .contentMediaType(MediaType.TEXT_PLAIN)
                 .build();
 
@@ -55,7 +55,7 @@ public abstract class AbstractUserResourceFuncTest {
     @Test
     public void testGetUserUnauthenticated() {
         UserBean exampleBean = getExampleBean();
-        Resource usersResource = ResourceBuilder.builder(ConfAPI.USERS + getUserNameQueryParam(exampleBean))
+        Resource usersResource = ResourceBuilder.builder(BootstrAPI.USERS + getUserNameQueryParam(exampleBean))
                 .username("wrong")
                 .password("password")
                 .build();
@@ -66,7 +66,7 @@ public abstract class AbstractUserResourceFuncTest {
     @Test
     public void testSetUserEmailAddressUnauthenticated() {
         UserBean exampleBean = getExampleBean();
-        Resource usersResource = ResourceBuilder.builder(ConfAPI.USERS + getUserNameQueryParam(exampleBean))
+        Resource usersResource = ResourceBuilder.builder(BootstrAPI.USERS + getUserNameQueryParam(exampleBean))
                 .username("wrong")
                 .password("password")
                 .build();
@@ -79,7 +79,7 @@ public abstract class AbstractUserResourceFuncTest {
     @Test
     void testGetUserUnauthorized() {
         UserBean exampleBean = getExampleBean();
-        Resource usersResource = ResourceBuilder.builder(ConfAPI.USERS + getUserNameQueryParam(exampleBean))
+        Resource usersResource = ResourceBuilder.builder(BootstrAPI.USERS + getUserNameQueryParam(exampleBean))
                 .username("user")
                 .password("user")
                 .build();
@@ -90,7 +90,7 @@ public abstract class AbstractUserResourceFuncTest {
     @Test
     void testSetUserEmailAddressUnauthorized() {
         UserBean exampleBean = getExampleBean();
-        Resource usersResource = ResourceBuilder.builder(ConfAPI.USERS + getUserNameQueryParam(exampleBean))
+        Resource usersResource = ResourceBuilder.builder(BootstrAPI.USERS + getUserNameQueryParam(exampleBean))
                 .username("user")
                 .password("user")
                 .build();

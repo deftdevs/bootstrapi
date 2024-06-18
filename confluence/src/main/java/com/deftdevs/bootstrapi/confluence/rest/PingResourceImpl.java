@@ -1,12 +1,12 @@
 package com.deftdevs.bootstrapi.confluence.rest;
 
 import com.atlassian.plugins.rest.common.security.UnrestrictedAccess;
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.rest.AbstractPingResourceImpl;
 
 import javax.ws.rs.Path;
 
-@Path(ConfAPI.PING)
+@Path(BootstrAPI.PING)
 @UnrestrictedAccess
 public class PingResourceImpl extends AbstractPingResourceImpl {
 

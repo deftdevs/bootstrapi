@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.sun.jersey.spi.container.ResourceFilters;
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
 import com.deftdevs.bootstrapi.commons.rest.api.MailServerSmtpResource;
 import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
@@ -12,7 +12,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-@Path(ConfAPI.MAIL_SERVER)
+@Path(BootstrAPI.MAIL_SERVER)
 @ResourceFilters(SysadminOnlyResourceFilter.class)
 @Component
 public class MailServerResourceImpl implements MailServerSmtpResource {

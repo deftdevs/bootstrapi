@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.model;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -13,7 +13,7 @@ import java.net.URI;
 
 @Data
 @NoArgsConstructor
-@XmlRootElement(name = ConfAPI.SETTINGS)
+@XmlRootElement(name = BootstrAPI.SETTINGS)
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SettingsBean {
 

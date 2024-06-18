@@ -125,7 +125,7 @@ public class SettingsBrandingServiceTest {
     @Test
     public void setLogo() throws PropertyManagerException {
 
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("images/aservo.png");
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("images/deftdevs.png");
 
         LookAndFeelConfiguration lookAndFeelConfiguration = LookAndFeelConfiguration.builder().build();
         Optional<LookAndFeelConfiguration> lookAndFeelConfigurationOptional = Optional.of(lookAndFeelConfiguration);
@@ -138,7 +138,7 @@ public class SettingsBrandingServiceTest {
     @Test(expected = BadRequestException.class)
     public void setLogoBadRequestException() throws PropertyManagerException {
 
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("images/aservo.png");
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("images/deftdevs.png");
 
         LookAndFeelConfiguration lookAndFeelConfiguration = LookAndFeelConfiguration.builder().build();
         Optional<LookAndFeelConfiguration> lookAndFeelConfigurationOptional = Optional.of(lookAndFeelConfiguration);

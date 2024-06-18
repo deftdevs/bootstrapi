@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.model.type;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -9,7 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
 @NoArgsConstructor
-@XmlRootElement(name = ConfAPI.PERMISSIONS)
+@XmlRootElement(name = BootstrAPI.PERMISSIONS)
 public class DirectoryPermissions {
 
     @XmlElement

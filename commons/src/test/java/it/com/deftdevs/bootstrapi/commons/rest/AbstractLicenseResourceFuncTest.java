@@ -1,6 +1,6 @@
 package it.com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
 import com.deftdevs.bootstrapi.commons.model.LicensesBean;
 import org.apache.wink.client.ClientAuthenticationException;
@@ -17,7 +17,7 @@ public abstract class AbstractLicenseResourceFuncTest {
 
     @Test
     void testGetLicenses() {
-        Resource licensesResource = ResourceBuilder.builder(ConfAPI.LICENSES).build();
+        Resource licensesResource = ResourceBuilder.builder(BootstrAPI.LICENSES).build();
 
         ClientResponse clientResponse = licensesResource.get();
         assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
@@ -30,7 +30,7 @@ public abstract class AbstractLicenseResourceFuncTest {
 
     @Test
     void testSetLicenses() {
-        Resource licensesResource = ResourceBuilder.builder(ConfAPI.LICENSES).build();
+        Resource licensesResource = ResourceBuilder.builder(BootstrAPI.LICENSES).build();
 
         ClientResponse response = licensesResource.put(getExampleBean());
         assertEquals(Response.Status.OK.getStatusCode(), response.getStatusCode());
@@ -43,7 +43,7 @@ public abstract class AbstractLicenseResourceFuncTest {
 
     @Test
     void testAddLicenses() {
-        Resource licensesResource = ResourceBuilder.builder(ConfAPI.LICENSES).build();
+        Resource licensesResource = ResourceBuilder.builder(BootstrAPI.LICENSES).build();
 
         LicenseBean licenseBean = getExampleBean().getLicenses().iterator().next();
         ClientResponse response = licensesResource.post(licenseBean);
@@ -57,7 +57,7 @@ public abstract class AbstractLicenseResourceFuncTest {
 
     @Test
     public void testGetLicensesUnauthenticated() {
-        Resource licensesResource = ResourceBuilder.builder(ConfAPI.LICENSES)
+        Resource licensesResource = ResourceBuilder.builder(BootstrAPI.LICENSES)
                 .username("wrong")
                 .password("password")
                 .build();
@@ -67,7 +67,7 @@ public abstract class AbstractLicenseResourceFuncTest {
 
     @Test
     public void testSetLicensesUnauthenticated() {
-        Resource licensesResource = ResourceBuilder.builder(ConfAPI.LICENSES)
+        Resource licensesResource = ResourceBuilder.builder(BootstrAPI.LICENSES)
                 .username("wrong")
                 .password("password")
                 .build();
@@ -79,7 +79,7 @@ public abstract class AbstractLicenseResourceFuncTest {
 
     @Test
     void testGetLicensesUnauthorized() {
-        Resource licensesResource = ResourceBuilder.builder(ConfAPI.LICENSES)
+        Resource licensesResource = ResourceBuilder.builder(BootstrAPI.LICENSES)
                 .username("user")
                 .password("user")
                 .build();
@@ -89,7 +89,7 @@ public abstract class AbstractLicenseResourceFuncTest {
 
     @Test
     void testSetLicensesUnauthorized() {
-        Resource licensesResource = ResourceBuilder.builder(ConfAPI.LICENSES)
+        Resource licensesResource = ResourceBuilder.builder(BootstrAPI.LICENSES)
                 .username("user")
                 .password("user")
                 .build();

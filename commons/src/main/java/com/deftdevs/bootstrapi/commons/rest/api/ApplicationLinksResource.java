@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinksBean;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
@@ -29,7 +29,7 @@ public interface ApplicationLinksResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.APPLICATION_LINKS },
+            tags = { BootstrAPI.APPLICATION_LINKS },
             summary = "Get all application links",
             responses = {
                     @ApiResponse(
@@ -48,7 +48,7 @@ public interface ApplicationLinksResource {
     @Path("{uuid}")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.APPLICATION_LINKS },
+            tags = { BootstrAPI.APPLICATION_LINKS },
             summary = "Get an application link",
             description = "Upon successful request, ",
             responses = {
@@ -69,7 +69,7 @@ public interface ApplicationLinksResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.APPLICATION_LINKS },
+            tags = { BootstrAPI.APPLICATION_LINKS },
             summary = "Set or update a list of application links",
             description = "NOTE: All existing application links with the same 'rpcUrl' attribute are updated.",
             responses = {
@@ -92,7 +92,7 @@ public interface ApplicationLinksResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.APPLICATION_LINKS },
+            tags = { BootstrAPI.APPLICATION_LINKS },
             summary = "Update an application link",
             responses = {
                     @ApiResponse(
@@ -114,7 +114,7 @@ public interface ApplicationLinksResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.APPLICATION_LINKS },
+            tags = { BootstrAPI.APPLICATION_LINKS },
             summary = "Add an application link",
             responses = {
                     @ApiResponse(
@@ -133,7 +133,7 @@ public interface ApplicationLinksResource {
 
     @DELETE
     @Operation(
-            tags = { ConfAPI.APPLICATION_LINKS },
+            tags = { BootstrAPI.APPLICATION_LINKS },
             summary = "Delete all application links",
             description = "NOTE: The 'force' parameter must be set to 'true' in order to execute this request.",
             responses = {
@@ -153,7 +153,7 @@ public interface ApplicationLinksResource {
     @DELETE
     @Path("{uuid}")
     @Operation(
-            tags = { ConfAPI.APPLICATION_LINKS },
+            tags = { BootstrAPI.APPLICATION_LINKS },
             summary = "Delete an application link",
             responses = {
                     @ApiResponse(

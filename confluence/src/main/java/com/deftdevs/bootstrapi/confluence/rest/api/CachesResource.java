@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.confluence.rest.api;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import com.deftdevs.bootstrapi.confluence.model.CacheBean;
 import com.deftdevs.bootstrapi.confluence.model.CachesBean;
@@ -18,7 +18,7 @@ public interface CachesResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = {ConfAPI.CACHE},
+            tags = {BootstrAPI.CACHE},
             summary = "Read all cache informations",
             responses = {
                     @ApiResponse(
@@ -36,7 +36,7 @@ public interface CachesResource {
     @Path("{name}")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = {ConfAPI.CACHE},
+            tags = {BootstrAPI.CACHE},
             summary = "Read cache information for a specified cache",
             responses = {
                     @ApiResponse(
@@ -55,7 +55,7 @@ public interface CachesResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = {ConfAPI.CACHE},
+            tags = {BootstrAPI.CACHE},
             summary = "Update an existing cache-size. Only Setting maxObjectCount is supported.",
             responses = {
                     @ApiResponse(
@@ -71,11 +71,11 @@ public interface CachesResource {
     Response updateCache(@PathParam("name") final String name, final CacheBean cache);
 
     @POST
-    @Path("{name}/" + ConfAPI.CACHE_FLUSH)
+    @Path("{name}/" + BootstrAPI.CACHE_FLUSH)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = {ConfAPI.CACHE},
+            tags = {BootstrAPI.CACHE},
             summary = "Flushes a cache",
             description = "Empties the specified cache",
             responses = {

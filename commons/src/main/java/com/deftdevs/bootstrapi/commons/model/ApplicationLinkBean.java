@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.model;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -15,7 +15,7 @@ import java.util.UUID;
  */
 @Data
 @NoArgsConstructor
-@XmlRootElement(name = ConfAPI.APPLICATION_LINK)
+@XmlRootElement(name = BootstrAPI.APPLICATION_LINK)
 public class ApplicationLinkBean {
 
     public enum ApplicationLinkType {

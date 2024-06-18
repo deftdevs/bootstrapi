@@ -1,6 +1,6 @@
 package it.com.deftdevs.bootstrapi.confluence.rest;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.confluence.model.PermissionAnonymousAccessBean;
 import it.com.deftdevs.bootstrapi.commons.rest.ResourceBuilder;
 import org.apache.wink.client.ClientAuthenticationException;
@@ -17,7 +17,7 @@ class PermissionsResourceFuncTest {
 
     @Test
     void testGetAnonymousPermissions() {
-        Resource permissionsResource = ResourceBuilder.builder(ConfAPI.PERMISSIONS + "/" + ConfAPI.PERMISSION_ANONYMOUS_ACCESS).build();
+        Resource permissionsResource = ResourceBuilder.builder(BootstrAPI.PERMISSIONS + "/" + BootstrAPI.PERMISSION_ANONYMOUS_ACCESS).build();
 
         ClientResponse clientResponse = permissionsResource.get();
         assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
@@ -28,7 +28,7 @@ class PermissionsResourceFuncTest {
 
     @Test
     void testSetAnonymousPermissions() {
-        Resource permissionsResource = ResourceBuilder.builder(ConfAPI.PERMISSIONS + "/" + ConfAPI.PERMISSION_ANONYMOUS_ACCESS).build();
+        Resource permissionsResource = ResourceBuilder.builder(BootstrAPI.PERMISSIONS + "/" + BootstrAPI.PERMISSION_ANONYMOUS_ACCESS).build();
 
         ClientResponse clientResponse = permissionsResource.put(getExampleBean());
         assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
@@ -39,7 +39,7 @@ class PermissionsResourceFuncTest {
 
     @Test
     void testGetAnonymousPermissionsUnauthenticated() {
-        Resource permissionsResource = ResourceBuilder.builder(ConfAPI.PERMISSIONS + "/" + ConfAPI.PERMISSION_ANONYMOUS_ACCESS)
+        Resource permissionsResource = ResourceBuilder.builder(BootstrAPI.PERMISSIONS + "/" + BootstrAPI.PERMISSION_ANONYMOUS_ACCESS)
                 .username("wrong")
                 .password("password")
                 .build();
@@ -49,7 +49,7 @@ class PermissionsResourceFuncTest {
 
     @Test
     void testSetAnonymousPermissionsUnauthenticated() {
-        Resource permissionsResource = ResourceBuilder.builder(ConfAPI.PERMISSIONS + "/" + ConfAPI.PERMISSION_ANONYMOUS_ACCESS)
+        Resource permissionsResource = ResourceBuilder.builder(BootstrAPI.PERMISSIONS + "/" + BootstrAPI.PERMISSION_ANONYMOUS_ACCESS)
                 .username("wrong")
                 .password("password")
                 .build();
@@ -64,7 +64,7 @@ class PermissionsResourceFuncTest {
     @Test
     @Disabled("cannot be executed because there is no default user with restricted access rights")
     void testGetAnonymousPermissionsUnauthorized() {
-        Resource permissionsResource = ResourceBuilder.builder(ConfAPI.PERMISSIONS + "/" + ConfAPI.PERMISSION_ANONYMOUS_ACCESS)
+        Resource permissionsResource = ResourceBuilder.builder(BootstrAPI.PERMISSIONS + "/" + BootstrAPI.PERMISSION_ANONYMOUS_ACCESS)
                 .username("user")
                 .password("user")
                 .build();
@@ -75,7 +75,7 @@ class PermissionsResourceFuncTest {
     @Test
     @Disabled("cannot be executed because there is no default user with restricted access rights")
     void testSetAnonymousPermissionsUnauthorized() {
-        Resource permissionsResource = ResourceBuilder.builder(ConfAPI.PERMISSIONS + "/" + ConfAPI.PERMISSION_ANONYMOUS_ACCESS)
+        Resource permissionsResource = ResourceBuilder.builder(BootstrAPI.PERMISSIONS + "/" + BootstrAPI.PERMISSION_ANONYMOUS_ACCESS)
                 .username("user")
                 .password("user")
                 .build();

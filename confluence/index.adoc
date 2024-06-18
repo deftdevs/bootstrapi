@@ -1,16 +1,16 @@
-= ConfAPI for Confluence
+= BootstrAPI for Confluence
 opensource@aservo.com
 1
 :toc: left
 :numbered:
 :toclevels: 4
 :source-highlighter: highlightjs
-:keywords: openapi, rest, ConfAPI for Confluence
+:keywords: openapi, rest, BootstrAPI for Confluence
 :specDir: src/main/resources/openapi/specs/
 :snippetDir: src/main/resources/openapi/snippets/
 :generator-template: v1 2019-12-20
-:info-url: https://github.com/aservo/confapi-confluence-plugin
-:app-name: ConfAPI for Confluence
+:info-url: https://github.com/aservo/bootstrapi-confluence-plugin
+:app-name: BootstrAPI for Confluence
 
 [abstract]
 .Abstract

@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.rest.api;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
 import com.deftdevs.bootstrapi.crowd.model.ApplicationsBean;
@@ -26,7 +26,7 @@ public interface ApplicationsResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.APPLICATIONS },
+            tags = { BootstrAPI.APPLICATIONS },
             summary = "Get all applications",
             description = "Upon successful request, returns a `ApplicationsBean` object containing all applications",
             responses = {
@@ -47,7 +47,7 @@ public interface ApplicationsResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.APPLICATIONS },
+            tags = { BootstrAPI.APPLICATIONS },
             summary = "Get an application",
             responses = {
                     @ApiResponse(
@@ -67,7 +67,7 @@ public interface ApplicationsResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.APPLICATIONS },
+            tags = { BootstrAPI.APPLICATIONS },
             summary = "Set or update a list of applications",
             description = "NOTE: All existing applications with the same 'name' attribute are updated.",
             responses = {
@@ -89,7 +89,7 @@ public interface ApplicationsResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.APPLICATIONS },
+            tags = { BootstrAPI.APPLICATIONS },
             summary = "Update an application",
             responses = {
                     @ApiResponse(
@@ -110,7 +110,7 @@ public interface ApplicationsResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.APPLICATIONS },
+            tags = { BootstrAPI.APPLICATIONS },
             summary = "Add an application",
             responses = {
                     @ApiResponse(
@@ -128,7 +128,7 @@ public interface ApplicationsResource {
 
     @DELETE
     @Operation(
-            tags = { ConfAPI.APPLICATIONS },
+            tags = { BootstrAPI.APPLICATIONS },
             summary = "Delete all applications",
             description = "NOTE: The 'force' parameter must be se to 'true' in order to execute this request.",
             responses = {
@@ -148,7 +148,7 @@ public interface ApplicationsResource {
     @DELETE
     @Path("{id}")
     @Operation(
-            tags = { ConfAPI.APPLICATIONS },
+            tags = { BootstrAPI.APPLICATIONS },
             summary = "Delete an application",
             responses = {
                     @ApiResponse(

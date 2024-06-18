@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.rest.api;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import com.deftdevs.bootstrapi.crowd.model.AllBean;
 import io.swagger.v3.oas.annotations.Operation;
@@ -18,7 +18,7 @@ public interface AllResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = {ConfAPI.ALL},
+            tags = {BootstrAPI.ALL},
             summary = "Set the whole configuration",
             responses = {
                     @ApiResponse(

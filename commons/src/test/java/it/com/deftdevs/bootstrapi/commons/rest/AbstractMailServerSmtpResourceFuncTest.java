@@ -1,6 +1,6 @@
 package it.com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
 import org.apache.wink.client.ClientAuthenticationException;
 import org.apache.wink.client.ClientResponse;
@@ -15,7 +15,7 @@ public abstract class AbstractMailServerSmtpResourceFuncTest {
 
     @Test
     void testGetMailServerImap() {
-        Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_SMTP).build();
+        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP).build();
 
         ClientResponse clientResponse = mailserverResource.get();
         assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
@@ -26,7 +26,7 @@ public abstract class AbstractMailServerSmtpResourceFuncTest {
 
     @Test
     void testSetMailServerImap() {
-        Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_SMTP).build();
+        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP).build();
 
         ClientResponse clientResponse = mailserverResource.put(getExampleBean());
         assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
@@ -37,7 +37,7 @@ public abstract class AbstractMailServerSmtpResourceFuncTest {
 
     @Test
     public void testGetMailServerImapUnauthenticated() {
-        Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_SMTP)
+        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
                 .username("wrong")
                 .password("password")
                 .build();
@@ -47,7 +47,7 @@ public abstract class AbstractMailServerSmtpResourceFuncTest {
 
     @Test
     public void testSetMailServerImapUnauthenticated() {
-        Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_SMTP)
+        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
                 .username("wrong")
                 .password("password")
                 .build();
@@ -59,7 +59,7 @@ public abstract class AbstractMailServerSmtpResourceFuncTest {
 
     @Test
     void testGetMailServerImapUnauthorized() {
-        Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_SMTP)
+        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
                 .username("user")
                 .password("user")
                 .build();
@@ -70,7 +70,7 @@ public abstract class AbstractMailServerSmtpResourceFuncTest {
 
     @Test
     void testSetMailServerImapUnauthorized() {
-        Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_SMTP)
+        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
                 .username("user")
                 .password("user")
                 .build();

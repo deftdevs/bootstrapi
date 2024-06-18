@@ -5,7 +5,7 @@ import com.deftdevs.bootstrapi.confluence.filter.SysAdminOnlyResourceFilter;
 import com.deftdevs.bootstrapi.confluence.model.PermissionAnonymousAccessBean;
 import com.deftdevs.bootstrapi.confluence.rest.api.PermissionsResource;
 import com.deftdevs.bootstrapi.confluence.service.api.PermissionsService;
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
@@ -15,7 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-@Path(ConfAPI.PERMISSIONS)
+@Path(BootstrAPI.PERMISSIONS)
 @Produces(MediaType.APPLICATION_JSON)
 @ResourceFilters(SysAdminOnlyResourceFilter.class)
 @Component

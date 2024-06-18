@@ -3,17 +3,17 @@
         <description>${project.description}</description>
         <version>${project.version}</version>
         <vendor name="${project.organization.name}" url="${project.organization.url}" />
-        <param name="plugin-logo">images/aservo.png</param>
+        <param name="plugin-logo">images/deftdevs.png</param>
         <param name="plugin-icon">images/plugin-icon.png</param>
     </plugin-info>
 
-    <web-resource key="aservo-confapi-jira-web-resource" name="ConfAPI Web Resource">
+    <web-resource key="deftdevs-bootstrapi-jira-web-resource" name="BootstrAPI Web Resource">
         <dependency>com.atlassian.auiplugin:ajs</dependency>
         <dependency>com.atlassian.auiplugin:aui-experimental-expander</dependency>
         <resource type="download" name="images/" location="/images"/>
         <context>atl.general</context>
     </web-resource>
 
-    <rest key="aservo-confapi-rest" name="ConfAPI REST" path="/confapi" version="1"/>
+    <rest key="deftdevs-bootstrapi-rest" name="BootstrAPI REST" path="/bootstrapi" version="1"/>
 
 </atlassian-plugin>

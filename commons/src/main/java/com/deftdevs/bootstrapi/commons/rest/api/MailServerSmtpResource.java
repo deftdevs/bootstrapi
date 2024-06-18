@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,10 +20,10 @@ import javax.ws.rs.core.Response;
 public interface MailServerSmtpResource {
 
     @GET
-    @Path(ConfAPI.MAIL_SERVER_SMTP)
+    @Path(BootstrAPI.MAIL_SERVER_SMTP)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.MAIL_SERVER },
+            tags = { BootstrAPI.MAIL_SERVER },
             summary = "Get the default SMTP mail server",
             responses = {
                     @ApiResponse(
@@ -43,11 +43,11 @@ public interface MailServerSmtpResource {
     Response getMailServerSmtp();
 
     @PUT
-    @Path(ConfAPI.MAIL_SERVER_SMTP)
+    @Path(BootstrAPI.MAIL_SERVER_SMTP)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.MAIL_SERVER },
+            tags = { BootstrAPI.MAIL_SERVER },
             summary = "Set the default SMTP mail server",
             responses = {
                     @ApiResponse(

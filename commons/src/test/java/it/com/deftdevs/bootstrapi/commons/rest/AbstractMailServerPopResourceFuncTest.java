@@ -1,6 +1,6 @@
 package it.com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
 import org.apache.wink.client.ClientAuthenticationException;
 import org.apache.wink.client.ClientResponse;
@@ -15,7 +15,7 @@ public abstract class AbstractMailServerPopResourceFuncTest {
 
     @Test
     void testGetMailServerPop() {
-        Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_POP).build();
+        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP).build();
 
         ClientResponse clientResponse = mailserverResource.get();
         assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
@@ -26,7 +26,7 @@ public abstract class AbstractMailServerPopResourceFuncTest {
 
     @Test
     void testSetMailServerPop() {
-        Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_POP).build();
+        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP).build();
 
         ClientResponse clientResponse = mailserverResource.put(getExampleBean());
         assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
@@ -37,7 +37,7 @@ public abstract class AbstractMailServerPopResourceFuncTest {
 
     @Test
     public void testGetMailServerPopUnauthenticated() {
-        Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_POP)
+        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
                 .username("wrong")
                 .password("password")
                 .build();
@@ -48,7 +48,7 @@ public abstract class AbstractMailServerPopResourceFuncTest {
 
     @Test
     public void testSetMailServerPopUnauthenticated() {
-        Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_POP)
+        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
                 .username("wrong")
                 .password("password")
                 .build();
@@ -60,7 +60,7 @@ public abstract class AbstractMailServerPopResourceFuncTest {
 
     @Test
     void testGetMailServerPopUnauthorized() {
-        Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_POP)
+        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
                 .username("user")
                 .password("user")
                 .build();
@@ -71,7 +71,7 @@ public abstract class AbstractMailServerPopResourceFuncTest {
 
     @Test
     void testSetMailServerPopUnauthorized() {
-        Resource mailserverResource = ResourceBuilder.builder(ConfAPI.MAIL_SERVER + "/" + ConfAPI.MAIL_SERVER_POP)
+        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
                 .username("user")
                 .password("user")
                 .build();

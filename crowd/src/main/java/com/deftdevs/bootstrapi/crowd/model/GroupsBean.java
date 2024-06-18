@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.model;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,7 +13,7 @@ import java.util.Collection;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement(name = ConfAPI.GROUPS)
+@XmlRootElement(name = BootstrAPI.GROUPS)
 public class GroupsBean {
 
     @XmlElement

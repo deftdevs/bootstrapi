@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.model;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.codehaus.jackson.annotate.JsonSubTypes;
@@ -19,8 +19,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 )
 // Note: New subtypes must also be registered in AuthenticationIdpsBean.java to be considered in the REST API documentation
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = AuthenticationIdpOidcBean.class, name = ConfAPI.AUTHENTICATION_IDP_OIDC),
-        @JsonSubTypes.Type(value = AuthenticationIdpSamlBean.class, name = ConfAPI.AUTHENTICATION_IDP_SAML),
+        @JsonSubTypes.Type(value = AuthenticationIdpOidcBean.class, name = BootstrAPI.AUTHENTICATION_IDP_OIDC),
+        @JsonSubTypes.Type(value = AuthenticationIdpSamlBean.class, name = BootstrAPI.AUTHENTICATION_IDP_SAML),
 })
 public abstract class AbstractAuthenticationIdpBean {
 

@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.confluence.model;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,7 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
 @NoArgsConstructor
-@XmlRootElement(name = ConfAPI.CACHE)
+@XmlRootElement(name = BootstrAPI.CACHE)
 public class CacheBean {
 
     @NotNull

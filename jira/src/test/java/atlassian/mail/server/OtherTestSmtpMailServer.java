@@ -5,7 +5,7 @@ import com.atlassian.mail.server.SMTPMailServer;
 
 public interface OtherTestSmtpMailServer extends DefaultTestMailServer, SMTPMailServer {
 
-    String FROM = "from.other@aservo.com";
+    String FROM = "from.other@deftdevs.com";
     String PREFIX = "[OTHER]";
     boolean TLS_REQUIRED = true;
     MailProtocol PROTOCOL = MailProtocol.SECURE_SMTP;

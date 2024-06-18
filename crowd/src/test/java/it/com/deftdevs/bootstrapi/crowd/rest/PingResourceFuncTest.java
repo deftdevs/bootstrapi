@@ -22,7 +22,7 @@ public class PingResourceFuncTest {
         final RestClient client = new RestClient(config);
 
         final String baseUrl = System.getProperty("baseurl");
-        final String resourceUrl = baseUrl + "/rest/confapi/1/ping";
+        final String resourceUrl = baseUrl + "/rest/bootstrapi/1/ping";
         final Resource resource = client.resource(resourceUrl);
 
         assertEquals(200, resource.get().getStatusCode());

@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
 import io.swagger.v3.oas.annotations.Operation;
@@ -20,10 +20,10 @@ import javax.ws.rs.core.Response;
 public interface MailServerPopResource {
 
     @GET
-    @Path(ConfAPI.MAIL_SERVER_POP)
+    @Path(BootstrAPI.MAIL_SERVER_POP)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.MAIL_SERVER },
+            tags = { BootstrAPI.MAIL_SERVER },
             summary = "Get the default POP mail server",
             responses = {
                     @ApiResponse(
@@ -43,11 +43,11 @@ public interface MailServerPopResource {
     Response getMailServerPop();
 
     @PUT
-    @Path(ConfAPI.MAIL_SERVER_POP)
+    @Path(BootstrAPI.MAIL_SERVER_POP)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.MAIL_SERVER },
+            tags = { BootstrAPI.MAIL_SERVER },
             summary = "Set the default POP mail server",
             responses = {
                     @ApiResponse(

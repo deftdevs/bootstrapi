@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.confluence.rest.api;
 
 import com.deftdevs.bootstrapi.confluence.model.PermissionAnonymousAccessBean;
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -17,9 +17,9 @@ import javax.ws.rs.core.Response;
 public interface PermissionsResource {
 
     @GET
-    @Path(ConfAPI.PERMISSION_ANONYMOUS_ACCESS)
+    @Path(BootstrAPI.PERMISSION_ANONYMOUS_ACCESS)
     @Operation(
-            tags = { ConfAPI.PERMISSIONS },
+            tags = { BootstrAPI.PERMISSIONS },
             summary = "Retrieve current anonymous access configuration",
             description = "Gets the current global permissions for anonymous access to public pages and user profiles",
             responses = {
@@ -30,9 +30,9 @@ public interface PermissionsResource {
     Response getPermissionAnonymousAccess();
 
     @PUT
-    @Path(ConfAPI.PERMISSION_ANONYMOUS_ACCESS)
+    @Path(BootstrAPI.PERMISSION_ANONYMOUS_ACCESS)
     @Operation(
-            tags = { ConfAPI.PERMISSIONS },
+            tags = { BootstrAPI.PERMISSIONS },
             summary = "Set anonymous access configuration",
             description = "Sets global permissions for anonymous access to public pages and user profiles",
             responses = {

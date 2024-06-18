@@ -1,16 +1,16 @@
-= ConfAPI for Jira
+= BootstrAPI for Jira
 opensource@aservo.com
 1
 :toc: left
 :numbered:
 :toclevels: 4
 :source-highlighter: highlightjs
-:keywords: openapi, rest, ConfAPI for Jira
+:keywords: openapi, rest, BootstrAPI for Jira
 :specDir: src/main/resources/openapi/specs/
 :snippetDir: src/main/resources/openapi/snippets/
 :generator-template: v1 2019-12-20
-:info-url: https://github.com/aservo/confapi-jira-plugin
-:app-name: ConfAPI for Jira
+:info-url: https://github.com/aservo/bootstrapi-jira-plugin
+:app-name: BootstrAPI for Jira
 
 [abstract]
 .Abstract

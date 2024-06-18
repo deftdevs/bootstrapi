@@ -3,5 +3,5 @@
     <compatibility>
         <product name="crowd" min="3.3.0" max="4.1.1"/>
     </compatibility>
-    <logo image="images/aservo.png"/>
+    <logo image="images/deftdevs.png"/>
 </atlassian-plugin-marketing>

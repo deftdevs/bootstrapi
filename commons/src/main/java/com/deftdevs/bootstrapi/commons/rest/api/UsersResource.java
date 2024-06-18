@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import com.deftdevs.bootstrapi.commons.model.UserBean;
 import io.swagger.v3.oas.annotations.Operation;
@@ -23,7 +23,7 @@ public interface UsersResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.USERS },
+            tags = { BootstrAPI.USERS },
             summary = "Get a user",
             responses = {
                     @ApiResponse(
@@ -43,7 +43,7 @@ public interface UsersResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.USERS },
+            tags = { BootstrAPI.USERS },
             summary = "Update an user",
             responses = {
                     @ApiResponse(
@@ -61,11 +61,11 @@ public interface UsersResource {
             @NotNull final UserBean userBean);
 
     @PUT
-    @Path(ConfAPI.USER_PASSWORD)
+    @Path(BootstrAPI.USER_PASSWORD)
     @Consumes(MediaType.TEXT_PLAIN)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.USERS },
+            tags = { BootstrAPI.USERS },
             summary = "Update a user password",
             responses = {
                     @ApiResponse(

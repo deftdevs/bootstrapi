@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import static com.deftdevs.bootstrapi.commons.constants.ConfAPI.*;
+import static com.deftdevs.bootstrapi.commons.constants.BootstrAPI.*;
 
 @Data
 @NoArgsConstructor

@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.rest.api;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageBean;
 import io.swagger.v3.oas.annotations.Operation;
@@ -17,9 +17,9 @@ public interface SettingsBrandingResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Path(ConfAPI.SETTINGS_BRANDING_LOGIN_PAGE)
+    @Path(BootstrAPI.SETTINGS_BRANDING_LOGIN_PAGE)
     @Operation(
-            tags = { ConfAPI.SETTINGS },
+            tags = { BootstrAPI.SETTINGS },
             summary = "Get the login-page settings",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingLoginPageBean.class))),
@@ -31,9 +31,9 @@ public interface SettingsBrandingResource {
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
-    @Path(ConfAPI.SETTINGS_BRANDING_LOGIN_PAGE)
+    @Path(BootstrAPI.SETTINGS_BRANDING_LOGIN_PAGE)
     @Operation(
-            tags = { ConfAPI.SETTINGS },
+            tags = { BootstrAPI.SETTINGS },
             summary = "Set the login-page settings",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingLoginPageBean.class))),
@@ -44,11 +44,11 @@ public interface SettingsBrandingResource {
             SettingsBrandingLoginPageBean settingsBrandingLoginPageBean);
 
     @PUT
-    @Consumes(ConfAPI.MEDIA_TYPE_IMAGE)
+    @Consumes(BootstrAPI.MEDIA_TYPE_IMAGE)
     @Produces(MediaType.APPLICATION_JSON)
-    @Path(ConfAPI.LOGO)
+    @Path(BootstrAPI.LOGO)
     @Operation(
-            tags = { ConfAPI.SETTINGS },
+            tags = { BootstrAPI.SETTINGS },
             summary = "Set the logo",
             responses = {
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))

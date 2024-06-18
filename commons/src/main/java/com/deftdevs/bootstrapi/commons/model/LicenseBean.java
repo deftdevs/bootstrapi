@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.model;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -16,7 +16,7 @@ import java.util.Date;
  */
 @Data
 @NoArgsConstructor
-@XmlRootElement(name = ConfAPI.LICENSE)
+@XmlRootElement(name = BootstrAPI.LICENSE)
 public class LicenseBean {
 
     @XmlElement

@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.http.PATCH;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpsBean;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
@@ -20,10 +20,10 @@ import javax.ws.rs.core.Response;
 public interface AuthenticationResource {
 
     @GET
-    @Path(ConfAPI.AUTHENTICATION_IDPS)
+    @Path(BootstrAPI.AUTHENTICATION_IDPS)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.AUTHENTICATION },
+            tags = { BootstrAPI.AUTHENTICATION },
             summary = "Get all authentication identity providers",
             responses = {
                     @ApiResponse(
@@ -38,11 +38,11 @@ public interface AuthenticationResource {
     Response getAuthenticationIdps();
 
     @PATCH
-    @Path(ConfAPI.AUTHENTICATION_IDPS)
+    @Path(BootstrAPI.AUTHENTICATION_IDPS)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.AUTHENTICATION },
+            tags = { BootstrAPI.AUTHENTICATION },
             summary = "Set all authentication identity providers",
             responses = {
                     @ApiResponse(
@@ -58,10 +58,10 @@ public interface AuthenticationResource {
             final AuthenticationIdpsBean authenticationIdpsBean);
 
     @GET
-    @Path(ConfAPI.AUTHENTICATION_SSO)
+    @Path(BootstrAPI.AUTHENTICATION_SSO)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.AUTHENTICATION },
+            tags = { BootstrAPI.AUTHENTICATION },
             summary = "Get authentication SSO configuration",
             responses = {
                     @ApiResponse(
@@ -76,11 +76,11 @@ public interface AuthenticationResource {
     Response getAuthenticationSso();
 
     @PATCH
-    @Path(ConfAPI.AUTHENTICATION_SSO)
+    @Path(BootstrAPI.AUTHENTICATION_SSO)
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.AUTHENTICATION },
+            tags = { BootstrAPI.AUTHENTICATION },
             summary = "Set authentication SSO configuration",
             responses = {
                     @ApiResponse(

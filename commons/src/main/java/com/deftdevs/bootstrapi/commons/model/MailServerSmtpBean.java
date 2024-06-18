@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.model;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -11,7 +11,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Data
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@XmlRootElement(name = ConfAPI.MAIL_SERVER + "-" + ConfAPI.MAIL_SERVER_SMTP)
+@XmlRootElement(name = BootstrAPI.MAIL_SERVER + "-" + BootstrAPI.MAIL_SERVER_SMTP)
 public class MailServerSmtpBean extends AbstractMailServerProtocolBean {
 
     @XmlElement
@@ -27,7 +27,7 @@ public class MailServerSmtpBean extends AbstractMailServerProtocolBean {
     private Boolean useTls;
 
     /**
-     * Constructor for {@link MailServerSmtpBean} used in crowd-confapi-plugin.
+     * Constructor for {@link MailServerSmtpBean} used in crowd-bootstrapi-plugin.
      *
      * @param adminContact the admin contact email address
      * @param from         the server from email address

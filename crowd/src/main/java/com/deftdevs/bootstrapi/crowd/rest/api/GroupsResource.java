@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.rest.api;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.http.PATCH;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
@@ -20,7 +20,7 @@ public interface GroupsResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.GROUPS },
+            tags = { BootstrAPI.GROUPS },
             summary = "Get a group",
             responses = {
                     @ApiResponse(
@@ -41,7 +41,7 @@ public interface GroupsResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.GROUPS },
+            tags = { BootstrAPI.GROUPS },
             summary = "Create a group",
             responses = {
                     @ApiResponse(
@@ -62,7 +62,7 @@ public interface GroupsResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.GROUPS },
+            tags = { BootstrAPI.GROUPS },
             summary = "Update a group",
             responses = {
                     @ApiResponse(
@@ -84,7 +84,7 @@ public interface GroupsResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.GROUPS },
+            tags = { BootstrAPI.GROUPS },
             summary = "Set groups",
             responses = {
                     @ApiResponse(

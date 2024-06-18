@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.model;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -14,7 +14,7 @@ import java.util.Collection;
  */
 @Data
 @NoArgsConstructor
-@XmlRootElement(name = ConfAPI.USER)
+@XmlRootElement(name = BootstrAPI.USER)
 public class UserBean {
 
     @XmlElement

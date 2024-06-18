@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.model;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -12,7 +12,7 @@ import java.util.Collection;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement(name = ConfAPI.APPLICATIONS)
+@XmlRootElement(name = BootstrAPI.APPLICATIONS)
 public class ApplicationsBean {
 
     @XmlElement

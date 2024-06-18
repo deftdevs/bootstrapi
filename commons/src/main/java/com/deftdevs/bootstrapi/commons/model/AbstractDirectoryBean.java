@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.model;
 
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.codehaus.jackson.annotate.JsonSubTypes;
@@ -24,11 +24,11 @@ import java.util.Date;
 )
 // Note: New subtypes must also be registered in DirectoriesBean.java to be considered in the REST API documentation
 @JsonSubTypes({
-        @JsonSubTypes.Type(value = DirectoryCrowdBean.class, name = ConfAPI.DIRECTORY_CROWD),
-        @JsonSubTypes.Type(value = DirectoryDelegatingBean.class, name = ConfAPI.DIRECTORY_DELEGATING),
-        @JsonSubTypes.Type(value = DirectoryGenericBean.class, name = ConfAPI.DIRECTORY_GENERIC),
-        @JsonSubTypes.Type(value = DirectoryInternalBean.class, name = ConfAPI.DIRECTORY_INTERNAL),
-        @JsonSubTypes.Type(value = DirectoryLdapBean.class, name = ConfAPI.DIRECTORY_LDAP),
+        @JsonSubTypes.Type(value = DirectoryCrowdBean.class, name = BootstrAPI.DIRECTORY_CROWD),
+        @JsonSubTypes.Type(value = DirectoryDelegatingBean.class, name = BootstrAPI.DIRECTORY_DELEGATING),
+        @JsonSubTypes.Type(value = DirectoryGenericBean.class, name = BootstrAPI.DIRECTORY_GENERIC),
+        @JsonSubTypes.Type(value = DirectoryInternalBean.class, name = BootstrAPI.DIRECTORY_INTERNAL),
+        @JsonSubTypes.Type(value = DirectoryLdapBean.class, name = BootstrAPI.DIRECTORY_LDAP),
 })
 public abstract class AbstractDirectoryBean {
 

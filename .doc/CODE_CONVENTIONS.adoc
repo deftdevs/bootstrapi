@@ -1,6 +1,6 @@
 = Code Conventions
 
-The code conventions are valid for all ConfAPI projects for now.
+The code conventions are valid for all BootstrAPI projects for now.
 
 :toc:
 
@@ -9,11 +9,11 @@ The code conventions are valid for all ConfAPI projects for now.
 === Quick Reference
 
 * Model Class: `EntityBean`
-* Model JSON Name: `entity` (`@XmlRootElement(name = ConfAPI.ENTITY)`)
+* Model JSON Name: `entity` (`@XmlRootElement(name = BootstrAPI.ENTITY)`)
 * Model Collection Class: `EntitiesBean`
-* Model JSON Name: `entities` (`@XmlRootElement(name = ConfAPI.ENTITIES)`)
+* Model JSON Name: `entities` (`@XmlRootElement(name = BootstrAPI.ENTITIES)`)
 * REST Endpoint Class: `EntitiesResource`
-* REST Endpoint Name: `entities` (`@Path(ConfAPI.ENTITIES)`)
+* REST Endpoint Name: `entities` (`@Path(BootstrAPI.ENTITIES)`)
 * Service Class: `EntitiesService`
 
 === Model
@@ -21,7 +21,7 @@ The code conventions are valid for all ConfAPI projects for now.
 We are using [Lombok](https://projectlombok.org/) for generating constructors, getters and setters.
 They always have to be annotated with the `@Data` annotation.
 
-The `@XmlRootElement` should always be named by a constant defined in the `ConfAPI` class.
+The `@XmlRootElement` should always be named by a constant defined in the `BootstrAPI` class.
 
 ==== Entities
 
@@ -34,7 +34,7 @@ Example:
 ----
 @Data
 @NoArgsConstructor
-@XmlRootElement(name = ConfAPI.ENTITY)
+@XmlRootElement(name = BootstrAPI.ENTITY)
 public class EntityBean {
 
     @XmlElement
@@ -47,7 +47,7 @@ public class EntityBean {
 }
 ----
 
-Please note that the constant `ConfAPI.ENTITY` defines a string `entity`.
+Please note that the constant `BootstrAPI.ENTITY` defines a string `entity`.
 The name of the model class has to match the name of that constant.
 
 Be careful with using validators like `@NotNull`.
@@ -79,7 +79,7 @@ The pattern of an entity collection always looks like this:
 ----
 @Data
 @AllArgsConstructor
-@XmlRootElement(name = ConfAPI.ENTITIES)
+@XmlRootElement(name = BootstrAPI.ENTITIES)
 public class EntitiesBean {
 
     @XmlElement
@@ -105,8 +105,8 @@ Examples:
 set - one title, one base-url etc. We think that `/settings` just sounds more intuitive than `/setting`.
 * The upcoming endpoint for exports and imports.
 
-Whenever it makes sense, the resource interface should be defined in the ConfAPI Commons library, so we can define a
-common API for all ConfAPI products.
+Whenever it makes sense, the resource interface should be defined in the BootstrAPI Commons library, so we can define a
+common API for all BootstrAPI products.
 
 ==== Annotations
 
@@ -136,7 +136,7 @@ public interface EntitiesResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.ENTITIES },
+            tags = { BootstrAPI.ENTITIES },
             summary = "Get the list of entities",
             responses = {
                     @ApiResponse(
@@ -152,7 +152,7 @@ public interface EntitiesResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { ConfAPI.ENTITIES },
+            tags = { BootstrAPI.ENTITIES },
             summary = "Add a new entity",
             description = "A new entity can be added here if no other entity with the same name already exists",
             responses = {
@@ -178,7 +178,7 @@ public interface EntitiesResource {
 
 [source]
 ----
-@Path(ConfAPI.ENTITIES)
+@Path(BootstrAPI.ENTITIES)
 @ResourceFilters(AdminOnlyResourceFilter.class)
 @Component
 public class EntitiesResourceImpl implements EntitiesResource {

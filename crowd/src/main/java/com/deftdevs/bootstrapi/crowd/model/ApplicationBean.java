@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.model;
 
 import com.atlassian.crowd.embedded.api.OperationType;
-import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +12,7 @@ import java.util.Collections;
 
 @Data
 @NoArgsConstructor
-@XmlRootElement(name = ConfAPI.APPLICATION)
+@XmlRootElement(name = BootstrAPI.APPLICATION)
 public class ApplicationBean {
 
     public enum ApplicationType {
