@@ -1,11 +1,11 @@
-package de.aservo.confapi.crowd.service;
+package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.exception.ObjectNotFoundException;
 import com.atlassian.crowd.manager.property.PropertyManager;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
-import de.aservo.confapi.commons.exception.NotFoundException;
-import de.aservo.confapi.crowd.model.MailTemplatesBean;
-import de.aservo.confapi.crowd.service.api.MailTemplatesService;
+import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
+import com.deftdevs.bootstrapi.crowd.model.MailTemplatesBean;
+import com.deftdevs.bootstrapi.crowd.service.api.MailTemplatesService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

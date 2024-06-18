@@ -1,6 +1,6 @@
-package de.aservo.confapi.commons.rest;
+package com.deftdevs.bootstrapi.commons.rest;
 
-import de.aservo.confapi.commons.rest.api.PingResource;
+import com.deftdevs.bootstrapi.commons.rest.api.PingResource;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

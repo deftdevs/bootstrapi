@@ -1,11 +1,11 @@
-package de.aservo.confapi.confluence.service;
+package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.confluence.setup.settings.GlobalSettingsManager;
 import com.atlassian.confluence.setup.settings.Settings;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.commons.model.SettingsBean;
-import de.aservo.confapi.commons.service.api.SettingsService;
+import com.deftdevs.bootstrapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

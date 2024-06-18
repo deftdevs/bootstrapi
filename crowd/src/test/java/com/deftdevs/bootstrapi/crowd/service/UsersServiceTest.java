@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.service;
+package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.embedded.api.CrowdService;
 import com.atlassian.crowd.embedded.api.Directory;
@@ -11,12 +11,12 @@ import com.atlassian.crowd.model.user.ImmutableUser;
 import com.atlassian.crowd.model.user.User;
 import com.atlassian.crowd.model.user.UserTemplate;
 import com.atlassian.crowd.model.user.UserTemplateWithAttributes;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.model.GroupBean;
-import de.aservo.confapi.commons.model.UserBean;
-import de.aservo.confapi.crowd.exception.NotFoundExceptionForUser;
-import de.aservo.confapi.crowd.model.util.UserBeanUtil;
-import de.aservo.confapi.crowd.service.api.GroupsService;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.commons.model.UserBean;
+import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForUser;
+import com.deftdevs.bootstrapi.crowd.model.util.UserBeanUtil;
+import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

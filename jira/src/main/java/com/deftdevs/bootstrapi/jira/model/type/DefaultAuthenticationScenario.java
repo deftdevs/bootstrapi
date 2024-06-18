@@ -1,4 +1,4 @@
-package de.aservo.confapi.jira.model.type;
+package com.deftdevs.bootstrapi.jira.model.type;
 
 import com.atlassian.applinks.spi.auth.AuthenticationScenario;
 

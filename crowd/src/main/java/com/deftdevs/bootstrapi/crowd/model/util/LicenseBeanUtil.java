@@ -1,7 +1,7 @@
-package de.aservo.confapi.crowd.model.util;
+package com.deftdevs.bootstrapi.crowd.model.util;
 
 import com.atlassian.extras.api.crowd.CrowdLicense;
-import de.aservo.confapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseBean;
 
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;

@@ -1,8 +1,8 @@
-package de.aservo.confapi.commons.rest;
+package com.deftdevs.bootstrapi.commons.rest;
 
-import de.aservo.confapi.commons.model.SettingsBean;
-import de.aservo.confapi.commons.rest.impl.TestSettingsResourceImpl;
-import de.aservo.confapi.commons.service.api.SettingsService;
+import com.deftdevs.bootstrapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.commons.rest.impl.TestSettingsResourceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

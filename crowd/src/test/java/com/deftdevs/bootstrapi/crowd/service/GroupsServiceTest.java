@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.service;
+package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.exception.DirectoryNotFoundException;
 import com.atlassian.crowd.exception.GroupNotFoundException;
@@ -10,11 +10,11 @@ import com.atlassian.crowd.manager.directory.DirectoryPermissionException;
 import com.atlassian.crowd.model.group.Group;
 import com.atlassian.crowd.model.group.GroupTemplate;
 import com.atlassian.crowd.model.group.ImmutableGroup;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.model.GroupBean;
-import de.aservo.confapi.crowd.exception.NotFoundExceptionForGroup;
-import de.aservo.confapi.crowd.model.GroupsBean;
-import de.aservo.confapi.crowd.model.util.GroupBeanUtil;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForGroup;
+import com.deftdevs.bootstrapi.crowd.model.GroupsBean;
+import com.deftdevs.bootstrapi.crowd.model.util.GroupBeanUtil;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,7 +1,7 @@
-package de.aservo.confapi.commons.service.api;
+package com.deftdevs.bootstrapi.commons.service.api;
 
-import de.aservo.confapi.commons.model.LicenseBean;
-import de.aservo.confapi.commons.model.LicensesBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicensesBean;
 
 import javax.validation.constraints.NotNull;
 

@@ -1,7 +1,7 @@
-package de.aservo.confapi.crowd.service;
+package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.proxy.TrustedProxyManager;
-import de.aservo.confapi.crowd.model.TrustedProxiesBean;
+import com.deftdevs.bootstrapi.crowd.model.TrustedProxiesBean;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

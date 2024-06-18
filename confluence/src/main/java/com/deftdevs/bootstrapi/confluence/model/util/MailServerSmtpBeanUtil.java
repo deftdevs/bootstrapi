@@ -1,7 +1,7 @@
-package de.aservo.confapi.confluence.model.util;
+package com.deftdevs.bootstrapi.confluence.model.util;
 
 import com.atlassian.mail.server.SMTPMailServer;
-import de.aservo.confapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
 
 import javax.annotation.Nullable;
 

@@ -1,4 +1,4 @@
-package de.aservo.confapi.confluence.service;
+package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.confluence.plugins.lookandfeel.SiteLogoManager;
 import com.atlassian.confluence.themes.BaseColourScheme;
@@ -14,12 +14,12 @@ import com.atlassian.favicon.core.exceptions.InvalidImageDataException;
 import com.atlassian.favicon.core.exceptions.UnsupportedImageTypeException;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.exception.InternalServerErrorException;
-import de.aservo.confapi.commons.exception.NotFoundException;
-import de.aservo.confapi.commons.model.SettingsBrandingColorSchemeBean;
-import de.aservo.confapi.commons.service.api.SettingsBrandingService;
-import de.aservo.confapi.confluence.model.util.SettingsBrandingColorSchemeBeanUtil;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
+import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
+import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
+import com.deftdevs.bootstrapi.commons.service.api.SettingsBrandingService;
+import com.deftdevs.bootstrapi.confluence.model.util.SettingsBrandingColorSchemeBeanUtil;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
 

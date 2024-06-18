@@ -1,8 +1,8 @@
-package de.aservo.confapi.confluence.rest.api;
+package com.deftdevs.bootstrapi.confluence.rest.api;
 
-import de.aservo.confapi.confluence.model.PermissionAnonymousAccessBean;
-import de.aservo.confapi.commons.constants.ConfAPI;
-import de.aservo.confapi.commons.model.ErrorCollection;
+import com.deftdevs.bootstrapi.confluence.model.PermissionAnonymousAccessBean;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

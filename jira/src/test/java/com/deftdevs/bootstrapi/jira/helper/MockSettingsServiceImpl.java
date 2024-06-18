@@ -1,8 +1,8 @@
-package de.aservo.confapi.jira.helper;
+package com.deftdevs.bootstrapi.jira.helper;
 
 import com.atlassian.jira.mock.MockApplicationProperties;
-import de.aservo.confapi.commons.model.SettingsBean;
-import de.aservo.confapi.jira.service.SettingsServiceImpl;
+import com.deftdevs.bootstrapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.jira.service.SettingsServiceImpl;
 
 import java.net.URI;
 

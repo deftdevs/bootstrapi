@@ -1,4 +1,4 @@
-package de.aservo.confapi.jira.model.util;
+package com.deftdevs.bootstrapi.jira.model.util;
 
 import atlassian.settings.setup.DefaultApplicationLink;
 import atlassian.settings.setup.DefaultApplicationType;
@@ -13,8 +13,8 @@ import com.atlassian.applinks.api.application.fecru.FishEyeCrucibleApplicationTy
 import com.atlassian.applinks.api.application.jira.JiraApplicationType;
 import com.atlassian.applinks.api.application.refapp.RefAppApplicationType;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
-import de.aservo.confapi.commons.model.ApplicationLinkBean;
-import de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

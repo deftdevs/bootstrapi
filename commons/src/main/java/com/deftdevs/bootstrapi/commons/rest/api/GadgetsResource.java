@@ -1,9 +1,9 @@
-package de.aservo.confapi.commons.rest.api;
+package com.deftdevs.bootstrapi.commons.rest.api;
 
-import de.aservo.confapi.commons.constants.ConfAPI;
-import de.aservo.confapi.commons.model.ErrorCollection;
-import de.aservo.confapi.commons.model.GadgetBean;
-import de.aservo.confapi.commons.model.GadgetsBean;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
+import com.deftdevs.bootstrapi.commons.model.GadgetBean;
+import com.deftdevs.bootstrapi.commons.model.GadgetsBean;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

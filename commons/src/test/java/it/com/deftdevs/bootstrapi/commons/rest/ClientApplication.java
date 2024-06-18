@@ -1,4 +1,4 @@
-package it.de.aservo.confapi.commons.rest;
+package it.com.deftdevs.bootstrapi.commons.rest;
 
 import javax.ws.rs.core.Application;
 import java.util.Collections;

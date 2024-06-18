@@ -1,6 +1,6 @@
-package de.aservo.confapi.commons.service.api;
+package com.deftdevs.bootstrapi.commons.service.api;
 
-import de.aservo.confapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsBean;
 
 import javax.validation.constraints.NotNull;
 

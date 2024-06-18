@@ -1,13 +1,13 @@
-package de.aservo.confapi.crowd.service;
+package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.crowd.manager.mail.MailConfigurationService;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.commons.model.MailServerPopBean;
-import de.aservo.confapi.commons.model.MailServerSmtpBean;
-import de.aservo.confapi.commons.service.api.MailServerService;
-import de.aservo.confapi.crowd.model.util.MailServerSmtpBeanUtil;
+import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
+import com.deftdevs.bootstrapi.crowd.model.util.MailServerSmtpBeanUtil;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

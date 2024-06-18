@@ -1,8 +1,8 @@
-package de.aservo.confapi.confluence.rest;
+package com.deftdevs.bootstrapi.confluence.rest;
 
 import com.atlassian.plugins.rest.common.security.UnrestrictedAccess;
-import de.aservo.confapi.commons.constants.ConfAPI;
-import de.aservo.confapi.commons.rest.AbstractPingResourceImpl;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.rest.AbstractPingResourceImpl;
 
 import javax.ws.rs.Path;
 

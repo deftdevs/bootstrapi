@@ -1,8 +1,8 @@
-package de.aservo.confapi.jira.model.util;
+package com.deftdevs.bootstrapi.jira.model.util;
 
 import com.atlassian.application.api.ApplicationKey;
 import com.atlassian.jira.license.LicenseDetails;
-import de.aservo.confapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseBean;
 
 import javax.annotation.Nonnull;
 import java.util.stream.Collectors;

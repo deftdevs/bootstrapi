@@ -1,8 +1,8 @@
-package de.aservo.confapi.crowd.rest;
+package com.deftdevs.bootstrapi.crowd.rest;
 
-import de.aservo.confapi.commons.model.DirectoriesBean;
-import de.aservo.confapi.commons.model.DirectoryInternalBean;
-import de.aservo.confapi.commons.service.api.DirectoriesService;
+import com.deftdevs.bootstrapi.commons.model.DirectoriesBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryInternalBean;
+import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

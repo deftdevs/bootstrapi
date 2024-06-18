@@ -1,12 +1,12 @@
-package de.aservo.confapi.jira.service;
+package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.jira.config.properties.APKeys;
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.model.SettingsBean;
-import de.aservo.confapi.commons.service.api.SettingsService;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

@@ -1,7 +1,7 @@
-package de.aservo.confapi.crowd.service.api;
+package com.deftdevs.bootstrapi.crowd.service.api;
 
-import de.aservo.confapi.crowd.model.ApplicationBean;
-import de.aservo.confapi.crowd.model.ApplicationsBean;
+import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
+import com.deftdevs.bootstrapi.crowd.model.ApplicationsBean;
 
 public interface ApplicationsService {
 

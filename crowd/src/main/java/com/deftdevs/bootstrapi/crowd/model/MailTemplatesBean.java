@@ -1,6 +1,6 @@
-package de.aservo.confapi.crowd.model;
+package com.deftdevs.bootstrapi.crowd.model;
 
-import de.aservo.confapi.crowd.rest.api.MailTemplateResource;
+import com.deftdevs.bootstrapi.crowd.rest.api.MailTemplateResource;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

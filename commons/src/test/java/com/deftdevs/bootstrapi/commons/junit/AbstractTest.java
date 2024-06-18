@@ -1,6 +1,6 @@
-package de.aservo.confapi.commons.junit;
+package com.deftdevs.bootstrapi.commons.junit;
 
-import static de.aservo.confapi.commons.util.StringUtil.baseName;
+import static com.deftdevs.bootstrapi.commons.util.StringUtil.baseName;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class AbstractTest {

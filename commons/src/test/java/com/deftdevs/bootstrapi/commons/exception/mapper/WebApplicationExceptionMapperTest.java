@@ -1,7 +1,7 @@
-package de.aservo.confapi.commons.exception.mapper;
+package com.deftdevs.bootstrapi.commons.exception.mapper;
 
-import de.aservo.confapi.commons.exception.NotFoundException;
-import de.aservo.confapi.commons.model.ErrorCollection;
+import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
+import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;

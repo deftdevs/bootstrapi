@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.filter;
+package com.deftdevs.bootstrapi.crowd.filter;
 
 import com.atlassian.crowd.manager.permission.UserPermissionService;
 import com.atlassian.plugins.rest.common.security.AuthenticationRequiredException;

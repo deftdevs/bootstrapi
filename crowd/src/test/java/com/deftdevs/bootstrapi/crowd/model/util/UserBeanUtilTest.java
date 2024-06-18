@@ -1,8 +1,8 @@
-package de.aservo.confapi.crowd.model.util;
+package com.deftdevs.bootstrapi.crowd.model.util;
 
 import com.atlassian.crowd.model.user.ImmutableUser;
 import com.atlassian.crowd.model.user.User;
-import de.aservo.confapi.commons.model.UserBean;
+import com.deftdevs.bootstrapi.commons.model.UserBean;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;

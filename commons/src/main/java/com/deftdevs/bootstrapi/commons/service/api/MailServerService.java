@@ -1,7 +1,7 @@
-package de.aservo.confapi.commons.service.api;
+package com.deftdevs.bootstrapi.commons.service.api;
 
-import de.aservo.confapi.commons.model.MailServerPopBean;
-import de.aservo.confapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
 
 import javax.validation.constraints.NotNull;
 

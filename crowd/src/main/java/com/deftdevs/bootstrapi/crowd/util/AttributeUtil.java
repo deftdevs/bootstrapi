@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.util;
+package com.deftdevs.bootstrapi.crowd.util;
 
 import javax.annotation.Nullable;
 import java.util.Collection;

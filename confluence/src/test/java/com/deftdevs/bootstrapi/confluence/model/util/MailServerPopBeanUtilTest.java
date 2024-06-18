@@ -1,8 +1,8 @@
-package de.aservo.confapi.confluence.model.util;
+package com.deftdevs.bootstrapi.confluence.model.util;
 
 import com.atlassian.mail.server.DefaultTestPopMailServerImpl;
 import com.atlassian.mail.server.PopMailServer;
-import de.aservo.confapi.commons.model.MailServerPopBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;

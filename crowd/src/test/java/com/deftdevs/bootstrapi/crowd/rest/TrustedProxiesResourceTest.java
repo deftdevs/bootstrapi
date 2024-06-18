@@ -1,7 +1,7 @@
-package de.aservo.confapi.crowd.rest;
+package com.deftdevs.bootstrapi.crowd.rest;
 
-import de.aservo.confapi.crowd.model.TrustedProxiesBean;
-import de.aservo.confapi.crowd.service.api.TrustedProxiesService;
+import com.deftdevs.bootstrapi.crowd.model.TrustedProxiesBean;
+import com.deftdevs.bootstrapi.crowd.service.api.TrustedProxiesService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

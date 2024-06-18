@@ -1,6 +1,6 @@
-package de.aservo.confapi.commons.model.type;
+package com.deftdevs.bootstrapi.commons.model.type;
 
-import de.aservo.confapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

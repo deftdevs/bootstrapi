@@ -1,7 +1,7 @@
-package de.aservo.confapi.confluence.rest;
+package com.deftdevs.bootstrapi.confluence.rest;
 
-import de.aservo.confapi.confluence.model.PermissionAnonymousAccessBean;
-import de.aservo.confapi.confluence.service.api.PermissionsService;
+import com.deftdevs.bootstrapi.confluence.model.PermissionAnonymousAccessBean;
+import com.deftdevs.bootstrapi.confluence.service.api.PermissionsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

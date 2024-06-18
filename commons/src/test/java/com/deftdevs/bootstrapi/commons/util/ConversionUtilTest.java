@@ -1,4 +1,4 @@
-package de.aservo.confapi.commons.util;
+package com.deftdevs.bootstrapi.commons.util;
 
 import org.junit.jupiter.api.Test;
 

@@ -1,4 +1,4 @@
-package de.aservo.confapi.jira.model.util;
+package com.deftdevs.bootstrapi.jira.model.util;
 
 import com.atlassian.applinks.api.ApplicationLink;
 import com.atlassian.applinks.api.ApplicationType;
@@ -9,14 +9,14 @@ import com.atlassian.applinks.api.application.crowd.CrowdApplicationType;
 import com.atlassian.applinks.api.application.fecru.FishEyeCrucibleApplicationType;
 import com.atlassian.applinks.api.application.jira.JiraApplicationType;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
-import de.aservo.confapi.commons.model.ApplicationLinkBean;
-import de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
 import org.apache.commons.lang3.NotImplementedException;
 
 import javax.validation.constraints.NotNull;
 import java.util.UUID;
 
-import static de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkType.*;
+import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType.*;
 
 public class ApplicationLinkBeanUtil {
 

@@ -1,8 +1,8 @@
-package de.aservo.confapi.crowd.rest;
+package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.atlassian.plugins.rest.common.security.AnonymousAllowed;
-import de.aservo.confapi.commons.constants.ConfAPI;
-import de.aservo.confapi.commons.rest.AbstractPingResourceImpl;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.rest.AbstractPingResourceImpl;
 
 import javax.ws.rs.Path;
 

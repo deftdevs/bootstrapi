@@ -1,12 +1,12 @@
-package de.aservo.confapi.confluence.service;
+package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.mail.MailException;
 import com.atlassian.mail.server.*;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.model.MailServerPopBean;
-import de.aservo.confapi.commons.model.MailServerSmtpBean;
-import de.aservo.confapi.confluence.model.util.MailServerPopBeanUtil;
-import de.aservo.confapi.confluence.model.util.MailServerSmtpBeanUtil;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.confluence.model.util.MailServerPopBeanUtil;
+import com.deftdevs.bootstrapi.confluence.model.util.MailServerSmtpBeanUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

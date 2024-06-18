@@ -1,4 +1,4 @@
-package de.aservo.confapi.commons.constants;
+package com.deftdevs.bootstrapi.commons.constants;
 
 public class ConfAPI {
 

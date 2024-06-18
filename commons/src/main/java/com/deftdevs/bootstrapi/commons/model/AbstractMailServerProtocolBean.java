@@ -1,4 +1,4 @@
-package de.aservo.confapi.commons.model;
+package com.deftdevs.bootstrapi.commons.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

@@ -1,8 +1,8 @@
-package de.aservo.confapi.crowd.rest;
+package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.atlassian.crowd.exception.ObjectNotFoundException;
-import de.aservo.confapi.crowd.model.MailTemplatesBean;
-import de.aservo.confapi.crowd.service.api.MailTemplatesService;
+import com.deftdevs.bootstrapi.crowd.model.MailTemplatesBean;
+import com.deftdevs.bootstrapi.crowd.service.api.MailTemplatesService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

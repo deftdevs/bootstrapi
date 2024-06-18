@@ -1,10 +1,10 @@
-package de.aservo.confapi.crowd.rest;
+package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.sun.jersey.spi.container.ResourceFilters;
-import de.aservo.confapi.crowd.filter.SysadminOnlyResourceFilter;
-import de.aservo.confapi.crowd.model.TrustedProxiesBean;
-import de.aservo.confapi.crowd.rest.api.TrustedProxiesResource;
-import de.aservo.confapi.crowd.service.api.TrustedProxiesService;
+import com.deftdevs.bootstrapi.crowd.filter.SysadminOnlyResourceFilter;
+import com.deftdevs.bootstrapi.crowd.model.TrustedProxiesBean;
+import com.deftdevs.bootstrapi.crowd.rest.api.TrustedProxiesResource;
+import com.deftdevs.bootstrapi.crowd.service.api.TrustedProxiesService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

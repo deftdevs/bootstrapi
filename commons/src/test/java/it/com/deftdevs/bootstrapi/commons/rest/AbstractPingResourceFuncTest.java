@@ -1,6 +1,6 @@
-package it.de.aservo.confapi.commons.rest;
+package it.com.deftdevs.bootstrapi.commons.rest;
 
-import de.aservo.confapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
 import org.apache.wink.client.Resource;
 import org.junit.jupiter.api.Test;
 

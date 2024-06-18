@@ -1,11 +1,11 @@
-package de.aservo.confapi.commons.exception;
+package com.deftdevs.bootstrapi.commons.exception;
 
-import de.aservo.confapi.commons.junit.AbstractExceptionTest;
+import com.deftdevs.bootstrapi.commons.junit.AbstractExceptionTest;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
 
-import static de.aservo.confapi.commons.exception.ServiceUnavailableException.HEADER_RETRY_AFTER;
+import static com.deftdevs.bootstrapi.commons.exception.ServiceUnavailableException.HEADER_RETRY_AFTER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 

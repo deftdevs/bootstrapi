@@ -1,8 +1,8 @@
-package de.aservo.confapi.confluence.model.util;
+package com.deftdevs.bootstrapi.confluence.model.util;
 
 import com.atlassian.cache.CacheStatisticsKey;
 import com.atlassian.cache.ManagedCache;
-import de.aservo.confapi.confluence.model.CacheBean;
+import com.deftdevs.bootstrapi.confluence.model.CacheBean;
 
 import javax.validation.constraints.NotNull;
 

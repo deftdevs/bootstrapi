@@ -1,9 +1,9 @@
-package de.aservo.confapi.jira.model.util;
+package com.deftdevs.bootstrapi.jira.model.util;
 
 import com.atlassian.application.api.ApplicationKey;
 import com.atlassian.jira.license.LicenseDetails;
 import com.atlassian.jira.license.LicensedApplications;
-import de.aservo.confapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseBean;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;

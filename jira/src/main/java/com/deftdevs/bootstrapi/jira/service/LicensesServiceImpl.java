@@ -1,13 +1,13 @@
-package de.aservo.confapi.jira.service;
+package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.jira.license.JiraLicenseManager;
 import com.atlassian.jira.license.LicenseDetails;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.commons.model.LicenseBean;
-import de.aservo.confapi.commons.model.LicensesBean;
-import de.aservo.confapi.commons.service.api.LicensesService;
-import de.aservo.confapi.jira.model.util.LicenseBeanUtil;
+import com.deftdevs.bootstrapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicensesBean;
+import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
+import com.deftdevs.bootstrapi.jira.model.util.LicenseBeanUtil;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

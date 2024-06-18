@@ -1,9 +1,9 @@
-package de.aservo.confapi.commons.rest;
+package com.deftdevs.bootstrapi.commons.rest;
 
-import de.aservo.confapi.commons.model.GadgetBean;
-import de.aservo.confapi.commons.model.GadgetsBean;
-import de.aservo.confapi.commons.rest.impl.TestGadgetsResourceImpl;
-import de.aservo.confapi.commons.service.api.GadgetsService;
+import com.deftdevs.bootstrapi.commons.model.GadgetBean;
+import com.deftdevs.bootstrapi.commons.model.GadgetsBean;
+import com.deftdevs.bootstrapi.commons.rest.impl.TestGadgetsResourceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.GadgetsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.service;
+package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.license.CrowdLicenseManager;
 import com.atlassian.crowd.manager.license.CrowdLicenseManagerException;
@@ -6,9 +6,9 @@ import com.atlassian.extras.api.LicenseType;
 import com.atlassian.extras.api.Organisation;
 import com.atlassian.extras.api.Product;
 import com.atlassian.extras.api.crowd.CrowdLicense;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.model.LicenseBean;
-import de.aservo.confapi.commons.model.LicensesBean;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicensesBean;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -18,7 +18,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 import java.util.ArrayList;
 import java.util.Collection;
 
-import static de.aservo.confapi.commons.model.LicenseBean.EXAMPLE_2_DEVELOPER_LICENSE;
+import static com.deftdevs.bootstrapi.commons.model.LicenseBean.EXAMPLE_2_DEVELOPER_LICENSE;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.*;

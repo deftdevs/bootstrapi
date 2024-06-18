@@ -1,4 +1,4 @@
-package de.aservo.confapi.commons.util;
+package com.deftdevs.bootstrapi.commons.util;
 
 import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.junit.jupiter.api.Test;

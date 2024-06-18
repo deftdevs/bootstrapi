@@ -1,6 +1,6 @@
-package it.de.aservo.confapi.confluence.rest;
+package it.com.deftdevs.bootstrapi.confluence.rest;
 
-import it.de.aservo.confapi.commons.rest.AbstractUserResourceFuncTest;
+import it.com.deftdevs.bootstrapi.commons.rest.AbstractUserResourceFuncTest;
 
 public class UserResourceFuncTest extends AbstractUserResourceFuncTest {
 }

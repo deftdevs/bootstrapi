@@ -1,8 +1,8 @@
-package de.aservo.confapi.commons.rest;
+package com.deftdevs.bootstrapi.commons.rest;
 
-import de.aservo.confapi.commons.model.SettingsBrandingColorSchemeBean;
-import de.aservo.confapi.commons.rest.impl.TestSettingsBrandingResourceImpl;
-import de.aservo.confapi.commons.service.api.SettingsBrandingService;
+import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
+import com.deftdevs.bootstrapi.commons.rest.impl.TestSettingsBrandingResourceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.SettingsBrandingService;
 import javax.ws.rs.core.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

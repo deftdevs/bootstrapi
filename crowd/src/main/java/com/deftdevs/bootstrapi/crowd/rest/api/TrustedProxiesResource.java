@@ -1,8 +1,8 @@
-package de.aservo.confapi.crowd.rest.api;
+package com.deftdevs.bootstrapi.crowd.rest.api;
 
 import com.atlassian.annotations.security.XsrfProtectionExcluded;
-import de.aservo.confapi.commons.model.ErrorCollection;
-import de.aservo.confapi.crowd.model.TrustedProxiesBean;
+import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
+import com.deftdevs.bootstrapi.crowd.model.TrustedProxiesBean;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

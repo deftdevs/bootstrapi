@@ -1,7 +1,7 @@
-package de.aservo.confapi.crowd.model;
+package com.deftdevs.bootstrapi.crowd.model;
 
-import de.aservo.confapi.commons.constants.ConfAPI;
-import de.aservo.confapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.model.GroupBean;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

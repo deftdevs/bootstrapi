@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.service;
+package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.OperationType;
@@ -13,13 +13,13 @@ import com.atlassian.crowd.model.application.ApplicationDirectoryMapping;
 import com.atlassian.crowd.model.application.ImmutableApplicationDirectoryMapping;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.exception.InternalServerErrorException;
-import de.aservo.confapi.commons.exception.NotFoundException;
-import de.aservo.confapi.crowd.model.ApplicationBean;
-import de.aservo.confapi.crowd.model.ApplicationsBean;
-import de.aservo.confapi.crowd.model.util.ApplicationBeanUtil;
-import de.aservo.confapi.crowd.service.api.ApplicationsService;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
+import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
+import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
+import com.deftdevs.bootstrapi.crowd.model.ApplicationsBean;
+import com.deftdevs.bootstrapi.crowd.model.util.ApplicationBeanUtil;
+import com.deftdevs.bootstrapi.crowd.service.api.ApplicationsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Nonnull;

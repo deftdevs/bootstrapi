@@ -1,5 +1,5 @@
-package it.de.aservo.confapi.confluence.rest;
+package it.com.deftdevs.bootstrapi.confluence.rest;
 
-import it.de.aservo.confapi.commons.rest.AbstractPingResourceFuncTest;
+import it.com.deftdevs.bootstrapi.commons.rest.AbstractPingResourceFuncTest;
 
 public class PingResourceFuncTest extends AbstractPingResourceFuncTest { }

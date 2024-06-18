@@ -1,9 +1,9 @@
-package de.aservo.confapi.commons.rest;
+package com.deftdevs.bootstrapi.commons.rest;
 
-import de.aservo.confapi.commons.model.GadgetBean;
-import de.aservo.confapi.commons.model.GadgetsBean;
-import de.aservo.confapi.commons.rest.api.GadgetsResource;
-import de.aservo.confapi.commons.service.api.GadgetsService;
+import com.deftdevs.bootstrapi.commons.model.GadgetBean;
+import com.deftdevs.bootstrapi.commons.model.GadgetsBean;
+import com.deftdevs.bootstrapi.commons.rest.api.GadgetsResource;
+import com.deftdevs.bootstrapi.commons.service.api.GadgetsService;
 
 import javax.ws.rs.core.Response;
 

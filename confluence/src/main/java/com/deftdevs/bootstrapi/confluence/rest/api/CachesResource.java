@@ -1,9 +1,9 @@
-package de.aservo.confapi.confluence.rest.api;
+package com.deftdevs.bootstrapi.confluence.rest.api;
 
-import de.aservo.confapi.commons.constants.ConfAPI;
-import de.aservo.confapi.commons.model.ErrorCollection;
-import de.aservo.confapi.confluence.model.CacheBean;
-import de.aservo.confapi.confluence.model.CachesBean;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
+import com.deftdevs.bootstrapi.confluence.model.CacheBean;
+import com.deftdevs.bootstrapi.confluence.model.CachesBean;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

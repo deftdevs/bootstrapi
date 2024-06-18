@@ -1,17 +1,17 @@
-package de.aservo.confapi.confluence.model.util;
+package com.deftdevs.bootstrapi.confluence.model.util;
 
 import com.atlassian.crowd.directory.RemoteCrowdDirectory;
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.model.directory.ImmutableDirectory;
-import de.aservo.confapi.commons.model.AbstractDirectoryBean;
-import de.aservo.confapi.commons.model.DirectoryCrowdBean;
-import de.aservo.confapi.commons.model.DirectoryCrowdBean.DirectoryCrowdAdvanced;
-import de.aservo.confapi.commons.model.DirectoryCrowdBean.DirectoryCrowdServer;
-import de.aservo.confapi.commons.model.DirectoryCrowdBean.DirectoryCrowdServer.DirectoryCrowdServerProxy;
-import de.aservo.confapi.commons.model.DirectoryGenericBean;
-import de.aservo.confapi.commons.model.DirectoryInternalBean;
-import de.aservo.confapi.commons.model.DirectoryLdapBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean.DirectoryCrowdAdvanced;
+import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean.DirectoryCrowdServer;
+import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean.DirectoryCrowdServer.DirectoryCrowdServerProxy;
+import com.deftdevs.bootstrapi.commons.model.DirectoryGenericBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryInternalBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryLdapBean;
 
 import javax.validation.constraints.NotNull;
 import java.net.URI;
@@ -21,7 +21,7 @@ import java.util.Map;
 import static com.atlassian.crowd.directory.RemoteCrowdDirectory.*;
 import static com.atlassian.crowd.directory.SynchronisableDirectoryProperties.*;
 import static com.atlassian.crowd.model.directory.DirectoryImpl.ATTRIBUTE_KEY_USE_NESTED_GROUPS;
-import static de.aservo.confapi.commons.util.ConversionUtil.*;
+import static com.deftdevs.bootstrapi.commons.util.ConversionUtil.*;
 
 public class DirectoryBeanUtil {
 

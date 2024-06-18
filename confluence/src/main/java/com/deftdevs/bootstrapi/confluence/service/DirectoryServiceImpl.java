@@ -1,4 +1,4 @@
-package de.aservo.confapi.confluence.service;
+package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.crowd.embedded.api.CrowdDirectoryService;
 import com.atlassian.crowd.embedded.api.Directory;
@@ -7,14 +7,14 @@ import com.atlassian.crowd.embedded.impl.ImmutableDirectory;
 import com.atlassian.crowd.exception.DirectoryCurrentlySynchronisingException;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.exception.NotFoundException;
-import de.aservo.confapi.commons.exception.ServiceUnavailableException;
-import de.aservo.confapi.commons.model.AbstractDirectoryBean;
-import de.aservo.confapi.commons.model.DirectoriesBean;
-import de.aservo.confapi.commons.model.DirectoryCrowdBean;
-import de.aservo.confapi.commons.service.api.DirectoriesService;
-import de.aservo.confapi.confluence.model.util.DirectoryBeanUtil;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
+import com.deftdevs.bootstrapi.commons.exception.ServiceUnavailableException;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoriesBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean;
+import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
+import com.deftdevs.bootstrapi.confluence.model.util.DirectoryBeanUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;

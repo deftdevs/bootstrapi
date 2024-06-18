@@ -1,8 +1,8 @@
-package de.aservo.confapi.commons.service.api;
+package com.deftdevs.bootstrapi.commons.service.api;
 
-import de.aservo.confapi.commons.model.AbstractAuthenticationIdpBean;
-import de.aservo.confapi.commons.model.AuthenticationIdpsBean;
-import de.aservo.confapi.commons.model.AuthenticationSsoBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpBean;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpsBean;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
 
 public interface AuthenticationService {
 

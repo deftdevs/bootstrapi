@@ -1,9 +1,9 @@
-package de.aservo.confapi.confluence.service;
+package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.confluence.security.SpacePermission;
 import com.atlassian.confluence.security.SpacePermissionManager;
 import com.atlassian.confluence.security.service.AnonymousUserPermissionsService;
-import de.aservo.confapi.confluence.model.PermissionAnonymousAccessBean;
+import com.deftdevs.bootstrapi.confluence.model.PermissionAnonymousAccessBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

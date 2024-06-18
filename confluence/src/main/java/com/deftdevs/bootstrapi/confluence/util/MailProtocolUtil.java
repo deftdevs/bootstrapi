@@ -1,4 +1,4 @@
-package de.aservo.confapi.confluence.util;
+package com.deftdevs.bootstrapi.confluence.util;
 
 import com.atlassian.mail.MailProtocol;
 

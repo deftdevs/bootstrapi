@@ -1,12 +1,12 @@
-package de.aservo.confapi.crowd.model.util;
+package com.deftdevs.bootstrapi.crowd.model.util;
 
 import com.atlassian.crowd.embedded.api.PasswordCredential;
 import com.atlassian.crowd.exception.OperationFailedException;
 import com.atlassian.crowd.manager.application.DefaultGroupMembershipService;
 import com.atlassian.crowd.model.application.*;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.exception.InternalServerErrorException;
-import de.aservo.confapi.crowd.model.ApplicationBean;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
+import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;

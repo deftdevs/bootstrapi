@@ -1,4 +1,4 @@
-package de.aservo.confapi.confluence.model.util;
+package com.deftdevs.bootstrapi.confluence.model.util;
 
 import com.atlassian.applinks.api.ApplicationId;
 import com.atlassian.applinks.api.ApplicationLink;
@@ -13,8 +13,8 @@ import com.atlassian.applinks.api.application.refapp.RefAppApplicationType;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
 import com.atlassian.confluence.settings.setup.DefaultApplicationLink;
 import com.atlassian.confluence.settings.setup.DefaultApplicationType;
-import de.aservo.confapi.commons.model.ApplicationLinkBean;
-import de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

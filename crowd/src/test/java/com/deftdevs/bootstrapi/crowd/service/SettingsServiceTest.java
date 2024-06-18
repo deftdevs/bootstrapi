@@ -1,9 +1,9 @@
-package de.aservo.confapi.crowd.service;
+package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.property.PropertyManager;
 import com.atlassian.crowd.manager.property.PropertyManagerException;
-import de.aservo.confapi.commons.exception.InternalServerErrorException;
-import de.aservo.confapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
+import com.deftdevs.bootstrapi.commons.model.SettingsBean;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +12,7 @@ import org.mockito.runners.MockitoJUnitRunner;
 
 import java.net.URISyntaxException;
 
-import static de.aservo.confapi.commons.model.SettingsBean.EXAMPLE_1_NO_MODE;
+import static com.deftdevs.bootstrapi.commons.model.SettingsBean.EXAMPLE_1_NO_MODE;
 import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 

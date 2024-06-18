@@ -1,11 +1,11 @@
-package de.aservo.confapi.crowd.rest;
+package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.sun.jersey.spi.container.ResourceFilters;
-import de.aservo.confapi.commons.constants.ConfAPI;
-import de.aservo.confapi.crowd.filter.SysadminOnlyResourceFilter;
-import de.aservo.confapi.crowd.model.AllBean;
-import de.aservo.confapi.crowd.rest.api.AllResource;
-import de.aservo.confapi.crowd.service.api.AllService;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.crowd.filter.SysadminOnlyResourceFilter;
+import com.deftdevs.bootstrapi.crowd.model.AllBean;
+import com.deftdevs.bootstrapi.crowd.rest.api.AllResource;
+import com.deftdevs.bootstrapi.crowd.service.api.AllService;
 
 import javax.inject.Inject;
 import javax.inject.Named;

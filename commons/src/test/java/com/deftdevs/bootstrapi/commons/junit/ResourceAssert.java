@@ -1,4 +1,4 @@
-package de.aservo.confapi.commons.junit;
+package com.deftdevs.bootstrapi.commons.junit;
 
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;

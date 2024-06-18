@@ -1,7 +1,7 @@
-package de.aservo.confapi.commons.rest.impl;
+package com.deftdevs.bootstrapi.commons.rest.impl;
 
-import de.aservo.confapi.commons.rest.AbstractSettingsResourceImpl;
-import de.aservo.confapi.commons.service.api.SettingsService;
+import com.deftdevs.bootstrapi.commons.rest.AbstractSettingsResourceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
 
 public class TestSettingsResourceImpl extends AbstractSettingsResourceImpl {
 

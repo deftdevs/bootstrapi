@@ -1,4 +1,4 @@
-package de.aservo.confapi.jira.service;
+package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.crowd.embedded.api.CrowdDirectoryService;
 import com.atlassian.crowd.embedded.api.Directory;
@@ -6,14 +6,14 @@ import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.exception.DirectoryCurrentlySynchronisingException;
 import com.atlassian.crowd.model.directory.DirectoryImpl;
 import com.atlassian.crowd.model.directory.ImmutableDirectory;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.exception.NotFoundException;
-import de.aservo.confapi.commons.exception.ServiceUnavailableException;
-import de.aservo.confapi.commons.model.AbstractDirectoryBean;
-import de.aservo.confapi.commons.model.DirectoriesBean;
-import de.aservo.confapi.commons.model.DirectoryCrowdBean;
-import de.aservo.confapi.commons.model.DirectoryLdapBean;
-import de.aservo.confapi.jira.model.util.DirectoryBeanUtil;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
+import com.deftdevs.bootstrapi.commons.exception.ServiceUnavailableException;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoriesBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryLdapBean;
+import com.deftdevs.bootstrapi.jira.model.util.DirectoryBeanUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

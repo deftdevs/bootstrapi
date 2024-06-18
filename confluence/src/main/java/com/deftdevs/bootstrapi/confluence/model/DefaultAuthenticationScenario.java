@@ -1,4 +1,4 @@
-package de.aservo.confapi.confluence.model;
+package com.deftdevs.bootstrapi.confluence.model;
 
 import com.atlassian.applinks.spi.auth.AuthenticationScenario;
 

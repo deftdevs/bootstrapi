@@ -1,6 +1,6 @@
-package de.aservo.confapi.commons.rest.api;
+package com.deftdevs.bootstrapi.commons.rest.api;
 
-import de.aservo.confapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 

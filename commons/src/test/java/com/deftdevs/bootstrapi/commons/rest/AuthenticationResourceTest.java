@@ -1,8 +1,8 @@
-package de.aservo.confapi.commons.rest;
+package com.deftdevs.bootstrapi.commons.rest;
 
-import de.aservo.confapi.commons.model.*;
-import de.aservo.confapi.commons.rest.impl.TestAuthenticationResourceImpl;
-import de.aservo.confapi.commons.service.api.AuthenticationService;
+import com.deftdevs.bootstrapi.commons.model.*;
+import com.deftdevs.bootstrapi.commons.rest.impl.TestAuthenticationResourceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.AuthenticationService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

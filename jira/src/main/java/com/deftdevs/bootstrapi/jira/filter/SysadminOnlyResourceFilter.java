@@ -1,4 +1,4 @@
-package de.aservo.confapi.jira.filter;
+package com.deftdevs.bootstrapi.jira.filter;
 
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.plugins.rest.common.security.AuthenticationRequiredException;

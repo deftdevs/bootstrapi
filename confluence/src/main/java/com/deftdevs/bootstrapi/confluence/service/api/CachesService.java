@@ -1,7 +1,7 @@
-package de.aservo.confapi.confluence.service.api;
+package com.deftdevs.bootstrapi.confluence.service.api;
 
-import de.aservo.confapi.confluence.model.CacheBean;
-import de.aservo.confapi.confluence.model.CachesBean;
+import com.deftdevs.bootstrapi.confluence.model.CacheBean;
+import com.deftdevs.bootstrapi.confluence.model.CachesBean;
 
 public interface CachesService {
 

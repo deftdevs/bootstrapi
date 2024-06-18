@@ -1,7 +1,7 @@
-package de.aservo.confapi.commons.rest.impl;
+package com.deftdevs.bootstrapi.commons.rest.impl;
 
-import de.aservo.confapi.commons.rest.AbstractSettingsBrandingResourceImpl;
-import de.aservo.confapi.commons.service.api.SettingsBrandingService;
+import com.deftdevs.bootstrapi.commons.rest.AbstractSettingsBrandingResourceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.SettingsBrandingService;
 
 public class TestSettingsBrandingResourceImpl extends AbstractSettingsBrandingResourceImpl {
 

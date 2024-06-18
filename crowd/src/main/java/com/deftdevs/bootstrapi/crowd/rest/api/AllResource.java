@@ -1,8 +1,8 @@
-package de.aservo.confapi.crowd.rest.api;
+package com.deftdevs.bootstrapi.crowd.rest.api;
 
-import de.aservo.confapi.commons.constants.ConfAPI;
-import de.aservo.confapi.commons.model.ErrorCollection;
-import de.aservo.confapi.crowd.model.AllBean;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
+import com.deftdevs.bootstrapi.crowd.model.AllBean;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;

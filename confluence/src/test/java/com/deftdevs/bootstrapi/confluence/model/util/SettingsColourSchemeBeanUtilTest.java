@@ -1,14 +1,14 @@
-package de.aservo.confapi.confluence.model.util;
+package com.deftdevs.bootstrapi.confluence.model.util;
 
 import com.atlassian.confluence.themes.BaseColourScheme;
 import com.atlassian.confluence.themes.ColourScheme;
-import de.aservo.confapi.commons.model.SettingsBrandingColorSchemeBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import static de.aservo.confapi.confluence.model.util.SettingsBrandingColorSchemeBeanUtil.toGlobalColorScheme;
-import static de.aservo.confapi.confluence.model.util.SettingsBrandingColorSchemeBeanUtil.toSettingsBrandingColorSchemeBean;
+import static com.deftdevs.bootstrapi.confluence.model.util.SettingsBrandingColorSchemeBeanUtil.toGlobalColorScheme;
+import static com.deftdevs.bootstrapi.confluence.model.util.SettingsBrandingColorSchemeBeanUtil.toSettingsBrandingColorSchemeBean;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)

@@ -1,14 +1,14 @@
-package de.aservo.confapi.confluence.service;
+package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.plugins.authentication.api.config.*;
 import com.atlassian.plugins.authentication.api.config.oidc.OidcConfig;
 import com.atlassian.plugins.authentication.api.config.saml.SamlConfig;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.model.AbstractAuthenticationIdpBean;
-import de.aservo.confapi.commons.model.AuthenticationIdpOidcBean;
-import de.aservo.confapi.commons.model.AuthenticationIdpsBean;
-import de.aservo.confapi.commons.model.AuthenticationSsoBean;
-import de.aservo.confapi.confluence.model.util.AuthenticationIdpBeanUtil;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpBean;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpOidcBean;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpsBean;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
+import com.deftdevs.bootstrapi.confluence.model.util.AuthenticationIdpBeanUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

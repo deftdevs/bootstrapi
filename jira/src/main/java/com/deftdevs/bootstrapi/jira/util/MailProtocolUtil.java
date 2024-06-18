@@ -1,4 +1,4 @@
-package de.aservo.confapi.jira.util;
+package com.deftdevs.bootstrapi.jira.util;
 
 import com.atlassian.mail.MailProtocol;
 

@@ -1,4 +1,4 @@
-package de.aservo.confapi.confluence.service;
+package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.confluence.user.ConfluenceUser;
 import com.atlassian.confluence.user.UserAccessor;
@@ -8,18 +8,18 @@ import com.atlassian.user.EntityException;
 import com.atlassian.user.User;
 import com.atlassian.user.UserManager;
 import com.atlassian.user.impl.DefaultUser;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.exception.NotFoundException;
-import de.aservo.confapi.commons.model.UserBean;
-import de.aservo.confapi.commons.service.api.UsersService;
-import de.aservo.confapi.confluence.model.util.UserBeanUtil;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
+import com.deftdevs.bootstrapi.commons.model.UserBean;
+import com.deftdevs.bootstrapi.commons.service.api.UsersService;
+import com.deftdevs.bootstrapi.confluence.model.util.UserBeanUtil;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.util.Collection;
 import java.util.List;
 
-import static de.aservo.confapi.commons.util.BeanValidationUtil.validate;
+import static com.deftdevs.bootstrapi.commons.util.BeanValidationUtil.validate;
 
 @Component
 @ExportAsService(UsersService.class)

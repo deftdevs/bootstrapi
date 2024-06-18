@@ -1,4 +1,4 @@
-package de.aservo.confapi.commons.exception;
+package com.deftdevs.bootstrapi.commons.exception;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;

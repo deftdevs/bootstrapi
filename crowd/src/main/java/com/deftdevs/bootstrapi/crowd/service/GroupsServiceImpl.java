@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.service;
+package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.exception.DirectoryNotFoundException;
 import com.atlassian.crowd.exception.GroupNotFoundException;
@@ -11,14 +11,14 @@ import com.atlassian.crowd.model.group.Group;
 import com.atlassian.crowd.model.group.GroupTemplate;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.exception.InternalServerErrorException;
-import de.aservo.confapi.commons.model.GroupBean;
-import de.aservo.confapi.crowd.exception.NotFoundExceptionForDirectory;
-import de.aservo.confapi.crowd.exception.NotFoundExceptionForGroup;
-import de.aservo.confapi.crowd.model.GroupsBean;
-import de.aservo.confapi.crowd.model.util.GroupBeanUtil;
-import de.aservo.confapi.crowd.service.api.GroupsService;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
+import com.deftdevs.bootstrapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForDirectory;
+import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForGroup;
+import com.deftdevs.bootstrapi.crowd.model.GroupsBean;
+import com.deftdevs.bootstrapi.crowd.model.util.GroupBeanUtil;
+import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Nullable;

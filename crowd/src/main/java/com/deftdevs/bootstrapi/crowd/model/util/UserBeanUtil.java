@@ -1,7 +1,7 @@
-package de.aservo.confapi.crowd.model.util;
+package com.deftdevs.bootstrapi.crowd.model.util;
 
 import com.atlassian.crowd.model.user.User;
-import de.aservo.confapi.commons.model.UserBean;
+import com.deftdevs.bootstrapi.commons.model.UserBean;
 
 import javax.annotation.Nonnull;
 

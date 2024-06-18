@@ -1,7 +1,7 @@
-package de.aservo.confapi.commons.rest.impl;
+package com.deftdevs.bootstrapi.commons.rest.impl;
 
-import de.aservo.confapi.commons.rest.AbstractUsersResourceImpl;
-import de.aservo.confapi.commons.service.api.UsersService;
+import com.deftdevs.bootstrapi.commons.rest.AbstractUsersResourceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.UsersService;
 
 public class TestUsersResourceImpl extends AbstractUsersResourceImpl {
 

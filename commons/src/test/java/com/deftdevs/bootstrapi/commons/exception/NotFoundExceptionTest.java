@@ -1,6 +1,6 @@
-package de.aservo.confapi.commons.exception;
+package com.deftdevs.bootstrapi.commons.exception;
 
-import de.aservo.confapi.commons.junit.AbstractExceptionTest;
+import com.deftdevs.bootstrapi.commons.junit.AbstractExceptionTest;
 
 public class NotFoundExceptionTest extends AbstractExceptionTest {
 }

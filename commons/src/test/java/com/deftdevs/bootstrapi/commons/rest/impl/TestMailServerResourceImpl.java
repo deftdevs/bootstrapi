@@ -1,7 +1,7 @@
-package de.aservo.confapi.commons.rest.impl;
+package com.deftdevs.bootstrapi.commons.rest.impl;
 
-import de.aservo.confapi.commons.rest.AbstractMailServerResourceImpl;
-import de.aservo.confapi.commons.service.api.MailServerService;
+import com.deftdevs.bootstrapi.commons.rest.AbstractMailServerResourceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
 
 public class TestMailServerResourceImpl extends AbstractMailServerResourceImpl {
 

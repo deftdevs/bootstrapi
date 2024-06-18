@@ -1,10 +1,10 @@
-package de.aservo.confapi.crowd.rest;
+package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.sun.jersey.spi.container.ResourceFilters;
-import de.aservo.confapi.commons.constants.ConfAPI;
-import de.aservo.confapi.commons.rest.AbstractDirectoriesResourceImpl;
-import de.aservo.confapi.commons.service.api.DirectoriesService;
-import de.aservo.confapi.crowd.filter.SysadminOnlyResourceFilter;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.rest.AbstractDirectoriesResourceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
+import com.deftdevs.bootstrapi.crowd.filter.SysadminOnlyResourceFilter;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

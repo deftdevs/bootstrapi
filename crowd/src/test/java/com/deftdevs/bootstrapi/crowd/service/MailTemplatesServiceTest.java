@@ -1,7 +1,7 @@
-package de.aservo.confapi.crowd.service;
+package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.property.PropertyManager;
-import de.aservo.confapi.crowd.model.MailTemplatesBean;
+import com.deftdevs.bootstrapi.crowd.model.MailTemplatesBean;
 import lombok.SneakyThrows;
 import org.junit.Before;
 import org.junit.Test;

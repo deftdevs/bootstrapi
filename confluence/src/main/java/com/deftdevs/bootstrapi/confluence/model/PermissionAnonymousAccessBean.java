@@ -1,6 +1,6 @@
-package de.aservo.confapi.confluence.model;
+package com.deftdevs.bootstrapi.confluence.model;
 
-import de.aservo.confapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

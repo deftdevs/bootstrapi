@@ -1,9 +1,9 @@
-package de.aservo.confapi.crowd.model.util;
+package com.deftdevs.bootstrapi.crowd.model.util;
 
 import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.crowd.util.mail.SMTPServer;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
 
 import javax.annotation.Nullable;
 import javax.mail.internet.AddressException;

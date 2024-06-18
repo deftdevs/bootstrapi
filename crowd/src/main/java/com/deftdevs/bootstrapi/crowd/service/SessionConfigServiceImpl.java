@@ -1,9 +1,9 @@
-package de.aservo.confapi.crowd.service;
+package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.property.PropertyManager;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
-import de.aservo.confapi.crowd.model.SessionConfigBean;
-import de.aservo.confapi.crowd.service.api.SessionConfigService;
+import com.deftdevs.bootstrapi.crowd.model.SessionConfigBean;
+import com.deftdevs.bootstrapi.crowd.service.api.SessionConfigService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

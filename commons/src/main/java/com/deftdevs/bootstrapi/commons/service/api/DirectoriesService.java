@@ -1,7 +1,7 @@
-package de.aservo.confapi.commons.service.api;
+package com.deftdevs.bootstrapi.commons.service.api;
 
-import de.aservo.confapi.commons.model.AbstractDirectoryBean;
-import de.aservo.confapi.commons.model.DirectoriesBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoriesBean;
 
 import javax.validation.constraints.NotNull;
 

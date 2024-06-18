@@ -1,4 +1,4 @@
-package de.aservo.confapi.jira.service;
+package com.deftdevs.bootstrapi.jira.service;
 
 import atlassian.mail.server.DefaultTestPopMailServerImpl;
 import atlassian.mail.server.DefaultTestSmtpMailServerImpl;
@@ -8,11 +8,11 @@ import com.atlassian.mail.MailException;
 import com.atlassian.mail.server.MailServerManager;
 import com.atlassian.mail.server.PopMailServer;
 import com.atlassian.mail.server.SMTPMailServer;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.model.MailServerPopBean;
-import de.aservo.confapi.commons.model.MailServerSmtpBean;
-import de.aservo.confapi.jira.model.util.MailServerPopBeanUtil;
-import de.aservo.confapi.jira.model.util.MailServerSmtpBeanUtil;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.jira.model.util.MailServerPopBeanUtil;
+import com.deftdevs.bootstrapi.jira.model.util.MailServerSmtpBeanUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

@@ -1,7 +1,7 @@
-package de.aservo.confapi.crowd.exception;
+package com.deftdevs.bootstrapi.crowd.exception;
 
-import de.aservo.confapi.commons.exception.NotFoundException;
-import de.aservo.confapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
+import com.deftdevs.bootstrapi.commons.model.GroupBean;
 
 @SuppressWarnings("java:S110")
 public class NotFoundExceptionForGroup extends NotFoundException {

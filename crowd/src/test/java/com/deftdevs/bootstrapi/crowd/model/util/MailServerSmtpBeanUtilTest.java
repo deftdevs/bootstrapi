@@ -1,8 +1,8 @@
-package de.aservo.confapi.crowd.model.util;
+package com.deftdevs.bootstrapi.crowd.model.util;
 
 import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.crowd.manager.mail.MockMailConfiguration;
-import de.aservo.confapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
 import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,6 +1,6 @@
-package de.aservo.confapi.crowd.service.api;
+package com.deftdevs.bootstrapi.crowd.service.api;
 
-import de.aservo.confapi.crowd.model.SettingsBrandingLoginPageBean;
+import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageBean;
 
 import java.io.InputStream;
 

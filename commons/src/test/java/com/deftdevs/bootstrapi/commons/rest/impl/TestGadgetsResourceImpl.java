@@ -1,7 +1,7 @@
-package de.aservo.confapi.commons.rest.impl;
+package com.deftdevs.bootstrapi.commons.rest.impl;
 
-import de.aservo.confapi.commons.rest.AbstractGadgetsResourceImpl;
-import de.aservo.confapi.commons.service.api.GadgetsService;
+import com.deftdevs.bootstrapi.commons.rest.AbstractGadgetsResourceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.GadgetsService;
 
 public class TestGadgetsResourceImpl extends AbstractGadgetsResourceImpl {
 

@@ -1,6 +1,6 @@
-package de.aservo.confapi.crowd.model;
+package com.deftdevs.bootstrapi.crowd.model;
 
-import de.aservo.confapi.crowd.rest.api.TrustedProxiesResource;
+import com.deftdevs.bootstrapi.crowd.rest.api.TrustedProxiesResource;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

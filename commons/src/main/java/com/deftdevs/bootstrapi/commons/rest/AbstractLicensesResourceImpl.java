@@ -1,9 +1,9 @@
-package de.aservo.confapi.commons.rest;
+package com.deftdevs.bootstrapi.commons.rest;
 
-import de.aservo.confapi.commons.model.LicenseBean;
-import de.aservo.confapi.commons.model.LicensesBean;
-import de.aservo.confapi.commons.rest.api.LicensesResource;
-import de.aservo.confapi.commons.service.api.LicensesService;
+import com.deftdevs.bootstrapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicensesBean;
+import com.deftdevs.bootstrapi.commons.rest.api.LicensesResource;
+import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 
 import javax.ws.rs.core.Response;
 

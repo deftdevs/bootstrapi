@@ -1,9 +1,9 @@
-package de.aservo.confapi.jira.model.util;
+package com.deftdevs.bootstrapi.jira.model.util;
 
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.model.directory.DirectoryImpl;
-import de.aservo.confapi.commons.model.DirectoryCrowdBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;

@@ -1,11 +1,11 @@
-package de.aservo.confapi.confluence.rest;
+package com.deftdevs.bootstrapi.confluence.rest;
 
 import com.sun.jersey.spi.container.ResourceFilters;
-import de.aservo.confapi.commons.constants.ConfAPI;
-import de.aservo.confapi.confluence.filter.SysAdminOnlyResourceFilter;
-import de.aservo.confapi.confluence.model.CacheBean;
-import de.aservo.confapi.confluence.rest.api.CachesResource;
-import de.aservo.confapi.confluence.service.api.CachesService;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.confluence.filter.SysAdminOnlyResourceFilter;
+import com.deftdevs.bootstrapi.confluence.model.CacheBean;
+import com.deftdevs.bootstrapi.confluence.rest.api.CachesResource;
+import com.deftdevs.bootstrapi.confluence.service.api.CachesService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

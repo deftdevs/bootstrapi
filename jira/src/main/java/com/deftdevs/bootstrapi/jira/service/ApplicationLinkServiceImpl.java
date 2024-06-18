@@ -1,4 +1,4 @@
-package de.aservo.confapi.jira.service;
+package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.applinks.api.ApplicationId;
 import com.atlassian.applinks.api.ApplicationLink;
@@ -22,13 +22,13 @@ import com.atlassian.applinks.spi.manifest.ManifestNotFoundException;
 import com.atlassian.applinks.spi.util.TypeAccessor;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.model.ApplicationLinkBean;
-import de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
-import de.aservo.confapi.commons.model.ApplicationLinksBean;
-import de.aservo.confapi.commons.service.api.ApplicationLinksService;
-import de.aservo.confapi.jira.model.type.DefaultAuthenticationScenario;
-import de.aservo.confapi.jira.model.util.ApplicationLinkBeanUtil;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinksBean;
+import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
+import com.deftdevs.bootstrapi.jira.model.type.DefaultAuthenticationScenario;
+import com.deftdevs.bootstrapi.jira.model.util.ApplicationLinkBeanUtil;
 import org.apache.commons.lang3.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,8 +43,8 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import static com.atlassian.applinks.internal.status.error.ApplinkErrorType.CONNECTION_REFUSED;
-import static de.aservo.confapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus.*;
-import static de.aservo.confapi.jira.model.util.ApplicationLinkBeanUtil.toApplicationLinkBean;
+import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus.*;
+import static com.deftdevs.bootstrapi.jira.model.util.ApplicationLinkBeanUtil.toApplicationLinkBean;
 
 /**
  * The type Application link service.

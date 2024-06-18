@@ -1,4 +1,4 @@
-package de.aservo.confapi.commons.model;
+package com.deftdevs.bootstrapi.commons.model;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

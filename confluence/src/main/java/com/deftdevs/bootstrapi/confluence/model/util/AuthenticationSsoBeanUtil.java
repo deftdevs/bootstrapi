@@ -1,8 +1,8 @@
-package de.aservo.confapi.confluence.model.util;
+package com.deftdevs.bootstrapi.confluence.model.util;
 
 import com.atlassian.plugins.authentication.api.config.ImmutableSsoConfig;
 import com.atlassian.plugins.authentication.api.config.SsoConfig;
-import de.aservo.confapi.commons.model.AuthenticationSsoBean;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
 
 public class AuthenticationSsoBeanUtil {
 

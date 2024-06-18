@@ -1,12 +1,12 @@
-package de.aservo.confapi.confluence.service;
+package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.confluence.security.SpacePermission;
 import com.atlassian.confluence.security.SpacePermissionManager;
 import com.atlassian.confluence.security.service.AnonymousUserPermissionsService;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.confluence.model.PermissionAnonymousAccessBean;
-import de.aservo.confapi.confluence.service.api.PermissionsService;
+import com.deftdevs.bootstrapi.confluence.model.PermissionAnonymousAccessBean;
+import com.deftdevs.bootstrapi.confluence.service.api.PermissionsService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

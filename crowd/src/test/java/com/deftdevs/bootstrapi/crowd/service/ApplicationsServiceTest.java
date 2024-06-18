@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.service;
+package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
@@ -13,11 +13,11 @@ import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.crowd.model.application.Application;
 import com.atlassian.crowd.model.application.ImmutableApplication;
 import com.atlassian.crowd.model.directory.ImmutableDirectory;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.exception.InternalServerErrorException;
-import de.aservo.confapi.commons.exception.NotFoundException;
-import de.aservo.confapi.crowd.model.ApplicationBean;
-import de.aservo.confapi.crowd.model.ApplicationsBean;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
+import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
+import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
+import com.deftdevs.bootstrapi.crowd.model.ApplicationsBean;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -30,10 +30,10 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
-import static de.aservo.confapi.crowd.model.ApplicationBean.EXAMPLE_1;
-import static de.aservo.confapi.crowd.model.ApplicationBean.EXAMPLE_2;
-import static de.aservo.confapi.crowd.model.util.ApplicationBeanUtil.toApplication;
-import static de.aservo.confapi.crowd.model.util.ApplicationBeanUtil.toStringCollection;
+import static com.deftdevs.bootstrapi.crowd.model.ApplicationBean.EXAMPLE_1;
+import static com.deftdevs.bootstrapi.crowd.model.ApplicationBean.EXAMPLE_2;
+import static com.deftdevs.bootstrapi.crowd.model.util.ApplicationBeanUtil.toApplication;
+import static com.deftdevs.bootstrapi.crowd.model.util.ApplicationBeanUtil.toStringCollection;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;

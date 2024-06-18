@@ -1,6 +1,6 @@
-package de.aservo.confapi.confluence.service.api;
+package com.deftdevs.bootstrapi.confluence.service.api;
 
-import de.aservo.confapi.confluence.model.PermissionAnonymousAccessBean;
+import com.deftdevs.bootstrapi.confluence.model.PermissionAnonymousAccessBean;
 
 import javax.validation.constraints.NotNull;
 

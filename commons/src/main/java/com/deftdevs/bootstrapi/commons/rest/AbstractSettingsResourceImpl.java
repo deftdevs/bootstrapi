@@ -1,8 +1,8 @@
-package de.aservo.confapi.commons.rest;
+package com.deftdevs.bootstrapi.commons.rest;
 
-import de.aservo.confapi.commons.model.SettingsBean;
-import de.aservo.confapi.commons.rest.api.SettingsResource;
-import de.aservo.confapi.commons.service.api.SettingsService;
+import com.deftdevs.bootstrapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.commons.rest.api.SettingsResource;
+import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
 
 import javax.ws.rs.core.Response;
 

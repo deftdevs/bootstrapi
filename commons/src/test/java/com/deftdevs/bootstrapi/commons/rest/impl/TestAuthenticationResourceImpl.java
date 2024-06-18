@@ -1,7 +1,7 @@
-package de.aservo.confapi.commons.rest.impl;
+package com.deftdevs.bootstrapi.commons.rest.impl;
 
-import de.aservo.confapi.commons.rest.AbstractAuthenticationResourceImpl;
-import de.aservo.confapi.commons.service.api.AuthenticationService;
+import com.deftdevs.bootstrapi.commons.rest.AbstractAuthenticationResourceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.AuthenticationService;
 
 public class TestAuthenticationResourceImpl extends AbstractAuthenticationResourceImpl {
 

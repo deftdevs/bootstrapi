@@ -1,7 +1,7 @@
-package de.aservo.confapi.crowd.rest;
+package com.deftdevs.bootstrapi.crowd.rest;
 
-import de.aservo.confapi.commons.model.MailServerSmtpBean;
-import de.aservo.confapi.commons.service.api.MailServerService;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

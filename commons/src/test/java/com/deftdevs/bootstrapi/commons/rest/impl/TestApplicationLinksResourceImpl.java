@@ -1,7 +1,7 @@
-package de.aservo.confapi.commons.rest.impl;
+package com.deftdevs.bootstrapi.commons.rest.impl;
 
-import de.aservo.confapi.commons.rest.AbstractApplicationLinksResourceImpl;
-import de.aservo.confapi.commons.service.api.ApplicationLinksService;
+import com.deftdevs.bootstrapi.commons.rest.AbstractApplicationLinksResourceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
 
 public class TestApplicationLinksResourceImpl extends AbstractApplicationLinksResourceImpl {
 

@@ -1,4 +1,4 @@
-package de.aservo.confapi.jira.service;
+package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.mail.MailException;
 import com.atlassian.mail.MailProtocol;
@@ -9,13 +9,13 @@ import com.atlassian.mail.server.impl.PopMailServerImpl;
 import com.atlassian.mail.server.impl.SMTPMailServerImpl;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.model.MailServerPopBean;
-import de.aservo.confapi.commons.model.MailServerSmtpBean;
-import de.aservo.confapi.commons.service.api.MailServerService;
-import de.aservo.confapi.jira.model.util.MailServerPopBeanUtil;
-import de.aservo.confapi.jira.model.util.MailServerSmtpBeanUtil;
-import de.aservo.confapi.jira.util.MailProtocolUtil;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
+import com.deftdevs.bootstrapi.jira.model.util.MailServerPopBeanUtil;
+import com.deftdevs.bootstrapi.jira.model.util.MailServerSmtpBeanUtil;
+import com.deftdevs.bootstrapi.jira.util.MailProtocolUtil;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

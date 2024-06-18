@@ -1,4 +1,4 @@
-package de.aservo.confapi.commons.http;
+package com.deftdevs.bootstrapi.commons.http;
 
 import javax.ws.rs.HttpMethod;
 import java.lang.annotation.Documented;

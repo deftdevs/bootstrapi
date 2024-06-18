@@ -1,8 +1,8 @@
-package it.de.aservo.confapi.confluence.rest;
+package it.com.deftdevs.bootstrapi.confluence.rest;
 
-import de.aservo.confapi.commons.constants.ConfAPI;
-import de.aservo.confapi.confluence.model.PermissionAnonymousAccessBean;
-import it.de.aservo.confapi.commons.rest.ResourceBuilder;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.confluence.model.PermissionAnonymousAccessBean;
+import it.com.deftdevs.bootstrapi.commons.rest.ResourceBuilder;
 import org.apache.wink.client.ClientAuthenticationException;
 import org.apache.wink.client.ClientResponse;
 import org.apache.wink.client.Resource;

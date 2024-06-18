@@ -1,14 +1,14 @@
-package de.aservo.confapi.crowd.service;
+package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.property.PropertyManager;
 import com.atlassian.crowd.manager.property.PropertyManagerException;
 import com.atlassian.crowd.model.lookandfeel.LookAndFeelConfiguration;
 import com.atlassian.crowd.util.ImageInfo;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.exception.InternalServerErrorException;
-import de.aservo.confapi.crowd.model.SettingsBrandingLoginPageBean;
-import de.aservo.confapi.crowd.service.api.SettingsBrandingService;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
+import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageBean;
+import com.deftdevs.bootstrapi.crowd.service.api.SettingsBrandingService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
 

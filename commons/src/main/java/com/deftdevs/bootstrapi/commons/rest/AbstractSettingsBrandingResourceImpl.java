@@ -1,8 +1,8 @@
-package de.aservo.confapi.commons.rest;
+package com.deftdevs.bootstrapi.commons.rest;
 
-import de.aservo.confapi.commons.model.SettingsBrandingColorSchemeBean;
-import de.aservo.confapi.commons.rest.api.SettingsBrandingResource;
-import de.aservo.confapi.commons.service.api.SettingsBrandingService;
+import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
+import com.deftdevs.bootstrapi.commons.rest.api.SettingsBrandingResource;
+import com.deftdevs.bootstrapi.commons.service.api.SettingsBrandingService;
 
 import javax.ws.rs.core.Response;
 import java.io.InputStream;

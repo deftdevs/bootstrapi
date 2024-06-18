@@ -1,7 +1,7 @@
-package de.aservo.confapi.crowd.rest;
+package com.deftdevs.bootstrapi.crowd.rest;
 
-import de.aservo.confapi.crowd.model.SessionConfigBean;
-import de.aservo.confapi.crowd.service.api.SessionConfigService;
+import com.deftdevs.bootstrapi.crowd.model.SessionConfigBean;
+import com.deftdevs.bootstrapi.crowd.service.api.SessionConfigService;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;

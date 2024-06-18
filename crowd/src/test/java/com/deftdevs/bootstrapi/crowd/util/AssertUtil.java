@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.util;
+package com.deftdevs.bootstrapi.crowd.util;
 
 import org.junit.Assert;
 

@@ -1,8 +1,8 @@
-package de.aservo.confapi.commons.rest;
+package com.deftdevs.bootstrapi.commons.rest;
 
-import de.aservo.confapi.commons.model.UserBean;
-import de.aservo.confapi.commons.rest.impl.TestUsersResourceImpl;
-import de.aservo.confapi.commons.service.api.UsersService;
+import com.deftdevs.bootstrapi.commons.model.UserBean;
+import com.deftdevs.bootstrapi.commons.rest.impl.TestUsersResourceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.UsersService;
 import javax.ws.rs.core.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

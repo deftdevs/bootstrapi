@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.model.util;
+package com.deftdevs.bootstrapi.crowd.model.util;
 
 import com.atlassian.crowd.directory.DelegatedAuthenticationDirectory;
 import com.atlassian.crowd.directory.SynchronisableDirectoryProperties;
@@ -9,13 +9,13 @@ import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.embedded.api.MockDirectoryInternal;
 import com.atlassian.crowd.embedded.api.OperationType;
 import com.atlassian.crowd.model.directory.ImmutableDirectory;
-import de.aservo.confapi.commons.model.AbstractDirectoryBean;
-import de.aservo.confapi.commons.model.DirectoryDelegatingBean;
-import de.aservo.confapi.commons.model.DirectoryInternalBean;
-import de.aservo.confapi.commons.model.type.DirectoryPermissions;
-import de.aservo.confapi.crowd.model.util.DirectoryBeanUtil.DirectoryDelegatingConnectorTypeImplClass;
-import de.aservo.confapi.crowd.model.util.DirectoryBeanUtil.UnsupportedDirectoryBeanException;
-import de.aservo.confapi.crowd.util.AssertUtil;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryDelegatingBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryInternalBean;
+import com.deftdevs.bootstrapi.commons.model.type.DirectoryPermissions;
+import com.deftdevs.bootstrapi.crowd.model.util.DirectoryBeanUtil.DirectoryDelegatingConnectorTypeImplClass;
+import com.deftdevs.bootstrapi.crowd.model.util.DirectoryBeanUtil.UnsupportedDirectoryBeanException;
+import com.deftdevs.bootstrapi.crowd.util.AssertUtil;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.runners.MockitoJUnitRunner;

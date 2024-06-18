@@ -1,4 +1,4 @@
-package de.aservo.confapi.commons.util;
+package com.deftdevs.bootstrapi.commons.util;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.Validation;

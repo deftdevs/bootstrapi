@@ -1,10 +1,10 @@
-package de.aservo.confapi.crowd.service;
+package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.proxy.TrustedProxyManager;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.crowd.model.TrustedProxiesBean;
-import de.aservo.confapi.crowd.service.api.TrustedProxiesService;
+import com.deftdevs.bootstrapi.crowd.model.TrustedProxiesBean;
+import com.deftdevs.bootstrapi.crowd.service.api.TrustedProxiesService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

@@ -1,7 +1,7 @@
-package de.aservo.confapi.confluence.model.util;
+package com.deftdevs.bootstrapi.confluence.model.util;
 
 import com.atlassian.sal.api.license.SingleProductLicenseDetailsView;
-import de.aservo.confapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseBean;
 
 import javax.annotation.Nonnull;
 import java.util.Collections;

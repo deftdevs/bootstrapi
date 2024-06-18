@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.model.util;
+package com.deftdevs.bootstrapi.crowd.model.util;
 
 import com.atlassian.applinks.api.ApplicationId;
 import com.atlassian.applinks.api.ApplicationLink;
@@ -11,9 +11,9 @@ import com.atlassian.applinks.api.application.fecru.FishEyeCrucibleApplicationTy
 import com.atlassian.applinks.api.application.jira.JiraApplicationType;
 import com.atlassian.applinks.api.application.refapp.RefAppApplicationType;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
-import de.aservo.confapi.commons.model.ApplicationLinkBean;
-import de.aservo.confapi.crowd.settings.setup.DefaultApplicationLink;
-import de.aservo.confapi.crowd.settings.setup.DefaultApplicationType;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
+import com.deftdevs.bootstrapi.crowd.settings.setup.DefaultApplicationLink;
+import com.deftdevs.bootstrapi.crowd.settings.setup.DefaultApplicationType;
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -1,4 +1,4 @@
-package de.aservo.confapi.jira.service;
+package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.atlassian.jira.config.properties.LookAndFeelBean;
@@ -15,10 +15,10 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import com.google.common.base.Suppliers;
-import de.aservo.confapi.commons.exception.InternalServerErrorException;
-import de.aservo.confapi.commons.model.SettingsBrandingColorSchemeBean;
-import de.aservo.confapi.commons.service.api.SettingsBrandingService;
-import de.aservo.confapi.jira.model.util.SettingsBrandingColorSchemeBeanUtil;
+import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
+import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
+import com.deftdevs.bootstrapi.commons.service.api.SettingsBrandingService;
+import com.deftdevs.bootstrapi.jira.model.util.SettingsBrandingColorSchemeBeanUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 

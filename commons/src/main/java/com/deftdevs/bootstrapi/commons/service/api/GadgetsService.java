@@ -1,7 +1,7 @@
-package de.aservo.confapi.commons.service.api;
+package com.deftdevs.bootstrapi.commons.service.api;
 
-import de.aservo.confapi.commons.model.GadgetBean;
-import de.aservo.confapi.commons.model.GadgetsBean;
+import com.deftdevs.bootstrapi.commons.model.GadgetBean;
+import com.deftdevs.bootstrapi.commons.model.GadgetsBean;
 
 import javax.validation.constraints.NotNull;
 

@@ -1,7 +1,7 @@
-package de.aservo.confapi.crowd.model.util;
+package com.deftdevs.bootstrapi.crowd.model.util;
 
 import com.atlassian.crowd.model.group.Group;
-import de.aservo.confapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.commons.model.GroupBean;
 
 import javax.annotation.Nonnull;
 

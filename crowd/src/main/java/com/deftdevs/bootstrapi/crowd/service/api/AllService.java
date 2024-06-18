@@ -1,6 +1,6 @@
-package de.aservo.confapi.crowd.service.api;
+package com.deftdevs.bootstrapi.crowd.service.api;
 
-import de.aservo.confapi.crowd.model.AllBean;
+import com.deftdevs.bootstrapi.crowd.model.AllBean;
 
 public interface AllService {
 

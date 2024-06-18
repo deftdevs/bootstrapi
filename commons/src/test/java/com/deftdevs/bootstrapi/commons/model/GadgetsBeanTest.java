@@ -1,6 +1,6 @@
-package de.aservo.confapi.commons.model;
+package com.deftdevs.bootstrapi.commons.model;
 
-import de.aservo.confapi.commons.junit.AbstractBeanTest;
+import com.deftdevs.bootstrapi.commons.junit.AbstractBeanTest;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 

@@ -1,7 +1,7 @@
-package de.aservo.confapi.crowd.model;
+package com.deftdevs.bootstrapi.crowd.model;
 
 import com.atlassian.crowd.embedded.api.OperationType;
-import de.aservo.confapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

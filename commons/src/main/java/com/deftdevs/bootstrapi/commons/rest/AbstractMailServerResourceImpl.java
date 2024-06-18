@@ -1,9 +1,9 @@
-package de.aservo.confapi.commons.rest;
+package com.deftdevs.bootstrapi.commons.rest;
 
-import de.aservo.confapi.commons.model.MailServerPopBean;
-import de.aservo.confapi.commons.model.MailServerSmtpBean;
-import de.aservo.confapi.commons.rest.api.MailServerResource;
-import de.aservo.confapi.commons.service.api.MailServerService;
+import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.commons.rest.api.MailServerResource;
+import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
 
 import javax.ws.rs.core.Response;
 

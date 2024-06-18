@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.model.util;
+package com.deftdevs.bootstrapi.crowd.model.util;
 
 import com.atlassian.crowd.directory.AbstractInternalDirectory;
 import com.atlassian.crowd.directory.DelegatedAuthenticationDirectory;
@@ -14,13 +14,13 @@ import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.embedded.api.OperationType;
 import com.atlassian.crowd.model.directory.DirectoryImpl;
 import com.atlassian.crowd.model.directory.ImmutableDirectory;
-import de.aservo.confapi.commons.model.AbstractDirectoryBean;
-import de.aservo.confapi.commons.model.DirectoryCrowdBean;
-import de.aservo.confapi.commons.model.DirectoryDelegatingBean;
-import de.aservo.confapi.commons.model.DirectoryGenericBean;
-import de.aservo.confapi.commons.model.DirectoryInternalBean;
-import de.aservo.confapi.commons.model.DirectoryLdapBean;
-import de.aservo.confapi.commons.model.type.DirectoryPermissions;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryDelegatingBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryGenericBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryInternalBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryLdapBean;
+import com.deftdevs.bootstrapi.commons.model.type.DirectoryPermissions;
 import lombok.Getter;
 
 import javax.annotation.Nonnull;
@@ -31,7 +31,7 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static de.aservo.confapi.crowd.util.AttributeUtil.*;
+import static com.deftdevs.bootstrapi.crowd.util.AttributeUtil.*;
 import static java.lang.Boolean.TRUE;
 
 public class DirectoryBeanUtil {

@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.settings.setup;
+package com.deftdevs.bootstrapi.crowd.settings.setup;
 
 import com.atlassian.applinks.api.application.jira.JiraApplicationType;
 

@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.service;
+package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.embedded.api.CrowdService;
 import com.atlassian.crowd.embedded.api.Directory;
@@ -14,16 +14,16 @@ import com.atlassian.crowd.search.builder.QueryBuilder;
 import com.atlassian.crowd.search.query.entity.EntityQuery;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.exception.InternalServerErrorException;
-import de.aservo.confapi.commons.model.GroupBean;
-import de.aservo.confapi.commons.model.UserBean;
-import de.aservo.confapi.commons.service.api.UsersService;
-import de.aservo.confapi.crowd.exception.NotFoundExceptionForDirectory;
-import de.aservo.confapi.crowd.exception.NotFoundExceptionForUser;
-import de.aservo.confapi.crowd.model.GroupsBean;
-import de.aservo.confapi.crowd.model.util.UserBeanUtil;
-import de.aservo.confapi.crowd.service.api.GroupsService;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
+import com.deftdevs.bootstrapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.commons.model.UserBean;
+import com.deftdevs.bootstrapi.commons.service.api.UsersService;
+import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForDirectory;
+import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForUser;
+import com.deftdevs.bootstrapi.crowd.model.GroupsBean;
+import com.deftdevs.bootstrapi.crowd.model.util.UserBeanUtil;
+import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Nullable;

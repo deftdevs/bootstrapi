@@ -1,7 +1,7 @@
-package de.aservo.confapi.crowd.service.api;
+package com.deftdevs.bootstrapi.crowd.service.api;
 
-import de.aservo.confapi.commons.model.GroupBean;
-import de.aservo.confapi.crowd.model.GroupsBean;
+import com.deftdevs.bootstrapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.crowd.model.GroupsBean;
 
 public interface GroupsService {
 

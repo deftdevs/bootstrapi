@@ -1,9 +1,9 @@
-package de.aservo.confapi.commons.rest;
+package com.deftdevs.bootstrapi.commons.rest;
 
-import de.aservo.confapi.commons.model.AbstractDirectoryBean;
-import de.aservo.confapi.commons.model.DirectoriesBean;
-import de.aservo.confapi.commons.rest.api.DirectoriesResource;
-import de.aservo.confapi.commons.service.api.DirectoriesService;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoriesBean;
+import com.deftdevs.bootstrapi.commons.rest.api.DirectoriesResource;
+import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 
 import javax.ws.rs.core.Response;
 

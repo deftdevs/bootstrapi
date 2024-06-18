@@ -1,6 +1,6 @@
-package de.aservo.confapi.crowd.service.api;
+package com.deftdevs.bootstrapi.crowd.service.api;
 
-import de.aservo.confapi.crowd.model.TrustedProxiesBean;
+import com.deftdevs.bootstrapi.crowd.model.TrustedProxiesBean;
 
 public interface TrustedProxiesService {
 

@@ -1,6 +1,6 @@
-package it.de.aservo.confapi.jira.rest;
+package it.com.deftdevs.bootstrapi.jira.rest;
 
-import it.de.aservo.confapi.commons.rest.AbstractMailServerPopResourceFuncTest;
+import it.com.deftdevs.bootstrapi.commons.rest.AbstractMailServerPopResourceFuncTest;
 
 // TODO: Make them run
 public abstract class MailServerPopResourceFuncTest extends AbstractMailServerPopResourceFuncTest {

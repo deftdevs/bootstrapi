@@ -1,4 +1,4 @@
-package it.de.aservo.confapi.crowd.rest;
+package it.com.deftdevs.bootstrapi.crowd.rest;
 
 import org.apache.wink.client.ClientConfig;
 import org.apache.wink.client.Resource;

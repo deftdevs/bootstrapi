@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.model;
+package com.deftdevs.bootstrapi.crowd.model;
 
 import com.atlassian.applinks.spi.auth.AuthenticationScenario;
 

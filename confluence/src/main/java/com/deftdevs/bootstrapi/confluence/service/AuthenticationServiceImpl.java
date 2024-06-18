@@ -1,4 +1,4 @@
-package de.aservo.confapi.confluence.service;
+package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
@@ -6,13 +6,13 @@ import com.atlassian.plugins.authentication.api.config.IdpConfig;
 import com.atlassian.plugins.authentication.api.config.IdpConfigService;
 import com.atlassian.plugins.authentication.api.config.SsoConfig;
 import com.atlassian.plugins.authentication.api.config.SsoConfigService;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.model.AbstractAuthenticationIdpBean;
-import de.aservo.confapi.commons.model.AuthenticationIdpsBean;
-import de.aservo.confapi.commons.model.AuthenticationSsoBean;
-import de.aservo.confapi.commons.service.api.AuthenticationService;
-import de.aservo.confapi.confluence.model.util.AuthenticationIdpBeanUtil;
-import de.aservo.confapi.confluence.model.util.AuthenticationSsoBeanUtil;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpBean;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpsBean;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
+import com.deftdevs.bootstrapi.commons.service.api.AuthenticationService;
+import com.deftdevs.bootstrapi.confluence.model.util.AuthenticationIdpBeanUtil;
+import com.deftdevs.bootstrapi.confluence.model.util.AuthenticationSsoBeanUtil;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;

@@ -1,10 +1,10 @@
-package de.aservo.confapi.crowd.rest;
+package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.sun.jersey.spi.container.ResourceFilters;
-import de.aservo.confapi.crowd.filter.SysadminOnlyResourceFilter;
-import de.aservo.confapi.crowd.model.MailTemplatesBean;
-import de.aservo.confapi.crowd.rest.api.MailTemplateResource;
-import de.aservo.confapi.crowd.service.api.MailTemplatesService;
+import com.deftdevs.bootstrapi.crowd.filter.SysadminOnlyResourceFilter;
+import com.deftdevs.bootstrapi.crowd.model.MailTemplatesBean;
+import com.deftdevs.bootstrapi.crowd.rest.api.MailTemplateResource;
+import com.deftdevs.bootstrapi.crowd.service.api.MailTemplatesService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

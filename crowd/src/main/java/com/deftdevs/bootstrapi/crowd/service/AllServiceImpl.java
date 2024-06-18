@@ -1,10 +1,10 @@
-package de.aservo.confapi.crowd.service;
+package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
-import de.aservo.confapi.commons.service.api.SettingsService;
-import de.aservo.confapi.crowd.model.AllBean;
-import de.aservo.confapi.crowd.service.api.AllService;
-import de.aservo.confapi.crowd.service.api.ApplicationsService;
+import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
+import com.deftdevs.bootstrapi.crowd.model.AllBean;
+import com.deftdevs.bootstrapi.crowd.service.api.AllService;
+import com.deftdevs.bootstrapi.crowd.service.api.ApplicationsService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

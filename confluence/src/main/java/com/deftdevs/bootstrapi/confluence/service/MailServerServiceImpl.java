@@ -1,4 +1,4 @@
-package de.aservo.confapi.confluence.service;
+package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.confluence.jmx.JmxSMTPMailServer;
 import com.atlassian.mail.MailException;
@@ -9,13 +9,13 @@ import com.atlassian.mail.server.SMTPMailServer;
 import com.atlassian.mail.server.impl.PopMailServerImpl;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.model.MailServerPopBean;
-import de.aservo.confapi.commons.model.MailServerSmtpBean;
-import de.aservo.confapi.commons.service.api.MailServerService;
-import de.aservo.confapi.confluence.model.util.MailServerPopBeanUtil;
-import de.aservo.confapi.confluence.model.util.MailServerSmtpBeanUtil;
-import de.aservo.confapi.confluence.util.MailProtocolUtil;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
+import com.deftdevs.bootstrapi.confluence.model.util.MailServerPopBeanUtil;
+import com.deftdevs.bootstrapi.confluence.model.util.MailServerSmtpBeanUtil;
+import com.deftdevs.bootstrapi.confluence.util.MailProtocolUtil;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

@@ -1,16 +1,16 @@
-package de.aservo.confapi.confluence.service;
+package com.deftdevs.bootstrapi.confluence.service;
 
 
 import com.atlassian.cache.CacheManager;
 import com.atlassian.cache.ManagedCache;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.exception.NotFoundException;
-import de.aservo.confapi.confluence.model.CacheBean;
-import de.aservo.confapi.confluence.model.CachesBean;
-import de.aservo.confapi.confluence.model.util.CacheBeanUtil;
-import de.aservo.confapi.confluence.service.api.CachesService;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
+import com.deftdevs.bootstrapi.confluence.model.CacheBean;
+import com.deftdevs.bootstrapi.confluence.model.CachesBean;
+import com.deftdevs.bootstrapi.confluence.model.util.CacheBeanUtil;
+import com.deftdevs.bootstrapi.confluence.service.api.CachesService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

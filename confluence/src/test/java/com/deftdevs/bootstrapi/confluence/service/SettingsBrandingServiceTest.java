@@ -1,4 +1,4 @@
-package de.aservo.confapi.confluence.service;
+package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.confluence.plugins.lookandfeel.SiteLogo;
 import com.atlassian.confluence.plugins.lookandfeel.SiteLogoManager;
@@ -10,8 +10,8 @@ import com.atlassian.favicon.core.StoredFavicon;
 import com.atlassian.favicon.core.exceptions.ImageStorageException;
 import com.atlassian.favicon.core.exceptions.InvalidImageDataException;
 import com.atlassian.favicon.core.exceptions.UnsupportedImageTypeException;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.model.SettingsBrandingColorSchemeBean;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
 
-import static de.aservo.confapi.confluence.model.util.SettingsBrandingColorSchemeBeanUtil.toGlobalColorScheme;
+import static com.deftdevs.bootstrapi.confluence.model.util.SettingsBrandingColorSchemeBeanUtil.toGlobalColorScheme;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 

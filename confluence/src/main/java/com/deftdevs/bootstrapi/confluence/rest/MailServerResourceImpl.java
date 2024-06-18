@@ -1,10 +1,10 @@
-package de.aservo.confapi.confluence.rest;
+package com.deftdevs.bootstrapi.confluence.rest;
 
 import com.sun.jersey.spi.container.ResourceFilters;
-import de.aservo.confapi.confluence.filter.SysAdminOnlyResourceFilter;
-import de.aservo.confapi.commons.constants.ConfAPI;
-import de.aservo.confapi.commons.rest.AbstractMailServerResourceImpl;
-import de.aservo.confapi.commons.service.api.MailServerService;
+import com.deftdevs.bootstrapi.confluence.filter.SysAdminOnlyResourceFilter;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.rest.AbstractMailServerResourceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;

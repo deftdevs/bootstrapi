@@ -1,14 +1,14 @@
-package de.aservo.confapi.confluence.model.util;
+package com.deftdevs.bootstrapi.confluence.model.util;
 
 import com.atlassian.plugins.authentication.api.config.IdpConfig;
 import com.atlassian.plugins.authentication.api.config.SsoType;
 import com.atlassian.plugins.authentication.api.config.oidc.OidcConfig;
 import com.atlassian.plugins.authentication.api.config.saml.SamlConfig;
-import de.aservo.confapi.commons.exception.BadRequestException;
-import de.aservo.confapi.commons.exception.InternalServerErrorException;
-import de.aservo.confapi.commons.model.AbstractAuthenticationIdpBean;
-import de.aservo.confapi.commons.model.AuthenticationIdpOidcBean;
-import de.aservo.confapi.commons.model.AuthenticationIdpSamlBean;
+import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
+import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpBean;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpOidcBean;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpSamlBean;
 
 public class AuthenticationIdpBeanUtil {
 

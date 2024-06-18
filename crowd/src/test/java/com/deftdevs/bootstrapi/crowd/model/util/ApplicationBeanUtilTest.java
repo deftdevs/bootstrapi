@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.model.util;
+package com.deftdevs.bootstrapi.crowd.model.util;
 
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
@@ -8,7 +8,7 @@ import com.atlassian.crowd.manager.application.DefaultGroupMembershipService;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.crowd.model.application.*;
 import com.atlassian.crowd.model.directory.ImmutableDirectory;
-import de.aservo.confapi.crowd.model.ApplicationBean;
+import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,8 +20,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 
-import static de.aservo.confapi.crowd.model.ApplicationBean.EXAMPLE_1;
-import static de.aservo.confapi.crowd.model.util.ApplicationBeanUtil.*;
+import static com.deftdevs.bootstrapi.crowd.model.ApplicationBean.EXAMPLE_1;
+import static com.deftdevs.bootstrapi.crowd.model.util.ApplicationBeanUtil.*;
 import static junit.framework.TestCase.assertEquals;
 import static junit.framework.TestCase.assertNull;
 import static org.junit.Assert.assertTrue;

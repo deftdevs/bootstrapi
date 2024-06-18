@@ -1,9 +1,9 @@
-package de.aservo.confapi.commons.rest;
+package com.deftdevs.bootstrapi.commons.rest;
 
-import de.aservo.confapi.commons.model.ApplicationLinkBean;
-import de.aservo.confapi.commons.model.ApplicationLinksBean;
-import de.aservo.confapi.commons.rest.api.ApplicationLinksResource;
-import de.aservo.confapi.commons.service.api.ApplicationLinksService;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinksBean;
+import com.deftdevs.bootstrapi.commons.rest.api.ApplicationLinksResource;
+import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
 
 import javax.ws.rs.core.Response;
 import java.util.UUID;

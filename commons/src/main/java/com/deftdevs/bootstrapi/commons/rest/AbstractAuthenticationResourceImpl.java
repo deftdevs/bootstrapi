@@ -1,9 +1,9 @@
-package de.aservo.confapi.commons.rest;
+package com.deftdevs.bootstrapi.commons.rest;
 
-import de.aservo.confapi.commons.model.AuthenticationIdpsBean;
-import de.aservo.confapi.commons.model.AuthenticationSsoBean;
-import de.aservo.confapi.commons.rest.api.AuthenticationResource;
-import de.aservo.confapi.commons.service.api.AuthenticationService;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpsBean;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
+import com.deftdevs.bootstrapi.commons.rest.api.AuthenticationResource;
+import com.deftdevs.bootstrapi.commons.service.api.AuthenticationService;
 
 import javax.ws.rs.core.Response;
 

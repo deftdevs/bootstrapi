@@ -1,6 +1,6 @@
-package de.aservo.confapi.commons.exception.mapper;
+package com.deftdevs.bootstrapi.commons.exception.mapper;
 
-import de.aservo.confapi.commons.model.ErrorCollection;
+import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;

@@ -1,4 +1,4 @@
-package de.aservo.confapi.crowd.settings.setup;
+package com.deftdevs.bootstrapi.crowd.settings.setup;
 
 import com.atlassian.applinks.api.ApplicationId;
 import com.atlassian.applinks.api.ApplicationLink;

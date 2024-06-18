@@ -1,7 +1,7 @@
-package de.aservo.confapi.commons.model;
+package com.deftdevs.bootstrapi.commons.model;
 
-import de.aservo.confapi.commons.constants.ConfAPI;
-import de.aservo.confapi.commons.model.type.DirectoryPermissions;
+import com.deftdevs.bootstrapi.commons.constants.ConfAPI;
+import com.deftdevs.bootstrapi.commons.model.type.DirectoryPermissions;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;

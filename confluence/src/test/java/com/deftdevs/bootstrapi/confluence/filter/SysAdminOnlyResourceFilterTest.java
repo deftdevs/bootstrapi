@@ -1,4 +1,4 @@
-package de.aservo.confapi.confluence.filter;
+package com.deftdevs.bootstrapi.confluence.filter;
 
 import com.atlassian.confluence.security.PermissionManager;
 import com.atlassian.confluence.user.AuthenticatedUserThreadLocal;

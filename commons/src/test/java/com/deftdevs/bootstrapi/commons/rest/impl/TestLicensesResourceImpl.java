@@ -1,7 +1,7 @@
-package de.aservo.confapi.commons.rest.impl;
+package com.deftdevs.bootstrapi.commons.rest.impl;
 
-import de.aservo.confapi.commons.rest.AbstractLicensesResourceImpl;
-import de.aservo.confapi.commons.service.api.LicensesService;
+import com.deftdevs.bootstrapi.commons.rest.AbstractLicensesResourceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 
 public class TestLicensesResourceImpl extends AbstractLicensesResourceImpl {
 

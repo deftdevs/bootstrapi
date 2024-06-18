@@ -1,7 +1,7 @@
-package de.aservo.confapi.commons.rest.impl;
+package com.deftdevs.bootstrapi.commons.rest.impl;
 
-import de.aservo.confapi.commons.rest.AbstractDirectoriesResourceImpl;
-import de.aservo.confapi.commons.service.api.DirectoriesService;
+import com.deftdevs.bootstrapi.commons.rest.AbstractDirectoriesResourceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 
 public class TestDirectoriesResourceImpl extends AbstractDirectoriesResourceImpl {
 
