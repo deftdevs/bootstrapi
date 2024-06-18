@@ -48,7 +48,6 @@
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <jira-lookandfeel-plugin.version>7.13.0</jira-lookandfeel-plugin.version>
         <mockito.version>5.10.0</mockito.version>
-        <openapi-generator.version>7.3.0</openapi-generator.version>
         <swagger.version>2.2.20</swagger.version>
         <!-- Compiler must be 8 so that the plugin can run on jIRA instances using Java 11 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

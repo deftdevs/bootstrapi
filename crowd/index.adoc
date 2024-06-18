@@ -1,15 +1,15 @@
 = BootstrAPI for Crowd
-opensource@aservo.com
+opensource@deftdevs.com
 1
 :toc: left
 :numbered:
-:toclevels: 3
+:toclevels: 4
 :source-highlighter: highlightjs
 :keywords: openapi, rest, BootstrAPI for Crowd
-:specDir: src/main/resources/doc/
-:snippetDir:
+:specDir: src/main/resources/openapi/specs/
+:snippetDir: src/main/resources/openapi/snippets/
 :generator-template: v1 2019-12-20
-:info-url: https://github.com/aservo/bootstrapi-crowd-plugin
+:info-url: https://github.com/deftdevs/bootstrapi
 :app-name: BootstrAPI for Crowd
 
 [abstract]
@@ -23,6 +23,7 @@ This plugin provides methods for accessing configuration for Crowd.
 == Access
 
 * *HTTP Basic* Authentication _basicAuth_
+
 
 
 
@@ -54,7 +55,7 @@ Set the whole configuration
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -63,8 +64,8 @@ Set the whole configuration
 | AllBean
 |  <<AllBean>>
 | -
-|
-|
+| 
+| 
 
 |===
 
@@ -84,7 +85,7 @@ Set the whole configuration
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -146,7 +147,7 @@ Add an application link
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -155,8 +156,8 @@ Add an application link
 | ApplicationLinkBean
 |  <<ApplicationLinkBean>>
 | X
-|
-|
+| 
+| 
 
 |===
 
@@ -169,10 +170,10 @@ Add an application link
 |Name| Description| Required| Default| Pattern
 
 | ignore-setup-errors
-|
+|  
 | -
 | false
-|
+| 
 
 |===
 
@@ -188,7 +189,7 @@ Add an application link
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -252,10 +253,10 @@ Delete an application link
 |Name| Description| Required| Default| Pattern
 
 | uuid
-|
+|  
 | X
 | null
-|
+| 
 
 |===
 
@@ -276,7 +277,7 @@ Delete an application link
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -344,10 +345,10 @@ NOTE: The 'force' parameter must be set to 'true' in order to execute this reque
 |Name| Description| Required| Default| Pattern
 
 | force
-|
+|  
 | -
 | null
-|
+| 
 
 |===
 
@@ -364,7 +365,7 @@ NOTE: The 'force' parameter must be set to 'true' in order to execute this reque
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -412,7 +413,7 @@ Get an application link
 
 ===== Description
 
-Upon successful request,
+Upon successful request, 
 
 
 // markup not found, no include::{specDir}application-links/\{uuid\}/GET/spec.adoc[opts=optional]
@@ -428,10 +429,10 @@ Upon successful request,
 |Name| Description| Required| Default| Pattern
 
 | uuid
-|
+|  
 | X
 | null
-|
+| 
 
 |===
 
@@ -451,7 +452,7 @@ Upon successful request,
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -525,7 +526,7 @@ Get all application links
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -589,14 +590,14 @@ Update an application link
 |Name| Description| Required| Default| Pattern
 
 | uuid
-|
+|  
 | X
 | null
-|
+| 
 
 |===
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -605,8 +606,8 @@ Update an application link
 | ApplicationLinkBean
 |  <<ApplicationLinkBean>>
 | X
-|
-|
+| 
+| 
 
 |===
 
@@ -619,10 +620,10 @@ Update an application link
 |Name| Description| Required| Default| Pattern
 
 | ignore-setup-errors
-|
+|  
 | -
 | false
-|
+| 
 
 |===
 
@@ -638,7 +639,7 @@ Update an application link
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -696,7 +697,7 @@ NOTE: All existing application links with the same 'rpcUrl' attribute are update
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -705,8 +706,8 @@ NOTE: All existing application links with the same 'rpcUrl' attribute are update
 | ApplicationLinksBean
 |  <<ApplicationLinksBean>>
 | X
-|
-|
+| 
+| 
 
 |===
 
@@ -719,10 +720,10 @@ NOTE: All existing application links with the same 'rpcUrl' attribute are update
 |Name| Description| Required| Default| Pattern
 
 | ignore-setup-errors
-|
+|  
 | -
 | false
-|
+| 
 
 |===
 
@@ -738,7 +739,7 @@ NOTE: All existing application links with the same 'rpcUrl' attribute are update
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -800,7 +801,7 @@ Add an application
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -809,8 +810,8 @@ Add an application
 | ApplicationBean
 |  <<ApplicationBean>>
 | -
-|
-|
+| 
+| 
 
 |===
 
@@ -829,7 +830,7 @@ Add an application
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -893,10 +894,10 @@ Delete an application
 |Name| Description| Required| Default| Pattern
 
 | id
-|
+|  
 | X
 | null
-|
+| 
 
 |===
 
@@ -917,7 +918,7 @@ Delete an application
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -985,10 +986,10 @@ NOTE: The 'force' parameter must be se to 'true' in order to execute this reques
 |Name| Description| Required| Default| Pattern
 
 | force
-|
+|  
 | -
 | null
-|
+| 
 
 |===
 
@@ -1005,7 +1006,7 @@ NOTE: The 'force' parameter must be se to 'true' in order to execute this reques
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -1069,10 +1070,10 @@ Get an application
 |Name| Description| Required| Default| Pattern
 
 | id
-|
+|  
 | X
 | null
-|
+| 
 
 |===
 
@@ -1092,7 +1093,7 @@ Get an application
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -1166,7 +1167,7 @@ Upon successful request, returns a `ApplicationsBean` object containing all appl
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -1230,14 +1231,14 @@ Update an application
 |Name| Description| Required| Default| Pattern
 
 | id
-|
+|  
 | X
 | null
-|
+| 
 
 |===
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -1246,8 +1247,8 @@ Update an application
 | ApplicationBean
 |  <<ApplicationBean>>
 | -
-|
-|
+| 
+| 
 
 |===
 
@@ -1266,7 +1267,7 @@ Update an application
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -1324,7 +1325,7 @@ NOTE: All existing applications with the same 'name' attribute are updated.
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -1333,8 +1334,8 @@ NOTE: All existing applications with the same 'name' attribute are updated.
 | ApplicationsBean
 |  <<ApplicationsBean>>
 | -
-|
-|
+| 
+| 
 
 |===
 
@@ -1353,7 +1354,7 @@ NOTE: All existing applications with the same 'name' attribute are updated.
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -1415,7 +1416,7 @@ Add a user directory
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -1424,8 +1425,8 @@ Add a user directory
 | AbstractDirectoryBean
 |  <<AbstractDirectoryBean>>
 | X
-|
-|
+| 
+| 
 
 |===
 
@@ -1438,10 +1439,10 @@ Add a user directory
 |Name| Description| Required| Default| Pattern
 
 | test-connection
-|
+|  
 | -
 | false
-|
+| 
 
 |===
 
@@ -1457,7 +1458,7 @@ Add a user directory
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -1525,10 +1526,10 @@ NOTE: The 'force' parameter must be set to 'true' in order to execute this reque
 |Name| Description| Required| Default| Pattern
 
 | force
-|
+|  
 | -
 | null
-|
+| 
 
 |===
 
@@ -1545,7 +1546,7 @@ NOTE: The 'force' parameter must be set to 'true' in order to execute this reque
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -1609,10 +1610,10 @@ Delete a user directory
 |Name| Description| Required| Default| Pattern
 
 | id
-|
+|  
 | X
 | null
-|
+| 
 
 |===
 
@@ -1633,7 +1634,7 @@ Delete a user directory
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -1707,7 +1708,7 @@ Get all user directories
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -1771,10 +1772,10 @@ Get a user directory
 |Name| Description| Required| Default| Pattern
 
 | id
-|
+|  
 | X
 | null
-|
+| 
 
 |===
 
@@ -1794,7 +1795,7 @@ Get a user directory
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -1852,7 +1853,7 @@ NOTE: All existing directories with the same 'name' attribute are updated.
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -1861,8 +1862,8 @@ NOTE: All existing directories with the same 'name' attribute are updated.
 | DirectoriesBean
 |  <<DirectoriesBean>>
 | X
-|
-|
+| 
+| 
 
 |===
 
@@ -1875,10 +1876,10 @@ NOTE: All existing directories with the same 'name' attribute are updated.
 |Name| Description| Required| Default| Pattern
 
 | test-connection
-|
+|  
 | -
 | false
-|
+| 
 
 |===
 
@@ -1894,7 +1895,7 @@ NOTE: All existing directories with the same 'name' attribute are updated.
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -1958,14 +1959,14 @@ Update a user directory
 |Name| Description| Required| Default| Pattern
 
 | id
-|
+|  
 | X
 | null
-|
+| 
 
 |===
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -1974,8 +1975,8 @@ Update a user directory
 | AbstractDirectoryBean
 |  <<AbstractDirectoryBean>>
 | X
-|
-|
+| 
+| 
 
 |===
 
@@ -1988,10 +1989,10 @@ Update a user directory
 |Name| Description| Required| Default| Pattern
 
 | test-connection
-|
+|  
 | -
 | false
-|
+| 
 
 |===
 
@@ -2007,7 +2008,7 @@ Update a user directory
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -2069,7 +2070,7 @@ Create a group
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -2078,8 +2079,8 @@ Create a group
 | GroupBean
 |  <<GroupBean>>
 | X
-|
-|
+| 
+| 
 
 |===
 
@@ -2092,10 +2093,10 @@ Create a group
 |Name| Description| Required| Default| Pattern
 
 | directoryId
-|
+|  
 | X
 | null
-|
+| 
 
 |===
 
@@ -2111,7 +2112,7 @@ Create a group
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -2179,16 +2180,16 @@ Get a group
 |Name| Description| Required| Default| Pattern
 
 | directoryId
-|
+|  
 | X
 | null
-|
+| 
 
 | name
-|
+|  
 | X
 | null
-|
+| 
 
 |===
 
@@ -2204,7 +2205,7 @@ Get a group
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -2262,7 +2263,7 @@ Set groups
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -2271,8 +2272,8 @@ Set groups
 | GroupsBean
 |  <<GroupsBean>>
 | X
-|
-|
+| 
+| 
 
 |===
 
@@ -2285,10 +2286,10 @@ Set groups
 |Name| Description| Required| Default| Pattern
 
 | directoryId
-|
+|  
 | X
 | null
-|
+| 
 
 |===
 
@@ -2304,7 +2305,7 @@ Set groups
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -2362,7 +2363,7 @@ Update a group
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -2371,8 +2372,8 @@ Update a group
 | GroupBean
 |  <<GroupBean>>
 | X
-|
-|
+| 
+| 
 
 |===
 
@@ -2385,16 +2386,16 @@ Update a group
 |Name| Description| Required| Default| Pattern
 
 | directoryId
-|
+|  
 | X
 | null
-|
+| 
 
 | name
-|
+|  
 | X
 | null
-|
+| 
 
 |===
 
@@ -2410,7 +2411,7 @@ Update a group
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -2472,7 +2473,7 @@ Add a license
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -2481,8 +2482,8 @@ Add a license
 | LicenseBean
 |  <<LicenseBean>>
 | X
-|
-|
+| 
+| 
 
 |===
 
@@ -2501,7 +2502,7 @@ Add a license
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -2575,7 +2576,7 @@ Upon successful request, returns a `LicensesBean` object containing license deta
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -2653,7 +2654,7 @@ Get the default SMTP mail server
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -2716,7 +2717,7 @@ Set the default SMTP mail server
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -2725,8 +2726,8 @@ Set the default SMTP mail server
 | MailServerSmtpBean
 |  <<MailServerSmtpBean>>
 | X
-|
-|
+| 
+| 
 
 |===
 
@@ -2745,7 +2746,7 @@ Set the default SMTP mail server
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -2823,19 +2824,19 @@ Get the mail templates
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
 
 
 | 200
-|
+| 
 |  <<MailTemplatesBean>>
 
 
 | 0
-|
+| 
 |  <<ErrorCollection>>
 
 |===
@@ -2881,7 +2882,7 @@ Set the mail templates
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -2890,8 +2891,8 @@ Set the mail templates
 | MailTemplatesBean
 |  <<MailTemplatesBean>>
 | -
-|
-|
+| 
+| 
 
 |===
 
@@ -2910,19 +2911,19 @@ Set the mail templates
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
 
 
 | 200
-|
+| 
 |  <<MailTemplatesBean>>
 
 
 | 0
-|
+| 
 |  <<ErrorCollection>>
 
 |===
@@ -2986,7 +2987,7 @@ Ping method for probing the REST API.
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -3059,19 +3060,19 @@ Get the session config
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
 
 
 | 200
-|
+| 
 |  <<SessionConfigBean>>
 
 
 | 0
-|
+| 
 |  <<ErrorCollection>>
 
 |===
@@ -3117,7 +3118,7 @@ Set the session config
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -3126,8 +3127,8 @@ Set the session config
 | SessionConfigBean
 |  <<SessionConfigBean>>
 | -
-|
-|
+| 
+| 
 
 |===
 
@@ -3146,19 +3147,19 @@ Set the session config
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
 
 
 | 200
-|
+| 
 |  <<SessionConfigBean>>
 
 
 | 0
-|
+| 
 |  <<ErrorCollection>>
 
 |===
@@ -3224,19 +3225,19 @@ Get the login-page settings
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
 
 
 | 200
-|
+| 
 |  <<SettingsBrandingLoginPageBean>>
 
 
 | 0
-|
+| 
 |  <<ErrorCollection>>
 
 |===
@@ -3298,7 +3299,7 @@ Get the application settings
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -3356,7 +3357,7 @@ Set the login-page settings
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -3365,8 +3366,8 @@ Set the login-page settings
 | SettingsBrandingLoginPageBean
 |  <<SettingsBrandingLoginPageBean>>
 | -
-|
-|
+| 
+| 
 
 |===
 
@@ -3385,19 +3386,19 @@ Set the login-page settings
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
 
 
 | 200
-|
+| 
 |  <<SettingsBrandingLoginPageBean>>
 
 
 | 0
-|
+| 
 |  <<ErrorCollection>>
 
 |===
@@ -3443,7 +3444,7 @@ Set the logo
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -3452,8 +3453,8 @@ Set the logo
 | body
 |  <<object>>
 | -
-|
-|
+| 
+| 
 
 |===
 
@@ -3472,14 +3473,14 @@ Set the logo
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
 
 
 | 0
-|
+| 
 |  <<ErrorCollection>>
 
 |===
@@ -3525,7 +3526,7 @@ Set the application settings
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -3534,8 +3535,8 @@ Set the application settings
 | SettingsBean
 |  <<SettingsBean>>
 | X
-|
-|
+| 
+| 
 
 |===
 
@@ -3554,7 +3555,7 @@ Set the application settings
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -3616,7 +3617,7 @@ Add a trusted proxy
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -3625,8 +3626,8 @@ Add a trusted proxy
 | body
 |  <<string>>
 | -
-|
-|
+| 
+| 
 
 |===
 
@@ -3645,19 +3646,19 @@ Add a trusted proxy
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
 
 
 | 200
-|
+| 
 |  <<TrustedProxiesBean>>
 
 
 | 0
-|
+| 
 |  <<ErrorCollection>>
 
 |===
@@ -3719,19 +3720,19 @@ Get the trusted proxies
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
 
 
 | 200
-|
+| 
 |  <<TrustedProxiesBean>>
 
 
 | 0
-|
+| 
 |  <<ErrorCollection>>
 
 |===
@@ -3777,7 +3778,7 @@ Remove a trusted proxy
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -3786,8 +3787,8 @@ Remove a trusted proxy
 | body
 |  <<string>>
 | -
-|
-|
+| 
+| 
 
 |===
 
@@ -3806,19 +3807,19 @@ Remove a trusted proxy
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
 
 
 | 200
-|
+| 
 |  <<TrustedProxiesBean>>
 
 
 | 0
-|
+| 
 |  <<ErrorCollection>>
 
 |===
@@ -3864,7 +3865,7 @@ Set the trusted proxies
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -3873,8 +3874,8 @@ Set the trusted proxies
 | TrustedProxiesBean
 |  <<TrustedProxiesBean>>
 | -
-|
-|
+| 
+| 
 
 |===
 
@@ -3893,19 +3894,19 @@ Set the trusted proxies
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
 
 
 | 200
-|
+| 
 |  <<TrustedProxiesBean>>
 
 
 | 0
-|
+| 
 |  <<ErrorCollection>>
 
 |===
@@ -3965,10 +3966,10 @@ Get a user
 |Name| Description| Required| Default| Pattern
 
 | username
-|
+|  
 | X
 | null
-|
+| 
 
 |===
 
@@ -3984,7 +3985,7 @@ Get a user
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -4042,7 +4043,7 @@ Update an user
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -4051,8 +4052,8 @@ Update an user
 | UserBean
 |  <<UserBean>>
 | X
-|
-|
+| 
+| 
 
 |===
 
@@ -4065,10 +4066,10 @@ Update an user
 |Name| Description| Required| Default| Pattern
 
 | username
-|
+|  
 | X
 | null
-|
+| 
 
 |===
 
@@ -4084,7 +4085,7 @@ Update an user
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -4142,7 +4143,7 @@ Update a user password
 ===== Parameters
 
 
-===== Body Parameter
+====== Body Parameter
 
 [cols="2,3,1,1,1"]
 |===
@@ -4151,8 +4152,8 @@ Update a user password
 | body
 |  <<string>>
 | X
-|
-|
+| 
+| 
 
 |===
 
@@ -4165,10 +4166,10 @@ Update a user password
 |Name| Description| Required| Default| Pattern
 
 | username
-|
+|  
 | X
 | null
-|
+| 
 
 |===
 
@@ -4184,7 +4185,7 @@ Update a user password
 
 ===== Responses
 
-.http response codes
+.HTTP Response Codes
 [cols="2,3,1"]
 |===
 | Code | Message | Datatype
@@ -4228,7 +4229,7 @@ endif::internal-generation[]
 
 
 [#AbstractDirectoryBean]
-=== _AbstractDirectoryBean_
+=== _AbstractDirectoryBean_ 
 
 
 
@@ -4238,100 +4239,100 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | id
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | name
 | X
-| String
-|
-|
+| String 
+| 
+|  
 
 | description
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | active
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | createdDate
-|
-| Date
-|
-| date-time
+| 
+| Date 
+| 
+| date-time 
 
 | updatedDate
-|
-| Date
-|
-| date-time
+| 
+| Date 
+| 
+| date-time 
 
 | server
-|
-| DirectoryLdapServer
-|
-|
+| 
+| DirectoryLdapServer 
+| 
+|  
 
 | permissions
-|
-| DirectoryLdapPermissions
-|
-|
+| 
+| DirectoryLdapPermissions 
+| 
+|  
 
 | advanced
-|
-| DirectoryInternalAdvanced
-|
-|
+| 
+| DirectoryInternalAdvanced 
+| 
+|  
 
 | connector
-|
-| DirectoryDelegatingConnector
-|
-|
+| 
+| DirectoryDelegatingConnector 
+| 
+|  
 
 | configuration
-|
-| DirectoryDelegatingConfiguration
-|
-|
+| 
+| DirectoryDelegatingConfiguration 
+| 
+|  
 
 | credentialPolicy
-|
-| DirectoryInternalCredentialPolicy
-|
-|
+| 
+| DirectoryInternalCredentialPolicy 
+| 
+|  
 
 | groups
-|
+| 
 | List  of <<GroupBean>>
-|
-|
+| 
+|  
 
 | users
-|
+| 
 | List  of <<UserBean>>
-|
-|
+| 
+|  
 
 | schema
-|
-| DirectoryLdapSchema
-|
-|
+| 
+| DirectoryLdapSchema 
+| 
+|  
 
 |===
 
 
 [#AllBean]
-=== _AllBean_
+=== _AllBean_ 
 
 
 
@@ -4341,22 +4342,22 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | settings
-|
-| SettingsBean
-|
-|
+| 
+| SettingsBean 
+| 
+|  
 
 | applications
-|
-| ApplicationsBean
-|
-|
+| 
+| ApplicationsBean 
+| 
+|  
 
 |===
 
 
 [#ApplicationBean]
-=== _ApplicationBean_
+=== _ApplicationBean_ 
 
 
 
@@ -4366,94 +4367,94 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | id
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | name
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | description
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | active
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | type
-|
-| String
-|
-|  _Enum:_ GENERIC, PLUGIN, CROWD, JIRA, CONFLUENCE, BITBUCKET, FISHEYE, CRUCIBLE, BAMBOO,
+| 
+| String 
+| 
+|  _Enum:_ GENERIC, PLUGIN, CROWD, JIRA, CONFLUENCE, BITBUCKET, FISHEYE, CRUCIBLE, BAMBOO, 
 
 | password
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | cachedDirectoriesAuthenticationOrderOptimisationEnabled
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | directoryMappings
-|
+| 
 | List  of <<ApplicationDirectoryMapping>>
-|
-|
+| 
+|  
 
 | accessBasedSynchronisation
-|
-| String
-|
-|  _Enum:_ NO_FILTERING, USER_ONLY_FILTERING, USER_AND_GROUP_FILTERING,
+| 
+| String 
+| 
+|  _Enum:_ NO_FILTERING, USER_ONLY_FILTERING, USER_AND_GROUP_FILTERING, 
 
 | membershipAggregationEnabled
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | remoteAddresses
-|
+| 
 | List  of <<string>>
-|
-|
+| 
+|  
 
 | aliasingEnabled
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | lowercaseOutputEnabled
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | authenticationWithoutPasswordEnabled
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 |===
 
 
 [#ApplicationDirectoryMapping]
-=== _ApplicationDirectoryMapping_
+=== _ApplicationDirectoryMapping_ 
 
 
 
@@ -4463,40 +4464,40 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | directoryName
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | authenticationAllowAll
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | authenticationGroups
-|
+| 
 | List  of <<string>>
-|
-|
+| 
+|  
 
 | autoAssignmentGroups
-|
+| 
 | List  of <<string>>
-|
-|
+| 
+|  
 
 | allowedOperations
-|
+| 
 | List  of <<string>>
-|
-|  _Enum:_
+| 
+|  _Enum:_ 
 
 |===
 
 
 [#ApplicationLinkBean]
-=== _ApplicationLinkBean_
+=== _ApplicationLinkBean_ 
 
 
 
@@ -4506,64 +4507,64 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | uuid
-|
-| UUID
-|
-| uuid
+| 
+| UUID 
+| 
+| uuid 
 
 | name
 | X
-| String
-|
-|
+| String 
+| 
+|  
 
 | type
 | X
-| String
-|
-|  _Enum:_ BAMBOO, JIRA, BITBUCKET, CONFLUENCE, FISHEYE, CROWD,
+| String 
+| 
+|  _Enum:_ BAMBOO, JIRA, BITBUCKET, CONFLUENCE, FISHEYE, CROWD, 
 
 | displayUrl
 | X
-| URI
-|
-| uri
+| URI 
+| 
+| uri 
 
 | rpcUrl
 | X
-| URI
-|
-| uri
+| URI 
+| 
+| uri 
 
 | primary
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | status
-|
-| String
-|
-|  _Enum:_ AVAILABLE, UNAVAILABLE, CONFIGURATION_ERROR,
+| 
+| String 
+| 
+|  _Enum:_ AVAILABLE, UNAVAILABLE, CONFIGURATION_ERROR, 
 
 | username
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | password
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 |===
 
 
 [#ApplicationLinksBean]
-=== _ApplicationLinksBean_
+=== _ApplicationLinksBean_ 
 
 
 
@@ -4573,16 +4574,16 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | applicationLinks
-|
+| 
 | List  of <<ApplicationLinkBean>>
-|
-|
+| 
+|  
 
 |===
 
 
 [#ApplicationsBean]
-=== _ApplicationsBean_
+=== _ApplicationsBean_ 
 
 
 
@@ -4592,16 +4593,16 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | applications
-|
+| 
 | List  of <<ApplicationBean>>
-|
-|
+| 
+|  
 
 |===
 
 
 [#DirectoriesBean]
-=== _DirectoriesBean_
+=== _DirectoriesBean_ 
 
 
 
@@ -4611,16 +4612,16 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | directories
-|
+| 
 | List  of <<AbstractDirectoryBean>>
-|
-|
+| 
+|  
 
 |===
 
 
 [#DirectoryCrowdAdvanced]
-=== _DirectoryCrowdAdvanced_
+=== _DirectoryCrowdAdvanced_ 
 
 
 
@@ -4630,34 +4631,34 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | enableNestedGroups
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | enableIncrementalSync
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | updateGroupMembershipMethod
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | updateSyncIntervalInMinutes
-|
-| Integer
-|
-| int32
+| 
+| Integer 
+| 
+| int32 
 
 |===
 
 
 [#DirectoryCrowdBean]
-=== _DirectoryCrowdBean_
+=== _DirectoryCrowdBean_ 
 
 
 
@@ -4667,64 +4668,64 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | id
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | name
 | X
-| String
-|
-|
+| String 
+| 
+|  
 
 | description
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | active
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | createdDate
-|
-| Date
-|
-| date-time
+| 
+| Date 
+| 
+| date-time 
 
 | updatedDate
-|
-| Date
-|
-| date-time
+| 
+| Date 
+| 
+| date-time 
 
 | server
-|
-| DirectoryCrowdServer
-|
-|
+| 
+| DirectoryCrowdServer 
+| 
+|  
 
 | permissions
-|
-| DirectoryCrowdPermissions
-|
-|
+| 
+| DirectoryCrowdPermissions 
+| 
+|  
 
 | advanced
-|
-| DirectoryCrowdAdvanced
-|
-|
+| 
+| DirectoryCrowdAdvanced 
+| 
+|  
 
 |===
 
 
 [#DirectoryCrowdPermissions]
-=== _DirectoryCrowdPermissions_
+=== _DirectoryCrowdPermissions_ 
 
 
 
@@ -4734,22 +4735,22 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | readOnly
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | fullAccess
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 |===
 
 
 [#DirectoryCrowdServer]
-=== _DirectoryCrowdServer_
+=== _DirectoryCrowdServer_ 
 
 
 
@@ -4760,45 +4761,45 @@ endif::internal-generation[]
 
 | url
 | X
-| URI
-|
-| uri
+| URI 
+| 
+| uri 
 
 | proxy
-|
-| DirectoryCrowdServerProxy
-|
-|
+| 
+| DirectoryCrowdServerProxy 
+| 
+|  
 
 | appUsername
 | X
-| String
-|
-|
+| String 
+| 
+|  
 
 | appPassword
 | X
-| String
-|
-|
+| String 
+| 
+|  
 
 | connectionTimeoutInMillis
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | maxConnections
-|
-| Integer
-|
-| int32
+| 
+| Integer 
+| 
+| int32 
 
 |===
 
 
 [#DirectoryCrowdServerProxy]
-=== _DirectoryCrowdServerProxy_
+=== _DirectoryCrowdServerProxy_ 
 
 
 
@@ -4808,34 +4809,34 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | host
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | port
-|
-| Integer
-|
-| int32
+| 
+| Integer 
+| 
+| int32 
 
 | username
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | password
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 |===
 
 
 [#DirectoryDelegatingBean]
-=== _DirectoryDelegatingBean_
+=== _DirectoryDelegatingBean_ 
 
 
 
@@ -4845,64 +4846,64 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | id
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | name
 | X
-| String
-|
-|
+| String 
+| 
+|  
 
 | description
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | active
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | createdDate
-|
-| Date
-|
-| date-time
+| 
+| Date 
+| 
+| date-time 
 
 | updatedDate
-|
-| Date
-|
-| date-time
+| 
+| Date 
+| 
+| date-time 
 
 | connector
-|
-| DirectoryDelegatingConnector
-|
-|
+| 
+| DirectoryDelegatingConnector 
+| 
+|  
 
 | configuration
-|
-| DirectoryDelegatingConfiguration
-|
-|
+| 
+| DirectoryDelegatingConfiguration 
+| 
+|  
 
 | permissions
-|
-| DirectoryPermissions
-|
-|
+| 
+| DirectoryPermissions 
+| 
+|  
 
 |===
 
 
 [#DirectoryDelegatingConfiguration]
-=== _DirectoryDelegatingConfiguration_
+=== _DirectoryDelegatingConfiguration_ 
 
 
 
@@ -4912,112 +4913,112 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | userDn
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | userObjectClass
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | userObjectFilter
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | userNameAttribute
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | userNameRdnAttribute
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | userFirstNameAttribute
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | userLastNameAttribute
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | userDisplayNameAttribute
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | userEmailAttribute
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | userGroupAttribute
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | userUniqueIdAttribute
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | groupDn
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | groupObjectClass
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | groupObjectFilter
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | groupNameAttribute
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | groupDescriptionAttribute
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | groupMembersAttribute
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 |===
 
 
 [#DirectoryDelegatingConnector]
-=== _DirectoryDelegatingConnector_
+=== _DirectoryDelegatingConnector_ 
 
 
 
@@ -5027,112 +5028,112 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | type
-|
-| String
-|
-|  _Enum:_ MICROSOFT_ACTIVE_DIRECTORY,
+| 
+| String 
+| 
+|  _Enum:_ MICROSOFT_ACTIVE_DIRECTORY, 
 
 | url
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | ssl
-|
-| String
-|
-|  _Enum:_ NONE, LDAPS, START_TLS,
+| 
+| String 
+| 
+|  _Enum:_ NONE, LDAPS, START_TLS, 
 
 | useNodeReferrals
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | nestedGroupsDisabled
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | synchronizeUsers
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | synchronizeUserDetails
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | synchronizeGroupMemberships
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | useUserMembershipAttribute
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | usePagedResults
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | pagedResultsSize
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | readTimeoutInMillis
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | searchTimeoutInMillis
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | connectionTimeoutInMillis
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | baseDn
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | username
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | password
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 |===
 
 
 [#DirectoryGenericBean]
-=== _DirectoryGenericBean_
+=== _DirectoryGenericBean_ 
 
 
 
@@ -5142,46 +5143,46 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | id
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | name
 | X
-| String
-|
-|
+| String 
+| 
+|  
 
 | description
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | active
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | createdDate
-|
-| Date
-|
-| date-time
+| 
+| Date 
+| 
+| date-time 
 
 | updatedDate
-|
-| Date
-|
-| date-time
+| 
+| Date 
+| 
+| date-time 
 
 |===
 
 
 [#DirectoryInternalAdvanced]
-=== _DirectoryInternalAdvanced_
+=== _DirectoryInternalAdvanced_ 
 
 
 
@@ -5191,16 +5192,16 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | enableNestedGroups
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 |===
 
 
 [#DirectoryInternalBean]
-=== _DirectoryInternalBean_
+=== _DirectoryInternalBean_ 
 
 
 
@@ -5210,76 +5211,76 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | id
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | name
 | X
-| String
-|
-|
+| String 
+| 
+|  
 
 | description
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | active
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | createdDate
-|
-| Date
-|
-| date-time
+| 
+| Date 
+| 
+| date-time 
 
 | updatedDate
-|
-| Date
-|
-| date-time
+| 
+| Date 
+| 
+| date-time 
 
 | credentialPolicy
-|
-| DirectoryInternalCredentialPolicy
-|
-|
+| 
+| DirectoryInternalCredentialPolicy 
+| 
+|  
 
 | advanced
-|
-| DirectoryInternalAdvanced
-|
-|
+| 
+| DirectoryInternalAdvanced 
+| 
+|  
 
 | permissions
-|
-| DirectoryPermissions
-|
-|
+| 
+| DirectoryPermissions 
+| 
+|  
 
 | groups
-|
+| 
 | List  of <<GroupBean>>
-|
-|
+| 
+|  
 
 | users
-|
+| 
 | List  of <<UserBean>>
-|
-|
+| 
+|  
 
 |===
 
 
 [#DirectoryInternalCredentialPolicy]
-=== _DirectoryInternalCredentialPolicy_
+=== _DirectoryInternalCredentialPolicy_ 
 
 
 
@@ -5289,52 +5290,52 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | passwordRegex
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | passwordComplexityMessage
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | passwordMaxAttempts
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | passwordHistoryCount
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | passwordMaxChangeTime
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | passwordExpiryNotificationDays
-|
+| 
 | List  of <<integer>>
-|
-| int32
+| 
+| int32 
 
 | passwordEncryptionMethod
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 |===
 
 
 [#DirectoryLdapBean]
-=== _DirectoryLdapBean_
+=== _DirectoryLdapBean_ 
 
 
 
@@ -5344,64 +5345,64 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | id
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | name
 | X
-| String
-|
-|
+| String 
+| 
+|  
 
 | description
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | active
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | createdDate
-|
-| Date
-|
-| date-time
+| 
+| Date 
+| 
+| date-time 
 
 | updatedDate
-|
-| Date
-|
-| date-time
+| 
+| Date 
+| 
+| date-time 
 
 | server
-|
-| DirectoryLdapServer
-|
-|
+| 
+| DirectoryLdapServer 
+| 
+|  
 
 | schema
-|
-| DirectoryLdapSchema
-|
-|
+| 
+| DirectoryLdapSchema 
+| 
+|  
 
 | permissions
-|
-| DirectoryLdapPermissions
-|
-|
+| 
+| DirectoryLdapPermissions 
+| 
+|  
 
 |===
 
 
 [#DirectoryLdapPermissions]
-=== _DirectoryLdapPermissions_
+=== _DirectoryLdapPermissions_ 
 
 
 
@@ -5411,28 +5412,28 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | readOnly
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | readOnlyForLocalGroups
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | fullAccess
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 |===
 
 
 [#DirectoryLdapSchema]
-=== _DirectoryLdapSchema_
+=== _DirectoryLdapSchema_ 
 
 
 
@@ -5442,28 +5443,28 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | baseDn
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | userDn
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | groupDn
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 |===
 
 
 [#DirectoryLdapServer]
-=== _DirectoryLdapServer_
+=== _DirectoryLdapServer_ 
 
 
 
@@ -5474,39 +5475,39 @@ endif::internal-generation[]
 
 | host
 | X
-| String
-|
-|
+| String 
+| 
+|  
 
 | port
-|
-| Integer
-|
-| int32
+| 
+| Integer 
+| 
+| int32 
 
 | useSsl
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | username
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | password
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 |===
 
 
 [#DirectoryPermissions]
-=== _DirectoryPermissions_
+=== _DirectoryPermissions_ 
 
 
 
@@ -5516,58 +5517,58 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | addGroup
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | addUser
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | modifyGroup
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | modifyUser
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | modifyGroupAttributes
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | modifyUserAttributes
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | removeGroup
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | removeUser
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 |===
 
 
 [#ErrorCollection]
-=== _ErrorCollection_
+=== _ErrorCollection_ 
 
 
 
@@ -5577,16 +5578,16 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | errorMessages
-|
+| 
 | List  of <<string>>
-|
-|
+| 
+|  
 
 |===
 
 
 [#GroupBean]
-=== _GroupBean_
+=== _GroupBean_ 
 
 
 
@@ -5596,28 +5597,28 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | name
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | description
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | active
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 |===
 
 
 [#GroupsBean]
-=== _GroupsBean_
+=== _GroupsBean_ 
 
 
 
@@ -5627,16 +5628,16 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | groups
-|
+| 
 | List  of <<GroupBean>>
-|
-|
+| 
+|  
 
 |===
 
 
 [#LicenseBean]
-=== _LicenseBean_
+=== _LicenseBean_ 
 
 
 
@@ -5646,52 +5647,52 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | products
-|
+| 
 | List  of <<string>>
-|
-|
+| 
+|  
 
 | type
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | organization
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | description
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | expiryDate
-|
-| Date
-|
-| date-time
+| 
+| Date 
+| 
+| date-time 
 
 | maxUsers
-|
-| Integer
-|
-| int32
+| 
+| Integer 
+| 
+| int32 
 
 | key
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 |===
 
 
 [#LicensesBean]
-=== _LicensesBean_
+=== _LicensesBean_ 
 
 
 
@@ -5701,16 +5702,16 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | licenses
-|
+| 
 | List  of <<LicenseBean>>
-|
-|
+| 
+|  
 
 |===
 
 
 [#MailServerSmtpBean]
-=== _MailServerSmtpBean_
+=== _MailServerSmtpBean_ 
 
 
 
@@ -5720,82 +5721,82 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | name
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | description
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | host
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | port
-|
-| Integer
-|
-| int32
+| 
+| Integer 
+| 
+| int32 
 
 | protocol
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | timeout
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | username
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | password
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | adminContact
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | from
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | prefix
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | useTls
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 |===
 
 
 [#MailTemplatesBean]
-=== _MailTemplatesBean_
+=== _MailTemplatesBean_ 
 
 
 
@@ -5805,40 +5806,40 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | forgottenPassword
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | forgottenUsername
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | passwordExpirationReminder
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | emailChangeValidation
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | emailChangeInfo
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 |===
 
 
 [#SessionConfigBean]
-=== _SessionConfigBean_
+=== _SessionConfigBean_ 
 
 
 
@@ -5848,22 +5849,22 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | sessionTimeoutInMinutes
-|
-| Long
-|
-| int64
+| 
+| Long 
+| 
+| int64 
 
 | requireConsistentClientIP
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 |===
 
 
 [#SettingsBean]
-=== _SettingsBean_
+=== _SettingsBean_ 
 
 
 
@@ -5873,40 +5874,40 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | baseUrl
-|
-| URI
-|
-| uri
+| 
+| URI 
+| 
+| uri 
 
 | mode
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | title
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | contactMessage
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | externalUserManagement
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 |===
 
 
 [#SettingsBrandingLoginPageBean]
-=== _SettingsBrandingLoginPageBean_
+=== _SettingsBrandingLoginPageBean_ 
 
 
 
@@ -5916,34 +5917,34 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | showLogo
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | header
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | content
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | buttonColor
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 |===
 
 
 [#TrustedProxiesBean]
-=== _TrustedProxiesBean_
+=== _TrustedProxiesBean_ 
 
 
 
@@ -5953,16 +5954,16 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | trustedProxies
-|
+| 
 | List  of <<string>>
-|
-|
+| 
+|  
 
 |===
 
 
 [#UserBean]
-=== _UserBean_
+=== _UserBean_ 
 
 
 
@@ -5972,52 +5973,52 @@ endif::internal-generation[]
 | Field Name| Required| Type| Description| Format
 
 | username
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | firstName
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | lastName
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | fullName
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | email
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | active
-|
-| Boolean
-|
-|
+| 
+| Boolean 
+| 
+|  
 
 | password
-|
-| String
-|
-|
+| 
+| String 
+| 
+|  
 
 | groups
-|
+| 
 | List  of <<GroupBean>>
-|
-|
+| 
+|  
 
 |===
 

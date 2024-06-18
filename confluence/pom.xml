@@ -58,7 +58,6 @@
         <log4j.version>2.23.0</log4j.version>
         <slf4j.version>2.0.12</slf4j.version>
         <swagger.version>2.2.20</swagger.version>
-        <openai-generator.version>7.3.0</openai-generator.version>
         <!-- Compiler must be 8 so that the plugin can run on Crowd instances using Java 8 -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -395,7 +394,7 @@
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>${openai-generator.version}</version>
+                <version>${openapi-generator.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
