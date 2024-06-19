@@ -10,6 +10,7 @@
         <groupId>com.deftdevs</groupId>
         <artifactId>bootstrapi-parent</artifactId>
         <version>0.7.0-SNAPSHOT</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>bootstrapi-confluence-plugin</artifactId>
@@ -46,7 +47,6 @@
         <confluence.data.version>8.5.6</confluence.data.version>
         <!-- other properties -->
         <ajp.port>8109</ajp.port>
-        <amps.version>8.12.4</amps.version>
         <atlassian.gadgets.version>8.1.4</atlassian.gadgets.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.2.4</atlassian.spring.scanner.version>
@@ -317,7 +317,7 @@
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
                 <artifactId>confluence-maven-plugin</artifactId>
-                <version>${amps.version}</version>
+                <version>${atlassian.amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <ajpPort>${ajp.port}</ajpPort>
@@ -339,14 +339,6 @@
                         <Spring-Context>*</Spring-Context>
                     </instructions>
                 </configuration>
-                <executions>
-                    <execution>
-                        <phase>compile</phase>
-                        <goals>
-                            <goal>copy-bundled-dependencies</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
 
             <plugin>
