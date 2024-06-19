@@ -56,11 +56,6 @@
         <swagger.version>2.1.1</swagger.version>
         <validation-api.version>1.1.0.Final</validation-api.version>
         <wink-client.version>1.4</wink-client.version>
-        <!-- Compiler must be 8 so that the plugin can run on Atlassian instances using Java 8 -->
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
     </properties>
 
     <dependencyManagement>

@@ -58,11 +58,6 @@
         <log4j.version>2.23.0</log4j.version>
         <slf4j.version>2.0.12</slf4j.version>
         <swagger.version>2.2.20</swagger.version>
-        <!-- Compiler must be 8 so that the plugin can run on Crowd instances using Java 8 -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>1.8</maven.compiler.source>
-        <maven.compiler.target>1.8</maven.compiler.target>
     </properties>
 
     <dependencyManagement>

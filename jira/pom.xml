@@ -49,11 +49,6 @@
         <jira-lookandfeel-plugin.version>7.13.0</jira-lookandfeel-plugin.version>
         <mockito.version>5.10.0</mockito.version>
         <swagger.version>2.2.20</swagger.version>
-        <!-- Compiler must be 8 so that the plugin can run on jIRA instances using Java 11 -->
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
     </properties>
 
     <dependencyManagement>
