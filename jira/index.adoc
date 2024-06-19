@@ -2167,6 +2167,171 @@ ifdef::internal-generation[]
 endif::internal-generation[]
 
 
+[.Permissions]
+=== Permissions
+
+
+[.getPermissionGlobal]
+==== getPermissionGlobal
+
+`GET /permissions/global`
+
+Get global permissions configuration
+
+===== Description
+
+Get the global permissions for ... TODO
+
+
+// markup not found, no include::{specDir}permissions/global/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+<<PermissionsGlobalBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| 
+|  <<PermissionsGlobalBean>>
+
+
+| 400
+| 
+|  <<ErrorCollection>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}permissions/global/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}permissions/global/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :permissions/global/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}permissions/global/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.setPermissionGlobal]
+==== setPermissionGlobal
+
+`PUT /permissions/global`
+
+Set global permissions configuration
+
+===== Description
+
+Set the global permissions for ... TODO
+
+
+// markup not found, no include::{specDir}permissions/global/PUT/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+====== Body Parameter
+
+[cols="2,3,1,1,1"]
+|===
+|Name| Description| Required| Default| Pattern
+
+| PermissionsGlobalBean
+|  <<PermissionsGlobalBean>>
+| X
+| 
+| 
+
+|===
+
+
+
+
+
+===== Return Type
+
+<<PermissionsGlobalBean>>
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| 
+|  <<PermissionsGlobalBean>>
+
+
+| 400
+| 
+|  <<ErrorCollection>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}permissions/global/PUT/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}permissions/global/PUT/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :permissions/global/PUT/PUT.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}permissions/global/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.Ping]
 === Ping
 
@@ -4394,6 +4559,31 @@ endif::internal-generation[]
 | useTls
 | 
 | Boolean 
+| 
+|  
+
+|===
+
+
+[#PermissionsGlobalBean]
+=== _PermissionsGlobalBean_ 
+
+
+
+[.fields-PermissionsGlobalBean]
+[cols="2,1,2,4,1"]
+|===
+| Field Name| Required| Type| Description| Format
+
+| groupPermissions
+| 
+| Map  of <<array>>
+| 
+|  
+
+| anonymousPermissions
+| 
+| List  of <<string>>
 | 
 |  
 

@@ -3138,19 +3138,19 @@ endif::internal-generation[]
 === Permissions
 
 
-[.getPermissionAnonymousAccess]
-==== getPermissionAnonymousAccess
+[.getPermissionGlobal]
+==== getPermissionGlobal
 
-`GET /permissions/anonymous-access`
+`GET /permissions/global`
 
-Retrieve current anonymous access configuration
+Get global permissions configuration
 
 ===== Description
 
-Gets the current global permissions for anonymous access to public pages and user profiles
+Get the global permissions for ... TODO
 
 
-// markup not found, no include::{specDir}permissions/anonymous-access/GET/spec.adoc[opts=optional]
+// markup not found, no include::{specDir}permissions/global/GET/spec.adoc[opts=optional]
 
 
 
@@ -3164,7 +3164,7 @@ Gets the current global permissions for anonymous access to public pages and use
 
 ===== Return Type
 
-<<PermissionAnonymousAccessBean>>
+<<PermissionsGlobalBean>>
 
 
 ===== Content Type
@@ -3181,7 +3181,7 @@ Gets the current global permissions for anonymous access to public pages and use
 
 | 200
 | 
-|  <<PermissionAnonymousAccessBean>>
+|  <<PermissionsGlobalBean>>
 
 
 | 400
@@ -3193,38 +3193,38 @@ Gets the current global permissions for anonymous access to public pages and use
 ===== Samples
 
 
-// markup not found, no include::{snippetDir}permissions/anonymous-access/GET/http-request.adoc[opts=optional]
+// markup not found, no include::{snippetDir}permissions/global/GET/http-request.adoc[opts=optional]
 
 
-// markup not found, no include::{snippetDir}permissions/anonymous-access/GET/http-response.adoc[opts=optional]
+// markup not found, no include::{snippetDir}permissions/global/GET/http-response.adoc[opts=optional]
 
 
 
-// file not found, no * wiremock data link :permissions/anonymous-access/GET/GET.json[]
+// file not found, no * wiremock data link :permissions/global/GET/GET.json[]
 
 
 ifdef::internal-generation[]
 ===== Implementation
 
-// markup not found, no include::{specDir}permissions/anonymous-access/GET/implementation.adoc[opts=optional]
+// markup not found, no include::{specDir}permissions/global/GET/implementation.adoc[opts=optional]
 
 
 endif::internal-generation[]
 
 
-[.setPermissionAnonymousAccess]
-==== setPermissionAnonymousAccess
+[.setPermissionGlobal]
+==== setPermissionGlobal
 
-`PUT /permissions/anonymous-access`
+`PUT /permissions/global`
 
-Set anonymous access configuration
+Set global permissions configuration
 
 ===== Description
 
-Sets global permissions for anonymous access to public pages and user profiles
+Set the global permissions for ... TODO
 
 
-// markup not found, no include::{specDir}permissions/anonymous-access/PUT/spec.adoc[opts=optional]
+// markup not found, no include::{specDir}permissions/global/PUT/spec.adoc[opts=optional]
 
 
 
@@ -3237,8 +3237,8 @@ Sets global permissions for anonymous access to public pages and user profiles
 |===
 |Name| Description| Required| Default| Pattern
 
-| PermissionAnonymousAccessBean
-|  <<PermissionAnonymousAccessBean>>
+| PermissionsGlobalBean
+|  <<PermissionsGlobalBean>>
 | X
 | 
 | 
@@ -3251,7 +3251,7 @@ Sets global permissions for anonymous access to public pages and user profiles
 
 ===== Return Type
 
-<<PermissionAnonymousAccessBean>>
+<<PermissionsGlobalBean>>
 
 
 ===== Content Type
@@ -3268,7 +3268,7 @@ Sets global permissions for anonymous access to public pages and user profiles
 
 | 200
 | 
-|  <<PermissionAnonymousAccessBean>>
+|  <<PermissionsGlobalBean>>
 
 
 | 400
@@ -3280,20 +3280,20 @@ Sets global permissions for anonymous access to public pages and user profiles
 ===== Samples
 
 
-// markup not found, no include::{snippetDir}permissions/anonymous-access/PUT/http-request.adoc[opts=optional]
+// markup not found, no include::{snippetDir}permissions/global/PUT/http-request.adoc[opts=optional]
 
 
-// markup not found, no include::{snippetDir}permissions/anonymous-access/PUT/http-response.adoc[opts=optional]
+// markup not found, no include::{snippetDir}permissions/global/PUT/http-response.adoc[opts=optional]
 
 
 
-// file not found, no * wiremock data link :permissions/anonymous-access/PUT/PUT.json[]
+// file not found, no * wiremock data link :permissions/global/PUT/PUT.json[]
 
 
 ifdef::internal-generation[]
 ===== Implementation
 
-// markup not found, no include::{specDir}permissions/anonymous-access/PUT/implementation.adoc[opts=optional]
+// markup not found, no include::{specDir}permissions/global/PUT/implementation.adoc[opts=optional]
 
 
 endif::internal-generation[]
@@ -5935,25 +5935,25 @@ endif::internal-generation[]
 |===
 
 
-[#PermissionAnonymousAccessBean]
-=== _PermissionAnonymousAccessBean_ 
+[#PermissionsGlobalBean]
+=== _PermissionsGlobalBean_ 
 
 
 
-[.fields-PermissionAnonymousAccessBean]
+[.fields-PermissionsGlobalBean]
 [cols="2,1,2,4,1"]
 |===
 | Field Name| Required| Type| Description| Format
 
-| allowForPages
+| groupPermissions
 | 
-| Boolean 
+| Map  of <<array>>
 | 
 |  
 
-| allowForUserProfiles
+| anonymousPermissions
 | 
-| Boolean 
+| List  of <<string>>
 | 
 |  
 
