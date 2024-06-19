@@ -1,0 +1,6 @@
+BootstrAPI
+Copyright 2024 Deft Devs LLC
+
+This product includes software developed by ASERVO Software GmbH (https://aservo.com/).
+The original software has been restructured to unite a number of single Maven projects into a single multi-module Maven project.
+For a detailed list of changes to the original software have a look at the Git history.
