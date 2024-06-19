@@ -1,0 +1,37 @@
+name: Release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'Release version (only if different from current SNAPSHOT version)'
+        type: string
+        required: false
+
+## Requires workflow permissions to be set to 'read and write permissions'
+## in Repository -> Settings -> Action -> General (and organisation settings)
+permissions:
+  contents: write
+
+jobs:
+  release:
+
+    runs-on: ubuntu-22.04
+
+    steps:
+    - name: Set up JDK 17
+      uses: actions/setup-java@v4
+      with:
+        java-version: 17
+        distribution: temurin
+
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Configure Git user
+      run: |
+        git config --global user.name "github-actions[bot]"
+        git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+    - name: Create Maven release
+      run: mvn -B release:prepare -DreleaseVersion=${{ inputs.version }}
