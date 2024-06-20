@@ -53,7 +53,7 @@
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
         <mockito.version>5.10.0</mockito.version>
         <spring-context.version>5.2.21.RELEASE</spring-context.version>
-        <swagger.version>2.1.1</swagger.version>
+        <swagger.version>2.2.22</swagger.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <wink-client.version>1.4</wink-client.version>
     </properties>
