@@ -41,7 +41,7 @@
         <!-- other properties -->
         <atlassian.ajp.port>8209</atlassian.ajp.port>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <atlassian.spring.scanner.version>2.2.4</atlassian.spring.scanner.version>
+        <atlassian.spring.scanner.version>2.2.6</atlassian.spring.scanner.version>
         <glassfish.el-api.version>2.2.4</glassfish.el-api.version>
         <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
         <javax.el-api.version>3.0.0</javax.el-api.version>
