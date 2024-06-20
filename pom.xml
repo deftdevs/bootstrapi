@@ -41,7 +41,7 @@
         <atlassian.amps.version>8.12.4</atlassian.amps.version>
         <jacoco.plugin.version>0.8.5</jacoco.plugin.version>
         <javax-ws-rs-api.version>2.0</javax-ws-rs-api.version>
-        <openapi-generator.version>7.3.0</openapi-generator.version>
+        <openapi-generator.version>7.6.0</openapi-generator.version>
         <swagger.version>2.1.1</swagger.version>
     </properties>
 
