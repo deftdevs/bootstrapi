@@ -47,7 +47,7 @@
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <jira-lookandfeel-plugin.version>7.13.0</jira-lookandfeel-plugin.version>
         <mockito.version>5.10.0</mockito.version>
-        <swagger.version>2.2.20</swagger.version>
+        <swagger.version>2.2.22</swagger.version>
     </properties>
 
     <dependencyManagement>
