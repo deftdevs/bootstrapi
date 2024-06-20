@@ -49,7 +49,6 @@
         <ajp.port>8109</ajp.port>
         <atlassian.gadgets.version>8.1.4</atlassian.gadgets.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <atlassian.spring.scanner.version>2.2.4</atlassian.spring.scanner.version>
         <custom-favicon-api.version>2.0.2</custom-favicon-api.version>
         <javax.jaxb-api.version>2.3.1</javax.jaxb-api.version>
         <javax.ws.rs-api.version>2.1.1</javax.ws.rs-api.version>
@@ -105,7 +104,6 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>1.18.28</version>
             <scope>provided</scope>
         </dependency>
 
@@ -196,7 +194,7 @@
         <dependency>
             <groupId>com.atlassian.plugin</groupId>
             <artifactId>atlassian-spring-scanner-annotation</artifactId>
-            <version>${atlassian.spring.scanner.version}</version>
+            <version>${atlassian.spring-scanner.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -344,7 +342,7 @@
             <plugin>
                 <groupId>com.atlassian.plugin</groupId>
                 <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
-                <version>${atlassian.spring.scanner.version}</version>
+                <version>${atlassian.spring-scanner.version}</version>
                 <executions>
                     <execution>
                         <phase>process-classes</phase>
@@ -400,19 +398,6 @@
                         </configuration>
                     </execution>
                 </executions>
-            </plugin>
-
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>${jacoco.plugin.version}</version>
-            </plugin>
-
-            <!-- Override Nexus Staging version from parent pom -->
-            <plugin>
-                <groupId>org.sonatype.plugins</groupId>
-                <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.13</version>
             </plugin>
         </plugins>
     </build>

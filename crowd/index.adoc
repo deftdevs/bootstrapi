@@ -4233,102 +4233,119 @@ endif::internal-generation[]
 
 
 
+
 [.fields-AbstractDirectoryBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | id
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | name
 | X
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | description
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | active
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | createdDate
 | 
-| Date 
 | 
-| date-time 
+|   Date  
+| 
+| date-time    
 
 | updatedDate
 | 
-| Date 
 | 
-| date-time 
+|   Date  
+| 
+| date-time    
 
 | server
 | 
-| DirectoryLdapServer 
 | 
-|  
+| <<DirectoryLdapServer>>    
+| 
+|     
 
 | permissions
 | 
-| DirectoryLdapPermissions 
 | 
-|  
+| <<DirectoryLdapPermissions>>    
+| 
+|     
 
 | advanced
 | 
-| DirectoryInternalAdvanced 
 | 
-|  
+| <<DirectoryInternalAdvanced>>    
+| 
+|     
 
 | connector
 | 
-| DirectoryDelegatingConnector 
 | 
-|  
+| <<DirectoryDelegatingConnector>>    
+| 
+|     
 
 | configuration
 | 
-| DirectoryDelegatingConfiguration 
 | 
-|  
+| <<DirectoryDelegatingConfiguration>>    
+| 
+|     
 
 | credentialPolicy
 | 
-| DirectoryInternalCredentialPolicy 
 | 
-|  
+| <<DirectoryInternalCredentialPolicy>>    
+| 
+|     
 
 | groups
 | 
-| List  of <<GroupBean>>
 | 
-|  
+|   List   of <<GroupBean>>
+| 
+|     
 
 | users
 | 
-| List  of <<UserBean>>
 | 
-|  
+|   List   of <<UserBean>>
+| 
+|     
 
 | schema
 | 
-| DirectoryLdapSchema 
 | 
-|  
+| <<DirectoryLdapSchema>>    
+| 
+|     
 
 |===
+
 
 
 [#AllBean]
@@ -4336,24 +4353,28 @@ endif::internal-generation[]
 
 
 
+
 [.fields-AllBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | settings
 | 
-| SettingsBean 
 | 
-|  
+| <<SettingsBean>>    
+| 
+|     
 
 | applications
 | 
-| ApplicationsBean 
 | 
-|  
+| <<ApplicationsBean>>    
+| 
+|     
 
 |===
+
 
 
 [#ApplicationBean]
@@ -4361,96 +4382,112 @@ endif::internal-generation[]
 
 
 
+
 [.fields-ApplicationBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | id
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | name
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | description
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | active
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | type
 | 
-| String 
 | 
-|  _Enum:_ GENERIC, PLUGIN, CROWD, JIRA, CONFLUENCE, BITBUCKET, FISHEYE, CRUCIBLE, BAMBOO, 
+|  <<String>>  
+| 
+|  _Enum:_ GENERIC, PLUGIN, CROWD, JIRA, CONFLUENCE, BITBUCKET, FISHEYE, CRUCIBLE, BAMBOO,  
 
 | password
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | cachedDirectoriesAuthenticationOrderOptimisationEnabled
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | directoryMappings
 | 
-| List  of <<ApplicationDirectoryMapping>>
 | 
-|  
+|   List   of <<ApplicationDirectoryMapping>>
+| 
+|     
 
 | accessBasedSynchronisation
 | 
-| String 
 | 
-|  _Enum:_ NO_FILTERING, USER_ONLY_FILTERING, USER_AND_GROUP_FILTERING, 
+|  <<String>>  
+| 
+|  _Enum:_ NO_FILTERING, USER_ONLY_FILTERING, USER_AND_GROUP_FILTERING,  
 
 | membershipAggregationEnabled
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | remoteAddresses
 | 
-| List  of <<string>>
 | 
-|  
+|   List   of <<string>>
+| 
+|     
 
 | aliasingEnabled
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | lowercaseOutputEnabled
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | authenticationWithoutPasswordEnabled
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 |===
+
 
 
 [#ApplicationDirectoryMapping]
@@ -4458,42 +4495,49 @@ endif::internal-generation[]
 
 
 
+
 [.fields-ApplicationDirectoryMapping]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | directoryName
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | authenticationAllowAll
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | authenticationGroups
 | 
-| List  of <<string>>
 | 
-|  
+|   List   of <<string>>
+| 
+|     
 
 | autoAssignmentGroups
 | 
-| List  of <<string>>
 | 
-|  
+|   List   of <<string>>
+| 
+|     
 
 | allowedOperations
 | 
-| List  of <<string>>
 | 
-|  _Enum:_ 
+|  <<List>>   of <<string>>
+| 
+|  _Enum:_  
 
 |===
+
 
 
 [#ApplicationLinkBean]
@@ -4501,66 +4545,77 @@ endif::internal-generation[]
 
 
 
+
 [.fields-ApplicationLinkBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | uuid
 | 
-| UUID 
 | 
-| uuid 
+|   UUID  
+| 
+| uuid    
 
 | name
 | X
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | type
 | X
-| String 
 | 
-|  _Enum:_ BAMBOO, JIRA, BITBUCKET, CONFLUENCE, FISHEYE, CROWD, 
+|  <<String>>  
+| 
+|  _Enum:_ BAMBOO, JIRA, BITBUCKET, CONFLUENCE, FISHEYE, CROWD,  
 
 | displayUrl
 | X
-| URI 
 | 
-| uri 
+|   URI  
+| 
+| uri    
 
 | rpcUrl
 | X
-| URI 
 | 
-| uri 
+|   URI  
+| 
+| uri    
 
 | primary
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | status
 | 
-| String 
 | 
-|  _Enum:_ AVAILABLE, UNAVAILABLE, CONFIGURATION_ERROR, 
+|  <<String>>  
+| 
+|  _Enum:_ AVAILABLE, UNAVAILABLE, CONFIGURATION_ERROR,  
 
 | username
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | password
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 |===
+
 
 
 [#ApplicationLinksBean]
@@ -4568,18 +4623,21 @@ endif::internal-generation[]
 
 
 
+
 [.fields-ApplicationLinksBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | applicationLinks
 | 
-| List  of <<ApplicationLinkBean>>
 | 
-|  
+|   List   of <<ApplicationLinkBean>>
+| 
+|     
 
 |===
+
 
 
 [#ApplicationsBean]
@@ -4587,18 +4645,21 @@ endif::internal-generation[]
 
 
 
+
 [.fields-ApplicationsBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | applications
 | 
-| List  of <<ApplicationBean>>
 | 
-|  
+|   List   of <<ApplicationBean>>
+| 
+|     
 
 |===
+
 
 
 [#DirectoriesBean]
@@ -4606,18 +4667,21 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoriesBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | directories
 | 
-| List  of <<AbstractDirectoryBean>>
 | 
-|  
+|   List   of <<AbstractDirectoryBean>>
+| 
+|     
 
 |===
+
 
 
 [#DirectoryCrowdAdvanced]
@@ -4625,36 +4689,42 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryCrowdAdvanced]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | enableNestedGroups
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | enableIncrementalSync
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | updateGroupMembershipMethod
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | updateSyncIntervalInMinutes
 | 
-| Integer 
 | 
-| int32 
+|   Integer  
+| 
+| int32    
 
 |===
+
 
 
 [#DirectoryCrowdBean]
@@ -4662,66 +4732,77 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryCrowdBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | id
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | name
 | X
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | description
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | active
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | createdDate
 | 
-| Date 
 | 
-| date-time 
+|   Date  
+| 
+| date-time    
 
 | updatedDate
 | 
-| Date 
 | 
-| date-time 
+|   Date  
+| 
+| date-time    
 
 | server
 | 
-| DirectoryCrowdServer 
 | 
-|  
+| <<DirectoryCrowdServer>>    
+| 
+|     
 
 | permissions
 | 
-| DirectoryCrowdPermissions 
 | 
-|  
+| <<DirectoryCrowdPermissions>>    
+| 
+|     
 
 | advanced
 | 
-| DirectoryCrowdAdvanced 
 | 
-|  
+| <<DirectoryCrowdAdvanced>>    
+| 
+|     
 
 |===
+
 
 
 [#DirectoryCrowdPermissions]
@@ -4729,24 +4810,28 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryCrowdPermissions]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | readOnly
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | fullAccess
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 |===
+
 
 
 [#DirectoryCrowdServer]
@@ -4754,48 +4839,56 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryCrowdServer]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | url
 | X
-| URI 
 | 
-| uri 
+|   URI  
+| 
+| uri    
 
 | proxy
 | 
-| DirectoryCrowdServerProxy 
 | 
-|  
+| <<DirectoryCrowdServerProxy>>    
+| 
+|     
 
 | appUsername
 | X
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | appPassword
 | X
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | connectionTimeoutInMillis
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | maxConnections
 | 
-| Integer 
 | 
-| int32 
+|   Integer  
+| 
+| int32    
 
 |===
+
 
 
 [#DirectoryCrowdServerProxy]
@@ -4803,36 +4896,42 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryCrowdServerProxy]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | host
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | port
 | 
-| Integer 
 | 
-| int32 
+|   Integer  
+| 
+| int32    
 
 | username
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | password
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 |===
+
 
 
 [#DirectoryDelegatingBean]
@@ -4840,66 +4939,77 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryDelegatingBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | id
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | name
 | X
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | description
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | active
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | createdDate
 | 
-| Date 
 | 
-| date-time 
+|   Date  
+| 
+| date-time    
 
 | updatedDate
 | 
-| Date 
 | 
-| date-time 
+|   Date  
+| 
+| date-time    
 
 | connector
 | 
-| DirectoryDelegatingConnector 
 | 
-|  
+| <<DirectoryDelegatingConnector>>    
+| 
+|     
 
 | configuration
 | 
-| DirectoryDelegatingConfiguration 
 | 
-|  
+| <<DirectoryDelegatingConfiguration>>    
+| 
+|     
 
 | permissions
 | 
-| DirectoryPermissions 
 | 
-|  
+| <<DirectoryPermissions>>    
+| 
+|     
 
 |===
+
 
 
 [#DirectoryDelegatingConfiguration]
@@ -4907,114 +5017,133 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryDelegatingConfiguration]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | userDn
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | userObjectClass
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | userObjectFilter
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | userNameAttribute
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | userNameRdnAttribute
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | userFirstNameAttribute
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | userLastNameAttribute
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | userDisplayNameAttribute
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | userEmailAttribute
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | userGroupAttribute
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | userUniqueIdAttribute
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | groupDn
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | groupObjectClass
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | groupObjectFilter
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | groupNameAttribute
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | groupDescriptionAttribute
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | groupMembersAttribute
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 |===
+
 
 
 [#DirectoryDelegatingConnector]
@@ -5022,114 +5151,133 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryDelegatingConnector]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | type
 | 
-| String 
 | 
-|  _Enum:_ MICROSOFT_ACTIVE_DIRECTORY, 
+|  <<String>>  
+| 
+|  _Enum:_ MICROSOFT_ACTIVE_DIRECTORY,  
 
 | url
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | ssl
 | 
-| String 
 | 
-|  _Enum:_ NONE, LDAPS, START_TLS, 
+|  <<String>>  
+| 
+|  _Enum:_ NONE, LDAPS, START_TLS,  
 
 | useNodeReferrals
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | nestedGroupsDisabled
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | synchronizeUsers
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | synchronizeUserDetails
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | synchronizeGroupMemberships
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | useUserMembershipAttribute
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | usePagedResults
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | pagedResultsSize
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | readTimeoutInMillis
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | searchTimeoutInMillis
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | connectionTimeoutInMillis
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | baseDn
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | username
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | password
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 |===
+
 
 
 [#DirectoryGenericBean]
@@ -5137,48 +5285,56 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryGenericBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | id
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | name
 | X
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | description
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | active
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | createdDate
 | 
-| Date 
 | 
-| date-time 
+|   Date  
+| 
+| date-time    
 
 | updatedDate
 | 
-| Date 
 | 
-| date-time 
+|   Date  
+| 
+| date-time    
 
 |===
+
 
 
 [#DirectoryInternalAdvanced]
@@ -5186,18 +5342,21 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryInternalAdvanced]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | enableNestedGroups
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 |===
+
 
 
 [#DirectoryInternalBean]
@@ -5205,78 +5364,91 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryInternalBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | id
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | name
 | X
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | description
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | active
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | createdDate
 | 
-| Date 
 | 
-| date-time 
+|   Date  
+| 
+| date-time    
 
 | updatedDate
 | 
-| Date 
 | 
-| date-time 
+|   Date  
+| 
+| date-time    
 
 | credentialPolicy
 | 
-| DirectoryInternalCredentialPolicy 
 | 
-|  
+| <<DirectoryInternalCredentialPolicy>>    
+| 
+|     
 
 | advanced
 | 
-| DirectoryInternalAdvanced 
 | 
-|  
+| <<DirectoryInternalAdvanced>>    
+| 
+|     
 
 | permissions
 | 
-| DirectoryPermissions 
 | 
-|  
+| <<DirectoryPermissions>>    
+| 
+|     
 
 | groups
 | 
-| List  of <<GroupBean>>
 | 
-|  
+|   List   of <<GroupBean>>
+| 
+|     
 
 | users
 | 
-| List  of <<UserBean>>
 | 
-|  
+|   List   of <<UserBean>>
+| 
+|     
 
 |===
+
 
 
 [#DirectoryInternalCredentialPolicy]
@@ -5284,54 +5456,63 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryInternalCredentialPolicy]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | passwordRegex
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | passwordComplexityMessage
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | passwordMaxAttempts
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | passwordHistoryCount
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | passwordMaxChangeTime
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | passwordExpiryNotificationDays
 | 
-| List  of <<integer>>
 | 
-| int32 
+|   List   of <<integer>>
+| 
+| int32    
 
 | passwordEncryptionMethod
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 |===
+
 
 
 [#DirectoryLdapBean]
@@ -5339,66 +5520,77 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryLdapBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | id
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | name
 | X
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | description
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | active
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | createdDate
 | 
-| Date 
 | 
-| date-time 
+|   Date  
+| 
+| date-time    
 
 | updatedDate
 | 
-| Date 
 | 
-| date-time 
+|   Date  
+| 
+| date-time    
 
 | server
 | 
-| DirectoryLdapServer 
 | 
-|  
+| <<DirectoryLdapServer>>    
+| 
+|     
 
 | schema
 | 
-| DirectoryLdapSchema 
 | 
-|  
+| <<DirectoryLdapSchema>>    
+| 
+|     
 
 | permissions
 | 
-| DirectoryLdapPermissions 
 | 
-|  
+| <<DirectoryLdapPermissions>>    
+| 
+|     
 
 |===
+
 
 
 [#DirectoryLdapPermissions]
@@ -5406,30 +5598,35 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryLdapPermissions]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | readOnly
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | readOnlyForLocalGroups
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | fullAccess
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 |===
+
 
 
 [#DirectoryLdapSchema]
@@ -5437,30 +5634,35 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryLdapSchema]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | baseDn
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | userDn
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | groupDn
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 |===
+
 
 
 [#DirectoryLdapServer]
@@ -5468,42 +5670,49 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryLdapServer]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | host
 | X
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | port
 | 
-| Integer 
 | 
-| int32 
+|   Integer  
+| 
+| int32    
 
 | useSsl
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | username
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | password
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 |===
+
 
 
 [#DirectoryPermissions]
@@ -5511,60 +5720,70 @@ endif::internal-generation[]
 
 
 
+
 [.fields-DirectoryPermissions]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | addGroup
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | addUser
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | modifyGroup
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | modifyUser
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | modifyGroupAttributes
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | modifyUserAttributes
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | removeGroup
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | removeUser
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 |===
+
 
 
 [#ErrorCollection]
@@ -5572,18 +5791,21 @@ endif::internal-generation[]
 
 
 
+
 [.fields-ErrorCollection]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | errorMessages
 | 
-| List  of <<string>>
 | 
-|  
+|   List   of <<string>>
+| 
+|     
 
 |===
+
 
 
 [#GroupBean]
@@ -5591,30 +5813,35 @@ endif::internal-generation[]
 
 
 
+
 [.fields-GroupBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | name
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | description
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | active
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 |===
+
 
 
 [#GroupsBean]
@@ -5622,18 +5849,21 @@ endif::internal-generation[]
 
 
 
+
 [.fields-GroupsBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | groups
 | 
-| List  of <<GroupBean>>
 | 
-|  
+|   List   of <<GroupBean>>
+| 
+|     
 
 |===
+
 
 
 [#LicenseBean]
@@ -5641,54 +5871,63 @@ endif::internal-generation[]
 
 
 
+
 [.fields-LicenseBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | products
 | 
-| List  of <<string>>
 | 
-|  
+|   List   of <<string>>
+| 
+|     
 
 | type
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | organization
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | description
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | expiryDate
 | 
-| Date 
 | 
-| date-time 
+|   Date  
+| 
+| date-time    
 
 | maxUsers
 | 
-| Integer 
 | 
-| int32 
+|   Integer  
+| 
+| int32    
 
 | key
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 |===
+
 
 
 [#LicensesBean]
@@ -5696,18 +5935,21 @@ endif::internal-generation[]
 
 
 
+
 [.fields-LicensesBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | licenses
 | 
-| List  of <<LicenseBean>>
 | 
-|  
+|   List   of <<LicenseBean>>
+| 
+|     
 
 |===
+
 
 
 [#MailServerSmtpBean]
@@ -5715,84 +5957,98 @@ endif::internal-generation[]
 
 
 
+
 [.fields-MailServerSmtpBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | name
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | description
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | host
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | port
 | 
-| Integer 
 | 
-| int32 
+|   Integer  
+| 
+| int32    
 
 | protocol
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | timeout
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | username
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | password
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | adminContact
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | from
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | prefix
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | useTls
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 |===
+
 
 
 [#MailTemplatesBean]
@@ -5800,42 +6056,49 @@ endif::internal-generation[]
 
 
 
+
 [.fields-MailTemplatesBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | forgottenPassword
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | forgottenUsername
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | passwordExpirationReminder
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | emailChangeValidation
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | emailChangeInfo
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 |===
+
 
 
 [#SessionConfigBean]
@@ -5843,24 +6106,28 @@ endif::internal-generation[]
 
 
 
+
 [.fields-SessionConfigBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | sessionTimeoutInMinutes
 | 
-| Long 
 | 
-| int64 
+|   Long  
+| 
+| int64    
 
 | requireConsistentClientIP
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 |===
+
 
 
 [#SettingsBean]
@@ -5868,42 +6135,49 @@ endif::internal-generation[]
 
 
 
+
 [.fields-SettingsBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | baseUrl
 | 
-| URI 
 | 
-| uri 
+|   URI  
+| 
+| uri    
 
 | mode
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | title
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | contactMessage
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | externalUserManagement
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 |===
+
 
 
 [#SettingsBrandingLoginPageBean]
@@ -5911,36 +6185,42 @@ endif::internal-generation[]
 
 
 
+
 [.fields-SettingsBrandingLoginPageBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | showLogo
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | header
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | content
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | buttonColor
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 |===
+
 
 
 [#TrustedProxiesBean]
@@ -5948,18 +6228,21 @@ endif::internal-generation[]
 
 
 
+
 [.fields-TrustedProxiesBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | trustedProxies
 | 
-| List  of <<string>>
 | 
-|  
+|   List   of <<string>>
+| 
+|     
 
 |===
+
 
 
 [#UserBean]
@@ -5967,59 +6250,69 @@ endif::internal-generation[]
 
 
 
+
 [.fields-UserBean]
-[cols="2,1,2,4,1"]
+[cols="2,1,1,2,4,1"]
 |===
-| Field Name| Required| Type| Description| Format
+| Field Name| Required| Nullable | Type| Description | Format
 
 | username
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | firstName
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | lastName
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | fullName
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | email
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | active
 | 
-| Boolean 
 | 
-|  
+|   Boolean  
+| 
+|     
 
 | password
 | 
-| String 
 | 
-|  
+|   String  
+| 
+|     
 
 | groups
 | 
-| List  of <<GroupBean>>
 | 
-|  
+|   List   of <<GroupBean>>
+| 
+|     
 
 |===
+
 
 
