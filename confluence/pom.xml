@@ -54,7 +54,7 @@
         <javax.jaxb-api.version>2.3.1</javax.jaxb-api.version>
         <javax.ws.rs-api.version>2.1.1</javax.ws.rs-api.version>
         <javax.el-api.version>3.0.0</javax.el-api.version>
-        <plugin.testrunner.version>2.0.4</plugin.testrunner.version>
+        <plugin.testrunner.version>2.0.8-ec066ff</plugin.testrunner.version>
         <log4j.version>2.23.0</log4j.version>
         <slf4j.version>2.0.12</slf4j.version>
         <swagger.version>2.2.20</swagger.version>

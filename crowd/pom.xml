@@ -47,7 +47,7 @@
         <ajp.port>8409</ajp.port>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <atlassian.spring.scanner.version>2.1.5</atlassian.spring.scanner.version>
-        <plugin.testrunner.version>2.0.1</plugin.testrunner.version>
+        <plugin.testrunner.version>2.0.8-ec066ff</plugin.testrunner.version>
     </properties>
 
     <dependencyManagement>
