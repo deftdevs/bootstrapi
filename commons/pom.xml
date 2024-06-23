@@ -7,13 +7,14 @@
         <groupId>com.deftdevs</groupId>
         <artifactId>bootstrapi-parent</artifactId>
         <version>0.7.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>bootstrapi-commons</artifactId>
     <packaging>jar</packaging>
 
-    <name>BootstrAPI commons</name>
+    <name>BootstrAPI commons library</name>
+    <description>BootstrAPI commons library provides common interfaces and implementations for the plugins</description>
+    <url>https://github.com/deftdevs/bootstrapi</url>
 
     <licenses>
         <license>
@@ -23,13 +24,21 @@
         </license>
     </licenses>
 
+    <scm>
+        <connection>scm:git:https://github.com/deftdevs/bootstrapi.git</connection>
+        <developerConnection>scm:git:https://github.com/deftdevs/bootstrapi.git</developerConnection>
+        <url>https://github.com/deftdevs/bootstrapi</url>
+        <tag>HEAD</tag>
+    </scm>
+
     <developers>
         <developer>
             <name>Patrick Hobusch</name>
-            <email>phobusch@aservo.com</email>
-            <organization>ASERVO Software GmbH</organization>
-            <organizationUrl>https://www.aservo.com</organizationUrl>
+            <email>patrick.hobusch@deftdevs.com</email>
+            <organization>Deft Devs LLC</organization>
+            <organizationUrl>https://deftdevs.com</organizationUrl>
         </developer>
+
         <developer>
             <name>Kai Lehmann</name>
             <email>klehmann@aservo.com</email>
@@ -53,19 +62,12 @@
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
         <mockito.version>5.12.0</mockito.version>
         <spring-context.version>5.3.38-atlassian-1-02</spring-context.version>
-        <swagger.version>2.2.22</swagger.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <wink-client.version>1.4</wink-client.version>
     </properties>
 
     <dependencyManagement>
         <dependencies>
-            <dependency>
-                <groupId>io.swagger.core.v3</groupId>
-                <artifactId>swagger-annotations</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>
-
             <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
@@ -322,6 +324,14 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <pushChanges>false</pushChanges>
+                </configuration>
             </plugin>
         </plugins>
     </build>

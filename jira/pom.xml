@@ -9,7 +9,6 @@
         <groupId>com.deftdevs</groupId>
         <artifactId>bootstrapi-parent</artifactId>
         <version>0.7.0-SNAPSHOT</version>
-        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>bootstrapi-jira-plugin</artifactId>
@@ -17,6 +16,7 @@
 
     <name>BootstrAPI for Jira</name>
     <description>BootstrAPI for Jira provides a REST API for automated configuration tasks</description>
+    <url>https://github.com/deftdevs/bootstrapi</url>
 
     <licenses>
         <license>
@@ -26,12 +26,19 @@
         </license>
     </licenses>
 
+    <scm>
+        <connection>scm:git:https://github.com/deftdevs/bootstrapi.git</connection>
+        <developerConnection>scm:git:https://github.com/deftdevs/bootstrapi.git</developerConnection>
+        <url>https://github.com/deftdevs/bootstrapi</url>
+        <tag>HEAD</tag>
+    </scm>
+
     <developers>
         <developer>
             <name>Patrick Hobusch</name>
-            <email>phobusch@aservo.com</email>
-            <organization>ASERVO Software GmbH</organization>
-            <organizationUrl>https://www.aservo.com</organizationUrl>
+            <email>patrick.hobusch@deftdevs.com</email>
+            <organization>Deft Devs LLC</organization>
+            <organizationUrl>https://deftdevs.com</organizationUrl>
         </developer>
     </developers>
 
@@ -41,13 +48,9 @@
         <!-- other properties -->
         <atlassian.ajp.port>8209</atlassian.ajp.port>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <glassfish.el-api.version>2.2.4</glassfish.el-api.version>
-        <hibernate-validator.version>6.1.5.Final</hibernate-validator.version>
-        <javax.el-api.version>3.0.0</javax.el-api.version>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <jira-lookandfeel-plugin.version>7.13.18</jira-lookandfeel-plugin.version>
         <mockito.version>5.12.0</mockito.version>
-        <swagger.version>2.2.22</swagger.version>
     </properties>
 
     <dependencyManagement>
@@ -203,7 +206,6 @@
         <dependency>
             <groupId>com.atlassian.plugin</groupId>
             <artifactId>atlassian-spring-scanner-annotation</artifactId>
-            <version>${atlassian.spring-scanner.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -299,7 +301,6 @@
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
                 <artifactId>jira-maven-plugin</artifactId>
-                <version>${atlassian.amps.version}</version>
                 <extensions>true</extensions>
                 <configuration>
                     <productVersion>${jira.version}</productVersion>
@@ -334,7 +335,6 @@
             <plugin>
                 <groupId>com.atlassian.plugin</groupId>
                 <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
-                <version>${atlassian.spring-scanner.version}</version>
                 <executions>
                     <execution>
                         <phase>process-classes</phase>
@@ -348,7 +348,6 @@
             <plugin>
                 <groupId>io.swagger.core.v3</groupId>
                 <artifactId>swagger-maven-plugin</artifactId>
-                <version>${swagger.version}</version>
                 <configuration>
                     <openapiFilePath>${basedir}/src/main/resources/openapi.yaml</openapiFilePath>
                     <resourcePackages>
@@ -371,7 +370,6 @@
             <plugin>
                 <groupId>org.openapitools</groupId>
                 <artifactId>openapi-generator-maven-plugin</artifactId>
-                <version>${openapi-generator.version}</version>
                 <executions>
                     <execution>
                         <phase>package</phase>
@@ -390,6 +388,14 @@
                         </configuration>
                     </execution>
                 </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-release-plugin</artifactId>
+                <configuration>
+                    <pushChanges>false</pushChanges>
+                </configuration>
             </plugin>
         </plugins>
     </build>

@@ -4281,69 +4281,6 @@ endif::internal-generation[]
 | 
 | date-time    
 
-| server
-| 
-| 
-| <<DirectoryLdapServer>>    
-| 
-|     
-
-| permissions
-| 
-| 
-| <<DirectoryLdapPermissions>>    
-| 
-|     
-
-| advanced
-| 
-| 
-| <<DirectoryInternalAdvanced>>    
-| 
-|     
-
-| connector
-| 
-| 
-| <<DirectoryDelegatingConnector>>    
-| 
-|     
-
-| configuration
-| 
-| 
-| <<DirectoryDelegatingConfiguration>>    
-| 
-|     
-
-| credentialPolicy
-| 
-| 
-| <<DirectoryInternalCredentialPolicy>>    
-| 
-|     
-
-| groups
-| 
-| 
-|   List   of <<GroupBean>>
-| 
-|     
-
-| users
-| 
-| 
-|   List   of <<UserBean>>
-| 
-|     
-
-| schema
-| 
-| 
-| <<DirectoryLdapSchema>>    
-| 
-|     
-
 |===
 
 
