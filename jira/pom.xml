@@ -36,7 +36,7 @@
     </developers>
 
     <properties>
-        <jira.version>9.12.5</jira.version>
+        <jira.version>1000.30.0</jira.version>
         <jira.data.version>9.12.5</jira.data.version>
         <!-- other properties -->
         <atlassian.ajp.port>8209</atlassian.ajp.port>
