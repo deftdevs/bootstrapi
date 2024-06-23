@@ -44,6 +44,7 @@
         <javax-ws-rs-api.version>2.1.1</javax-ws-rs-api.version>
         <lombok.version>1.18.32</lombok.version>
         <maven.release-plugin.version>3.1.0</maven.release-plugin.version>
+        <maven.resources-plugin.version>3.3.1</maven.resources-plugin.version>
         <openapi-generator.version>7.6.0</openapi-generator.version>
         <swagger.version>2.2.22</swagger.version>
     </properties>
@@ -87,6 +88,36 @@
                     <tagNameFormat>v@{project.version}</tagNameFormat>
                     <autoVersionSubmodules>true</autoVersionSubmodules>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>${maven.resources-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>copy-license-files</id>
+                        <!-- Needs to be done later than process-resources to override files from extracted dependencies -->
+                        <phase>prepare-package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.outputDirectory}/META-INF</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>${project.basedir}</directory>
+                                    <!-- Enable filtering as workaround for symlink issue: https://issues.apache.org/jira/browse/MRESOURCES-237 -->
+                                    <filtering>true</filtering>
+                                    <includes>
+                                        <include>LICENSE</include>
+                                        <include>NOTICE</include>
+                                    </includes>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
