@@ -8,6 +8,14 @@
       "description": "Automerge non-major updates",
       "matchUpdateTypes": ["minor", "patch"],
       "automerge": true
+    },
+    {
+      "matchPackagePrefixes": ["com.atlassian"],
+      "allowedVersions": "<1000"
+    },
+    {
+      "matchPackagePrefixes": ["com.atlassian"],
+      "allowedVersions": "/^[0-9]+\\.[0-9]+\\.[0-9]+$/"
     }
   ]
 }
