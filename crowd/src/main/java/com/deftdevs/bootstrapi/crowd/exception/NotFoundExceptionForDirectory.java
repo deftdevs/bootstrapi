@@ -9,7 +9,7 @@ public class NotFoundExceptionForDirectory extends NotFoundException {
     public NotFoundExceptionForDirectory(
             final AbstractDirectoryBean directoryBean) {
 
-        this(directoryBean.getName());
+        super(directoryBean.getName());
     }
 
     public NotFoundExceptionForDirectory(

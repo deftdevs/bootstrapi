@@ -9,7 +9,7 @@ public class NotFoundExceptionForGroup extends NotFoundException {
     public NotFoundExceptionForGroup(
             final GroupBean groupBean) {
 
-        this(groupBean.getName());
+        super(groupBean.getName());
     }
 
     public NotFoundExceptionForGroup(
