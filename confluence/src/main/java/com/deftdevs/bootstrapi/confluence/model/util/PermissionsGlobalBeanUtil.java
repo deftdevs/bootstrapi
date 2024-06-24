@@ -4,10 +4,7 @@ import com.atlassian.confluence.security.SpacePermission;
 import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalBean;
 
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class PermissionsGlobalBeanUtil {
@@ -20,16 +17,30 @@ public class PermissionsGlobalBeanUtil {
         final TreeSet<String> anonymousGlobalPermissions = new TreeSet<>();
         final TreeMap<String, TreeSet<String>> groupGlobalPermissions = new TreeMap<>();
 
+        final Set<String> validGlobalPermissions = new HashSet<>(SpacePermission.GLOBAL_PERMISSIONS);
+
+        final Collection<SpacePermission> globalGroupPermissions = globalPermissions.stream()
+                .filter(SpacePermission::isGroupPermission)
+                .filter(p -> validGlobalPermissions.contains(p.getType()))
+                .collect(Collectors.toList());
+
         // group global permissions
-        for (SpacePermission globalPermission : globalPermissions.stream().filter(SpacePermission::isGroupPermission).collect(Collectors.toList())) {
-            final String group = globalPermission.getGroup();
+        for (SpacePermission globalGroupPermission : globalGroupPermissions) {
+            final String group = globalGroupPermission.getGroup();
             groupGlobalPermissions.putIfAbsent(group, new TreeSet<>());
-            groupGlobalPermissions.get(group).add(globalPermission.getType());
+            groupGlobalPermissions.get(group).add(globalGroupPermission.getType());
         }
 
+        final Set<String> invalidAnonymousPermissions = new HashSet<>(SpacePermission.INVALID_ANONYMOUS_PERMISSIONS);
+
+        final List<SpacePermission> globalAnonymousPermissions = globalPermissions.stream()
+                .filter(SpacePermission::isAnonymousPermission)
+                .filter(p -> !invalidAnonymousPermissions.contains(p.getType()))
+                .collect(Collectors.toList());
+
         // anonymous global permissions
-        for (SpacePermission globalPermission : globalPermissions.stream().filter(SpacePermission::isAnonymousPermission).collect(Collectors.toList())) {
-            anonymousGlobalPermissions.add(globalPermission.getType());
+        for (SpacePermission globalAnonymousPermission : globalAnonymousPermissions) {
+            anonymousGlobalPermissions.add(globalAnonymousPermission.getType());
         }
 
         final PermissionsGlobalBean permissionsGlobalBean = new PermissionsGlobalBean();

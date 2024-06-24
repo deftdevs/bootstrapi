@@ -75,12 +75,11 @@ class PermissionsServiceTest {
 
     @Test
     void testSetPermissionsGlobalForAnonymous() {
-        final SpacePermission globalPermissionEntryToAdd = SpacePermission.createAnonymousSpacePermission(BROWSE_USERS_PERMISSION, null);
-        final SpacePermission globalPermissionEntryToRetain = SpacePermission.createAnonymousSpacePermission(USE_CONFLUENCE_PERMISSION, null);
-        final SpacePermission globalPermissionEntryToRemove = SpacePermission.createAnonymousSpacePermission(VIEWSPACE_PERMISSION, null);
-        doReturn(Arrays.asList(globalPermissionEntryToRetain, globalPermissionEntryToRemove)).when(spacePermissionManager).getGlobalPermissions();
+        final SpacePermission globalPermissionEntryToAdd = SpacePermission.createAnonymousSpacePermission(VIEWSPACE_PERMISSION, null);
+        final SpacePermission globalPermissionEntryToRemove = SpacePermission.createAnonymousSpacePermission(BROWSE_USERS_PERMISSION, null);
+        doReturn(List.of(globalPermissionEntryToRemove)).when(spacePermissionManager).getGlobalPermissions();
 
-        final Collection<SpacePermission> requestGlobalPermissions = Arrays.asList(globalPermissionEntryToAdd, globalPermissionEntryToRetain);
+        final Collection<SpacePermission> requestGlobalPermissions = List.of(globalPermissionEntryToAdd);
         final PermissionsGlobalBean requestPermissionsGLobalBean = PermissionsGlobalBeanUtil.toPermissionsGlobalBean(requestGlobalPermissions);
         permissionsService.setPermissionsGlobal(requestPermissionsGLobalBean);
 

@@ -5,7 +5,6 @@ import com.atlassian.confluence.security.SpacePermissionManager;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
-import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalBean;
 import com.deftdevs.bootstrapi.commons.service.api.PermissionsService;
 import com.deftdevs.bootstrapi.confluence.model.util.PermissionsGlobalBeanUtil;
@@ -13,11 +12,14 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static com.atlassian.confluence.security.SpacePermission.*;
+import static com.atlassian.confluence.security.SpacePermission.INVALID_ANONYMOUS_PERMISSIONS;
 
 @Component
 @ExportAsService(PermissionsService.class)
@@ -57,9 +59,11 @@ public class PermissionsServiceImpl implements PermissionsService {
         }
 
         final Set<String> validGlobalPermissions = new HashSet<>(SpacePermission.GLOBAL_PERMISSIONS);
+
         final Map<String, Map<String, SpacePermission>> existingGroupPermissions = spacePermissionManager.getGlobalPermissions().stream()
                 .filter(SpacePermission::isGroupPermission)
                 .filter(permission -> permission.getGroup() != null)
+                .filter(permission -> validGlobalPermissions.contains(permission.getType()))
                 .collect(Collectors.groupingBy(
                         SpacePermission::getGroup,
                         Collectors.toMap(
@@ -77,10 +81,6 @@ public class PermissionsServiceImpl implements PermissionsService {
             }
 
             for (Map.Entry<String, SpacePermission> permissionEntry : existingGroupPermissions.get(group).entrySet()) {
-                if (!validGlobalPermissions.contains(permissionEntry.getKey())) {
-                    throw new InternalServerErrorException(String.format("The given global permission '%s' is not valid", permissionEntry.getKey()));
-                }
-
                 if (!requestGroupPermissions.get(group).contains(permissionEntry.getKey())) {
                     spacePermissionManager.removePermission(permissionEntry.getValue());  // nosonar: deprecated but no alternative
                 }
@@ -110,8 +110,10 @@ public class PermissionsServiceImpl implements PermissionsService {
             return;
         }
 
+        final Set<String> invalidAnonymousPermissions = new HashSet<>(INVALID_ANONYMOUS_PERMISSIONS);
         final Map<String, SpacePermission> existingAnonymousPermissions = spacePermissionManager.getGlobalPermissions().stream()
                 .filter(SpacePermission::isAnonymousPermission)
+                .filter(permission -> !invalidAnonymousPermissions.contains(permission.getType()))
                 .collect(Collectors.toMap(
                                 SpacePermission::getType,
                                 Function.identity(),
@@ -120,14 +122,9 @@ public class PermissionsServiceImpl implements PermissionsService {
                 );
 
         final Set<String> requestAnonymousPermissions = new HashSet<>(permissionsGlobalBean.getAnonymousPermissions());
-        final Set<String> invalidAnonymousPermissions = new HashSet<>(INVALID_ANONYMOUS_PERMISSIONS);
 
         // remove all anonymous global permissions that currently exist but are not contained in the request
         for (Map.Entry<String, SpacePermission> permissionEntry : existingAnonymousPermissions.entrySet()) {
-            if (invalidAnonymousPermissions.contains(permissionEntry.getKey())) {
-                throw new InternalServerErrorException(String.format("The given global permission '%s' is invalid for anonymous", permissionEntry.getKey()));
-            }
-
             if (!requestAnonymousPermissions.contains(permissionEntry.getKey())) {
                 spacePermissionManager.removePermission(permissionEntry.getValue());  // nosonar: deprecated but no alternative
             }
