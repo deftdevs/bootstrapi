@@ -9,7 +9,7 @@ public class NotFoundExceptionForUser extends NotFoundException {
     public NotFoundExceptionForUser(
             final UserBean userBean) {
 
-        this(userBean.getUsername());
+        super(userBean.getUsername());
     }
 
     public NotFoundExceptionForUser(
