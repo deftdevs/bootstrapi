@@ -2,7 +2,6 @@ BootstrAPI
 ==========
 
 [![Build Status](https://github.com/deftdevs/bootstrapi/actions/workflows/ci.yaml/badge.svg)](https://github.com/deftdevs/bootstrapi/actions/workflows/ci.yaml)
-
 [![Coverage](https://sonarcloud.io/api/project_badges/measure?project=deftdevs_bootstrapi&metric=coverage)](https://sonarcloud.io/dashboard?id=deftdevs_bootstrapi)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=deftdevs_bootstrapi&metric=alert_status)](https://sonarcloud.io/dashboard?id=deftdevs_bootstrapi)
 [![License](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
