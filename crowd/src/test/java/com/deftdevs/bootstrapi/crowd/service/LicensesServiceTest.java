@@ -9,21 +9,22 @@ import com.atlassian.extras.api.crowd.CrowdLicense;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
 import com.deftdevs.bootstrapi.commons.model.LicensesBean;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.Collection;
 
 import static com.deftdevs.bootstrapi.commons.model.LicenseBean.EXAMPLE_2_DEVELOPER_LICENSE;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class LicensesServiceTest {
 
     @Mock
@@ -31,7 +32,7 @@ public class LicensesServiceTest {
 
     private LicensesServiceImpl licensesService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         licensesService = new LicensesServiceImpl(licenseManager);
     }
@@ -67,11 +68,13 @@ public class LicensesServiceTest {
         assertEquals(licenseBean.getMaxUsers(), EXAMPLE_2_DEVELOPER_LICENSE.getMaxUsers());
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void testAddLicenseBadRequestException() throws CrowdLicenseManagerException {
         doThrow(new CrowdLicenseManagerException()).when(licenseManager).storeLicense(anyString());
 
-        licensesService.addLicense(EXAMPLE_2_DEVELOPER_LICENSE);
+        assertThrows(BadRequestException.class, () -> {
+            licensesService.addLicense(EXAMPLE_2_DEVELOPER_LICENSE);
+        });
     }
 
     private CrowdLicense toMockCrowdLicense() {

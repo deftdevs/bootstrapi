@@ -7,22 +7,20 @@ import com.atlassian.crowd.util.ImageInfo;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
 import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageBean;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Optional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class SettingsBrandingServiceTest {
 
     @Mock
@@ -30,10 +28,7 @@ public class SettingsBrandingServiceTest {
 
     private SettingsBrandingServiceImpl settingsBrandingService;
 
-    public SettingsBrandingServiceTest() throws FileNotFoundException {
-    }
-
-    @Before
+    @BeforeEach
     public void setup() {
         settingsBrandingService = new SettingsBrandingServiceImpl(propertyManager);
     }
@@ -60,10 +55,13 @@ public class SettingsBrandingServiceTest {
         assertNotNull(settingsBrandingService.getLoginPage());
     }
 
-    @Test(expected = InternalServerErrorException.class)
+    @Test
     public void getLoginPageInternalServerErrorException() throws PropertyManagerException {
         doThrow(new PropertyManagerException()).when(propertyManager).getLookAndFeelConfiguration();
-        settingsBrandingService.getLoginPage();
+
+        assertThrows(InternalServerErrorException.class, () -> {
+            settingsBrandingService.getLoginPage();
+        });
     }
 
     @Test
@@ -108,7 +106,7 @@ public class SettingsBrandingServiceTest {
         assertEquals(lookAndFeelConfiguration.isShowLogo(), captorValue.isShowLogo());
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void setLoginPageBadRequestException() throws PropertyManagerException {
 
         SettingsBrandingLoginPageBean settingsBrandingLoginPageBean = new SettingsBrandingLoginPageBean();
@@ -119,7 +117,10 @@ public class SettingsBrandingServiceTest {
 
         doThrow(new PropertyManagerException()).when(propertyManager).setLookAndFeelConfiguration(any(LookAndFeelConfiguration.class), any());
 
-        settingsBrandingService.setLoginPage(settingsBrandingLoginPageBean);
+
+        assertThrows(BadRequestException.class, () -> {
+            settingsBrandingService.setLoginPage(settingsBrandingLoginPageBean);
+        });
     }
 
     @Test
@@ -135,7 +136,7 @@ public class SettingsBrandingServiceTest {
         verify(propertyManager).setLookAndFeelConfiguration(any(LookAndFeelConfiguration.class), any(ImageInfo.class));
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void setLogoBadRequestException() throws PropertyManagerException {
 
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("images/deftdevs.png");
@@ -145,7 +146,10 @@ public class SettingsBrandingServiceTest {
         doReturn(lookAndFeelConfigurationOptional).when(propertyManager).getLookAndFeelConfiguration();
 
         doThrow(new PropertyManagerException()).when(propertyManager).setLookAndFeelConfiguration(any(LookAndFeelConfiguration.class), any(ImageInfo.class));
-        settingsBrandingService.setLogo(inputStream);
+
+        assertThrows(BadRequestException.class, () -> {
+            settingsBrandingService.setLogo(inputStream);
+        });
     }
 
     private LookAndFeelConfiguration getLookAndFeelConfiguration(SettingsBrandingLoginPageBean bean) {

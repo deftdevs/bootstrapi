@@ -18,12 +18,12 @@ import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
 import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
 import com.deftdevs.bootstrapi.crowd.model.ApplicationsBean;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -34,11 +34,10 @@ import static com.deftdevs.bootstrapi.crowd.model.ApplicationBean.EXAMPLE_1;
 import static com.deftdevs.bootstrapi.crowd.model.ApplicationBean.EXAMPLE_2;
 import static com.deftdevs.bootstrapi.crowd.model.util.ApplicationBeanUtil.toApplication;
 import static com.deftdevs.bootstrapi.crowd.model.util.ApplicationBeanUtil.toStringCollection;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ApplicationsServiceTest {
 
     @Mock
@@ -52,10 +51,10 @@ public class ApplicationsServiceTest {
 
     private ApplicationsServiceImpl applicationsService;
 
-    @Before
+    @BeforeEach
     public void setup() throws DirectoryNotFoundException {
         for (Directory directory : getDirectories()) {
-            doReturn(directory).when(directoryManager).findDirectoryByName(directory.getName());
+            lenient().doReturn(directory).when(directoryManager).findDirectoryByName(directory.getName());
         }
 
         applicationsService = new ApplicationsServiceImpl(applicationManager, defaultGroupMembershipService, directoryManager);
@@ -254,48 +253,66 @@ public class ApplicationsServiceTest {
 
     // exception test cases to feed Sonarqube
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void testDeleteApplicationsForceFalse() {
-        doReturn(Collections.emptyList()).when(applicationManager).findAll();
-
-        applicationsService.deleteApplications(false);
+        assertThrows(BadRequestException.class, () -> {
+            applicationsService.deleteApplications(false);
+        });
     }
 
-    @Test(expected = NotFoundException.class)
+    @Test
     public void testDeleteApplicationBadRequestException() throws ApplicationNotFoundException {
         doThrow(new ApplicationNotFoundException("any")).when(applicationManager).findById(anyLong());
-        applicationsService.deleteApplication(1);
+
+        assertThrows(NotFoundException.class, () -> {
+            applicationsService.deleteApplication(1);
+        });
     }
 
-    @Test(expected = InternalServerErrorException.class)
+    @Test
     public void testDeleteApplicationInternalServerErrorException() throws ApplicationManagerException {
-        doThrow(new ApplicationManagerException()).when(applicationManager).remove(any(Application.class));
-        applicationsService.deleteApplication(1);
+        doThrow(new ApplicationManagerException()).when(applicationManager).remove(any());
+
+        assertThrows(InternalServerErrorException.class, () -> {
+            applicationsService.deleteApplication(1);
+        });
     }
 
-    @Test(expected = NotFoundException.class)
+    @Test
     public void testSetBeanApplicationNotFoundException() throws ApplicationNotFoundException {
         doThrow(new ApplicationNotFoundException("app")).when(applicationManager).findById(anyLong());
-        applicationsService.setApplication(1, EXAMPLE_1);
+
+        assertThrows(NotFoundException.class, () -> {
+            applicationsService.setApplication(1, EXAMPLE_1);
+        });
     }
 
-    @Test(expected = InternalServerErrorException.class)
+    @Test
     public void testSetBeanApplicationManagerException() throws ApplicationNotFoundException, ApplicationManagerException {
         doReturn(toApplication(EXAMPLE_1)).when(applicationManager).findById(anyLong());
         doThrow(new ApplicationManagerException("x")).when(applicationManager).update(any(Application.class));
-        applicationsService.setApplication(EXAMPLE_1.getId(), EXAMPLE_1);
+
+        assertThrows(InternalServerErrorException.class, () -> {
+            applicationsService.setApplication(EXAMPLE_1.getId(), EXAMPLE_1);
+        });
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void testAddApplicationCredentialsException() throws ApplicationAlreadyExistsException, InvalidCredentialException {
         doThrow(new InvalidCredentialException()).when(applicationManager).add(any(Application.class));
-        applicationsService.addApplication(EXAMPLE_1);
+
+        assertThrows(BadRequestException.class, () -> {
+            applicationsService.addApplication(EXAMPLE_1);
+        });
     }
 
-    @Test(expected = NotFoundException.class)
+    @Test
     public void testGetApplicationException() throws ApplicationNotFoundException {
         doThrow(new ApplicationNotFoundException("")).when(applicationManager).findById(anyLong());
-        applicationsService.getApplication(1L);
+
+        assertThrows(NotFoundException.class, () -> {
+            applicationsService.getApplication(1L);
+        });
     }
 
     private static Collection<Directory> getDirectories() {

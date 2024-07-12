@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.deftdevs</groupId>
         <artifactId>bootstrapi-parent</artifactId>
-        <version>0.7.2-SNAPSHOT</version>
+        <version>0.8.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>bootstrapi-crowd-plugin</artifactId>
@@ -206,16 +206,20 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>1.10.19</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-junit-jupiter</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -257,14 +261,17 @@
                 <artifactId>crowd-maven-plugin</artifactId>
                 <extensions>true</extensions>
                 <configuration>
-                    <ajpPort>${ajp.port}</ajpPort>
                     <productVersion>${crowd.version}</productVersion>
+                    <!-- the following version may only be adjusted, when a new home zip has been generated -->
                     <productDataVersion>${crowd.data.version}</productDataVersion>
                     <!-- in case new home zip should be generated, please add your executed steps to generated-test-resources.md -->
                     <productDataPath>${project.basedir}/src/test/resources/generated-test-resources.zip</productDataPath>
+                    <ajpPort>${ajp.port}</ajpPort>
                     <allowGoogleTracking>false</allowGoogleTracking>
                     <enableQuickReload>true</enableQuickReload>
                     <extractDependencies>true</extractDependencies>
+                    <!-- See here for an explanation of default instructions: -->
+                    <!-- https://developer.atlassian.com/docs/advanced-topics/configuration-of-instructions-in-atlassian-plugins -->
                     <instructions>
                         <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
                         <Import-Package>

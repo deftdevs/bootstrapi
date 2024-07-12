@@ -305,7 +305,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @NotNull
-    private User createUser(
+    User createUser(
             final long directoryId,
             final UserTemplateWithAttributes userTemplate,
             final String password) {

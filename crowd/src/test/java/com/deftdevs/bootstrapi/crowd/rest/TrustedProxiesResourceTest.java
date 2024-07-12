@@ -2,21 +2,21 @@ package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.deftdevs.bootstrapi.crowd.model.TrustedProxiesBean;
 import com.deftdevs.bootstrapi.crowd.service.api.TrustedProxiesService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.core.Response;
 import java.util.Collections;
 import java.util.HashSet;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class TrustedProxiesResourceTest {
 
     @Mock
@@ -26,7 +26,7 @@ public class TrustedProxiesResourceTest {
 
     private final HashSet<String> trustedProxies = new HashSet<>();
 
-    @Before
+    @BeforeEach
     public void setup() {
         trustedProxiesResource = new TrustedProxiesResourceImpl(trustedProxiesService);
     }

@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.deftdevs</groupId>
         <artifactId>bootstrapi-parent</artifactId>
-        <version>0.7.2-SNAPSHOT</version>
+        <version>0.8.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>bootstrapi-jira-plugin</artifactId>
@@ -302,23 +302,26 @@
                 <extensions>true</extensions>
                 <configuration>
                     <productVersion>${jira.version}</productVersion>
+                    <!-- the following version may only be adjusted, when a new home zip has been generated -->
                     <productDataVersion>${jira.data.version}</productDataVersion>
+                    <!-- in case new home zip should be generated, please add your executed steps to generated-test-resources.md -->
                     <productDataPath>${project.basedir}/src/test/resources/generated-test-resources.zip</productDataPath>
-                    <jvmArgs>-Xms1g -Xmx4g -XX:MaxPermSize=1g -XX:-UseGCOverheadLimit -server</jvmArgs>
                     <ajpPort>${atlassian.ajp.port}</ajpPort>
-                    <!-- <extractDependencies>false</extractDependencies> -->
                     <allowGoogleTracking>false</allowGoogleTracking>
-                    <systemPropertyVariables>
-                        <atlassian.mail.senddisabled>false</atlassian.mail.senddisabled>
-                        <atlassian.darkfeature.jira.onboarding.feature.disabled>true</atlassian.darkfeature.jira.onboarding.feature.disabled>
-                    </systemPropertyVariables>
                     <enableQuickReload>true</enableQuickReload>
+                    <!-- <extractDependencies>false</extractDependencies> -->
                     <applications>
                         <application>
                             <applicationKey>jira-software</applicationKey>
                             <version>${jira.version}</version>
                         </application>
                     </applications>
+                    <systemPropertyVariables>
+                        <atlassian.mail.senddisabled>false</atlassian.mail.senddisabled>
+                        <atlassian.darkfeature.jira.onboarding.feature.disabled>true</atlassian.darkfeature.jira.onboarding.feature.disabled>
+                    </systemPropertyVariables>
+                    <!-- See here for an explanation of default instructions: -->
+                    <!-- https://developer.atlassian.com/docs/advanced-topics/configuration-of-instructions-in-atlassian-plugins -->
                     <instructions>
                         <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
                         <Import-Package>

@@ -9,11 +9,10 @@ import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.crowd.model.application.*;
 import com.atlassian.crowd.model.directory.ImmutableDirectory;
 import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -22,12 +21,10 @@ import java.util.HashSet;
 
 import static com.deftdevs.bootstrapi.crowd.model.ApplicationBean.EXAMPLE_1;
 import static com.deftdevs.bootstrapi.crowd.model.util.ApplicationBeanUtil.*;
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ApplicationBeanUtilTest {
 
     @Mock
@@ -35,10 +32,6 @@ public class ApplicationBeanUtilTest {
 
     @Mock
     private DirectoryManager directoryManager;
-
-    @Before
-    public void setup() throws DirectoryNotFoundException {
-    }
 
     @Test
     public void testMapTypesApplication() {
@@ -93,7 +86,6 @@ public class ApplicationBeanUtilTest {
                 .builder(applicationBeanDirectoryMapping.getDirectoryName(), DirectoryType.INTERNAL, "internal")
                 .setId(1L)
                 .build();
-        doReturn(directory).when(directoryManager).findDirectoryByName(directory.getName());
 
         // since we cannot persist directory mappings together with the application, the `toApplication` method has no mapper for them,
         // and for this reason we need to construct the directory mapping of the application manually...

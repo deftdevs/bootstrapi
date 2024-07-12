@@ -5,17 +5,16 @@ import com.atlassian.plugins.rest.common.security.AuthenticationRequiredExceptio
 import com.atlassian.plugins.rest.common.security.AuthorisationException;
 import com.atlassian.sal.api.user.UserManager;
 import com.atlassian.sal.api.user.UserProfile;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class SysadminOnlyResourceFilterTest {
 
     @Mock
@@ -26,7 +25,7 @@ public class SysadminOnlyResourceFilterTest {
 
     private SysadminOnlyResourceFilter sysadminOnlyResourceFilter;
 
-    @Before
+    @BeforeEach
     public void setup() {
         sysadminOnlyResourceFilter = new SysadminOnlyResourceFilter(userManager, userPermissionService);
     }
@@ -37,18 +36,22 @@ public class SysadminOnlyResourceFilterTest {
         assertEquals(sysadminOnlyResourceFilter, sysadminOnlyResourceFilter.getRequestFilter());
     }
 
-    @Test(expected = AuthenticationRequiredException.class)
+    @Test
     public void testAdminAccessNoUser() {
-        sysadminOnlyResourceFilter.filter(null);
+        assertThrows(AuthenticationRequiredException.class, () -> {
+            sysadminOnlyResourceFilter.filter(null);
+        });
     }
 
-    @Test(expected = AuthorisationException.class)
+    @Test
     public void testNonSysadminAccess() {
         final UserProfile userProfile = mock(UserProfile.class);
         doReturn(userProfile).when(userManager).getRemoteUser();
         doReturn(false).when(userPermissionService).hasPermission(any(), any());
 
-        sysadminOnlyResourceFilter.filter(null);
+        assertThrows(AuthorisationException.class, () -> {
+            sysadminOnlyResourceFilter.filter(null);
+        });
     }
 
     @Test

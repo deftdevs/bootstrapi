@@ -3,16 +3,16 @@ package com.deftdevs.bootstrapi.crowd.model.util;
 import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.crowd.manager.mail.MockMailConfiguration;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
-import org.junit.Ignore;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.mail.internet.AddressException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class MailServerSmtpBeanUtilTest {
 
     @Test
@@ -33,9 +33,10 @@ public class MailServerSmtpBeanUtilTest {
     }
 
     @Test
-    @Ignore("Running in IntelliJ, failing in Maven!?")
+    @Disabled("Running in IntelliJ, failing in Maven!?")
     public void testToMailConfiguration() throws AddressException {
         final MailServerSmtpBean mailServerSmtpBean = MailServerSmtpBean.EXAMPLE_1;
+
         final MailConfiguration mailConfiguration = MailServerSmtpBeanUtil.toMailConfiguration(mailServerSmtpBean);
 
         assertNotNull(mailConfiguration);

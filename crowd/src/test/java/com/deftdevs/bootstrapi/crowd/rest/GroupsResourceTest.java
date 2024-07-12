@@ -3,21 +3,20 @@ package com.deftdevs.bootstrapi.crowd.rest;
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
 import com.deftdevs.bootstrapi.crowd.model.GroupsBean;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.core.Response;
-
 import java.util.Collections;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.*;
 import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class GroupsResourceTest {
 
     @Mock
@@ -25,7 +24,7 @@ public class GroupsResourceTest {
 
     private GroupsResourceImpl groupsResource;
 
-    @Before
+    @BeforeEach
     public void setup() {
         groupsResource = new GroupsResourceImpl(groupsService);
     }

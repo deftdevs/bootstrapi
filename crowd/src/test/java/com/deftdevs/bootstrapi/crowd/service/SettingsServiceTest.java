@@ -4,19 +4,20 @@ import com.atlassian.crowd.manager.property.PropertyManager;
 import com.atlassian.crowd.manager.property.PropertyManagerException;
 import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.URISyntaxException;
 
 import static com.deftdevs.bootstrapi.commons.model.SettingsBean.EXAMPLE_1_NO_MODE;
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class SettingsServiceTest {
 
     @Mock
@@ -26,7 +27,7 @@ public class SettingsServiceTest {
 
     private SettingsServiceImpl settingsService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         settingsService = new SettingsServiceImpl(propertyManager);
     }
@@ -39,10 +40,13 @@ public class SettingsServiceTest {
         assertEquals(settingsBean.getBaseUrl(), settingsService.getSettings().getBaseUrl());
     }
 
-    @Test(expected = InternalServerErrorException.class)
+    @Test
     public void testGetSettingsWithInternalServerErrorException() throws PropertyManagerException, URISyntaxException {
         doThrow(new PropertyManagerException()).when(propertyManager).getBaseUrl();
-        settingsService.getSettings();
+
+        assertThrows(InternalServerErrorException.class, () -> {
+            settingsService.getSettings();
+        });
     }
 
     @Test
