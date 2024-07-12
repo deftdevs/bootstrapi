@@ -16,20 +16,20 @@ import com.deftdevs.bootstrapi.commons.model.type.DirectoryPermissions;
 import com.deftdevs.bootstrapi.crowd.model.util.DirectoryBeanUtil.DirectoryDelegatingConnectorTypeImplClass;
 import com.deftdevs.bootstrapi.crowd.model.util.DirectoryBeanUtil.UnsupportedDirectoryBeanException;
 import com.deftdevs.bootstrapi.crowd.util.AssertUtil;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
 import java.util.Set;
 
 import static com.atlassian.crowd.directory.AbstractInternalDirectory.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.spy;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class DirectoryBeanUtilTest {
 
     @Test

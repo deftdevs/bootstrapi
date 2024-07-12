@@ -15,19 +15,18 @@ import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
 import com.deftdevs.bootstrapi.crowd.settings.setup.DefaultApplicationLink;
 import com.deftdevs.bootstrapi.crowd.settings.setup.DefaultApplicationType;
 import org.apache.commons.lang3.NotImplementedException;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ApplicationLinkBeanUtilTest {
 
     @Test
@@ -91,14 +90,17 @@ public class ApplicationLinkBeanUtilTest {
         }
     }
 
-    @Test(expected = NotImplementedException.class)
+    @Test
     public void testNonImplementedLinkTypeGenerator() throws URISyntaxException {
         ApplicationType applicationType = mock(RefAppApplicationType.class);
         ApplicationId applicationId = new ApplicationId(UUID.randomUUID().toString());
         URI uri = new URI("http://localhost");
         ApplicationLink applicationLink = new DefaultApplicationLink(
                 applicationId, applicationType, "test", uri, uri, false, false);
-        ApplicationLinkBeanUtil.toApplicationLinkBean(applicationLink);
+
+        assertThrows(NotImplementedException.class, () -> {
+            ApplicationLinkBeanUtil.toApplicationLinkBean(applicationLink);
+        });
     }
 
 }

@@ -3,21 +3,22 @@ package com.deftdevs.bootstrapi.crowd.service;
 import com.atlassian.crowd.manager.property.PropertyManager;
 import com.deftdevs.bootstrapi.crowd.model.MailTemplatesBean;
 import lombok.SneakyThrows;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import static com.atlassian.crowd.model.property.Property.*;
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyString;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.lenient;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class MailTemplatesServiceTest {
 
     private final Map<String, String> properties = new HashMap<>();
@@ -27,7 +28,7 @@ public class MailTemplatesServiceTest {
 
     private MailTemplatesServiceImpl mailTemplateService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         mailTemplateService = new MailTemplatesServiceImpl(propertyManager);
 
@@ -39,13 +40,13 @@ public class MailTemplatesServiceTest {
         // mock the property manager with the properties map
 
         doAnswer(invocation -> {
-            String key = invocation.getArgumentAt(0, String.class);
+            String key = invocation.getArgument(0, String.class);
             return properties.get(key);
         }).when(propertyManager).getProperty(anyString());
 
-        doAnswer(invocation -> {
-            String key = invocation.getArgumentAt(0, String.class);
-            String value = invocation.getArgumentAt(1, String.class);
+        lenient().doAnswer(invocation -> {
+            String key = invocation.getArgument(0, String.class);
+            String value = invocation.getArgument(1, String.class);
             properties.put(key, value);
             return null;
         }).when(propertyManager).setProperty(anyString(), anyString());

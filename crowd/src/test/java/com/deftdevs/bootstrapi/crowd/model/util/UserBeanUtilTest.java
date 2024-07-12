@@ -3,13 +3,14 @@ package com.deftdevs.bootstrapi.crowd.model.util;
 import com.atlassian.crowd.model.user.ImmutableUser;
 import com.atlassian.crowd.model.user.User;
 import com.deftdevs.bootstrapi.commons.model.UserBean;
-import org.junit.Test;
-import org.junit.runner.RunWith;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class UserBeanUtilTest {
 
     @Test

@@ -25,11 +25,11 @@ import com.deftdevs.bootstrapi.crowd.model.DefaultAuthenticationScenario;
 import com.deftdevs.bootstrapi.crowd.model.util.ApplicationLinkBeanUtil;
 import com.deftdevs.bootstrapi.crowd.settings.setup.DefaultApplicationLink;
 import com.deftdevs.bootstrapi.crowd.settings.setup.DefaultApplicationType;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.URI;
 import java.net.URISyntaxException;
@@ -43,11 +43,11 @@ import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.Applicat
 import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus.CONFIGURATION_ERROR;
 import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType.CROWD;
 import static com.deftdevs.bootstrapi.crowd.model.util.ApplicationLinkBeanUtil.toApplicationLinkBean;
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class ApplicationLinksServiceTest {
 
     @Mock
@@ -95,10 +95,13 @@ public class ApplicationLinksServiceTest {
         assertEquals(applicationLinkBean, appLinkResponse);
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void testSetApplicationLinkException() throws TypeNotInstalledException, URISyntaxException {
         doThrow(new TypeNotInstalledException("")).when(mutatingApplicationLinkService).getApplicationLink(any());
-        applicationLinkService.setApplicationLink(UUID.randomUUID(), createApplicationLinkBean(), true);
+
+        assertThrows(BadRequestException.class, () -> {
+            applicationLinkService.setApplicationLink(UUID.randomUUID(), createApplicationLinkBean(), true);
+        });
     }
 
     @Test
@@ -125,12 +128,12 @@ public class ApplicationLinksServiceTest {
 
         ApplicationId applicationId = new ApplicationId(UUID.randomUUID().toString());
         URI uri = new URI("http://localhostdsadsa");
-        ApplicationLink applicationLink_existing = new DefaultApplicationLink(applicationId, new DefaultApplicationType(), "test2", uri, uri, false, false);
+        ApplicationLink applicationLinkExisting = new DefaultApplicationLink(applicationId, new DefaultApplicationType(), "test2", uri, uri, false, false);
         ApplicationLink applicationLink = createApplicationLink();
         ApplicationLinksBean applicationLinksBean = new ApplicationLinksBean(Collections.singletonList(createApplicationLinkBean()));
 
-        doReturn(Collections.singletonList(applicationLink_existing)).when(mutatingApplicationLinkService).getApplicationLinks();
-        doReturn(applicationLink).when(mutatingApplicationLinkService).createApplicationLink(any(ApplicationType.class), any(ApplicationLinkDetails.class));
+        doReturn(Collections.singletonList(applicationLinkExisting)).when(mutatingApplicationLinkService).getApplicationLinks();
+        doReturn(applicationLink).when(mutatingApplicationLinkService).createApplicationLink(any(), any());
         doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
 
         ApplicationLinksServiceImpl spy = spy(applicationLinkService);
@@ -138,10 +141,13 @@ public class ApplicationLinksServiceTest {
         verify(spy).addApplicationLink(any(),anyBoolean());
     }
 
-    @Test(expected = NotFoundException.class)
+    @Test
     public void testFindApplicationLink() throws TypeNotInstalledException {
         doReturn(null).when(mutatingApplicationLinkService).getApplicationLink(any());
-        applicationLinkService.getApplicationLink(UUID.randomUUID());
+
+        assertThrows(NotFoundException.class, () -> {
+            applicationLinkService.getApplicationLink(UUID.randomUUID());
+        });
     }
 
     @Test
@@ -170,9 +176,11 @@ public class ApplicationLinksServiceTest {
         verify(mutatingApplicationLinkService).deleteApplicationLink(applicationLink);
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void testDeleteApplicationLinksWithoutForceParameter() {
-        applicationLinkService.deleteApplicationLinks(false);
+        assertThrows(BadRequestException.class, () -> {
+            applicationLinkService.deleteApplicationLinks(false);
+        });
     }
 
     @Test
@@ -184,10 +192,13 @@ public class ApplicationLinksServiceTest {
         verify(mutatingApplicationLinkService).deleteApplicationLink(applicationLink);
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void testDeleteApplicationLinkException() throws TypeNotInstalledException {
         doThrow(new TypeNotInstalledException("abc")).when(mutatingApplicationLinkService).getApplicationLink(any());
-        applicationLinkService.deleteApplicationLink(UUID.randomUUID());
+
+        assertThrows(BadRequestException.class, () -> {
+            applicationLinkService.deleteApplicationLink(UUID.randomUUID());
+        });
     }
 
     @Test
@@ -243,7 +254,7 @@ public class ApplicationLinksServiceTest {
         assertNotEquals(applicationLinkResponse, applicationLinkBean);
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void testAddApplicationLinkWithAuthenticatorErrorNOTIgnored() throws URISyntaxException, ManifestNotFoundException, AuthenticationConfigurationException {
         ApplicationLink applicationLink = createApplicationLink();
         ApplicationLinkBean applicationLinkBean = createApplicationLinkBean();
@@ -254,7 +265,9 @@ public class ApplicationLinksServiceTest {
         doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
         doThrow(new AuthenticationConfigurationException("")).when(mutatingApplicationLinkService).configureAuthenticationForApplicationLink(any(), any(), any(), any());
 
-        applicationLinkService.addApplicationLink(applicationLinkBean, false);
+        assertThrows(BadRequestException.class, () -> {
+            applicationLinkService.addApplicationLink(applicationLinkBean, false);
+        });
     }
 
     @Test

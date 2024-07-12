@@ -17,23 +17,22 @@ import com.deftdevs.bootstrapi.commons.model.UserBean;
 import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForUser;
 import com.deftdevs.bootstrapi.crowd.model.util.UserBeanUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Captor;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.WebApplicationException;
 import java.util.*;
 
 import static com.atlassian.crowd.model.user.UserConstants.*;
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.any;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class UsersServiceTest {
 
     @Mock
@@ -47,7 +46,7 @@ public class UsersServiceTest {
 
     private UsersServiceImpl usersService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         usersService = new UsersServiceImpl(crowdService, directoryManager, groupsService);
 
@@ -55,7 +54,7 @@ public class UsersServiceTest {
     }
 
     private void setupDirectoryManager() {
-        doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
+        lenient().doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
     }
 
     @Test
@@ -76,33 +75,37 @@ public class UsersServiceTest {
         assertEquals(user.getName(), userBean.getUsername());
     }
 
-    @Test(expected = NotFoundExceptionForUser.class)
+    @Test
     public void testGetUserNotFound() throws Exception {
         final Directory directory = getTestDirectory();
         final String userName = "not_found";
         doThrow(new UserNotFoundException(userName)).when(directoryManager).findUserByName(directory.getId(), userName);
 
-        usersService.getUser(directory.getId(), userName);
+        assertThrows(NotFoundExceptionForUser.class, () -> {
+            usersService.getUser(directory.getId(), userName);
+        });
     }
 
-    @Test(expected = NotFoundExceptionForUser.class)
+    @Test
     public void testGetUserNotFoundAnyDirectory() throws Exception {
         final Directory directory = getTestDirectory();
         final String userName = "not_found";
         doThrow(new UserNotFoundException(userName)).when(directoryManager).findUserByName(directory.getId(), userName);
 
-        usersService.getUser(userName);
+        assertThrows(NotFoundExceptionForUser.class, () -> {
+            usersService.getUser(userName);
+        });
     }
 
     @Test
     public void testSetUserAddNew() {
         final User user = getTestUser();
-        final UserBean userBean = UserBean.EXAMPLE_1;
+        final UserBean userBean = UserBeanUtil.toUserBean(user);
         final UsersServiceImpl spy = spy(usersService);
-        doReturn(userBean).when(spy).addUser(anyLong(), anyString(), any());
+        doReturn(userBean).when(spy).addUser(anyLong(), any(UserBean.class));
 
         spy.setUser(user.getDirectoryId(), userBean);
-        verify(spy).addUser(anyLong(), anyString(), any());
+        verify(spy).addUser(anyLong(), any(UserBean.class));
     }
 
     @Test
@@ -142,7 +145,6 @@ public class UsersServiceTest {
 
     @Test
     public void testAddUser() throws CrowdException, DirectoryPermissionException {
-        doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
         // return the same user as the one we are adding
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addUser(anyLong(), any(), any());
 
@@ -161,7 +163,6 @@ public class UsersServiceTest {
 
     @Test
     public void testAddUserActiveByDefault() throws CrowdException, DirectoryPermissionException {
-        doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
         // return the same user as the one we are adding
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addUser(anyLong(), any(), any());
 
@@ -176,7 +177,6 @@ public class UsersServiceTest {
 
     @Test
     public void testAddUserWithGroups() throws CrowdException, DirectoryPermissionException {
-        doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
         // return the same user as the one we are adding
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addUser(anyLong(), any(), any());
 
@@ -189,63 +189,68 @@ public class UsersServiceTest {
         verify(groupsService, times(groupBeans.size())).setGroup(anyLong(), anyString(), any());
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void testAddUserAlreadyExists() throws CrowdException {
         final User user = getTestUser();
-        doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
         final UserBean userBean = UserBeanUtil.toUserBean(user);
-        usersService.addUser(user.getDirectoryId(), userBean);
+
+        assertThrows(BadRequestException.class, () -> {
+            usersService.addUser(user.getDirectoryId(), userBean);
+        });
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void testAddUserNoName() throws CrowdException {
         final User user = getTestUser();
-        doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
-        doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
-
         final UserBean userBean = UserBeanUtil.toUserBean(user);
         userBean.setUsername(null);
-        usersService.addUser(user.getDirectoryId(), userBean);
+
+        assertThrows(BadRequestException.class, () -> {
+            usersService.addUser(user.getDirectoryId(), userBean);
+        });
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void testAddUserTwoDifferentNames() throws CrowdException {
         final User user = getTestUser();
-        doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
         final UserBean userBean = UserBeanUtil.toUserBean(user);
-        usersService.addUser(user.getDirectoryId(), "Other", userBean);
+
+        assertThrows(BadRequestException.class, () -> {
+            usersService.addUser(user.getDirectoryId(), "Other", userBean);
+        });
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void testAddUserDetailMissing() throws CrowdException {
         final User user = getTestUser();
-        doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
-        doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
-
         final UserBean userBean = UserBeanUtil.toUserBean(user);
         userBean.setFirstName(null);
-        usersService.addUser(user.getDirectoryId(), userBean);
+
+        assertThrows(BadRequestException.class, () -> {
+            usersService.addUser(user.getDirectoryId(), userBean);
+        });
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void testAddUserPasswordMissing() throws CrowdException {
         final User user = getTestUser();
-        doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
         final UserBean userBean = UserBeanUtil.toUserBean(user);
         userBean.setPassword(null);
-        usersService.addUser(user.getDirectoryId(), userBean);
+
+        assertThrows(BadRequestException.class, () -> {
+            usersService.addUser(user.getDirectoryId(), userBean);
+        });
     }
 
     @Test
     public void testUpdateUser() throws CrowdException, PermissionException {
         final User user = getTestUser();
-        doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
         // return the same user as the one we are updating
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).updateUser(anyLong(), any());
@@ -270,7 +275,6 @@ public class UsersServiceTest {
     @Test
     public void updateUserWithGroups() throws CrowdException, DirectoryPermissionException {
         final User user = getTestUser();
-        doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
         // return the same user as the one we are updating
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).updateUser(anyLong(), any());
@@ -285,8 +289,6 @@ public class UsersServiceTest {
 
     @Test
     public void testUpdateUserNoOp() throws CrowdException, PermissionException {
-        doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
-
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
@@ -299,13 +301,14 @@ public class UsersServiceTest {
         verify(directoryManager, never()).updateUserCredential(anyLong(), anyString(), any());
     }
 
-    @Test(expected = NotFoundExceptionForUser.class)
+    @Test
     public void testUpdateUserNotFound() throws CrowdException, PermissionException {
-        doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
-
         final User user = getTestUser();
         final UserBean userBean = UserBeanUtil.toUserBean(user);
-        usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+
+        assertThrows(NotFoundExceptionForUser.class, () -> {
+            usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+        });
     }
 
     @Test
@@ -398,9 +401,7 @@ public class UsersServiceTest {
 
         final String password = "pa55w0rd";
         final com.atlassian.crowd.embedded.api.User authenticatedUserMock = mock(com.atlassian.crowd.embedded.api.User.class);
-        when(authenticatedUserMock.getName()).thenReturn(user.getName());
-        when(crowdService.getUser(user.getName())).thenReturn(authenticatedUserMock);
-        when(crowdService.authenticate(user.getName(), password)).thenReturn(authenticatedUserMock);
+        doReturn(authenticatedUserMock).when(crowdService).authenticate(user.getName(), password);
 
         usersService.updatePassword(user.getName(), password);
         verify(directoryManager, never()).updateUserCredential(anyLong(), anyString(), any());
@@ -427,39 +428,47 @@ public class UsersServiceTest {
     // We are also not testing DirectoryNotFoundException and UserNotFoundException here,
     // because these cases won't happen anymore after a user has been found by its name.
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testGetUserDirectoryNotFoundException() throws CrowdException {
         final User user = getTestUser();
-        doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
         doThrow(new DirectoryNotFoundException(user.getDirectoryId())).when(directoryManager).findUserByName(anyLong(), anyString());
-        usersService.getUser(user.getDirectoryId(), user.getName());
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.getUser(user.getDirectoryId(), user.getName());
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testGetUserDirectoryNotFoundExceptionAnyDirectory() throws CrowdException {
         final User user = getTestUser();
-        doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
         doThrow(new DirectoryNotFoundException(user.getDirectoryId())).when(directoryManager).findUserByName(anyLong(), anyString());
-        usersService.getUser(user.getName());
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.getUser(user.getName());
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testGetUserOperationFailedException() throws CrowdException {
         final User user = getTestUser();
-        doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
         doThrow(new OperationFailedException()).when(directoryManager).findUserByName(anyLong(), anyString());
-        usersService.getUser(user.getDirectoryId(), user.getName());
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.getUser(user.getDirectoryId(), user.getName());
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testGetUserOperationFailedExceptionAnyDirectory() throws CrowdException {
         final User user = getTestUser();
-        doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
         doThrow(new OperationFailedException()).when(directoryManager).findUserByName(anyLong(), anyString());
-        usersService.getUser(user.getName());
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.getUser(user.getName());
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testRenameUserDirectoryPermissionException() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
@@ -468,10 +477,13 @@ public class UsersServiceTest {
         userBean.setUsername("new_username");
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
-        usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testRenameUserDirectoryPermissionExceptionAnyDirectory() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
@@ -480,10 +492,13 @@ public class UsersServiceTest {
         userBean.setUsername("new_username");
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
-        usersService.updateUser(user.getName(), userBean);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updateUser(user.getName(), userBean);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testRenameUserUserAlreadyExistsException() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
@@ -492,10 +507,13 @@ public class UsersServiceTest {
         userBean.setUsername("new_username");
 
         doThrow(new UserAlreadyExistsException(user.getDirectoryId(), userBean.getUsername())).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
-        usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testRenameUserUserAlreadyExistsExceptionAnyDirectory() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
@@ -504,10 +522,13 @@ public class UsersServiceTest {
         userBean.setUsername("new_username");
 
         doThrow(new UserAlreadyExistsException(user.getDirectoryId(), userBean.getUsername())).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
-        usersService.updateUser(user.getName(), userBean);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updateUser(user.getName(), userBean);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testRenameUserInvalidUserException() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
@@ -516,10 +537,13 @@ public class UsersServiceTest {
         userBean.setUsername("new_username");
 
         doThrow(new InvalidUserException(user, "message")).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
-        usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testRenameUserInvalidUserExceptionAnyDirectory() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
@@ -528,10 +552,13 @@ public class UsersServiceTest {
         userBean.setUsername("new_username");
 
         doThrow(new InvalidUserException(user, "message")).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
-        usersService.updateUser(user.getName(), userBean);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updateUser(user.getName(), userBean);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testRenameUserOperationFailedException() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
@@ -540,10 +567,13 @@ public class UsersServiceTest {
         userBean.setUsername("new_username");
 
         doThrow(new OperationFailedException()).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
-        usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testRenameUserOperationFailedExceptionAnyDirectory() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
@@ -552,10 +582,13 @@ public class UsersServiceTest {
         userBean.setUsername("new_username");
 
         doThrow(new OperationFailedException()).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
-        usersService.updateUser(user.getName(), userBean);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updateUser(user.getName(), userBean);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testUpdateUserDirectoryPermissionException() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
@@ -564,18 +597,24 @@ public class UsersServiceTest {
         userBean.setFullName("Other Full Name");
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).updateUser(anyLong(), any());
-        usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testUpdateUserNotFoundExceptionAnyDirectory() throws CrowdException {
         final User user = getTestUser();
         final UserBean userBean = new UserBean();
         userBean.setFullName("Other Full Name");
-        usersService.updateUser(user.getName(), userBean);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updateUser(user.getName(), userBean);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testUpdateUserDirectoryPermissionExceptionAnyDirectory() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
@@ -584,10 +623,13 @@ public class UsersServiceTest {
         userBean.setFullName("Other Full Name");
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).updateUser(anyLong(), any());
-        usersService.updateUser(user.getName(), userBean);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updateUser(user.getName(), userBean);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testUpdateUserInvalidUserException() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
@@ -596,10 +638,13 @@ public class UsersServiceTest {
         userBean.setFullName("Other Full Name");
 
         doThrow(new InvalidUserException(user, "message")).when(directoryManager).updateUser(anyLong(), any());
-        usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testUpdateUserInvalidUserExceptionAnyDirectory() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
@@ -608,10 +653,13 @@ public class UsersServiceTest {
         userBean.setFullName("Other Full Name");
 
         doThrow(new InvalidUserException(user, "message")).when(directoryManager).updateUser(anyLong(), any());
-        usersService.updateUser(user.getName(), userBean);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updateUser(user.getName(), userBean);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testUpdateUserOperationFailedException() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
@@ -620,10 +668,13 @@ public class UsersServiceTest {
         userBean.setEmail("other@example.com");
 
         doThrow(new OperationFailedException()).when(directoryManager).updateUser(anyLong(), any());
-        usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testUpdateUserOperationFailedExceptionAnyDirectory() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
@@ -632,103 +683,133 @@ public class UsersServiceTest {
         userBean.setEmail("other@example.com");
 
         doThrow(new OperationFailedException()).when(directoryManager).updateUser(anyLong(), any());
-        usersService.updateUser(user.getName(), userBean);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updateUser(user.getName(), userBean);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testUpdatePasswordNotFoundException() throws CrowdException, DirectoryPermissionException {
         final User user = getTestUser();
         final String password = "pa55w0rd";
         doThrow(new UserNotFoundException(user.getName())).when(directoryManager).updateUserCredential(user.getDirectoryId(), user.getName(), PasswordCredential.unencrypted(password));
-        usersService.updatePassword(user, password);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updatePassword(user, password);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testUpdatePasswordDirectoryPermissionException() throws CrowdException, PermissionException {
         final User user = getTestUser();
         final String password = "pa55w0rd";
-        doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
-
         doThrow(new DirectoryPermissionException()).when(directoryManager).updateUserCredential(anyLong(), anyString(), any());
-        usersService.updatePassword(user, password);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updatePassword(user, password);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testUpdatePasswordDirectoryPermissionExceptionAnyDirectory() throws CrowdException, PermissionException {
         final User user = getTestUser();
         final String password = "pa55w0rd";
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).updateUserCredential(anyLong(), anyString(), any());
-        usersService.updatePassword(user.getName(), password);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updatePassword(user.getName(), password);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testUpdatePasswordInvalidCredentialException() throws CrowdException, PermissionException {
         final User user = getTestUser();
         final String password = "pa55w0rd";
-        doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
-
         doThrow(new InvalidCredentialException()).when(directoryManager).updateUserCredential(anyLong(), anyString(), any());
-        usersService.updatePassword(user, password);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updatePassword(user, password);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testUpdatePasswordInvalidCredentialExceptionAnyDirectory() throws CrowdException, PermissionException {
         final User user = getTestUser();
         final String password = "pa55w0rd";
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
         doThrow(new InvalidCredentialException()).when(directoryManager).updateUserCredential(anyLong(), anyString(), any());
-        usersService.updatePassword(user.getName(), password);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updatePassword(user.getName(), password);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testUpdatePasswordOperationFailedException() throws CrowdException, PermissionException {
         final User user = getTestUser();
         final String password = "pa55w0rd";
-        doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
-
         doThrow(new OperationFailedException()).when(directoryManager).updateUserCredential(anyLong(), anyString(), any());
-        usersService.updatePassword(user, password);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updatePassword(user, password);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testUpdatePasswordOperationFailedExceptionAnyDirectory() throws CrowdException, PermissionException {
         final User user = getTestUser();
         final String password = "pa55w0rd";
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
         doThrow(new OperationFailedException()).when(directoryManager).updateUserCredential(anyLong(), anyString(), any());
-        usersService.updatePassword(user.getName(), password);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.updatePassword(user.getName(), password);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testResetUserPasswordAttributesDirectoryPermissionException() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doThrow(new DirectoryPermissionException()).when(directoryManager).storeUserAttributes(anyLong(), anyString(), any());
-        usersService.resetUserPasswordAttributes(user);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.resetUserPasswordAttributes(user);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testResetUserPasswordAttributesDirectoryNotFoundException() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doThrow(new DirectoryNotFoundException(user.getDirectoryId())).when(directoryManager).storeUserAttributes(anyLong(), anyString(), any());
-        usersService.resetUserPasswordAttributes(user);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.resetUserPasswordAttributes(user);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testResetUserPasswordAttributesUserNotFoundException() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doThrow(new UserNotFoundException(user.getName())).when(directoryManager).storeUserAttributes(anyLong(), anyString(), any());
-        usersService.resetUserPasswordAttributes(user);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.resetUserPasswordAttributes(user);
+        });
     }
 
-    @Test(expected = WebApplicationException.class)
+    @Test
     public void testResetUserPasswordAttributesOperationFailedException() throws CrowdException, PermissionException {
         final User user = getTestUser();
         doThrow(new OperationFailedException()).when(directoryManager).storeUserAttributes(anyLong(), anyString(), any());
-        usersService.resetUserPasswordAttributes(user);
+
+        assertThrows(WebApplicationException.class, () -> {
+            usersService.resetUserPasswordAttributes(user);
+        });
     }
 
     private Directory getTestDirectory() {

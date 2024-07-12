@@ -6,20 +6,20 @@ import com.atlassian.crowd.manager.mail.MockMailConfiguration;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
 import com.deftdevs.bootstrapi.crowd.model.util.MailServerSmtpBeanUtil;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.mail.internet.AddressException;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class MailServerServiceTest {
 
     @Mock
@@ -27,7 +27,7 @@ public class MailServerServiceTest {
 
     private MailServerServiceImpl mailServerService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         mailServerService = new MailServerServiceImpl(mailConfigurationService);
     }
@@ -80,23 +80,30 @@ public class MailServerServiceTest {
         assertEquals(mailServerSmtpBean.getHost(), updatedMailServerSmtpBean.getHost());
     }
 
-    @Test(expected = BadRequestException.class)
+    @Test
     public void testSetMailServerSmtpWithException() {
         final MailConfiguration emptyMailConfiguration = MailConfiguration.builder().build();
         doReturn(emptyMailConfiguration).when(mailConfigurationService).getMailConfiguration();
 
         final MailServerSmtpBean mailServerSmtpBean = MailServerSmtpBean.EXAMPLE_1;
         mailServerSmtpBean.setFrom("@wrong@format@");
-        mailServerService.setMailServerSmtp(mailServerSmtpBean);
+
+        assertThrows(BadRequestException.class, () -> {
+            mailServerService.setMailServerSmtp(mailServerSmtpBean);
+        });
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void testGetMailServerPop() {
-        mailServerService.getMailServerPop();
+        assertThrows(UnsupportedOperationException.class, () -> {
+            mailServerService.getMailServerPop();
+        });
     }
 
-    @Test(expected = UnsupportedOperationException.class)
+    @Test
     public void testSetMailServerPop() {
-        mailServerService.setMailServerPop(null);
+        assertThrows(UnsupportedOperationException.class, () -> {
+            mailServerService.setMailServerPop(null);
+        });
     }
 }

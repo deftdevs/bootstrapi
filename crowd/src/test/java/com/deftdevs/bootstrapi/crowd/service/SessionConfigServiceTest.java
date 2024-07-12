@@ -2,18 +2,18 @@ package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.property.PropertyManager;
 import com.deftdevs.bootstrapi.crowd.model.SessionConfigBean;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.verify;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class SessionConfigServiceTest {
 
     @Mock
@@ -21,7 +21,7 @@ public class SessionConfigServiceTest {
 
     private SessionConfigServiceImpl sessionConfigService;
 
-    @Before
+    @BeforeEach
     public void setup() {
         sessionConfigService = new SessionConfigServiceImpl(propertyManager);
     }

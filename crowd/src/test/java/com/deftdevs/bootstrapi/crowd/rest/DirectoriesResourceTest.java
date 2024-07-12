@@ -3,20 +3,20 @@ package com.deftdevs.bootstrapi.crowd.rest;
 import com.deftdevs.bootstrapi.commons.model.DirectoriesBean;
 import com.deftdevs.bootstrapi.commons.model.DirectoryInternalBean;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.core.Response;
 import java.util.Collections;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Matchers.anyLong;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.doReturn;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class DirectoriesResourceTest {
 
     @Mock
@@ -24,7 +24,7 @@ public class DirectoriesResourceTest {
 
     private DirectoriesResourceImpl directoriesResource;
 
-    @Before
+    @BeforeEach
     public void setup() {
         directoriesResource = new DirectoriesResourceImpl(directoriesService);
     }

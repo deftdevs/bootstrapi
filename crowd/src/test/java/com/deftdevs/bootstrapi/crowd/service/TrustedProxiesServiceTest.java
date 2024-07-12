@@ -2,22 +2,21 @@ package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.proxy.TrustedProxyManager;
 import com.deftdevs.bootstrapi.crowd.model.TrustedProxiesBean;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.runners.MockitoJUnitRunner;
+import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 
-import static org.junit.Assert.*;
-import static org.mockito.Matchers.anyString;
-import static org.mockito.Mockito.doAnswer;
-import static org.mockito.Mockito.doReturn;
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.ArgumentMatchers.anyString;
+import static org.mockito.Mockito.*;
 
-@RunWith(MockitoJUnitRunner.class)
+@ExtendWith(MockitoExtension.class)
 public class TrustedProxiesServiceTest {
 
     @Mock
@@ -27,16 +26,16 @@ public class TrustedProxiesServiceTest {
 
     private final HashSet<String> trustedProxies = new HashSet<>();
 
-    @Before
+    @BeforeEach
     public void setup() {
         // run trustedProxies.add() when trustedProxyManager.addAddress() is called
-        doAnswer(invocation -> {
+        lenient().doAnswer(invocation -> {
             trustedProxies.add((String) invocation.getArguments()[0]);
             return true;
         }).when(trustedProxyManager).addAddress(anyString());
 
         // run trustedProxies.remove() when trustedProxyManager.removeAddress() is called
-        doAnswer(invocation -> {
+        lenient().doAnswer(invocation -> {
             trustedProxies.remove((String) invocation.getArguments()[0]);
             return null; // return null since the method is void
         }).when(trustedProxyManager).removeAddress(anyString());
