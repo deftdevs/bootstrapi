@@ -1,19 +1,16 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
-import com.sun.jersey.spi.container.ResourceFilters;
-import com.deftdevs.bootstrapi.crowd.filter.SysadminOnlyResourceFilter;
+import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 import com.deftdevs.bootstrapi.crowd.model.MailTemplatesBean;
 import com.deftdevs.bootstrapi.crowd.rest.api.MailTemplateResource;
 import com.deftdevs.bootstrapi.crowd.service.api.MailTemplatesService;
-import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
+@SystemAdminOnly
 @Path(MailTemplateResource.MAIL_TEMPLATES)
-@ResourceFilters(SysadminOnlyResourceFilter.class)
-@Component
 public class MailTemplatesResourceImpl implements MailTemplateResource {
 
     private final MailTemplatesService mailTemplatesService;
