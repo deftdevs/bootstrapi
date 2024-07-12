@@ -53,7 +53,6 @@
         <crowd.data.version>5.2.2</crowd.data.version>
         <ajp.port>8409</ajp.port>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <plugin.testrunner.version>2.0.8-ec066ff</plugin.testrunner.version>
     </properties>
 
     <dependencyManagement>
@@ -68,7 +67,7 @@
 
             <dependency>
                 <groupId>com.deftdevs</groupId>
-                <artifactId>bootstrapi-commons</artifactId>
+                <artifactId>bootstrapi-parent</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -238,7 +237,6 @@
         <dependency>
             <groupId>com.atlassian.plugins</groupId>
             <artifactId>atlassian-plugins-osgi-testrunner</artifactId>
-            <version>${plugin.testrunner.version}</version>
             <scope>test</scope>
             <exclusions>
                 <exclusion>

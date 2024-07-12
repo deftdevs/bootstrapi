@@ -76,7 +76,7 @@ public class SettingsBrandingServiceTest {
         settingsBrandingService.setLoginPage(settingsBrandingLoginPageBean);
 
         final ArgumentCaptor<LookAndFeelConfiguration> captor = ArgumentCaptor.forClass(LookAndFeelConfiguration.class);
-        verify(propertyManager).setLookAndFeelConfiguration(captor.capture(), anyObject());
+        verify(propertyManager).setLookAndFeelConfiguration(captor.capture(), any());
         LookAndFeelConfiguration captorValue = captor.getValue();
 
         assertEquals(settingsBrandingLoginPageBean.getHeader(), captorValue.getHeader());
@@ -97,7 +97,7 @@ public class SettingsBrandingServiceTest {
         settingsBrandingService.setLoginPage(settingsBrandingLoginPageBean);
 
         final ArgumentCaptor<LookAndFeelConfiguration> captor = ArgumentCaptor.forClass(LookAndFeelConfiguration.class);
-        verify(propertyManager).setLookAndFeelConfiguration(captor.capture(), anyObject());
+        verify(propertyManager).setLookAndFeelConfiguration(captor.capture(), any());
         LookAndFeelConfiguration captorValue = captor.getValue();
 
         assertEquals(lookAndFeelConfiguration.getHeader(), captorValue.getHeader());

@@ -48,7 +48,6 @@
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
         <jira-lookandfeel-plugin.version>9.16.1</jira-lookandfeel-plugin.version>
-        <mockito.version>5.12.0</mockito.version>
     </properties>
 
     <dependencyManagement>
@@ -77,7 +76,7 @@
 
             <dependency>
                 <groupId>com.deftdevs</groupId>
-                <artifactId>bootstrapi-commons</artifactId>
+                <artifactId>bootstrapi-parent</artifactId>
                 <version>${project.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -228,7 +227,6 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>${javax.servlet-api.version}</version>
             <scope>provided</scope>
         </dependency>
 
@@ -263,14 +261,12 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
-            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-junit-jupiter</artifactId>
-            <version>${mockito.version}</version>
             <scope>test</scope>
         </dependency>
 
