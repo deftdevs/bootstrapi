@@ -60,7 +60,7 @@
         <log4j.version>2.23.1</log4j.version>
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
         <mockito.version>5.12.0</mockito.version>
-        <spring-context.version>5.3.38-atlassian-1-02</spring-context.version>
+        <spring-context.version>6.1.11</spring-context.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
         <wink-client.version>1.4</wink-client.version>
     </properties>
