@@ -1,20 +1,17 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
-import com.sun.jersey.spi.container.ResourceFilters;
+import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.crowd.filter.SysadminOnlyResourceFilter;
 import com.deftdevs.bootstrapi.crowd.model.AllBean;
 import com.deftdevs.bootstrapi.crowd.rest.api.AllResource;
 import com.deftdevs.bootstrapi.crowd.service.api.AllService;
 
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-@Named
+@SystemAdminOnly
 @Path(BootstrAPI.ALL)
-@ResourceFilters(SysadminOnlyResourceFilter.class)
 public class AllResourceImpl implements AllResource {
 
     private final AllService allService;

@@ -76,7 +76,7 @@
         <!-- other properties -->
         <atlassian.amps.version>8.17.4</atlassian.amps.version>
         <atlassian.platform.version>6.5.21</atlassian.platform.version>
-        <atlassian.plugins-osgi-testrunner.version>2.0.9</atlassian.plugins-osgi-testrunner.version>
+        <atlassian.plugins-osgi-testrunner.version>3.0.0-m01</atlassian.plugins-osgi-testrunner.version>
         <jacoco.maven-plugin.version>0.8.12</jacoco.maven-plugin.version>
         <lombok.version>1.18.34</lombok.version>
         <maven.release-plugin.version>3.1.0</maven.release-plugin.version>
@@ -84,9 +84,11 @@
         <openapi-generator.version>7.7.0</openapi-generator.version>
         <swagger.version>2.2.22</swagger.version>
         <!-- ... -->
+        <httpclient5.version>5.3.1</httpclient5.version>
         <hibernate-validator.version>6.2.5.Final</hibernate-validator.version>
         <javax.el-api.version>2.2.5</javax.el-api.version>
         <javax-ws-rs-api.version>2.1.1</javax-ws-rs-api.version>
+        <jersey-common.version>2.43</jersey-common.version>
         <junit.version>5.10.3</junit.version>
         <log4j.version>2.23.1</log4j.version>
         <mockito.version>5.12.0</mockito.version>
@@ -159,6 +161,12 @@
             </dependency>
 
             <dependency>
+                <groupId>org.apache.httpcomponents.client5</groupId>
+                <artifactId>httpclient5</artifactId>
+                <version>${httpclient5.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator.version}</version>
@@ -180,6 +188,13 @@
                 <groupId>javax.ws.rs</groupId>
                 <artifactId>javax.ws.rs-api</artifactId>
                 <version>${javax-ws-rs-api.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.glassfish.jersey.core</groupId>
+                <artifactId>jersey-common</artifactId>
+                <version>${jersey-common.version}</version>
+                <scope>test</scope>
             </dependency>
 
             <dependency>

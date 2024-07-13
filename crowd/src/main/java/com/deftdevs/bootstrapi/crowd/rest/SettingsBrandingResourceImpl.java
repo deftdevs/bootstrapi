@@ -1,22 +1,19 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
 
-import com.sun.jersey.spi.container.ResourceFilters;
+import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.crowd.filter.SysadminOnlyResourceFilter;
 import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageBean;
 import com.deftdevs.bootstrapi.crowd.rest.api.SettingsBrandingResource;
 import com.deftdevs.bootstrapi.crowd.service.api.SettingsBrandingService;
-import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
 
+@SystemAdminOnly
 @Path(BootstrAPI.SETTINGS + "/" + BootstrAPI.SETTINGS_BRANDING)
-@ResourceFilters(SysadminOnlyResourceFilter.class)
-@Component
 public class SettingsBrandingResourceImpl implements SettingsBrandingResource {
 
     private final SettingsBrandingService settingsBrandingService;

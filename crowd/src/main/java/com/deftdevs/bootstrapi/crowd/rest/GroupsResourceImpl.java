@@ -1,21 +1,18 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
-import com.sun.jersey.spi.container.ResourceFilters;
+import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
-import com.deftdevs.bootstrapi.crowd.filter.SysadminOnlyResourceFilter;
 import com.deftdevs.bootstrapi.crowd.model.GroupsBean;
 import com.deftdevs.bootstrapi.crowd.rest.api.GroupsResource;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
-import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
+@SystemAdminOnly
 @Path(BootstrAPI.GROUPS)
-@ResourceFilters(SysadminOnlyResourceFilter.class)
-@Component
 public class GroupsResourceImpl implements GroupsResource {
 
     private final GroupsService groupsService;
