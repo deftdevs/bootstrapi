@@ -5,11 +5,12 @@
   ],
   "packageRules": [
     {
-      "description": "Automerge non-major updates",
-      "matchUpdateTypes": ["minor", "patch"],
+      "description": "Auto-merge patch updates",
+      "matchUpdateTypes": ["patch"],
       "automerge": true
     },
     {
+      "description": "Allow only Atlassian packages with SemVer version and exclude 1000er versions",
       "matchPackagePrefixes": ["com.atlassian"],
       "allowedVersions": "/^[0-9]{1,3}\\.[0-9]+\\.[0-9]+$/"
     }
