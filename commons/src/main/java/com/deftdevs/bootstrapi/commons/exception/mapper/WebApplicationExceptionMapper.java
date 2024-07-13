@@ -18,7 +18,13 @@ public class WebApplicationExceptionMapper implements ExceptionMapper<WebApplica
             return Response.serverError().entity(errorCollection).build();
         }
 
-        final String message = e.getMessage();
+        final String message;
+
+        if (e.getCause() != null) {
+            message = e.getCause().getMessage();
+        } else {
+            message = e.getMessage();
+        }
 
         if (message != null) {
             // there is no way around the cause in the WebApplicationException so that messages always start

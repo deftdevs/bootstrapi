@@ -3,98 +3,92 @@ package it.com.deftdevs.bootstrapi.commons.rest;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
 import com.deftdevs.bootstrapi.commons.model.LicensesBean;
-import org.apache.wink.client.ClientAuthenticationException;
-import org.apache.wink.client.ClientResponse;
-import org.apache.wink.client.Resource;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
+import javax.ws.rs.HttpMethod;
 import javax.ws.rs.core.Response;
+import java.net.http.HttpResponse;
 import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class AbstractLicenseResourceFuncTest {
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     @Test
-    void testGetLicenses() {
-        Resource licensesResource = ResourceBuilder.builder(BootstrAPI.LICENSES).build();
+    void testGetLicenses() throws Exception {
+        final HttpResponse<String> licensesResponse = HttpRequestHelper.builder(BootstrAPI.LICENSES)
+                .request();
+        assertEquals(Response.Status.OK.getStatusCode(), licensesResponse.statusCode());
 
-        ClientResponse clientResponse = licensesResource.get();
-        assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
-
-        Collection<LicenseBean> licenses = clientResponse.getEntity(LicensesBean.class).getLicenses();
+        final LicensesBean licensesBean = objectMapper.readValue(licensesResponse.body(), LicensesBean.class);
+        final Collection<LicenseBean> licenses = licensesBean.getLicenses();
         assertNotNull(licenses);
         assertNotEquals(0, licenses.size());
         assertNotNull(licenses.iterator().next().getOrganization());
     }
 
     @Test
-    void testSetLicenses() {
-        Resource licensesResource = ResourceBuilder.builder(BootstrAPI.LICENSES).build();
+    void testSetLicenses() throws Exception {
+        final HttpResponse<String> licensesResponse = HttpRequestHelper.builder(BootstrAPI.LICENSES)
+                .request(HttpMethod.PUT, getExampleBean());
+        assertEquals(Response.Status.OK.getStatusCode(), licensesResponse.statusCode());
 
-        ClientResponse response = licensesResource.put(getExampleBean());
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatusCode());
-
-        response = licensesResource.get();
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatusCode());
-        assertEquals(getExampleBean().getLicenses().iterator().next().getDescription(),
-                response.getEntity(LicensesBean.class).getLicenses().iterator().next().getDescription());
+        final LicensesBean licensesBean = objectMapper.readValue(licensesResponse.body(), LicensesBean.class);
+        assertEquals(getExampleBean().getLicenses().iterator().next().getDescription(), licensesBean.getLicenses().iterator().next().getDescription());
     }
 
     @Test
-    void testAddLicenses() {
-        Resource licensesResource = ResourceBuilder.builder(BootstrAPI.LICENSES).build();
+    void testAddLicenses() throws Exception {
+        final LicenseBean licenseBean = getExampleBean().getLicenses().iterator().next();
+        final HttpResponse<String> licensesResponse = HttpRequestHelper.builder(BootstrAPI.LICENSES)
+                .request(HttpMethod.POST, licenseBean);
+        assertEquals(Response.Status.OK.getStatusCode(), licensesResponse.statusCode());
 
-        LicenseBean licenseBean = getExampleBean().getLicenses().iterator().next();
-        ClientResponse response = licensesResource.post(licenseBean);
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatusCode());
-
-        response = licensesResource.get();
-        assertEquals(Response.Status.OK.getStatusCode(), response.getStatusCode());
-        assertEquals(licenseBean.getDescription(),
-                response.getEntity(LicensesBean.class).getLicenses().iterator().next().getDescription());
+        final LicensesBean licensesBean = objectMapper.readValue(licensesResponse.body(), LicensesBean.class);
+        assertEquals(licenseBean.getDescription(), licensesBean.getLicenses().iterator().next().getDescription());
     }
 
     @Test
-    public void testGetLicensesUnauthenticated() {
-        Resource licensesResource = ResourceBuilder.builder(BootstrAPI.LICENSES)
+    public void testGetLicensesUnauthenticated() throws Exception {
+        final HttpResponse<String> licensesResponse = HttpRequestHelper.builder(BootstrAPI.LICENSES)
                 .username("wrong")
                 .password("password")
-                .build();
+                .request();
 
-        assertThrows(ClientAuthenticationException.class, licensesResource::get);
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), licensesResponse.statusCode());
     }
 
     @Test
-    public void testSetLicensesUnauthenticated() {
-        Resource licensesResource = ResourceBuilder.builder(BootstrAPI.LICENSES)
+    public void testSetLicensesUnauthenticated() throws Exception {
+        final HttpResponse<String> licensesResponse = HttpRequestHelper.builder(BootstrAPI.LICENSES)
                 .username("wrong")
                 .password("password")
-                .build();
+                .request(HttpMethod.PUT, getExampleBean());
 
-        assertThrows(ClientAuthenticationException.class, () -> {
-            licensesResource.put(getExampleBean());
-        });
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), licensesResponse.statusCode());
     }
 
     @Test
-    void testGetLicensesUnauthorized() {
-        Resource licensesResource = ResourceBuilder.builder(BootstrAPI.LICENSES)
+    void testGetLicensesUnauthorized() throws Exception {
+        final HttpResponse<String> licensesResponse = HttpRequestHelper.builder(BootstrAPI.LICENSES)
                 .username("user")
                 .password("user")
-                .build();
+                .request();
 
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), licensesResource.get().getStatusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), licensesResponse.statusCode());
     }
 
     @Test
-    void testSetLicensesUnauthorized() {
-        Resource licensesResource = ResourceBuilder.builder(BootstrAPI.LICENSES)
+    void testSetLicensesUnauthorized() throws Exception {
+        final HttpResponse<String> licensesResponse = HttpRequestHelper.builder(BootstrAPI.LICENSES)
                 .username("user")
                 .password("user")
-                .build();
+                .request(HttpMethod.PUT, getExampleBean());
 
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), licensesResource.put(getExampleBean()).getStatusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), licensesResponse.statusCode());
     }
 
     protected LicensesBean getExampleBean() {
