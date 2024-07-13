@@ -47,7 +47,6 @@
         <atlassian.ajp.port>8209</atlassian.ajp.port>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <javax.servlet-api.version>4.0.1</javax.servlet-api.version>
-        <jira-lookandfeel-plugin.version>9.17.0</jira-lookandfeel-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -190,7 +189,7 @@
         <dependency>
             <groupId>com.atlassian.jira</groupId>
             <artifactId>jira-lookandfeel-plugin</artifactId>
-            <version>${jira-lookandfeel-plugin.version}</version>
+            <version>${jira.version}</version>
             <scope>provided</scope>
         </dependency>
 
