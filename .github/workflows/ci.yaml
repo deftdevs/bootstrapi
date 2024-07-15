@@ -76,3 +76,35 @@ jobs:
 
     - name: Run integration tests
       run: mvn -B -pl ${{ matrix.product }} -am verify
+
+  apcc:
+    needs: compile
+
+    runs-on: ubuntu-22.04
+
+    strategy:
+      fail-fast: false
+      matrix:
+        product:
+          - crowd
+          - jira
+          # APCC currently does not support confluence...
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: 17
+          distribution: temurin
+          cache: 'maven'
+
+      - name: Run APCC
+        run: |
+          mvn -B install -DskipTests
+          cd ${{ matrix.product }}
+          mvn -B dependency:get -DgroupId=de.aservo -DartifactId=atlassian-plugin-compatibility-check -Dversion=0.0.4
+          mvn -B dependency:copy -Dartifact=de.aservo:atlassian-plugin-compatibility-check:0.0.4 -DoutputDirectory=.
+          java -jar atlassian-plugin-compatibility-check-0.0.4.jar "${{ matrix.product }}.version"
