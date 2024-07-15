@@ -10,7 +10,7 @@ on:
   merge_group:
 
 jobs:
-  package:
+  compile:
 
     runs-on: ubuntu-22.04
 
@@ -25,11 +25,11 @@ jobs:
         distribution: temurin
         cache: 'maven'
 
-    - name: Build Maven packages
-      run: mvn -B package -DskipTests
+    - name: Run compile
+      run: mvn -B compile
 
   unit-tests:
-    needs: package
+    needs: compile
 
     runs-on: ubuntu-22.04
 
@@ -71,8 +71,5 @@ jobs:
         distribution: temurin
         cache: 'maven'
 
-    - name: Install Maven packages
-      run: mvn -B install -DskipTests
-
     - name: Run integration tests
-      run: mvn -B -pl ${{ matrix.product }} ${{ matrix.product }}:integration-test
+      run: mvn -B -pl ${{ matrix.product }} -am verify
