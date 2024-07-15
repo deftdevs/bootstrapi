@@ -74,7 +74,7 @@
         <maven.compiler.source>11</maven.compiler.source>
         <maven.compiler.target>11</maven.compiler.target>
         <!-- other properties -->
-        <atlassian.amps.version>8.17.4</atlassian.amps.version>
+        <atlassian.amps.version>8.17.5</atlassian.amps.version>
         <atlassian.platform.version>6.5.21</atlassian.platform.version>
         <atlassian.plugins-osgi-testrunner.version>3.0.0-m01</atlassian.plugins-osgi-testrunner.version>
         <jacoco.maven-plugin.version>0.8.12</jacoco.maven-plugin.version>
