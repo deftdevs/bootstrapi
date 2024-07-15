@@ -77,6 +77,7 @@
         <atlassian.amps.version>8.17.5</atlassian.amps.version>
         <atlassian.platform.version>6.5.21</atlassian.platform.version>
         <atlassian.plugins-osgi-testrunner.version>3.0.0-m01</atlassian.plugins-osgi-testrunner.version>
+        <atlassian.spring-scanner.version>2.2.6</atlassian.spring-scanner.version>
         <jacoco.maven-plugin.version>0.8.12</jacoco.maven-plugin.version>
         <lombok.version>1.18.34</lombok.version>
         <maven.release-plugin.version>3.1.1</maven.release-plugin.version>
@@ -86,6 +87,7 @@
         <!-- ... -->
         <httpclient5.version>5.3.1</httpclient5.version>
         <hibernate-validator.version>6.2.5.Final</hibernate-validator.version>
+        <jackson.version>2.17.2</jackson.version>
         <javax.el-api.version>2.2.5</javax.el-api.version>
         <javax-ws-rs-api.version>2.1.1</javax-ws-rs-api.version>
         <jersey-common.version>2.43</jersey-common.version>
@@ -190,6 +192,18 @@
             </dependency>
 
             <dependency>
+                <groupId>com.fasterxml.jackson.core</groupId>
+                <artifactId>jackson-databind</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.fasterxml.jackson.jaxrs</groupId>
+                <artifactId>jackson-jaxrs-base</artifactId>
+                <version>${jackson.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>org.glassfish.jersey.core</groupId>
                 <artifactId>jersey-common</artifactId>
                 <version>${jersey-common.version}</version>
@@ -242,6 +256,7 @@
                 <plugin>
                     <groupId>com.atlassian.plugin</groupId>
                     <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
+                    <version>${atlassian.spring-scanner.version}</version>
                 </plugin>
 
                 <plugin>

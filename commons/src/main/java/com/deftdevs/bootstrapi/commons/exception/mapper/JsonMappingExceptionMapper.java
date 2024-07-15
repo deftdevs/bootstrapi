@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.commons.exception.mapper;
 
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import org.codehaus.jackson.map.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 
 import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
