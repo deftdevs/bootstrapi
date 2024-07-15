@@ -55,8 +55,6 @@
         <ajp.port>8109</ajp.port>
         <!-- other properties -->
         <custom-favicon-api.version>2.2.1</custom-favicon-api.version>
-        <log4j.version>2.23.1</log4j.version>
-        <slf4j.version>2.0.13</slf4j.version>
     </properties>
 
     <dependencyManagement>
@@ -225,6 +223,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- test dependencies -->
 
         <dependency>
@@ -268,20 +272,6 @@
         <dependency>
             <groupId>org.glassfish</groupId>
             <artifactId>jakarta.el</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.apache.logging.log4j</groupId>
-            <artifactId>log4j-to-slf4j</artifactId>
-            <version>${log4j.version}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>${slf4j.version}</version>
             <scope>test</scope>
         </dependency>
 
