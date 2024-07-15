@@ -84,9 +84,8 @@
         <openapi-generator.version>7.7.0</openapi-generator.version>
         <swagger.version>2.2.22</swagger.version>
         <!-- ... -->
-        <httpclient5.version>5.3.1</httpclient5.version>
         <hibernate-validator.version>6.2.5.Final</hibernate-validator.version>
-        <javax.el-api.version>2.2.5</javax.el-api.version>
+        <jakarta.el-api.version>3.0.3</jakarta.el-api.version>
         <javax-ws-rs-api.version>2.1.1</javax-ws-rs-api.version>
         <jersey-common.version>2.43</jersey-common.version>
         <junit.version>5.10.3</junit.version>
@@ -98,21 +97,15 @@
     <dependencyManagement>
         <dependencies>
             <dependency>
-                <groupId>io.swagger.core.v3</groupId>
-                <artifactId>swagger-annotations</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.swagger.core.v3</groupId>
-                <artifactId>swagger-jaxrs2</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.swagger.core.v3</groupId>
+                <artifactId>swagger-annotations</artifactId>
+                <version>${swagger.version}</version>
             </dependency>
 
             <dependency>
@@ -160,12 +153,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.apache.httpcomponents.client5</groupId>
-                <artifactId>httpclient5</artifactId>
-                <version>${httpclient5.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.hibernate.validator</groupId>
                 <artifactId>hibernate-validator</artifactId>
                 <version>${hibernate-validator.version}</version>
@@ -178,28 +165,16 @@
             </dependency>
 
             <dependency>
-                <groupId>javax.el</groupId>
-                <artifactId>javax.el-api</artifactId>
-                <version>${javax.el-api.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>javax.ws.rs</groupId>
-                <artifactId>javax.ws.rs-api</artifactId>
-                <version>${javax-ws-rs-api.version}</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.glassfish.jersey.core</groupId>
                 <artifactId>jersey-common</artifactId>
                 <version>${jersey-common.version}</version>
-                <scope>test</scope>
             </dependency>
 
             <dependency>
-                <groupId>org.glassfish.web</groupId>
-                <artifactId>javax.el</artifactId>
-                <version>${javax.el-api.version}</version>
+                <groupId>org.glassfish</groupId>
+                <artifactId>jakarta.el</artifactId>
+                <version>${jakarta.el-api.version}</version>
+                <scope>test</scope>
             </dependency>
 
             <dependency>

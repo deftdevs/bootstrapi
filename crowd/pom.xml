@@ -86,17 +86,17 @@
             <scope>compile</scope>
         </dependency>
 
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
-        <!-- behaves like a compile dependency -->
+        <!-- behave like a compile dependencies -->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -176,12 +176,6 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>javax.xml.bind</groupId>
             <artifactId>jaxb-api</artifactId>
             <scope>provided</scope>
@@ -247,17 +241,10 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.httpcomponents.client5</groupId>
-            <artifactId>httpclient5</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.codehaus.jackson</groupId>
             <artifactId>jackson-jaxrs</artifactId>
             <scope>test</scope>
         </dependency>
-
     </dependencies>
 
     <build>

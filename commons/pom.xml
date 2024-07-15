@@ -63,19 +63,17 @@
     </dependencyManagement>
 
     <dependencies>
-        <!-- compile dependencies -->
-
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <scope>compile</scope>
-        </dependency>
-
-        <!-- behaves like a compile dependency -->
+        <!-- behave like a compile dependencies -->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -141,13 +139,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- needs to be of scope 'provided' as implicitly used for 'checkNotNull' -->
-        <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- test dependencies -->
 
         <dependency>
@@ -181,18 +172,6 @@
         </dependency>
 
         <dependency>
-            <groupId>javax.el</groupId>
-            <artifactId>javax.el-api</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.glassfish.web</groupId>
-            <artifactId>javax.el</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-api</artifactId>
             <scope>test</scope>
@@ -207,6 +186,18 @@
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-common</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish</groupId>
+            <artifactId>jakarta.el</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava</artifactId>
             <scope>test</scope>
         </dependency>
 
