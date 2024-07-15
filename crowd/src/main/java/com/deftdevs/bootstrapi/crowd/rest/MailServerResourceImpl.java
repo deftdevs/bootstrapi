@@ -5,11 +5,13 @@ import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
 import com.deftdevs.bootstrapi.commons.rest.api.MailServerSmtpResource;
 import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
+import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
+@Component
 @SystemAdminOnly
 @Path(BootstrAPI.MAIL_SERVER)
 public class MailServerResourceImpl implements MailServerSmtpResource {

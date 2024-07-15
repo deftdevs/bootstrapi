@@ -132,6 +132,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- deprecated, see https://github.com/deftdevs/bootstrapi/issues/59 -->
+        <dependency>
+            <groupId>com.atlassian.plugins.rest</groupId>
+            <artifactId>atlassian-rest-common</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>com.atlassian.plugins.rest</groupId>
             <artifactId>atlassian-rest-v2-api</artifactId>

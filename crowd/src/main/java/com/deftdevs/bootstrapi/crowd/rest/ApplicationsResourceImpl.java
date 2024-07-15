@@ -6,11 +6,13 @@ import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
 import com.deftdevs.bootstrapi.crowd.model.ApplicationsBean;
 import com.deftdevs.bootstrapi.crowd.rest.api.ApplicationsResource;
 import com.deftdevs.bootstrapi.crowd.service.api.ApplicationsService;
+import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
+@Component
 @SystemAdminOnly
 @Path(BootstrAPI.APPLICATIONS)
 public class ApplicationsResourceImpl implements ApplicationsResource {
