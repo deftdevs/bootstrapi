@@ -5,11 +5,13 @@ import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.crowd.model.AllBean;
 import com.deftdevs.bootstrapi.crowd.rest.api.AllResource;
 import com.deftdevs.bootstrapi.crowd.service.api.AllService;
+import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
+@Component
 @SystemAdminOnly
 @Path(BootstrAPI.ALL)
 public class AllResourceImpl implements AllResource {
