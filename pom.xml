@@ -68,11 +68,11 @@
     </developers>
 
     <properties>
-        <!-- project / compile properties -->
+        <!-- project / compiler properties -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <maven.compiler.source>11</maven.compiler.source>
-        <maven.compiler.target>11</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <!-- sonarcloud properties -->
         <sonar.organization>deftdevs</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
@@ -81,6 +81,7 @@
         <atlassian.amps.version>8.17.6</atlassian.amps.version>
         <atlassian.platform.version>6.5.22</atlassian.platform.version>
         <atlassian.plugins-osgi-testrunner.version>3.0.0-m01</atlassian.plugins-osgi-testrunner.version>
+        <atlassian.spring-scanner.version>2.2.6</atlassian.spring-scanner.version>
         <jacoco.maven-plugin.version>0.8.12</jacoco.maven-plugin.version>
         <lombok.version>1.18.34</lombok.version>
         <maven.release-plugin.version>3.1.1</maven.release-plugin.version>
@@ -208,6 +209,7 @@
                 <plugin>
                     <groupId>com.atlassian.plugin</groupId>
                     <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
+                    <version>${atlassian.spring-scanner.version}</version>
                 </plugin>
 
                 <plugin>
