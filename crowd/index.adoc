@@ -3627,6 +3627,13 @@ endif::internal-generation[]
 | 
 | date-time    
 
+| type
+| X
+| 
+|   String  
+| 
+|     
+
 |===
 
 
@@ -3963,6 +3970,13 @@ endif::internal-generation[]
 | 
 | date-time    
 
+| type
+| X
+| 
+|   String  
+| 
+|     
+
 | server
 | 
 | 
@@ -4169,6 +4183,13 @@ endif::internal-generation[]
 |   Date  
 | 
 | date-time    
+
+| type
+| X
+| 
+|   String  
+| 
+|     
 
 | connector
 | 
@@ -4516,6 +4537,13 @@ endif::internal-generation[]
 | 
 | date-time    
 
+| type
+| X
+| 
+|   String  
+| 
+|     
+
 |===
 
 
@@ -4594,6 +4622,13 @@ endif::internal-generation[]
 |   Date  
 | 
 | date-time    
+
+| type
+| X
+| 
+|   String  
+| 
+|     
 
 | credentialPolicy
 | 
@@ -4750,6 +4785,13 @@ endif::internal-generation[]
 |   Date  
 | 
 | date-time    
+
+| type
+| X
+| 
+|   String  
+| 
+|     
 
 | server
 | 
@@ -5166,13 +5208,6 @@ endif::internal-generation[]
 |   String  
 | 
 |     
-
-| port
-| 
-| 
-|   Integer  
-| 
-| int32    
 
 | protocol
 | 
