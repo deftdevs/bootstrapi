@@ -27,7 +27,6 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-import static com.google.common.base.Preconditions.checkNotNull;
 import static java.lang.String.format;
 
 @Component
@@ -41,7 +40,7 @@ public class DirectoryServiceImpl implements DirectoriesService {
 
     @Inject
     public DirectoryServiceImpl(@ComponentImport CrowdDirectoryService crowdDirectoryService) {
-        this.crowdDirectoryService = checkNotNull(crowdDirectoryService);
+        this.crowdDirectoryService = crowdDirectoryService;
     }
 
     @Override
