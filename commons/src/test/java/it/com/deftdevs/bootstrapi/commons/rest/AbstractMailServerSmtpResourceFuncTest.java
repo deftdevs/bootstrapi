@@ -2,81 +2,78 @@ package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
-import org.apache.wink.client.ClientAuthenticationException;
-import org.apache.wink.client.ClientResponse;
-import org.apache.wink.client.Resource;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
+import javax.ws.rs.HttpMethod;
 import javax.ws.rs.core.Response;
+import java.net.http.HttpResponse;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public abstract class AbstractMailServerSmtpResourceFuncTest {
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     @Test
-    void testGetMailServerImap() {
-        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP).build();
+    void testGetMailServerImap() throws Exception {
+        final HttpResponse<String> mailServerSmtpResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
+                .request();
+        assertEquals(Response.Status.OK.getStatusCode(), mailServerSmtpResponse.statusCode());
 
-        ClientResponse clientResponse = mailserverResource.get();
-        assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
-
-        MailServerSmtpBean mailServerSmtpBean = clientResponse.getEntity(MailServerSmtpBean.class);
+        final MailServerSmtpBean mailServerSmtpBean = objectMapper.readValue(mailServerSmtpResponse.body(), MailServerSmtpBean.class);
         assertNotNull(mailServerSmtpBean);
     }
 
     @Test
-    void testSetMailServerImap() {
-        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP).build();
+    void testSetMailServerImap() throws Exception {
+        final HttpResponse<String> mailServerSmtpResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
+                .request(HttpMethod.PUT, getExampleBean());
+        assertEquals(Response.Status.OK.getStatusCode(), mailServerSmtpResponse.statusCode());
 
-        ClientResponse clientResponse = mailserverResource.put(getExampleBean());
-        assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
-
-        MailServerSmtpBean mailServerSmtpBean = clientResponse.getEntity(MailServerSmtpBean.class);
+        final MailServerSmtpBean mailServerSmtpBean = objectMapper.readValue(mailServerSmtpResponse.body(), MailServerSmtpBean.class);
         assertMailServerBeanAgainstExample(mailServerSmtpBean);
     }
 
     @Test
-    public void testGetMailServerImapUnauthenticated() {
-        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
+    public void testGetMailServerSmtpUnauthenticated() throws Exception {
+        final HttpResponse<String> mailServerSmtpResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
                 .username("wrong")
                 .password("password")
-                .build();
+                .request();
 
-        assertThrows(ClientAuthenticationException.class, mailserverResource::get);
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), mailServerSmtpResponse.statusCode());
     }
 
     @Test
-    public void testSetMailServerImapUnauthenticated() {
-        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
+    public void testSetMailServerSmtpUnauthenticated() throws Exception {
+        final HttpResponse<String> mailServerSmtpResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
                 .username("wrong")
                 .password("password")
-                .build();
+                .request(HttpMethod.PUT, getExampleBean());
 
-        assertThrows(ClientAuthenticationException.class, () -> {
-            mailserverResource.put(getExampleBean());
-        });
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), mailServerSmtpResponse.statusCode());
     }
 
     @Test
-    void testGetMailServerImapUnauthorized() {
-        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
+    public void testGetMailServerSmtpUnauthorized() throws Exception {
+        final HttpResponse<String> mailServerSmtpResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
                 .username("user")
                 .password("user")
-                .build();
+                .request();
 
-        ClientResponse response = mailserverResource.get();
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), response.getStatusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), mailServerSmtpResponse.statusCode());
     }
 
     @Test
-    void testSetMailServerImapUnauthorized() {
-        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
+    public void testSetMailServerSmtpUnauthorized() throws Exception {
+        final HttpResponse<String> mailServerSmtpResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
                 .username("user")
                 .password("user")
-                .build();
+                .request(HttpMethod.PUT, getExampleBean());
 
-        ClientResponse response = mailserverResource.put(getExampleBean());
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), response.getStatusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), mailServerSmtpResponse.statusCode());
     }
 
     protected void assertMailServerBeanAgainstExample(MailServerSmtpBean bean) {

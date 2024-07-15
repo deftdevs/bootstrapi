@@ -2,76 +2,75 @@ package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
-import org.apache.wink.client.ClientAuthenticationException;
-import org.apache.wink.client.ClientResponse;
-import org.apache.wink.client.Resource;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
+import javax.ws.rs.HttpMethod;
 import javax.ws.rs.core.Response;
+import java.net.http.HttpResponse;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 public abstract class AbstractSettingsResourceFuncTest {
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     @Test
-    void testGetSettings() {
-        Resource settingsResource = ResourceBuilder.builder(BootstrAPI.SETTINGS).build();
-        ClientResponse clientResponse = settingsResource.get();
-        assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
-        assertNotNull(clientResponse.getEntity(SettingsBean.class).getTitle());
+    void testGetSettings() throws Exception {
+        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS)
+                .request();
+        assertEquals(Response.Status.OK.getStatusCode(), settingsResponse.statusCode());
+
+        final SettingsBean settingsBean = objectMapper.readValue(settingsResponse.body(), SettingsBean.class);
+        assertNotNull(settingsBean.getTitle());
     }
 
     @Test
-    void testSetSettings() {
-        Resource settingsResource = ResourceBuilder.builder(BootstrAPI.SETTINGS).build();
-        assertEquals(Response.Status.OK.getStatusCode(), settingsResource.put(getExampleBean()).getStatusCode());
+    void testSetSettings() throws Exception {
+        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS)
+                .request(HttpMethod.PUT, getExampleBean());
+        assertEquals(Response.Status.OK.getStatusCode(), settingsResponse.statusCode());
 
-        ClientResponse clientResponse = settingsResource.get();
-        assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
-        assertEquals(getExampleBean(), clientResponse.getEntity(SettingsBean.class));
+        final SettingsBean settingsBean = objectMapper.readValue(settingsResponse.body(), SettingsBean.class);
+        assertEquals(getExampleBean(), settingsBean);
     }
 
     @Test
-    public void testGetSettingsUnauthenticated() {
-        Resource settingsResource = ResourceBuilder.builder(BootstrAPI.SETTINGS)
+    public void testGetSettingsUnauthenticated() throws Exception {
+        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS)
                 .username("wrong")
                 .password("password")
-                .build();
-
-        assertThrows(ClientAuthenticationException.class, settingsResource::get);
+                .request();
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), settingsResponse.statusCode());
     }
 
     @Test
-    public void testSetSettingsUnauthenticated() {
-        Resource settingsResource = ResourceBuilder.builder(BootstrAPI.SETTINGS)
+    public void testSetSettingsUnauthenticated() throws Exception {
+        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS)
                 .username("wrong")
                 .password("password")
-                .build();
-
-
-        assertThrows(ClientAuthenticationException.class, () -> {
-            settingsResource.put(getExampleBean());
-        });
+                .request(HttpMethod.PUT, getExampleBean());
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), settingsResponse.statusCode());
     }
 
     @Test
-    void testGetSettingsUnauthorized() {
-        Resource settingsResource = ResourceBuilder.builder(BootstrAPI.SETTINGS)
+    void testGetSettingsUnauthorized() throws Exception {
+        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS)
                 .username("user")
                 .password("user")
-                .build();
+                .request();
 
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), settingsResource.get().getStatusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), settingsResponse.statusCode());
     }
 
     @Test
-    void testSetSettingsUnauthorized() {
-        Resource settingsResource = ResourceBuilder.builder(BootstrAPI.SETTINGS)
+    void testSetSettingsUnauthorized() throws Exception {
+        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS)
                 .username("user")
                 .password("user")
-                .build();
+                .request(HttpMethod.PUT, getExampleBean());
 
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), settingsResource.put(getExampleBean()).getStatusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), settingsResponse.statusCode());
     }
 
     protected SettingsBean getExampleBean() {

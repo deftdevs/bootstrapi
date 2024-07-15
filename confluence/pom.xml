@@ -49,11 +49,11 @@
     </developers>
 
     <properties>
+        <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <confluence.version>8.5.6</confluence.version>
         <confluence.data.version>8.5.6</confluence.data.version>
-        <!-- other properties -->
         <ajp.port>8109</ajp.port>
-        <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
+        <!-- other properties -->
         <custom-favicon-api.version>2.2.1</custom-favicon-api.version>
         <javax.el-api.version>3.0.0</javax.el-api.version>
         <log4j.version>2.23.1</log4j.version>
@@ -70,10 +70,9 @@
                 <scope>import</scope>
             </dependency>
 
-            <!-- not working, use for version references -->
             <dependency>
                 <groupId>com.atlassian.confluence</groupId>
-                <artifactId>confluence-bundled-plugins-library</artifactId>
+                <artifactId>confluence-plugins-platform-pom</artifactId>
                 <version>${confluence.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
@@ -100,11 +99,17 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- behaves like a compile dependency -->
+        <!-- behave like compile dependencies -->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -149,44 +154,33 @@
         </dependency>
 
         <dependency>
+            <groupId>com.atlassian.gadgets</groupId>
+            <artifactId>atlassian-gadgets-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.gadgets</groupId>
+            <artifactId>atlassian-gadgets-spi</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.plugins.authentication</groupId>
+            <artifactId>atlassian-authentication-plugin</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- deprecated, see https://github.com/deftdevs/bootstrapi/issues/59 -->
+        <dependency>
             <groupId>com.atlassian.plugins.rest</groupId>
             <artifactId>atlassian-rest-common</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>javax.inject</groupId>
-            <artifactId>javax.inject</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-context</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.google.code.gson</groupId>
-            <artifactId>gson</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.ws.rs</groupId>
-            <artifactId>javax.ws.rs-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.servlet</groupId>
-            <artifactId>javax.servlet-api</artifactId>
+            <groupId>com.atlassian.plugins.rest</groupId>
+            <artifactId>atlassian-rest-v2-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -197,39 +191,44 @@
         </dependency>
 
         <dependency>
-            <groupId>com.atlassian.gadgets</groupId>
-            <artifactId>atlassian-gadgets-api</artifactId>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>com.atlassian.gadgets</groupId>
-            <artifactId>atlassian-gadgets-spi</artifactId>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>net.sourceforge.findbugs</groupId>
-                    <artifactId>jsr305</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.plugins.authentication</groupId>
-            <artifactId>atlassian-authentication-plugin</artifactId>
-            <version>5.0.4</version>
+            <groupId>jakarta.ws.rs</groupId>
+            <artifactId>jakarta.ws.rs-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-annotations</artifactId>
+            <groupId>javax.inject</groupId>
+            <artifactId>javax.inject</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-jaxrs2</artifactId>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.sun.jersey</groupId>
+            <artifactId>jersey-server</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.google.code.gson</groupId>
+            <artifactId>gson</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -262,12 +261,6 @@
         </dependency>
 
         <dependency>
-            <groupId>org.apache.wink</groupId>
-            <artifactId>wink-client</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>javax.el</groupId>
             <artifactId>javax.el-api</artifactId>
             <version>${javax.el-api.version}</version>
@@ -284,6 +277,12 @@
         <dependency>
             <groupId>com.atlassian.plugins</groupId>
             <artifactId>atlassian-plugins-osgi-testrunner</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-common</artifactId>
             <scope>test</scope>
         </dependency>
 

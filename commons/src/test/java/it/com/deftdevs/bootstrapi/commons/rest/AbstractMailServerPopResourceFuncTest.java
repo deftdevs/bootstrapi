@@ -2,82 +2,78 @@ package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
-import org.apache.wink.client.ClientAuthenticationException;
-import org.apache.wink.client.ClientResponse;
-import org.apache.wink.client.Resource;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
+import javax.ws.rs.HttpMethod;
 import javax.ws.rs.core.Response;
+import java.net.http.HttpResponse;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public abstract class AbstractMailServerPopResourceFuncTest {
 
+    private final ObjectMapper objectMapper = new ObjectMapper();
+
     @Test
-    void testGetMailServerPop() {
-        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP).build();
+    void testGetMailServerPop() throws Exception {
+        final HttpResponse<String> mailServerPopResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
+                .request();
+        assertEquals(Response.Status.OK.getStatusCode(), mailServerPopResponse.statusCode());
 
-        ClientResponse clientResponse = mailserverResource.get();
-        assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
-
-        MailServerPopBean mailServerPopBean = clientResponse.getEntity(MailServerPopBean.class);
+        final MailServerPopBean mailServerPopBean = objectMapper.readValue(mailServerPopResponse.body(), MailServerPopBean.class);
         assertNotNull(mailServerPopBean);
     }
 
     @Test
-    void testSetMailServerPop() {
-        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP).build();
+    void testSetMailServerPop() throws Exception {
+        final HttpResponse<String> mailServerPopResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
+                .request(HttpMethod.PUT, getExampleBean());
+        assertEquals(Response.Status.OK.getStatusCode(), mailServerPopResponse.statusCode());
 
-        ClientResponse clientResponse = mailserverResource.put(getExampleBean());
-        assertEquals(Response.Status.OK.getStatusCode(), clientResponse.getStatusCode());
-
-        MailServerPopBean mailServerPopBean = clientResponse.getEntity(MailServerPopBean.class);
+        final MailServerPopBean mailServerPopBean = objectMapper.readValue(mailServerPopResponse.body(), MailServerPopBean.class);
         assertMailServerBeanAgainstExample(mailServerPopBean);
     }
 
     @Test
-    public void testGetMailServerPopUnauthenticated() {
-        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
+    public void testGetMailServerPopUnauthenticated() throws Exception {
+        final HttpResponse<String> mailServerPopResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
                 .username("wrong")
                 .password("password")
-                .build();
+                .request();
 
-
-        assertThrows(ClientAuthenticationException.class, mailserverResource::get);
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), mailServerPopResponse.statusCode());
     }
 
     @Test
-    public void testSetMailServerPopUnauthenticated() {
-        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
+    public void testSetMailServerPopUnauthenticated() throws Exception {
+        final HttpResponse<String> mailServerPopResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
                 .username("wrong")
                 .password("password")
-                .build();
+                .request(HttpMethod.PUT, getExampleBean());
 
-        assertThrows(ClientAuthenticationException.class, () -> {
-            mailserverResource.put(getExampleBean());
-        });
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), mailServerPopResponse.statusCode());
     }
 
     @Test
-    void testGetMailServerPopUnauthorized() {
-        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
+    void testGetMailServerPopUnauthorized() throws Exception {
+        final HttpResponse<String> mailServerPopResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
                 .username("user")
                 .password("user")
-                .build();
+                .request();
 
-        ClientResponse response = mailserverResource.put(getExampleBean());
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), response.getStatusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), mailServerPopResponse.statusCode());
     }
 
     @Test
-    void testSetMailServerPopUnauthorized() {
-        Resource mailserverResource = ResourceBuilder.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
+    void testSetMailServerPopUnauthorized() throws Exception {
+        final HttpResponse<String> mailServerPopResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
                 .username("user")
                 .password("user")
-                .build();
+                .request(HttpMethod.PUT, getExampleBean());
 
-        ClientResponse response = mailserverResource.put(getExampleBean());
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), response.getStatusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), mailServerPopResponse.statusCode());
     }
 
     protected void assertMailServerBeanAgainstExample(MailServerPopBean bean) {
