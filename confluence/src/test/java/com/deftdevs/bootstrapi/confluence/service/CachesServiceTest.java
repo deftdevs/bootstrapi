@@ -14,7 +14,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import java.util.SortedMap;
 import java.util.TreeMap;
 import java.util.function.Supplier;
@@ -45,12 +45,12 @@ class CachesServiceTest {
         doReturn(false).when(cache).isFlushable();
         doReturn(createStatistics(555L, 2L, 1L, 1000L)).when(cache).getStatistics();
 
-        Collection<ManagedCache> cacheCollection = new ArrayList<>();
+        List<ManagedCache> cacheCollection = new ArrayList<>();
         cacheCollection.add(cache);
 
         doReturn(cacheCollection).when(cacheManager).getManagedCaches();
 
-        assertEquals(CacheBeanUtil.toCacheBean(cache), cachesService.getAllCaches().getCaches().iterator().next());
+        assertEquals(CacheBeanUtil.toCacheBean(cache), cachesService.getAllCaches().iterator().next());
 
     }
 

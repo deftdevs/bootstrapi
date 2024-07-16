@@ -4,7 +4,6 @@ import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.http.PATCH;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
-import com.deftdevs.bootstrapi.crowd.model.GroupsBean;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -14,6 +13,7 @@ import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 public interface GroupsResource {
 
@@ -99,6 +99,6 @@ public interface GroupsResource {
     )
     Response setGroups(
             @NotNull @QueryParam("directoryId") final long directoryId,
-            @NotNull final GroupsBean groupBeans);
+            @NotNull final List<GroupBean> groupBeans);
 
 }

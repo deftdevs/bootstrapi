@@ -1,6 +1,6 @@
 = Code Conventions
 
-The code conventions are valid for all BootstrAPI projects for now.
+The code conventions are valid for all BootstrAPI modules.
 
 :toc:
 
@@ -10,8 +10,6 @@ The code conventions are valid for all BootstrAPI projects for now.
 
 * Model Class: `EntityBean`
 * Model JSON Name: `entity` (`@XmlRootElement(name = BootstrAPI.ENTITY)`)
-* Model Collection Class: `EntitiesBean`
-* Model JSON Name: `entities` (`@XmlRootElement(name = BootstrAPI.ENTITIES)`)
 * REST Endpoint Class: `EntitiesResource`
 * REST Endpoint Name: `entities` (`@Path(BootstrAPI.ENTITIES)`)
 * Service Class: `EntitiesService`
@@ -67,27 +65,6 @@ For example, if you want to make sure that an empty description is considered nu
     }
 ----
 
-==== Entity Collections
-
-We use entity collection beans to hold a collection of entity beans and to specify the return type when the REST API
-returns such a collection.
-
-Thus, there is always only a single attribute necessary which allows using an `@AllArgsConstructor`.
-The pattern of an entity collection always looks like this:
-
-[source]
-----
-@Data
-@AllArgsConstructor
-@XmlRootElement(name = BootstrAPI.ENTITIES)
-public class EntitiesBean {
-
-    @XmlElement
-    private Collection<EntityBean> entities;
-
-}
-----
-
 === Resource Interface
 
 Resource interface classes represent the REST endpoints and thus define the REST API.
@@ -140,7 +117,7 @@ public interface EntitiesResource {
             summary = "Get the list of entities",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = EntitiesBean.class)),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = EntitiyBean.class))),
                             description = ""
                     ),
                     @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
@@ -196,8 +173,8 @@ public class EntitiesResourceImpl implements EntitiesResource {
     public Response getEntities() {
         final ErrorCollection errorCollection = new ErrorCollection();
         try {
-            final EntitiesBean entitiesBean = new EntitiesBean(entitiesService.getEntities());
-            return Response.ok(entitiesBean).build();
+            final List<EntitiesBean> entitieBeans = entitiesService.getEntities();
+            return Response.ok(entitiesBeanBeans).build();
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             errorCollection.addErrorMessage(e.getMessage());

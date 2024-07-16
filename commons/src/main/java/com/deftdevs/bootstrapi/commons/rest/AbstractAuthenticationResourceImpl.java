@@ -1,11 +1,12 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpsBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpBean;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
 import com.deftdevs.bootstrapi.commons.rest.api.AuthenticationResource;
 import com.deftdevs.bootstrapi.commons.service.api.AuthenticationService;
 
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 public abstract class AbstractAuthenticationResourceImpl implements AuthenticationResource {
 
@@ -19,16 +20,16 @@ public abstract class AbstractAuthenticationResourceImpl implements Authenticati
 
     @Override
     public Response getAuthenticationIdps() {
-        final AuthenticationIdpsBean resultAuthenticationIdpsBean = authenticationService.getAuthenticationIdps();
-        return Response.ok(resultAuthenticationIdpsBean).build();
+        final List<AbstractAuthenticationIdpBean> resultAuthenticationIdpBeans = authenticationService.getAuthenticationIdps();
+        return Response.ok(resultAuthenticationIdpBeans).build();
     }
 
     @Override
     public Response setAuthenticationIdps(
-            final AuthenticationIdpsBean authenticationIdpsBean) {
+            final List<AbstractAuthenticationIdpBean> authenticationIdpBeans) {
 
-        final AuthenticationIdpsBean resultAuthenticationIdpsBean = authenticationService.setAuthenticationIdps(authenticationIdpsBean);
-        return Response.ok(resultAuthenticationIdpsBean).build();
+        final List<AbstractAuthenticationIdpBean> resultAuthenticationIdpBeans = authenticationService.setAuthenticationIdps(authenticationIdpBeans);
+        return Response.ok(resultAuthenticationIdpBeans).build();
     }
 
     @Override

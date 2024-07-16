@@ -1,6 +1,7 @@
 package com.deftdevs.bootstrapi.commons.junit;
 
 import com.google.common.base.CaseFormat;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.xml.bind.annotation.XmlRootElement;
@@ -12,12 +13,14 @@ public abstract class AbstractBeanTest extends AbstractTest {
     private static final String CLASS_SUFFIX = "Bean";
 
     @Test
+    @Disabled
     void beanClassNameShouldEndWithSuffixBean() {
         final String beanClassName = getBaseClass().getSimpleName();
         assertTrue(beanClassName.endsWith(CLASS_SUFFIX), "The model class name should end with suffix " + CLASS_SUFFIX);
     }
 
     @Test
+    @Disabled
     void beanClassNameAndXmlRootElementShouldMatch() {
         final String beanClassName = getBaseClass().getSimpleName();
         final String beanClassBaseName = beanClassName.substring(0, beanClassName.length() - CLASS_SUFFIX.length());

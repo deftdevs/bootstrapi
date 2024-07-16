@@ -1,15 +1,16 @@
 package com.deftdevs.bootstrapi.commons.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpBean;
-import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpsBean;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
+
+import java.util.List;
 
 public interface AuthenticationService {
 
-    AuthenticationIdpsBean getAuthenticationIdps();
+    List<AbstractAuthenticationIdpBean> getAuthenticationIdps();
 
-    AuthenticationIdpsBean setAuthenticationIdps(
-            AuthenticationIdpsBean authenticationIdpsBean);
+    List<AbstractAuthenticationIdpBean> setAuthenticationIdps(
+            List<AbstractAuthenticationIdpBean> authenticationIdpBeans);
 
     AbstractAuthenticationIdpBean setAuthenticationIdp(
             AbstractAuthenticationIdpBean authenticationIdpBean);

@@ -3,7 +3,6 @@ package com.deftdevs.bootstrapi.crowd.rest;
 import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
-import com.deftdevs.bootstrapi.crowd.model.ApplicationsBean;
 import com.deftdevs.bootstrapi.crowd.rest.api.ApplicationsResource;
 import com.deftdevs.bootstrapi.crowd.service.api.ApplicationsService;
 import org.springframework.stereotype.Component;
@@ -11,6 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Component
 @SystemAdminOnly
@@ -39,8 +39,8 @@ public class ApplicationsResourceImpl implements ApplicationsResource {
 
     @Override
     public Response setApplications(
-            final ApplicationsBean applicationsBean) {
-        return Response.ok(applicationsService.setApplications(applicationsBean)).build();
+            final List<ApplicationBean> applicationBeans) {
+        return Response.ok(applicationsService.setApplications(applicationBeans)).build();
     }
 
     @Override

@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
-import com.deftdevs.bootstrapi.commons.model.DirectoriesBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
 import com.deftdevs.bootstrapi.commons.model.DirectoryInternalBean;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.core.Response;
 import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.anyLong;
@@ -31,14 +32,14 @@ public class DirectoriesResourceTest {
 
     @Test
     public void testGetDirectories() {
-        final DirectoriesBean directoriesBean = new DirectoriesBean(Collections.singletonList(DirectoryInternalBean.EXAMPLE_1));
+        final List<AbstractDirectoryBean> directoriesBean = Collections.singletonList(DirectoryInternalBean.EXAMPLE_1);
         doReturn(directoriesBean).when(directoriesService).getDirectories();
 
         final Response response = directoriesResource.getDirectories();
         assertEquals(200, response.getStatus());
 
-        final DirectoriesBean responseDirectoriesBean = (DirectoriesBean) response.getEntity();
-        assertEquals(directoriesBean, responseDirectoriesBean);
+        final List<AbstractDirectoryBean> responseDirectoryBean = (List<AbstractDirectoryBean>) response.getEntity();
+        assertEquals(directoriesBean, responseDirectoryBean);
     }
 
     @Test

@@ -1,11 +1,12 @@
 package com.deftdevs.bootstrapi.confluence.service.api;
 
 import com.deftdevs.bootstrapi.confluence.model.CacheBean;
-import com.deftdevs.bootstrapi.confluence.model.CachesBean;
+
+import java.util.List;
 
 public interface CachesService {
 
-    CachesBean getAllCaches();
+    List<CacheBean> getAllCaches();
 
     CacheBean getCache(String name);
 

@@ -3,8 +3,8 @@ package com.deftdevs.bootstrapi.confluence.rest.api;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import com.deftdevs.bootstrapi.confluence.model.CacheBean;
-import com.deftdevs.bootstrapi.confluence.model.CachesBean;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -19,10 +19,10 @@ public interface CachesResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = {BootstrAPI.CACHE},
-            summary = "Read all cache informations",
+            summary = "Read all cache information",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = CachesBean.class)),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = CacheBean.class))),
                             description = "Returns all information for current cache configuration."),
                     @ApiResponse(
                             content = @Content(schema = @Schema(implementation = ErrorCollection.class)),

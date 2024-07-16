@@ -1,17 +1,18 @@
 package com.deftdevs.bootstrapi.crowd.service.api;
 
 import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
-import com.deftdevs.bootstrapi.crowd.model.ApplicationsBean;
+
+import java.util.List;
 
 public interface ApplicationsService {
 
-    ApplicationsBean getApplications();
+    List<ApplicationBean> getApplications();
 
     ApplicationBean getApplication(
             long id);
 
-    ApplicationsBean setApplications(
-            ApplicationsBean applicationsBean);
+    List<ApplicationBean> setApplications(
+            List<ApplicationBean> applicationBeans);
 
     ApplicationBean setApplication(
             long id,

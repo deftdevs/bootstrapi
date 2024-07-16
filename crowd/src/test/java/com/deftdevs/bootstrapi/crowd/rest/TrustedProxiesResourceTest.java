@@ -71,7 +71,7 @@ public class TrustedProxiesResourceTest {
     @Test
     public void testRemoveTrustedProxy() {
         final String trustedProxy = TrustedProxiesBean.EXAMPLE_1.getTrustedProxies().iterator().next();
-        final TrustedProxiesBean trustedProxiesBean = new TrustedProxiesBean(Collections.emptySet());
+        final TrustedProxiesBean trustedProxiesBean = new TrustedProxiesBean(Collections.emptyList());
         doReturn(trustedProxiesBean).when(trustedProxiesService).removeTrustedProxy(trustedProxy);
 
         final Response response = trustedProxiesResource.removeTrustedProxy(trustedProxy);

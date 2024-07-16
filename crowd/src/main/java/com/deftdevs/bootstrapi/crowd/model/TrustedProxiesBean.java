@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Collection;
+import java.util.List;
 import java.util.Collections;
 
 @Data
@@ -17,7 +17,7 @@ import java.util.Collections;
 public class TrustedProxiesBean {
 
     @XmlElement
-    private Collection<String> trustedProxies;
+    private List<String> trustedProxies;
 
     public static final TrustedProxiesBean EXAMPLE_1;
     public static final TrustedProxiesBean EXAMPLE_2;

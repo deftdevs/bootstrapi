@@ -1,11 +1,11 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
-import com.deftdevs.bootstrapi.commons.model.LicensesBean;
 import com.deftdevs.bootstrapi.commons.rest.api.LicensesResource;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 public abstract class AbstractLicensesResourceImpl implements LicensesResource {
 
@@ -17,8 +17,8 @@ public abstract class AbstractLicensesResourceImpl implements LicensesResource {
 
     @Override
     public Response getLicenses() {
-        final LicensesBean licensesBean = licensesService.getLicenses();
-        return Response.ok(licensesBean).build();
+        final List<LicenseBean> licenseBeans = licensesService.getLicenses();
+        return Response.ok(licenseBeans).build();
     }
 
     @Override

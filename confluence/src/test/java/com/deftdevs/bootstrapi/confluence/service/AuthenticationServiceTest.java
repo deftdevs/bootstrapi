@@ -6,7 +6,6 @@ import com.atlassian.plugins.authentication.api.config.saml.SamlConfig;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpBean;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpOidcBean;
-import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpsBean;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
 import com.deftdevs.bootstrapi.confluence.model.util.AuthenticationIdpBeanUtil;
 import org.junit.jupiter.api.BeforeEach;
@@ -46,8 +45,8 @@ class AuthenticationServiceTest {
         final SamlConfig samlConfig = SamlConfig.builder().setName("saml").build();
         doReturn(Arrays.asList(oidcConfig, samlConfig)).when(idpConfigService).getIdpConfigs();
 
-        final AuthenticationIdpsBean authenticationIdpsBean = authenticationService.getAuthenticationIdps();
-        final List<String> names = authenticationIdpsBean.getAuthenticationIdpBeans().stream()
+        final List<AbstractAuthenticationIdpBean> authenticationIdpBeans = authenticationService.getAuthenticationIdps();
+        final List<String> names = authenticationIdpBeans.stream()
                 .map(AbstractAuthenticationIdpBean::getName)
                 .collect(Collectors.toList());
         assertTrue(names.contains(oidcConfig.getName()));
@@ -57,36 +56,36 @@ class AuthenticationServiceTest {
     @Test
     void testSetAuthenticationIdpsWithCreate() {
         final AuthenticationIdpOidcBean authenticationIdpOidcBean = AuthenticationIdpOidcBean.EXAMPLE_1;
-        final AuthenticationIdpsBean authenticationIdpsBean = new AuthenticationIdpsBean(Collections.singletonList(authenticationIdpOidcBean));
+        final List<AbstractAuthenticationIdpBean> authenticationIdpBeans = Collections.singletonList(authenticationIdpOidcBean);
         doAnswer(invocation -> invocation.getArgument(0)).when(idpConfigService).addIdpConfig(any());
 
-        final AuthenticationIdpsBean resultAuthenticationIdpsBean = authenticationService.setAuthenticationIdps(authenticationIdpsBean);
+        final List<AbstractAuthenticationIdpBean> resultAuthenticationIdpBeans = authenticationService.setAuthenticationIdps(authenticationIdpBeans);
         verify(idpConfigService, times(1)).addIdpConfig(any());
-        assertEquals(authenticationIdpOidcBean.getId(), resultAuthenticationIdpsBean.getAuthenticationIdpBeans().iterator().next().getId());
-        assertEquals(authenticationIdpOidcBean.getName(), resultAuthenticationIdpsBean.getAuthenticationIdpBeans().iterator().next().getName());
+        assertEquals(authenticationIdpOidcBean.getId(), resultAuthenticationIdpBeans.iterator().next().getId());
+        assertEquals(authenticationIdpOidcBean.getName(), resultAuthenticationIdpBeans.iterator().next().getName());
     }
 
     @Test
     void testSetAuthenticationIdpsWithUpdate() {
         final AuthenticationIdpOidcBean authenticationIdpOidcBean = AuthenticationIdpOidcBean.EXAMPLE_1;
-        final AuthenticationIdpsBean authenticationIdpsBean = new AuthenticationIdpsBean(Collections.singletonList(authenticationIdpOidcBean));
+        final List<AbstractAuthenticationIdpBean> authenticationIdpBeans = Collections.singletonList(authenticationIdpOidcBean);
         final IdpConfig idpConfig = AuthenticationIdpBeanUtil.toIdpConfig(authenticationIdpOidcBean);
         doReturn(Collections.singletonList(idpConfig)).when(idpConfigService).getIdpConfigs();
         doAnswer(invocation -> invocation.getArgument(0)).when(idpConfigService).updateIdpConfig(any());
 
-        final AuthenticationIdpsBean resultAuthenticationIdpsBean = authenticationService.setAuthenticationIdps(authenticationIdpsBean);
+        final List<AbstractAuthenticationIdpBean> resultAuthenticationIdpBeans = authenticationService.setAuthenticationIdps(authenticationIdpBeans);
         verify(idpConfigService, times(1)).updateIdpConfig(any());
-        assertEquals(authenticationIdpOidcBean.getId(), resultAuthenticationIdpsBean.getAuthenticationIdpBeans().iterator().next().getId());
-        assertEquals(authenticationIdpOidcBean.getName(), resultAuthenticationIdpsBean.getAuthenticationIdpBeans().iterator().next().getName());
+        assertEquals(authenticationIdpOidcBean.getId(), resultAuthenticationIdpBeans.iterator().next().getId());
+        assertEquals(authenticationIdpOidcBean.getName(), resultAuthenticationIdpBeans.iterator().next().getName());
     }
 
     @Test
     void testSetAuthenticationIdpsNameNull() {
         final AuthenticationIdpOidcBean authenticationIdpOidcBean = new AuthenticationIdpOidcBean();
-        final AuthenticationIdpsBean authenticationIdpsBean = new AuthenticationIdpsBean(Collections.singletonList(authenticationIdpOidcBean));
+        final List<AbstractAuthenticationIdpBean> authenticationIdpBeans = Collections.singletonList(authenticationIdpOidcBean);
 
         assertThrows(BadRequestException.class, () -> {
-            authenticationService.setAuthenticationIdps(authenticationIdpsBean);
+            authenticationService.setAuthenticationIdps(authenticationIdpBeans);
         });
     }
 
@@ -94,10 +93,10 @@ class AuthenticationServiceTest {
     void testSetAuthenticationIdpsNameEmpty() {
         final AuthenticationIdpOidcBean authenticationIdpOidcBean = new AuthenticationIdpOidcBean();
         authenticationIdpOidcBean.setName("");
-        final AuthenticationIdpsBean authenticationIdpsBean = new AuthenticationIdpsBean(Collections.singletonList(authenticationIdpOidcBean));
+        final List<AbstractAuthenticationIdpBean> authenticationIdpBeans = Collections.singletonList(authenticationIdpOidcBean);
 
         assertThrows(BadRequestException.class, () -> {
-            authenticationService.setAuthenticationIdps(authenticationIdpsBean);
+            authenticationService.setAuthenticationIdps(authenticationIdpBeans);
         });
     }
 

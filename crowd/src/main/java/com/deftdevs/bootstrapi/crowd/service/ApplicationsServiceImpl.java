@@ -17,7 +17,6 @@ import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
 import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
-import com.deftdevs.bootstrapi.crowd.model.ApplicationsBean;
 import com.deftdevs.bootstrapi.crowd.model.util.ApplicationBeanUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.ApplicationsService;
 import org.springframework.stereotype.Component;
@@ -50,10 +49,10 @@ public class ApplicationsServiceImpl implements ApplicationsService {
     }
 
     @Override
-    public ApplicationsBean getApplications() {
-        return new ApplicationsBean(applicationManager.findAll().stream()
+    public List<ApplicationBean> getApplications() {
+        return applicationManager.findAll().stream()
                 .map(application -> ApplicationBeanUtil.toApplicationBean(application, defaultGroupMembershipService))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -68,21 +67,21 @@ public class ApplicationsServiceImpl implements ApplicationsService {
     }
 
     @Override
-    public ApplicationsBean setApplications(
-            final ApplicationsBean applicationsBean) {
+    public List<ApplicationBean> setApplications(
+            final List<ApplicationBean> applicationBeans) {
 
-        final List<ApplicationBean> applicationBeans = new ArrayList<>();
+        final List<ApplicationBean> resultApplicationBeans = new ArrayList<>();
 
-        for (ApplicationBean applicationBean : applicationsBean.getApplications()) {
+        for (ApplicationBean applicationBean : applicationBeans) {
             try {
                 final Application application = applicationManager.findByName(applicationBean.getName());
-                applicationBeans.add(setApplication(application.getId(), applicationBean));
+                resultApplicationBeans.add(setApplication(application.getId(), applicationBean));
             } catch (ApplicationNotFoundException ignored) {
-                applicationBeans.add(addApplication(applicationBean));
+                resultApplicationBeans.add(addApplication(applicationBean));
             }
         }
 
-        return new ApplicationsBean(applicationBeans);
+        return resultApplicationBeans;
     }
 
     @Override
@@ -201,12 +200,12 @@ public class ApplicationsServiceImpl implements ApplicationsService {
             return;
         }
 
-        final Map<String, Collection<String>> authenticationGroupsByDirectoryName = applicationBean.getDirectoryMappings().stream()
+        final Map<String, List<String>> authenticationGroupsByDirectoryName = applicationBean.getDirectoryMappings().stream()
                 .collect(Collectors.toMap(ApplicationBean.ApplicationDirectoryMapping::getDirectoryName, ApplicationBean.ApplicationDirectoryMapping::getAuthenticationGroups));
 
         for (ApplicationDirectoryMapping applicationDirectoryMapping : application.getApplicationDirectoryMappings()) {
             final Set<String> authenticationGroups = new HashSet<>(authenticationGroupsByDirectoryName.getOrDefault(
-                    applicationDirectoryMapping.getDirectory().getName(), Collections.emptySet()));
+                    applicationDirectoryMapping.getDirectory().getName(), Collections.emptyList()));
 
             final Set<String> currentAuthenticationGroups = applicationDirectoryMapping.getAuthorisedGroupNames();
 
@@ -228,13 +227,13 @@ public class ApplicationsServiceImpl implements ApplicationsService {
             return;
         }
 
-        final Map<String, Collection<String>> autoAssignmentGroupsByDirectoryName = applicationBean.getDirectoryMappings().stream()
+        final Map<String, List<String>> autoAssignmentGroupsByDirectoryName = applicationBean.getDirectoryMappings().stream()
                 .collect(Collectors.toMap(
                         ApplicationBean.ApplicationDirectoryMapping::getDirectoryName,
                         adm -> adm.getAutoAssignmentGroups() != null ? adm.getAutoAssignmentGroups() : Collections.emptyList()));
 
         for (ApplicationDirectoryMapping applicationDirectoryMapping : application.getApplicationDirectoryMappings()) {
-            final Collection<String> autoAssignmentGroups = autoAssignmentGroupsByDirectoryName.getOrDefault(
+            final List<String> autoAssignmentGroups = autoAssignmentGroupsByDirectoryName.getOrDefault(
                     applicationDirectoryMapping.getDirectory().getName(), Collections.emptyList());
 
             final Set<String> currentAutoAssignmentGroups;
@@ -257,7 +256,7 @@ public class ApplicationsServiceImpl implements ApplicationsService {
     }
 
     @Nonnull
-    Collection<ApplicationDirectoryMapping> toApplicationDirectoryMappings(
+    List<ApplicationDirectoryMapping> toApplicationDirectoryMappings(
             @Nonnull final Collection<ApplicationBean.ApplicationDirectoryMapping> applicationBeanDirectoryMappings) {
 
         return applicationBeanDirectoryMappings.stream()
@@ -346,7 +345,7 @@ public class ApplicationsServiceImpl implements ApplicationsService {
     void addAuthenticationGroups(
             final Application application,
             final Directory directory,
-            final Collection<String> authenticationGroupsToAdd) {
+            final Set<String> authenticationGroupsToAdd) {
 
         for (String authenticationGroupToAdd : authenticationGroupsToAdd) {
             try {
@@ -360,7 +359,7 @@ public class ApplicationsServiceImpl implements ApplicationsService {
     void removeAuthenticationGroups(
             final Application application,
             final Directory directory,
-            final Collection<String> authenticationGroupsToRemove) {
+            final Set<String> authenticationGroupsToRemove) {
 
         for (String authenticationGroupToRemove : authenticationGroupsToRemove) {
             try {
@@ -374,7 +373,7 @@ public class ApplicationsServiceImpl implements ApplicationsService {
     void addAutoAssignmentGroups(
             final Application application,
             final ApplicationDirectoryMapping applicationDirectoryMapping,
-            final Collection<String> autoAssignmentGroupsToAdd,
+            final Set<String> autoAssignmentGroupsToAdd,
             final DefaultGroupMembershipService defaultGroupMembershipService) {
 
         for (String autoAssignmentGroupToAdd : autoAssignmentGroupsToAdd) {
@@ -389,7 +388,7 @@ public class ApplicationsServiceImpl implements ApplicationsService {
     void removeAutoAssignmentGroups(
             final Application application,
             final ApplicationDirectoryMapping applicationDirectoryMapping,
-            final Collection<String> autoAssignmentGroupsToRemove,
+            final Set<String> autoAssignmentGroupsToRemove,
             final DefaultGroupMembershipService defaultGroupMembershipService) {
 
         for (String autoAssignmentGroupToRemove : autoAssignmentGroupsToRemove) {

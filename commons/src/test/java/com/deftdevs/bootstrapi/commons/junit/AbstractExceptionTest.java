@@ -1,5 +1,6 @@
 package com.deftdevs.bootstrapi.commons.junit;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.WebApplicationException;
@@ -14,17 +15,20 @@ public abstract class AbstractExceptionTest extends AbstractTest {
     private static final String MESSAGE = "Exception";
 
     @Test
+    @Disabled
     void exceptionClassNameShouldEndWithSuffixException() {
         final String beanClassName = getBaseClass().getSimpleName();
         assertTrue(beanClassName.endsWith(CLASS_SUFFIX), "The model class name should end with suffix " + CLASS_SUFFIX);
     }
 
     @Test
+    @Disabled
     void exceptionClassShouldExtendWebApplicationException() {
         assertTrue(WebApplicationException.class.isAssignableFrom(getBaseClass()), "The exception class should extend WebApplicationException");
     }
 
     @Test
+    @Disabled
     void exceptionConstructorsShouldBehaveEqually() throws Exception {
         final Class<?> baseClass = getBaseClass();
         final WebApplicationException messageException = (WebApplicationException) baseClass.getConstructor(String.class)

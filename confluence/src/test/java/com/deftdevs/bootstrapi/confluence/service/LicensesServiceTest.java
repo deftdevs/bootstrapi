@@ -5,12 +5,13 @@ import com.atlassian.sal.api.i18n.InvalidOperationException;
 import com.atlassian.sal.api.license.LicenseHandler;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
-import com.deftdevs.bootstrapi.commons.model.LicensesBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.List;
 
 import static com.atlassian.confluence.setup.ConfluenceBootstrapConstants.DEFAULT_LICENSE_REGISTRY_KEY;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -34,12 +35,11 @@ class LicensesServiceTest {
 
     @Test
     void testGetLicense() {
-        DefaultSingleProductLicenseDetailsView testLicense = new DefaultSingleProductLicenseDetailsView(LicenseBean.EXAMPLE_1);
+        final DefaultSingleProductLicenseDetailsView testLicense = new DefaultSingleProductLicenseDetailsView(LicenseBean.EXAMPLE_1);
         doReturn(testLicense).when(licenseHandler).getProductLicenseDetails(DEFAULT_LICENSE_REGISTRY_KEY);
 
-        LicensesBean licenses = licenseService.getLicenses();
-
-        assertEquals(testLicense.getDescription(), licenses.getLicenses().iterator().next().getDescription());
+        final List<LicenseBean> licenses = licenseService.getLicenses();
+        assertEquals(testLicense.getDescription(), licenses.iterator().next().getDescription());
     }
 
     @Test

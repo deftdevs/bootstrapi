@@ -1,11 +1,12 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
-import com.deftdevs.bootstrapi.commons.model.ApplicationLinksBean;
 import com.deftdevs.bootstrapi.commons.rest.api.ApplicationLinksResource;
 import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
 
 import javax.ws.rs.core.Response;
+import java.util.List;
+import java.util.List;
 import java.util.UUID;
 
 public abstract class AbstractApplicationLinksResourceImpl implements ApplicationLinksResource {
@@ -20,8 +21,8 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
 
     @Override
     public Response getApplicationLinks() {
-        final ApplicationLinksBean linksBean = applicationLinksService.getApplicationLinks();
-        return Response.ok(linksBean).build();
+        final List<ApplicationLinkBean> applicationLinkBeans = applicationLinksService.getApplicationLinks();
+        return Response.ok(applicationLinkBeans).build();
     }
 
     @Override
@@ -35,11 +36,11 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
     @Override
     public Response setApplicationLinks(
             final boolean ignoreSetupErrors,
-            ApplicationLinksBean linksBean) {
+            final List<ApplicationLinkBean> applicationLinkBeans) {
 
-        final ApplicationLinksBean updatedLinksBean = applicationLinksService.setApplicationLinks(
-                linksBean, ignoreSetupErrors);
-        return Response.ok(updatedLinksBean).build();
+        final List<ApplicationLinkBean> updatedApplicationLinkBeans = applicationLinksService.setApplicationLinks(
+                applicationLinkBeans, ignoreSetupErrors);
+        return Response.ok(updatedApplicationLinkBeans).build();
     }
 
     @Override

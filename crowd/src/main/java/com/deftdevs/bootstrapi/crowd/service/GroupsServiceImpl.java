@@ -1,10 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.service;
 
-import com.atlassian.crowd.exception.DirectoryNotFoundException;
-import com.atlassian.crowd.exception.GroupNotFoundException;
-import com.atlassian.crowd.exception.InvalidGroupException;
-import com.atlassian.crowd.exception.OperationFailedException;
-import com.atlassian.crowd.exception.ReadOnlyGroupException;
+import com.atlassian.crowd.exception.*;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.crowd.manager.directory.DirectoryPermissionException;
 import com.atlassian.crowd.model.group.Group;
@@ -16,7 +12,6 @@ import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
 import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForDirectory;
 import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForGroup;
-import com.deftdevs.bootstrapi.crowd.model.GroupsBean;
 import com.deftdevs.bootstrapi.crowd.model.util.GroupBeanUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
@@ -24,6 +19,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Nullable;
 import javax.inject.Inject;
 import java.util.Collections;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -125,17 +121,17 @@ public class GroupsServiceImpl implements GroupsService {
     }
 
     @Override
-    public GroupsBean setGroups(
+    public List<GroupBean> setGroups(
             final long directoryId,
-            final GroupsBean groupsBean) {
+            final List<GroupBean> groupBeans) {
 
-        if (groupsBean == null || groupsBean.getGroups() == null) {
-            return new GroupsBean(Collections.emptyList());
+        if (groupBeans == null) {
+            return Collections.emptyList();
         }
 
-        return new GroupsBean(groupsBean.getGroups().stream()
+        return groupBeans.stream()
                 .map(groupBean -> setGroup(directoryId, groupBean.getName(), groupBean))
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     @Nullable

@@ -7,13 +7,13 @@ import com.atlassian.sal.api.license.LicenseHandler;
 import com.atlassian.sal.api.license.SingleProductLicenseDetailsView;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
-import com.deftdevs.bootstrapi.commons.model.LicensesBean;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 import com.deftdevs.bootstrapi.confluence.model.util.LicenseBeanUtil;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.util.Collections;
+import java.util.List;
 
 import static com.atlassian.confluence.setup.ConfluenceBootstrapConstants.DEFAULT_LICENSE_REGISTRY_KEY;
 
@@ -29,11 +29,9 @@ public class LicensesServiceImpl implements LicensesService {
     }
 
     @Override
-    public LicensesBean getLicenses() {
+    public List<LicenseBean> getLicenses() {
         SingleProductLicenseDetailsView confluenceLicenseView = licenseHandler.getProductLicenseDetails(DEFAULT_LICENSE_REGISTRY_KEY);
-        LicensesBean licensesBean = new LicensesBean();
-        licensesBean.setLicenses(Collections.singletonList(LicenseBeanUtil.toLicenseBean(confluenceLicenseView)));
-        return licensesBean;
+        return Collections.singletonList(LicenseBeanUtil.toLicenseBean(confluenceLicenseView));
     }
 
     @Override

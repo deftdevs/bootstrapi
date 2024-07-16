@@ -17,7 +17,6 @@ import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
 import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
-import com.deftdevs.bootstrapi.crowd.model.ApplicationsBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,7 +25,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -75,19 +74,15 @@ public class ApplicationsServiceTest {
 
     @Test
     public void testGetApplications() {
-        Application application = toApplication(EXAMPLE_1);
-        Collection<Application> applications = Collections.singletonList(application);
-
+        final Application application = toApplication(EXAMPLE_1);
+        final List<Application> applications = Collections.singletonList(application);
         doReturn(applications).when(applicationManager).findAll();
 
-        ApplicationsBean applicationBeans = applicationsService.getApplications();
+        final List<ApplicationBean> applicationBeans = applicationsService.getApplications();
         assertNotNull(applicationBeans);
-        Collection<ApplicationBean> applicationsCollection = applicationBeans.getApplications();
-        assertNotNull(applicationsCollection);
-        assertEquals(1,applicationsCollection.size());
+        assertEquals(1,applicationBeans.size());
 
-        ApplicationBean resultApplicationBean = applicationsCollection.iterator().next();
-
+        final ApplicationBean resultApplicationBean = applicationBeans.iterator().next();
         assertEquals(EXAMPLE_1.getName(), resultApplicationBean.getName());
         assertEquals(EXAMPLE_1.getDescription(), resultApplicationBean.getDescription());
         assertEquals(EXAMPLE_1.getActive(), resultApplicationBean.getActive());
@@ -192,28 +187,21 @@ public class ApplicationsServiceTest {
 
     @Test
     public void testSetApplications() throws ApplicationNotFoundException {
-        Application applicationExample1 = ImmutableApplication.builder(toApplication(EXAMPLE_1))
+        final Application applicationExample1 = ImmutableApplication.builder(toApplication(EXAMPLE_1))
                 .setId(EXAMPLE_1.getId())
                 .build();
-
-        List<ApplicationBean> applicationList = new ArrayList<>();
-        applicationList.add(EXAMPLE_1);
-        applicationList.add(EXAMPLE_2);
-
-        ApplicationsBean applicationsBean = new ApplicationsBean(applicationList);
-
+        final List<ApplicationBean> applicationBeans = Arrays.asList(EXAMPLE_1, EXAMPLE_2);
         doReturn(applicationExample1).when(applicationManager).findByName(EXAMPLE_1.getName());
         doThrow(new ApplicationNotFoundException("")).when(applicationManager).findByName(EXAMPLE_2.getName());
 
-        ApplicationsServiceImpl spy = spy(applicationsService);
+        final ApplicationsServiceImpl spy = spy(applicationsService);
         doReturn(EXAMPLE_1).when(spy).setApplication(EXAMPLE_1.getId(), EXAMPLE_1);
         doReturn(EXAMPLE_2).when(spy).addApplication(EXAMPLE_2);
 
-        ApplicationsBean responseApplicationsBean = spy.setApplications(applicationsBean);
-
+        final List<ApplicationBean> responseApplicationBeans = spy.setApplications(applicationBeans);
         verify(spy).setApplication(EXAMPLE_1.getId(), EXAMPLE_1);
         verify(spy).addApplication(EXAMPLE_2);
-        assertEquals(applicationList.size(), responseApplicationsBean.getApplications().size());
+        assertEquals(applicationBeans.size(), responseApplicationBeans.size());
     }
 
     @Test
@@ -315,7 +303,7 @@ public class ApplicationsServiceTest {
         });
     }
 
-    private static Collection<Directory> getDirectories() {
+    private static List<Directory> getDirectories() {
         final Directory directory = ImmutableDirectory
                 .builder("directory", DirectoryType.INTERNAL, "internal")
                 .setId(1L)

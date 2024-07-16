@@ -181,7 +181,7 @@ public class UsersServiceTest {
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addUser(anyLong(), any(), any());
 
         final UserBean userBean = UserBeanUtil.toUserBean(getTestUser());
-        final Collection<GroupBean> groupBeans = Collections.singletonList(GroupBean.EXAMPLE_1);
+        final List<GroupBean> groupBeans = Collections.singletonList(GroupBean.EXAMPLE_1);
         userBean.setPassword("12345");
         userBean.setGroups(groupBeans);
 
@@ -280,7 +280,7 @@ public class UsersServiceTest {
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).updateUser(anyLong(), any());
 
         final UserBean userBean = UserBeanUtil.toUserBean(getTestUser());
-        final Collection<GroupBean> groupBeans = Collections.singletonList(GroupBean.EXAMPLE_1);
+        final List<GroupBean> groupBeans = Collections.singletonList(GroupBean.EXAMPLE_1);
         userBean.setGroups(groupBeans);
 
         usersService.updateUser(1L, user.getName(), userBean);

@@ -15,7 +15,6 @@ import com.atlassian.sal.api.user.UserKey;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
 import com.deftdevs.bootstrapi.commons.model.GadgetBean;
-import com.deftdevs.bootstrapi.commons.model.GadgetsBean;
 import com.deftdevs.bootstrapi.commons.service.api.GadgetsService;
 import org.apache.commons.lang.reflect.FieldUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -28,6 +27,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collections;
+import java.util.List;
 import java.util.Locale;
 import java.util.UUID;
 
@@ -57,12 +57,11 @@ class GadgetsServiceTest {
 
     @Test
     void testGetGadgets() throws URISyntaxException {
-        ExternalGadgetSpec externalGadgetSpec = createExternalGadgetSpec();
+        final ExternalGadgetSpec externalGadgetSpec = createExternalGadgetSpec();
         doReturn(Collections.singletonList(externalGadgetSpec)).when(externalGadgetSpecStore).entries();
 
-        GadgetsBean gadgetsBean = gadgetsService.getGadgets();
-
-        assertEquals(externalGadgetSpec.getSpecUri(), gadgetsBean.getGadgets().iterator().next().getUrl());
+        final List<GadgetBean> gadgetBeans = gadgetsService.getGadgets();
+        assertEquals(externalGadgetSpec.getSpecUri(), gadgetBeans.iterator().next().getUrl());
     }
 
     @Test
@@ -97,8 +96,8 @@ class GadgetsServiceTest {
         try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
             authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
 
-            final GadgetBean gadgetsBean = gadgetsService.addGadget(gadgetBean);
-            assertEquals(externalGadgetSpec.getSpecUri(), gadgetsBean.getUrl());
+            final GadgetBean responseGadgetBean = gadgetsService.addGadget(gadgetBean);
+            assertEquals(externalGadgetSpec.getSpecUri(), responseGadgetBean.getUrl());
         }
     }
 
@@ -131,15 +130,15 @@ class GadgetsServiceTest {
         ConfluenceUser user = createConfluenceUser();
         GadgetBean gadgetBean = new GadgetBean();
         gadgetBean.setUrl(externalGadgetSpec.getSpecUri());
-        GadgetsBean gadgetsBeanToSet = new GadgetsBean(Collections.singletonList(gadgetBean));
+        List<GadgetBean> gadgetBeansToSet = Collections.singletonList(gadgetBean);
 
         GadgetSpec gadgetSpec = GadgetSpec.gadgetSpec(externalGadgetSpec.getSpecUri()).build();
 
         try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
             authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
 
-            final GadgetsBean gadgetsBean = gadgetsService.setGadgets(gadgetsBeanToSet);
-            assertEquals(externalGadgetSpec.getSpecUri(), gadgetsBean.getGadgets().iterator().next().getUrl());
+            final List<GadgetBean> gadgetBeans = gadgetsService.setGadgets(gadgetBeansToSet);
+            assertEquals(externalGadgetSpec.getSpecUri(), gadgetBeans.iterator().next().getUrl());
         }
     }
 

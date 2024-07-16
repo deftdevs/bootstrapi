@@ -2,26 +2,18 @@ package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
-import com.deftdevs.bootstrapi.commons.model.DirectoriesBean;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import javax.validation.constraints.NotNull;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 public interface DirectoriesResource {
 
@@ -32,7 +24,7 @@ public interface DirectoriesResource {
             summary = "Get all user directories",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = DirectoriesBean.class)),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = AbstractDirectoryBean.class))),
                             description = "Returns all directories."
                     ),
                     @ApiResponse(
@@ -72,7 +64,7 @@ public interface DirectoriesResource {
             description = "NOTE: All existing directories with the same 'name' attribute are updated.",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = DirectoriesBean.class)),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = AbstractDirectoryBean.class))),
                             description = "Returns all directories."
                     ),
                     @ApiResponse(
@@ -83,7 +75,7 @@ public interface DirectoriesResource {
     )
     Response setDirectories(
             @QueryParam("test-connection") @DefaultValue("false") final boolean testConnection,
-            @NotNull final DirectoriesBean directories);
+            @NotNull final List<AbstractDirectoryBean> directories);
 
     @PUT
     @Path("{id}")

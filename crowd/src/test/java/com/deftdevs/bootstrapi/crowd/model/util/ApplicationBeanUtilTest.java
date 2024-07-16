@@ -15,7 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import java.util.Collections;
 import java.util.HashSet;
 
@@ -102,7 +102,7 @@ public class ApplicationBeanUtilTest {
         doReturn(new ArrayList<>(applicationBeanDirectoryMapping.getAutoAssignmentGroups()))
                 .when(defaultGroupMembershipService).listAll(applicationWithDirectoryMappings, applicationDirectoryMapping);
 
-        final Collection<ApplicationBean.ApplicationDirectoryMapping> transformedApplicationBeanDirectoryMappings
+        final List<ApplicationBean.ApplicationDirectoryMapping> transformedApplicationBeanDirectoryMappings
                 = toApplicationBeanDirectoryMappings(applicationWithDirectoryMappings, defaultGroupMembershipService);
         assertEquals(1, transformedApplicationBeanDirectoryMappings.size());
 
@@ -117,8 +117,8 @@ public class ApplicationBeanUtilTest {
     }
 
     private static <T> void assertCollectionsEqual(
-            final Collection<T> expected,
-            final Collection<T> actual) {
+            final List<T> expected,
+            final List<T> actual) {
 
         assertTrue(actual.containsAll(expected) && expected.containsAll(actual));
     }

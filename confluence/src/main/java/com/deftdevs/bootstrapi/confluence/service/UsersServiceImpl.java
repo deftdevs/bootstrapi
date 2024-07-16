@@ -16,7 +16,7 @@ import com.deftdevs.bootstrapi.confluence.model.util.UserBeanUtil;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import java.util.Collection;
+import java.util.List;
 import java.util.List;
 
 import static com.deftdevs.bootstrapi.commons.util.BeanValidationUtil.validate;
@@ -106,7 +106,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public List<UserBean> setUsers(
             final long directoryId,
-            final Collection<UserBean> userBeans) {
+            final List<UserBean> userBeans) {
 
         // Not yet implemented
         throw new UnsupportedOperationException();

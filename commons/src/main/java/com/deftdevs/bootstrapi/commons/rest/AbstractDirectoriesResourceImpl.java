@@ -1,11 +1,11 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
-import com.deftdevs.bootstrapi.commons.model.DirectoriesBean;
 import com.deftdevs.bootstrapi.commons.rest.api.DirectoriesResource;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 public abstract class AbstractDirectoriesResourceImpl implements DirectoriesResource {
 
@@ -17,8 +17,8 @@ public abstract class AbstractDirectoriesResourceImpl implements DirectoriesReso
 
     @Override
     public Response getDirectories() {
-        final DirectoriesBean directoriesBean = directoriesService.getDirectories();
-        return Response.ok(directoriesBean).build();
+        final List<AbstractDirectoryBean> directoryBeans = directoriesService.getDirectories();
+        return Response.ok(directoryBeans).build();
     }
 
     @Override
@@ -31,10 +31,10 @@ public abstract class AbstractDirectoriesResourceImpl implements DirectoriesReso
     @Override
     public Response setDirectories (
             final boolean testConnection,
-            final DirectoriesBean directories) {
+            final List<AbstractDirectoryBean> directories) {
 
-        DirectoriesBean directoriesBean = directoriesService.setDirectories(directories, testConnection);
-        return Response.ok(directoriesBean).build();
+        List<AbstractDirectoryBean> directoryBeans = directoriesService.setDirectories(directories, testConnection);
+        return Response.ok(directoryBeans).build();
     }
 
     @Override
@@ -43,8 +43,8 @@ public abstract class AbstractDirectoriesResourceImpl implements DirectoriesReso
             final boolean testConnection,
             final AbstractDirectoryBean directory) {
 
-        AbstractDirectoryBean directoriesBean = directoriesService.setDirectory(id, directory, testConnection);
-        return Response.ok(directoriesBean).build();
+        AbstractDirectoryBean resultDirectoryBean  = directoriesService.setDirectory(id, directory, testConnection);
+        return Response.ok(resultDirectoryBean).build();
     }
 
     @Override

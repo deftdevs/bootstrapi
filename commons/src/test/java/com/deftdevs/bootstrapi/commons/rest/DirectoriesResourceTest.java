@@ -1,7 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
-import com.deftdevs.bootstrapi.commons.model.DirectoriesBean;
 import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean;
 import com.deftdevs.bootstrapi.commons.rest.impl.TestDirectoriesResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
@@ -14,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import javax.ws.rs.core.Response;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -34,16 +34,15 @@ class DirectoriesResourceTest {
 
     @Test
     void testGetDirectories() {
-        DirectoryCrowdBean initialDirectoryBean = DirectoryCrowdBean.EXAMPLE_1;
-        DirectoriesBean directoriesBean = new DirectoriesBean(Collections.singleton(initialDirectoryBean));
-
-        doReturn(directoriesBean).when(directoriesService).getDirectories();
+        final DirectoryCrowdBean initialDirectoryBean = DirectoryCrowdBean.EXAMPLE_1;
+        final List<AbstractDirectoryBean> directoryBeans = Collections.singletonList(initialDirectoryBean);
+        doReturn(directoryBeans).when(directoriesService).getDirectories();
 
         final Response response = resource.getDirectories();
         assertEquals(200, response.getStatus());
-        final DirectoriesBean directoriesBeanResponse = (DirectoriesBean) response.getEntity();
 
-        assertEquals(initialDirectoryBean, directoriesBeanResponse.getDirectories().iterator().next());
+        final List<AbstractDirectoryBean> responseDirectoryBeans = (List<AbstractDirectoryBean>) response.getEntity();
+        assertEquals(initialDirectoryBean, responseDirectoryBeans.iterator().next());
     }
 
     @Test
@@ -61,17 +60,16 @@ class DirectoriesResourceTest {
 
     @Test
     void testSetDirectories() {
-        DirectoryCrowdBean directoryBean1 = DirectoryCrowdBean.EXAMPLE_1;
-        DirectoryCrowdBean directoryBean2 = DirectoryCrowdBean.EXAMPLE_3;
-        DirectoriesBean directoriesBean = new DirectoriesBean(Arrays.asList(directoryBean1, directoryBean2));
+        final DirectoryCrowdBean directoryBean1 = DirectoryCrowdBean.EXAMPLE_1;
+        final DirectoryCrowdBean directoryBean2 = DirectoryCrowdBean.EXAMPLE_3;
+        final List<AbstractDirectoryBean> directoryBeans = Arrays.asList(directoryBean1, directoryBean2);
+        doReturn(directoryBeans).when(directoriesService).setDirectories(directoryBeans, false);
 
-        doReturn(directoriesBean).when(directoriesService).setDirectories(directoriesBean, false);
-
-        final Response response = resource.setDirectories(Boolean.FALSE, directoriesBean);
+        final Response response = resource.setDirectories(Boolean.FALSE, directoryBeans);
         assertEquals(200, response.getStatus());
-        final DirectoriesBean directoriesBeanResponse = (DirectoriesBean) response.getEntity();
 
-        assertEquals(directoriesBean.getDirectories().size(), directoriesBeanResponse.getDirectories().size());
+        final List<AbstractDirectoryBean> responseDirectoryBeans = (List<AbstractDirectoryBean>) response.getEntity();
+        assertEquals(directoryBeans.size(), responseDirectoryBeans.size());
     }
 
     @Test

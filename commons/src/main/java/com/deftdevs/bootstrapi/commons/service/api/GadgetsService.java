@@ -1,9 +1,9 @@
 package com.deftdevs.bootstrapi.commons.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.GadgetBean;
-import com.deftdevs.bootstrapi.commons.model.GadgetsBean;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public interface GadgetsService {
 
@@ -12,7 +12,7 @@ public interface GadgetsService {
      *
      * @return the gadgets
      */
-    GadgetsBean getGadgets();
+    List<GadgetBean> getGadgets();
 
     /**
      * Gets a single gadget.
@@ -26,11 +26,11 @@ public interface GadgetsService {
     /**
      * Sets or updates the gadgets set.
      *
-     * @param gadgetsBean the gadgets bean
+     * @param List<gadgetsBeanBeans> the gadgets bean
      * @return the updated gadgets
      */
-    GadgetsBean setGadgets(
-            @NotNull final GadgetsBean gadgetsBean);
+    List<GadgetBean> setGadgets(
+            @NotNull final List<GadgetBean> gadgetBeans);
 
     /**
      * Updates a single gadgets.

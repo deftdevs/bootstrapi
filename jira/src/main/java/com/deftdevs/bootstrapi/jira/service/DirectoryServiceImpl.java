@@ -11,7 +11,6 @@ import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.ServiceUnavailableException;
 import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
-import com.deftdevs.bootstrapi.commons.model.DirectoriesBean;
 import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 import com.deftdevs.bootstrapi.jira.model.util.DirectoryBeanUtil;
@@ -44,14 +43,14 @@ public class DirectoryServiceImpl implements DirectoriesService {
     }
 
     @Override
-    public DirectoriesBean getDirectories() {
+    public List<AbstractDirectoryBean> getDirectories() {
         List<AbstractDirectoryBean> beans = new ArrayList<>();
         for (Directory directory : crowdDirectoryService.findAllDirectories()) {
             AbstractDirectoryBean crowdBean;
             crowdBean = DirectoryBeanUtil.toDirectoryBean(directory);
             beans.add(crowdBean);
         }
-        return new DirectoriesBean(beans);
+        return beans;
     }
 
     @Override
@@ -61,12 +60,13 @@ public class DirectoryServiceImpl implements DirectoriesService {
     }
 
     @Override
-    public DirectoriesBean setDirectories(DirectoriesBean directoriesBean, boolean testConnection) {
+    public List<AbstractDirectoryBean> setDirectories(
+            List<AbstractDirectoryBean> directoryBeans, boolean testConnection) {
 
         final Map<String, Directory> existingDirectoriesByName = crowdDirectoryService.findAllDirectories().stream()
                 .collect(Collectors.toMap(Directory::getName, Function.identity()));
 
-        directoriesBean.getDirectories().forEach(directoryRequestBean -> {
+        for (AbstractDirectoryBean directoryRequestBean : directoryBeans) {
             if (directoryRequestBean instanceof DirectoryCrowdBean) {
                 DirectoryCrowdBean crowdRequestBean = (DirectoryCrowdBean) directoryRequestBean;
 
@@ -78,7 +78,8 @@ public class DirectoryServiceImpl implements DirectoriesService {
             } else {
                 throw new BadRequestException(format("Updating directory type '%s' is not supported (yet)", directoryRequestBean.getClass()));
             }
-        });
+        };
+
         return getDirectories();
     }
 
