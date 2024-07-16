@@ -9,8 +9,4 @@
 
     <rest key="deftdevs-bootstrapi-rest" name="BootstrAPI REST" path="/bootstrapi" version="1"/>
 
-    <rest-migration key="deftdevs-bootstrapi-rest-migration">
-        <rest-v2/>
-    </rest-migration>
-
 </atlassian-plugin>
