@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
-import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
+import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
 import com.deftdevs.bootstrapi.crowd.model.MailTemplatesBean;
 import com.deftdevs.bootstrapi.crowd.rest.api.MailTemplateResource;
 import com.deftdevs.bootstrapi.crowd.service.api.MailTemplatesService;
