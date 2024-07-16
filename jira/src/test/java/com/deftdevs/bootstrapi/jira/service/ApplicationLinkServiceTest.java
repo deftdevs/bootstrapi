@@ -22,7 +22,6 @@ import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
-import com.deftdevs.bootstrapi.commons.model.ApplicationLinksBean;
 import com.deftdevs.bootstrapi.jira.model.type.DefaultAuthenticationScenario;
 import com.deftdevs.bootstrapi.jira.model.util.ApplicationLinkBeanUtil;
 import org.junit.jupiter.api.BeforeEach;
@@ -33,6 +32,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.UUID;
 
@@ -78,11 +78,11 @@ class ApplicationLinkServiceTest {
         doReturn(Collections.singletonList(applicationLink)).when(mutatingApplicationLinkService).getApplicationLinks();
         doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
 
-        ApplicationLinksBean applicationLinks = applicationLinkService.getApplicationLinks();
+        Collection<ApplicationLinkBean> applicationLinkBeans = applicationLinkService.getApplicationLinks();
 
         ApplicationLinkBean applicationLinkBean = ApplicationLinkBeanUtil.toApplicationLinkBean(applicationLink);
         applicationLinkBean.setStatus(AVAILABLE);
-        assertEquals(applicationLinks.getApplicationLinks().iterator().next(), applicationLinkBean);
+        assertEquals(applicationLinkBeans.iterator().next(), applicationLinkBean);
     }
 
     @Test
@@ -102,19 +102,17 @@ class ApplicationLinkServiceTest {
     void testSetApplicationLinks()
             throws URISyntaxException, NoAccessException, NoSuchApplinkException, TypeNotInstalledException {
 
-        ApplicationLink applicationLink = createApplicationLink();
-        ApplicationLinkBean applicationLinkBean = createApplicationLinkBean();
-        ApplicationLinksBean applicationLinksBean = new ApplicationLinksBean(Collections.singletonList(createApplicationLinkBean()));
-
+        final ApplicationLink applicationLink = createApplicationLink();
+        final ApplicationLinkBean applicationLinkBean = createApplicationLinkBean();
+        final Collection<ApplicationLinkBean> applicationLinkBeans = Collections.singletonList(createApplicationLinkBean());
         doReturn(Collections.singletonList(applicationLink)).when(mutatingApplicationLinkService).getApplicationLinks();
         doReturn(applicationLink).when(mutatingApplicationLinkService).getApplicationLink(any());
         doReturn(applicationLink).when(mutatingApplicationLinkService).addApplicationLink(any(), any(), any());
         doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
         doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
 
-        ApplicationLinksBean applicationLinkResponse = applicationLinkService.setApplicationLinks(applicationLinksBean, true);
-
-        assertEquals(applicationLinkResponse.getApplicationLinks().iterator().next().getName(), applicationLinkBean.getName());
+        final Collection<ApplicationLinkBean> responseApplicationLinkBeans = applicationLinkService.setApplicationLinks(applicationLinkBeans, true);
+        assertEquals(responseApplicationLinkBeans.iterator().next().getName(), applicationLinkBean.getName());
     }
 
     @Test

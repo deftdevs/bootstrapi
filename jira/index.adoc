@@ -425,7 +425,7 @@ Get all application links
 
 ===== Return Type
 
-<<ApplicationLinksBean>>
+array[<<ApplicationLinkBean>>]
 
 
 ===== Content Type
@@ -442,7 +442,7 @@ Get all application links
 
 | 200
 | Returns all application links.
-|  <<ApplicationLinksBean>>
+| List[<<ApplicationLinkBean>>] 
 
 
 | 0
@@ -611,8 +611,8 @@ NOTE: All existing application links with the same 'rpcUrl' attribute are update
 |===
 |Name| Description| Required| Default| Pattern
 
-| ApplicationLinksBean
-|  <<ApplicationLinksBean>>
+| ApplicationLinkBean
+|  <<ApplicationLinkBean>>
 | X
 | 
 | 
@@ -638,7 +638,7 @@ NOTE: All existing application links with the same 'rpcUrl' attribute are update
 
 ===== Return Type
 
-<<ApplicationLinksBean>>
+array[<<ApplicationLinkBean>>]
 
 
 ===== Content Type
@@ -655,7 +655,7 @@ NOTE: All existing application links with the same 'rpcUrl' attribute are update
 
 | 200
 | Returns all application links.
-|  <<ApplicationLinksBean>>
+| List[<<ApplicationLinkBean>>] 
 
 
 | 0
@@ -3187,28 +3187,6 @@ endif::internal-generation[]
 | 
 | 
 |   String  
-| 
-|     
-
-|===
-
-
-
-[#ApplicationLinksBean]
-=== _ApplicationLinksBean_ 
-
-
-
-
-[.fields-ApplicationLinksBean]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| applicationLinks
-| 
-| 
-|   List   of <<ApplicationLinkBean>>
 | 
 |     
 

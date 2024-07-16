@@ -25,7 +25,6 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
-import com.deftdevs.bootstrapi.commons.model.ApplicationLinksBean;
 import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
 import com.deftdevs.bootstrapi.confluence.model.DefaultAuthenticationScenario;
 import com.deftdevs.bootstrapi.confluence.model.util.ApplicationLinkBeanUtil;
@@ -36,7 +35,7 @@ import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.net.URI;
-import java.util.List;
+import java.util.Collection;
 import java.util.Map;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -66,14 +65,12 @@ public class ApplicationLinkServiceImpl implements ApplicationLinksService {
     }
 
     @Override
-    public ApplicationLinksBean getApplicationLinks() {
+    public Collection<ApplicationLinkBean> getApplicationLinks() {
         Iterable<ApplicationLink> applicationLinksIterable = mutatingApplicationLinkService.getApplicationLinks();
 
-        List<ApplicationLinkBean> applicationLinkBeans = StreamSupport.stream(applicationLinksIterable.spliterator(),false)
+        return StreamSupport.stream(applicationLinksIterable.spliterator(),false)
                 .map(this::getApplicationLinkBeanWithStatus)
                 .collect(Collectors.toList());
-
-        return new ApplicationLinksBean(applicationLinkBeans);
     }
 
     @Override
@@ -89,16 +86,16 @@ public class ApplicationLinkServiceImpl implements ApplicationLinksService {
     }
 
     @Override
-    public ApplicationLinksBean setApplicationLinks(
-            final ApplicationLinksBean applicationLinksBean,
+    public Collection<ApplicationLinkBean> setApplicationLinks(
+            final Collection<ApplicationLinkBean> applicationLinkBeans,
             final boolean ignoreSetupErrors) {
 
-        //existing applinks map
-        Map<URI, ApplicationLinkBean> linkBeanMap = getApplicationLinks().getApplicationLinks().stream()
+        // existing application links map
+        final Map<URI, ApplicationLinkBean> linkBeanMap = getApplicationLinks().stream()
                 .collect(Collectors.toMap(ApplicationLinkBean::getRpcUrl, link -> link));
 
-        //find existing link by rpcUrl
-        for (ApplicationLinkBean applicationLink : applicationLinksBean.getApplicationLinks()) {
+        // find existing link by rpcUrl
+        for (ApplicationLinkBean applicationLink : applicationLinkBeans) {
             URI key = applicationLink.getRpcUrl();
             if (linkBeanMap.containsKey(key)) {
                 setApplicationLink(linkBeanMap.get(key).getUuid(), applicationLink, ignoreSetupErrors);

@@ -2,26 +2,18 @@ package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
-import com.deftdevs.bootstrapi.commons.model.ApplicationLinksBean;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import javax.validation.constraints.NotNull;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.DefaultValue;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 import java.util.UUID;
 
 public interface ApplicationLinksResource {
@@ -33,7 +25,7 @@ public interface ApplicationLinksResource {
             summary = "Get all application links",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinksBean.class)),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApplicationLinkBean.class))),
                             description = "Returns all application links."
                     ),
                     @ApiResponse(
@@ -74,7 +66,7 @@ public interface ApplicationLinksResource {
             description = "NOTE: All existing application links with the same 'rpcUrl' attribute are updated.",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinksBean.class)),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApplicationLinkBean.class))),
                             description = "Returns all application links."
                     ),
                     @ApiResponse(
@@ -85,7 +77,7 @@ public interface ApplicationLinksResource {
     )
     Response setApplicationLinks(
             @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
-            @NotNull final ApplicationLinksBean linksBean);
+            @NotNull final List<ApplicationLinkBean> applicationLinkBeans);
 
     @PUT
     @Path("{uuid}")

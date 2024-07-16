@@ -39,7 +39,7 @@ This plugin provides methods for accessing configuration for Crowd.
 [.setAll]
 ==== setAll
 
-`PUT /all`
+`PUT /`
 
 Set the whole configuration
 
@@ -48,7 +48,7 @@ Set the whole configuration
 
 
 
-// markup not found, no include::{specDir}all/PUT/spec.adoc[opts=optional]
+// markup not found, no include::{specDir}PUT/spec.adoc[opts=optional]
 
 
 
@@ -105,20 +105,20 @@ Set the whole configuration
 ===== Samples
 
 
-// markup not found, no include::{snippetDir}all/PUT/http-request.adoc[opts=optional]
+// markup not found, no include::{snippetDir}PUT/http-request.adoc[opts=optional]
 
 
-// markup not found, no include::{snippetDir}all/PUT/http-response.adoc[opts=optional]
+// markup not found, no include::{snippetDir}PUT/http-response.adoc[opts=optional]
 
 
 
-// file not found, no * wiremock data link :all/PUT/PUT.json[]
+// file not found, no * wiremock data link :PUT/PUT.json[]
 
 
 ifdef::internal-generation[]
 ===== Implementation
 
-// markup not found, no include::{specDir}all/PUT/implementation.adoc[opts=optional]
+// markup not found, no include::{specDir}PUT/implementation.adoc[opts=optional]
 
 
 endif::internal-generation[]
@@ -517,7 +517,7 @@ Get all application links
 
 ===== Return Type
 
-<<ApplicationLinksBean>>
+array[<<ApplicationLinkBean>>]
 
 
 ===== Content Type
@@ -534,7 +534,7 @@ Get all application links
 
 | 200
 | Returns all application links.
-|  <<ApplicationLinksBean>>
+| List[<<ApplicationLinkBean>>] 
 
 
 | 0
@@ -703,8 +703,8 @@ NOTE: All existing application links with the same 'rpcUrl' attribute are update
 |===
 |Name| Description| Required| Default| Pattern
 
-| ApplicationLinksBean
-|  <<ApplicationLinksBean>>
+| ApplicationLinkBean
+|  <<ApplicationLinkBean>>
 | X
 | 
 | 
@@ -730,7 +730,7 @@ NOTE: All existing application links with the same 'rpcUrl' attribute are update
 
 ===== Return Type
 
-<<ApplicationLinksBean>>
+array[<<ApplicationLinkBean>>]
 
 
 ===== Content Type
@@ -747,7 +747,7 @@ NOTE: All existing application links with the same 'rpcUrl' attribute are update
 
 | 200
 | Returns all application links.
-|  <<ApplicationLinksBean>>
+| List[<<ApplicationLinkBean>>] 
 
 
 | 0
@@ -4548,28 +4548,6 @@ endif::internal-generation[]
 | 
 | 
 |   String  
-| 
-|     
-
-|===
-
-
-
-[#ApplicationLinksBean]
-=== _ApplicationLinksBean_ 
-
-
-
-
-[.fields-ApplicationLinksBean]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| applicationLinks
-| 
-| 
-|   List   of <<ApplicationLinkBean>>
 | 
 |     
 
