@@ -79,7 +79,7 @@
         <sonar.projectKey>deftdevs_bootstrapi</sonar.projectKey>
         <!-- other properties -->
         <atlassian.amps.version>8.17.6</atlassian.amps.version>
-        <atlassian.platform.version>6.5.21</atlassian.platform.version>
+        <atlassian.platform.version>6.5.22</atlassian.platform.version>
         <atlassian.plugins-osgi-testrunner.version>3.0.0-m01</atlassian.plugins-osgi-testrunner.version>
         <jacoco.maven-plugin.version>0.8.12</jacoco.maven-plugin.version>
         <lombok.version>1.18.34</lombok.version>
