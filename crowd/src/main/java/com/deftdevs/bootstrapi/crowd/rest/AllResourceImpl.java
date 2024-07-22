@@ -12,7 +12,7 @@ import javax.ws.rs.core.Response;
 
 @Component
 @SystemAdminOnly
-@Path("")
+@Path("/")
 public class AllResourceImpl implements AllResource {
 
     private final AllService allService;
@@ -22,6 +22,11 @@ public class AllResourceImpl implements AllResource {
             final AllService allService) {
 
         this.allService = allService;
+    }
+
+    @Override
+    public Response getAll() {
+        return Response.ok().build();
     }
 
     @Override

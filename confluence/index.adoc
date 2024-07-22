@@ -1364,6 +1364,79 @@ ifdef::internal-generation[]
 endif::internal-generation[]
 
 
+[.Default]
+=== Default
+
+
+[.getTest]
+==== getTest
+
+`GET /application-links/test`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}application-links/test/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+map[<<ApplicationLinkBean>>]
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| default response
+| Map[<<ApplicationLinkBean>>] 
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}application-links/test/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}application-links/test/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :application-links/test/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}application-links/test/GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.Directories]
 === Directories
 

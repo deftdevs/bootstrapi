@@ -36,6 +36,81 @@ This plugin provides methods for accessing configuration for Crowd.
 === All
 
 
+[.getAll]
+==== getAll
+
+`GET /`
+
+Get the whole configuration
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+
+
+-
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 200
+| When getting whole configuration was successful.
+|  <<>>
+
+
+| 0
+| Returns a list of error messages.
+|  <<ErrorCollection>>
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}GET/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
 [.setAll]
 ==== setAll
 
@@ -81,7 +156,7 @@ Set the whole configuration
 
 ===== Content Type
 
-* */*
+* application/json
 
 ===== Responses
 
@@ -1388,6 +1463,79 @@ ifdef::internal-generation[]
 ===== Implementation
 
 // markup not found, no include::{specDir}applications/PUT/implementation.adoc[opts=optional]
+
+
+endif::internal-generation[]
+
+
+[.Default]
+=== Default
+
+
+[.getTest]
+==== getTest
+
+`GET /application-links/test`
+
+
+
+===== Description
+
+
+
+
+// markup not found, no include::{specDir}application-links/test/GET/spec.adoc[opts=optional]
+
+
+
+===== Parameters
+
+
+
+
+
+
+
+===== Return Type
+
+map[<<ApplicationLinkBean>>]
+
+
+===== Content Type
+
+* application/json
+
+===== Responses
+
+.HTTP Response Codes
+[cols="2,3,1"]
+|===
+| Code | Message | Datatype
+
+
+| 0
+| default response
+| Map[<<ApplicationLinkBean>>] 
+
+|===
+
+===== Samples
+
+
+// markup not found, no include::{snippetDir}application-links/test/GET/http-request.adoc[opts=optional]
+
+
+// markup not found, no include::{snippetDir}application-links/test/GET/http-response.adoc[opts=optional]
+
+
+
+// file not found, no * wiremock data link :application-links/test/GET/GET.json[]
+
+
+ifdef::internal-generation[]
+===== Implementation
+
+// markup not found, no include::{specDir}application-links/test/GET/implementation.adoc[opts=optional]
 
 
 endif::internal-generation[]

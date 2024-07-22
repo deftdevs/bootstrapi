@@ -5,9 +5,7 @@ import com.deftdevs.bootstrapi.commons.rest.api.ApplicationLinksResource;
 import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
 
 import javax.ws.rs.core.Response;
-import java.util.Collection;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 
 public abstract class AbstractApplicationLinksResourceImpl implements ApplicationLinksResource {
 
@@ -17,6 +15,11 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
             final ApplicationLinksService applicationLinksService) {
 
         this.applicationLinksService = applicationLinksService;
+    }
+
+    @Override
+    public Map<String, ApplicationLinkBean> getTest() {
+        return Collections.singletonMap(ApplicationLinkBean.EXAMPLE_1.getName(), ApplicationLinkBean.EXAMPLE_1);
     }
 
     @Override

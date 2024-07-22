@@ -14,9 +14,15 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public interface ApplicationLinksResource {
+
+    @GET
+    @Path("test")
+    @Produces(MediaType.APPLICATION_JSON)
+    Map<String, ApplicationLinkBean> getTest();
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
