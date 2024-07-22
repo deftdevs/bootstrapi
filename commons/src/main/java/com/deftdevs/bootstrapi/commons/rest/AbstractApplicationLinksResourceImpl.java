@@ -44,7 +44,7 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
     }
 
     @Override
-    public Response setApplicationLink(
+    public Response updateApplicationLink(
             final UUID uuid,
             final boolean ignoreSetupErrors,
             final ApplicationLinkBean linkBean) {
@@ -55,7 +55,7 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
     }
 
     @Override
-    public Response addApplicationLink(
+    public Response createApplicationLink(
             final boolean ignoreSetupErrors,
             final ApplicationLinkBean linkBean) {
 

@@ -4,18 +4,18 @@ All URIs are relative to *https://&lt;JIRA_URL&gt;/rest/bootstrapi/1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**addDirectory**](DirectoriesApi.md#addDirectory) | **POST** /directories | Add a user directory |
+| [**createDirectory**](DirectoriesApi.md#createDirectory) | **POST** /directories | Add a user directory |
 | [**deleteDirectories**](DirectoriesApi.md#deleteDirectories) | **DELETE** /directories | Delete all user directories |
 | [**deleteDirectory**](DirectoriesApi.md#deleteDirectory) | **DELETE** /directories/{id} | Delete a user directory |
 | [**getDirectories**](DirectoriesApi.md#getDirectories) | **GET** /directories | Get all user directories |
 | [**getDirectory**](DirectoriesApi.md#getDirectory) | **GET** /directories/{id} | Get a user directory |
-| [**setDirectories**](DirectoriesApi.md#setDirectories) | **PUT** /directories | Set or update a list of user directories |
-| [**setDirectory**](DirectoriesApi.md#setDirectory) | **PUT** /directories/{id} | Update a user directory |
+| [**setDirectories**](DirectoriesApi.md#setDirectories) | **PUT** /directories | Set a list of user directories |
+| [**updateDirectory**](DirectoriesApi.md#updateDirectory) | **PUT** /directories/{id} | Update a user directory |
 
 
-<a name="addDirectory"></a>
-# **addDirectory**
-> AbstractDirectoryBean addDirectory(AbstractDirectoryBean, test-connection)
+<a name="createDirectory"></a>
+# **createDirectory**
+> AbstractDirectoryBean createDirectory(AbstractDirectoryBean, test-connection)
 
 Add a user directory
 
@@ -142,7 +142,7 @@ Get a user directory
 # **setDirectories**
 > List setDirectories(AbstractDirectoryBean, test-connection)
 
-Set or update a list of user directories
+Set a list of user directories
 
     NOTE: All existing directories with the same &#39;name&#39; attribute are updated.
 
@@ -166,9 +166,9 @@ Set or update a list of user directories
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="setDirectory"></a>
-# **setDirectory**
-> AbstractDirectoryBean setDirectory(id, AbstractDirectoryBean, test-connection)
+<a name="updateDirectory"></a>
+# **updateDirectory**
+> AbstractDirectoryBean updateDirectory(id, AbstractDirectoryBean, test-connection)
 
 Update a user directory
 

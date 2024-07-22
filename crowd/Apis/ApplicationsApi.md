@@ -4,18 +4,18 @@ All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**addApplication**](ApplicationsApi.md#addApplication) | **POST** /applications | Add an application |
+| [**createApplication**](ApplicationsApi.md#createApplication) | **POST** /applications | Add an application |
 | [**deleteApplication**](ApplicationsApi.md#deleteApplication) | **DELETE** /applications/{id} | Delete an application |
 | [**deleteApplications**](ApplicationsApi.md#deleteApplications) | **DELETE** /applications | Delete all applications |
 | [**getApplication**](ApplicationsApi.md#getApplication) | **GET** /applications/{id} | Get an application |
 | [**getApplications**](ApplicationsApi.md#getApplications) | **GET** /applications | Get all applications |
-| [**setApplication**](ApplicationsApi.md#setApplication) | **PUT** /applications/{id} | Update an application |
-| [**setApplications**](ApplicationsApi.md#setApplications) | **PUT** /applications | Set or update a list of applications |
+| [**setApplications**](ApplicationsApi.md#setApplications) | **PUT** /applications | Set a list of applications |
+| [**updateApplication**](ApplicationsApi.md#updateApplication) | **PUT** /applications/{id} | Update an application |
 
 
-<a name="addApplication"></a>
-# **addApplication**
-> ApplicationBean addApplication(ApplicationBean)
+<a name="createApplication"></a>
+# **createApplication**
+> ApplicationBean createApplication(ApplicationBean)
 
 Add an application
 
@@ -139,9 +139,36 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="setApplication"></a>
-# **setApplication**
-> ApplicationBean setApplication(id, ApplicationBean)
+<a name="setApplications"></a>
+# **setApplications**
+> List setApplications(ApplicationBean)
+
+Set a list of applications
+
+    NOTE: All existing applications with the same &#39;name&#39; attribute are updated.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **ApplicationBean** | [**List**](../Models/ApplicationBean.md)|  | [optional] |
+
+### Return type
+
+[**List**](../Models/ApplicationBean.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+<a name="updateApplication"></a>
+# **updateApplication**
+> ApplicationBean updateApplication(id, ApplicationBean)
 
 Update an application
 
@@ -155,33 +182,6 @@ Update an application
 ### Return type
 
 [**ApplicationBean**](../Models/ApplicationBean.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="setApplications"></a>
-# **setApplications**
-> List setApplications(ApplicationBean)
-
-Set or update a list of applications
-
-    NOTE: All existing applications with the same &#39;name&#39; attribute are updated.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **ApplicationBean** | [**List**](../Models/ApplicationBean.md)|  | [optional] |
-
-### Return type
-
-[**List**](../Models/ApplicationBean.md)
 
 ### Authorization
 

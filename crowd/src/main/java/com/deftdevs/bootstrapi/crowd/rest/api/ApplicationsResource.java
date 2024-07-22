@@ -61,7 +61,7 @@ public interface ApplicationsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { BootstrAPI.APPLICATIONS },
-            summary = "Set or update a list of applications",
+            summary = "Set a list of applications",
             description = "NOTE: All existing applications with the same 'name' attribute are updated.",
             responses = {
                     @ApiResponse(
@@ -76,6 +76,26 @@ public interface ApplicationsResource {
     )
     Response setApplications(
             List<ApplicationBean> applicationBeans);
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            tags = { BootstrAPI.APPLICATIONS },
+            summary = "Add an application",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationBean.class)),
+                            description = "Returns the added application."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
+            }
+    )
+    Response createApplication(
+            ApplicationBean applicationBean);
 
     @PUT
     @Path("{id}")
@@ -95,29 +115,9 @@ public interface ApplicationsResource {
                     ),
             }
     )
-    Response setApplication(
+    Response updateApplication(
             @PathParam("id") long id,
             ApplicationBean applicationsBeanBeans);
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.APPLICATIONS },
-            summary = "Add an application",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationBean.class)),
-                            description = "Returns the added application."
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response addApplication(
-            ApplicationBean applicationBean);
 
     @DELETE
     @Operation(

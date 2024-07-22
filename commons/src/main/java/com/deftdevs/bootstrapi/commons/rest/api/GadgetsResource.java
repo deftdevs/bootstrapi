@@ -60,7 +60,7 @@ public interface GadgetsResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { BootstrAPI.GADGETS },
-            summary = "Set or update a list of gadgets",
+            summary = "Set a list of gadgets",
             description = "NOTE: This will only create gadgets that does not exist yet as there is no real 'update'.",
             responses = {
                     @ApiResponse(
@@ -75,28 +75,6 @@ public interface GadgetsResource {
     )
     Response setGadgets(
             @NotNull final List<GadgetBean> gadgetBeans);
-
-    @PUT
-    @Path("{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.GADGETS },
-            summary = "Update a gadget",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetBean.class)),
-                            description = "Returns the updated gadget."
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response setGadget(
-            @PathParam("id") final long id,
-            @NotNull final GadgetBean gadgetBean);
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -116,7 +94,29 @@ public interface GadgetsResource {
                     ),
             }
     )
-    Response addGadget(
+    Response createGadget(
+            @NotNull final GadgetBean gadgetBean);
+
+    @PUT
+    @Path("{id}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            tags = { BootstrAPI.GADGETS },
+            summary = "Update a gadget",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetBean.class)),
+                            description = "Returns the updated gadget."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
+            }
+    )
+    Response updateGadget(
+            @PathParam("id") final long id,
             @NotNull final GadgetBean gadgetBean);
 
     @DELETE

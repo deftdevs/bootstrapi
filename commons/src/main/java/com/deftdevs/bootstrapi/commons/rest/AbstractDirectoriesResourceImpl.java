@@ -38,7 +38,7 @@ public abstract class AbstractDirectoriesResourceImpl implements DirectoriesReso
     }
 
     @Override
-    public Response setDirectory (
+    public Response updateDirectory(
             final long id,
             final boolean testConnection,
             final AbstractDirectoryBean directory) {
@@ -48,7 +48,7 @@ public abstract class AbstractDirectoriesResourceImpl implements DirectoriesReso
     }
 
     @Override
-    public Response addDirectory (
+    public Response createDirectory(
             final boolean testConnection,
             final AbstractDirectoryBean directory) {
 

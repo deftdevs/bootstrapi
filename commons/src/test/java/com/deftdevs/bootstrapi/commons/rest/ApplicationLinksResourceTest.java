@@ -77,7 +77,7 @@ class ApplicationLinksResourceTest {
 
         doReturn(bean).when(applicationLinksService).setApplicationLink(id, bean, true);
 
-        final Response response = resource.setApplicationLink(id, true, bean);
+        final Response response = resource.updateApplicationLink(id, true, bean);
         assertEquals(200, response.getStatus());
         final ApplicationLinkBean linkBean = (ApplicationLinkBean) response.getEntity();
 
@@ -90,7 +90,7 @@ class ApplicationLinksResourceTest {
 
         doReturn(bean).when(applicationLinksService).addApplicationLink(bean, true);
 
-        final Response response = resource.addApplicationLink(true, bean);
+        final Response response = resource.createApplicationLink(true, bean);
         assertEquals(200, response.getStatus());
         final ApplicationLinkBean responseBean = (ApplicationLinkBean) response.getEntity();
 
