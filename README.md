@@ -9,6 +9,12 @@ BootstrAPI
 
 BootstrAPI is a series of plugins for providing additional REST API's for Atlassian products with focus on initial and declarative instance configuration (also referred to as "bootstrapping", hence the name).
 
+## Plugins
+
+- [Confluence](confluence) ([documentation](confluence/README.md))
+- [Crowd](crowd) ([documentation](crowd/README.md))
+- [Jira](jira) ([documentation](jira/README.md))
+
 ## About
 
 BootstrAPI is an open source project of Deft Devs LLC.

@@ -1,0 +1,59 @@
+# LicensesApi
+
+All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
+
+| Method | HTTP request | Description |
+|------------- | ------------- | -------------|
+| [**addLicense**](LicensesApi.md#addLicense) | **POST** /licenses | Add a license |
+| [**getLicenses**](LicensesApi.md#getLicenses) | **GET** /licenses | Get all licenses information |
+
+
+<a name="addLicense"></a>
+# **addLicense**
+> LicenseBean addLicense(LicenseBean)
+
+Add a license
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **LicenseBean** | [**LicenseBean**](../Models/LicenseBean.md)|  | |
+
+### Return type
+
+[**LicenseBean**](../Models/LicenseBean.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+<a name="getLicenses"></a>
+# **getLicenses**
+> List getLicenses()
+
+Get all licenses information
+
+    Upon successful request, returns a &#x60;LicensesBean&#x60; object containing license details. Be aware that &#x60;products&#x60; collection of the &#x60;LicenseBean&#x60; contains the product display names, not the product key names
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**List**](../Models/LicenseBean.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+

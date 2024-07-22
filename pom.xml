@@ -111,6 +111,12 @@
             </dependency>
 
             <dependency>
+                <groupId>io.swagger.core.v3</groupId>
+                <artifactId>swagger-models</artifactId>
+                <version>${swagger.version}</version>
+            </dependency>
+
+            <dependency>
                 <groupId>com.atlassian.platform.dependencies</groupId>
                 <artifactId>platform-public-api</artifactId>
                 <version>${atlassian.platform.version}</version>
