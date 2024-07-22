@@ -1,7 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
-import com.deftdevs.bootstrapi.crowd.model.TrustedProxiesBean;
 import com.deftdevs.bootstrapi.crowd.rest.api.TrustedProxiesResource;
 import com.deftdevs.bootstrapi.crowd.service.api.TrustedProxiesService;
 import org.springframework.stereotype.Component;
@@ -9,6 +8,7 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 @Component
 @SystemAdminOnly
@@ -30,8 +30,8 @@ public class TrustedProxiesResourceImpl implements TrustedProxiesResource {
     }
 
     @Override
-    public Response setTrustedProxies(TrustedProxiesBean trustedProxiesBean) {
-        final TrustedProxiesBean result = trustedProxiesService.setTrustedProxies(trustedProxiesBean);
+    public Response setTrustedProxies(List<String> trustedProxies) {
+        final List<String> result = trustedProxiesService.setTrustedProxies(trustedProxies);
         return Response.ok(result).build();
     }
 

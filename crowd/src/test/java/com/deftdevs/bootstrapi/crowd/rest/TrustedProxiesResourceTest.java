@@ -1,6 +1,5 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
-import com.deftdevs.bootstrapi.crowd.model.TrustedProxiesBean;
 import com.deftdevs.bootstrapi.crowd.service.api.TrustedProxiesService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,6 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import javax.ws.rs.core.Response;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -33,52 +33,56 @@ public class TrustedProxiesResourceTest {
 
     @Test
     public void testGetTrustedProxies() {
-        final TrustedProxiesBean trustedProxiesBean = TrustedProxiesBean.EXAMPLE_1;
-        doReturn(trustedProxiesBean).when(trustedProxiesService).getTrustedProxies();
+        final List<String> trustedProxies = Collections.singletonList(getExample());
+        doReturn(trustedProxies).when(trustedProxiesService).getTrustedProxies();
 
         final Response response = trustedProxiesResource.getTrustedProxies();
         assertEquals(200, response.getStatus());
 
-        final TrustedProxiesBean responseTrustedProxiesBean = (TrustedProxiesBean) response.getEntity();
-        assertEquals(trustedProxiesBean, responseTrustedProxiesBean);
+        final List<String> responseTrustedProxies = (List<String>) response.getEntity();
+        assertEquals(trustedProxies, responseTrustedProxies);
     }
 
     @Test
     public void testSetTrustedProxies() {
-        final TrustedProxiesBean trustedProxiesBean = TrustedProxiesBean.EXAMPLE_1;
-        doReturn(trustedProxiesBean).when(trustedProxiesService).setTrustedProxies(trustedProxiesBean);
+        final List<String> trustedProxies = Collections.singletonList(getExample());
+        doReturn(trustedProxies).when(trustedProxiesService).setTrustedProxies(trustedProxies);
 
-        final Response response = trustedProxiesResource.setTrustedProxies(TrustedProxiesBean.EXAMPLE_1);
+        final Response response = trustedProxiesResource.setTrustedProxies(trustedProxies);
         assertEquals(200, response.getStatus());
 
-        final TrustedProxiesBean responseTrustedProxiesBean = (TrustedProxiesBean) response.getEntity();
-        assertEquals(trustedProxiesBean, responseTrustedProxiesBean);
+        final List<String> responseTrustedProxies = (List<String>) response.getEntity();
+        assertEquals(trustedProxies, responseTrustedProxies);
     }
 
     @Test
     public void testAddTrustedProxy() {
-        final TrustedProxiesBean trustedProxiesBean = TrustedProxiesBean.EXAMPLE_1;
-        final String trustedProxy = trustedProxiesBean.getTrustedProxies().iterator().next();
-        doReturn(trustedProxiesBean).when(trustedProxiesService).addTrustedProxy(trustedProxy);
+        final List<String> trustedProxies = Collections.singletonList(getExample());
+        final String trustedProxy = trustedProxies.iterator().next();
+        doReturn(trustedProxies).when(trustedProxiesService).addTrustedProxy(trustedProxy);
 
         final Response response = trustedProxiesResource.addTrustedProxy(trustedProxy);
         assertEquals(200, response.getStatus());
 
-        final TrustedProxiesBean responseTrustedProxiesBean = (TrustedProxiesBean) response.getEntity();
-        assertEquals(trustedProxiesBean, responseTrustedProxiesBean);
+        final List<String> responseTrustedProxies = (List<String>) response.getEntity();
+        assertEquals(trustedProxies, responseTrustedProxies);
     }
 
     @Test
     public void testRemoveTrustedProxy() {
-        final String trustedProxy = TrustedProxiesBean.EXAMPLE_1.getTrustedProxies().iterator().next();
-        final TrustedProxiesBean trustedProxiesBean = new TrustedProxiesBean(Collections.emptyList());
-        doReturn(trustedProxiesBean).when(trustedProxiesService).removeTrustedProxy(trustedProxy);
+        final String trustedProxy = getExample();
+        final List<String> trustedProxies = Collections.emptyList();
+        doReturn(trustedProxies).when(trustedProxiesService).removeTrustedProxy(trustedProxy);
 
         final Response response = trustedProxiesResource.removeTrustedProxy(trustedProxy);
         assertEquals(200, response.getStatus());
 
-        final TrustedProxiesBean responseTrustedProxiesBean = (TrustedProxiesBean) response.getEntity();
-        assertTrue(responseTrustedProxiesBean.getTrustedProxies().isEmpty());
+        final List<String> responseTrustedProxies = (List<String>) response.getEntity();
+        assertTrue(responseTrustedProxies.isEmpty());
+    }
+
+    private String getExample() {
+        return "0.0.0.0/0";
     }
 
 }

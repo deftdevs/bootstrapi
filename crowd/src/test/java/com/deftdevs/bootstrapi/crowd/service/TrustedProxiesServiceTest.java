@@ -1,7 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.proxy.TrustedProxyManager;
-import com.deftdevs.bootstrapi.crowd.model.TrustedProxiesBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -51,50 +50,53 @@ public class TrustedProxiesServiceTest {
     public void testGetTrustedProxies() {
         assertTrue(trustedProxies.isEmpty());
 
-        final List<String> trustedProxyStrings = TrustedProxiesBean.EXAMPLE_1.getTrustedProxies();
+        final List<String> trustedProxyStrings = Collections.singletonList(getExample1());
         trustedProxies.addAll(trustedProxyStrings);
 
-        final TrustedProxiesBean trustedProxiesBean = trustedProxiesService.getTrustedProxies();
-        assertEquals(trustedProxyStrings, trustedProxiesBean.getTrustedProxies());
+        final List<String> trustedProxies = trustedProxiesService.getTrustedProxies();
+        assertEquals(trustedProxyStrings, trustedProxies);
     }
 
     @Test
     public void testSetTrustedProxies() {
-        final List<String> trustedProxyStrings = TrustedProxiesBean.EXAMPLE_1.getTrustedProxies();
-        trustedProxies.addAll(trustedProxyStrings);
-        assertEquals(new HashSet<>(trustedProxyStrings), trustedProxies);
-
-        final List<String> otherTrustedProxyStrings = Arrays.asList("1.2.3.4", "5.6.7.8");
-        final TrustedProxiesBean otherTrustedProxiesBean = new TrustedProxiesBean(otherTrustedProxyStrings);
-
-        final TrustedProxiesBean trustedProxiesBean = trustedProxiesService.setTrustedProxies(otherTrustedProxiesBean);
-        assertEquals(trustedProxies, new HashSet<>(trustedProxiesBean.getTrustedProxies()));
+        final List<String> trustedProxies = Collections.singletonList(getExample1());
+        final List<String> otherTrustedProxies = Arrays.asList("1.2.3.4", "5.6.7.8");
+        final List<String> responseTrustedProxies = trustedProxiesService.setTrustedProxies(otherTrustedProxies);
+        assertEquals(responseTrustedProxies, otherTrustedProxies);
     }
 
     @Test
     public void testAddTrustedProxy() {
-        final String trustedProxy = TrustedProxiesBean.EXAMPLE_1.getTrustedProxies().iterator().next();
+        final String trustedProxy = getExample1();
         trustedProxies.add(trustedProxy);
         assertEquals(Collections.singleton(trustedProxy), trustedProxies);
 
-        final String otherTrustedProxy = TrustedProxiesBean.EXAMPLE_2.getTrustedProxies().iterator().next();
-        final TrustedProxiesBean trustedProxiesBean = trustedProxiesService.addTrustedProxy(otherTrustedProxy);
-        assertTrue(trustedProxiesBean.getTrustedProxies().contains(trustedProxy));
-        assertTrue(trustedProxiesBean.getTrustedProxies().contains(otherTrustedProxy));
+        final String otherTrustedProxy = getExample2();
+        final List<String> trustedProxies = trustedProxiesService.addTrustedProxy(otherTrustedProxy);
+        assertTrue(trustedProxies.contains(trustedProxy));
+        assertTrue(trustedProxies.contains(otherTrustedProxy));
     }
 
     @Test
     public void testRemoveTrustedProxy() {
-        final String trustedProxy = TrustedProxiesBean.EXAMPLE_1.getTrustedProxies().iterator().next();
-        final String otherTrustedProxy = TrustedProxiesBean.EXAMPLE_2.getTrustedProxies().iterator().next();
+        final String trustedProxy = getExample1();
+        final String otherTrustedProxy = getExample2();
         trustedProxies.add(trustedProxy);
         trustedProxies.add(otherTrustedProxy);
         assertTrue(trustedProxies.contains(trustedProxy));
         assertTrue(trustedProxies.contains(otherTrustedProxy));
 
-        final TrustedProxiesBean trustedProxiesBean = trustedProxiesService.removeTrustedProxy(otherTrustedProxy);
-        assertTrue(trustedProxiesBean.getTrustedProxies().contains(trustedProxy));
-        assertFalse(trustedProxiesBean.getTrustedProxies().contains(otherTrustedProxy));
+        final List<String> trustedProxies = trustedProxiesService.removeTrustedProxy(otherTrustedProxy);
+        assertTrue(trustedProxies.contains(trustedProxy));
+        assertFalse(trustedProxies.contains(otherTrustedProxy));
+    }
+
+    private String getExample1() {
+        return "0.0.0.0/0";
+    }
+
+    private String getExample2() {
+        return "10.10.10.10/10"; // NOSONAR - hardcoded IP only for testing
     }
 
 }
