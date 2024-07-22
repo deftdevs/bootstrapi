@@ -8,12 +8,12 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
 import com.deftdevs.bootstrapi.confluence.model.CacheBean;
-import com.deftdevs.bootstrapi.confluence.model.CachesBean;
 import com.deftdevs.bootstrapi.confluence.model.util.CacheBeanUtil;
 import com.deftdevs.bootstrapi.confluence.service.api.CachesService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
@@ -29,10 +29,10 @@ public class CachesServiceImpl implements CachesService {
     }
 
     @Override
-    public CachesBean getAllCaches() {
-        return new CachesBean(cacheManager.getManagedCaches().stream()
+    public List<CacheBean> getAllCaches() {
+        return cacheManager.getManagedCaches().stream()
                 .map(CacheBeanUtil::toCacheBean)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     @Override

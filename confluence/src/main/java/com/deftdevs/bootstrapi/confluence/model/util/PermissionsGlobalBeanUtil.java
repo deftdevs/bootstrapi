@@ -11,7 +11,7 @@ public class PermissionsGlobalBeanUtil {
 
     @NotNull
     public static PermissionsGlobalBean toPermissionsGlobalBean(
-            @NotNull final Collection<SpacePermission> spacePermissions) {
+            @NotNull final List<SpacePermission> spacePermissions) {
 
         final HashSet<SpacePermission> globalPermissions = new HashSet<>(spacePermissions);
         final TreeSet<String> anonymousGlobalPermissions = new TreeSet<>();
@@ -19,7 +19,7 @@ public class PermissionsGlobalBeanUtil {
 
         final Set<String> validGlobalPermissions = new HashSet<>(SpacePermission.GLOBAL_PERMISSIONS);
 
-        final Collection<SpacePermission> globalGroupPermissions = globalPermissions.stream()
+        final List<SpacePermission> globalGroupPermissions = globalPermissions.stream()
                 .filter(SpacePermission::isGroupPermission)
                 .filter(p -> validGlobalPermissions.contains(p.getType()))
                 .collect(Collectors.toList());
@@ -50,7 +50,7 @@ public class PermissionsGlobalBeanUtil {
         }
 
         if (!anonymousGlobalPermissions.isEmpty()) {
-            permissionsGlobalBean.setAnonymousPermissions(anonymousGlobalPermissions);
+            permissionsGlobalBean.setAnonymousPermissions(new ArrayList<String>(anonymousGlobalPermissions));
         }
 
         return permissionsGlobalBean;

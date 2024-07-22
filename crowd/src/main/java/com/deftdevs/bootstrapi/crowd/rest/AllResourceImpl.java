@@ -1,7 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
-import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.crowd.model.AllBean;
 import com.deftdevs.bootstrapi.crowd.rest.api.AllResource;
 import com.deftdevs.bootstrapi.crowd.service.api.AllService;
@@ -13,7 +12,7 @@ import javax.ws.rs.core.Response;
 
 @Component
 @SystemAdminOnly
-@Path(BootstrAPI.ALL)
+@Path("")
 public class AllResourceImpl implements AllResource {
 
     private final AllService allService;

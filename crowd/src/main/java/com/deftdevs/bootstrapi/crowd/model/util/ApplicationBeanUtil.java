@@ -183,11 +183,11 @@ public class ApplicationBeanUtil {
     }
 
     @Nonnull
-    static Collection<ApplicationBean.ApplicationDirectoryMapping> toApplicationBeanDirectoryMappings(
+    static List<ApplicationBean.ApplicationDirectoryMapping> toApplicationBeanDirectoryMappings(
             @Nonnull final Application application,
             @Nonnull final DefaultGroupMembershipService defaultGroupMembershipService) {
 
-        final Collection<ApplicationDirectoryMapping> applicationDirectoryMappings = application.getApplicationDirectoryMappings();
+        final List<ApplicationDirectoryMapping> applicationDirectoryMappings = application.getApplicationDirectoryMappings();
         final List<ApplicationBean.ApplicationDirectoryMapping> applicationBeanDirectoryMappings = new ArrayList<>();
 
         for (final ApplicationDirectoryMapping applicationDirectoryMapping : applicationDirectoryMappings) {
@@ -198,7 +198,7 @@ public class ApplicationBeanUtil {
             // if all directory users are allowed to authenticate, we don't return the unused list of groups that are allowed to do so,
             // but instead we just return an empty list
             if (!applicationDirectoryMapping.isAllowAllToAuthenticate()) {
-                applicationBeanDirectoryMapping.setAuthenticationGroups(applicationDirectoryMapping.getAuthorisedGroupNames());
+                applicationBeanDirectoryMapping.setAuthenticationGroups(new ArrayList<>(applicationDirectoryMapping.getAuthorisedGroupNames()));
             } else {
                 applicationBeanDirectoryMapping.setAuthenticationGroups(Collections.emptyList());
             }
@@ -237,7 +237,7 @@ public class ApplicationBeanUtil {
 
     @Nonnull
     static Set<RemoteAddress> toAddressSet(
-            @Nullable final Collection<String> remoteAddresses) {
+            @Nullable final List<String> remoteAddresses) {
 
         if (remoteAddresses == null) {
             return new HashSet<>();
@@ -249,7 +249,7 @@ public class ApplicationBeanUtil {
     }
 
     @Nonnull
-    public static Collection<String> toStringCollection(
+    public static List<String> toStringCollection(
             @Nonnull final Set<RemoteAddress> remoteAddresses) {
 
         return remoteAddresses.stream()

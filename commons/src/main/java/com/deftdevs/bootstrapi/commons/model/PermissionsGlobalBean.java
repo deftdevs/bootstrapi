@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 
 @Data
@@ -18,6 +19,6 @@ public class PermissionsGlobalBean {
     private Map<String, ? extends Collection<String>> groupPermissions;
 
     @XmlElement
-    private Collection<String> anonymousPermissions;
+    private List<String> anonymousPermissions;
 
 }

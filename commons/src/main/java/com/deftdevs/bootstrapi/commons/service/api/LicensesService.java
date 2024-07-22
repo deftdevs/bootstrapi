@@ -1,9 +1,9 @@
 package com.deftdevs.bootstrapi.commons.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
-import com.deftdevs.bootstrapi.commons.model.LicensesBean;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 public interface LicensesService {
 
@@ -12,7 +12,7 @@ public interface LicensesService {
      *
      * @return the licenses
      */
-    LicensesBean getLicenses();
+    List<LicenseBean> getLicenses();
 
     /**
      * Add a single license

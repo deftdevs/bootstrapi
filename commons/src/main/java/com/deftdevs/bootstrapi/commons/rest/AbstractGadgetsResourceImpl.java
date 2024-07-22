@@ -1,11 +1,11 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.model.GadgetBean;
-import com.deftdevs.bootstrapi.commons.model.GadgetsBean;
 import com.deftdevs.bootstrapi.commons.rest.api.GadgetsResource;
 import com.deftdevs.bootstrapi.commons.service.api.GadgetsService;
 
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 public abstract class AbstractGadgetsResourceImpl implements GadgetsResource {
 
@@ -17,8 +17,8 @@ public abstract class AbstractGadgetsResourceImpl implements GadgetsResource {
 
     @Override
     public Response getGadgets() {
-        final GadgetsBean gadgetsBean = gadgetsService.getGadgets();
-        return Response.ok(gadgetsBean).build();
+        final List<GadgetBean> gadgetBeans = gadgetsService.getGadgets();
+        return Response.ok(gadgetBeans).build();
     }
 
     @Override
@@ -30,9 +30,9 @@ public abstract class AbstractGadgetsResourceImpl implements GadgetsResource {
 
     @Override
     public Response setGadgets(
-            final GadgetsBean gadgetsBean) {
-        GadgetsBean updatedGadgetsBean = gadgetsService.setGadgets(gadgetsBean);
-        return Response.ok(updatedGadgetsBean).build();
+            final List<GadgetBean> gadgetBeans) {
+        List<GadgetBean> updatedGadgetBeans = gadgetsService.setGadgets(gadgetBeans);
+        return Response.ok(updatedGadgetBeans).build();
     }
 
     @Override

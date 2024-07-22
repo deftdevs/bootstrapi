@@ -1,7 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.model.GadgetBean;
-import com.deftdevs.bootstrapi.commons.model.GadgetsBean;
 import com.deftdevs.bootstrapi.commons.rest.impl.TestGadgetsResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.GadgetsService;
 import org.junit.jupiter.api.BeforeEach;
@@ -11,6 +10,8 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.core.Response;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -31,15 +32,14 @@ class GadgetsResourceTest {
 
     @Test
     void testGetGadgets() {
-        final GadgetsBean bean = GadgetsBean.EXAMPLE_1;
-
-        doReturn(bean).when(gadgetsService).getGadgets();
+        final List<GadgetBean> gadgetBeans = Collections.singletonList(GadgetBean.EXAMPLE_1);
+        doReturn(gadgetBeans).when(gadgetsService).getGadgets();
 
         final Response response = resource.getGadgets();
         assertEquals(200, response.getStatus());
-        final GadgetsBean gadgetsBean = (GadgetsBean) response.getEntity();
 
-        assertEquals(gadgetsBean, bean);
+        final List<GadgetBean> responseGadgetBeans = (List<GadgetBean>) response.getEntity();
+        assertEquals(responseGadgetBeans, gadgetBeans);
     }
 
     @Test
@@ -57,40 +57,37 @@ class GadgetsResourceTest {
 
     @Test
     void testSetGadgets() {
-        final GadgetsBean bean = GadgetsBean.EXAMPLE_1;
+        final List<GadgetBean> gadgetBeans = Collections.singletonList(GadgetBean.EXAMPLE_1);
+        doReturn(gadgetBeans).when(gadgetsService).setGadgets(gadgetBeans);
 
-        doReturn(bean).when(gadgetsService).setGadgets(bean);
-
-        final Response response = resource.setGadgets(bean);
+        final Response response = resource.setGadgets(gadgetBeans);
         assertEquals(200, response.getStatus());
-        final GadgetsBean gadgetsBean = (GadgetsBean) response.getEntity();
 
-        assertEquals(gadgetsBean, bean);
+        final List<GadgetBean> responseGadgetBeans = (List<GadgetBean>) response.getEntity();
+        assertEquals(responseGadgetBeans, gadgetBeans);
     }
 
     @Test
     void testSetGadget() {
         final GadgetBean bean = GadgetBean.EXAMPLE_1;
-
         doReturn(bean).when(gadgetsService).setGadget(1L, bean);
 
         final Response response = resource.setGadget(1L, bean);
         assertEquals(200, response.getStatus());
-        final GadgetBean gadgetBean = (GadgetBean) response.getEntity();
 
+        final GadgetBean gadgetBean = (GadgetBean) response.getEntity();
         assertEquals(gadgetBean, bean);
     }
 
     @Test
     void testAddGadget() {
         final GadgetBean bean = GadgetBean.EXAMPLE_1;
-
         doReturn(bean).when(gadgetsService).addGadget(bean);
 
         final Response response = resource.addGadget(bean);
         assertEquals(200, response.getStatus());
-        final GadgetBean responseBean = (GadgetBean) response.getEntity();
 
+        final GadgetBean responseBean = (GadgetBean) response.getEntity();
         assertEquals(bean, responseBean);
     }
 

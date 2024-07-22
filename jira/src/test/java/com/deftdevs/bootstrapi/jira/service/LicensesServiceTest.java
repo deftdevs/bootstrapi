@@ -5,7 +5,6 @@ import com.atlassian.jira.license.JiraLicenseManager;
 import com.atlassian.jira.license.LicenseDetails;
 import com.atlassian.jira.license.LicensedApplications;
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
-import com.deftdevs.bootstrapi.commons.model.LicensesBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +12,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Collections;
+import java.util.List;
 
 import static com.atlassian.extras.api.LicenseType.TESTING;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -42,13 +42,12 @@ class LicensesServiceTest {
         final LicenseDetails licenseDetails = mock(LicenseDetails.class);
         doReturn(licensedApplications).when(licenseDetails).getLicensedApplications();
         doReturn(TESTING).when(licenseDetails).getLicenseType();
-
         doReturn(Collections.singletonList(licenseDetails)).when(licenseManager).getLicenses();
 
-        final LicensesBean licensesBean = licensesService.getLicenses();
-        assertEquals(1, licensesBean.getLicenses().size());
+        final List<LicenseBean> licenseBeans = licensesService.getLicenses();
+        assertEquals(1, licenseBeans.size());
 
-        final LicenseBean licenseBean = licensesBean.getLicenses().iterator().next();
+        final LicenseBean licenseBean = licenseBeans.iterator().next();
         assertNotNull(licenseBean);
     }
 
@@ -61,7 +60,7 @@ class LicensesServiceTest {
         final Iterable<? extends LicenseDetails> existingLicenses = Collections.emptyList();
         doReturn(existingLicenses).when(licenseManager).getLicenses();
 
-        spy.setLicenses(new LicensesBean(Collections.singletonList(licenseBean)));
+        spy.setLicenses(Collections.singletonList(licenseBean));
 
         // make sure that all licenses are deleted first
         verify(licenseManager).removeLicenses(existingLicenses);

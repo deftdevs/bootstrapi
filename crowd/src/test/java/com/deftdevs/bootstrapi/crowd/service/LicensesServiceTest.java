@@ -8,7 +8,6 @@ import com.atlassian.extras.api.Product;
 import com.atlassian.extras.api.crowd.CrowdLicense;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
-import com.deftdevs.bootstrapi.commons.model.LicensesBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -16,7 +15,7 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 
 import static com.deftdevs.bootstrapi.commons.model.LicenseBean.EXAMPLE_2_DEVELOPER_LICENSE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -39,13 +38,11 @@ public class LicensesServiceTest {
 
     @Test
     public void testGetLicenses() {
-        CrowdLicense license = toMockCrowdLicense();
-
+        final CrowdLicense license = toMockCrowdLicense();
         doReturn(license).when(licenseManager).getLicense();
 
-        LicensesBean licensesBean = licensesService.getLicenses();
-        LicenseBean returnedBean = licensesBean.getLicenses().iterator().next();
-
+        final List<LicenseBean> licenseBeans = licensesService.getLicenses();
+        final LicenseBean returnedBean = licenseBeans.iterator().next();
         assertEquals(returnedBean.getDescription(), EXAMPLE_2_DEVELOPER_LICENSE.getDescription());
         assertEquals(returnedBean.getOrganization(), EXAMPLE_2_DEVELOPER_LICENSE.getOrganization());
         assertEquals(returnedBean.getType(), LicenseType.TESTING.toString());
@@ -84,7 +81,7 @@ public class LicensesServiceTest {
         doReturn(EXAMPLE_2_DEVELOPER_LICENSE.getOrganization()).when(organisation).toString();
         doReturn(organisation).when(license).getOrganisation();
 
-        Collection<Product> products = new ArrayList<>();
+        List<Product> products = new ArrayList<>();
         doReturn(products).when(license).getProducts();
 
         doReturn(EXAMPLE_2_DEVELOPER_LICENSE.getDescription()).when(license).getDescription();

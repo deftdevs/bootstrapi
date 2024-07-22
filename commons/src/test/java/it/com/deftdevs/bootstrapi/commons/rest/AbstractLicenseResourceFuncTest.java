@@ -2,14 +2,15 @@ package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
-import com.deftdevs.bootstrapi.commons.model.LicensesBean;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.codehaus.jackson.type.TypeReference;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.HttpMethod;
 import javax.ws.rs.core.Response;
 import java.net.http.HttpResponse;
-import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -23,11 +24,10 @@ public abstract class AbstractLicenseResourceFuncTest {
                 .request();
         assertEquals(Response.Status.OK.getStatusCode(), licensesResponse.statusCode());
 
-        final LicensesBean licensesBean = objectMapper.readValue(licensesResponse.body(), LicensesBean.class);
-        final Collection<LicenseBean> licenses = licensesBean.getLicenses();
-        assertNotNull(licenses);
-        assertNotEquals(0, licenses.size());
-        assertNotNull(licenses.iterator().next().getOrganization());
+        final List<LicenseBean> licenseBeans = objectMapper.readValue(licensesResponse.body(), new TypeReference<List<LicenseBean>>(){});
+        assertNotNull(licenseBeans);
+        assertNotEquals(0, ((List<LicenseBean>) licenseBeans).size());
+        assertNotNull(((List<LicenseBean>) licenseBeans).iterator().next().getOrganization());
     }
 
     @Test
@@ -36,19 +36,19 @@ public abstract class AbstractLicenseResourceFuncTest {
                 .request(HttpMethod.PUT, getExampleBean());
         assertEquals(Response.Status.OK.getStatusCode(), licensesResponse.statusCode());
 
-        final LicensesBean licensesBean = objectMapper.readValue(licensesResponse.body(), LicensesBean.class);
-        assertEquals(getExampleBean().getLicenses().iterator().next().getDescription(), licensesBean.getLicenses().iterator().next().getDescription());
+        final List<LicenseBean> licenseBeans = objectMapper.readValue(licensesResponse.body(), new TypeReference<List<LicenseBean>>(){});
+        assertEquals(getExampleBean().iterator().next().getDescription(), licenseBeans.iterator().next().getDescription());
     }
 
     @Test
     void testAddLicenses() throws Exception {
-        final LicenseBean licenseBean = getExampleBean().getLicenses().iterator().next();
+        final LicenseBean licenseBean = getExampleBean().iterator().next();
         final HttpResponse<String> licensesResponse = HttpRequestHelper.builder(BootstrAPI.LICENSES)
                 .request(HttpMethod.POST, licenseBean);
         assertEquals(Response.Status.OK.getStatusCode(), licensesResponse.statusCode());
 
-        final LicensesBean licensesBean = objectMapper.readValue(licensesResponse.body(), LicensesBean.class);
-        assertEquals(licenseBean.getDescription(), licensesBean.getLicenses().iterator().next().getDescription());
+        final List<LicenseBean> licenseBeans = objectMapper.readValue(licensesResponse.body(), new TypeReference<List<LicenseBean>>(){});
+        assertEquals(licenseBean.getDescription(), licenseBeans.iterator().next().getDescription());
     }
 
     @Test
@@ -91,7 +91,7 @@ public abstract class AbstractLicenseResourceFuncTest {
         assertEquals(Response.Status.FORBIDDEN.getStatusCode(), licensesResponse.statusCode());
     }
 
-    protected LicensesBean getExampleBean() {
-        return LicensesBean.EXAMPLE_2_DEVELOPER_LICENSE;
+    protected List<LicenseBean> getExampleBean() {
+        return Collections.singletonList(LicenseBean.EXAMPLE_2_DEVELOPER_LICENSE);
     }
 }

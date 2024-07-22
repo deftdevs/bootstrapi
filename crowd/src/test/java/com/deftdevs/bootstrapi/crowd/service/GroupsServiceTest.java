@@ -9,7 +9,6 @@ import com.atlassian.crowd.model.group.ImmutableGroup;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
 import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForGroup;
-import com.deftdevs.bootstrapi.crowd.model.GroupsBean;
 import com.deftdevs.bootstrapi.crowd.model.util.GroupBeanUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -20,8 +19,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.WebApplicationException;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -181,25 +180,20 @@ public class GroupsServiceTest {
 
     @Test
     public void testSetGroups() {
-        final Collection<GroupBean> groupBeans = new ArrayList<>();
+        final List<GroupBean> groupBeans = new ArrayList<>();
         groupBeans.add(GroupBean.EXAMPLE_1);
         groupBeans.add(GroupBean.EXAMPLE_2);
 
         final GroupsServiceImpl spy = spy(groupsService);
         doAnswer(invocation -> invocation.getArguments()[2]).when(spy).setGroup(anyLong(), any(), any());
 
-        spy.setGroups(0L, new GroupsBean(groupBeans));
+        spy.setGroups(0L, groupBeans);
         verify(spy, times(groupBeans.size())).setGroup(anyLong(), any(), any());
     }
 
     @Test
     public void testSetGroupsNull() {
-        assertEquals(new GroupsBean(Collections.emptyList()), groupsService.setGroups(0L, null));
-    }
-
-    @Test
-    public void testSetGroupsListNull() {
-        assertEquals(new GroupsBean(Collections.emptyList()), groupsService.setGroups(0L, new GroupsBean(null)));
+        assertEquals(Collections.emptyList(), groupsService.setGroups(0L, null));
     }
 
     // We kind of need to test all the exceptions here, but it's also pointless to test

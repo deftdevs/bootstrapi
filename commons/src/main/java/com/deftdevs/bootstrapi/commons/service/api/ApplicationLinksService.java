@@ -1,9 +1,9 @@
 package com.deftdevs.bootstrapi.commons.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
-import com.deftdevs.bootstrapi.commons.model.ApplicationLinksBean;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 import java.util.UUID;
 
 public interface ApplicationLinksService {
@@ -13,7 +13,7 @@ public interface ApplicationLinksService {
      *
      * @return the application links
      */
-    ApplicationLinksBean getApplicationLinks();
+    List<ApplicationLinkBean> getApplicationLinks();
 
     /**
      * Gets a single application link.
@@ -27,13 +27,13 @@ public interface ApplicationLinksService {
     /**
      * Sets or updates the given application links
      *
-     * @param applicationLinksBean the application links to set / update
+     * @param applicationLinkBeans the application links to set / update
      * @param ignoreSetupErrors    whether or not to ignore authentication or other setup errors when setting up the link
      *                             which usually happens if the application to link has not setup the link counterpart yet
      * @return the updated application links
      */
-    ApplicationLinksBean setApplicationLinks(
-            @NotNull final ApplicationLinksBean applicationLinksBean,
+    List<ApplicationLinkBean> setApplicationLinks(
+            @NotNull final List<ApplicationLinkBean> applicationLinkBeans,
             boolean ignoreSetupErrors);
 
     /**

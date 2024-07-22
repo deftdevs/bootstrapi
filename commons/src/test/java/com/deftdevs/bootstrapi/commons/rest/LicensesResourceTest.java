@@ -1,15 +1,17 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
-import com.deftdevs.bootstrapi.commons.model.LicensesBean;
 import com.deftdevs.bootstrapi.commons.rest.impl.TestLicensesResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
-import javax.ws.rs.core.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
+
+import javax.ws.rs.core.Response;
+import java.util.Collections;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
@@ -29,15 +31,14 @@ class LicensesResourceTest {
 
     @Test
     void testGetLicenses() {
-        final LicensesBean bean = LicensesBean.EXAMPLE_1;
-
-        doReturn(bean).when(licensesService).getLicenses();
+        final List<LicenseBean> licenseBeans = Collections.singletonList(LicenseBean.EXAMPLE_1);
+        doReturn(licenseBeans).when(licensesService).getLicenses();
 
         final Response response = resource.getLicenses();
         assertEquals(200, response.getStatus());
-        final LicensesBean licensesBean = (LicensesBean) response.getEntity();
 
-        assertEquals(licensesBean, bean);
+        final List<LicenseBean> resultLicenseBeans = (List<LicenseBean>) response.getEntity();
+        assertEquals(resultLicenseBeans, licenseBeans);
     }
 
     @Test

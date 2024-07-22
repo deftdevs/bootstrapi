@@ -8,7 +8,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Collection;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Collections;
 import java.util.HashSet;
 
@@ -50,7 +51,7 @@ public class TrustedProxiesServiceTest {
     public void testGetTrustedProxies() {
         assertTrue(trustedProxies.isEmpty());
 
-        final Collection<String> trustedProxyStrings = TrustedProxiesBean.EXAMPLE_1.getTrustedProxies();
+        final List<String> trustedProxyStrings = TrustedProxiesBean.EXAMPLE_1.getTrustedProxies();
         trustedProxies.addAll(trustedProxyStrings);
 
         final TrustedProxiesBean trustedProxiesBean = trustedProxiesService.getTrustedProxies();
@@ -59,13 +60,11 @@ public class TrustedProxiesServiceTest {
 
     @Test
     public void testSetTrustedProxies() {
-        final Collection<String> trustedProxyStrings = TrustedProxiesBean.EXAMPLE_1.getTrustedProxies();
+        final List<String> trustedProxyStrings = TrustedProxiesBean.EXAMPLE_1.getTrustedProxies();
         trustedProxies.addAll(trustedProxyStrings);
         assertEquals(new HashSet<>(trustedProxyStrings), trustedProxies);
 
-        final Collection<String> otherTrustedProxyStrings = new HashSet<>();
-        otherTrustedProxyStrings.add("1.2.3.4");
-        otherTrustedProxyStrings.add("5.6.7.8");
+        final List<String> otherTrustedProxyStrings = Arrays.asList("1.2.3.4", "5.6.7.8");
         final TrustedProxiesBean otherTrustedProxiesBean = new TrustedProxiesBean(otherTrustedProxyStrings);
 
         final TrustedProxiesBean trustedProxiesBean = trustedProxiesService.setTrustedProxies(otherTrustedProxiesBean);

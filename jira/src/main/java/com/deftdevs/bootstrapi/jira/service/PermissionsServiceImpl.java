@@ -105,7 +105,7 @@ public class PermissionsServiceImpl implements PermissionsService {
         }
     }
 
-    Collection<GlobalPermissionEntry> getGlobalPermissions() {
+    List<GlobalPermissionEntry> getGlobalPermissions() {
         return globalPermissionManager.getAllGlobalPermissions().stream()
                 .map(GlobalPermissionType::getGlobalPermissionKey)
                 .flatMap(key -> globalPermissionManager.getPermissions(key).stream())

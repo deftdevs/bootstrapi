@@ -8,7 +8,6 @@ import com.atlassian.plugins.authentication.api.config.SsoConfig;
 import com.atlassian.plugins.authentication.api.config.SsoConfigService;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpBean;
-import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpsBean;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
 import com.deftdevs.bootstrapi.commons.service.api.AuthenticationService;
 import com.deftdevs.bootstrapi.confluence.model.util.AuthenticationIdpBeanUtil;
@@ -16,6 +15,7 @@ import com.deftdevs.bootstrapi.confluence.model.util.AuthenticationSsoBeanUtil;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -39,21 +39,21 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     @Override
-    public AuthenticationIdpsBean getAuthenticationIdps() {
-        return new AuthenticationIdpsBean(idpConfigService.getIdpConfigs().stream()
+    public List<AbstractAuthenticationIdpBean> getAuthenticationIdps() {
+        return idpConfigService.getIdpConfigs().stream()
                 .map(AuthenticationIdpBeanUtil::toAuthenticationIdpBean)
                 .sorted(authenticationIdpBeanComparator)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     @Override
-    public AuthenticationIdpsBean setAuthenticationIdps(
-            final AuthenticationIdpsBean authenticationIdpsBean) {
+    public List<AbstractAuthenticationIdpBean> setAuthenticationIdps(
+            final List<AbstractAuthenticationIdpBean> authenticationIdpBeans) {
 
-        return new AuthenticationIdpsBean(authenticationIdpsBean.getAuthenticationIdpBeans().stream()
+        return authenticationIdpBeans.stream()
                 .map(this::setAuthenticationIdp)
                 .sorted(authenticationIdpBeanComparator)
-                .collect(Collectors.toList()));
+                .collect(Collectors.toList());
     }
 
     public AbstractAuthenticationIdpBean setAuthenticationIdp(

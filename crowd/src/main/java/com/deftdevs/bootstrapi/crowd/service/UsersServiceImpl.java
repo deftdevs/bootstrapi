@@ -21,7 +21,6 @@ import com.deftdevs.bootstrapi.commons.model.UserBean;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
 import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForDirectory;
 import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForUser;
-import com.deftdevs.bootstrapi.crowd.model.GroupsBean;
 import com.deftdevs.bootstrapi.crowd.model.util.UserBeanUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
@@ -89,7 +88,7 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public List<UserBean> setUsers(
             final long directoryId,
-            final Collection<UserBean> userBeans) {
+            final List<UserBean> userBeans) {
 
         if (userBeans == null) {
             return Collections.emptyList();
@@ -149,8 +148,8 @@ public class UsersServiceImpl implements UsersService {
         final UserBean resultUserBean = UserBeanUtil.toUserBean(user);
 
         if (userBean.getGroups() != null) {
-            final GroupsBean resultGroupsBean = addUserToGroups(directoryId, userBean.getUsername(), userBean.getGroups());
-            resultUserBean.setGroups(resultGroupsBean.getGroups());
+            final List<GroupBean> resultGroupBeans = addUserToGroups(directoryId, userBean.getUsername(), userBean.getGroups());
+            resultUserBean.setGroups(resultGroupBeans);
         }
 
         return resultUserBean;
@@ -182,8 +181,8 @@ public class UsersServiceImpl implements UsersService {
         final UserBean resultUserBean = UserBeanUtil.toUserBean(user);
 
         if (userBean.getGroups() != null) {
-            final GroupsBean resultGroupsBean = addUserToGroups(directoryId, userBean.getUsername(), userBean.getGroups());
-            resultUserBean.setGroups(resultGroupsBean.getGroups());
+            final List<GroupBean> resultGroupBeans = addUserToGroups(directoryId, userBean.getUsername(), userBean.getGroups());
+            resultUserBean.setGroups(resultGroupBeans);
         }
 
         return resultUserBean;
@@ -400,12 +399,12 @@ public class UsersServiceImpl implements UsersService {
         }
     }
 
-    GroupsBean addUserToGroups(
+    List<GroupBean> addUserToGroups(
             final long directoryId,
             final String username,
-            final Collection<GroupBean> groupBeans) {
+            final List<GroupBean> groupBeans) {
 
-        final Collection<GroupBean> resultGroupBeans = new ArrayList<>();
+        final List<GroupBean> resultGroupBeans = new ArrayList<>();
 
         if (groupBeans != null) {
             for (GroupBean groupBean : groupBeans) {
@@ -425,7 +424,7 @@ public class UsersServiceImpl implements UsersService {
             }
         }
 
-        return new GroupsBean(resultGroupBeans);
+        return resultGroupBeans;
     }
 
     private static UserTemplate getUserTemplate(

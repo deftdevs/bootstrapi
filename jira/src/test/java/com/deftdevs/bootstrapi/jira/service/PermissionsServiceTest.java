@@ -65,7 +65,7 @@ class PermissionsServiceTest {
         doReturn(globalPermissionTypeToAdd).when(spy).getGlobalPermissionType(globalPermissionTypeToAdd.getKey());
         doReturn(globalPermissionTypeToRemove).when(spy).getGlobalPermissionType(globalPermissionTypeToRemove.getKey());
 
-        final Collection<GlobalPermissionEntry> requestGlobalPermissions = Arrays.asList(globalPermissionEntryToAdd, globalPermissionEntryToRetain);
+        final List<GlobalPermissionEntry> requestGlobalPermissions = Arrays.asList(globalPermissionEntryToAdd, globalPermissionEntryToRetain);
         final PermissionsGlobalBean requestPermissionsGLobalBean = PermissionsGlobalBeanUtil.toPermissionsGlobalBean(requestGlobalPermissions);
         spy.setPermissionsGlobal(requestPermissionsGLobalBean);
 

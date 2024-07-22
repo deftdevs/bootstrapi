@@ -1,9 +1,9 @@
 package com.deftdevs.bootstrapi.commons.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
-import com.deftdevs.bootstrapi.commons.model.DirectoriesBean;
 
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 /**
  * The User directory service interface.
@@ -15,7 +15,7 @@ public interface DirectoriesService {
      *
      * @return the directories
      */
-    DirectoriesBean getDirectories();
+    List<AbstractDirectoryBean> getDirectories();
 
     /**
      * Gets a single directory.
@@ -33,8 +33,8 @@ public interface DirectoriesService {
      * @param testConnection whether to test connection
      * @return the directories
      */
-    DirectoriesBean setDirectories(
-            @NotNull DirectoriesBean directories,
+    List<AbstractDirectoryBean> setDirectories(
+            @NotNull List<AbstractDirectoryBean> directories,
             boolean testConnection);
 
     /**

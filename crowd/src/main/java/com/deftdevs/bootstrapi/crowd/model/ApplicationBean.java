@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Collection;
+import java.util.List;
 import java.util.Collections;
 
 @Data
@@ -57,7 +57,7 @@ public class ApplicationBean {
     private Boolean cachedDirectoriesAuthenticationOrderOptimisationEnabled;
 
     @XmlElement
-    private Collection<ApplicationDirectoryMapping> directoryMappings;
+    private List<ApplicationDirectoryMapping> directoryMappings;
 
     @XmlElement
     private AccessBasedSynchronisation accessBasedSynchronisation;
@@ -66,7 +66,7 @@ public class ApplicationBean {
     private Boolean membershipAggregationEnabled;
 
     @XmlElement
-    private Collection<String> remoteAddresses;
+    private List<String> remoteAddresses;
 
     @XmlElement
     private Boolean aliasingEnabled;
@@ -88,13 +88,13 @@ public class ApplicationBean {
         private Boolean authenticationAllowAll;
 
         @XmlElement
-        private Collection<String> authenticationGroups;
+        private List<String> authenticationGroups;
 
         @XmlElement
-        private Collection<String> autoAssignmentGroups;
+        private List<String> autoAssignmentGroups;
 
         @XmlElement
-        private Collection<OperationType> allowedOperations;
+        private List<OperationType> allowedOperations;
 
     }
 
@@ -113,10 +113,10 @@ public class ApplicationBean {
         final ApplicationDirectoryMapping directoryMapping = new ApplicationDirectoryMapping();
         directoryMapping.setDirectoryName("directory");
         directoryMapping.setAuthenticationAllowAll(true);
-        directoryMapping.setAuthenticationGroups(Collections.singleton("app_access"));
-        directoryMapping.setAutoAssignmentGroups(Collections.singleton("app_users"));
-        directoryMapping.setAllowedOperations(Collections.singleton(OperationType.CREATE_USER));
-        EXAMPLE_1.setDirectoryMappings(Collections.singleton(directoryMapping));
+        directoryMapping.setAuthenticationGroups(Collections.singletonList("app_access"));
+        directoryMapping.setAutoAssignmentGroups(Collections.singletonList("app_users"));
+        directoryMapping.setAllowedOperations(Collections.singletonList(OperationType.CREATE_USER));
+        EXAMPLE_1.setDirectoryMappings(Collections.singletonList(directoryMapping));
         EXAMPLE_1.setAccessBasedSynchronisation(AccessBasedSynchronisation.NO_FILTERING);
         EXAMPLE_1.setMembershipAggregationEnabled(false);
         EXAMPLE_1.setRemoteAddresses(Collections.singletonList("127.0.0.1"));
@@ -137,10 +137,10 @@ public class ApplicationBean {
         final ApplicationDirectoryMapping directoryMapping = new ApplicationDirectoryMapping();
         directoryMapping.setDirectoryName("directory");
         directoryMapping.setAuthenticationAllowAll(false);
-        directoryMapping.setAuthenticationGroups(Collections.singleton("app_access2"));
-        directoryMapping.setAutoAssignmentGroups(Collections.singleton("app_users2"));
-        directoryMapping.setAllowedOperations(Collections.singleton(OperationType.CREATE_GROUP));
-        EXAMPLE_2.setDirectoryMappings(Collections.singleton(directoryMapping));
+        directoryMapping.setAuthenticationGroups(Collections.singletonList("app_access2"));
+        directoryMapping.setAutoAssignmentGroups(Collections.singletonList("app_users2"));
+        directoryMapping.setAllowedOperations(Collections.singletonList(OperationType.CREATE_GROUP));
+        EXAMPLE_2.setDirectoryMappings(Collections.singletonList(directoryMapping));
         EXAMPLE_2.setAccessBasedSynchronisation(AccessBasedSynchronisation.USER_AND_GROUP_FILTERING);
         EXAMPLE_2.setMembershipAggregationEnabled(true);
         EXAMPLE_2.setRemoteAddresses(Collections.singletonList("127.0.0.3"));

@@ -3,7 +3,7 @@ package com.deftdevs.bootstrapi.commons.service.api;
 import com.deftdevs.bootstrapi.commons.model.UserBean;
 
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
+import java.util.List;
 import java.util.List;
 
 public interface UsersService {
@@ -48,7 +48,7 @@ public interface UsersService {
      */
     List<UserBean> setUsers(
             final long directoryId,
-            @NotNull final Collection<UserBean> userBeans);
+            @NotNull final List<UserBean> userBeans);
 
     /**
      * Update the user.

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Collection;
+import java.util.List;
 
 /**
  * Bean for users REST requests.
@@ -40,7 +40,7 @@ public class UserBean {
     private String password;
 
     @XmlElement
-    private Collection<GroupBean> groups;
+    private List<GroupBean> groups;
 
     // Example instances for documentation and tests
 

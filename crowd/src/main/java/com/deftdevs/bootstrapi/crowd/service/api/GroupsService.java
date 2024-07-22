@@ -1,7 +1,8 @@
 package com.deftdevs.bootstrapi.crowd.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
-import com.deftdevs.bootstrapi.crowd.model.GroupsBean;
+
+import java.util.List;
 
 public interface GroupsService {
 
@@ -57,11 +58,11 @@ public interface GroupsService {
      * Set (add or update) groups.
      *
      * @param directoryId the directory id
-     * @param groupsBean the groups bean
+     * @param List<groupsBeanBeans> the groups bean
      * @return the set group beans
      */
-    GroupsBean setGroups(
+    List<GroupBean> setGroups(
             final long directoryId,
-            final GroupsBean groupsBean);
+            final List<GroupBean> groupBeans);
 
 }

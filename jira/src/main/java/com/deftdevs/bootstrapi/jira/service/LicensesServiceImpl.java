@@ -1,19 +1,18 @@
 package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.jira.license.JiraLicenseManager;
-import com.atlassian.jira.license.LicenseDetails;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
-import com.deftdevs.bootstrapi.commons.model.LicensesBean;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 import com.deftdevs.bootstrapi.jira.model.util.LicenseBeanUtil;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Component
 @ExportAsService(LicensesService.class)
@@ -29,22 +28,20 @@ public class LicensesServiceImpl implements LicensesService {
     }
 
     @Override
-    public LicensesBean getLicenses() {
-        Collection<LicenseBean> licenseBeans = new ArrayList<>();
-
-        for (LicenseDetails licenseDetails : licenseManager.getLicenses()) {
-            licenseBeans.add(LicenseBeanUtil.toLicenseBean(licenseDetails));
-        }
-
-        return new LicensesBean(licenseBeans);
+    public List<LicenseBean> getLicenses() {
+        return StreamSupport.stream(licenseManager.getLicenses().spliterator(), false)
+                .map(LicenseBeanUtil::toLicenseBean)
+                .collect(Collectors.toList());
     }
 
-    public LicensesBean setLicenses(@NotNull LicensesBean licensesBean) {
+    public List<LicenseBean> setLicenses(
+            @NotNull final List<LicenseBean> licenseBeans) {
+
         // clear all licenses first
         licenseManager.removeLicenses(licenseManager.getLicenses());
 
         // set all licenses and fire event(s)
-        licensesBean.getLicenses().stream()
+        licenseBeans.stream()
                 .map(LicenseBean::getKey)
                 .forEach(licenseManager::setLicense);
 
@@ -52,7 +49,9 @@ public class LicensesServiceImpl implements LicensesService {
     }
 
     @Override
-    public LicenseBean addLicense(@NotNull LicenseBean licenseBean) {
+    public LicenseBean addLicense(
+            @NotNull final LicenseBean licenseBean) {
+
         return LicenseBeanUtil.toLicenseBean(licenseManager.setLicense(licenseBean.getKey()));
     }
 

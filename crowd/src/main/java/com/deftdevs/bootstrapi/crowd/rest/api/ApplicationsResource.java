@@ -3,23 +3,16 @@ package com.deftdevs.bootstrapi.crowd.rest.api;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
-import com.deftdevs.bootstrapi.crowd.model.ApplicationsBean;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import javax.ws.rs.Consumes;
-import javax.ws.rs.DELETE;
-import javax.ws.rs.GET;
-import javax.ws.rs.POST;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 public interface ApplicationsResource {
 
@@ -31,7 +24,7 @@ public interface ApplicationsResource {
             description = "Upon successful request, returns a `ApplicationsBean` object containing all applications",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationsBean.class)),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApplicationBean.class))),
                             description = "Returns all applications."
                     ),
                     @ApiResponse(
@@ -51,7 +44,7 @@ public interface ApplicationsResource {
             summary = "Get an application",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationsBean.class)),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApplicationBean.class))),
                             description = "Returns the requested application."
                     ),
                     @ApiResponse(
@@ -72,7 +65,7 @@ public interface ApplicationsResource {
             description = "NOTE: All existing applications with the same 'name' attribute are updated.",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationsBean.class)),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApplicationBean.class))),
                             description = "Returns all applications."
                     ),
                     @ApiResponse(
@@ -82,7 +75,7 @@ public interface ApplicationsResource {
             }
     )
     Response setApplications(
-            ApplicationsBean applicationsBean);
+            List<ApplicationBean> applicationBeans);
 
     @PUT
     @Path("{id}")
@@ -104,7 +97,7 @@ public interface ApplicationsResource {
     )
     Response setApplication(
             @PathParam("id") long id,
-            ApplicationBean applicationsBean);
+            ApplicationBean applicationsBeanBeans);
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)

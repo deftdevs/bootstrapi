@@ -20,7 +20,6 @@ import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus;
-import com.deftdevs.bootstrapi.commons.model.ApplicationLinksBean;
 import com.deftdevs.bootstrapi.crowd.model.DefaultAuthenticationScenario;
 import com.deftdevs.bootstrapi.crowd.model.util.ApplicationLinkBeanUtil;
 import com.deftdevs.bootstrapi.crowd.settings.setup.DefaultApplicationLink;
@@ -33,6 +32,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.List;
 import java.util.Collections;
 import java.util.UUID;
 
@@ -71,15 +71,14 @@ public class ApplicationLinksServiceTest {
 
     @Test
     public void testGetApplicationLinks() throws URISyntaxException, NoAccessException, NoSuchApplinkException {
-        ApplicationLink applicationLink = createApplicationLink();
+        final ApplicationLink applicationLink = createApplicationLink();
         doReturn(Collections.singletonList(applicationLink)).when(mutatingApplicationLinkService).getApplicationLinks();
         doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
 
-        ApplicationLinksBean applicationLinks = applicationLinkService.getApplicationLinks();
-
-        ApplicationLinkBean applicationLinkBean = toApplicationLinkBean(applicationLink);
+        final List<ApplicationLinkBean> applicationLinkBeans = applicationLinkService.getApplicationLinks();
+        final ApplicationLinkBean applicationLinkBean = toApplicationLinkBean(applicationLink);
         applicationLinkBean.setStatus(AVAILABLE);
-        assertEquals(applicationLinks.getApplicationLinks().iterator().next(), applicationLinkBean);
+        assertEquals(applicationLinkBeans.iterator().next(), applicationLinkBean);
     }
 
     @Test
@@ -108,36 +107,33 @@ public class ApplicationLinksServiceTest {
     public void testSetApplicationLinks()
             throws URISyntaxException, NoAccessException, NoSuchApplinkException, TypeNotInstalledException {
 
-        ApplicationLink applicationLink = createApplicationLink();
-        ApplicationLinkBean applicationLinkBean = createApplicationLinkBean();
-        ApplicationLinksBean applicationLinksBean = new ApplicationLinksBean(Collections.singletonList(createApplicationLinkBean()));
-
+        final ApplicationLink applicationLink = createApplicationLink();
+        final ApplicationLinkBean applicationLinkBean = createApplicationLinkBean();
+        final List<ApplicationLinkBean> applicationLinkBeans = Collections.singletonList(createApplicationLinkBean());
         doReturn(Collections.singletonList(applicationLink)).when(mutatingApplicationLinkService).getApplicationLinks();
         doReturn(applicationLink).when(mutatingApplicationLinkService).addApplicationLink(any(), any(), any());
         doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
         doReturn(applicationLink).when(mutatingApplicationLinkService).getApplicationLink(any());
 
-        ApplicationLinksBean applicationLinkResponse = applicationLinkService.setApplicationLinks(applicationLinksBean, true);
-
-        assertEquals(applicationLinkResponse.getApplicationLinks().iterator().next().getName(), applicationLinkBean.getName());
+        final List<ApplicationLinkBean> responseApplicationLinkBeans = applicationLinkService.setApplicationLinks(applicationLinkBeans, true);
+        assertEquals(responseApplicationLinkBeans.iterator().next().getName(), applicationLinkBean.getName());
     }
 
     @Test
     public void testSetApplicationLinksNonExisting()
             throws URISyntaxException, ManifestNotFoundException, NoAccessException, NoSuchApplinkException {
 
-        ApplicationId applicationId = new ApplicationId(UUID.randomUUID().toString());
-        URI uri = new URI("http://localhostdsadsa");
-        ApplicationLink applicationLinkExisting = new DefaultApplicationLink(applicationId, new DefaultApplicationType(), "test2", uri, uri, false, false);
-        ApplicationLink applicationLink = createApplicationLink();
-        ApplicationLinksBean applicationLinksBean = new ApplicationLinksBean(Collections.singletonList(createApplicationLinkBean()));
-
+        final ApplicationId applicationId = new ApplicationId(UUID.randomUUID().toString());
+        final URI uri = new URI("http://localhostdsadsa");
+        final ApplicationLink applicationLinkExisting = new DefaultApplicationLink(applicationId, new DefaultApplicationType(), "test2", uri, uri, false, false);
+        final ApplicationLink applicationLink = createApplicationLink();
+        final List<ApplicationLinkBean> applicationLinkBeans = Collections.singletonList(createApplicationLinkBean());
         doReturn(Collections.singletonList(applicationLinkExisting)).when(mutatingApplicationLinkService).getApplicationLinks();
         doReturn(applicationLink).when(mutatingApplicationLinkService).createApplicationLink(any(), any());
         doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
 
-        ApplicationLinksServiceImpl spy = spy(applicationLinkService);
-        spy.setApplicationLinks(applicationLinksBean, true);
+        final ApplicationLinksServiceImpl spy = spy(applicationLinkService);
+        spy.setApplicationLinks(applicationLinkBeans, true);
         verify(spy).addApplicationLink(any(),anyBoolean());
     }
 

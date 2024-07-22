@@ -14,7 +14,6 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
 import com.deftdevs.bootstrapi.commons.model.GadgetBean;
-import com.deftdevs.bootstrapi.commons.model.GadgetsBean;
 import com.deftdevs.bootstrapi.commons.service.api.GadgetsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,16 +50,15 @@ public class GadgetsServiceImpl implements GadgetsService {
     }
 
     @Override
-    public GadgetsBean getGadgets() {
+    public List<GadgetBean> getGadgets() {
         Iterable<ExternalGadgetSpec> specIterable = externalGadgetSpecStore.entries();
-        List<GadgetBean> gadgetBeanList = StreamSupport.stream(specIterable.spliterator(), false)
+        return StreamSupport.stream(specIterable.spliterator(), false)
                 .map(spec -> {
                     GadgetBean gadgetBean = new GadgetBean();
                     gadgetBean.setId(Long.valueOf(spec.getId().value()));
                     gadgetBean.setUrl(spec.getSpecUri());
                     return gadgetBean;
                 }).collect(Collectors.toList());
-        return new GadgetsBean(gadgetBeanList);
     }
 
     @Override
@@ -69,11 +67,11 @@ public class GadgetsServiceImpl implements GadgetsService {
     }
 
     @Override
-    public GadgetsBean setGadgets(GadgetsBean gadgetsBean) {
+    public List<GadgetBean> setGadgets(List<GadgetBean> gadgetBeans) {
         //as the gadget only consists of an url, only new gadgets need to be added, existing gadget urls remain
-        GadgetsBean existingGadgets = getGadgets();
-        gadgetsBean.getGadgets().forEach(gadgetBean -> {
-            Optional<GadgetBean> gadget = existingGadgets.getGadgets().stream()
+        List<GadgetBean> existingGadgets = getGadgets();
+        gadgetBeans.forEach(gadgetBean -> {
+            Optional<GadgetBean> gadget = existingGadgets.stream()
                     .filter(bean -> bean.getUrl().toString().equals(gadgetBean.getUrl().toString())).findFirst();
             if (!gadget.isPresent()) {
                 addGadget(gadgetBean);
@@ -134,7 +132,7 @@ public class GadgetsServiceImpl implements GadgetsService {
     }
 
     private GadgetBean findGadget(long id) {
-        Optional<GadgetBean> result = getGadgets().getGadgets().stream().filter(gadget -> gadget.getId().equals(id)).findFirst();
+        Optional<GadgetBean> result = getGadgets().stream().filter(gadget -> gadget.getId().equals(id)).findFirst();
         if (!result.isPresent()) {
             throw new NotFoundException(String.format("gadget with id '%s' could not be found", id));
         } else {

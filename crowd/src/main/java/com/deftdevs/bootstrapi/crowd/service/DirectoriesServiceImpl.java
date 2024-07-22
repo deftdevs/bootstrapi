@@ -14,13 +14,12 @@ import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.exception.ServiceUnavailableException;
 import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
-import com.deftdevs.bootstrapi.commons.model.DirectoriesBean;
 import com.deftdevs.bootstrapi.commons.model.DirectoryInternalBean;
+import com.deftdevs.bootstrapi.commons.model.GroupBean;
 import com.deftdevs.bootstrapi.commons.model.UserBean;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
 import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForDirectory;
-import com.deftdevs.bootstrapi.crowd.model.GroupsBean;
 import com.deftdevs.bootstrapi.crowd.model.util.DirectoryBeanUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
@@ -29,7 +28,6 @@ import javax.annotation.Nonnull;
 import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
@@ -63,11 +61,10 @@ public class DirectoriesServiceImpl implements DirectoriesService {
     }
 
     @Override
-    public DirectoriesBean getDirectories() {
-        return new DirectoriesBean(findAllDirectories().stream()
+    public List<AbstractDirectoryBean> getDirectories() {
+        return findAllDirectories().stream()
                 .map(DirectoryBeanUtil::toDirectoryBean)
-                .collect(Collectors.toList())
-        );
+                .collect(Collectors.toList());
     }
 
     @Override
@@ -79,8 +76,8 @@ public class DirectoriesServiceImpl implements DirectoriesService {
     }
 
     @Override
-    public DirectoriesBean setDirectories(
-            @NotNull final DirectoriesBean directoriesBean,
+    public List<AbstractDirectoryBean> setDirectories(
+            @NotNull final List<AbstractDirectoryBean> directoryBeans,
             final boolean testConnection) {
 
         final Map<String, Directory> existingDirectoriesByName = findAllDirectories().stream()
@@ -88,7 +85,7 @@ public class DirectoriesServiceImpl implements DirectoriesService {
 
         final List<AbstractDirectoryBean> resultDirectories = new ArrayList<>();
 
-        for (AbstractDirectoryBean directoryBean : directoriesBean.getDirectories()) {
+        for (AbstractDirectoryBean directoryBean : directoryBeans) {
             if (existingDirectoriesByName.containsKey(directoryBean.getName())) {
                 resultDirectories.add(setDirectory(existingDirectoriesByName.get(directoryBean.getName()).getId(), directoryBean, testConnection));
             } else {
@@ -96,7 +93,7 @@ public class DirectoriesServiceImpl implements DirectoriesService {
             }
         }
 
-        return new DirectoriesBean(resultDirectories);
+        return resultDirectories;
     }
 
     @Override
@@ -157,7 +154,7 @@ public class DirectoriesServiceImpl implements DirectoriesService {
             throw new BadRequestException("'force = true' must be supplied to delete all entries");
         }
 
-        final Collection<Directory> directories = findAllDirectories();
+        final List<Directory> directories = findAllDirectories();
 
         directories.stream()
                 .sorted(new DirectoryComparator())
@@ -197,7 +194,7 @@ public class DirectoriesServiceImpl implements DirectoriesService {
     }
 
     @Nonnull
-    Collection<Directory> findAllDirectories() {
+    List<Directory> findAllDirectories() {
         final EntityQuery<Directory> allDirectoriesEntityQuery = QueryBuilder
                 .queryFor(Directory.class, EntityDescriptor.directory())
                 .returningAtMost(EntityQuery.ALL_RESULTS);
@@ -212,8 +209,8 @@ public class DirectoriesServiceImpl implements DirectoriesService {
 
             if (directoryInternalBean.getGroups() != null) {
                 // this is the new implementation using a groups bean
-                final GroupsBean resultGroupsBean = groupsService.setGroups(resultDirectoryInternalBean.getId(), new GroupsBean(directoryInternalBean.getGroups()));
-                resultDirectoryInternalBean.setGroups(resultGroupsBean.getGroups());
+                final List<GroupBean> resultGroupBeans = groupsService.setGroups(resultDirectoryInternalBean.getId(), directoryInternalBean.getGroups());
+                resultDirectoryInternalBean.setGroups(resultGroupBeans);
             }
 
             if (directoryInternalBean.getUsers() != null) {

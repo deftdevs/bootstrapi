@@ -4,7 +4,7 @@ import com.atlassian.jira.security.GlobalPermissionEntry;
 import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalBean;
 
 import javax.validation.constraints.NotNull;
-import java.util.Collection;
+import java.util.List;
 import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
@@ -13,7 +13,7 @@ public class PermissionsGlobalBeanUtil {
 
     @NotNull
     public static PermissionsGlobalBean toPermissionsGlobalBean(
-            @NotNull final Collection<GlobalPermissionEntry> globalPermissions) {
+            @NotNull final List<GlobalPermissionEntry> globalPermissions) {
 
         final TreeMap<String, TreeSet<String>> groupGlobalPermissions = new TreeMap<>();
 

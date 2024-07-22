@@ -26,7 +26,6 @@ import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
-import com.deftdevs.bootstrapi.commons.model.ApplicationLinksBean;
 import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
 import com.deftdevs.bootstrapi.crowd.model.DefaultAuthenticationScenario;
 import com.deftdevs.bootstrapi.crowd.model.util.ApplicationLinkBeanUtil;
@@ -72,14 +71,12 @@ public class ApplicationLinksServiceImpl implements ApplicationLinksService {
     }
 
     @Override
-    public ApplicationLinksBean getApplicationLinks() {
-        Iterable<ApplicationLink> applicationLinksIterable = mutatingApplicationLinkService.getApplicationLinks();
+    public List<ApplicationLinkBean> getApplicationLinks() {
+        final Iterable<ApplicationLink> applicationLinksIterable = mutatingApplicationLinkService.getApplicationLinks();
 
-        List<ApplicationLinkBean> applicationLinkBeans = StreamSupport.stream(applicationLinksIterable.spliterator(),false)
+        return StreamSupport.stream(applicationLinksIterable.spliterator(),false)
                 .map(this::getApplicationLinkBeanWithStatus)
                 .collect(Collectors.toList());
-
-        return new ApplicationLinksBean(applicationLinkBeans);
     }
 
     @Override
@@ -96,14 +93,14 @@ public class ApplicationLinksServiceImpl implements ApplicationLinksService {
     }
 
     @Override
-    public ApplicationLinksBean setApplicationLinks(
-            @NotNull final ApplicationLinksBean applicationLinksBean,
+    public List<ApplicationLinkBean> setApplicationLinks(
+            @NotNull final List<ApplicationLinkBean> applicationLinkBeans,
             final boolean ignoreSetupErrors) {
 
-        Map<URI, ApplicationLinkBean> applicationLinksByRpcUrl = getApplicationLinks().getApplicationLinks().stream()
+        final Map<URI, ApplicationLinkBean> applicationLinksByRpcUrl = getApplicationLinks().stream()
                 .collect(Collectors.toMap(ApplicationLinkBean::getRpcUrl, Function.identity()));
 
-        for (ApplicationLinkBean applicationLink : applicationLinksBean.getApplicationLinks()) {
+        for (ApplicationLinkBean applicationLink : applicationLinkBeans) {
             if (applicationLinksByRpcUrl.containsKey(applicationLink.getRpcUrl())) {
                 setApplicationLink(applicationLink.getUuid(), applicationLink, ignoreSetupErrors);
             } else {

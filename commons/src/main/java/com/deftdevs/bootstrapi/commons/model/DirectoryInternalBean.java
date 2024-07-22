@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
 import java.util.Collections;
 
 /**
@@ -34,10 +34,10 @@ public class DirectoryInternalBean extends AbstractDirectoryBean {
     // in external directories also, so we just start with the internal directory for now.
 
     @XmlElement
-    private Collection<GroupBean> groups;
+    private List<GroupBean> groups;
 
     @XmlElement
-    private Collection<UserBean> users;
+    private List<UserBean> users;
 
     @Data
     @NoArgsConstructor
@@ -59,7 +59,7 @@ public class DirectoryInternalBean extends AbstractDirectoryBean {
         private Long passwordMaxChangeTime;
 
         @XmlElement
-        private Collection<Integer> passwordExpiryNotificationDays;
+        private List<Integer> passwordExpiryNotificationDays;
 
         @XmlElement
         private String passwordEncryptionMethod;

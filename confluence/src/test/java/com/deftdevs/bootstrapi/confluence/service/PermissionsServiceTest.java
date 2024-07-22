@@ -53,7 +53,7 @@ class PermissionsServiceTest {
         final SpacePermission globalPermissionEntryToRemove = SpacePermission.createGroupSpacePermission(USE_CONFLUENCE_PERMISSION, null, group);
         doReturn(Arrays.asList(globalPermissionEntryToRetain, globalPermissionEntryToRemove)).when(spacePermissionManager).getGlobalPermissions();
 
-        final Collection<SpacePermission> requestGlobalPermissions = Arrays.asList(globalPermissionEntryToAdd, globalPermissionEntryToRetain);
+        final List<SpacePermission> requestGlobalPermissions = Arrays.asList(globalPermissionEntryToAdd, globalPermissionEntryToRetain);
         final PermissionsGlobalBean requestPermissionsGLobalBean = PermissionsGlobalBeanUtil.toPermissionsGlobalBean(requestGlobalPermissions);
         permissionsService.setPermissionsGlobal(requestPermissionsGLobalBean);
 
@@ -79,7 +79,7 @@ class PermissionsServiceTest {
         final SpacePermission globalPermissionEntryToRemove = SpacePermission.createAnonymousSpacePermission(BROWSE_USERS_PERMISSION, null);
         doReturn(List.of(globalPermissionEntryToRemove)).when(spacePermissionManager).getGlobalPermissions();
 
-        final Collection<SpacePermission> requestGlobalPermissions = List.of(globalPermissionEntryToAdd);
+        final List<SpacePermission> requestGlobalPermissions = List.of(globalPermissionEntryToAdd);
         final PermissionsGlobalBean requestPermissionsGLobalBean = PermissionsGlobalBeanUtil.toPermissionsGlobalBean(requestGlobalPermissions);
         permissionsService.setPermissionsGlobal(requestPermissionsGLobalBean);
 

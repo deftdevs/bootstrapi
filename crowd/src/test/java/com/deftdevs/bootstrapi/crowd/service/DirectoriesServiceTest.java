@@ -13,9 +13,11 @@ import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.ServiceUnavailableException;
-import com.deftdevs.bootstrapi.commons.model.*;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
+import com.deftdevs.bootstrapi.commons.model.DirectoryInternalBean;
+import com.deftdevs.bootstrapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.commons.model.UserBean;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
-import com.deftdevs.bootstrapi.crowd.model.GroupsBean;
 import com.deftdevs.bootstrapi.crowd.model.util.DirectoryBeanUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.junit.jupiter.api.BeforeEach;
@@ -72,11 +74,11 @@ public class DirectoriesServiceTest {
         doReturn(Collections.singletonList(directoryInternal)).when(spy).findAllDirectories();
 
         final AbstractDirectoryBean directoryBean = DirectoryBeanUtil.toDirectoryBean(directoryInternalNew);
-        final DirectoriesBean directoriesBean = new DirectoriesBean(Collections.singletonList(directoryBean));
+        final List<AbstractDirectoryBean> directoryBeans = Collections.singletonList(directoryBean);
         final boolean testConnection = false;
         doReturn(null).when(spy).addDirectory(directoryBean, testConnection);
 
-        spy.setDirectories(directoriesBean, testConnection);
+        spy.setDirectories(directoryBeans, testConnection);
         verify(spy).addDirectory(directoryBean, testConnection);
     }
 
@@ -88,11 +90,11 @@ public class DirectoriesServiceTest {
         doReturn(Collections.singletonList(directoryInternal)).when(spy).findAllDirectories();
 
         final AbstractDirectoryBean directoryBean = DirectoryBeanUtil.toDirectoryBean(directoryAzureAd);
-        final DirectoriesBean directoriesBean = new DirectoriesBean(Collections.singletonList(directoryBean));
+        final List<AbstractDirectoryBean> directoryBeans = Collections.singletonList(directoryBean);
         final boolean testConnection = false;
 
         assertThrows(BadRequestException.class, () -> {
-            spy.setDirectories(directoriesBean, testConnection);
+            spy.setDirectories(directoryBeans, testConnection);
         });
     }
 
@@ -103,11 +105,11 @@ public class DirectoriesServiceTest {
         doReturn(Collections.singletonList(directory)).when(spy).findAllDirectories();
 
         final AbstractDirectoryBean directoryBean = DirectoryBeanUtil.toDirectoryBean(directory);
-        final DirectoriesBean directoriesBean = new DirectoriesBean(Collections.singletonList(directoryBean));
+        final List<AbstractDirectoryBean> directoryBeans = Collections.singletonList(directoryBean);
         final boolean testConnection = false;
         doReturn(null).when(spy).setDirectory(directory.getId(), directoryBean, testConnection);
 
-        spy.setDirectories(directoriesBean, testConnection);
+        spy.setDirectories(directoryBeans, testConnection);
         verify(spy).setDirectory(directory.getId(), directoryBean, testConnection);
     }
 
@@ -120,11 +122,11 @@ public class DirectoriesServiceTest {
         doReturn(directoryAzureAd).when(spy).findDirectory(directoryAzureAd.getId());
 
         final AbstractDirectoryBean directoryBean = DirectoryBeanUtil.toDirectoryBean(directoryAzureAd);
-        final DirectoriesBean directoriesBean = new DirectoriesBean(Collections.singletonList(directoryBean));
+        final List<AbstractDirectoryBean> directoryBeans = Collections.singletonList(directoryBean);
         final boolean testConnection = false;
 
         assertThrows(BadRequestException.class, () -> {
-            spy.setDirectories(directoriesBean, testConnection);
+            spy.setDirectories(directoryBeans, testConnection);
         });
     }
 
@@ -152,7 +154,7 @@ public class DirectoriesServiceTest {
         // Return the same directory as passed as argument
         doAnswer(invocation -> invocation.getArgument(0, Directory.class)).when(directoryManager).addDirectory(any());
         // Return the same groups bean as passed as argument
-        doAnswer(invocation -> invocation.getArgument(1, GroupsBean.class)).when(groupsService).setGroups(anyLong(), any());
+        doAnswer(invocation -> invocation.getArgument(1, List.class)).when(groupsService).setGroups(anyLong(), any());
         // Return the same user beans as passed as argument
         doAnswer(invocation -> invocation.getArgument(1, Collection.class)).when(usersService).setUsers(anyLong(), any());
 
@@ -202,7 +204,7 @@ public class DirectoriesServiceTest {
         // Return the same directory as passed as argument
         doAnswer(invocation -> invocation.getArgument(0, Directory.class)).when(directoryManager).updateDirectory(any());
         // Return the same groups bean as passed as argument
-        doAnswer(invocation -> invocation.getArgument(1, GroupsBean.class)).when(groupsService).setGroups(anyLong(), any());
+        doAnswer(invocation -> invocation.getArgument(1, List.class)).when(groupsService).setGroups(anyLong(), any());
         // Return the same user beans as passed as argument
         doAnswer(invocation -> invocation.getArgument(1, Collection.class)).when(usersService).setUsers(anyLong(), any());
 

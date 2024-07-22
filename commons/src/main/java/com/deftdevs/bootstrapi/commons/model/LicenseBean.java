@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Arrays;
-import java.util.Collection;
+import java.util.List;
 import java.util.Collections;
 import java.util.Date;
 
@@ -20,7 +20,7 @@ import java.util.Date;
 public class LicenseBean {
 
     @XmlElement
-    private Collection<String> products;
+    private List<String> products;
 
     @XmlElement
     private String type;
@@ -50,7 +50,7 @@ public class LicenseBean {
         EXAMPLE_1.setKey("ABC...");
         EXAMPLE_1.setDescription("Example License");
         EXAMPLE_1.setOrganization("Example Organization");
-        EXAMPLE_1.setProducts(Collections.singleton("example-product"));
+        EXAMPLE_1.setProducts(Collections.singletonList("example-product"));
         EXAMPLE_1.setMaxUsers(10);
         EXAMPLE_1.setExpiryDate(new Date());
 

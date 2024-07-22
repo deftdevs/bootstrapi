@@ -10,7 +10,6 @@ import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.ServiceUnavailableException;
 import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
-import com.deftdevs.bootstrapi.commons.model.DirectoriesBean;
 import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean;
 import com.deftdevs.bootstrapi.commons.model.DirectoryLdapBean;
 import com.deftdevs.bootstrapi.confluence.model.util.DirectoryBeanUtil;
@@ -20,16 +19,14 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 import static com.atlassian.crowd.directory.RemoteCrowdDirectory.*;
 import static com.atlassian.crowd.directory.SynchronisableDirectoryProperties.*;
 import static com.atlassian.crowd.directory.SynchronisableDirectoryProperties.SyncGroupMembershipsAfterAuth.WHEN_AUTHENTICATION_CREATED_THE_USER;
 import static com.atlassian.crowd.model.directory.DirectoryImpl.ATTRIBUTE_KEY_USE_NESTED_GROUPS;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
@@ -48,12 +45,11 @@ class DirectoryServiceTest {
 
     @Test
     void testGetDirectories() {
-        Directory directory = createDirectory();
+        final Directory directory = createDirectory();
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
 
-        DirectoriesBean directories = directoryService.getDirectories();
-
-        assertEquals(directories.getDirectories().iterator().next(), DirectoryBeanUtil.toDirectoryBean(directory));
+        final List<AbstractDirectoryBean> directories = directoryService.getDirectories();
+        assertEquals(directories.iterator().next(), DirectoryBeanUtil.toDirectoryBean(directory));
     }
 
     @Test
@@ -92,37 +88,33 @@ class DirectoryServiceTest {
 
         DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
         directoryBean.getServer().setAppPassword("test");
-        directoryService.setDirectories(new DirectoriesBean(Collections.singletonList(directoryBean)), false);
+        directoryService.setDirectories(Collections.singletonList(directoryBean), false);
     }
 
     @Test
     void testSetDirectoriesWithExistingDirectory() {
-        Directory directory = createDirectory();
-
+        final Directory directory = createDirectory();
         doReturn(directory).when(crowdDirectoryService).findDirectoryById(1L);
         doReturn(directory).when(crowdDirectoryService).updateDirectory(any());
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
 
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
+        final DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
         directoryBean.getServer().setAppPassword("test");
-        DirectoriesBean directoryAdded = directoryService.setDirectories(new DirectoriesBean(Collections.singletonList(directoryBean)), false);
-
-        assertEquals(directoryAdded.getDirectories().iterator().next().getName(), directoryBean.getName());
+        final List<AbstractDirectoryBean> directoryAdded = directoryService.setDirectories(Collections.singletonList(directoryBean), false);
+        assertEquals(directoryAdded.iterator().next().getName(), directoryBean.getName());
     }
 
     @Test
     void testSetDirectoriesWithConnectionTest() {
-        Directory directory = createDirectory();
-
+        final Directory directory = createDirectory();
         doReturn(directory).when(crowdDirectoryService).findDirectoryById(1L);
         doReturn(directory).when(crowdDirectoryService).updateDirectory(any());
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
 
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
+        final DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
         directoryBean.getServer().setAppPassword("test");
-        DirectoriesBean directoryAdded = directoryService.setDirectories(new DirectoriesBean(Collections.singletonList(directoryBean)), true);
-
-        assertEquals(directoryAdded.getDirectories().iterator().next().getName(), directoryBean.getName());
+        List<AbstractDirectoryBean> directoryAdded = directoryService.setDirectories(Collections.singletonList(directoryBean), true);
+        assertEquals(directoryAdded.iterator().next().getName(), directoryBean.getName());
     }
 
     @Test

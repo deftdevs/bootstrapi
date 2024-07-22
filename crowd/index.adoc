@@ -39,7 +39,7 @@ This plugin provides methods for accessing configuration for Crowd.
 [.setAll]
 ==== setAll
 
-`PUT /all`
+`PUT /`
 
 Set the whole configuration
 
@@ -48,7 +48,7 @@ Set the whole configuration
 
 
 
-// markup not found, no include::{specDir}all/PUT/spec.adoc[opts=optional]
+// markup not found, no include::{specDir}PUT/spec.adoc[opts=optional]
 
 
 
@@ -105,20 +105,20 @@ Set the whole configuration
 ===== Samples
 
 
-// markup not found, no include::{snippetDir}all/PUT/http-request.adoc[opts=optional]
+// markup not found, no include::{snippetDir}PUT/http-request.adoc[opts=optional]
 
 
-// markup not found, no include::{snippetDir}all/PUT/http-response.adoc[opts=optional]
+// markup not found, no include::{snippetDir}PUT/http-response.adoc[opts=optional]
 
 
 
-// file not found, no * wiremock data link :all/PUT/PUT.json[]
+// file not found, no * wiremock data link :PUT/PUT.json[]
 
 
 ifdef::internal-generation[]
 ===== Implementation
 
-// markup not found, no include::{specDir}all/PUT/implementation.adoc[opts=optional]
+// markup not found, no include::{specDir}PUT/implementation.adoc[opts=optional]
 
 
 endif::internal-generation[]
@@ -517,7 +517,7 @@ Get all application links
 
 ===== Return Type
 
-<<ApplicationLinksBean>>
+array[<<ApplicationLinkBean>>]
 
 
 ===== Content Type
@@ -534,7 +534,7 @@ Get all application links
 
 | 200
 | Returns all application links.
-|  <<ApplicationLinksBean>>
+| List[<<ApplicationLinkBean>>] 
 
 
 | 0
@@ -703,8 +703,8 @@ NOTE: All existing application links with the same 'rpcUrl' attribute are update
 |===
 |Name| Description| Required| Default| Pattern
 
-| ApplicationLinksBean
-|  <<ApplicationLinksBean>>
+| ApplicationLinkBean
+|  <<ApplicationLinkBean>>
 | X
 | 
 | 
@@ -730,7 +730,7 @@ NOTE: All existing application links with the same 'rpcUrl' attribute are update
 
 ===== Return Type
 
-<<ApplicationLinksBean>>
+array[<<ApplicationLinkBean>>]
 
 
 ===== Content Type
@@ -747,7 +747,7 @@ NOTE: All existing application links with the same 'rpcUrl' attribute are update
 
 | 200
 | Returns all application links.
-|  <<ApplicationLinksBean>>
+| List[<<ApplicationLinkBean>>] 
 
 
 | 0
@@ -1084,7 +1084,7 @@ Get an application
 
 ===== Return Type
 
-<<ApplicationsBean>>
+array[<<ApplicationBean>>]
 
 
 ===== Content Type
@@ -1101,7 +1101,7 @@ Get an application
 
 | 200
 | Returns the requested application.
-|  <<ApplicationsBean>>
+| List[<<ApplicationBean>>] 
 
 
 | 0
@@ -1158,7 +1158,7 @@ Upon successful request, returns a `ApplicationsBean` object containing all appl
 
 ===== Return Type
 
-<<ApplicationsBean>>
+array[<<ApplicationBean>>]
 
 
 ===== Content Type
@@ -1175,7 +1175,7 @@ Upon successful request, returns a `ApplicationsBean` object containing all appl
 
 | 200
 | Returns all applications.
-|  <<ApplicationsBean>>
+| List[<<ApplicationBean>>] 
 
 
 | 0
@@ -1331,8 +1331,8 @@ NOTE: All existing applications with the same 'name' attribute are updated.
 |===
 |Name| Description| Required| Default| Pattern
 
-| ApplicationsBean
-|  <<ApplicationsBean>>
+| ApplicationBean
+|  <<ApplicationBean>>
 | -
 | 
 | 
@@ -1345,7 +1345,7 @@ NOTE: All existing applications with the same 'name' attribute are updated.
 
 ===== Return Type
 
-<<ApplicationsBean>>
+array[<<ApplicationBean>>]
 
 
 ===== Content Type
@@ -1362,7 +1362,7 @@ NOTE: All existing applications with the same 'name' attribute are updated.
 
 | 200
 | Returns all applications.
-|  <<ApplicationsBean>>
+| List[<<ApplicationBean>>] 
 
 
 | 0
@@ -1699,7 +1699,7 @@ Get all user directories
 
 ===== Return Type
 
-<<DirectoriesBean>>
+array[<<AbstractDirectoryBean>>]
 
 
 ===== Content Type
@@ -1716,7 +1716,7 @@ Get all user directories
 
 | 200
 | Returns all directories.
-|  <<DirectoriesBean>>
+| List[<<AbstractDirectoryBean>>] 
 
 
 | 0
@@ -1859,8 +1859,8 @@ NOTE: All existing directories with the same 'name' attribute are updated.
 |===
 |Name| Description| Required| Default| Pattern
 
-| DirectoriesBean
-|  <<DirectoriesBean>>
+| AbstractDirectoryBean
+|  <<AbstractDirectoryBean>>
 | X
 | 
 | 
@@ -1886,7 +1886,7 @@ NOTE: All existing directories with the same 'name' attribute are updated.
 
 ===== Return Type
 
-<<DirectoriesBean>>
+array[<<AbstractDirectoryBean>>]
 
 
 ===== Content Type
@@ -1903,7 +1903,7 @@ NOTE: All existing directories with the same 'name' attribute are updated.
 
 | 200
 | Returns all directories.
-|  <<DirectoriesBean>>
+| List[<<AbstractDirectoryBean>>] 
 
 
 | 0
@@ -2269,8 +2269,8 @@ Set groups
 |===
 |Name| Description| Required| Default| Pattern
 
-| GroupsBean
-|  <<GroupsBean>>
+| GroupBean
+|  <<GroupBean>>
 | X
 | 
 | 
@@ -2567,7 +2567,7 @@ Upon successful request, returns a `LicensesBean` object containing license deta
 
 ===== Return Type
 
-<<LicensesBean>>
+array[<<LicenseBean>>]
 
 
 ===== Content Type
@@ -2584,7 +2584,7 @@ Upon successful request, returns a `LicensesBean` object containing license deta
 
 | 200
 | Returns a list of all licenses (NOTE: for all applications except Jira this will return a single license)
-|  <<LicensesBean>>
+| List[<<LicenseBean>>] 
 
 
 | 0
@@ -4306,7 +4306,7 @@ endif::internal-generation[]
 | applications
 | 
 | 
-| <<ApplicationsBean>>    
+|   List   of <<ApplicationBean>>
 | 
 |     
 
@@ -4555,1174 +4555,6 @@ endif::internal-generation[]
 
 
 
-[#ApplicationLinksBean]
-=== _ApplicationLinksBean_ 
-
-
-
-
-[.fields-ApplicationLinksBean]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| applicationLinks
-| 
-| 
-|   List   of <<ApplicationLinkBean>>
-| 
-|     
-
-|===
-
-
-
-[#ApplicationsBean]
-=== _ApplicationsBean_ 
-
-
-
-
-[.fields-ApplicationsBean]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| applications
-| 
-| 
-|   List   of <<ApplicationBean>>
-| 
-|     
-
-|===
-
-
-
-[#DirectoriesBean]
-=== _DirectoriesBean_ 
-
-
-
-
-[.fields-DirectoriesBean]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| directories
-| 
-| 
-|   List   of <<AbstractDirectoryBean>>
-| 
-|     
-
-|===
-
-
-
-[#DirectoryCrowdAdvanced]
-=== _DirectoryCrowdAdvanced_ 
-
-
-
-
-[.fields-DirectoryCrowdAdvanced]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| enableNestedGroups
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| enableIncrementalSync
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| updateGroupMembershipMethod
-| 
-| 
-|   String  
-| 
-|     
-
-| updateSyncIntervalInMinutes
-| 
-| 
-|   Integer  
-| 
-| int32    
-
-|===
-
-
-
-[#DirectoryCrowdBean]
-=== _DirectoryCrowdBean_ 
-
-
-
-
-[.fields-DirectoryCrowdBean]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| id
-| 
-| 
-|   Long  
-| 
-| int64    
-
-| name
-| X
-| 
-|   String  
-| 
-|     
-
-| description
-| 
-| 
-|   String  
-| 
-|     
-
-| active
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| createdDate
-| 
-| 
-|   Date  
-| 
-| date-time    
-
-| updatedDate
-| 
-| 
-|   Date  
-| 
-| date-time    
-
-| server
-| 
-| 
-| <<DirectoryCrowdServer>>    
-| 
-|     
-
-| permissions
-| 
-| 
-| <<DirectoryCrowdPermissions>>    
-| 
-|     
-
-| advanced
-| 
-| 
-| <<DirectoryCrowdAdvanced>>    
-| 
-|     
-
-|===
-
-
-
-[#DirectoryCrowdPermissions]
-=== _DirectoryCrowdPermissions_ 
-
-
-
-
-[.fields-DirectoryCrowdPermissions]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| readOnly
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| fullAccess
-| 
-| 
-|   Boolean  
-| 
-|     
-
-|===
-
-
-
-[#DirectoryCrowdServer]
-=== _DirectoryCrowdServer_ 
-
-
-
-
-[.fields-DirectoryCrowdServer]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| url
-| X
-| 
-|   URI  
-| 
-| uri    
-
-| proxy
-| 
-| 
-| <<DirectoryCrowdServerProxy>>    
-| 
-|     
-
-| appUsername
-| X
-| 
-|   String  
-| 
-|     
-
-| appPassword
-| X
-| 
-|   String  
-| 
-|     
-
-| connectionTimeoutInMillis
-| 
-| 
-|   Long  
-| 
-| int64    
-
-| maxConnections
-| 
-| 
-|   Integer  
-| 
-| int32    
-
-|===
-
-
-
-[#DirectoryCrowdServerProxy]
-=== _DirectoryCrowdServerProxy_ 
-
-
-
-
-[.fields-DirectoryCrowdServerProxy]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| host
-| 
-| 
-|   String  
-| 
-|     
-
-| port
-| 
-| 
-|   Integer  
-| 
-| int32    
-
-| username
-| 
-| 
-|   String  
-| 
-|     
-
-| password
-| 
-| 
-|   String  
-| 
-|     
-
-|===
-
-
-
-[#DirectoryDelegatingBean]
-=== _DirectoryDelegatingBean_ 
-
-
-
-
-[.fields-DirectoryDelegatingBean]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| id
-| 
-| 
-|   Long  
-| 
-| int64    
-
-| name
-| X
-| 
-|   String  
-| 
-|     
-
-| description
-| 
-| 
-|   String  
-| 
-|     
-
-| active
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| createdDate
-| 
-| 
-|   Date  
-| 
-| date-time    
-
-| updatedDate
-| 
-| 
-|   Date  
-| 
-| date-time    
-
-| connector
-| 
-| 
-| <<DirectoryDelegatingConnector>>    
-| 
-|     
-
-| configuration
-| 
-| 
-| <<DirectoryDelegatingConfiguration>>    
-| 
-|     
-
-| permissions
-| 
-| 
-| <<DirectoryPermissions>>    
-| 
-|     
-
-|===
-
-
-
-[#DirectoryDelegatingConfiguration]
-=== _DirectoryDelegatingConfiguration_ 
-
-
-
-
-[.fields-DirectoryDelegatingConfiguration]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| userDn
-| 
-| 
-|   String  
-| 
-|     
-
-| userObjectClass
-| 
-| 
-|   String  
-| 
-|     
-
-| userObjectFilter
-| 
-| 
-|   String  
-| 
-|     
-
-| userNameAttribute
-| 
-| 
-|   String  
-| 
-|     
-
-| userNameRdnAttribute
-| 
-| 
-|   String  
-| 
-|     
-
-| userFirstNameAttribute
-| 
-| 
-|   String  
-| 
-|     
-
-| userLastNameAttribute
-| 
-| 
-|   String  
-| 
-|     
-
-| userDisplayNameAttribute
-| 
-| 
-|   String  
-| 
-|     
-
-| userEmailAttribute
-| 
-| 
-|   String  
-| 
-|     
-
-| userGroupAttribute
-| 
-| 
-|   String  
-| 
-|     
-
-| userUniqueIdAttribute
-| 
-| 
-|   String  
-| 
-|     
-
-| groupDn
-| 
-| 
-|   String  
-| 
-|     
-
-| groupObjectClass
-| 
-| 
-|   String  
-| 
-|     
-
-| groupObjectFilter
-| 
-| 
-|   String  
-| 
-|     
-
-| groupNameAttribute
-| 
-| 
-|   String  
-| 
-|     
-
-| groupDescriptionAttribute
-| 
-| 
-|   String  
-| 
-|     
-
-| groupMembersAttribute
-| 
-| 
-|   String  
-| 
-|     
-
-|===
-
-
-
-[#DirectoryDelegatingConnector]
-=== _DirectoryDelegatingConnector_ 
-
-
-
-
-[.fields-DirectoryDelegatingConnector]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| type
-| 
-| 
-|  <<String>>  
-| 
-|  _Enum:_ MICROSOFT_ACTIVE_DIRECTORY,  
-
-| url
-| 
-| 
-|   String  
-| 
-|     
-
-| ssl
-| 
-| 
-|  <<String>>  
-| 
-|  _Enum:_ NONE, LDAPS, START_TLS,  
-
-| useNodeReferrals
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| nestedGroupsDisabled
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| synchronizeUsers
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| synchronizeUserDetails
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| synchronizeGroupMemberships
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| useUserMembershipAttribute
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| usePagedResults
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| pagedResultsSize
-| 
-| 
-|   Long  
-| 
-| int64    
-
-| readTimeoutInMillis
-| 
-| 
-|   Long  
-| 
-| int64    
-
-| searchTimeoutInMillis
-| 
-| 
-|   Long  
-| 
-| int64    
-
-| connectionTimeoutInMillis
-| 
-| 
-|   Long  
-| 
-| int64    
-
-| baseDn
-| 
-| 
-|   String  
-| 
-|     
-
-| username
-| 
-| 
-|   String  
-| 
-|     
-
-| password
-| 
-| 
-|   String  
-| 
-|     
-
-|===
-
-
-
-[#DirectoryGenericBean]
-=== _DirectoryGenericBean_ 
-
-
-
-
-[.fields-DirectoryGenericBean]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| id
-| 
-| 
-|   Long  
-| 
-| int64    
-
-| name
-| X
-| 
-|   String  
-| 
-|     
-
-| description
-| 
-| 
-|   String  
-| 
-|     
-
-| active
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| createdDate
-| 
-| 
-|   Date  
-| 
-| date-time    
-
-| updatedDate
-| 
-| 
-|   Date  
-| 
-| date-time    
-
-|===
-
-
-
-[#DirectoryInternalAdvanced]
-=== _DirectoryInternalAdvanced_ 
-
-
-
-
-[.fields-DirectoryInternalAdvanced]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| enableNestedGroups
-| 
-| 
-|   Boolean  
-| 
-|     
-
-|===
-
-
-
-[#DirectoryInternalBean]
-=== _DirectoryInternalBean_ 
-
-
-
-
-[.fields-DirectoryInternalBean]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| id
-| 
-| 
-|   Long  
-| 
-| int64    
-
-| name
-| X
-| 
-|   String  
-| 
-|     
-
-| description
-| 
-| 
-|   String  
-| 
-|     
-
-| active
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| createdDate
-| 
-| 
-|   Date  
-| 
-| date-time    
-
-| updatedDate
-| 
-| 
-|   Date  
-| 
-| date-time    
-
-| credentialPolicy
-| 
-| 
-| <<DirectoryInternalCredentialPolicy>>    
-| 
-|     
-
-| advanced
-| 
-| 
-| <<DirectoryInternalAdvanced>>    
-| 
-|     
-
-| permissions
-| 
-| 
-| <<DirectoryPermissions>>    
-| 
-|     
-
-| groups
-| 
-| 
-|   List   of <<GroupBean>>
-| 
-|     
-
-| users
-| 
-| 
-|   List   of <<UserBean>>
-| 
-|     
-
-|===
-
-
-
-[#DirectoryInternalCredentialPolicy]
-=== _DirectoryInternalCredentialPolicy_ 
-
-
-
-
-[.fields-DirectoryInternalCredentialPolicy]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| passwordRegex
-| 
-| 
-|   String  
-| 
-|     
-
-| passwordComplexityMessage
-| 
-| 
-|   String  
-| 
-|     
-
-| passwordMaxAttempts
-| 
-| 
-|   Long  
-| 
-| int64    
-
-| passwordHistoryCount
-| 
-| 
-|   Long  
-| 
-| int64    
-
-| passwordMaxChangeTime
-| 
-| 
-|   Long  
-| 
-| int64    
-
-| passwordExpiryNotificationDays
-| 
-| 
-|   List   of <<integer>>
-| 
-| int32    
-
-| passwordEncryptionMethod
-| 
-| 
-|   String  
-| 
-|     
-
-|===
-
-
-
-[#DirectoryLdapBean]
-=== _DirectoryLdapBean_ 
-
-
-
-
-[.fields-DirectoryLdapBean]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| id
-| 
-| 
-|   Long  
-| 
-| int64    
-
-| name
-| X
-| 
-|   String  
-| 
-|     
-
-| description
-| 
-| 
-|   String  
-| 
-|     
-
-| active
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| createdDate
-| 
-| 
-|   Date  
-| 
-| date-time    
-
-| updatedDate
-| 
-| 
-|   Date  
-| 
-| date-time    
-
-| server
-| 
-| 
-| <<DirectoryLdapServer>>    
-| 
-|     
-
-| schema
-| 
-| 
-| <<DirectoryLdapSchema>>    
-| 
-|     
-
-| permissions
-| 
-| 
-| <<DirectoryLdapPermissions>>    
-| 
-|     
-
-|===
-
-
-
-[#DirectoryLdapPermissions]
-=== _DirectoryLdapPermissions_ 
-
-
-
-
-[.fields-DirectoryLdapPermissions]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| readOnly
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| readOnlyForLocalGroups
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| fullAccess
-| 
-| 
-|   Boolean  
-| 
-|     
-
-|===
-
-
-
-[#DirectoryLdapSchema]
-=== _DirectoryLdapSchema_ 
-
-
-
-
-[.fields-DirectoryLdapSchema]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| baseDn
-| 
-| 
-|   String  
-| 
-|     
-
-| userDn
-| 
-| 
-|   String  
-| 
-|     
-
-| groupDn
-| 
-| 
-|   String  
-| 
-|     
-
-|===
-
-
-
-[#DirectoryLdapServer]
-=== _DirectoryLdapServer_ 
-
-
-
-
-[.fields-DirectoryLdapServer]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| host
-| X
-| 
-|   String  
-| 
-|     
-
-| port
-| 
-| 
-|   Integer  
-| 
-| int32    
-
-| useSsl
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| username
-| 
-| 
-|   String  
-| 
-|     
-
-| password
-| 
-| 
-|   String  
-| 
-|     
-
-|===
-
-
-
-[#DirectoryPermissions]
-=== _DirectoryPermissions_ 
-
-
-
-
-[.fields-DirectoryPermissions]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| addGroup
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| addUser
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| modifyGroup
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| modifyUser
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| modifyGroupAttributes
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| modifyUserAttributes
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| removeGroup
-| 
-| 
-|   Boolean  
-| 
-|     
-
-| removeUser
-| 
-| 
-|   Boolean  
-| 
-|     
-
-|===
-
-
-
 [#ErrorCollection]
 === _ErrorCollection_ 
 
@@ -5774,28 +4606,6 @@ endif::internal-generation[]
 | 
 | 
 |   Boolean  
-| 
-|     
-
-|===
-
-
-
-[#GroupsBean]
-=== _GroupsBean_ 
-
-
-
-
-[.fields-GroupsBean]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| groups
-| 
-| 
-|   List   of <<GroupBean>>
 | 
 |     
 
@@ -5860,28 +4670,6 @@ endif::internal-generation[]
 | 
 | 
 |   String  
-| 
-|     
-
-|===
-
-
-
-[#LicensesBean]
-=== _LicensesBean_ 
-
-
-
-
-[.fields-LicensesBean]
-[cols="2,1,1,2,4,1"]
-|===
-| Field Name| Required| Nullable | Type| Description | Format
-
-| licenses
-| 
-| 
-|   List   of <<LicenseBean>>
 | 
 |     
 
