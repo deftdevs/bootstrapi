@@ -26,7 +26,7 @@ public interface GadgetsService {
     /**
      * Sets or updates the gadgets set.
      *
-     * @param List<gadgetsBeanBeans> the gadgets bean
+     * @param gadgetBeans the gadget beans
      * @return the updated gadgets
      */
     List<GadgetBean> setGadgets(

@@ -58,7 +58,7 @@ public interface GroupsService {
      * Set (add or update) groups.
      *
      * @param directoryId the directory id
-     * @param List<groupsBeanBeans> the groups bean
+     * @param groupBeans the group beans
      * @return the set group beans
      */
     List<GroupBean> setGroups(
