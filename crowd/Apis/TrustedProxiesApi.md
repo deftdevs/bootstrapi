@@ -12,7 +12,7 @@ All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
 
 <a name="addTrustedProxy"></a>
 # **addTrustedProxy**
-> TrustedProxiesBean addTrustedProxy(body)
+> List addTrustedProxy(body)
 
 Add a trusted proxy
 
@@ -24,7 +24,7 @@ Add a trusted proxy
 
 ### Return type
 
-[**TrustedProxiesBean**](../Models/TrustedProxiesBean.md)
+**List**
 
 ### Authorization
 
@@ -37,7 +37,7 @@ Add a trusted proxy
 
 <a name="getTrustedProxies"></a>
 # **getTrustedProxies**
-> TrustedProxiesBean getTrustedProxies()
+> List getTrustedProxies()
 
 Get the trusted proxies
 
@@ -46,7 +46,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**TrustedProxiesBean**](../Models/TrustedProxiesBean.md)
+**List**
 
 ### Authorization
 
@@ -59,7 +59,7 @@ This endpoint does not need any parameter.
 
 <a name="removeTrustedProxy"></a>
 # **removeTrustedProxy**
-> TrustedProxiesBean removeTrustedProxy(body)
+> List removeTrustedProxy(body)
 
 Remove a trusted proxy
 
@@ -71,7 +71,7 @@ Remove a trusted proxy
 
 ### Return type
 
-[**TrustedProxiesBean**](../Models/TrustedProxiesBean.md)
+**List**
 
 ### Authorization
 
@@ -84,7 +84,7 @@ Remove a trusted proxy
 
 <a name="setTrustedProxies"></a>
 # **setTrustedProxies**
-> TrustedProxiesBean setTrustedProxies(TrustedProxiesBean)
+> List setTrustedProxies(request\_body)
 
 Set the trusted proxies
 
@@ -92,11 +92,11 @@ Set the trusted proxies
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **TrustedProxiesBean** | [**TrustedProxiesBean**](../Models/TrustedProxiesBean.md)|  | [optional] |
+| **request\_body** | [**List**](../Models/string.md)|  | [optional] |
 
 ### Return type
 
-[**TrustedProxiesBean**](../Models/TrustedProxiesBean.md)
+**List**
 
 ### Authorization
 

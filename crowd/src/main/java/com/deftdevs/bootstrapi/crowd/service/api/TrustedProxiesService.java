@@ -1,18 +1,18 @@
 package com.deftdevs.bootstrapi.crowd.service.api;
 
-import com.deftdevs.bootstrapi.crowd.model.TrustedProxiesBean;
+import java.util.List;
 
 public interface TrustedProxiesService {
 
-    TrustedProxiesBean getTrustedProxies();
+    List<String> getTrustedProxies();
 
-    TrustedProxiesBean setTrustedProxies(
-            TrustedProxiesBean trustedProxiesBean);
+    List<String> setTrustedProxies(
+            List<String> trustedProxies);
 
-    TrustedProxiesBean addTrustedProxy(
+    List<String> addTrustedProxy(
             String trustedProxy);
 
-    TrustedProxiesBean removeTrustedProxy(
+    List<String> removeTrustedProxy(
             String trustedProxy);
 
 }

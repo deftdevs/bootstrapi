@@ -89,7 +89,6 @@ All URIs are relative to *https://<CROWD_URL>/rest/bootstrapi/1*
  - [SessionConfigBean](./Models/SessionConfigBean.md)
  - [SettingsBean](./Models/SettingsBean.md)
  - [SettingsBrandingLoginPageBean](./Models/SettingsBrandingLoginPageBean.md)
- - [TrustedProxiesBean](./Models/TrustedProxiesBean.md)
  - [UserBean](./Models/UserBean.md)
 
 
