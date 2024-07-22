@@ -72,7 +72,7 @@ class GadgetsResourceTest {
         final GadgetBean bean = GadgetBean.EXAMPLE_1;
         doReturn(bean).when(gadgetsService).setGadget(1L, bean);
 
-        final Response response = resource.setGadget(1L, bean);
+        final Response response = resource.updateGadget(1L, bean);
         assertEquals(200, response.getStatus());
 
         final GadgetBean gadgetBean = (GadgetBean) response.getEntity();
@@ -84,7 +84,7 @@ class GadgetsResourceTest {
         final GadgetBean bean = GadgetBean.EXAMPLE_1;
         doReturn(bean).when(gadgetsService).addGadget(bean);
 
-        final Response response = resource.addGadget(bean);
+        final Response response = resource.createGadget(bean);
         assertEquals(200, response.getStatus());
 
         final GadgetBean responseBean = (GadgetBean) response.getEntity();

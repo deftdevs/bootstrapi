@@ -4,18 +4,18 @@ All URIs are relative to *https://&lt;CONFLUENCE_URL&gt;/rest/bootstrapi/1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**addGadget**](GadgetsApi.md#addGadget) | **POST** /gadgets | Add a gadget |
+| [**createGadget**](GadgetsApi.md#createGadget) | **POST** /gadgets | Add a gadget |
 | [**deleteGadget**](GadgetsApi.md#deleteGadget) | **DELETE** /gadgets/{id} | Delete a gadget |
 | [**deleteGadgets**](GadgetsApi.md#deleteGadgets) | **DELETE** /gadgets | Delete all gadgets |
 | [**getGadget**](GadgetsApi.md#getGadget) | **GET** /gadgets/{id} | Get a gadget |
 | [**getGadgets**](GadgetsApi.md#getGadgets) | **GET** /gadgets | Get all gadgets |
-| [**setGadget**](GadgetsApi.md#setGadget) | **PUT** /gadgets/{id} | Update a gadget |
-| [**setGadgets**](GadgetsApi.md#setGadgets) | **PUT** /gadgets | Set or update a list of gadgets |
+| [**setGadgets**](GadgetsApi.md#setGadgets) | **PUT** /gadgets | Set a list of gadgets |
+| [**updateGadget**](GadgetsApi.md#updateGadget) | **PUT** /gadgets/{id} | Update a gadget |
 
 
-<a name="addGadget"></a>
-# **addGadget**
-> GadgetBean addGadget(GadgetBean)
+<a name="createGadget"></a>
+# **createGadget**
+> GadgetBean createGadget(GadgetBean)
 
 Add a gadget
 
@@ -139,9 +139,36 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="setGadget"></a>
-# **setGadget**
-> GadgetBean setGadget(id, GadgetBean)
+<a name="setGadgets"></a>
+# **setGadgets**
+> List setGadgets(GadgetBean)
+
+Set a list of gadgets
+
+    NOTE: This will only create gadgets that does not exist yet as there is no real &#39;update&#39;.
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **GadgetBean** | [**List**](../Models/GadgetBean.md)|  | |
+
+### Return type
+
+[**List**](../Models/GadgetBean.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+<a name="updateGadget"></a>
+# **updateGadget**
+> GadgetBean updateGadget(id, GadgetBean)
 
 Update a gadget
 
@@ -155,33 +182,6 @@ Update a gadget
 ### Return type
 
 [**GadgetBean**](../Models/GadgetBean.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="setGadgets"></a>
-# **setGadgets**
-> List setGadgets(GadgetBean)
-
-Set or update a list of gadgets
-
-    NOTE: This will only create gadgets that does not exist yet as there is no real &#39;update&#39;.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **GadgetBean** | [**List**](../Models/GadgetBean.md)|  | |
-
-### Return type
-
-[**List**](../Models/GadgetBean.md)
 
 ### Authorization
 

@@ -78,7 +78,7 @@ class DirectoriesResourceTest {
 
         doReturn(directoryBean).when(directoriesService).setDirectory(1L, directoryBean, false);
 
-        final Response response = resource.setDirectory(1L, Boolean.FALSE, directoryBean);
+        final Response response = resource.updateDirectory(1L, Boolean.FALSE, directoryBean);
         assertEquals(200, response.getStatus());
         final AbstractDirectoryBean directoryBeanResponse = (AbstractDirectoryBean) response.getEntity();
 
@@ -91,7 +91,7 @@ class DirectoriesResourceTest {
 
         doReturn(bean).when(directoriesService).addDirectory(bean, false);
 
-        final Response response = resource.addDirectory(Boolean.FALSE, bean);
+        final Response response = resource.createDirectory(Boolean.FALSE, bean);
         assertEquals(200, response.getStatus());
         final AbstractDirectoryBean responseBean = (AbstractDirectoryBean) response.getEntity();
 

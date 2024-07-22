@@ -60,7 +60,7 @@ public interface DirectoriesResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { BootstrAPI.DIRECTORIES },
-            summary = "Set or update a list of user directories",
+            summary = "Set a list of user directories",
             description = "NOTE: All existing directories with the same 'name' attribute are updated.",
             responses = {
                     @ApiResponse(
@@ -76,6 +76,27 @@ public interface DirectoriesResource {
     Response setDirectories(
             @QueryParam("test-connection") @DefaultValue("false") final boolean testConnection,
             @NotNull final List<AbstractDirectoryBean> directories);
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            tags = { BootstrAPI.DIRECTORIES },
+            summary = "Add a user directory",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryBean.class)),
+                            description = "Returns the added directory."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
+            }
+    )
+    Response createDirectory(
+            @QueryParam("test-connection") @DefaultValue("false") final boolean testConnection,
+            @NotNull final AbstractDirectoryBean directory);
 
     @PUT
     @Path("{id}")
@@ -95,29 +116,8 @@ public interface DirectoriesResource {
                     ),
             }
     )
-    Response setDirectory(
+    Response updateDirectory(
             @PathParam("id") final long id,
-            @QueryParam("test-connection") @DefaultValue("false") final boolean testConnection,
-            @NotNull final AbstractDirectoryBean directory);
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.DIRECTORIES },
-            summary = "Add a user directory",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryBean.class)),
-                            description = "Returns the added directory."
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response addDirectory(
             @QueryParam("test-connection") @DefaultValue("false") final boolean testConnection,
             @NotNull final AbstractDirectoryBean directory);
 

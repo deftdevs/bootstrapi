@@ -7,24 +7,24 @@ All URIs are relative to *https://<JIRA_URL>/rest/bootstrapi/1*
 
 | Class | Method | HTTP request | Description |
 |------------ | ------------- | ------------- | -------------|
-| *ApplicationLinksApi* | [**addApplicationLink**](Apis/ApplicationLinksApi.md#addapplicationlink) | **POST** /application-links | Add an application link |
+| *ApplicationLinksApi* | [**createApplicationLink**](Apis/ApplicationLinksApi.md#createapplicationlink) | **POST** /application-links | Create an application link |
 *ApplicationLinksApi* | [**deleteApplicationLink**](Apis/ApplicationLinksApi.md#deleteapplicationlink) | **DELETE** /application-links/{uuid} | Delete an application link |
 *ApplicationLinksApi* | [**deleteApplicationLinks**](Apis/ApplicationLinksApi.md#deleteapplicationlinks) | **DELETE** /application-links | Delete all application links |
 *ApplicationLinksApi* | [**getApplicationLink**](Apis/ApplicationLinksApi.md#getapplicationlink) | **GET** /application-links/{uuid} | Get an application link |
 *ApplicationLinksApi* | [**getApplicationLinks**](Apis/ApplicationLinksApi.md#getapplicationlinks) | **GET** /application-links | Get all application links |
-*ApplicationLinksApi* | [**setApplicationLink**](Apis/ApplicationLinksApi.md#setapplicationlink) | **PUT** /application-links/{uuid} | Update an application link |
-*ApplicationLinksApi* | [**setApplicationLinks**](Apis/ApplicationLinksApi.md#setapplicationlinks) | **PUT** /application-links | Set or update a list of application links |
+*ApplicationLinksApi* | [**setApplicationLinks**](Apis/ApplicationLinksApi.md#setapplicationlinks) | **PUT** /application-links | Set a list of application links |
+*ApplicationLinksApi* | [**updateApplicationLink**](Apis/ApplicationLinksApi.md#updateapplicationlink) | **PUT** /application-links/{uuid} | Update an application link |
 | *AuthenticationApi* | [**getAuthenticationIdps**](Apis/AuthenticationApi.md#getauthenticationidps) | **GET** /authentication/idps | Get all authentication identity providers |
 *AuthenticationApi* | [**getAuthenticationSso**](Apis/AuthenticationApi.md#getauthenticationsso) | **GET** /authentication/sso | Get authentication SSO configuration |
 *AuthenticationApi* | [**setAuthenticationIdps**](Apis/AuthenticationApi.md#setauthenticationidps) | **PATCH** /authentication/idps | Set all authentication identity providers |
 *AuthenticationApi* | [**setAuthenticationSso**](Apis/AuthenticationApi.md#setauthenticationsso) | **PATCH** /authentication/sso | Set authentication SSO configuration |
-| *DirectoriesApi* | [**addDirectory**](Apis/DirectoriesApi.md#adddirectory) | **POST** /directories | Add a user directory |
+| *DirectoriesApi* | [**createDirectory**](Apis/DirectoriesApi.md#createdirectory) | **POST** /directories | Add a user directory |
 *DirectoriesApi* | [**deleteDirectories**](Apis/DirectoriesApi.md#deletedirectories) | **DELETE** /directories | Delete all user directories |
 *DirectoriesApi* | [**deleteDirectory**](Apis/DirectoriesApi.md#deletedirectory) | **DELETE** /directories/{id} | Delete a user directory |
 *DirectoriesApi* | [**getDirectories**](Apis/DirectoriesApi.md#getdirectories) | **GET** /directories | Get all user directories |
 *DirectoriesApi* | [**getDirectory**](Apis/DirectoriesApi.md#getdirectory) | **GET** /directories/{id} | Get a user directory |
-*DirectoriesApi* | [**setDirectories**](Apis/DirectoriesApi.md#setdirectories) | **PUT** /directories | Set or update a list of user directories |
-*DirectoriesApi* | [**setDirectory**](Apis/DirectoriesApi.md#setdirectory) | **PUT** /directories/{id} | Update a user directory |
+*DirectoriesApi* | [**setDirectories**](Apis/DirectoriesApi.md#setdirectories) | **PUT** /directories | Set a list of user directories |
+*DirectoriesApi* | [**updateDirectory**](Apis/DirectoriesApi.md#updatedirectory) | **PUT** /directories/{id} | Update a user directory |
 | *LicensesApi* | [**addLicense**](Apis/LicensesApi.md#addlicense) | **POST** /licenses | Add a license |
 *LicensesApi* | [**getLicenses**](Apis/LicensesApi.md#getlicenses) | **GET** /licenses | Get all licenses information |
 | *MailServerApi* | [**getMailServerPop**](Apis/MailServerApi.md#getmailserverpop) | **GET** /mail-server/pop | Get the default POP mail server |

@@ -44,14 +44,14 @@ public class ApplicationsResourceImpl implements ApplicationsResource {
     }
 
     @Override
-    public Response setApplication(
+    public Response updateApplication(
             final long id,
             final ApplicationBean applicationBean) {
         return Response.ok(applicationsService.setApplication(id, applicationBean)).build();
     }
 
     @Override
-    public Response addApplication(
+    public Response createApplication(
             final ApplicationBean applicationBean) {
         return Response.ok(applicationsService.addApplication(applicationBean)).build();
     }

@@ -62,7 +62,7 @@ public interface ApplicationLinksResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { BootstrAPI.APPLICATION_LINKS },
-            summary = "Set or update a list of application links",
+            summary = "Set a list of application links",
             description = "NOTE: All existing application links with the same 'rpcUrl' attribute are updated.",
             responses = {
                     @ApiResponse(
@@ -78,6 +78,27 @@ public interface ApplicationLinksResource {
     Response setApplicationLinks(
             @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
             @NotNull final List<ApplicationLinkBean> applicationLinkBeans);
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            tags = { BootstrAPI.APPLICATION_LINKS },
+            summary = "Create an application link",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class)),
+                            description = "Returns the added application link."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
+            }
+    )
+    Response createApplicationLink(
+            @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
+            @NotNull final ApplicationLinkBean linkBean);
 
     @PUT
     @Path("{uuid}")
@@ -97,31 +118,10 @@ public interface ApplicationLinksResource {
                     ),
             }
     )
-    Response setApplicationLink(
+    Response updateApplicationLink(
             @PathParam("uuid") @NotNull final UUID uuid,
             @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
             @NotNull final ApplicationLinkBean linksBeanBeans);
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.APPLICATION_LINKS },
-            summary = "Add an application link",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class)),
-                            description = "Returns the added application link."
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response addApplicationLink(
-            @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
-            @NotNull final ApplicationLinkBean linkBean);
 
     @DELETE
     @Operation(
