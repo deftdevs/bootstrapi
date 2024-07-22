@@ -15,7 +15,7 @@ servers:
   - url: "{url}/rest/bootstrapi/1/"
     variables:
       url:
-        default: http://localhost:1990/confluence
+        default: https://<CONFLUENCE_URL>
         description: URL with protocol, domain, port and path
 components:
   securitySchemes:

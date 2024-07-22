@@ -77,6 +77,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-models</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- provided dependencies -->
 
         <dependency>

@@ -100,6 +100,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-models</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- provided dependencies -->
 
         <dependency>
@@ -337,7 +343,7 @@
                         </goals>
                         <configuration>
                             <inputSpec>${project.build.directory}/openapi.yaml</inputSpec>
-                            <generatorName>asciidoc</generatorName>
+                            <generatorName>markdown</generatorName>
                             <output>${project.basedir}</output>
                             <skipValidateSpec>true</skipValidateSpec>
                             <additionalProperties>

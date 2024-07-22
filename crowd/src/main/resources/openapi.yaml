@@ -15,7 +15,7 @@ servers:
   - url: "{url}/rest/bootstrapi/1/"
     variables:
       url:
-        default: http://localhost:4990/crowd
+        default: https://<CROWD_URL>
         description: URL with protocol, domain, port and path
 components:
   securitySchemes:
