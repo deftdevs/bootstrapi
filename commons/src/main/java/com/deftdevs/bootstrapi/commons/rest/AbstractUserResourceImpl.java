@@ -1,16 +1,16 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.model.UserBean;
-import com.deftdevs.bootstrapi.commons.rest.api.UsersResource;
+import com.deftdevs.bootstrapi.commons.rest.api.UserResource;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
 
 import javax.ws.rs.core.Response;
 
-public class AbstractUsersResourceImpl implements UsersResource {
+public class AbstractUserResourceImpl implements UserResource {
 
     private final UsersService usersService;
 
-    public AbstractUsersResourceImpl(final UsersService usersService) {
+    public AbstractUserResourceImpl(final UsersService usersService) {
         this.usersService = usersService;
     }
 

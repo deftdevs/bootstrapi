@@ -17,69 +17,6 @@ import java.util.List;
 
 public interface GroupsResource {
 
-    @GET
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.GROUPS },
-            summary = "Get a group",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = GroupBean.class)),
-                            description = "Returns the requested group details"
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response getGroup(
-            @NotNull @QueryParam("directoryId") final long directoryId,
-            @NotNull @QueryParam("name") final String groupName);
-
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.GROUPS },
-            summary = "Create a group",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = GroupBean.class)),
-                            description = "Returns the updated group details"
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response createGroup(
-            @NotNull @QueryParam("directoryId") final long directoryId,
-            @NotNull final GroupBean groupBean);
-
-    @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.GROUPS },
-            summary = "Update a group",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = GroupBean.class)),
-                            description = "Returns the updated group details"
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response updateGroup(
-            @NotNull @QueryParam("directoryId") final long directoryId,
-            @NotNull @QueryParam("name") final String groupName,
-            @NotNull final GroupBean groupBean);
-
     @PATCH
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)

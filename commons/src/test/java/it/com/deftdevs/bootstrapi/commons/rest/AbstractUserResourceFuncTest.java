@@ -13,7 +13,7 @@ import java.net.http.HttpResponse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
-public abstract class AbstractUsersResourceFuncTest {
+public abstract class AbstractUserResourceFuncTest {
 
     private static final String PARAM_USERNAME = "username";
 
@@ -22,7 +22,7 @@ public abstract class AbstractUsersResourceFuncTest {
     @Test
     void testGetUser() throws Exception {
         final UserBean exampleBean = getExampleBean();
-        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USERS + getUserNameQueryParam(exampleBean))
+        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleBean))
                 .request();
         assertEquals(Response.Status.OK.getStatusCode(), usersResponse.statusCode());
 
@@ -33,7 +33,7 @@ public abstract class AbstractUsersResourceFuncTest {
     @Test
     void testSetUserEmailAddress() throws Exception {
         final UserBean exampleBean = getExampleBean();
-        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USERS + getUserNameQueryParam(exampleBean))
+        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleBean))
                 .request(HttpMethod.PUT, exampleBean);
         assertEquals(Response.Status.OK.getStatusCode(), usersResponse.statusCode());
         
@@ -45,7 +45,7 @@ public abstract class AbstractUsersResourceFuncTest {
     void testSetUserPassword() throws Exception {
         final UserBean exampleBean = getExampleBean();
         final HttpResponse<String> usersResponse = HttpRequestHelper
-                .builder(BootstrAPI.USERS + "/" + BootstrAPI.USER_PASSWORD + getUserNameQueryParam(exampleBean))
+                .builder(BootstrAPI.USER + "/" + BootstrAPI.USER_PASSWORD + getUserNameQueryParam(exampleBean))
                 .contentMediaType(MediaType.TEXT_PLAIN)
                 .request(HttpMethod.PUT, exampleBean.getPassword());
         assertEquals(Response.Status.OK.getStatusCode(), usersResponse.statusCode());
@@ -54,7 +54,7 @@ public abstract class AbstractUsersResourceFuncTest {
     @Test
     public void testGetUserUnauthenticated() throws Exception {
         final UserBean exampleBean = getExampleBean();
-        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USERS + getUserNameQueryParam(exampleBean))
+        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleBean))
                 .username("wrong")
                 .password("password")
                 .request();
@@ -64,7 +64,7 @@ public abstract class AbstractUsersResourceFuncTest {
     @Test
     public void testSetUserEmailAddressUnauthenticated() throws Exception {
         final UserBean exampleBean = getExampleBean();
-        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USERS + getUserNameQueryParam(exampleBean))
+        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleBean))
                 .username("wrong")
                 .password("password")
                 .request(HttpMethod.PUT, exampleBean);
@@ -74,7 +74,7 @@ public abstract class AbstractUsersResourceFuncTest {
     @Test
     void testGetUserUnauthorized() throws Exception {
         final UserBean exampleBean = getExampleBean();
-        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USERS + getUserNameQueryParam(exampleBean))
+        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleBean))
                 .username("user")
                 .password("user")
                 .request();
@@ -84,7 +84,7 @@ public abstract class AbstractUsersResourceFuncTest {
     @Test
     void testSetUserEmailAddressUnauthorized() throws Exception {
         final UserBean exampleBean = getExampleBean();
-        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USERS + getUserNameQueryParam(exampleBean))
+        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleBean))
                 .username("user")
                 .password("user")
                 .request(HttpMethod.PUT, exampleBean);

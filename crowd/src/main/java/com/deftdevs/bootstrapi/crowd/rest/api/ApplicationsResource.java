@@ -35,27 +35,6 @@ public interface ApplicationsResource {
     )
     Response getApplications();
 
-    @GET
-    @Path("{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.APPLICATIONS },
-            summary = "Get an application",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApplicationBean.class))),
-                            description = "Returns the requested application."
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response getApplication(
-            @PathParam("id") long id);
-
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -77,48 +56,6 @@ public interface ApplicationsResource {
     Response setApplications(
             List<ApplicationBean> applicationBeans);
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.APPLICATIONS },
-            summary = "Add an application",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationBean.class)),
-                            description = "Returns the added application."
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response createApplication(
-            ApplicationBean applicationBean);
-
-    @PUT
-    @Path("{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.APPLICATIONS },
-            summary = "Update an application",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationBean.class)),
-                            description = "Returns the updated application."
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response updateApplication(
-            @PathParam("id") long id,
-            ApplicationBean applicationsBeanBeans);
-
     @DELETE
     @Operation(
             tags = { BootstrAPI.APPLICATIONS },
@@ -137,24 +74,5 @@ public interface ApplicationsResource {
     )
     Response deleteApplications(
             @QueryParam("force") final boolean force);
-
-    @DELETE
-    @Path("{id}")
-    @Operation(
-            tags = { BootstrAPI.APPLICATIONS },
-            summary = "Delete an application",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Returns an empty body."
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response deleteApplication(
-            @PathParam("id") final long id);
 
 }

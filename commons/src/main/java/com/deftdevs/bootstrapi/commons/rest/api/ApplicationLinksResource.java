@@ -14,7 +14,6 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
-import java.util.UUID;
 
 public interface ApplicationLinksResource {
 
@@ -35,27 +34,6 @@ public interface ApplicationLinksResource {
             }
     )
     Response getApplicationLinks();
-
-    @GET
-    @Path("{uuid}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.APPLICATION_LINKS },
-            summary = "Get an application link",
-            description = "Upon successful request, ",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class)),
-                            description = "Returns the requested application link."
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response getApplicationLink(
-            @PathParam("uuid") @NotNull final UUID uuid);
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -79,50 +57,6 @@ public interface ApplicationLinksResource {
             @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
             @NotNull final List<ApplicationLinkBean> applicationLinkBeans);
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.APPLICATION_LINKS },
-            summary = "Create an application link",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class)),
-                            description = "Returns the added application link."
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response createApplicationLink(
-            @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
-            @NotNull final ApplicationLinkBean linkBean);
-
-    @PUT
-    @Path("{uuid}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.APPLICATION_LINKS },
-            summary = "Update an application link",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class)),
-                            description = "Returns the updated application link."
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response updateApplicationLink(
-            @PathParam("uuid") @NotNull final UUID uuid,
-            @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
-            @NotNull final ApplicationLinkBean linksBeanBeans);
-
     @DELETE
     @Operation(
             tags = { BootstrAPI.APPLICATION_LINKS },
@@ -141,24 +75,5 @@ public interface ApplicationLinksResource {
     )
     Response deleteApplicationLinks(
             @QueryParam("force") final boolean force);
-
-    @DELETE
-    @Path("{uuid}")
-    @Operation(
-            tags = { BootstrAPI.APPLICATION_LINKS },
-            summary = "Delete an application link",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Returns an empty body."
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response deleteApplicationLink(
-            @PathParam("uuid") @NotNull final UUID uuid);
 
 }

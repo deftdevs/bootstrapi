@@ -18,7 +18,7 @@ public interface CachesResource {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = {BootstrAPI.CACHE},
+            tags = {BootstrAPI.CACHES},
             summary = "Read all cache information",
             responses = {
                     @ApiResponse(
@@ -36,7 +36,7 @@ public interface CachesResource {
     @Path("{name}")
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = {BootstrAPI.CACHE},
+            tags = {BootstrAPI.CACHES},
             summary = "Read cache information for a specified cache",
             responses = {
                     @ApiResponse(
@@ -55,7 +55,7 @@ public interface CachesResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = {BootstrAPI.CACHE},
+            tags = {BootstrAPI.CACHES},
             summary = "Update an existing cache-size. Only Setting maxObjectCount is supported.",
             responses = {
                     @ApiResponse(
@@ -75,7 +75,7 @@ public interface CachesResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = {BootstrAPI.CACHE},
+            tags = {BootstrAPI.CACHES},
             summary = "Flushes a cache",
             description = "Empties the specified cache",
             responses = {

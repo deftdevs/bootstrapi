@@ -1,34 +1,29 @@
-package com.deftdevs.bootstrapi.commons.rest.api;
+package com.deftdevs.bootstrapi.crowd.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.commons.model.UserBean;
+import com.deftdevs.bootstrapi.commons.model.GroupBean;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import javax.validation.constraints.NotNull;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.GET;
-import javax.ws.rs.PUT;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.QueryParam;
+import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-public interface UsersResource {
+public interface GroupResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { BootstrAPI.USERS },
-            summary = "Get a user",
+            tags = { BootstrAPI.GROUP },
+            summary = "Get a group",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class)),
-                            description = "Returns the requested user details"
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = GroupBean.class)),
+                            description = "Returns the requested group details"
                     ),
                     @ApiResponse(
                             responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
@@ -36,19 +31,41 @@ public interface UsersResource {
                     ),
             }
     )
-    Response getUser(
-            @NotNull @QueryParam("username") final String username);
+    Response getGroup(
+            @NotNull @QueryParam("directoryId") final long directoryId,
+            @NotNull @QueryParam("name") final String groupName);
+
+    @POST
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    @Operation(
+            tags = { BootstrAPI.GROUP },
+            summary = "Create a group",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = GroupBean.class)),
+                            description = "Returns the updated group details"
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
+            }
+    )
+    Response createGroup(
+            @NotNull @QueryParam("directoryId") final long directoryId,
+            @NotNull final GroupBean groupBean);
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = { BootstrAPI.USERS },
-            summary = "Update an user",
+            tags = { BootstrAPI.GROUP },
+            summary = "Update a group",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class)),
-                            description = "Returns the updated user details"
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = GroupBean.class)),
+                            description = "Returns the updated group details"
                     ),
                     @ApiResponse(
                             responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
@@ -56,30 +73,9 @@ public interface UsersResource {
                     ),
             }
     )
-    Response setUser(
-            @NotNull @QueryParam("username") final String username,
-            @NotNull final UserBean userBean);
-
-    @PUT
-    @Path(BootstrAPI.USER_PASSWORD)
-    @Consumes(MediaType.TEXT_PLAIN)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.USERS },
-            summary = "Update a user password",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class)),
-                            description = "Returns the user details"
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response setUserPassword(
-            @NotNull @QueryParam("username") final String username,
-            @NotNull final String password);
+    Response updateGroup(
+            @NotNull @QueryParam("directoryId") final long directoryId,
+            @NotNull @QueryParam("name") final String groupName,
+            @NotNull final GroupBean groupBean);
 
 }

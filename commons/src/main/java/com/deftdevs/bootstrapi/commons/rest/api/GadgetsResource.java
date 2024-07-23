@@ -35,26 +35,6 @@ public interface GadgetsResource {
     )
     Response getGadgets();
 
-    @GET
-    @Path("{id}")
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.GADGETS },
-            summary = "Get a gadget",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetBean.class)),
-                            description = "Returns the requested gadget."
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response getGadget(
-            @PathParam("id") final long id);
-
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
@@ -76,49 +56,6 @@ public interface GadgetsResource {
     Response setGadgets(
             @NotNull final List<GadgetBean> gadgetBeans);
 
-    @POST
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.GADGETS },
-            summary = "Add a gadget",
-            description = "Upon successful request, returns a `GadgetBean` object of the created gadget.",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetBean.class)),
-                            description = "Returns the added gadget."
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response createGadget(
-            @NotNull final GadgetBean gadgetBean);
-
-    @PUT
-    @Path("{id}")
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
-    @Operation(
-            tags = { BootstrAPI.GADGETS },
-            summary = "Update a gadget",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetBean.class)),
-                            description = "Returns the updated gadget."
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response updateGadget(
-            @PathParam("id") final long id,
-            @NotNull final GadgetBean gadgetBean);
-
     @DELETE
     @Operation(
             tags = { BootstrAPI.GADGETS },
@@ -137,24 +74,5 @@ public interface GadgetsResource {
     )
     Response deleteGadgets(
             @QueryParam("force") final boolean force);
-
-    @DELETE
-    @Path("{id}")
-    @Operation(
-            tags = { BootstrAPI.GADGETS },
-            summary = "Delete a gadget",
-            responses = {
-                    @ApiResponse(
-                            responseCode = "200",
-                            description = "Returns an empty body."
-                    ),
-                    @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
-                            description = "Returns a list of error messages."
-                    ),
-            }
-    )
-    Response deleteGadget(
-            @PathParam("id") final long id);
 
 }
