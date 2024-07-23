@@ -7,7 +7,6 @@ All URIs are relative to *https://<CROWD_URL>/rest/bootstrapi/1*
 
 | Class | Method | HTTP request | Description |
 |------------ | ------------- | ------------- | -------------|
-| *AllApi* | [**setAll**](Apis/AllApi.md#setall) | **PUT** / | Set the whole configuration |
 | *ApplicationLinksApi* | [**createApplicationLink**](Apis/ApplicationLinksApi.md#createapplicationlink) | **POST** /application-links | Create an application link |
 *ApplicationLinksApi* | [**deleteApplicationLink**](Apis/ApplicationLinksApi.md#deleteapplicationlink) | **DELETE** /application-links/{uuid} | Delete an application link |
 *ApplicationLinksApi* | [**deleteApplicationLinks**](Apis/ApplicationLinksApi.md#deleteapplicationlinks) | **DELETE** /application-links | Delete all application links |
@@ -60,7 +59,6 @@ All URIs are relative to *https://<CROWD_URL>/rest/bootstrapi/1*
 ## Documentation for Models
 
  - [AbstractDirectoryBean](./Models/AbstractDirectoryBean.md)
- - [AllBean](./Models/AllBean.md)
  - [ApplicationBean](./Models/ApplicationBean.md)
  - [ApplicationDirectoryMapping](./Models/ApplicationDirectoryMapping.md)
  - [ApplicationLinkBean](./Models/ApplicationLinkBean.md)
