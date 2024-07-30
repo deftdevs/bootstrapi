@@ -46,19 +46,6 @@ class DirectoriesResourceTest {
     }
 
     @Test
-    void testGetDirectory() {
-        DirectoryCrowdBean directoryBean = DirectoryCrowdBean.EXAMPLE_1;
-
-        doReturn(directoryBean).when(directoriesService).getDirectory(1L);
-
-        final Response response = resource.getDirectory(1L);
-        assertEquals(200, response.getStatus());
-        final AbstractDirectoryBean directoryBeanResponse = (AbstractDirectoryBean) response.getEntity();
-
-        assertEquals(directoryBean, directoryBeanResponse);
-    }
-
-    @Test
     void testSetDirectories() {
         final DirectoryCrowdBean directoryBean1 = DirectoryCrowdBean.EXAMPLE_1;
         final DirectoryCrowdBean directoryBean2 = DirectoryCrowdBean.EXAMPLE_3;
@@ -73,40 +60,8 @@ class DirectoriesResourceTest {
     }
 
     @Test
-    void testSetDirectory() {
-        DirectoryCrowdBean directoryBean = DirectoryCrowdBean.EXAMPLE_1;
-
-        doReturn(directoryBean).when(directoriesService).setDirectory(1L, directoryBean, false);
-
-        final Response response = resource.updateDirectory(1L, Boolean.FALSE, directoryBean);
-        assertEquals(200, response.getStatus());
-        final AbstractDirectoryBean directoryBeanResponse = (AbstractDirectoryBean) response.getEntity();
-
-        assertEquals(directoryBean, directoryBeanResponse);
-    }
-
-    @Test
-    void testAddDirectory() {
-        DirectoryCrowdBean bean = DirectoryCrowdBean.EXAMPLE_1;
-
-        doReturn(bean).when(directoriesService).addDirectory(bean, false);
-
-        final Response response = resource.createDirectory(Boolean.FALSE, bean);
-        assertEquals(200, response.getStatus());
-        final AbstractDirectoryBean responseBean = (AbstractDirectoryBean) response.getEntity();
-
-        assertEquals(bean.getName(), responseBean.getName());
-    }
-
-    @Test
     void testDeleteDirectories() {
         resource.deleteDirectories(true);
-        assertTrue(true, "Delete Successful");
-    }
-
-    @Test
-    void testDeleteDirectory() {
-        resource.deleteDirectory(1L);
         assertTrue(true, "Delete Successful");
     }
 

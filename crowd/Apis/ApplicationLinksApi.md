@@ -4,65 +4,10 @@ All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createApplicationLink**](ApplicationLinksApi.md#createApplicationLink) | **POST** /application-links | Create an application link |
-| [**deleteApplicationLink**](ApplicationLinksApi.md#deleteApplicationLink) | **DELETE** /application-links/{uuid} | Delete an application link |
 | [**deleteApplicationLinks**](ApplicationLinksApi.md#deleteApplicationLinks) | **DELETE** /application-links | Delete all application links |
-| [**getApplicationLink**](ApplicationLinksApi.md#getApplicationLink) | **GET** /application-links/{uuid} | Get an application link |
 | [**getApplicationLinks**](ApplicationLinksApi.md#getApplicationLinks) | **GET** /application-links | Get all application links |
 | [**setApplicationLinks**](ApplicationLinksApi.md#setApplicationLinks) | **PUT** /application-links | Set a list of application links |
-| [**updateApplicationLink**](ApplicationLinksApi.md#updateApplicationLink) | **PUT** /application-links/{uuid} | Update an application link |
 
-
-<a name="createApplicationLink"></a>
-# **createApplicationLink**
-> ApplicationLinkBean createApplicationLink(ApplicationLinkBean, ignore-setup-errors)
-
-Create an application link
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **ApplicationLinkBean** | [**ApplicationLinkBean**](../Models/ApplicationLinkBean.md)|  | |
-| **ignore-setup-errors** | **Boolean**|  | [optional] [default to false] |
-
-### Return type
-
-[**ApplicationLinkBean**](../Models/ApplicationLinkBean.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="deleteApplicationLink"></a>
-# **deleteApplicationLink**
-> deleteApplicationLink(uuid)
-
-Delete an application link
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **uuid** | **UUID**|  | [default to null] |
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: */*
 
 <a name="deleteApplicationLinks"></a>
 # **deleteApplicationLinks**
@@ -90,33 +35,6 @@ null (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: */*
-
-<a name="getApplicationLink"></a>
-# **getApplicationLink**
-> ApplicationLinkBean getApplicationLink(uuid)
-
-Get an application link
-
-    Upon successful request, 
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **uuid** | **UUID**|  | [default to null] |
-
-### Return type
-
-[**ApplicationLinkBean**](../Models/ApplicationLinkBean.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 
 <a name="getApplicationLinks"></a>
 # **getApplicationLinks**
@@ -158,33 +76,6 @@ Set a list of application links
 ### Return type
 
 [**List**](../Models/ApplicationLinkBean.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="updateApplicationLink"></a>
-# **updateApplicationLink**
-> ApplicationLinkBean updateApplicationLink(uuid, ApplicationLinkBean, ignore-setup-errors)
-
-Update an application link
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **uuid** | **UUID**|  | [default to null] |
-| **ApplicationLinkBean** | [**ApplicationLinkBean**](../Models/ApplicationLinkBean.md)|  | |
-| **ignore-setup-errors** | **Boolean**|  | [optional] [default to false] |
-
-### Return type
-
-[**ApplicationLinkBean**](../Models/ApplicationLinkBean.md)
 
 ### Authorization
 

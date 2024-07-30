@@ -1,29 +1,30 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.model.UserBean;
-import com.deftdevs.bootstrapi.commons.rest.impl.TestUsersResourceImpl;
+import com.deftdevs.bootstrapi.commons.rest.impl.TestUserResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
-import javax.ws.rs.core.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import javax.ws.rs.core.Response;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
 
 @ExtendWith(MockitoExtension.class)
-class UsersResourceTest {
+class UserResourceTest {
 
     @Mock
     private UsersService usersService;
 
-    private TestUsersResourceImpl resource;
+    private TestUserResourceImpl resource;
 
     @BeforeEach
     public void setup() {
-        resource = new TestUsersResourceImpl(usersService);
+        resource = new TestUserResourceImpl(usersService);
     }
 
     @Test

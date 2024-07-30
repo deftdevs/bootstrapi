@@ -32,39 +32,14 @@ public class ApplicationsResourceImpl implements ApplicationsResource {
     }
 
     @Override
-    public Response getApplication(
-            final long id) {
-        return Response.ok(applicationsService.getApplication(id)).build();
-    }
-
-    @Override
     public Response setApplications(
             final List<ApplicationBean> applicationBeans) {
         return Response.ok(applicationsService.setApplications(applicationBeans)).build();
     }
 
     @Override
-    public Response updateApplication(
-            final long id,
-            final ApplicationBean applicationBean) {
-        return Response.ok(applicationsService.setApplication(id, applicationBean)).build();
-    }
-
-    @Override
-    public Response createApplication(
-            final ApplicationBean applicationBean) {
-        return Response.ok(applicationsService.addApplication(applicationBean)).build();
-    }
-
-    @Override
     public Response deleteApplications(boolean force) {
         applicationsService.deleteApplications(force);
-        return Response.ok().build();
-    }
-
-    @Override
-    public Response deleteApplication(long id) {
-        applicationsService.deleteApplication(id);
         return Response.ok().build();
     }
 

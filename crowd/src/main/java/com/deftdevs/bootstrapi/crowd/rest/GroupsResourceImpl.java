@@ -27,34 +27,6 @@ public class GroupsResourceImpl implements GroupsResource {
     }
 
     @Override
-    public Response getGroup(
-            final long directoryId,
-            final String groupName) {
-
-        final GroupBean groupBean = groupsService.getGroup(directoryId, groupName);
-        return Response.ok(groupBean).build();
-    }
-
-    @Override
-    public Response createGroup(
-            final long directoryId,
-            final GroupBean groupBean) {
-
-        final GroupBean resultGroupBean = groupsService.createGroup(directoryId, groupBean);
-        return Response.ok(resultGroupBean).build();
-    }
-
-    @Override
-    public Response updateGroup(
-            final long directoryId,
-            final String groupName,
-            final GroupBean groupBean) {
-
-        final GroupBean resultGroupBean = groupsService.updateGroup(directoryId, groupName, groupBean);
-        return Response.ok(resultGroupBean).build();
-    }
-
-    @Override
     public Response setGroups(
             final long directoryId,
             final List<GroupBean> groupBeans) {

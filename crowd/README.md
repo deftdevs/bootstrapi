@@ -7,31 +7,31 @@ All URIs are relative to *https://<CROWD_URL>/rest/bootstrapi/1*
 
 | Class | Method | HTTP request | Description |
 |------------ | ------------- | ------------- | -------------|
-| *ApplicationLinksApi* | [**createApplicationLink**](Apis/ApplicationLinksApi.md#createapplicationlink) | **POST** /application-links | Create an application link |
-*ApplicationLinksApi* | [**deleteApplicationLink**](Apis/ApplicationLinksApi.md#deleteapplicationlink) | **DELETE** /application-links/{uuid} | Delete an application link |
-*ApplicationLinksApi* | [**deleteApplicationLinks**](Apis/ApplicationLinksApi.md#deleteapplicationlinks) | **DELETE** /application-links | Delete all application links |
-*ApplicationLinksApi* | [**getApplicationLink**](Apis/ApplicationLinksApi.md#getapplicationlink) | **GET** /application-links/{uuid} | Get an application link |
+| *ApplicationApi* | [**createApplication**](Apis/ApplicationApi.md#createapplication) | **POST** /application | Create an application |
+*ApplicationApi* | [**deleteApplication**](Apis/ApplicationApi.md#deleteapplication) | **DELETE** /application/{id} | Delete an application |
+*ApplicationApi* | [**getApplication**](Apis/ApplicationApi.md#getapplication) | **GET** /application/{id} | Get an application |
+*ApplicationApi* | [**updateApplication**](Apis/ApplicationApi.md#updateapplication) | **PUT** /application/{id} | Update an application |
+| *ApplicationLinkApi* | [**createApplicationLink**](Apis/ApplicationLinkApi.md#createapplicationlink) | **POST** /application-link | Create an application link |
+*ApplicationLinkApi* | [**deleteApplicationLink**](Apis/ApplicationLinkApi.md#deleteapplicationlink) | **DELETE** /application-link/{uuid} | Delete an application link |
+*ApplicationLinkApi* | [**getApplicationLink**](Apis/ApplicationLinkApi.md#getapplicationlink) | **GET** /application-link/{uuid} | Get an application link |
+*ApplicationLinkApi* | [**updateApplicationLink**](Apis/ApplicationLinkApi.md#updateapplicationlink) | **PUT** /application-link/{uuid} | Update an application link |
+| *ApplicationLinksApi* | [**deleteApplicationLinks**](Apis/ApplicationLinksApi.md#deleteapplicationlinks) | **DELETE** /application-links | Delete all application links |
 *ApplicationLinksApi* | [**getApplicationLinks**](Apis/ApplicationLinksApi.md#getapplicationlinks) | **GET** /application-links | Get all application links |
 *ApplicationLinksApi* | [**setApplicationLinks**](Apis/ApplicationLinksApi.md#setapplicationlinks) | **PUT** /application-links | Set a list of application links |
-*ApplicationLinksApi* | [**updateApplicationLink**](Apis/ApplicationLinksApi.md#updateapplicationlink) | **PUT** /application-links/{uuid} | Update an application link |
-| *ApplicationsApi* | [**createApplication**](Apis/ApplicationsApi.md#createapplication) | **POST** /applications | Add an application |
-*ApplicationsApi* | [**deleteApplication**](Apis/ApplicationsApi.md#deleteapplication) | **DELETE** /applications/{id} | Delete an application |
-*ApplicationsApi* | [**deleteApplications**](Apis/ApplicationsApi.md#deleteapplications) | **DELETE** /applications | Delete all applications |
-*ApplicationsApi* | [**getApplication**](Apis/ApplicationsApi.md#getapplication) | **GET** /applications/{id} | Get an application |
+| *ApplicationsApi* | [**deleteApplications**](Apis/ApplicationsApi.md#deleteapplications) | **DELETE** /applications | Delete all applications |
 *ApplicationsApi* | [**getApplications**](Apis/ApplicationsApi.md#getapplications) | **GET** /applications | Get all applications |
 *ApplicationsApi* | [**setApplications**](Apis/ApplicationsApi.md#setapplications) | **PUT** /applications | Set a list of applications |
-*ApplicationsApi* | [**updateApplication**](Apis/ApplicationsApi.md#updateapplication) | **PUT** /applications/{id} | Update an application |
-| *DirectoriesApi* | [**createDirectory**](Apis/DirectoriesApi.md#createdirectory) | **POST** /directories | Add a user directory |
-*DirectoriesApi* | [**deleteDirectories**](Apis/DirectoriesApi.md#deletedirectories) | **DELETE** /directories | Delete all user directories |
-*DirectoriesApi* | [**deleteDirectory**](Apis/DirectoriesApi.md#deletedirectory) | **DELETE** /directories/{id} | Delete a user directory |
+| *DirectoriesApi* | [**deleteDirectories**](Apis/DirectoriesApi.md#deletedirectories) | **DELETE** /directories | Delete all user directories |
 *DirectoriesApi* | [**getDirectories**](Apis/DirectoriesApi.md#getdirectories) | **GET** /directories | Get all user directories |
-*DirectoriesApi* | [**getDirectory**](Apis/DirectoriesApi.md#getdirectory) | **GET** /directories/{id} | Get a user directory |
 *DirectoriesApi* | [**setDirectories**](Apis/DirectoriesApi.md#setdirectories) | **PUT** /directories | Set a list of user directories |
-*DirectoriesApi* | [**updateDirectory**](Apis/DirectoriesApi.md#updatedirectory) | **PUT** /directories/{id} | Update a user directory |
-| *GroupsApi* | [**createGroup**](Apis/GroupsApi.md#creategroup) | **POST** /groups | Create a group |
-*GroupsApi* | [**getGroup**](Apis/GroupsApi.md#getgroup) | **GET** /groups | Get a group |
-*GroupsApi* | [**setGroups**](Apis/GroupsApi.md#setgroups) | **PATCH** /groups | Set groups |
-*GroupsApi* | [**updateGroup**](Apis/GroupsApi.md#updategroup) | **PUT** /groups | Update a group |
+| *DirectoryApi* | [**createDirectory**](Apis/DirectoryApi.md#createdirectory) | **POST** /directory | Create a user directory |
+*DirectoryApi* | [**deleteDirectory**](Apis/DirectoryApi.md#deletedirectory) | **DELETE** /directory/{id} | Delete a user directory |
+*DirectoryApi* | [**getDirectory**](Apis/DirectoryApi.md#getdirectory) | **GET** /directory/{id} | Get a user directory |
+*DirectoryApi* | [**updateDirectory**](Apis/DirectoryApi.md#updatedirectory) | **PUT** /directory/{id} | Update a user directory |
+| *GroupApi* | [**createGroup**](Apis/GroupApi.md#creategroup) | **POST** /group | Create a group |
+*GroupApi* | [**getGroup**](Apis/GroupApi.md#getgroup) | **GET** /group | Get a group |
+*GroupApi* | [**updateGroup**](Apis/GroupApi.md#updategroup) | **PUT** /group | Update a group |
+| *GroupsApi* | [**setGroups**](Apis/GroupsApi.md#setgroups) | **PATCH** /groups | Set groups |
 | *LicensesApi* | [**addLicense**](Apis/LicensesApi.md#addlicense) | **POST** /licenses | Add a license |
 *LicensesApi* | [**getLicenses**](Apis/LicensesApi.md#getlicenses) | **GET** /licenses | Get all licenses information |
 | *MailServerApi* | [**getMailServerSmtp**](Apis/MailServerApi.md#getmailserversmtp) | **GET** /mail-server/smtp | Get the default SMTP mail server |
@@ -50,9 +50,9 @@ All URIs are relative to *https://<CROWD_URL>/rest/bootstrapi/1*
 *TrustedProxiesApi* | [**getTrustedProxies**](Apis/TrustedProxiesApi.md#gettrustedproxies) | **GET** /trusted-proxies | Get the trusted proxies |
 *TrustedProxiesApi* | [**removeTrustedProxy**](Apis/TrustedProxiesApi.md#removetrustedproxy) | **DELETE** /trusted-proxies | Remove a trusted proxy |
 *TrustedProxiesApi* | [**setTrustedProxies**](Apis/TrustedProxiesApi.md#settrustedproxies) | **PUT** /trusted-proxies | Set the trusted proxies |
-| *UsersApi* | [**getUser**](Apis/UsersApi.md#getuser) | **GET** /users | Get a user |
-*UsersApi* | [**setUser**](Apis/UsersApi.md#setuser) | **PUT** /users | Update an user |
-*UsersApi* | [**setUserPassword**](Apis/UsersApi.md#setuserpassword) | **PUT** /users/password | Update a user password |
+| *UserApi* | [**getUser**](Apis/UserApi.md#getuser) | **GET** /users | Get a user |
+*UserApi* | [**setUser**](Apis/UserApi.md#setuser) | **PUT** /users | Update an user |
+*UserApi* | [**setUserPassword**](Apis/UserApi.md#setuserpassword) | **PUT** /users/password | Update a user password |
 
 
 <a name="documentation-for-models"></a>

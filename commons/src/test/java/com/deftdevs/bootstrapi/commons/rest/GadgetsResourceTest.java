@@ -43,19 +43,6 @@ class GadgetsResourceTest {
     }
 
     @Test
-    void testGetGadget() {
-        final GadgetBean bean = GadgetBean.EXAMPLE_1;
-
-        doReturn(bean).when(gadgetsService).getGadget(1L);
-
-        final Response response = resource.getGadget(1L);
-        assertEquals(200, response.getStatus());
-        final GadgetBean gadgetBean = (GadgetBean) response.getEntity();
-
-        assertEquals(gadgetBean, bean);
-    }
-
-    @Test
     void testSetGadgets() {
         final List<GadgetBean> gadgetBeans = Collections.singletonList(GadgetBean.EXAMPLE_1);
         doReturn(gadgetBeans).when(gadgetsService).setGadgets(gadgetBeans);
@@ -68,38 +55,9 @@ class GadgetsResourceTest {
     }
 
     @Test
-    void testSetGadget() {
-        final GadgetBean bean = GadgetBean.EXAMPLE_1;
-        doReturn(bean).when(gadgetsService).setGadget(1L, bean);
-
-        final Response response = resource.updateGadget(1L, bean);
-        assertEquals(200, response.getStatus());
-
-        final GadgetBean gadgetBean = (GadgetBean) response.getEntity();
-        assertEquals(gadgetBean, bean);
-    }
-
-    @Test
-    void testAddGadget() {
-        final GadgetBean bean = GadgetBean.EXAMPLE_1;
-        doReturn(bean).when(gadgetsService).addGadget(bean);
-
-        final Response response = resource.createGadget(bean);
-        assertEquals(200, response.getStatus());
-
-        final GadgetBean responseBean = (GadgetBean) response.getEntity();
-        assertEquals(bean, responseBean);
-    }
-
-    @Test
     void testDeleteGadgets() {
         resource.deleteGadgets(true);
         assertTrue(true, "Delete Successful");
     }
 
-    @Test
-    void testDeleteGadget() {
-        resource.deleteGadget(1L);
-        assertTrue(true, "Delete Successful");
-    }
 }

@@ -4,66 +4,10 @@ All URIs are relative to *https://&lt;CONFLUENCE_URL&gt;/rest/bootstrapi/1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**createGadget**](GadgetsApi.md#createGadget) | **POST** /gadgets | Add a gadget |
-| [**deleteGadget**](GadgetsApi.md#deleteGadget) | **DELETE** /gadgets/{id} | Delete a gadget |
 | [**deleteGadgets**](GadgetsApi.md#deleteGadgets) | **DELETE** /gadgets | Delete all gadgets |
-| [**getGadget**](GadgetsApi.md#getGadget) | **GET** /gadgets/{id} | Get a gadget |
 | [**getGadgets**](GadgetsApi.md#getGadgets) | **GET** /gadgets | Get all gadgets |
 | [**setGadgets**](GadgetsApi.md#setGadgets) | **PUT** /gadgets | Set a list of gadgets |
-| [**updateGadget**](GadgetsApi.md#updateGadget) | **PUT** /gadgets/{id} | Update a gadget |
 
-
-<a name="createGadget"></a>
-# **createGadget**
-> GadgetBean createGadget(GadgetBean)
-
-Add a gadget
-
-    Upon successful request, returns a &#x60;GadgetBean&#x60; object of the created gadget.
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **GadgetBean** | [**GadgetBean**](../Models/GadgetBean.md)|  | |
-
-### Return type
-
-[**GadgetBean**](../Models/GadgetBean.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="deleteGadget"></a>
-# **deleteGadget**
-> deleteGadget(id)
-
-Delete a gadget
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **id** | **Long**|  | [default to null] |
-
-### Return type
-
-null (empty response body)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: */*
 
 <a name="deleteGadgets"></a>
 # **deleteGadgets**
@@ -91,31 +35,6 @@ null (empty response body)
 
 - **Content-Type**: Not defined
 - **Accept**: */*
-
-<a name="getGadget"></a>
-# **getGadget**
-> GadgetBean getGadget(id)
-
-Get a gadget
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **id** | **Long**|  | [default to null] |
-
-### Return type
-
-[**GadgetBean**](../Models/GadgetBean.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
 
 <a name="getGadgets"></a>
 # **getGadgets**
@@ -156,32 +75,6 @@ Set a list of gadgets
 ### Return type
 
 [**List**](../Models/GadgetBean.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="updateGadget"></a>
-# **updateGadget**
-> GadgetBean updateGadget(id, GadgetBean)
-
-Update a gadget
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **id** | **Long**|  | [default to null] |
-| **GadgetBean** | [**GadgetBean**](../Models/GadgetBean.md)|  | |
-
-### Return type
-
-[**GadgetBean**](../Models/GadgetBean.md)
 
 ### Authorization
 
