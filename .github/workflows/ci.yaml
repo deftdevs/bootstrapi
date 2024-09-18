@@ -10,7 +10,7 @@ on:
   merge_group:
 
 jobs:
-  compile:
+  build:
 
     runs-on: ubuntu-22.04
 
@@ -27,11 +27,19 @@ jobs:
         distribution: temurin
         cache: 'maven'
 
-    - name: Run compile
-      run: mvn -B compile
+    - name: Run build
+      run: mvn -B package -DskipTests
+
+    - name: Archive artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: artifacts
+        path: |
+          **/target/*.jar
+          **/target/*.obr
 
   unit-tests:
-    needs: compile
+    needs: build
 
     runs-on: ubuntu-22.04
 
@@ -84,7 +92,7 @@ jobs:
       run: mvn -B -pl ${{ matrix.product }} -am verify
 
   apcc:
-    needs: compile
+    needs: build
 
     runs-on: ubuntu-22.04
 
