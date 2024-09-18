@@ -34,10 +34,12 @@ All URIs are relative to *https://<JIRA_URL>/rest/bootstrapi/1*
 | *PermissionsApi* | [**getPermissionGlobal**](Apis/PermissionsApi.md#getpermissionglobal) | **GET** /permissions/global | Get global permissions configuration |
 *PermissionsApi* | [**setPermissionGlobal**](Apis/PermissionsApi.md#setpermissionglobal) | **PUT** /permissions/global | Set global permissions configuration |
 | *PingApi* | [**getPing**](Apis/PingApi.md#getping) | **GET** /ping | Ping method for probing the REST API. |
-| *SettingsApi* | [**getBrandingColorScheme**](Apis/SettingsApi.md#getbrandingcolorscheme) | **GET** /settings/branding/color-scheme | Get the color scheme |
+| *SettingsApi* | [**getBanner**](Apis/SettingsApi.md#getbanner) | **GET** /settings/banner | Get the banner |
+*SettingsApi* | [**getBrandingColorScheme**](Apis/SettingsApi.md#getbrandingcolorscheme) | **GET** /settings/branding/color-scheme | Get the color scheme |
 *SettingsApi* | [**getBrandingFavicon**](Apis/SettingsApi.md#getbrandingfavicon) | **GET** /settings/branding/favicon | Get the favicon |
 *SettingsApi* | [**getBrandingLogo**](Apis/SettingsApi.md#getbrandinglogo) | **GET** /settings/branding/logo | Get the logo |
 *SettingsApi* | [**getSettings**](Apis/SettingsApi.md#getsettings) | **GET** /settings | Get the application settings |
+*SettingsApi* | [**setBanner**](Apis/SettingsApi.md#setbanner) | **PUT** /settings/banner | Set the banner |
 *SettingsApi* | [**setBrandingColorScheme**](Apis/SettingsApi.md#setbrandingcolorscheme) | **PUT** /settings/branding/color-scheme | Set the color scheme |
 *SettingsApi* | [**setBrandingFavicon**](Apis/SettingsApi.md#setbrandingfavicon) | **PUT** /settings/branding/favicon | Set the favicon |
 *SettingsApi* | [**setBrandingLogo**](Apis/SettingsApi.md#setbrandinglogo) | **PUT** /settings/branding/logo | Set the logo |
@@ -76,6 +78,7 @@ All URIs are relative to *https://<JIRA_URL>/rest/bootstrapi/1*
  - [MailServerPopBean](./Models/MailServerPopBean.md)
  - [MailServerSmtpBean](./Models/MailServerSmtpBean.md)
  - [PermissionsGlobalBean](./Models/PermissionsGlobalBean.md)
+ - [SettingsBannerBean](./Models/SettingsBannerBean.md)
  - [SettingsBean](./Models/SettingsBean.md)
  - [SettingsBrandingColorSchemeBean](./Models/SettingsBrandingColorSchemeBean.md)
  - [UserBean](./Models/UserBean.md)

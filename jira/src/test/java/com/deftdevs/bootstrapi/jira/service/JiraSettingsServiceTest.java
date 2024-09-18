@@ -1,10 +1,8 @@
 package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.jira.config.properties.ApplicationProperties;
-import com.atlassian.jira.web.action.admin.EditAnnouncementBanner;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
-import com.deftdevs.bootstrapi.jira.model.SettingsBannerBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -19,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class SettingsServiceTest {
+class JiraSettingsServiceTest {
 
     private static final URI BASE_URL = URI.create("https://jira.atlassian.com");
     private static final String MODE_PUBLIC = "public";
@@ -103,34 +101,6 @@ class SettingsServiceTest {
         assertThrows(BadRequestException.class, () -> {
             settingsService.setSettings(settingsBean);
         });
-    }
-
-    @Test
-    void testGetBanner() {
-        final String content = "Banner!";
-        final String visibility = EditAnnouncementBanner.PUBLIC_BANNER;
-        doReturn(content).when(applicationProperties).getDefaultBackedText(JIRA_ALERT_HEADER);
-        doReturn(visibility).when(applicationProperties).getDefaultBackedString(JIRA_ALERT_HEADER_VISIBILITY);
-
-        final SettingsBannerBean bannerBean = settingsService.getBanner();
-        assertEquals(content, bannerBean.getContent());
-        assertEquals(visibility, bannerBean.getVisibility().name().toLowerCase());
-    }
-
-    @Test
-    void testSetBanner() {
-        final SettingsBannerBean settingsBannerBean = SettingsBannerBean.builder()
-                .content("Hello...")
-                .visibility(SettingsBannerBean.Visibility.valueOf(EditAnnouncementBanner.PRIVATE_BANNER.toUpperCase()))
-                .build();
-
-        final SettingsServiceImpl spy = spy(settingsService);
-        doReturn(settingsBannerBean).when(spy).getBanner();
-
-        spy.setBanner(settingsBannerBean);
-        verify(applicationProperties).setString(JIRA_ALERT_HEADER, settingsBannerBean.getContent());
-        verify(applicationProperties).setString(JIRA_ALERT_HEADER_VISIBILITY, settingsBannerBean.getVisibility().name().toLowerCase());
-        verify(spy).getBanner();
     }
 
 }

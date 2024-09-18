@@ -10,7 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 
-@Path(BootstrAPI.SETTINGS + "/" + BootstrAPI.BRANDING)
+@Path(BootstrAPI.SETTINGS + "/" + BootstrAPI.SETTINGS_BRANDING)
 @ResourceFilters(SysAdminOnlyResourceFilter.class)
 @Component
 public class SettingsBrandingResourceImpl extends AbstractSettingsBrandingResourceImpl {

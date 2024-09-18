@@ -50,9 +50,9 @@ All URIs are relative to *https://<CROWD_URL>/rest/bootstrapi/1*
 *TrustedProxiesApi* | [**getTrustedProxies**](Apis/TrustedProxiesApi.md#gettrustedproxies) | **GET** /trusted-proxies | Get the trusted proxies |
 *TrustedProxiesApi* | [**removeTrustedProxy**](Apis/TrustedProxiesApi.md#removetrustedproxy) | **DELETE** /trusted-proxies | Remove a trusted proxy |
 *TrustedProxiesApi* | [**setTrustedProxies**](Apis/TrustedProxiesApi.md#settrustedproxies) | **PUT** /trusted-proxies | Set the trusted proxies |
-| *UserApi* | [**getUser**](Apis/UserApi.md#getuser) | **GET** /users | Get a user |
-*UserApi* | [**setUser**](Apis/UserApi.md#setuser) | **PUT** /users | Update an user |
-*UserApi* | [**setUserPassword**](Apis/UserApi.md#setuserpassword) | **PUT** /users/password | Update a user password |
+| *UserApi* | [**getUser**](Apis/UserApi.md#getuser) | **GET** /user | Get a user |
+*UserApi* | [**setUser**](Apis/UserApi.md#setuser) | **PUT** /user | Update an user |
+*UserApi* | [**setUserPassword**](Apis/UserApi.md#setuserpassword) | **PUT** /user/password | Update a user password |
 
 
 <a name="documentation-for-models"></a>

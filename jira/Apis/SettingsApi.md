@@ -4,15 +4,39 @@ All URIs are relative to *https://&lt;JIRA_URL&gt;/rest/bootstrapi/1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
+| [**getBanner**](SettingsApi.md#getBanner) | **GET** /settings/banner | Get the banner |
 | [**getBrandingColorScheme**](SettingsApi.md#getBrandingColorScheme) | **GET** /settings/branding/color-scheme | Get the color scheme |
 | [**getBrandingFavicon**](SettingsApi.md#getBrandingFavicon) | **GET** /settings/branding/favicon | Get the favicon |
 | [**getBrandingLogo**](SettingsApi.md#getBrandingLogo) | **GET** /settings/branding/logo | Get the logo |
 | [**getSettings**](SettingsApi.md#getSettings) | **GET** /settings | Get the application settings |
+| [**setBanner**](SettingsApi.md#setBanner) | **PUT** /settings/banner | Set the banner |
 | [**setBrandingColorScheme**](SettingsApi.md#setBrandingColorScheme) | **PUT** /settings/branding/color-scheme | Set the color scheme |
 | [**setBrandingFavicon**](SettingsApi.md#setBrandingFavicon) | **PUT** /settings/branding/favicon | Set the favicon |
 | [**setBrandingLogo**](SettingsApi.md#setBrandingLogo) | **PUT** /settings/branding/logo | Set the logo |
 | [**setSettings**](SettingsApi.md#setSettings) | **PUT** /settings | Set the application settings |
 
+
+<a name="getBanner"></a>
+# **getBanner**
+> SettingsBannerBean getBanner()
+
+Get the banner
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**SettingsBannerBean**](../Models/SettingsBannerBean.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 <a name="getBrandingColorScheme"></a>
 # **getBrandingColorScheme**
@@ -100,6 +124,31 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="setBanner"></a>
+# **setBanner**
+> SettingsBannerBean setBanner(SettingsBannerBean)
+
+Set the banner
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **SettingsBannerBean** | [**SettingsBannerBean**](../Models/SettingsBannerBean.md)|  | |
+
+### Return type
+
+[**SettingsBannerBean**](../Models/SettingsBannerBean.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 <a name="setBrandingColorScheme"></a>
