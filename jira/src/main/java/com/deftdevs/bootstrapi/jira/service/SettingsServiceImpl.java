@@ -7,17 +7,18 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
+import com.deftdevs.bootstrapi.jira.model.SettingsBannerBean;
+import com.deftdevs.bootstrapi.jira.service.api.JiraSettingsService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-
 import java.net.URI;
 
 import static com.atlassian.jira.config.properties.APKeys.*;
 
 @Component
-@ExportAsService(SettingsService.class)
-public class SettingsServiceImpl implements SettingsService {
+@ExportAsService({SettingsService.class, JiraSettingsService.class})
+public class SettingsServiceImpl implements JiraSettingsService {
 
     private final ApplicationProperties applicationProperties;
 
@@ -79,6 +80,33 @@ public class SettingsServiceImpl implements SettingsService {
         }
 
         return getSettings();
+    }
+
+    @Override
+    public SettingsBannerBean getBanner() {
+        final String content = applicationProperties.getDefaultBackedText(JIRA_ALERT_HEADER);
+        final String visibilityString = applicationProperties.getDefaultBackedString(JIRA_ALERT_HEADER_VISIBILITY);
+        final SettingsBannerBean.Visibility visibility = SettingsBannerBean.Visibility.valueOf(visibilityString.toUpperCase());
+
+        return SettingsBannerBean.builder()
+                .content(content)
+                .visibility(visibility)
+                .build();
+    }
+
+    @Override
+    public SettingsBannerBean setBanner(
+            final SettingsBannerBean settingsBannerBean) {
+
+        if (settingsBannerBean.getContent() != null) {
+            applicationProperties.setString(JIRA_ALERT_HEADER, settingsBannerBean.getContent());
+        }
+
+        if (settingsBannerBean.getVisibility() != null) {
+            applicationProperties.setString(JIRA_ALERT_HEADER_VISIBILITY, settingsBannerBean.getVisibility().name().toLowerCase());
+        }
+
+        return getBanner();
     }
 
 }

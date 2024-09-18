@@ -4,9 +4,9 @@ All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getUser**](UserApi.md#getUser) | **GET** /users | Get a user |
-| [**setUser**](UserApi.md#setUser) | **PUT** /users | Update an user |
-| [**setUserPassword**](UserApi.md#setUserPassword) | **PUT** /users/password | Update a user password |
+| [**getUser**](UserApi.md#getUser) | **GET** /user | Get a user |
+| [**setUser**](UserApi.md#setUser) | **PUT** /user | Update an user |
+| [**setUserPassword**](UserApi.md#setUserPassword) | **PUT** /user/password | Update a user password |
 
 
 <a name="getUser"></a>

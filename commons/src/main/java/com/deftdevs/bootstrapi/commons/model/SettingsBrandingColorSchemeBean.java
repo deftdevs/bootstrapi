@@ -12,7 +12,7 @@ import static com.deftdevs.bootstrapi.commons.constants.BootstrAPI.*;
 
 @Data
 @NoArgsConstructor
-@XmlRootElement(name = SETTINGS + "-" + BRANDING + "-" + COLOR_SCHEME)
+@XmlRootElement(name = SETTINGS + "-" + SETTINGS_BRANDING + "-" + COLOR_SCHEME)
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SettingsBrandingColorSchemeBean {
 
