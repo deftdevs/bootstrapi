@@ -1,19 +1,22 @@
 package com.deftdevs.bootstrapi.confluence.service;
 
+import com.atlassian.confluence.setup.settings.CustomHtmlSettings;
 import com.atlassian.confluence.setup.settings.GlobalSettingsManager;
 import com.atlassian.confluence.setup.settings.Settings;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
+import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlBean;
+import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.net.URI;
 
 @Component
-@ExportAsService(SettingsService.class)
-public class SettingsServiceImpl implements SettingsService {
+@ExportAsService({SettingsService.class, ConfluenceSettingsService.class})
+public class SettingsServiceImpl implements ConfluenceSettingsService {
 
     @ComponentImport
     private final GlobalSettingsManager globalSettingsManager;
@@ -62,4 +65,40 @@ public class SettingsServiceImpl implements SettingsService {
 
         return getSettings();
     }
+
+    @Override
+    public SettingsCustomHtmlBean getCustomHtml() {
+        final CustomHtmlSettings customHtmlSettings = globalSettingsManager.getGlobalSettings().getCustomHtmlSettings();
+
+        return SettingsCustomHtmlBean.builder()
+                .beforeHeadEnd(customHtmlSettings.getBeforeHeadEnd())
+                .afterBodyStart(customHtmlSettings.getAfterBodyStart())
+                .beforeBodyEnd(customHtmlSettings.getBeforeBodyEnd())
+                .build();
+    }
+
+    @Override
+    public SettingsCustomHtmlBean setCustomHtml(
+            final SettingsCustomHtmlBean settingsCustomHtmlBean) {
+
+        final Settings settings = globalSettingsManager.getGlobalSettings();
+        final CustomHtmlSettings customHtmlSettings = settings.getCustomHtmlSettings();
+
+        if (settingsCustomHtmlBean.getBeforeHeadEnd() != null) {
+            customHtmlSettings.setBeforeHeadEnd(settingsCustomHtmlBean.getBeforeHeadEnd());
+        }
+
+        if (settingsCustomHtmlBean.getAfterBodyStart() != null) {
+            customHtmlSettings.setAfterBodyStart(settingsCustomHtmlBean.getAfterBodyStart());
+        }
+
+        if (settingsCustomHtmlBean.getBeforeBodyEnd() != null) {
+            customHtmlSettings.setBeforeBodyEnd(settingsCustomHtmlBean.getBeforeBodyEnd());
+        }
+
+        globalSettingsManager.updateGlobalSettings(settings);
+
+        return getCustomHtml();
+    }
+
 }
