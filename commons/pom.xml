@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.deftdevs</groupId>
         <artifactId>bootstrapi-parent</artifactId>
-        <version>0.9.1-SNAPSHOT</version>
+        <version>0.9.1</version>
     </parent>
 
     <artifactId>bootstrapi-commons</artifactId>
@@ -27,7 +27,7 @@
         <connection>scm:git:https://github.com/deftdevs/bootstrapi.git</connection>
         <developerConnection>scm:git:https://github.com/deftdevs/bootstrapi.git</developerConnection>
         <url>https://github.com/deftdevs/bootstrapi</url>
-        <tag>HEAD</tag>
+        <tag>v0.9.1</tag>
     </scm>
 
     <developers>
