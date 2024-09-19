@@ -128,7 +128,7 @@ class SettingsServiceTest {
         doReturn(settingsBannerBean).when(spy).getBanner();
 
         spy.setBanner(settingsBannerBean);
-        verify(applicationProperties).setString(JIRA_ALERT_HEADER, settingsBannerBean.getContent());
+        verify(applicationProperties).setText(JIRA_ALERT_HEADER, settingsBannerBean.getContent());
         verify(applicationProperties).setString(JIRA_ALERT_HEADER_VISIBILITY, settingsBannerBean.getVisibility().name().toLowerCase());
         verify(spy).getBanner();
     }
