@@ -99,7 +99,7 @@ public class SettingsServiceImpl implements JiraSettingsService {
             final SettingsBannerBean settingsBannerBean) {
 
         if (settingsBannerBean.getContent() != null) {
-            applicationProperties.setString(JIRA_ALERT_HEADER, settingsBannerBean.getContent());
+            applicationProperties.setText(JIRA_ALERT_HEADER, settingsBannerBean.getContent());
         }
 
         if (settingsBannerBean.getVisibility() != null) {
