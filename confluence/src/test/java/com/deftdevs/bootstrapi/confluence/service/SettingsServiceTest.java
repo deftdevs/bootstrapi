@@ -2,9 +2,11 @@ package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.confluence.settings.setup.DefaultTestSettings;
 import com.atlassian.confluence.settings.setup.OtherTestSettings;
+import com.atlassian.confluence.setup.settings.CustomHtmlSettings;
 import com.atlassian.confluence.setup.settings.GlobalSettingsManager;
 import com.atlassian.confluence.setup.settings.Settings;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -15,8 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.net.URI;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class SettingsServiceTest {
@@ -96,6 +97,37 @@ class SettingsServiceTest {
         assertEquals(defaultSettings.isExternalUserManagement(), settings.isExternalUserManagement());
     }
 
+    @Test
+    void testGetCustomHtml() {
+        final SettingsCustomHtmlBean customHtmlBean = SettingsCustomHtmlBean.EXAMPLE_1;
+        final CustomHtmlSettings customHtmlSettings = new CustomHtmlSettings(
+                customHtmlBean.getBeforeHeadEnd(),
+                customHtmlBean.getAfterBodyStart(),
+                customHtmlBean.getBeforeBodyEnd());
+        final Settings settings = new Settings();
+        settings.setCustomHtmlSettings(customHtmlSettings);
+        doReturn(settings).when(globalSettingsManager).getGlobalSettings();
 
+        final SettingsCustomHtmlBean result = settingsService.getCustomHtml();
+        assertEquals(customHtmlBean, result);
+    }
+
+    @Test
+    void testSetCustomHtml() {
+        final Settings settings = mock(Settings.class);
+        doReturn(new CustomHtmlSettings()).when(settings).getCustomHtmlSettings();
+        doReturn(settings).when(globalSettingsManager).getGlobalSettings();
+
+        final SettingsCustomHtmlBean customHtmlBean = SettingsCustomHtmlBean.EXAMPLE_1;
+        final SettingsServiceImpl spy = spy(settingsService);
+        doReturn(customHtmlBean).when(spy).getCustomHtml();
+
+        final ArgumentCaptor<Settings> settingsArgumentCaptor = ArgumentCaptor.forClass(Settings.class);
+        spy.setCustomHtml(customHtmlBean);
+        verify(globalSettingsManager).updateGlobalSettings(settingsArgumentCaptor.capture());
+
+        final Settings capuredSettings = settingsArgumentCaptor.getValue();
+        assertEquals(customHtmlBean.getBeforeHeadEnd(), capuredSettings.getCustomHtmlSettings().getBeforeHeadEnd());
+    }
 
 }

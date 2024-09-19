@@ -7,10 +7,12 @@ All URIs are relative to *https://&lt;CONFLUENCE_URL&gt;/rest/bootstrapi/1*
 | [**getBrandingColorScheme**](SettingsApi.md#getBrandingColorScheme) | **GET** /settings/branding/color-scheme | Get the color scheme |
 | [**getBrandingFavicon**](SettingsApi.md#getBrandingFavicon) | **GET** /settings/branding/favicon | Get the favicon |
 | [**getBrandingLogo**](SettingsApi.md#getBrandingLogo) | **GET** /settings/branding/logo | Get the logo |
+| [**getCustomHtml**](SettingsApi.md#getCustomHtml) | **GET** /settings/custom-html | Get the custom HTML |
 | [**getSettings**](SettingsApi.md#getSettings) | **GET** /settings | Get the application settings |
 | [**setBrandingColorScheme**](SettingsApi.md#setBrandingColorScheme) | **PUT** /settings/branding/color-scheme | Set the color scheme |
 | [**setBrandingFavicon**](SettingsApi.md#setBrandingFavicon) | **PUT** /settings/branding/favicon | Set the favicon |
 | [**setBrandingLogo**](SettingsApi.md#setBrandingLogo) | **PUT** /settings/branding/logo | Set the logo |
+| [**setCustomHtml**](SettingsApi.md#setCustomHtml) | **PUT** /settings/custom-html | Set the custom HTML |
 | [**setSettings**](SettingsApi.md#setSettings) | **PUT** /settings | Set the application settings |
 
 
@@ -79,6 +81,28 @@ This endpoint does not need any parameter.
 
 - **Content-Type**: Not defined
 - **Accept**: application/octet-stream
+
+<a name="getCustomHtml"></a>
+# **getCustomHtml**
+> SettingsCustomHtmlBean getCustomHtml()
+
+Get the custom HTML
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**SettingsCustomHtmlBean**](../Models/SettingsCustomHtmlBean.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
 
 <a name="getSettings"></a>
 # **getSettings**
@@ -175,6 +199,31 @@ null (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/octet-stream
+- **Accept**: application/json
+
+<a name="setCustomHtml"></a>
+# **setCustomHtml**
+> SettingsCustomHtmlBean setCustomHtml(SettingsCustomHtmlBean)
+
+Set the custom HTML
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **SettingsCustomHtmlBean** | [**SettingsCustomHtmlBean**](../Models/SettingsCustomHtmlBean.md)|  | |
+
+### Return type
+
+[**SettingsCustomHtmlBean**](../Models/SettingsCustomHtmlBean.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 <a name="setSettings"></a>

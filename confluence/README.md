@@ -48,10 +48,12 @@ All URIs are relative to *https://<CONFLUENCE_URL>/rest/bootstrapi/1*
 | *SettingsApi* | [**getBrandingColorScheme**](Apis/SettingsApi.md#getbrandingcolorscheme) | **GET** /settings/branding/color-scheme | Get the color scheme |
 *SettingsApi* | [**getBrandingFavicon**](Apis/SettingsApi.md#getbrandingfavicon) | **GET** /settings/branding/favicon | Get the favicon |
 *SettingsApi* | [**getBrandingLogo**](Apis/SettingsApi.md#getbrandinglogo) | **GET** /settings/branding/logo | Get the logo |
+*SettingsApi* | [**getCustomHtml**](Apis/SettingsApi.md#getcustomhtml) | **GET** /settings/custom-html | Get the custom HTML |
 *SettingsApi* | [**getSettings**](Apis/SettingsApi.md#getsettings) | **GET** /settings | Get the application settings |
 *SettingsApi* | [**setBrandingColorScheme**](Apis/SettingsApi.md#setbrandingcolorscheme) | **PUT** /settings/branding/color-scheme | Set the color scheme |
 *SettingsApi* | [**setBrandingFavicon**](Apis/SettingsApi.md#setbrandingfavicon) | **PUT** /settings/branding/favicon | Set the favicon |
 *SettingsApi* | [**setBrandingLogo**](Apis/SettingsApi.md#setbrandinglogo) | **PUT** /settings/branding/logo | Set the logo |
+*SettingsApi* | [**setCustomHtml**](Apis/SettingsApi.md#setcustomhtml) | **PUT** /settings/custom-html | Set the custom HTML |
 *SettingsApi* | [**setSettings**](Apis/SettingsApi.md#setsettings) | **PUT** /settings | Set the application settings |
 | *UserApi* | [**getUser**](Apis/UserApi.md#getuser) | **GET** /user | Get a user |
 *UserApi* | [**setUser**](Apis/UserApi.md#setuser) | **PUT** /user | Update an user |
@@ -94,6 +96,7 @@ All URIs are relative to *https://<CONFLUENCE_URL>/rest/bootstrapi/1*
  - [PermissionsGlobalBean](./Models/PermissionsGlobalBean.md)
  - [SettingsBean](./Models/SettingsBean.md)
  - [SettingsBrandingColorSchemeBean](./Models/SettingsBrandingColorSchemeBean.md)
+ - [SettingsCustomHtmlBean](./Models/SettingsCustomHtmlBean.md)
  - [UserBean](./Models/UserBean.md)
 
 
