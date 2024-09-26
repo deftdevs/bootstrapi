@@ -10,11 +10,13 @@ import com.atlassian.applinks.api.application.confluence.ConfluenceApplicationTy
 import com.atlassian.applinks.api.application.crowd.CrowdApplicationType;
 import com.atlassian.applinks.api.application.fecru.FishEyeCrucibleApplicationType;
 import com.atlassian.applinks.api.application.jira.JiraApplicationType;
+import com.atlassian.applinks.api.auth.types.OAuthAuthenticationProvider;
 import com.atlassian.applinks.core.ApplinkStatus;
 import com.atlassian.applinks.core.ApplinkStatusService;
 import com.atlassian.applinks.internal.common.exception.NoAccessException;
 import com.atlassian.applinks.internal.common.exception.NoSuchApplinkException;
 import com.atlassian.applinks.spi.auth.AuthenticationConfigurationException;
+import com.atlassian.applinks.spi.auth.AuthenticationConfigurationManager;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
 import com.atlassian.applinks.spi.link.MutableApplicationLink;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
@@ -164,6 +166,9 @@ public class ApplicationLinkServiceImpl implements ApplicationLinksService {
 
         //configure authenticator, this might fail if setup is incorrect or remote app is unavailable
         try {
+            AuthenticationConfigurationManager authenticationConfigurationManager = new AuthenticationConfigurationManager();
+            authenticationConfigurationManager.registerProvider(applicationLink.getId(), OAuthAuthenticationProvider.class, );
+
             mutatingApplicationLinkService.configureAuthenticationForApplicationLink(applicationLink,
                     new DefaultAuthenticationScenario(), linkBean.getUsername(), linkBean.getPassword());
         } catch (AuthenticationConfigurationException e) {
