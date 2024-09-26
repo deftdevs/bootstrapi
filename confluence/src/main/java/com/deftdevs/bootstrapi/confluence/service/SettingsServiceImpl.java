@@ -8,6 +8,7 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
 import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlBean;
+import com.deftdevs.bootstrapi.confluence.model.SettingsSecurityBean;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
 import org.springframework.stereotype.Component;
 
@@ -99,6 +100,33 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
         globalSettingsManager.updateGlobalSettings(settings);
 
         return getCustomHtml();
+    }
+
+    @Override
+    public SettingsSecurityBean getSecurity() {
+        final Settings settings = globalSettingsManager.getGlobalSettings();
+
+        return SettingsSecurityBean.builder()
+                .webSudoEnabled(settings.getWebSudoEnabled())
+                .webSudoTimeout(settings.getWebSudoTimeout())
+                .build();
+    }
+
+    @Override
+    public SettingsSecurityBean setSecurity(
+            final SettingsSecurityBean settingsSecurityBean) {
+
+        final Settings settings = globalSettingsManager.getGlobalSettings();
+
+        if (settingsSecurityBean.getWebSudoEnabled() != null) {
+            settings.setWebSudoEnabled(settingsSecurityBean.getWebSudoEnabled());
+        }
+
+        if (settingsSecurityBean.getWebSudoTimeout() != null) {
+            settings.setWebSudoTimeout(settingsSecurityBean.getWebSudoTimeout());
+        }
+
+        return getSecurity();
     }
 
 }

@@ -8,11 +8,13 @@ All URIs are relative to *https://&lt;CONFLUENCE_URL&gt;/rest/bootstrapi/1*
 | [**getBrandingFavicon**](SettingsApi.md#getBrandingFavicon) | **GET** /settings/branding/favicon | Get the favicon |
 | [**getBrandingLogo**](SettingsApi.md#getBrandingLogo) | **GET** /settings/branding/logo | Get the logo |
 | [**getCustomHtml**](SettingsApi.md#getCustomHtml) | **GET** /settings/custom-html | Get the custom HTML |
+| [**getSecurity**](SettingsApi.md#getSecurity) | **GET** /settings/security | Get the security settings |
 | [**getSettings**](SettingsApi.md#getSettings) | **GET** /settings | Get the application settings |
 | [**setBrandingColorScheme**](SettingsApi.md#setBrandingColorScheme) | **PUT** /settings/branding/color-scheme | Set the color scheme |
 | [**setBrandingFavicon**](SettingsApi.md#setBrandingFavicon) | **PUT** /settings/branding/favicon | Set the favicon |
 | [**setBrandingLogo**](SettingsApi.md#setBrandingLogo) | **PUT** /settings/branding/logo | Set the logo |
 | [**setCustomHtml**](SettingsApi.md#setCustomHtml) | **PUT** /settings/custom-html | Set the custom HTML |
+| [**setSecurity**](SettingsApi.md#setSecurity) | **PUT** /settings/security | Set the security settings |
 | [**setSettings**](SettingsApi.md#setSettings) | **PUT** /settings | Set the application settings |
 
 
@@ -94,6 +96,28 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**SettingsCustomHtmlBean**](../Models/SettingsCustomHtmlBean.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="getSecurity"></a>
+# **getSecurity**
+> SettingsSecurityBean getSecurity()
+
+Get the security settings
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**SettingsSecurityBean**](../Models/SettingsSecurityBean.md)
 
 ### Authorization
 
@@ -216,6 +240,31 @@ Set the custom HTML
 ### Return type
 
 [**SettingsCustomHtmlBean**](../Models/SettingsCustomHtmlBean.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+<a name="setSecurity"></a>
+# **setSecurity**
+> SettingsSecurityBean setSecurity(SettingsSecurityBean)
+
+Set the security settings
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **SettingsSecurityBean** | [**SettingsSecurityBean**](../Models/SettingsSecurityBean.md)|  | |
+
+### Return type
+
+[**SettingsSecurityBean**](../Models/SettingsSecurityBean.md)
 
 ### Authorization
 

@@ -55,6 +55,7 @@ public class BootstrAPI {
     public static final String SETTINGS_BRANDING_LOGIN_PAGE = "login-page";
     public static final String SETTINGS_BRANDING_LOGO       = "logo";
     public static final String SETTINGS_CUSTOM_HTML         = "custom-html";
+    public static final String SETTINGS_SECURITY            = "security";
     public static final String USER                         = "user";
     public static final String USERS                        = "users";
     public static final String USER_PASSWORD                = "password";

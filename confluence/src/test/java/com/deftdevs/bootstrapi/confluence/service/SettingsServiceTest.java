@@ -7,6 +7,7 @@ import com.atlassian.confluence.setup.settings.GlobalSettingsManager;
 import com.atlassian.confluence.setup.settings.Settings;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
 import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlBean;
+import com.deftdevs.bootstrapi.confluence.model.SettingsSecurityBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -128,6 +129,32 @@ class SettingsServiceTest {
 
         final Settings capuredSettings = settingsArgumentCaptor.getValue();
         assertEquals(customHtmlBean.getBeforeHeadEnd(), capuredSettings.getCustomHtmlSettings().getBeforeHeadEnd());
+    }
+
+    @Test
+    void testGetSecurity() {
+        final SettingsSecurityBean settingsSecurityBean = SettingsSecurityBean.EXAMPLE_1;
+        final Settings settings = mock(Settings.class);
+        doReturn(settingsSecurityBean.getWebSudoEnabled()).when(settings).getWebSudoEnabled();
+        doReturn(settingsSecurityBean.getWebSudoTimeout()).when(settings).getWebSudoTimeout();
+        doReturn(settings).when(globalSettingsManager).getGlobalSettings();
+
+        final SettingsSecurityBean resultSettingsSecurityBean = settingsService.getSecurity();
+        assertEquals(settingsSecurityBean, resultSettingsSecurityBean);
+    }
+
+    @Test
+    void testSetSettings() {
+        final Settings settings = mock(Settings.class);
+        doReturn(settings).when(globalSettingsManager).getGlobalSettings();
+
+        final SettingsSecurityBean settingsSecurityBean = SettingsSecurityBean.EXAMPLE_1;
+        final SettingsServiceImpl spy = spy(settingsService);
+        doReturn(settingsSecurityBean).when(spy).getSecurity();
+
+        spy.setSecurity(settingsSecurityBean);
+        verify(settings).setWebSudoEnabled(settingsSecurityBean.getWebSudoEnabled());
+        verify(settings).setWebSudoTimeout(settingsSecurityBean.getWebSudoTimeout());
     }
 
 }
