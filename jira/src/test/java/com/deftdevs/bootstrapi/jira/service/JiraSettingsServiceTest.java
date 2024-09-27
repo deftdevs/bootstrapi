@@ -36,14 +36,14 @@ class JiraSettingsServiceTest {
     }
 
     @Test
-    void testGetSettings() {
+    void testGetSettingsGeneral() {
         doReturn(BASE_URL.toString()).when(applicationProperties).getString(JIRA_BASEURL);
         doReturn(MODE_PUBLIC).when(applicationProperties).getString(JIRA_MODE);
         doReturn(TITLE).when(applicationProperties).getString(JIRA_TITLE);
         doReturn(CONTACT_MESSAGE).when(applicationProperties).getString(JIRA_CONTACT_ADMINISTRATORS_MESSSAGE);
         doReturn(EXTERNAL_USER_MANAGEMENT).when(applicationProperties).getString(JIRA_OPTION_USER_EXTERNALMGT);
 
-        final SettingsBean settingsBean = settingsService.getSettings();
+        final SettingsBean settingsBean = settingsService.getSettingsGeneral();
 
         assertEquals(BASE_URL, settingsBean.getBaseUrl());
         assertEquals(MODE_PUBLIC, settingsBean.getMode());
@@ -53,7 +53,7 @@ class JiraSettingsServiceTest {
     }
 
     @Test
-    void testSetSettings() {
+    void testSetSettingsGeneral() {
         final SettingsBean settingsBean = new SettingsBean();
         settingsBean.setBaseUrl(BASE_URL);
         settingsBean.setMode(MODE_PUBLIC);
@@ -61,7 +61,7 @@ class JiraSettingsServiceTest {
         settingsBean.setContactMessage(CONTACT_MESSAGE);
         settingsBean.setExternalUserManagement(Boolean.parseBoolean(EXTERNAL_USER_MANAGEMENT));
 
-        settingsService.setSettings(settingsBean);
+        settingsService.setSettingsGeneral(settingsBean);
 
         verify(applicationProperties).setString(JIRA_BASEURL, BASE_URL.toString());
         verify(applicationProperties).setString(JIRA_MODE, MODE_PUBLIC);
@@ -71,10 +71,10 @@ class JiraSettingsServiceTest {
     }
 
     @Test
-    void testSetSettingsEmptyBean() {
+    void testSetSettingsGeneralEmptyBean() {
         final SettingsBean settingsBean = new SettingsBean();
 
-        settingsService.setSettings(settingsBean);
+        settingsService.setSettingsGeneral(settingsBean);
 
         verify(applicationProperties, never()).setString(JIRA_BASEURL, BASE_URL.toString());
         verify(applicationProperties, never()).setString(JIRA_MODE, MODE_PUBLIC);
@@ -83,23 +83,23 @@ class JiraSettingsServiceTest {
     }
 
     @Test
-    void testSetSettingsUnsupportedMode() {
+    void testSetSettingsGeneralUnsupportedMode() {
         final SettingsBean settingsBean = new SettingsBean();
         settingsBean.setMode("unsupported");
 
         assertThrows(BadRequestException.class, () -> {
-            settingsService.setSettings(settingsBean);
+            settingsService.setSettingsGeneral(settingsBean);
         });
     }
 
     @Test
-    void testSetSettingsInvalidCombination() {
+    void testSetSettingsGeneralInvalidCombination() {
         final SettingsBean settingsBean = new SettingsBean();
         settingsBean.setMode(MODE_PUBLIC);
         doReturn(true).when(applicationProperties).getOption(JIRA_OPTION_USER_EXTERNALMGT);
 
         assertThrows(BadRequestException.class, () -> {
-            settingsService.setSettings(settingsBean);
+            settingsService.setSettingsGeneral(settingsBean);
         });
     }
 

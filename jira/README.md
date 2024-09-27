@@ -38,12 +38,14 @@ All URIs are relative to *https://<JIRA_URL>/rest/bootstrapi/1*
 *SettingsApi* | [**getBrandingColorScheme**](Apis/SettingsApi.md#getbrandingcolorscheme) | **GET** /settings/branding/color-scheme | Get the color scheme |
 *SettingsApi* | [**getBrandingFavicon**](Apis/SettingsApi.md#getbrandingfavicon) | **GET** /settings/branding/favicon | Get the favicon |
 *SettingsApi* | [**getBrandingLogo**](Apis/SettingsApi.md#getbrandinglogo) | **GET** /settings/branding/logo | Get the logo |
-*SettingsApi* | [**getSettings**](Apis/SettingsApi.md#getsettings) | **GET** /settings | Get the application settings |
+*SettingsApi* | [**getSettings**](Apis/SettingsApi.md#getsettings) | **GET** /settings | Get the general settings |
+*SettingsApi* | [**getSettingsSecurity**](Apis/SettingsApi.md#getsettingssecurity) | **GET** /settings/security | Get the security settings |
 *SettingsApi* | [**setBanner**](Apis/SettingsApi.md#setbanner) | **PUT** /settings/banner | Set the banner |
 *SettingsApi* | [**setBrandingColorScheme**](Apis/SettingsApi.md#setbrandingcolorscheme) | **PUT** /settings/branding/color-scheme | Set the color scheme |
 *SettingsApi* | [**setBrandingFavicon**](Apis/SettingsApi.md#setbrandingfavicon) | **PUT** /settings/branding/favicon | Set the favicon |
 *SettingsApi* | [**setBrandingLogo**](Apis/SettingsApi.md#setbrandinglogo) | **PUT** /settings/branding/logo | Set the logo |
-*SettingsApi* | [**setSettings**](Apis/SettingsApi.md#setsettings) | **PUT** /settings | Set the application settings |
+*SettingsApi* | [**setSettings**](Apis/SettingsApi.md#setsettings) | **PUT** /settings | Set the general settings |
+*SettingsApi* | [**setSettingsSecurity**](Apis/SettingsApi.md#setsettingssecurity) | **PUT** /settings/security | Set the security settings |
 
 
 <a name="documentation-for-models"></a>
@@ -81,6 +83,7 @@ All URIs are relative to *https://<JIRA_URL>/rest/bootstrapi/1*
  - [SettingsBannerBean](./Models/SettingsBannerBean.md)
  - [SettingsBean](./Models/SettingsBean.md)
  - [SettingsBrandingColorSchemeBean](./Models/SettingsBrandingColorSchemeBean.md)
+ - [SettingsSecurityBean](./Models/SettingsSecurityBean.md)
  - [UserBean](./Models/UserBean.md)
 
 

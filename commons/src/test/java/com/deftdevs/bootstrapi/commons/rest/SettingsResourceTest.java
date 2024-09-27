@@ -31,7 +31,7 @@ class SettingsResourceTest {
     void testGetSettings() {
         final SettingsBean bean = SettingsBean.EXAMPLE_1;
 
-        doReturn(bean).when(settingsService).getSettings();
+        doReturn(bean).when(settingsService).getSettingsGeneral();
 
         final Response response = resource.getSettings();
         assertEquals(200, response.getStatus());
@@ -44,7 +44,7 @@ class SettingsResourceTest {
     void testSetSettings() {
         final SettingsBean bean = SettingsBean.EXAMPLE_1;
 
-        doReturn(bean).when(settingsService).setSettings(bean);
+        doReturn(bean).when(settingsService).setSettingsGeneral(bean);
 
         final Response response = resource.setSettings(bean);
         assertEquals(200, response.getStatus());

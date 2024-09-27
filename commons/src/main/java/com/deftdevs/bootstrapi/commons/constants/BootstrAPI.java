@@ -14,9 +14,6 @@ public class BootstrAPI {
     public static final String AUTHENTICATION_IDP_SAML      = "saml";
     public static final String AUTHENTICATION_SSO           = "sso";
     public static final String BACKUP                       = "backup";
-    public static final String BACKUP_EXPORT                = "export";
-    public static final String BACKUP_IMPORT                = "import";
-    public static final String BACKUP_QUEUE                 = "queue";
     public static final String CACHE                        = "cache";
     public static final String CACHES                       = "caches";
     public static final String CACHE_FLUSH                  = "flush";
@@ -61,6 +58,16 @@ public class BootstrAPI {
     public static final String USER_PASSWORD                = "password";
 
     public static final String MEDIA_TYPE_IMAGE             = "image/*";
+
+    public static final String ERROR_COLLECTION_RESPONSE_DESCRIPTION      = "Returns a list of error messages.";
+    public static final String SETTINGS_GENERAL_GET_SUMMARY               = "Get the general settings";
+    public static final String SETTINGS_GENERAL_GET_RESPONSE_DESCRIPTION  = "Returns the general settings";
+    public static final String SETTINGS_GENERAL_PUT_SUMMARY               = "Set the general settings";
+    public static final String SETTINGS_GENERAL_PUT_RESPONSE_DESCRIPTION  = "Returns the general security settings";
+    public static final String SETTINGS_SECURITY_GET_SUMMARY              = "Get the security settings";
+    public static final String SETTINGS_SECURITY_GET_RESPONSE_DESCRIPTION = "Returns the security settings";
+    public static final String SETTINGS_SECURITY_PUT_SUMMARY              = "Set the security settings";
+    public static final String SETTINGS_SECURITY_PUT_RESPONSE_DESCRIPTION = "Returns the updated security settings";
 
     private BootstrAPI() {
     }

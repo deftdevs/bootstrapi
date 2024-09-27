@@ -26,7 +26,7 @@ public class SettingsBannerResourceImpl implements SettingsBannerResource {
 
     @Override
     public Response getBanner() {
-        final SettingsBannerBean result = settingsService.getBanner();
+        final SettingsBannerBean result = settingsService.getSettingsBanner();
         return Response.ok(result).build();
     }
 
@@ -34,7 +34,7 @@ public class SettingsBannerResourceImpl implements SettingsBannerResource {
     public Response setBanner(
             final SettingsBannerBean settingsBannerBean) {
 
-        final SettingsBannerBean result = settingsService.setBanner(settingsBannerBean);
+        final SettingsBannerBean result = settingsService.setSettingsBanner(settingsBannerBean);
         return Response.ok(result).build();
     }
 

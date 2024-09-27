@@ -33,25 +33,25 @@ public class SettingsServiceTest {
     }
 
     @Test
-    public void testGetSettings() throws PropertyManagerException {
+    public void testGetSettingsGeneral() throws PropertyManagerException {
         doReturn(settingsBean.getTitle()).when(propertyManager).getDeploymentTitle();
         doReturn(settingsBean.getBaseUrl()).when(propertyManager).getBaseUrl();
-        assertEquals(settingsBean.getTitle(), settingsService.getSettings().getTitle());
-        assertEquals(settingsBean.getBaseUrl(), settingsService.getSettings().getBaseUrl());
+        assertEquals(settingsBean.getTitle(), settingsService.getSettingsGeneral().getTitle());
+        assertEquals(settingsBean.getBaseUrl(), settingsService.getSettingsGeneral().getBaseUrl());
     }
 
     @Test
-    public void testGetSettingsWithInternalServerErrorException() throws PropertyManagerException, URISyntaxException {
+    public void testGetSettingsGeneralWithInternalServerErrorException() throws PropertyManagerException, URISyntaxException {
         doThrow(new PropertyManagerException()).when(propertyManager).getBaseUrl();
 
         assertThrows(InternalServerErrorException.class, () -> {
-            settingsService.getSettings();
+            settingsService.getSettingsGeneral();
         });
     }
 
     @Test
-    public void testSetSettings() {
-        settingsService.setSettings(settingsBean);
+    public void testSetSettingsGeneral() {
+        settingsService.setSettingsGeneral(settingsBean);
         verify(propertyManager).setBaseUrl(settingsBean.getBaseUrl());
         verify(propertyManager).setDeploymentTitle(settingsBean.getTitle());
     }

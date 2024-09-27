@@ -6,6 +6,7 @@ import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsSecurityBean;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
 import com.deftdevs.bootstrapi.jira.model.SettingsBannerBean;
 import com.deftdevs.bootstrapi.jira.service.api.JiraSettingsService;
@@ -35,7 +36,7 @@ public class SettingsServiceImpl implements JiraSettingsService {
     }
 
     @Override
-    public SettingsBean getSettings() {
+    public SettingsBean getSettingsGeneral() {
         final SettingsBean settingsBean = new SettingsBean();
         final String baseUrl = applicationProperties.getString(JIRA_BASEURL);
         if (baseUrl != null) {
@@ -50,7 +51,7 @@ public class SettingsServiceImpl implements JiraSettingsService {
     }
 
     @Override
-    public SettingsBean setSettings(
+    public SettingsBean setSettingsGeneral(
             final SettingsBean settingsBean) {
 
         if (settingsBean.getBaseUrl() != null) {
@@ -79,11 +80,37 @@ public class SettingsServiceImpl implements JiraSettingsService {
             applicationProperties.setString(JIRA_OPTION_USER_EXTERNALMGT, String.valueOf(settingsBean.getExternalUserManagement()));
         }
 
-        return getSettings();
+        return getSettingsGeneral();
     }
 
     @Override
-    public SettingsBannerBean getBanner() {
+    public SettingsSecurityBean getSettingsSecurity() {
+        final Boolean webSudoEnabled = !applicationProperties.getOption(WebSudo.IS_DISABLED);
+        final String webSudoTimeout = applicationProperties.getDefaultBackedString(WebSudo.TIMEOUT);
+
+        return SettingsSecurityBean.builder()
+                .webSudoEnabled(webSudoEnabled)
+                .webSudoTimeout(Long.valueOf(webSudoTimeout))
+                .build();
+    }
+
+    @Override
+    public SettingsSecurityBean setSettingsSecurity(
+            final SettingsSecurityBean settingsSecurityBean) {
+
+        if (settingsSecurityBean.getWebSudoEnabled() != null) {
+            applicationProperties.setOption(WebSudo.IS_DISABLED, !settingsSecurityBean.getWebSudoEnabled());
+        }
+
+        if (settingsSecurityBean.getWebSudoTimeout() != null) {
+            applicationProperties.setString(WebSudo.TIMEOUT, Long.toString(settingsSecurityBean.getWebSudoTimeout()));
+        }
+
+        return getSettingsSecurity();
+    }
+
+    @Override
+    public SettingsBannerBean getSettingsBanner() {
         final String content = applicationProperties.getDefaultBackedText(JIRA_ALERT_HEADER);
         final String visibilityString = applicationProperties.getDefaultBackedString(JIRA_ALERT_HEADER_VISIBILITY);
         final SettingsBannerBean.Visibility visibility = SettingsBannerBean.Visibility.valueOf(visibilityString.toUpperCase());
@@ -95,7 +122,7 @@ public class SettingsServiceImpl implements JiraSettingsService {
     }
 
     @Override
-    public SettingsBannerBean setBanner(
+    public SettingsBannerBean setSettingsBanner(
             final SettingsBannerBean settingsBannerBean) {
 
         if (settingsBannerBean.getContent() != null) {
@@ -106,7 +133,7 @@ public class SettingsServiceImpl implements JiraSettingsService {
             applicationProperties.setString(JIRA_ALERT_HEADER_VISIBILITY, settingsBannerBean.getVisibility().name().toLowerCase());
         }
 
-        return getBanner();
+        return getSettingsBanner();
     }
 
 }

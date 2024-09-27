@@ -4,22 +4,22 @@ import com.deftdevs.bootstrapi.commons.model.SettingsBean;
 
 import javax.validation.constraints.NotNull;
 
-public interface SettingsService {
+public interface SettingsService<B extends SettingsBean> {
 
     /**
      * Get the settings.
      *
-     * @return the settings
+     * @return the general settings
      */
-    SettingsBean getSettings();
-
+    B getSettingsGeneral();
 
     /**
      * Set the settings
      *
-     * @param settingsBean the settings to set
+     * @param settingsBean the general settings to set
      * @return the settings
      */
-    SettingsBean setSettings(
-            @NotNull final SettingsBean settingsBean);
+    B setSettingsGeneral(
+            @NotNull final B settingsBean);
+
 }
