@@ -6,14 +6,15 @@ import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
-import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
+import com.deftdevs.bootstrapi.crowd.service.api.CrowdSettingsGeneralService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 
 @Component
-@ExportAsService(SettingsService.class)
-public class SettingsServiceImpl implements SettingsService {
+@ExportAsService(CrowdSettingsGeneralService.class)
+public class SettingsServiceImpl
+        implements CrowdSettingsGeneralService {
 
     private final PropertyManager propertyManager;
 
@@ -23,7 +24,7 @@ public class SettingsServiceImpl implements SettingsService {
     }
 
     @Override
-    public SettingsBean getSettings() {
+    public SettingsBean getSettingsGeneral() {
         SettingsBean settingsBean = new SettingsBean();
         try {
             settingsBean.setBaseUrl(propertyManager.getBaseUrl());
@@ -35,14 +36,14 @@ public class SettingsServiceImpl implements SettingsService {
     }
 
     @Override
-    public SettingsBean setSettings(SettingsBean settingsBean) {
+    public SettingsBean setSettingsGeneral(SettingsBean settingsBean) {
         if (settingsBean.getBaseUrl() != null) {
             propertyManager.setBaseUrl(settingsBean.getBaseUrl());
         }
         if (settingsBean.getTitle() != null) {
             propertyManager.setDeploymentTitle(settingsBean.getTitle());
         }
-        return getSettings();
+        return getSettingsGeneral();
     }
 
 }

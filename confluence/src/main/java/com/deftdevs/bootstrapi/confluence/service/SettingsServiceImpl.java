@@ -6,9 +6,8 @@ import com.atlassian.confluence.setup.settings.Settings;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
-import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
+import com.deftdevs.bootstrapi.commons.model.SettingsSecurityBean;
 import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlBean;
-import com.deftdevs.bootstrapi.confluence.model.SettingsSecurityBean;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
 import org.springframework.stereotype.Component;
 
@@ -16,7 +15,7 @@ import javax.inject.Inject;
 import java.net.URI;
 
 @Component
-@ExportAsService({SettingsService.class, ConfluenceSettingsService.class})
+@ExportAsService({ConfluenceSettingsService.class})
 public class SettingsServiceImpl implements ConfluenceSettingsService {
 
     @ComponentImport
@@ -30,7 +29,7 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
     }
 
     @Override
-    public SettingsBean getSettings() {
+    public SettingsBean getSettingsGeneral() {
         final Settings settings = globalSettingsManager.getGlobalSettings();
 
         final SettingsBean settingsBean = new SettingsBean();
@@ -43,7 +42,7 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
     }
 
     @Override
-    public SettingsBean setSettings(SettingsBean settingsBean) {
+    public SettingsBean setSettingsGeneral(SettingsBean settingsBean) {
         final Settings settings = globalSettingsManager.getGlobalSettings();
 
         if (settingsBean.getBaseUrl() != null) {
@@ -64,7 +63,7 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
 
         globalSettingsManager.updateGlobalSettings(settings);
 
-        return getSettings();
+        return getSettingsGeneral();
     }
 
     @Override
@@ -103,7 +102,7 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
     }
 
     @Override
-    public SettingsSecurityBean getSecurity() {
+    public SettingsSecurityBean getSettingsSecurity() {
         final Settings settings = globalSettingsManager.getGlobalSettings();
 
         return SettingsSecurityBean.builder()
@@ -113,7 +112,7 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
     }
 
     @Override
-    public SettingsSecurityBean setSecurity(
+    public SettingsSecurityBean setSettingsSecurity(
             final SettingsSecurityBean settingsSecurityBean) {
 
         final Settings settings = globalSettingsManager.getGlobalSettings();
@@ -126,7 +125,7 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
             settings.setWebSudoTimeout(settingsSecurityBean.getWebSudoTimeout());
         }
 
-        return getSecurity();
+        return getSettingsSecurity();
     }
 
 }

@@ -8,14 +8,14 @@ All URIs are relative to *https://&lt;CONFLUENCE_URL&gt;/rest/bootstrapi/1*
 | [**getBrandingFavicon**](SettingsApi.md#getBrandingFavicon) | **GET** /settings/branding/favicon | Get the favicon |
 | [**getBrandingLogo**](SettingsApi.md#getBrandingLogo) | **GET** /settings/branding/logo | Get the logo |
 | [**getCustomHtml**](SettingsApi.md#getCustomHtml) | **GET** /settings/custom-html | Get the custom HTML |
-| [**getSecurity**](SettingsApi.md#getSecurity) | **GET** /settings/security | Get the security settings |
-| [**getSettings**](SettingsApi.md#getSettings) | **GET** /settings | Get the application settings |
+| [**getSettings**](SettingsApi.md#getSettings) | **GET** /settings | Get the general settings |
+| [**getSettingsSecurity**](SettingsApi.md#getSettingsSecurity) | **GET** /settings/security | Get the security settings |
 | [**setBrandingColorScheme**](SettingsApi.md#setBrandingColorScheme) | **PUT** /settings/branding/color-scheme | Set the color scheme |
 | [**setBrandingFavicon**](SettingsApi.md#setBrandingFavicon) | **PUT** /settings/branding/favicon | Set the favicon |
 | [**setBrandingLogo**](SettingsApi.md#setBrandingLogo) | **PUT** /settings/branding/logo | Set the logo |
 | [**setCustomHtml**](SettingsApi.md#setCustomHtml) | **PUT** /settings/custom-html | Set the custom HTML |
-| [**setSecurity**](SettingsApi.md#setSecurity) | **PUT** /settings/security | Set the security settings |
-| [**setSettings**](SettingsApi.md#setSettings) | **PUT** /settings | Set the application settings |
+| [**setSettings**](SettingsApi.md#setSettings) | **PUT** /settings | Set the general settings |
+| [**setSettingsSecurity**](SettingsApi.md#setSettingsSecurity) | **PUT** /settings/security | Set the security settings |
 
 
 <a name="getBrandingColorScheme"></a>
@@ -106,18 +106,18 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getSecurity"></a>
-# **getSecurity**
-> SettingsSecurityBean getSecurity()
+<a name="getSettings"></a>
+# **getSettings**
+> SettingsBean getSettings()
 
-Get the security settings
+Get the general settings
 
 ### Parameters
 This endpoint does not need any parameter.
 
 ### Return type
 
-[**SettingsSecurityBean**](../Models/SettingsSecurityBean.md)
+[**SettingsBean**](../Models/SettingsBean.md)
 
 ### Authorization
 
@@ -128,18 +128,18 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="getSettings"></a>
-# **getSettings**
-> SettingsBean getSettings()
+<a name="getSettingsSecurity"></a>
+# **getSettingsSecurity**
+> SettingsSecurityBean getSettingsSecurity()
 
-Get the application settings
+Get the security settings
 
 ### Parameters
 This endpoint does not need any parameter.
 
 ### Return type
 
-[**SettingsBean**](../Models/SettingsBean.md)
+[**SettingsSecurityBean**](../Models/SettingsSecurityBean.md)
 
 ### Authorization
 
@@ -250,9 +250,34 @@ Set the custom HTML
 - **Content-Type**: application/json
 - **Accept**: application/json
 
-<a name="setSecurity"></a>
-# **setSecurity**
-> SettingsSecurityBean setSecurity(SettingsSecurityBean)
+<a name="setSettings"></a>
+# **setSettings**
+> SettingsBean setSettings(SettingsBean)
+
+Set the general settings
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **SettingsBean** | [**SettingsBean**](../Models/SettingsBean.md)|  | |
+
+### Return type
+
+[**SettingsBean**](../Models/SettingsBean.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+<a name="setSettingsSecurity"></a>
+# **setSettingsSecurity**
+> SettingsSecurityBean setSettingsSecurity(SettingsSecurityBean)
 
 Set the security settings
 
@@ -265,31 +290,6 @@ Set the security settings
 ### Return type
 
 [**SettingsSecurityBean**](../Models/SettingsSecurityBean.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-<a name="setSettings"></a>
-# **setSettings**
-> SettingsBean setSettings(SettingsBean)
-
-Set the application settings
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **SettingsBean** | [**SettingsBean**](../Models/SettingsBean.md)|  | |
-
-### Return type
-
-[**SettingsBean**](../Models/SettingsBean.md)
 
 ### Authorization
 

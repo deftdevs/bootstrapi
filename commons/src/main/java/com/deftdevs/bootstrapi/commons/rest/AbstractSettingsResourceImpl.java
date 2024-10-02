@@ -6,23 +6,26 @@ import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
 
 import javax.ws.rs.core.Response;
 
-public abstract class AbstractSettingsResourceImpl implements SettingsResource {
+public abstract class AbstractSettingsResourceImpl<B extends SettingsBean, S extends SettingsService<B>>
+        implements SettingsResource<B> {
 
-    private final SettingsService settingsService;
+    private final S settingsService;
 
-    public AbstractSettingsResourceImpl(final SettingsService settingsService) {
+    public AbstractSettingsResourceImpl(
+            final S settingsService) {
+
         this.settingsService = settingsService;
     }
 
     @Override
     public Response getSettings() {
-        final SettingsBean settingsBean = settingsService.getSettings();
+        final B settingsBean = settingsService.getSettingsGeneral();
         return Response.ok(settingsBean).build();
     }
 
     @Override
-    public Response setSettings(SettingsBean settingsBean) {
-        final SettingsBean updatedSettingsBean = settingsService.setSettings(settingsBean);
+    public Response setSettings(B settingsBean) {
+        final B updatedSettingsBean = settingsService.setSettingsGeneral(settingsBean);
         return Response.ok(updatedSettingsBean).build();
     }
 }

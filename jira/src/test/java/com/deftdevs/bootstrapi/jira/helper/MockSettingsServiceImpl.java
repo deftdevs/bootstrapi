@@ -20,7 +20,7 @@ public class MockSettingsServiceImpl extends SettingsServiceImpl {
         settingsBean.setMode(MODE);
         settingsBean.setTitle(TITLE);
 
-        setSettings(settingsBean);
+        setSettingsGeneral(settingsBean);
     }
 
 }

@@ -42,10 +42,10 @@ All URIs are relative to *https://<CROWD_URL>/rest/bootstrapi/1*
 | *SessionConfigApi* | [**getSessionConfig**](Apis/SessionConfigApi.md#getsessionconfig) | **GET** /session-config | Get the session config |
 *SessionConfigApi* | [**setSessionConfig**](Apis/SessionConfigApi.md#setsessionconfig) | **PUT** /session-config | Set the session config |
 | *SettingsApi* | [**getLoginPage**](Apis/SettingsApi.md#getloginpage) | **GET** /settings/branding/login-page | Get the login-page settings |
-*SettingsApi* | [**getSettings**](Apis/SettingsApi.md#getsettings) | **GET** /settings | Get the application settings |
+*SettingsApi* | [**getSettings**](Apis/SettingsApi.md#getsettings) | **GET** /settings | Get the general settings |
 *SettingsApi* | [**setLoginPage**](Apis/SettingsApi.md#setloginpage) | **PUT** /settings/branding/login-page | Set the login-page settings |
 *SettingsApi* | [**setLogo**](Apis/SettingsApi.md#setlogo) | **PUT** /settings/branding/logo | Set the logo |
-*SettingsApi* | [**setSettings**](Apis/SettingsApi.md#setsettings) | **PUT** /settings | Set the application settings |
+*SettingsApi* | [**setSettings**](Apis/SettingsApi.md#setsettings) | **PUT** /settings | Set the general settings |
 | *TrustedProxiesApi* | [**addTrustedProxy**](Apis/TrustedProxiesApi.md#addtrustedproxy) | **POST** /trusted-proxies | Add a trusted proxy |
 *TrustedProxiesApi* | [**getTrustedProxies**](Apis/TrustedProxiesApi.md#gettrustedproxies) | **GET** /trusted-proxies | Get the trusted proxies |
 *TrustedProxiesApi* | [**removeTrustedProxy**](Apis/TrustedProxiesApi.md#removetrustedproxy) | **DELETE** /trusted-proxies | Remove a trusted proxy |

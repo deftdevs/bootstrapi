@@ -5,10 +5,10 @@ All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
 | [**getLoginPage**](SettingsApi.md#getLoginPage) | **GET** /settings/branding/login-page | Get the login-page settings |
-| [**getSettings**](SettingsApi.md#getSettings) | **GET** /settings | Get the application settings |
+| [**getSettings**](SettingsApi.md#getSettings) | **GET** /settings | Get the general settings |
 | [**setLoginPage**](SettingsApi.md#setLoginPage) | **PUT** /settings/branding/login-page | Set the login-page settings |
 | [**setLogo**](SettingsApi.md#setLogo) | **PUT** /settings/branding/logo | Set the logo |
-| [**setSettings**](SettingsApi.md#setSettings) | **PUT** /settings | Set the application settings |
+| [**setSettings**](SettingsApi.md#setSettings) | **PUT** /settings | Set the general settings |
 
 
 <a name="getLoginPage"></a>
@@ -37,7 +37,7 @@ This endpoint does not need any parameter.
 # **getSettings**
 > SettingsBean getSettings()
 
-Get the application settings
+Get the general settings
 
 ### Parameters
 This endpoint does not need any parameter.
@@ -109,7 +109,7 @@ Set the logo
 # **setSettings**
 > SettingsBean setSettings(SettingsBean)
 
-Set the application settings
+Set the general settings
 
 ### Parameters
 

@@ -7,7 +7,7 @@ import com.atlassian.confluence.setup.settings.GlobalSettingsManager;
 import com.atlassian.confluence.setup.settings.Settings;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
 import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlBean;
-import com.deftdevs.bootstrapi.confluence.model.SettingsSecurityBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsSecurityBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -34,12 +34,12 @@ class SettingsServiceTest {
     }
 
     @Test
-    void testGetSettings() {
+    void testGetSettingsGeneral() {
         final Settings settings = new DefaultTestSettings();
 
         doReturn(settings).when(globalSettingsManager).getGlobalSettings();
 
-        final SettingsBean settingsBean = settingsService.getSettings();
+        final SettingsBean settingsBean = settingsService.getSettingsGeneral();
 
         final SettingsBean settingsBeanRef = new SettingsBean();
         settingsBeanRef.setBaseUrl(URI.create(settings.getBaseUrl()));
@@ -51,7 +51,7 @@ class SettingsServiceTest {
     }
 
     @Test
-    void testPutSettings() {
+    void testSetSettingsGeneral() {
         final Settings defaultSettings = new DefaultTestSettings();
         doReturn(defaultSettings).when(globalSettingsManager).getGlobalSettings();
 
@@ -63,7 +63,7 @@ class SettingsServiceTest {
         requestBean.setContactMessage(updateSettings.getCustomContactMessage());
         requestBean.setExternalUserManagement(updateSettings.isExternalUserManagement());
 
-        final SettingsBean responseBean = settingsService.setSettings(requestBean);
+        final SettingsBean responseBean = settingsService.setSettingsGeneral(requestBean);
 
         final ArgumentCaptor<Settings> settingsCaptor = ArgumentCaptor.forClass(Settings.class);
         verify(globalSettingsManager).updateGlobalSettings(settingsCaptor.capture());
@@ -80,13 +80,13 @@ class SettingsServiceTest {
     }
 
     @Test
-    void testPutSettingsDefaultConfig(){
+    void testSetSettingsDefaultConfig(){
         final SettingsBean settingsBean = new SettingsBean();
 
         final Settings defaultSettings = new DefaultTestSettings();
         doReturn(defaultSettings).when(globalSettingsManager).getGlobalSettings();
 
-        settingsService.setSettings(settingsBean);
+        settingsService.setSettingsGeneral(settingsBean);
 
         final ArgumentCaptor<Settings> settingsCaptor = ArgumentCaptor.forClass(Settings.class);
         verify(globalSettingsManager).updateGlobalSettings(settingsCaptor.capture());
@@ -139,20 +139,20 @@ class SettingsServiceTest {
         doReturn(settingsSecurityBean.getWebSudoTimeout()).when(settings).getWebSudoTimeout();
         doReturn(settings).when(globalSettingsManager).getGlobalSettings();
 
-        final SettingsSecurityBean resultSettingsSecurityBean = settingsService.getSecurity();
+        final SettingsSecurityBean resultSettingsSecurityBean = settingsService.getSettingsSecurity();
         assertEquals(settingsSecurityBean, resultSettingsSecurityBean);
     }
 
     @Test
-    void testSetSettings() {
+    void testSetSettingsSecurity() {
         final Settings settings = mock(Settings.class);
         doReturn(settings).when(globalSettingsManager).getGlobalSettings();
 
         final SettingsSecurityBean settingsSecurityBean = SettingsSecurityBean.EXAMPLE_1;
         final SettingsServiceImpl spy = spy(settingsService);
-        doReturn(settingsSecurityBean).when(spy).getSecurity();
+        doReturn(settingsSecurityBean).when(spy).getSettingsSecurity();
 
-        spy.setSecurity(settingsSecurityBean);
+        spy.setSettingsSecurity(settingsSecurityBean);
         verify(settings).setWebSudoEnabled(settingsSecurityBean.getWebSudoEnabled());
         verify(settings).setWebSudoTimeout(settingsSecurityBean.getWebSudoTimeout());
     }

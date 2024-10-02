@@ -49,14 +49,14 @@ All URIs are relative to *https://<CONFLUENCE_URL>/rest/bootstrapi/1*
 *SettingsApi* | [**getBrandingFavicon**](Apis/SettingsApi.md#getbrandingfavicon) | **GET** /settings/branding/favicon | Get the favicon |
 *SettingsApi* | [**getBrandingLogo**](Apis/SettingsApi.md#getbrandinglogo) | **GET** /settings/branding/logo | Get the logo |
 *SettingsApi* | [**getCustomHtml**](Apis/SettingsApi.md#getcustomhtml) | **GET** /settings/custom-html | Get the custom HTML |
-*SettingsApi* | [**getSecurity**](Apis/SettingsApi.md#getsecurity) | **GET** /settings/security | Get the security settings |
-*SettingsApi* | [**getSettings**](Apis/SettingsApi.md#getsettings) | **GET** /settings | Get the application settings |
+*SettingsApi* | [**getSettings**](Apis/SettingsApi.md#getsettings) | **GET** /settings | Get the general settings |
+*SettingsApi* | [**getSettingsSecurity**](Apis/SettingsApi.md#getsettingssecurity) | **GET** /settings/security | Get the security settings |
 *SettingsApi* | [**setBrandingColorScheme**](Apis/SettingsApi.md#setbrandingcolorscheme) | **PUT** /settings/branding/color-scheme | Set the color scheme |
 *SettingsApi* | [**setBrandingFavicon**](Apis/SettingsApi.md#setbrandingfavicon) | **PUT** /settings/branding/favicon | Set the favicon |
 *SettingsApi* | [**setBrandingLogo**](Apis/SettingsApi.md#setbrandinglogo) | **PUT** /settings/branding/logo | Set the logo |
 *SettingsApi* | [**setCustomHtml**](Apis/SettingsApi.md#setcustomhtml) | **PUT** /settings/custom-html | Set the custom HTML |
-*SettingsApi* | [**setSecurity**](Apis/SettingsApi.md#setsecurity) | **PUT** /settings/security | Set the security settings |
-*SettingsApi* | [**setSettings**](Apis/SettingsApi.md#setsettings) | **PUT** /settings | Set the application settings |
+*SettingsApi* | [**setSettings**](Apis/SettingsApi.md#setsettings) | **PUT** /settings | Set the general settings |
+*SettingsApi* | [**setSettingsSecurity**](Apis/SettingsApi.md#setsettingssecurity) | **PUT** /settings/security | Set the security settings |
 | *UserApi* | [**getUser**](Apis/UserApi.md#getuser) | **GET** /user | Get a user |
 *UserApi* | [**setUser**](Apis/UserApi.md#setuser) | **PUT** /user | Update an user |
 *UserApi* | [**setUserPassword**](Apis/UserApi.md#setuserpassword) | **PUT** /user/password | Update a user password |

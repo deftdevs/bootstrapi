@@ -14,7 +14,6 @@ public interface SettingsBrandingService {
      */
     SettingsBrandingColorSchemeBean getColourScheme();
 
-
     /**
      * Set the colour scheme
      *
@@ -53,4 +52,5 @@ public interface SettingsBrandingService {
      */
     void setFavicon(
             @NotNull InputStream faviconBinary);
+
 }
