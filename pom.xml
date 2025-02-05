@@ -375,27 +375,39 @@
 
     <repositories>
         <repository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2/</url>
+        </repository>
+        <repository>
             <id>atlassian</id>
             <url>https://packages.atlassian.com/mvn/maven-external</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+        </repository>
+        <repository>
+            <id>jenkins</id>
+            <url>https://repo.jenkins-ci.org/releases</url>
+        </repository>
+        <repository>
+            <id>52north</id>
+            <url>https://52north.org/maven/repo/releases</url>
         </repository>
     </repositories>
 
     <pluginRepositories>
         <pluginRepository>
+            <id>central</id>
+            <url>https://repo1.maven.org/maven2/</url>
+        </pluginRepository>
+        <pluginRepository>
             <id>atlassian</id>
             <url>https://packages.atlassian.com/mvn/maven-external</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
+        </pluginRepository>
+        <pluginRepository>
+            <id>jenkins</id>
+            <url>https://repo.jenkins-ci.org/releases</url>
+        </pluginRepository>
+        <pluginRepository>
+            <id>52north</id>
+            <url>https://52north.org/maven/repo/releases</url>
         </pluginRepository>
     </pluginRepositories>
 
