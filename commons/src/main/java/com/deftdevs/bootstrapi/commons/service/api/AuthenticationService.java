@@ -5,19 +5,19 @@ import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
 
 import java.util.List;
 
-public interface AuthenticationService {
+public interface AuthenticationService<IB extends AbstractAuthenticationIdpBean, SB extends AuthenticationSsoBean> {
 
-    List<AbstractAuthenticationIdpBean> getAuthenticationIdps();
+    List<IB> getAuthenticationIdps();
 
-    List<AbstractAuthenticationIdpBean> setAuthenticationIdps(
-            List<AbstractAuthenticationIdpBean> authenticationIdpBeans);
+    List<IB> setAuthenticationIdps(
+            List<IB> authenticationIdpBeans);
 
-    AbstractAuthenticationIdpBean setAuthenticationIdp(
-            AbstractAuthenticationIdpBean authenticationIdpBean);
+    IB setAuthenticationIdp(
+            IB authenticationIdpBean);
 
-    AuthenticationSsoBean getAuthenticationSso();
+    SB getAuthenticationSso();
 
-    AuthenticationSsoBean setAuthenticationSso(
-            AuthenticationSsoBean authenticationSsoBean);
+    SB setAuthenticationSso(
+            SB authenticationSsoBean);
 
 }

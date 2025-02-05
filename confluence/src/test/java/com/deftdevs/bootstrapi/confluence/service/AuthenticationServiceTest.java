@@ -102,22 +102,30 @@ class AuthenticationServiceTest {
 
     @Test
     void testGetAuthenticationSso() {
-        final SsoConfig ssoConfig = ImmutableSsoConfig.builder().setShowLoginForm(true).build();
+        final SsoConfig ssoConfig = ImmutableSsoConfig.builder()
+                .setShowLoginForm(true)
+                .setEnableAuthenticationFallback(true)
+                .build();
         doReturn(ssoConfig).when(ssoConfigService).getSsoConfig();
 
         final AuthenticationSsoBean authenticationSsoBean = authenticationService.getAuthenticationSso();
         assertEquals(ssoConfig.getShowLoginForm(), authenticationSsoBean.getShowOnLogin());
+        assertEquals(ssoConfig.enableAuthenticationFallback(), authenticationSsoBean.getEnableAuthenticationFallback());
     }
 
     @Test
     void testSetAuthenticationSso() {
         final AuthenticationSsoBean authenticationSsoBean = AuthenticationSsoBean.EXAMPLE_1;
-        final SsoConfig ssoConfig = ImmutableSsoConfig.builder().setShowLoginForm(authenticationSsoBean.getShowOnLogin()).build();
+        final SsoConfig ssoConfig = ImmutableSsoConfig.builder()
+                .setShowLoginForm(authenticationSsoBean.getShowOnLogin())
+                .setEnableAuthenticationFallback(authenticationSsoBean.getEnableAuthenticationFallback())
+                .build();
         doReturn(ssoConfig).when(ssoConfigService).updateSsoConfig(ssoConfig);
 
         final AuthenticationSsoBean resultAuthenticationSsoBean = authenticationService.setAuthenticationSso(authenticationSsoBean);
         verify(ssoConfigService, times(1)).updateSsoConfig(ssoConfig);
         assertEquals(authenticationSsoBean.getShowOnLogin(), resultAuthenticationSsoBean.getShowOnLogin());
+        assertEquals(authenticationSsoBean.getEnableAuthenticationFallback(), resultAuthenticationSsoBean.getEnableAuthenticationFallback());
     }
 
 }

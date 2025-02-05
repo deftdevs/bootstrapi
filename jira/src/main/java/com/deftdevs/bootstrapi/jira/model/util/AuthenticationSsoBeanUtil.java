@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.jira.model.util;
 
 import com.atlassian.plugins.authentication.api.config.ImmutableSsoConfig;
 import com.atlassian.plugins.authentication.api.config.SsoConfig;
-import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
+import com.deftdevs.bootstrapi.jira.model.AuthenticationSsoBean;
 
 public class AuthenticationSsoBeanUtil {
 
@@ -28,6 +28,14 @@ public class AuthenticationSsoBeanUtil {
             ssoConfigBuilder.setShowLoginForm(authenticationSsoBean.getShowOnLogin());
         }
 
+        if (authenticationSsoBean.getShowOnLoginForJsm() != null) {
+            ssoConfigBuilder.setShowLoginFormForJsm(authenticationSsoBean.getShowOnLoginForJsm());
+        }
+
+        if (authenticationSsoBean.getEnableAuthenticationFallback() != null) {
+            ssoConfigBuilder.setEnableAuthenticationFallback(authenticationSsoBean.getEnableAuthenticationFallback());
+        }
+
         return ssoConfigBuilder.build();
     }
 
@@ -36,6 +44,8 @@ public class AuthenticationSsoBeanUtil {
 
         final AuthenticationSsoBean authenticationSsoBean = new AuthenticationSsoBean();
         authenticationSsoBean.setShowOnLogin(ssoConfig.getShowLoginForm());
+        authenticationSsoBean.setShowOnLoginForJsm(ssoConfig.getShowLoginFormForJsm());
+        authenticationSsoBean.setEnableAuthenticationFallback(ssoConfig.enableAuthenticationFallback());
 
         return authenticationSsoBean;
     }

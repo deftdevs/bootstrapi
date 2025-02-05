@@ -6,7 +6,7 @@ import com.atlassian.plugins.authentication.api.config.saml.SamlConfig;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpBean;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpOidcBean;
-import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
+import com.deftdevs.bootstrapi.jira.model.AuthenticationSsoBean;
 import com.deftdevs.bootstrapi.jira.model.util.AuthenticationIdpBeanUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -102,22 +102,34 @@ class AuthenticationServiceTest {
 
     @Test
     void testGetAuthenticationSso() {
-        final SsoConfig ssoConfig = ImmutableSsoConfig.builder().setShowLoginForm(true).build();
+        final SsoConfig ssoConfig = ImmutableSsoConfig.builder()
+                .setShowLoginForm(true)
+                .setShowLoginFormForJsm(true)
+                .setEnableAuthenticationFallback(true)
+                .build();
         doReturn(ssoConfig).when(ssoConfigService).getSsoConfig();
 
         final AuthenticationSsoBean authenticationSsoBean = authenticationService.getAuthenticationSso();
         assertEquals(ssoConfig.getShowLoginForm(), authenticationSsoBean.getShowOnLogin());
+        assertEquals(ssoConfig.getShowLoginFormForJsm(), authenticationSsoBean.getShowOnLoginForJsm());
+        assertEquals(ssoConfig.enableAuthenticationFallback(), authenticationSsoBean.getEnableAuthenticationFallback());
     }
 
     @Test
     void testSetAuthenticationSso() {
         final AuthenticationSsoBean authenticationSsoBean = AuthenticationSsoBean.EXAMPLE_1;
-        final SsoConfig ssoConfig = ImmutableSsoConfig.builder().setShowLoginForm(authenticationSsoBean.getShowOnLogin()).build();
+        final SsoConfig ssoConfig = ImmutableSsoConfig.builder()
+                .setShowLoginForm(authenticationSsoBean.getShowOnLogin())
+                .setShowLoginFormForJsm(authenticationSsoBean.getShowOnLoginForJsm())
+                .setEnableAuthenticationFallback(authenticationSsoBean.getEnableAuthenticationFallback())
+                .build();
         doReturn(ssoConfig).when(ssoConfigService).updateSsoConfig(ssoConfig);
 
         final AuthenticationSsoBean resultAuthenticationSsoBean = authenticationService.setAuthenticationSso(authenticationSsoBean);
         verify(ssoConfigService, times(1)).updateSsoConfig(ssoConfig);
         assertEquals(authenticationSsoBean.getShowOnLogin(), resultAuthenticationSsoBean.getShowOnLogin());
+        assertEquals(authenticationSsoBean.getShowOnLoginForJsm(), resultAuthenticationSsoBean.getShowOnLoginForJsm());
+        assertEquals(authenticationSsoBean.getEnableAuthenticationFallback(), resultAuthenticationSsoBean.getEnableAuthenticationFallback());
     }
 
 }
