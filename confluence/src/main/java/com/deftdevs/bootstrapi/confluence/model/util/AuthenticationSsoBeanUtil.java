@@ -28,6 +28,10 @@ public class AuthenticationSsoBeanUtil {
             ssoConfigBuilder.setShowLoginForm(authenticationSsoBean.getShowOnLogin());
         }
 
+        if (authenticationSsoBean.getEnableAuthenticationFallback() != null) {
+            ssoConfigBuilder.setEnableAuthenticationFallback(authenticationSsoBean.getEnableAuthenticationFallback());
+        }
+
         return ssoConfigBuilder.build();
     }
 
@@ -36,6 +40,7 @@ public class AuthenticationSsoBeanUtil {
 
         final AuthenticationSsoBean authenticationSsoBean = new AuthenticationSsoBean();
         authenticationSsoBean.setShowOnLogin(ssoConfig.getShowLoginForm());
+        authenticationSsoBean.setEnableAuthenticationFallback(ssoConfig.enableAuthenticationFallback());
 
         return authenticationSsoBean;
     }

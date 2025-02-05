@@ -22,7 +22,7 @@ import java.util.stream.Collectors;
 
 @Component
 @ExportAsService(AuthenticationService.class)
-public class AuthenticationServiceImpl implements AuthenticationService {
+public class AuthenticationServiceImpl implements AuthenticationService<AbstractAuthenticationIdpBean, AuthenticationSsoBean> {
 
     @ComponentImport
     private final IdpConfigService idpConfigService;
