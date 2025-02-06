@@ -16,6 +16,9 @@ public class AuthenticationSsoBean {
     private Boolean showOnLogin;
 
     @XmlElement
+    private Boolean showOnLoginForJsm;
+
+    @XmlElement
     private Boolean enableAuthenticationFallback;
 
     // Example instances for documentation and tests
@@ -25,6 +28,7 @@ public class AuthenticationSsoBean {
     static {
         EXAMPLE_1 = new AuthenticationSsoBean();
         EXAMPLE_1.setShowOnLogin(true);
+        EXAMPLE_1.setShowOnLoginForJsm(true);
         EXAMPLE_1.setEnableAuthenticationFallback(true);
     }
 

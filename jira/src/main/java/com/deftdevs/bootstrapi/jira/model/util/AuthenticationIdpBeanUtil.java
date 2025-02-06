@@ -51,6 +51,9 @@ public class AuthenticationIdpBeanUtil {
         if (authenticationIdpOidcBean.getEnabled() != null) {
             oidcConfigBuilder.setEnabled(authenticationIdpOidcBean.getEnabled());
         }
+        if (authenticationIdpOidcBean.getEnabledForJsm() != null) {
+            oidcConfigBuilder.setIncludeCustomerLogins(authenticationIdpOidcBean.getEnabledForJsm());
+        }
         if (authenticationIdpOidcBean.getUrl() != null) {
             oidcConfigBuilder.setIssuer(authenticationIdpOidcBean.getUrl());
         }
@@ -113,6 +116,7 @@ public class AuthenticationIdpBeanUtil {
         authenticationIdpOidcBean.setId(oidcConfig.getId());
         authenticationIdpOidcBean.setName(oidcConfig.getName());
         authenticationIdpOidcBean.setEnabled(oidcConfig.isEnabled());
+        authenticationIdpOidcBean.setEnabledForJsm(oidcConfig.isIncludeCustomerLogins());
         authenticationIdpOidcBean.setUrl(oidcConfig.getIssuer());
         authenticationIdpOidcBean.setEnableRememberMe(oidcConfig.isEnableRememberMe());
         authenticationIdpOidcBean.setButtonText(oidcConfig.getButtonText());
@@ -140,6 +144,7 @@ public class AuthenticationIdpBeanUtil {
         authenticationIdpSamlBean.setId(samlConfig.getId());
         authenticationIdpSamlBean.setName(samlConfig.getName());
         authenticationIdpSamlBean.setEnabled(samlConfig.isEnabled());
+        authenticationIdpSamlBean.setEnabledForJsm(samlConfig.isIncludeCustomerLogins());
         authenticationIdpSamlBean.setUrl(samlConfig.getIssuer());
         authenticationIdpSamlBean.setEnableRememberMe(samlConfig.isEnableRememberMe());
         authenticationIdpSamlBean.setButtonText(samlConfig.getButtonText());
