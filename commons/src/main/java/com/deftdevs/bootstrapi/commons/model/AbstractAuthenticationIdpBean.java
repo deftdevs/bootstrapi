@@ -42,6 +42,9 @@ public abstract class AbstractAuthenticationIdpBean {
     private Boolean enabled;
 
     @XmlElement
+    private Boolean enabledForJsm;
+
+    @XmlElement
     private String url;
 
     @XmlElement

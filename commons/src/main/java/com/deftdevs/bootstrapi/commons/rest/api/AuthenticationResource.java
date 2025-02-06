@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-public interface AuthenticationResource {
+public interface AuthenticationResource<IB extends AbstractAuthenticationIdpBean, SB extends AuthenticationSsoBean> {
 
     @GET
     @Path(BootstrAPI.AUTHENTICATION_IDPS)
@@ -57,7 +57,7 @@ public interface AuthenticationResource {
             }
     )
     Response setAuthenticationIdps(
-            final List<AbstractAuthenticationIdpBean> authenticationIdpBeans);
+            final List<IB> authenticationIdpBeans);
 
     @GET
     @Path(BootstrAPI.AUTHENTICATION_SSO)
@@ -95,6 +95,6 @@ public interface AuthenticationResource {
             }
     )
     Response setAuthenticationSso(
-            final AuthenticationSsoBean authenticationSsoBean);
+            final SB authenticationSsoBean);
 
 }

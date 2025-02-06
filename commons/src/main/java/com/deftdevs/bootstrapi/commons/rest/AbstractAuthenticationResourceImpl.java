@@ -8,41 +8,42 @@ import com.deftdevs.bootstrapi.commons.service.api.AuthenticationService;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-public abstract class AbstractAuthenticationResourceImpl implements AuthenticationResource {
+public abstract class AbstractAuthenticationResourceImpl<IB extends AbstractAuthenticationIdpBean, SB extends AuthenticationSsoBean, S extends AuthenticationService<IB, SB>>
+        implements AuthenticationResource<IB, SB> {
 
-    private final AuthenticationService authenticationService;
+    private final S authenticationService;
 
     protected AbstractAuthenticationResourceImpl(
-            final AuthenticationService authenticationService) {
+            final S authenticationService) {
 
         this.authenticationService = authenticationService;
     }
 
     @Override
     public Response getAuthenticationIdps() {
-        final List<AbstractAuthenticationIdpBean> resultAuthenticationIdpBeans = authenticationService.getAuthenticationIdps();
+        final List<IB> resultAuthenticationIdpBeans = authenticationService.getAuthenticationIdps();
         return Response.ok(resultAuthenticationIdpBeans).build();
     }
 
     @Override
     public Response setAuthenticationIdps(
-            final List<AbstractAuthenticationIdpBean> authenticationIdpBeans) {
+            final List<IB> authenticationIdpBeans) {
 
-        final List<AbstractAuthenticationIdpBean> resultAuthenticationIdpBeans = authenticationService.setAuthenticationIdps(authenticationIdpBeans);
+        final List<IB> resultAuthenticationIdpBeans = authenticationService.setAuthenticationIdps(authenticationIdpBeans);
         return Response.ok(resultAuthenticationIdpBeans).build();
     }
 
     @Override
     public Response getAuthenticationSso() {
-        final AuthenticationSsoBean resultAuthenticationSsoBean = authenticationService.getAuthenticationSso();
+        final SB resultAuthenticationSsoBean = authenticationService.getAuthenticationSso();
         return Response.ok(resultAuthenticationSsoBean).build();
     }
 
     @Override
     public Response setAuthenticationSso(
-            final AuthenticationSsoBean authenticationSsoBean) {
+            final SB authenticationSsoBean) {
 
-        final AuthenticationSsoBean resultAuthenticationSsoBean = authenticationService.setAuthenticationSso(authenticationSsoBean);
+        final SB resultAuthenticationSsoBean = authenticationService.setAuthenticationSso(authenticationSsoBean);
         return Response.ok(resultAuthenticationSsoBean).build();
     }
 

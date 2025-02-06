@@ -6,7 +6,7 @@ import com.atlassian.plugins.authentication.api.config.saml.SamlConfig;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpBean;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpOidcBean;
-import com.deftdevs.bootstrapi.jira.model.AuthenticationSsoBean;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
 import com.deftdevs.bootstrapi.jira.model.util.AuthenticationIdpBeanUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

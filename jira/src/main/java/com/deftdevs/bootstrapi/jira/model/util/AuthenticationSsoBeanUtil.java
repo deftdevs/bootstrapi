@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.jira.model.util;
 
 import com.atlassian.plugins.authentication.api.config.ImmutableSsoConfig;
 import com.atlassian.plugins.authentication.api.config.SsoConfig;
-import com.deftdevs.bootstrapi.jira.model.AuthenticationSsoBean;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
 
 public class AuthenticationSsoBeanUtil {
 

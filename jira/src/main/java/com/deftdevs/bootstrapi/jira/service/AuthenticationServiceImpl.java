@@ -8,10 +8,10 @@ import com.atlassian.plugins.authentication.api.config.SsoConfig;
 import com.atlassian.plugins.authentication.api.config.SsoConfigService;
 import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpBean;
-import com.deftdevs.bootstrapi.commons.service.api.AuthenticationService;
-import com.deftdevs.bootstrapi.jira.model.AuthenticationSsoBean;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
 import com.deftdevs.bootstrapi.jira.model.util.AuthenticationIdpBeanUtil;
 import com.deftdevs.bootstrapi.jira.model.util.AuthenticationSsoBeanUtil;
+import com.deftdevs.bootstrapi.jira.service.api.JiraAuthenticationService;
 import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
@@ -21,8 +21,8 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
-@ExportAsService(AuthenticationService.class)
-public class AuthenticationServiceImpl implements AuthenticationService<AbstractAuthenticationIdpBean, AuthenticationSsoBean> {
+@ExportAsService(JiraAuthenticationService.class)
+public class AuthenticationServiceImpl implements JiraAuthenticationService {
 
     @ComponentImport
     private final IdpConfigService idpConfigService;
