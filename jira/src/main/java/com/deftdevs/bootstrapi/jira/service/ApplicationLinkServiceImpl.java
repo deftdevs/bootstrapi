@@ -14,7 +14,6 @@ import com.atlassian.applinks.core.ApplinkStatus;
 import com.atlassian.applinks.core.ApplinkStatusService;
 import com.atlassian.applinks.internal.common.exception.NoAccessException;
 import com.atlassian.applinks.internal.common.exception.NoSuchApplinkException;
-import com.atlassian.applinks.spi.auth.AuthenticationConfigurationException;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
 import com.atlassian.applinks.spi.link.MutableApplicationLink;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
@@ -26,7 +25,6 @@ import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
 import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
-import com.deftdevs.bootstrapi.jira.model.type.DefaultAuthenticationScenario;
 import com.deftdevs.bootstrapi.jira.model.util.ApplicationLinkBeanUtil;
 import org.apache.commons.lang3.NotImplementedException;
 import org.slf4j.Logger;
@@ -54,14 +52,21 @@ public class ApplicationLinkServiceImpl implements ApplicationLinksService {
 
     private static final Logger log = LoggerFactory.getLogger(ApplicationLinkServiceImpl.class);
 
+    @ComponentImport
     private final MutatingApplicationLinkService mutatingApplicationLinkService;
+
+    @ComponentImport
     private final TypeAccessor typeAccessor;
+
+    @ComponentImport
     private final ApplinkStatusService applinkStatusService;
 
     @Inject
-    public ApplicationLinkServiceImpl(@ComponentImport MutatingApplicationLinkService mutatingApplicationLinkService,
-                                      @ComponentImport TypeAccessor typeAccessor,
-                                      @ComponentImport ApplinkStatusService applinkStatusService) {
+    public ApplicationLinkServiceImpl(
+            final MutatingApplicationLinkService mutatingApplicationLinkService,
+            final TypeAccessor typeAccessor,
+            final ApplinkStatusService applinkStatusService) {
+
         this.mutatingApplicationLinkService = mutatingApplicationLinkService;
         this.typeAccessor = typeAccessor;
         this.applinkStatusService = applinkStatusService;
@@ -133,7 +138,8 @@ public class ApplicationLinkServiceImpl implements ApplicationLinksService {
             //entity must be removed first (there is no update service method)
             mutatingApplicationLinkService.deleteApplicationLink(applicationLink);
             //finally a new entity is added with the known existing server id
-            MutableApplicationLink mutableApplicationLink = mutatingApplicationLinkService.addApplicationLink(id, applicationType, linkDetails);
+            final MutableApplicationLink mutableApplicationLink = mutatingApplicationLinkService.addApplicationLink(id, applicationType, linkDetails);
+            updateOAuthStatus(applicationLink, "bla");
             return getApplicationLinkBeanWithStatus(mutableApplicationLink);
         } catch (TypeNotInstalledException e) {
             throw new BadRequestException(e.getMessage());
@@ -152,7 +158,7 @@ public class ApplicationLinkServiceImpl implements ApplicationLinksService {
         Class<? extends ApplicationType> appType = applicationType != null ? applicationType.getClass() : null;
         ApplicationLink primaryApplicationLink = mutatingApplicationLinkService.getPrimaryApplicationLink(appType);
         if (primaryApplicationLink != null) {
-            log.info("An existiaang application link configuration '{}' was found and is removed now before adding the new configuration",
+            log.info("An existing application link configuration '{}' was found and is removed now before adding the new configuration",
                     primaryApplicationLink.getName());
             mutatingApplicationLinkService.deleteApplicationLink(primaryApplicationLink);
         }
@@ -165,16 +171,17 @@ public class ApplicationLinkServiceImpl implements ApplicationLinksService {
             throw new BadRequestException(e.getMessage());
         }
 
-        //configure authenticator, this might fail if setup is incorrect or remote app is unavailable
-        try {
-            mutatingApplicationLinkService.configureAuthenticationForApplicationLink(applicationLink,
-                    new DefaultAuthenticationScenario(), linkBean.getUsername(), linkBean.getPassword());
-        } catch (AuthenticationConfigurationException e) {
-            if (!ignoreSetupErrors) {
-                throw new BadRequestException(e.getMessage());
-            }
-        }
+//        //configure authenticator, this might fail if setup is incorrect or remote app is unavailable
+//        try {
+//            mutatingApplicationLinkService.configureAuthenticationForApplicationLink(applicationLink,
+//                    new DefaultAuthenticationScenario(), linkBean.getUsername(), linkBean.getPassword());
+//        } catch (AuthenticationConfigurationException e) {
+//            if (!ignoreSetupErrors) {
+//                throw new BadRequestException(e.getMessage());
+//            }
+//        }
 
+        updateOAuthStatus(applicationLink, "bla");
         return getApplicationLinkBeanWithStatus(applicationLink);
     }
 
@@ -198,6 +205,17 @@ public class ApplicationLinkServiceImpl implements ApplicationLinksService {
         } catch (TypeNotInstalledException e) {
             throw new BadRequestException(e.getMessage());
         }
+    }
+
+    protected void updateOAuthStatus(
+            final ApplicationLink applicationLink,
+            final String oAuthType) {
+
+//        try {
+//            oAuthStatusService.updateOAuthStatus(applicationLink, ApplinkOAuthStatus.IMPERSONATION);
+//        } catch (NoAccessException | ConsumerInformationUnavailableException e) {
+//            throw new InternalServerErrorException(e);
+//        }
     }
 
     protected ApplicationType buildApplicationType(ApplicationLinkType linkType) {

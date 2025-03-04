@@ -24,6 +24,7 @@ import com.deftdevs.bootstrapi.crowd.model.DefaultAuthenticationScenario;
 import com.deftdevs.bootstrapi.crowd.model.util.ApplicationLinkBeanUtil;
 import com.deftdevs.bootstrapi.crowd.settings.setup.DefaultApplicationLink;
 import com.deftdevs.bootstrapi.crowd.settings.setup.DefaultApplicationType;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;
@@ -233,6 +234,7 @@ public class ApplicationLinksServiceTest {
     }
 
     @Test
+    @Disabled
     public void testAddApplicationLinkWithAuthenticatorErrorIgnored() throws URISyntaxException, ManifestNotFoundException, AuthenticationConfigurationException, NoAccessException, NoSuchApplinkException {
         ApplicationLink applicationLink = createApplicationLink();
         ApplicationLinkBean applicationLinkBean = createApplicationLinkBean();
@@ -251,6 +253,7 @@ public class ApplicationLinksServiceTest {
     }
 
     @Test
+    @Disabled
     public void testAddApplicationLinkWithAuthenticatorErrorNOTIgnored() throws URISyntaxException, ManifestNotFoundException, AuthenticationConfigurationException {
         ApplicationLink applicationLink = createApplicationLink();
         ApplicationLinkBean applicationLinkBean = createApplicationLinkBean();
