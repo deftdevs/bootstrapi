@@ -1,4 +1,4 @@
-package com.deftdevs.bootstrapi.commons.exception.mapper;
+package com.deftdevs.bootstrapi.commons.exception.web.mapper;
 
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import org.codehaus.jackson.map.JsonMappingException;

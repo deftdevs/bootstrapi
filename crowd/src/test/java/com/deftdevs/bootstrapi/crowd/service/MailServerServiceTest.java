@@ -3,7 +3,7 @@ package com.deftdevs.bootstrapi.crowd.service;
 import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.crowd.manager.mail.MailConfigurationService;
 import com.atlassian.crowd.manager.mail.MockMailConfiguration;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
 import com.deftdevs.bootstrapi.crowd.model.util.MailServerSmtpBeanUtil;
 import org.junit.jupiter.api.BeforeEach;

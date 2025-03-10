@@ -11,7 +11,7 @@ import com.atlassian.crowd.model.user.ImmutableUser;
 import com.atlassian.crowd.model.user.User;
 import com.atlassian.crowd.model.user.UserTemplate;
 import com.atlassian.crowd.model.user.UserTemplateWithAttributes;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
 import com.deftdevs.bootstrapi.commons.model.UserBean;
 import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForUser;

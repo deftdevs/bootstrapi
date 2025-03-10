@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.crowd.model.util;
 
 import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.crowd.util.mail.SMTPServer;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
 
 import javax.annotation.Nullable;

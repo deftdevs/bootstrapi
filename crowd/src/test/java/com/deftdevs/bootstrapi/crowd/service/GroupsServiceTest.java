@@ -6,7 +6,7 @@ import com.atlassian.crowd.manager.directory.DirectoryPermissionException;
 import com.atlassian.crowd.model.group.Group;
 import com.atlassian.crowd.model.group.GroupTemplate;
 import com.atlassian.crowd.model.group.ImmutableGroup;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
 import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForGroup;
 import com.deftdevs.bootstrapi.crowd.model.util.GroupBeanUtil;

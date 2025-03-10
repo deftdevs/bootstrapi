@@ -4,7 +4,7 @@ import com.atlassian.confluence.security.SpacePermission;
 import com.atlassian.confluence.security.SpacePermissionManager;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalBean;
 import com.deftdevs.bootstrapi.commons.service.api.PermissionsService;
 import com.deftdevs.bootstrapi.confluence.model.util.PermissionsGlobalBeanUtil;

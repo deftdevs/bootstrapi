@@ -1,4 +1,4 @@
-package com.deftdevs.bootstrapi.commons.exception;
+package com.deftdevs.bootstrapi.commons.exception.web;
 
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;

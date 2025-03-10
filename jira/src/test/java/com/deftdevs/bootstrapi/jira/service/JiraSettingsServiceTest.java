@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.jira.config.properties.ApplicationProperties;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

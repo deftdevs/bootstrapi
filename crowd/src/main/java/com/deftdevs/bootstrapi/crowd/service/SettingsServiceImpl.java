@@ -4,7 +4,7 @@ import com.atlassian.crowd.manager.property.PropertyManager;
 import com.atlassian.crowd.manager.property.PropertyManagerException;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
+import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
 import com.deftdevs.bootstrapi.crowd.service.api.CrowdSettingsGeneralService;
 import org.springframework.stereotype.Component;

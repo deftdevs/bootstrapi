@@ -1,4 +1,4 @@
-package com.deftdevs.bootstrapi.commons.exception;
+package com.deftdevs.bootstrapi.commons.exception.web;
 
 import com.deftdevs.bootstrapi.commons.junit.AbstractExceptionTest;
 

@@ -10,7 +10,7 @@ import com.atlassian.favicon.core.StoredFavicon;
 import com.atlassian.favicon.core.exceptions.ImageStorageException;
 import com.atlassian.favicon.core.exceptions.InvalidImageDataException;
 import com.atlassian.favicon.core.exceptions.UnsupportedImageTypeException;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

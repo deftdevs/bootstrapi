@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.exception;
 
-import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
+import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.commons.model.UserBean;
 
 @SuppressWarnings("java:S110")
