@@ -42,7 +42,7 @@
 
     <properties>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <jira.version>9.12.5</jira.version>
+        <jira.version>9.12.19</jira.version>
         <jira.data.version>9.12.5</jira.data.version>
         <ajp.port>8209</ajp.port>
     </properties>
@@ -55,12 +55,6 @@
                 <version>${jira.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-                <exclusions>
-                    <exclusion>
-                        <groupId>jta</groupId>
-                        <artifactId>jta</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
 
             <dependency>
@@ -118,6 +112,12 @@
             <groupId>com.atlassian.jira</groupId>
             <artifactId>jira-api</artifactId>
             <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>javax.transaction</groupId>
+                    <artifactId>jta</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -125,6 +125,10 @@
             <artifactId>jira-core</artifactId>
             <scope>provided</scope>
             <exclusions>
+                <exclusion>
+                    <groupId>javax.transaction</groupId>
+                    <artifactId>jta</artifactId>
+                </exclusion>
                 <exclusion>
                     <groupId>jndi</groupId>
                     <artifactId>jndi</artifactId>
