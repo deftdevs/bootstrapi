@@ -3,6 +3,11 @@
   "extends": [
     "config:recommended"
   ],
+  "prConcurrentLimit": 0,
+  "separateMajorMinor": true,
+  "separateMinorPatch": true,
+  "separateMultipleMajor": true,
+  "separateMultipleMinor": true,
   "packageRules": [
     {
       "description": "Auto-merge patch updates",
