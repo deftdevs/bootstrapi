@@ -77,7 +77,7 @@
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.projectKey>deftdevs_bootstrapi</sonar.projectKey>
         <!-- other properties -->
-        <atlassian.amps.version>9.2.5</atlassian.amps.version>
+        <atlassian.amps.version>9.2.6</atlassian.amps.version>
         <atlassian.platform.version>6.5.40</atlassian.platform.version>
         <atlassian.plugins-osgi-testrunner.version>3.0.0-m01</atlassian.plugins-osgi-testrunner.version>
         <atlassian.spring-scanner.version>2.2.6</atlassian.spring-scanner.version>
