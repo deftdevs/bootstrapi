@@ -19,8 +19,8 @@ import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorExceptio
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
 import com.deftdevs.bootstrapi.commons.model.UserBean;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
-import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForDirectory;
-import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForUser;
+import com.deftdevs.bootstrapi.commons.exception.DirectoryNotFoundException;
+import com.deftdevs.bootstrapi.commons.exception.UserNotFoundException;
 import com.deftdevs.bootstrapi.crowd.model.util.UserBeanUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
@@ -66,7 +66,7 @@ public class UsersServiceImpl implements UsersService {
         final User user = findUser(directoryId, username);
 
         if (user == null) {
-            throw new NotFoundExceptionForUser(username);
+            throw new UserNotFoundException(username);
         }
 
         return UserBeanUtil.toUserBean(user);
@@ -163,7 +163,7 @@ public class UsersServiceImpl implements UsersService {
         User user = findUser(directoryId, username);
 
         if (user == null) {
-            throw new NotFoundExceptionForUser(username);
+            throw new UserNotFoundException(username);
         }
 
         if (userBean.getUsername() != null && !username.equals(userBean.getUsername())) {
@@ -195,9 +195,9 @@ public class UsersServiceImpl implements UsersService {
 
         try {
             return directoryManager.findUserByName(directoryId, username);
-        } catch (DirectoryNotFoundException e) {
-            throw new NotFoundExceptionForDirectory(directoryId);
-        } catch (UserNotFoundException e) {
+        } catch (com.atlassian.crowd.exception.DirectoryNotFoundException e) {
+            throw new DirectoryNotFoundException(directoryId);
+        } catch (com.atlassian.crowd.exception.UserNotFoundException e) {
             // Ignore, will be handled differently
         } catch (OperationFailedException e) {
             throw new InternalServerErrorException(e);
@@ -217,7 +217,7 @@ public class UsersServiceImpl implements UsersService {
         final User user = findUserAllDirectories(username);
 
         if (user == null) {
-            throw new NotFoundExceptionForUser(username);
+            throw new UserNotFoundException(username);
         }
 
         return UserBeanUtil.toUserBean(user);
@@ -239,7 +239,7 @@ public class UsersServiceImpl implements UsersService {
         final User user = findUserAllDirectories(username);
 
         if (user == null) {
-            throw new NotFoundExceptionForUser(username);
+            throw new UserNotFoundException(username);
         }
 
         return updateUser(user.getDirectoryId(), username, userBean);
@@ -257,7 +257,7 @@ public class UsersServiceImpl implements UsersService {
         final User user = findUserAllDirectories(username);
 
         if (user == null) {
-            throw new NotFoundExceptionForUser(username);
+            throw new UserNotFoundException(username);
         }
 
         updatePassword(user, password);
@@ -275,9 +275,9 @@ public class UsersServiceImpl implements UsersService {
         for (Directory directory : findDirectories()) {
             try {
                 return directoryManager.findUserByName(directory.getId(), username);
-            } catch (UserNotFoundException e) {
+            } catch (com.atlassian.crowd.exception.UserNotFoundException e) {
                 // Ignore, will be handled below
-            } catch (DirectoryNotFoundException | OperationFailedException e) {
+            } catch (com.atlassian.crowd.exception.DirectoryNotFoundException | OperationFailedException e) {
                 throw new InternalServerErrorException(e);
             }
         }
@@ -296,7 +296,8 @@ public class UsersServiceImpl implements UsersService {
             // A permission exception should only happen if we try change the name
             // of a user in a read-only directory, so treat this as a bad request
             throw new BadRequestException(e);
-        } catch (DirectoryNotFoundException | UserNotFoundException | OperationFailedException e) {
+        } catch (com.atlassian.crowd.exception.DirectoryNotFoundException |
+                 com.atlassian.crowd.exception.UserNotFoundException | OperationFailedException e) {
             // At this point, we know the user exists, thus directory or user not found
             // should never happen, so if it does, treat it as an internal server error
             throw new InternalServerErrorException(e);
@@ -318,7 +319,7 @@ public class UsersServiceImpl implements UsersService {
             // A permission exception should only happen if we try change the name
             // of a user in a read-only directory, so treat this as a bad request
             throw new BadRequestException(e);
-        } catch (OperationFailedException | DirectoryNotFoundException e) {
+        } catch (OperationFailedException | com.atlassian.crowd.exception.DirectoryNotFoundException e) {
             // At this point, we know the directory, thus directory not found should
             // never happen, so if it does, treat it as an internal server error
             throw new InternalServerErrorException(e);
@@ -336,7 +337,8 @@ public class UsersServiceImpl implements UsersService {
             // A permission exception should only happen if we try change the name
             // of a user in a read-only directory, so treat this as a bad request
             throw new BadRequestException(e);
-        } catch (DirectoryNotFoundException | UserNotFoundException | OperationFailedException e) {
+        } catch (com.atlassian.crowd.exception.DirectoryNotFoundException |
+                 com.atlassian.crowd.exception.UserNotFoundException | OperationFailedException e) {
             // At this point, we know the user exists, thus directory or user not found
             // should never happen, so if it does, treat it as an internal server error
             throw new InternalServerErrorException(e);
@@ -370,7 +372,8 @@ public class UsersServiceImpl implements UsersService {
             // A permission exception should only happen if we try to update the password
             // of a user in a read-only directory, so treat this as a bad request
             throw new BadRequestException(e);
-        } catch (DirectoryNotFoundException | UserNotFoundException | OperationFailedException e) {
+        } catch (com.atlassian.crowd.exception.DirectoryNotFoundException |
+                 com.atlassian.crowd.exception.UserNotFoundException | OperationFailedException e) {
             // At this point, we know the user exists, thus directory or user not found
             // should never happen, so if it does, treat it as an internal server error
             throw new InternalServerErrorException(e);
@@ -392,7 +395,8 @@ public class UsersServiceImpl implements UsersService {
             // A permission exception should only happen if we try to update a user
             // in a read-only directory, so treat this as a bad request
             throw new BadRequestException(e);
-        } catch (DirectoryNotFoundException | UserNotFoundException | OperationFailedException e) {
+        } catch (com.atlassian.crowd.exception.DirectoryNotFoundException |
+                 com.atlassian.crowd.exception.UserNotFoundException | OperationFailedException e) {
             // At this point, we know the user exists, thus directory or user not found
             // should never happen, so if it does, treat it as an internal server error
             throw new InternalServerErrorException(e);
@@ -415,7 +419,8 @@ public class UsersServiceImpl implements UsersService {
                     resultGroupBeans.add(resultGroupBean);
                 } catch (DirectoryPermissionException | ReadOnlyGroupException e) {
                     throw new BadRequestException(e);
-                } catch (DirectoryNotFoundException | UserNotFoundException | GroupNotFoundException |
+                } catch (com.atlassian.crowd.exception.DirectoryNotFoundException |
+                         com.atlassian.crowd.exception.UserNotFoundException | GroupNotFoundException |
                          OperationFailedException e) {
                     throw new InternalServerErrorException(e);
                 } catch (MembershipAlreadyExistsException e) {

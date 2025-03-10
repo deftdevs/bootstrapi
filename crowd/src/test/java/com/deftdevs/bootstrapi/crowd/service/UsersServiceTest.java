@@ -14,7 +14,7 @@ import com.atlassian.crowd.model.user.UserTemplateWithAttributes;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
 import com.deftdevs.bootstrapi.commons.model.UserBean;
-import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForUser;
+import com.deftdevs.bootstrapi.commons.exception.UserNotFoundException;
 import com.deftdevs.bootstrapi.crowd.model.util.UserBeanUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.junit.jupiter.api.BeforeEach;
@@ -79,9 +79,9 @@ public class UsersServiceTest {
     public void testGetUserNotFound() throws Exception {
         final Directory directory = getTestDirectory();
         final String userName = "not_found";
-        doThrow(new UserNotFoundException(userName)).when(directoryManager).findUserByName(directory.getId(), userName);
+        doThrow(new com.atlassian.crowd.exception.UserNotFoundException(userName)).when(directoryManager).findUserByName(directory.getId(), userName);
 
-        assertThrows(NotFoundExceptionForUser.class, () -> {
+        assertThrows(UserNotFoundException.class, () -> {
             usersService.getUser(directory.getId(), userName);
         });
     }
@@ -90,9 +90,9 @@ public class UsersServiceTest {
     public void testGetUserNotFoundAnyDirectory() throws Exception {
         final Directory directory = getTestDirectory();
         final String userName = "not_found";
-        doThrow(new UserNotFoundException(userName)).when(directoryManager).findUserByName(directory.getId(), userName);
+        doThrow(new com.atlassian.crowd.exception.UserNotFoundException(userName)).when(directoryManager).findUserByName(directory.getId(), userName);
 
-        assertThrows(NotFoundExceptionForUser.class, () -> {
+        assertThrows(UserNotFoundException.class, () -> {
             usersService.getUser(userName);
         });
     }
@@ -306,7 +306,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         final UserBean userBean = UserBeanUtil.toUserBean(user);
 
-        assertThrows(NotFoundExceptionForUser.class, () -> {
+        assertThrows(UserNotFoundException.class, () -> {
             usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
         });
     }
@@ -693,7 +693,7 @@ public class UsersServiceTest {
     public void testUpdatePasswordNotFoundException() throws CrowdException, DirectoryPermissionException {
         final User user = getTestUser();
         final String password = "pa55w0rd";
-        doThrow(new UserNotFoundException(user.getName())).when(directoryManager).updateUserCredential(user.getDirectoryId(), user.getName(), PasswordCredential.unencrypted(password));
+        doThrow(new com.atlassian.crowd.exception.UserNotFoundException(user.getName())).when(directoryManager).updateUserCredential(user.getDirectoryId(), user.getName(), PasswordCredential.unencrypted(password));
 
         assertThrows(WebApplicationException.class, () -> {
             usersService.updatePassword(user, password);
@@ -795,7 +795,7 @@ public class UsersServiceTest {
     @Test
     public void testResetUserPasswordAttributesUserNotFoundException() throws CrowdException, PermissionException {
         final User user = getTestUser();
-        doThrow(new UserNotFoundException(user.getName())).when(directoryManager).storeUserAttributes(anyLong(), anyString(), any());
+        doThrow(new com.atlassian.crowd.exception.UserNotFoundException(user.getName())).when(directoryManager).storeUserAttributes(anyLong(), anyString(), any());
 
         assertThrows(WebApplicationException.class, () -> {
             usersService.resetUserPasswordAttributes(user);

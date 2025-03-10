@@ -1,18 +1,18 @@
-package com.deftdevs.bootstrapi.crowd.exception;
+package com.deftdevs.bootstrapi.commons.exception;
 
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
 
 @SuppressWarnings("java:S110")
-public class NotFoundExceptionForGroup extends NotFoundException {
+public class GroupNotFoundException extends NotFoundException {
 
-    public NotFoundExceptionForGroup(
+    public GroupNotFoundException(
             final GroupBean groupBean) {
 
         super(groupBean.getName());
     }
 
-    public NotFoundExceptionForGroup(
+    public GroupNotFoundException(
             final String name) {
 
         super(String.format("Group with name '%s' could not be found", name));

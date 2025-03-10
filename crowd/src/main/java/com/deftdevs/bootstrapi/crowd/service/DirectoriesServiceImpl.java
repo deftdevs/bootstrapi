@@ -3,7 +3,6 @@ package com.deftdevs.bootstrapi.crowd.service;
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.exception.DirectoryCurrentlySynchronisingException;
 import com.atlassian.crowd.exception.DirectoryInstantiationException;
-import com.atlassian.crowd.exception.DirectoryNotFoundException;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.crowd.search.EntityDescriptor;
 import com.atlassian.crowd.search.builder.QueryBuilder;
@@ -19,7 +18,7 @@ import com.deftdevs.bootstrapi.commons.model.GroupBean;
 import com.deftdevs.bootstrapi.commons.model.UserBean;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
-import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForDirectory;
+import com.deftdevs.bootstrapi.commons.exception.DirectoryNotFoundException;
 import com.deftdevs.bootstrapi.crowd.model.util.DirectoryBeanUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
@@ -112,7 +111,7 @@ public class DirectoriesServiceImpl implements DirectoriesService {
         } catch (DirectoryBeanUtil.UnsupportedDirectoryBeanException e) {
             throw new BadRequestException(String.format(
                     "Setting directory type '%s' is not supported (yet)", e.getMessage()));
-        } catch (DirectoryNotFoundException e) {
+        } catch (com.atlassian.crowd.exception.DirectoryNotFoundException e) {
             // this should not happen
             throw new InternalServerErrorException(String.format(
                     "When trying to update directory '%s', it could not be found anymore", existingDirectory.getName()));
@@ -174,7 +173,7 @@ public class DirectoriesServiceImpl implements DirectoriesService {
 
         try {
             directoryManager.removeDirectory(directory);
-        } catch (DirectoryNotFoundException e) {
+        } catch (com.atlassian.crowd.exception.DirectoryNotFoundException e) {
             throw new InternalServerErrorException(String.format(
                     "When trying to delete directory '%s', it could not be found anymore", directory.getName()));
         } catch (DirectoryCurrentlySynchronisingException e) {
@@ -188,8 +187,8 @@ public class DirectoriesServiceImpl implements DirectoriesService {
 
         try {
             return directoryManager.findDirectoryById(id);
-        } catch (DirectoryNotFoundException e) {
-            throw new NotFoundExceptionForDirectory(id);
+        } catch (com.atlassian.crowd.exception.DirectoryNotFoundException e) {
+            throw new DirectoryNotFoundException(id);
         }
     }
 

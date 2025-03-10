@@ -10,8 +10,8 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
-import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForDirectory;
-import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForGroup;
+import com.deftdevs.bootstrapi.commons.exception.DirectoryNotFoundException;
+import com.deftdevs.bootstrapi.commons.exception.GroupNotFoundException;
 import com.deftdevs.bootstrapi.crowd.model.util.GroupBeanUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
@@ -44,7 +44,7 @@ public class GroupsServiceImpl implements GroupsService {
         final Group group = findGroup(directoryId, groupName);
 
         if (group == null) {
-            throw new NotFoundExceptionForGroup(groupName);
+            throw new GroupNotFoundException(groupName);
         }
 
         return GroupBeanUtil.toGroupBean(group);
@@ -75,7 +75,7 @@ public class GroupsServiceImpl implements GroupsService {
             // A permission exception should only happen if we try adding the group
             // a user in a read-only directory, so treat this as a bad request
             throw new BadRequestException(e);
-        } catch (DirectoryNotFoundException | OperationFailedException e) {
+        } catch (com.atlassian.crowd.exception.DirectoryNotFoundException | OperationFailedException e) {
             // At this point, we know the group exists, thus directory not found
             // should never happen, so if it does, treat it as an internal server error
             throw new InternalServerErrorException(e);
@@ -91,7 +91,7 @@ public class GroupsServiceImpl implements GroupsService {
         Group group = findGroup(directoryId, groupName);
 
         if (group == null) {
-            throw new NotFoundExceptionForGroup(groupName);
+            throw new GroupNotFoundException(groupName);
         }
 
         if (groupBean.getName() != null && !groupBean.getName().equals(group.getName())) {
@@ -141,9 +141,9 @@ public class GroupsServiceImpl implements GroupsService {
 
         try {
             return directoryManager.findGroupByName(directoryId, groupName);
-        } catch (DirectoryNotFoundException e) {
-            throw new NotFoundExceptionForDirectory(directoryId);
-        } catch (GroupNotFoundException e) {
+        } catch (com.atlassian.crowd.exception.DirectoryNotFoundException e) {
+            throw new DirectoryNotFoundException(directoryId);
+        } catch (com.atlassian.crowd.exception.GroupNotFoundException e) {
             // Ignore, will be handled differently
         } catch (OperationFailedException e) {
             throw new InternalServerErrorException(e);
@@ -162,7 +162,8 @@ public class GroupsServiceImpl implements GroupsService {
             // A permission exception should only happen if we try updating the group
             // a user in a read-only directory, so treat this as a bad request
             throw new BadRequestException(e);
-        } catch (DirectoryNotFoundException | GroupNotFoundException | OperationFailedException e) {
+        } catch (com.atlassian.crowd.exception.DirectoryNotFoundException |
+                 com.atlassian.crowd.exception.GroupNotFoundException | OperationFailedException e) {
             // At this point, we know the group exists, thus directory or group not found
             // should never happen, so if it does, treat it as an internal server error
             throw new InternalServerErrorException(e);
@@ -180,7 +181,8 @@ public class GroupsServiceImpl implements GroupsService {
             // A permission exception should only happen if we try change the name
             // of a user in a read-only directory, so treat this as a bad request
             throw new BadRequestException(e);
-        } catch (DirectoryNotFoundException | GroupNotFoundException | OperationFailedException e) {
+        } catch (com.atlassian.crowd.exception.DirectoryNotFoundException |
+                 com.atlassian.crowd.exception.GroupNotFoundException | OperationFailedException e) {
             // At this point, we know the user exists, thus directory or user not found
             // should never happen, so if it does, treat it as an internal server error
             throw new InternalServerErrorException(e);
