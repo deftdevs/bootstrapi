@@ -228,12 +228,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.atlassian.crowd</groupId>
-            <artifactId>crowd-test-utils</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>com.atlassian.plugins</groupId>
             <artifactId>atlassian-plugins-osgi-testrunner</artifactId>
             <scope>test</scope>
