@@ -80,7 +80,7 @@
         <atlassian.amps.version>9.2.6</atlassian.amps.version>
         <atlassian.platform.version>6.5.40</atlassian.platform.version>
         <atlassian.plugins-osgi-testrunner.version>3.0.0-m01</atlassian.plugins-osgi-testrunner.version>
-        <atlassian.spring-scanner.version>2.2.6</atlassian.spring-scanner.version>
+        <atlassian.spring-scanner.version>3.0.4</atlassian.spring-scanner.version>
         <jacoco.maven-plugin.version>0.8.12</jacoco.maven-plugin.version>
         <lombok.version>1.18.36</lombok.version>
         <maven.compiler-plugin.version>3.14.0</maven.compiler-plugin.version>
