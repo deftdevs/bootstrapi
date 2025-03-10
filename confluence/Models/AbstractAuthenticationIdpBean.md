@@ -6,6 +6,7 @@
 | **id** | **Long** |  | [optional] [default to null] |
 | **name** | **String** |  | [optional] [default to null] |
 | **enabled** | **Boolean** |  | [optional] [default to null] |
+| **enabledForJsm** | **Boolean** |  | [optional] [default to null] |
 | **url** | **String** |  | [optional] [default to null] |
 | **enableRememberMe** | **Boolean** |  | [optional] [default to null] |
 | **buttonText** | **String** |  | [optional] [default to null] |
