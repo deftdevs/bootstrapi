@@ -1,4 +1,4 @@
-package com.deftdevs.bootstrapi.confluence.service;
+package com.deftdevs.bootstrapi.commons.service;
 
 import com.atlassian.applinks.api.ApplicationId;
 import com.atlassian.applinks.api.ApplicationLink;
@@ -20,20 +20,16 @@ import com.atlassian.applinks.spi.link.MutableApplicationLink;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
 import com.atlassian.applinks.spi.manifest.ManifestNotFoundException;
 import com.atlassian.applinks.spi.util.TypeAccessor;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
+import com.deftdevs.bootstrapi.commons.helper.DefaultAuthenticationScenario;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
+import com.deftdevs.bootstrapi.commons.model.util.ApplicationLinkBeanUtil;
 import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
-import com.deftdevs.bootstrapi.confluence.model.DefaultAuthenticationScenario;
-import com.deftdevs.bootstrapi.confluence.model.util.ApplicationLinkBeanUtil;
 import org.apache.commons.lang3.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import java.net.URI;
 import java.util.List;
 import java.util.Map;
@@ -43,25 +39,25 @@ import java.util.stream.StreamSupport;
 
 import static com.atlassian.applinks.internal.status.error.ApplinkErrorType.CONNECTION_REFUSED;
 import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus.*;
-import static com.deftdevs.bootstrapi.confluence.model.util.ApplicationLinkBeanUtil.toApplicationLinkBean;
 
-@Component
-@ExportAsService(ApplicationLinksService.class)
-public class ApplicationLinkServiceImpl implements ApplicationLinksService {
+public class DefaultApplicationLinksServiceImpl implements ApplicationLinksService {
 
-    private static final Logger log = LoggerFactory.getLogger(ApplicationLinkServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(DefaultApplicationLinksServiceImpl.class);
 
     private final MutatingApplicationLinkService mutatingApplicationLinkService;
-    private final TypeAccessor typeAccessor;
+
     private final ApplinkStatusService applinkStatusService;
 
-    @Inject
-    public ApplicationLinkServiceImpl(@ComponentImport MutatingApplicationLinkService mutatingApplicationLinkService,
-                                      @ComponentImport TypeAccessor typeAccessor,
-                                      @ComponentImport ApplinkStatusService applinkStatusService) {
+    private final TypeAccessor typeAccessor;
+
+    public DefaultApplicationLinksServiceImpl(
+            final MutatingApplicationLinkService mutatingApplicationLinkService,
+            final ApplinkStatusService applinkStatusService,
+            final TypeAccessor typeAccessor) {
+
         this.mutatingApplicationLinkService = mutatingApplicationLinkService;
-        this.typeAccessor = typeAccessor;
         this.applinkStatusService = applinkStatusService;
+        this.typeAccessor = typeAccessor;
     }
 
     @Override
@@ -218,7 +214,7 @@ public class ApplicationLinkServiceImpl implements ApplicationLinksService {
 
     private ApplicationLinkBean getApplicationLinkBeanWithStatus(ApplicationLink applicationLink) {
 
-        ApplicationLinkBean applicationLinkBean = toApplicationLinkBean(applicationLink);
+        ApplicationLinkBean applicationLinkBean = ApplicationLinkBeanUtil.toApplicationLinkBean(applicationLink);
 
         try {
             ApplinkStatus applinkStatus = applinkStatusService.getApplinkStatus(applicationLink.getId());

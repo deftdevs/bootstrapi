@@ -1,4 +1,4 @@
-package com.deftdevs.bootstrapi.confluence.service;
+package com.deftdevs.bootstrapi.commons.service;
 
 import com.atlassian.applinks.api.ApplicationId;
 import com.atlassian.applinks.api.ApplicationLink;
@@ -16,14 +16,14 @@ import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
 import com.atlassian.applinks.spi.manifest.ManifestNotFoundException;
 import com.atlassian.applinks.spi.util.TypeAccessor;
-import com.atlassian.confluence.settings.setup.DefaultApplicationLink;
-import com.atlassian.confluence.settings.setup.DefaultApplicationType;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
+import com.deftdevs.bootstrapi.commons.helper.DefaultApplicationLink;
+import com.deftdevs.bootstrapi.commons.helper.DefaultApplicationType;
+import com.deftdevs.bootstrapi.commons.helper.DefaultAuthenticationScenario;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
-import com.deftdevs.bootstrapi.confluence.model.DefaultAuthenticationScenario;
-import com.deftdevs.bootstrapi.confluence.model.util.ApplicationLinkBeanUtil;
+import com.deftdevs.bootstrapi.commons.model.util.ApplicationLinkBeanUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -32,8 +32,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
 import java.util.Collections;
+import java.util.List;
 import java.util.UUID;
 
 import static com.atlassian.applinks.internal.common.status.oauth.OAuthConfig.createDefaultOAuthConfig;
@@ -47,7 +47,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class ApplicationLinkServiceTest {
+class DefaultApplicationLinkServiceTest {
 
     @Mock
     private MutatingApplicationLinkService mutatingApplicationLinkService;
@@ -58,11 +58,11 @@ class ApplicationLinkServiceTest {
     @Mock
     private ApplinkStatusService applinkStatusService;
 
-    private ApplicationLinkServiceImpl applicationLinkService;
+    private DefaultApplicationLinksServiceImpl applicationLinkService;
 
     @BeforeEach
     public void setup() {
-        applicationLinkService = new ApplicationLinkServiceImpl(mutatingApplicationLinkService, typeAccessor, applinkStatusService);
+        applicationLinkService = new DefaultApplicationLinksServiceImpl(mutatingApplicationLinkService, applinkStatusService, typeAccessor);
     }
 
     @Test
@@ -138,7 +138,7 @@ class ApplicationLinkServiceTest {
         ApplicationLink applicationLink = createApplicationLink();
         ApplicationLinkBean applicationLinkBean = createApplicationLinkBeanUpdate();
 
-        ApplicationLinkServiceImpl spyApplicationLinkService = spy(applicationLinkService);
+        DefaultApplicationLinksServiceImpl spyApplicationLinkService = spy(applicationLinkService);
         doReturn(applicationLink.getType()).when(spyApplicationLinkService).buildApplicationType(any());
 
         doReturn(applicationLink).when(mutatingApplicationLinkService).getApplicationLink(any());

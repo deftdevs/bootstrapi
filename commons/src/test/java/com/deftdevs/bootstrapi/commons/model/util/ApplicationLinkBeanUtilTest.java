@@ -1,7 +1,5 @@
-package com.deftdevs.bootstrapi.jira.model.util;
+package com.deftdevs.bootstrapi.commons.model.util;
 
-import atlassian.settings.setup.DefaultApplicationLink;
-import atlassian.settings.setup.DefaultApplicationType;
 import com.atlassian.applinks.api.ApplicationId;
 import com.atlassian.applinks.api.ApplicationLink;
 import com.atlassian.applinks.api.ApplicationType;
@@ -13,6 +11,8 @@ import com.atlassian.applinks.api.application.fecru.FishEyeCrucibleApplicationTy
 import com.atlassian.applinks.api.application.jira.JiraApplicationType;
 import com.atlassian.applinks.api.application.refapp.RefAppApplicationType;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
+import com.deftdevs.bootstrapi.commons.helper.DefaultApplicationLink;
+import com.deftdevs.bootstrapi.commons.helper.DefaultApplicationType;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
 import org.apache.commons.lang3.NotImplementedException;
@@ -37,7 +37,7 @@ class ApplicationLinkBeanUtilTest {
         final URI rpcUri = new URI("http://rpc.example.com");
         final ApplicationLink applicationLink = new DefaultApplicationLink(
                 applicationId, new DefaultApplicationType(), "test", displayUri, rpcUri, false, false);
-        final ApplicationLinkBean bean =ApplicationLinkBeanUtil.toApplicationLinkBean(applicationLink);
+        final ApplicationLinkBean bean = ApplicationLinkBeanUtil.toApplicationLinkBean(applicationLink);
 
         assertNotNull(bean);
         assertEquals(bean.getName(), applicationLink.getName());
@@ -47,7 +47,7 @@ class ApplicationLinkBeanUtilTest {
     }
 
     @Test
-    void testToApplicationLinkDetails() {
+    void testToApplicationLinkDetails() throws Exception {
         final ApplicationLinkBean bean = ApplicationLinkBean.EXAMPLE_1;
         final ApplicationLinkDetails linkDetails = ApplicationLinkBeanUtil.toApplicationLinkDetails(bean);
 

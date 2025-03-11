@@ -1,5 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
+import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.rest.AbstractApplicationLinksResourceImpl;
@@ -15,7 +16,9 @@ import javax.ws.rs.Path;
 public class ApplicationLinksResourceImpl extends AbstractApplicationLinksResourceImpl {
 
     @Inject
-    public ApplicationLinksResourceImpl(ApplicationLinksService applicationLinkService) {
-        super(applicationLinkService);
+    public ApplicationLinksResourceImpl(
+            final ApplicationLinksService applicationLinksService) {
+
+        super(applicationLinksService);
     }
 }

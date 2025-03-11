@@ -1,4 +1,4 @@
-package com.deftdevs.bootstrapi.crowd.settings.setup;
+package com.deftdevs.bootstrapi.commons.helper;
 
 import com.atlassian.applinks.api.application.jira.JiraApplicationType;
 

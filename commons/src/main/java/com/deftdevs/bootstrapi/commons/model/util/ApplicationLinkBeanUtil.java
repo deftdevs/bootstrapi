@@ -1,4 +1,4 @@
-package com.deftdevs.bootstrapi.jira.model.util;
+package com.deftdevs.bootstrapi.commons.model.util;
 
 import com.atlassian.applinks.api.ApplicationLink;
 import com.atlassian.applinks.api.ApplicationType;
