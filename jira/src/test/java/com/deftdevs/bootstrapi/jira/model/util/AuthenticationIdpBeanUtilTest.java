@@ -4,7 +4,7 @@ import com.atlassian.plugins.authentication.api.config.IdpConfig;
 import com.atlassian.plugins.authentication.api.config.SsoType;
 import com.atlassian.plugins.authentication.api.config.oidc.OidcConfig;
 import com.atlassian.plugins.authentication.api.config.saml.SamlConfig;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpBean;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpOidcBean;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpSamlBean;

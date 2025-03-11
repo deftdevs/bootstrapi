@@ -6,7 +6,7 @@ import com.atlassian.plugins.authentication.api.config.IdpConfig;
 import com.atlassian.plugins.authentication.api.config.IdpConfigService;
 import com.atlassian.plugins.authentication.api.config.SsoConfig;
 import com.atlassian.plugins.authentication.api.config.SsoConfigService;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpBean;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
 import com.deftdevs.bootstrapi.jira.model.util.AuthenticationIdpBeanUtil;

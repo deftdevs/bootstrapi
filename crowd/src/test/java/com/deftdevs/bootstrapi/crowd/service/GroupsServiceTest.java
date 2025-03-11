@@ -6,9 +6,9 @@ import com.atlassian.crowd.manager.directory.DirectoryPermissionException;
 import com.atlassian.crowd.model.group.Group;
 import com.atlassian.crowd.model.group.GroupTemplate;
 import com.atlassian.crowd.model.group.ImmutableGroup;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
-import com.deftdevs.bootstrapi.crowd.exception.NotFoundExceptionForGroup;
+import com.deftdevs.bootstrapi.commons.exception.GroupNotFoundException;
 import com.deftdevs.bootstrapi.crowd.model.util.GroupBeanUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -51,7 +51,7 @@ public class GroupsServiceTest {
     public void testGetGroupNotFound() {
         final String groupName = "not_found";
 
-        assertThrows(NotFoundExceptionForGroup.class, () -> {
+        assertThrows(GroupNotFoundException.class, () -> {
             groupsService.getGroup(0L, groupName);
         });
     }
@@ -84,7 +84,7 @@ public class GroupsServiceTest {
     }
 
     @Test
-    public void testCreateGroupAlreadyExists() throws DirectoryNotFoundException, OperationFailedException, GroupNotFoundException {
+    public void testCreateGroupAlreadyExists() throws DirectoryNotFoundException, OperationFailedException, com.atlassian.crowd.exception.GroupNotFoundException {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
@@ -96,7 +96,7 @@ public class GroupsServiceTest {
     }
 
     @Test
-    public void testCreateGroupNoName() throws DirectoryNotFoundException, OperationFailedException, GroupNotFoundException {
+    public void testCreateGroupNoName() throws DirectoryNotFoundException, OperationFailedException, com.atlassian.crowd.exception.GroupNotFoundException {
         final Group group = getTestGroup();
 
         final GroupBean groupBean = GroupBeanUtil.toGroupBean(group);
@@ -135,7 +135,7 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         final GroupBean groupBean = GroupBeanUtil.toGroupBean(group);
 
-        assertThrows(NotFoundExceptionForGroup.class, () -> {
+        assertThrows(GroupNotFoundException.class, () -> {
             groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupBean);
         });
     }
@@ -203,7 +203,7 @@ public class GroupsServiceTest {
     // because these cases won't happen anymore after a group has been found by its name.
 
     @Test
-    public void testGetGroupDirectoryNotFoundException() throws DirectoryNotFoundException, OperationFailedException, GroupNotFoundException {
+    public void testGetGroupDirectoryNotFoundException() throws DirectoryNotFoundException, OperationFailedException, com.atlassian.crowd.exception.GroupNotFoundException {
         final Group group = getTestGroup();
         doThrow(new DirectoryNotFoundException(group.getDirectoryId())).when(directoryManager).findGroupByName(anyLong(), anyString());
 
@@ -213,7 +213,7 @@ public class GroupsServiceTest {
     }
 
     @Test
-    public void testGetGroupOperationFailedException() throws DirectoryNotFoundException, OperationFailedException, GroupNotFoundException {
+    public void testGetGroupOperationFailedException() throws DirectoryNotFoundException, OperationFailedException, com.atlassian.crowd.exception.GroupNotFoundException {
         final Group group = getTestGroup();
         doThrow(new OperationFailedException()).when(directoryManager).findGroupByName(anyLong(), anyString());
 
@@ -319,7 +319,7 @@ public class GroupsServiceTest {
         final GroupBean groupBean = GroupBeanUtil.toGroupBean(group);
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        doThrow(new GroupNotFoundException(group.getName())).when(directoryManager).updateGroup(anyLong(), any());
+        doThrow(new com.atlassian.crowd.exception.GroupNotFoundException(group.getName())).when(directoryManager).updateGroup(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
             groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupBean);

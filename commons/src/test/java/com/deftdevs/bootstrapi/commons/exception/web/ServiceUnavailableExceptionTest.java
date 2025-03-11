@@ -1,11 +1,11 @@
-package com.deftdevs.bootstrapi.commons.exception;
+package com.deftdevs.bootstrapi.commons.exception.web;
 
 import com.deftdevs.bootstrapi.commons.junit.AbstractExceptionTest;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;
 
-import static com.deftdevs.bootstrapi.commons.exception.ServiceUnavailableException.HEADER_RETRY_AFTER;
+import static com.deftdevs.bootstrapi.commons.exception.web.ServiceUnavailableException.HEADER_RETRY_AFTER;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 

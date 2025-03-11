@@ -1,6 +1,6 @@
-package com.deftdevs.bootstrapi.commons.exception.mapper;
+package com.deftdevs.bootstrapi.commons.exception.web.mapper;
 
-import com.deftdevs.bootstrapi.commons.exception.NotFoundException;
+import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import org.junit.jupiter.api.Test;
 

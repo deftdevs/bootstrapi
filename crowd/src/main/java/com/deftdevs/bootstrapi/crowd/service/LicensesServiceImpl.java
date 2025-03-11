@@ -5,7 +5,7 @@ import com.atlassian.crowd.manager.license.CrowdLicenseManagerException;
 import com.atlassian.extras.api.crowd.CrowdLicense;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 

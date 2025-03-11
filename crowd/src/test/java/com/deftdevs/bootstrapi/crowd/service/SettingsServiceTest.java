@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.property.PropertyManager;
 import com.atlassian.crowd.manager.property.PropertyManagerException;
-import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
+import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

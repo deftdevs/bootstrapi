@@ -4,8 +4,8 @@ import com.atlassian.crowd.embedded.api.PasswordCredential;
 import com.atlassian.crowd.exception.OperationFailedException;
 import com.atlassian.crowd.manager.application.DefaultGroupMembershipService;
 import com.atlassian.crowd.model.application.*;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
-import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
 
 import javax.annotation.Nonnull;

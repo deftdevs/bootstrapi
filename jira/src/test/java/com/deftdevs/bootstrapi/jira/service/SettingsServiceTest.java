@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.atlassian.jira.web.action.admin.EditAnnouncementBanner;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
 import com.deftdevs.bootstrapi.commons.model.SettingsSecurityBean;
 import com.deftdevs.bootstrapi.jira.model.SettingsBannerBean;

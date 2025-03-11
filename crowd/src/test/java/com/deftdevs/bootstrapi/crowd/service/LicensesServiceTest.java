@@ -6,7 +6,7 @@ import com.atlassian.extras.api.LicenseType;
 import com.atlassian.extras.api.Organisation;
 import com.atlassian.extras.api.Product;
 import com.atlassian.extras.api.crowd.CrowdLicense;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

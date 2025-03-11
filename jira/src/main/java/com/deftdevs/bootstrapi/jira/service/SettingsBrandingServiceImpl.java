@@ -15,7 +15,7 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import com.google.common.base.Suppliers;
-import com.deftdevs.bootstrapi.commons.exception.InternalServerErrorException;
+import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsBrandingService;
 import com.deftdevs.bootstrapi.jira.model.util.SettingsBrandingColorSchemeBeanUtil;

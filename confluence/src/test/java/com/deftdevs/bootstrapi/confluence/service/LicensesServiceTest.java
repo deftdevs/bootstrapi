@@ -3,7 +3,7 @@ package com.deftdevs.bootstrapi.confluence.service;
 import com.atlassian.confluence.settings.setup.DefaultSingleProductLicenseDetailsView;
 import com.atlassian.sal.api.i18n.InvalidOperationException;
 import com.atlassian.sal.api.license.LicenseHandler;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

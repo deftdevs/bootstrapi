@@ -18,7 +18,7 @@ import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
 import com.atlassian.applinks.spi.manifest.ManifestNotFoundException;
 import com.atlassian.applinks.spi.util.TypeAccessor;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType;

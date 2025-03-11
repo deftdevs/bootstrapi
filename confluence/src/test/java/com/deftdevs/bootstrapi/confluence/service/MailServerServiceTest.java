@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.mail.MailException;
 import com.atlassian.mail.server.*;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
 import com.deftdevs.bootstrapi.confluence.model.util.MailServerPopBeanUtil;

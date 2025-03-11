@@ -5,7 +5,7 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.i18n.InvalidOperationException;
 import com.atlassian.sal.api.license.LicenseHandler;
 import com.atlassian.sal.api.license.SingleProductLicenseDetailsView;
-import com.deftdevs.bootstrapi.commons.exception.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 import com.deftdevs.bootstrapi.confluence.model.util.LicenseBeanUtil;
