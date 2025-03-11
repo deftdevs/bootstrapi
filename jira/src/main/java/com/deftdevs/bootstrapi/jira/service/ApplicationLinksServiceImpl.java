@@ -1,4 +1,4 @@
-package com.deftdevs.bootstrapi.crowd.service;
+package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.applinks.core.ApplinkStatusService;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;

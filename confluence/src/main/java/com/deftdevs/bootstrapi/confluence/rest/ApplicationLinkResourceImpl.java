@@ -16,7 +16,9 @@ import javax.ws.rs.Path;
 public class ApplicationLinkResourceImpl extends AbstractApplicationLinkResourceImpl {
 
     @Inject
-    public ApplicationLinkResourceImpl(ApplicationLinksService applicationLinkService) {
-        super(applicationLinkService);
+    public ApplicationLinkResourceImpl(
+            final ApplicationLinksService applicationLinksService) {
+
+        super(applicationLinksService);
     }
 }

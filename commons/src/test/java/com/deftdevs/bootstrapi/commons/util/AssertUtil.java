@@ -1,4 +1,4 @@
-package com.deftdevs.bootstrapi.crowd.util;
+package com.deftdevs.bootstrapi.commons.util;
 
 import org.junit.jupiter.api.Assertions;
 

@@ -1,4 +1,4 @@
-package com.deftdevs.bootstrapi.crowd.settings.setup;
+package com.deftdevs.bootstrapi.commons.helper;
 
 import com.atlassian.applinks.api.ApplicationId;
 import com.atlassian.applinks.api.ApplicationLink;
@@ -12,6 +12,10 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.net.URI;
+
+// TODO:
+// This class could also be replaced by:
+// com.atlassian.applinks.core.link.DefaultApplicationLink
 
 @Data
 @NoArgsConstructor

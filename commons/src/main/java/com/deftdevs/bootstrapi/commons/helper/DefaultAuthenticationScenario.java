@@ -1,4 +1,4 @@
-package com.deftdevs.bootstrapi.crowd.model;
+package com.deftdevs.bootstrapi.commons.helper;
 
 import com.atlassian.applinks.spi.auth.AuthenticationScenario;
 
@@ -6,6 +6,7 @@ import com.atlassian.applinks.spi.auth.AuthenticationScenario;
  * The type Default authentication scenario.
  */
 public class DefaultAuthenticationScenario implements AuthenticationScenario {
+
     @Override
     public boolean isCommonUserBase() {
         return true;

@@ -1,6 +1,5 @@
-package com.deftdevs.bootstrapi.confluence.model.type;
+package com.deftdevs.bootstrapi.commons.helper;
 
-import com.deftdevs.bootstrapi.confluence.model.DefaultAuthenticationScenario;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
