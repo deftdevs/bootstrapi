@@ -1,4 +1,4 @@
-package com.deftdevs.bootstrapi.commons.helper;
+package com.deftdevs.bootstrapi.commons.types;
 
 import com.atlassian.applinks.api.ApplicationId;
 import com.atlassian.applinks.api.ApplicationLink;

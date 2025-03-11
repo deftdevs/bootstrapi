@@ -10,11 +10,12 @@ import com.atlassian.applinks.api.application.crowd.CrowdApplicationType;
 import com.atlassian.applinks.api.application.fecru.FishEyeCrucibleApplicationType;
 import com.atlassian.applinks.api.application.jira.JiraApplicationType;
 import com.atlassian.applinks.api.application.refapp.RefAppApplicationType;
+import com.atlassian.applinks.internal.common.status.oauth.OAuthConfig;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
-import com.deftdevs.bootstrapi.commons.helper.DefaultApplicationLink;
-import com.deftdevs.bootstrapi.commons.helper.DefaultApplicationType;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
+import com.deftdevs.bootstrapi.commons.types.DefaultApplicationLink;
+import com.deftdevs.bootstrapi.commons.types.DefaultApplicationType;
 import org.apache.commons.lang3.NotImplementedException;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -56,6 +57,42 @@ class ApplicationLinkBeanUtilTest {
         assertEquals(bean.getDisplayUrl(), linkDetails.getDisplayUrl());
         assertEquals(bean.getRpcUrl(), linkDetails.getRpcUrl());
         assertEquals(bean.isPrimary(), linkDetails.isPrimary());
+    }
+
+    @Test
+    void testToApplicationLinkAuthTypeDisabled() {
+        assertEquals(ApplicationLinkBean.ApplicationLinkAuthType.DISABLED,
+                ApplicationLinkBeanUtil.toApplicationLinkAuthType(OAuthConfig.createDisabledConfig()));
+    }
+
+    @Test
+    void testToApplicationLinkAuthTypeOAuth() {
+        assertEquals(ApplicationLinkBean.ApplicationLinkAuthType.OAUTH,
+                ApplicationLinkBeanUtil.toApplicationLinkAuthType(OAuthConfig.createDefaultOAuthConfig()));
+    }
+
+    @Test
+    void testToApplicationLinkAuthTypeOAuthImpersonation() {
+        assertEquals(ApplicationLinkBean.ApplicationLinkAuthType.OAUTH_IMPERSONATION,
+                ApplicationLinkBeanUtil.toApplicationLinkAuthType(OAuthConfig.createOAuthWithImpersonationConfig()));
+    }
+
+    @Test
+    void testToOAuthConfigDisabled() {
+        assertEquals(OAuthConfig.createDisabledConfig(),
+                ApplicationLinkBeanUtil.toOAuthConfig(ApplicationLinkBean.ApplicationLinkAuthType.DISABLED));
+    }
+
+    @Test
+    void testToOAuthConfigOAuth() {
+        assertEquals(OAuthConfig.createDefaultOAuthConfig(),
+                ApplicationLinkBeanUtil.toOAuthConfig(ApplicationLinkBean.ApplicationLinkAuthType.OAUTH));
+    }
+
+    @Test
+    void testToOAuthConfigOAuthWithImpersonation() {
+        assertEquals(OAuthConfig.createOAuthWithImpersonationConfig(),
+                ApplicationLinkBeanUtil.toOAuthConfig(ApplicationLinkBean.ApplicationLinkAuthType.OAUTH_IMPERSONATION));
     }
 
     @Test
