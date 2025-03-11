@@ -13,6 +13,14 @@ public class NotFoundException extends WebApplicationException {
         super(new Exception(message), STATUS);
     }
 
+    public NotFoundException(String entity, String name) {
+        this(String.format("%s with name '%s' could not be found", entity, name));
+    }
+
+    public NotFoundException(String entity, long id) {
+        this(String.format("%s with ID '%d' could not be found", entity, id));
+    }
+
     public NotFoundException(Throwable cause) {
         super(cause, STATUS);
     }

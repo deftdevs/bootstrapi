@@ -6,22 +6,24 @@ import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
 @SuppressWarnings("java:S110")
 public class DirectoryNotFoundException extends NotFoundException {
 
-    public DirectoryNotFoundException(
-            final AbstractDirectoryBean directoryBean) {
-
-        super(directoryBean.getName());
-    }
+    public static final String ENTITY_NAME = "Directory";
 
     public DirectoryNotFoundException(
             final String name) {
 
-        super(String.format("Directory with name '%s' could not be found", name));
+        super(ENTITY_NAME, name);
     }
 
     public DirectoryNotFoundException(
             final long id) {
 
-        super(String.format("Directory with id '%d' could not be found", id));
+        super(ENTITY_NAME, id);
+    }
+
+    public DirectoryNotFoundException(
+            final AbstractDirectoryBean directoryBean) {
+
+        this(directoryBean.getName());
     }
 
 }

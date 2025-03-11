@@ -6,16 +6,24 @@ import com.deftdevs.bootstrapi.commons.model.GroupBean;
 @SuppressWarnings("java:S110")
 public class GroupNotFoundException extends NotFoundException {
 
-    public GroupNotFoundException(
-            final GroupBean groupBean) {
-
-        super(groupBean.getName());
-    }
+    public static final String ENTITY_NAME = "Group";
 
     public GroupNotFoundException(
             final String name) {
 
-        super(String.format("Group with name '%s' could not be found", name));
+        super(ENTITY_NAME, name);
+    }
+
+    public GroupNotFoundException(
+            final long id) {
+
+        super(ENTITY_NAME, id);
+    }
+
+    public GroupNotFoundException(
+            final GroupBean groupBean) {
+
+        this(groupBean.getName());
     }
 
 }
