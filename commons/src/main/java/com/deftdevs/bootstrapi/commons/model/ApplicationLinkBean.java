@@ -24,13 +24,19 @@ public class ApplicationLinkBean {
         BITBUCKET,
         CONFLUENCE,
         FISHEYE,
-        CROWD
+        CROWD,
+    }
+
+    public enum ApplicationLinkAuthType {
+        OAUTH,
+        OAUTH_IMPERSONATION,
+        DISABLED,
     }
 
     public enum ApplicationLinkStatus {
         AVAILABLE,
         UNAVAILABLE,
-        CONFIGURATION_ERROR
+        CONFIGURATION_ERROR,
     }
 
     @XmlElement
@@ -53,16 +59,16 @@ public class ApplicationLinkBean {
     private URI rpcUrl;
 
     @XmlElement
+    private ApplicationLinkAuthType outgoingAuthType;
+
+    @XmlElement
+    private ApplicationLinkAuthType incomingAuthType;
+
+    @XmlElement
     private boolean primary;
 
     @XmlElement
     private ApplicationLinkStatus status;
-
-    @XmlElement
-    private String username;
-
-    @XmlElement
-    private String password;
 
     // Example instances for documentation and tests
 
@@ -74,10 +80,10 @@ public class ApplicationLinkBean {
         EXAMPLE_1.setName("Example");
         EXAMPLE_1.setDisplayUrl(URI.create("http://example.com"));
         EXAMPLE_1.setRpcUrl(URI.create("http://rpc.example.com"));
+        EXAMPLE_1.setOutgoingAuthType(ApplicationLinkAuthType.OAUTH);
+        EXAMPLE_1.setIncomingAuthType(ApplicationLinkAuthType.OAUTH);
         EXAMPLE_1.setPrimary(true);
         EXAMPLE_1.setType(ApplicationLinkType.JIRA);
-        EXAMPLE_1.setUsername("username");
-        EXAMPLE_1.setPassword("p455w0rd");
     }
 
 }

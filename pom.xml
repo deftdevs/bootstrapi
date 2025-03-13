@@ -80,6 +80,8 @@
         <atlassian.amps.version>9.2.6</atlassian.amps.version>
         <atlassian.platform.version>6.5.40</atlassian.platform.version>
         <atlassian.applinks-plugin.version>9.2.5</atlassian.applinks-plugin.version>
+        <atlassian.authentication.version>4.3.11</atlassian.authentication.version>
+        <atlassian.oauth.version>5.0.14</atlassian.oauth.version>
         <atlassian.sal.version>5.2.1</atlassian.sal.version>
         <atlassian.plugins-osgi-testrunner.version>2.0.9</atlassian.plugins-osgi-testrunner.version>
         <atlassian.spring-scanner.version>5.1.0</atlassian.spring-scanner.version>
@@ -151,6 +153,30 @@
                 <groupId>com.atlassian.applinks</groupId>
                 <artifactId>applinks-plugin</artifactId>
                 <version>${atlassian.applinks-plugin.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atlassian.plugins.authentication</groupId>
+                <artifactId>atlassian-authentication-plugin</artifactId>
+                <version>${atlassian.authentication.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atlassian.oauth</groupId>
+                <artifactId>atlassian-oauth-api</artifactId>
+                <version>${atlassian.oauth.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atlassian.oauth</groupId>
+                <artifactId>atlassian-oauth-service-provider-spi</artifactId>
+                <version>${atlassian.oauth.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.atlassian.oauth</groupId>
+                <artifactId>atlassian-oauth-consumer-spi</artifactId>
+                <version>${atlassian.oauth.version}</version>
             </dependency>
 
             <dependency>

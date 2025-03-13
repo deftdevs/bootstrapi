@@ -125,8 +125,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.atlassian.applinks</groupId>
-            <artifactId>applinks-plugin</artifactId>
+            <groupId>com.atlassian.confluence</groupId>
+            <artifactId>confluence-rest-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -145,14 +145,38 @@
         </dependency>
 
         <dependency>
-            <groupId>com.atlassian.confluence</groupId>
-            <artifactId>confluence-rest-api</artifactId>
+            <groupId>com.atlassian.crowd</groupId>
+            <artifactId>crowd-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>com.atlassian.crowd</groupId>
-            <artifactId>crowd-api</artifactId>
+            <groupId>com.atlassian.plugins.authentication</groupId>
+            <artifactId>atlassian-authentication-plugin</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.oauth</groupId>
+            <artifactId>atlassian-oauth-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.oauth</groupId>
+            <artifactId>atlassian-oauth-service-provider-spi</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.oauth</groupId>
+            <artifactId>atlassian-oauth-consumer-spi</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.applinks</groupId>
+            <artifactId>applinks-plugin</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -165,12 +189,6 @@
         <dependency>
             <groupId>com.atlassian.gadgets</groupId>
             <artifactId>atlassian-gadgets-spi</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.plugins.authentication</groupId>
-            <artifactId>atlassian-authentication-plugin</artifactId>
             <scope>provided</scope>
         </dependency>
 

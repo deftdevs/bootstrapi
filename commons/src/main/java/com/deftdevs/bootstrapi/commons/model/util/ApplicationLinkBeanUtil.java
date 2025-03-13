@@ -8,7 +8,9 @@ import com.atlassian.applinks.api.application.confluence.ConfluenceApplicationTy
 import com.atlassian.applinks.api.application.crowd.CrowdApplicationType;
 import com.atlassian.applinks.api.application.fecru.FishEyeCrucibleApplicationType;
 import com.atlassian.applinks.api.application.jira.JiraApplicationType;
+import com.atlassian.applinks.internal.common.status.oauth.OAuthConfig;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
+import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
 import org.apache.commons.lang3.NotImplementedException;
@@ -23,19 +25,44 @@ public class ApplicationLinkBeanUtil {
     /**
      * Instantiates a new Application link bean.
      *
-     * @param linkDetails the link details
+     * @param applicationLink the application link
+     *
+     * @return the application link bean
      */
     @NotNull
     public static ApplicationLinkBean toApplicationLinkBean(
-            @NotNull final ApplicationLink linkDetails) {
+            @NotNull final ApplicationLink applicationLink) {
 
         final ApplicationLinkBean applicationLinkBean = new ApplicationLinkBean();
-        applicationLinkBean.setUuid(UUID.fromString(linkDetails.getId().get()));
-        applicationLinkBean.setName(linkDetails.getName());
-        applicationLinkBean.setType(getLinkTypeFromAppType(linkDetails.getType()));
-        applicationLinkBean.setDisplayUrl(linkDetails.getDisplayUrl());
-        applicationLinkBean.setRpcUrl(linkDetails.getRpcUrl());
-        applicationLinkBean.setPrimary(linkDetails.isPrimary());
+        applicationLinkBean.setUuid(UUID.fromString(applicationLink.getId().get()));
+        applicationLinkBean.setName(applicationLink.getName());
+        applicationLinkBean.setType(getLinkTypeFromAppType(applicationLink.getType()));
+        applicationLinkBean.setDisplayUrl(applicationLink.getDisplayUrl());
+        applicationLinkBean.setRpcUrl(applicationLink.getRpcUrl());
+        applicationLinkBean.setPrimary(applicationLink.isPrimary());
+        return applicationLinkBean;
+    }
+
+    /**
+     * Instantiates a new Application link bean.
+     *
+     * @param applicationLink the application link
+     * @param outgoingOAuthConfig  the outgoing OAuth config
+     * @param incomingOAuthConfig  the incoming OAuth config
+     *
+     * @return the application link bean
+     */
+    @NotNull
+    public static ApplicationLinkBean toApplicationLinkBean(
+            @NotNull final ApplicationLink applicationLink,
+            @NotNull final OAuthConfig outgoingOAuthConfig,
+            @NotNull final OAuthConfig incomingOAuthConfig,
+            @NotNull final ApplicationLinkBean.ApplicationLinkStatus applicationLinkStatus) {
+
+        final ApplicationLinkBean applicationLinkBean = toApplicationLinkBean(applicationLink);
+        applicationLinkBean.setOutgoingAuthType(toApplicationLinkAuthType(outgoingOAuthConfig));
+        applicationLinkBean.setIncomingAuthType(toApplicationLinkAuthType(incomingOAuthConfig));
+        applicationLinkBean.setStatus(applicationLinkStatus);
         return applicationLinkBean;
     }
 
@@ -54,6 +81,54 @@ public class ApplicationLinkBeanUtil {
                 .rpcUrl(applicationLinkBean.getRpcUrl())
                 .isPrimary(applicationLinkBean.isPrimary())
                 .build();
+    }
+
+    /**
+     * Create application link auth type from OAuth confi
+     *
+     * @param oAuthConfig application link auth type
+     *
+     * @return the OAuth config
+     */
+    @NotNull
+    public static ApplicationLinkBean.ApplicationLinkAuthType toApplicationLinkAuthType(
+            @NotNull final OAuthConfig oAuthConfig) {
+
+        if (!oAuthConfig.isEnabled()) {
+            return ApplicationLinkBean.ApplicationLinkAuthType.DISABLED;
+        }
+
+        if (!oAuthConfig.isTwoLoEnabled()) {
+            throw new InternalServerErrorException("ThreeLoOnlyConfig is not supported");
+        }
+
+        if (!oAuthConfig.isTwoLoImpersonationEnabled()) {
+            return ApplicationLinkBean.ApplicationLinkAuthType.OAUTH;
+        }
+
+        return ApplicationLinkBean.ApplicationLinkAuthType.OAUTH_IMPERSONATION;
+    }
+
+    /**
+     * Create OAuth config from an application link auth type
+     *
+     * @param applicationLinkAuthType application link auth type
+     *
+     * @return the OAuth config
+     */
+    @NotNull
+    public static OAuthConfig toOAuthConfig(
+            @NotNull final ApplicationLinkBean.ApplicationLinkAuthType applicationLinkAuthType) {
+
+        if (applicationLinkAuthType.equals(ApplicationLinkBean.ApplicationLinkAuthType.OAUTH)) {
+            return OAuthConfig.createDefaultOAuthConfig();
+        }
+
+        if (applicationLinkAuthType.equals(ApplicationLinkBean.ApplicationLinkAuthType.OAUTH_IMPERSONATION)) {
+            return OAuthConfig.createOAuthWithImpersonationConfig();
+        }
+
+        return OAuthConfig.createDisabledConfig();
     }
 
     /**
