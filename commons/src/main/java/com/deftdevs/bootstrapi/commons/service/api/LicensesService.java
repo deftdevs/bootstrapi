@@ -15,12 +15,20 @@ public interface LicensesService {
     List<LicenseBean> getLicenses();
 
     /**
+     * Set a list of licenses.
+     *
+     * @return the licenses
+     */
+    List<LicenseBean> setLicenses(
+            List<String> licenseKeys);
+
+    /**
      * Add a single license
      *
      * @param licenseBean the single license to set
      * @return the added license
      */
     LicenseBean addLicense(
-            @NotNull final LicenseBean licenseBean);
+            @NotNull final String licenseBean);
 
 }

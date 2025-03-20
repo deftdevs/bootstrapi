@@ -32,8 +32,9 @@ All URIs are relative to *https://<CROWD_URL>/rest/bootstrapi/1*
 *GroupApi* | [**getGroup**](Apis/GroupApi.md#getgroup) | **GET** /group | Get a group |
 *GroupApi* | [**updateGroup**](Apis/GroupApi.md#updategroup) | **PUT** /group | Update a group |
 | *GroupsApi* | [**setGroups**](Apis/GroupsApi.md#setgroups) | **PATCH** /groups | Set groups |
-| *LicensesApi* | [**addLicense**](Apis/LicensesApi.md#addlicense) | **POST** /licenses | Add a license |
-*LicensesApi* | [**getLicenses**](Apis/LicensesApi.md#getlicenses) | **GET** /licenses | Get all licenses information |
+| *LicenseApi* | [**addLicense**](Apis/LicenseApi.md#addlicense) | **POST** /license | Add a license |
+| *LicensesApi* | [**getLicenses**](Apis/LicensesApi.md#getlicenses) | **GET** /licenses | Get all licenses information |
+*LicensesApi* | [**setLicenses**](Apis/LicensesApi.md#setlicenses) | **PUT** /licenses | Set a list of licenses |
 | *MailServerApi* | [**getMailServerSmtp**](Apis/MailServerApi.md#getmailserversmtp) | **GET** /mail-server/smtp | Get the default SMTP mail server |
 *MailServerApi* | [**setMailServerSmtp**](Apis/MailServerApi.md#setmailserversmtp) | **PUT** /mail-server/smtp | Set the default SMTP mail server |
 | *MailTemplatesApi* | [**getMailTemplates**](Apis/MailTemplatesApi.md#getmailtemplates) | **GET** /mail-templates | Get the mail templates |

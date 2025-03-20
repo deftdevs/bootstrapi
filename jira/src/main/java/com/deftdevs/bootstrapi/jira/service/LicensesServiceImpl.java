@@ -9,7 +9,6 @@ import com.deftdevs.bootstrapi.jira.model.util.LicenseBeanUtil;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -34,25 +33,21 @@ public class LicensesServiceImpl implements LicensesService {
                 .collect(Collectors.toList());
     }
 
+    @Override
     public List<LicenseBean> setLicenses(
-            @NotNull final List<LicenseBean> licenseBeans) {
-
-        // clear all licenses first
-        licenseManager.removeLicenses(licenseManager.getLicenses());
+            final List<String> licenseKeys) {
 
         // set all licenses and fire event(s)
-        licenseBeans.stream()
-                .map(LicenseBean::getKey)
-                .forEach(licenseManager::setLicense);
+        licenseManager.setLicenses(licenseKeys);
 
         return getLicenses();
     }
 
     @Override
     public LicenseBean addLicense(
-            @NotNull final LicenseBean licenseBean) {
+            final String license) {
 
-        return LicenseBeanUtil.toLicenseBean(licenseManager.setLicense(licenseBean.getKey()));
+        return LicenseBeanUtil.toLicenseBean(licenseManager.setLicense(license));
     }
 
 }

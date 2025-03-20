@@ -25,8 +25,9 @@ All URIs are relative to *https://<JIRA_URL>/rest/bootstrapi/1*
 *DirectoryApi* | [**deleteDirectory**](Apis/DirectoryApi.md#deletedirectory) | **DELETE** /directory/{id} | Delete a user directory |
 *DirectoryApi* | [**getDirectory**](Apis/DirectoryApi.md#getdirectory) | **GET** /directory/{id} | Get a user directory |
 *DirectoryApi* | [**updateDirectory**](Apis/DirectoryApi.md#updatedirectory) | **PUT** /directory/{id} | Update a user directory |
-| *LicensesApi* | [**addLicense**](Apis/LicensesApi.md#addlicense) | **POST** /licenses | Add a license |
-*LicensesApi* | [**getLicenses**](Apis/LicensesApi.md#getlicenses) | **GET** /licenses | Get all licenses information |
+| *LicenseApi* | [**addLicense**](Apis/LicenseApi.md#addlicense) | **POST** /license | Add a license |
+| *LicensesApi* | [**getLicenses**](Apis/LicensesApi.md#getlicenses) | **GET** /licenses | Get all licenses information |
+*LicensesApi* | [**setLicenses**](Apis/LicensesApi.md#setlicenses) | **PUT** /licenses | Set a list of licenses |
 | *MailServerApi* | [**getMailServerPop**](Apis/MailServerApi.md#getmailserverpop) | **GET** /mail-server/pop | Get the default POP mail server |
 *MailServerApi* | [**getMailServerSmtp**](Apis/MailServerApi.md#getmailserversmtp) | **GET** /mail-server/smtp | Get the default SMTP mail server |
 *MailServerApi* | [**setMailServerPop**](Apis/MailServerApi.md#setmailserverpop) | **PUT** /mail-server/pop | Set the default POP mail server |

@@ -53,21 +53,32 @@ class LicensesServiceTest {
 
     @Test
     void testSetLicenses() {
-        final LicenseBean licenseBean = new LicenseBean();
-
         final LicensesServiceImpl spy = spy(licensesService);
+        doReturn(Collections.emptyList()).when(spy).getLicenses();
 
-        final Iterable<? extends LicenseDetails> existingLicenses = Collections.emptyList();
-        doReturn(existingLicenses).when(licenseManager).getLicenses();
-
-        spy.setLicenses(Collections.singletonList(licenseBean));
-
-        // make sure that all licenses are deleted first
-        verify(licenseManager).removeLicenses(existingLicenses);
+        final List<String> licenses = List.of("ABC...", "DEF...");
+        spy.setLicenses(licenses);
         // make sure that license is added
-        verify(licenseManager).setLicense(any());
+        verify(licenseManager).setLicenses(licenses);
         // Make sure that licenses are returned from getter
         verify(spy).getLicenses();
+    }
+
+    @Test
+    void testAddLicense() {
+        final LicensedApplications licensedApplications = mock(LicensedApplications.class);
+        doReturn(Collections.singleton(ApplicationKey.valueOf("jira"))).when(licensedApplications).getKeys();
+
+        final LicenseDetails licenseDetails = mock(LicenseDetails.class);
+        doReturn(licensedApplications).when(licenseDetails).getLicensedApplications();
+        doReturn(TESTING).when(licenseDetails).getLicenseType();
+
+        final LicensesServiceImpl spy = spy(licensesService);
+        doReturn(licenseDetails).when(licenseManager).setLicense(any());
+
+        spy.addLicense("ABC...");
+        // make sure that license is added
+        verify(licenseManager).setLicense(any());
     }
 
 }

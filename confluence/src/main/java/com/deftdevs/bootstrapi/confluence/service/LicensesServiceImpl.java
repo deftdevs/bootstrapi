@@ -6,6 +6,7 @@ import com.atlassian.sal.api.i18n.InvalidOperationException;
 import com.atlassian.sal.api.license.LicenseHandler;
 import com.atlassian.sal.api.license.SingleProductLicenseDetailsView;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 import com.deftdevs.bootstrapi.confluence.model.util.LicenseBeanUtil;
@@ -30,18 +31,39 @@ public class LicensesServiceImpl implements LicensesService {
 
     @Override
     public List<LicenseBean> getLicenses() {
-        SingleProductLicenseDetailsView confluenceLicenseView = licenseHandler.getProductLicenseDetails(DEFAULT_LICENSE_REGISTRY_KEY);
+        final SingleProductLicenseDetailsView confluenceLicenseView = licenseHandler.getProductLicenseDetails(DEFAULT_LICENSE_REGISTRY_KEY);
+
+        if (confluenceLicenseView == null) {
+            throw new InternalServerErrorException("Cannot get license details");
+        }
+
         return Collections.singletonList(LicenseBeanUtil.toLicenseBean(confluenceLicenseView));
     }
 
     @Override
-    public LicenseBean addLicense(LicenseBean licenseBean) {
+    public List<LicenseBean> setLicenses(
+            final List<String> licenseKeys) {
+
+        licenseKeys.forEach(this::addLicense);
+        return getLicenses();
+    }
+
+    @Override
+    public LicenseBean addLicense(
+            final String licenseKey) {
+
         try {
-            licenseHandler.addProductLicense(DEFAULT_LICENSE_REGISTRY_KEY, licenseBean.getKey());
+            licenseHandler.addProductLicense(DEFAULT_LICENSE_REGISTRY_KEY, licenseKey);
         } catch (InvalidOperationException e) {
             throw new BadRequestException("The new license cannot be set");
         }
-        return licenseBean;
+
+        final SingleProductLicenseDetailsView productLicenseDetails = licenseHandler.getProductLicenseDetails(DEFAULT_LICENSE_REGISTRY_KEY);
+        if (productLicenseDetails == null) {
+            throw new InternalServerErrorException("Cannot get license details");
+        }
+
+        return LicenseBeanUtil.toLicenseBean(productLicenseDetails);
     }
 
 }

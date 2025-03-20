@@ -38,7 +38,7 @@ public class LicensesServiceTest {
 
     @Test
     public void testGetLicenses() {
-        final CrowdLicense license = toMockCrowdLicense();
+        final CrowdLicense license = createMockCrowdLicense();
         doReturn(license).when(licenseManager).getLicense();
 
         final List<LicenseBean> licenseBeans = licensesService.getLicenses();
@@ -51,13 +51,26 @@ public class LicensesServiceTest {
     }
 
     @Test
+    public void testSetLicenses() throws CrowdLicenseManagerException {
+        final CrowdLicense license = createMockCrowdLicense();
+        doReturn(license).when(licenseManager).getLicense();
+        doReturn(license).when(licenseManager).storeLicense(anyString());
+
+        final String license1 = "1";
+        final String license2 = "2";
+        final List<String> licenses = List.of(license1, license2);
+        final LicensesServiceImpl spy = spy(licensesService);
+        spy.setLicenses(licenses);
+        verify(spy).addLicense(license1);
+        verify(spy).addLicense(license2);
+    }
+
+    @Test
     public void testAddLicense() throws CrowdLicenseManagerException {
-        CrowdLicense license = toMockCrowdLicense();
+        final CrowdLicense license = createMockCrowdLicense();
+        doReturn(license).when(licenseManager).storeLicense("ABC...");
 
-        doReturn(license).when(licenseManager).storeLicense(EXAMPLE_2_DEVELOPER_LICENSE.getKey());
-
-        LicenseBean licenseBean = licensesService.addLicense(EXAMPLE_2_DEVELOPER_LICENSE);
-
+        final LicenseBean licenseBean = licensesService.addLicense("ABC...");
         assertEquals(licenseBean.getDescription(), EXAMPLE_2_DEVELOPER_LICENSE.getDescription());
         assertEquals(licenseBean.getOrganization(), EXAMPLE_2_DEVELOPER_LICENSE.getOrganization());
         assertEquals(licenseBean.getType(), LicenseType.TESTING.toString());
@@ -70,11 +83,11 @@ public class LicensesServiceTest {
         doThrow(new CrowdLicenseManagerException()).when(licenseManager).storeLicense(anyString());
 
         assertThrows(BadRequestException.class, () -> {
-            licensesService.addLicense(EXAMPLE_2_DEVELOPER_LICENSE);
+            licensesService.addLicense("ABC...");
         });
     }
 
-    private CrowdLicense toMockCrowdLicense() {
+    private CrowdLicense createMockCrowdLicense() {
         CrowdLicense license = mock(CrowdLicense.class);
 
         Organisation organisation = mock(Organisation.class);

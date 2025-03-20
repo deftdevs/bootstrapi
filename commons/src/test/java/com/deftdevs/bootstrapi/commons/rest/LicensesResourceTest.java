@@ -42,15 +42,15 @@ class LicensesResourceTest {
     }
 
     @Test
-    void testAddLicense() {
-        final LicenseBean bean = LicenseBean.EXAMPLE_1;
+    void testSetLicenses() {
+        final List<String> licenses = List.of("ABC...");
+        final List<LicenseBean> licenseBeans = List.of(LicenseBean.EXAMPLE_1);
+        doReturn(licenseBeans).when(licensesService).setLicenses(licenses);
 
-        doReturn(bean).when(licensesService).addLicense(bean);
-
-        final Response response = resource.addLicense(bean);
+        final Response response = resource.setLicenses(licenses);
         assertEquals(200, response.getStatus());
-        final LicenseBean responseBean = (LicenseBean) response.getEntity();
 
-        assertEquals(bean, responseBean);
+        final List<LicenseBean> resultLicenseBeans = (List<LicenseBean>) response.getEntity();
+        assertEquals(licenseBeans, resultLicenseBeans);
     }
 }
