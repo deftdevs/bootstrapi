@@ -12,10 +12,11 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
-import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import java.util.List;
 
 public interface LicensesResource {
 
@@ -38,16 +39,16 @@ public interface LicensesResource {
     )
     Response getLicenses();
 
-    @POST
+    @PUT
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
             tags = { BootstrAPI.LICENSES },
-            summary = "Add a license",
+            summary = "Set a list of licenses",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = LicenseBean.class)),
-                            description = "Returns the added license details"
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = LicenseBean.class))),
+                            description = "Returns all license details"
                     ),
                     @ApiResponse(
                             responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
@@ -55,7 +56,7 @@ public interface LicensesResource {
                     ),
             }
     )
-    Response addLicense(
-            @NotNull final LicenseBean licenseBean);
+    Response setLicenses(
+            @NotNull final List<String> licenseKeys);
 
 }

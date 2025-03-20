@@ -17,8 +17,8 @@ import static com.atlassian.confluence.setup.ConfluenceBootstrapConstants.DEFAUL
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class LicensesServiceTest {
@@ -26,11 +26,11 @@ class LicensesServiceTest {
     @Mock
     private LicenseHandler licenseHandler;
 
-    private LicensesServiceImpl licenseService;
+    private LicensesServiceImpl licensesService;
 
     @BeforeEach
     public void setup() {
-        licenseService = new LicensesServiceImpl(licenseHandler);
+        licensesService = new LicensesServiceImpl(licenseHandler);
     }
 
     @Test
@@ -38,27 +38,41 @@ class LicensesServiceTest {
         final DefaultSingleProductLicenseDetailsView testLicense = new DefaultSingleProductLicenseDetailsView(LicenseBean.EXAMPLE_1);
         doReturn(testLicense).when(licenseHandler).getProductLicenseDetails(DEFAULT_LICENSE_REGISTRY_KEY);
 
-        final List<LicenseBean> licenses = licenseService.getLicenses();
+        final List<LicenseBean> licenses = licensesService.getLicenses();
         assertEquals(testLicense.getDescription(), licenses.iterator().next().getDescription());
     }
 
     @Test
+    public void testSetLicenses() {
+        final String license1 = "1";
+        final String license2 = "2";
+        final List<String> licenses = List.of(license1, license2);
+        final DefaultSingleProductLicenseDetailsView testLicense = new DefaultSingleProductLicenseDetailsView(LicenseBean.EXAMPLE_1);
+        doReturn(testLicense).when(licenseHandler).getProductLicenseDetails(any());
+
+        final LicensesServiceImpl spy = spy(licensesService);
+        spy.setLicenses(licenses);
+        verify(spy).addLicense(license1);
+        verify(spy).addLicense(license2);
+    }
+
+    @Test
     void testAddLicense() {
-        LicenseBean licenseBean = LicenseBean.EXAMPLE_1;
-        DefaultSingleProductLicenseDetailsView testLicense = new DefaultSingleProductLicenseDetailsView(licenseBean);
+        final LicenseBean licenseBean = LicenseBean.EXAMPLE_1;
+        final DefaultSingleProductLicenseDetailsView testLicense = new DefaultSingleProductLicenseDetailsView(licenseBean);
+        doReturn(testLicense).when(licenseHandler).getProductLicenseDetails(any());
 
-        LicenseBean updatedLicenseBean = licenseService.addLicense(licenseBean);
-
+        final LicenseBean updatedLicenseBean = licensesService.addLicense("ABC...");
         assertEquals(testLicense.getDescription(), updatedLicenseBean.getDescription());
     }
 
     @Test
     void testAddLicenseWithError() throws InvalidOperationException {
-        LicenseBean licenseBean = LicenseBean.EXAMPLE_1;
+        final LicenseBean licenseBean = LicenseBean.EXAMPLE_1;
         doThrow(new InvalidOperationException("", "")).when(licenseHandler).addProductLicense(any(), any());
 
         assertThrows(BadRequestException.class, () -> {
-            licenseService.addLicense(licenseBean);
+            licensesService.addLicense("ABC...");
         });
     }
 }

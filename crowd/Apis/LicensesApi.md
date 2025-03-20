@@ -4,34 +4,9 @@ All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**addLicense**](LicensesApi.md#addLicense) | **POST** /licenses | Add a license |
 | [**getLicenses**](LicensesApi.md#getLicenses) | **GET** /licenses | Get all licenses information |
+| [**setLicenses**](LicensesApi.md#setLicenses) | **PUT** /licenses | Set a list of licenses |
 
-
-<a name="addLicense"></a>
-# **addLicense**
-> LicenseBean addLicense(LicenseBean)
-
-Add a license
-
-### Parameters
-
-|Name | Type | Description  | Notes |
-|------------- | ------------- | ------------- | -------------|
-| **LicenseBean** | [**LicenseBean**](../Models/LicenseBean.md)|  | |
-
-### Return type
-
-[**LicenseBean**](../Models/LicenseBean.md)
-
-### Authorization
-
-[basicAuth](../README.md#basicAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
 
 <a name="getLicenses"></a>
 # **getLicenses**
@@ -55,5 +30,30 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+<a name="setLicenses"></a>
+# **setLicenses**
+> List setLicenses(request\_body)
+
+Set a list of licenses
+
+### Parameters
+
+|Name | Type | Description  | Notes |
+|------------- | ------------- | ------------- | -------------|
+| **request\_body** | [**List**](../Models/string.md)|  | |
+
+### Return type
+
+[**List**](../Models/LicenseBean.md)
+
+### Authorization
+
+[basicAuth](../README.md#basicAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 

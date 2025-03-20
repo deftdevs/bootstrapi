@@ -9,7 +9,7 @@ import java.util.Date;
 
 public class DefaultSingleProductLicenseDetailsView implements SingleProductLicenseDetailsView {
 
-    private LicenseBean licenseBean;
+    private final LicenseBean licenseBean;
 
     public DefaultSingleProductLicenseDetailsView(LicenseBean licenseBean) {
         this.licenseBean = licenseBean;

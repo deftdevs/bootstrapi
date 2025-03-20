@@ -22,9 +22,11 @@ public abstract class AbstractLicensesResourceImpl implements LicensesResource {
     }
 
     @Override
-    public Response addLicense(
-            final LicenseBean licenseBean) {
-        LicenseBean updatedLicenseBean = licensesService.addLicense(licenseBean);
-        return Response.ok(updatedLicenseBean).build();
+    public Response setLicenses(
+            final List<String> licenseKeys) {
+
+        final List<LicenseBean> setLicenseBeans = licensesService.setLicenses(licenseKeys);
+        return Response.ok(setLicenseBeans).build();
     }
+
 }
