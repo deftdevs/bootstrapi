@@ -50,7 +50,7 @@
 
     <properties>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <confluence.version>8.5.20</confluence.version>
+        <confluence.version>8.5.21</confluence.version>
         <confluence.data.version>8.5.6</confluence.data.version>
         <ajp.port>8109</ajp.port>
         <!-- other properties -->
