@@ -50,8 +50,8 @@
 
     <properties>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <confluence.version>8.5.22</confluence.version>
-        <confluence.data.version>8.5.6</confluence.data.version>
+        <confluence.version>9.2.4</confluence.version>
+        <confluence.data.version>9.2.4</confluence.data.version>
         <ajp.port>8109</ajp.port>
         <!-- other properties -->
         <confluence.ancillary.plugins.version>20.0.38</confluence.ancillary.plugins.version>
@@ -126,7 +126,7 @@
 
         <dependency>
             <groupId>com.atlassian.confluence</groupId>
-            <artifactId>confluence-rest-api</artifactId>
+            <artifactId>confluence-rest-v2-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -134,6 +134,12 @@
             <groupId>com.atlassian.confluence.plugins</groupId>
             <artifactId>confluence-lookandfeel</artifactId>
             <version>${confluence.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.core</groupId>
+            <artifactId>atlassian-core-thumbnail</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -146,7 +152,13 @@
 
         <dependency>
             <groupId>com.atlassian.crowd</groupId>
-            <artifactId>crowd-api</artifactId>
+            <artifactId>embedded-crowd-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.crowd</groupId>
+            <artifactId>embedded-crowd-core</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -177,6 +189,12 @@
         <dependency>
             <groupId>com.atlassian.applinks</groupId>
             <artifactId>applinks-plugin</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.applinks</groupId>
+            <artifactId>applinks-spi</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -313,7 +331,7 @@
                     <!-- the following version may only be adjusted, when a new home zip has been generated -->
                     <productDataVersion>${confluence.data.version}</productDataVersion>
                     <!-- in case new home zip should be generated, please add your executed steps to generated-test-resources.md -->
-                    <productDataPath>${project.basedir}/src/test/resources/generated-test-resources.zip</productDataPath>
+<!--                    <productDataPath>${project.basedir}/src/test/resources/generated-test-resources.zip</productDataPath>-->
                     <allowGoogleTracking>false</allowGoogleTracking>
                     <enableQuickReload>true</enableQuickReload>
                     <!-- See here for an explanation of default instructions: -->
