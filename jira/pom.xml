@@ -166,6 +166,13 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>com.atlassian.lookandfeel</groupId>
+            <artifactId>atlassian-look-and-feel</artifactId>
+            <version>1.6</version>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- deprecated, see https://github.com/deftdevs/bootstrapi/issues/59 -->
         <dependency>
             <groupId>com.atlassian.plugins.rest</groupId>
