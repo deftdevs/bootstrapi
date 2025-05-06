@@ -2,7 +2,7 @@ package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.UserModel;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.HttpMethod;
@@ -36,7 +36,7 @@ public abstract class AbstractUserResourceFuncTest {
         final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleModel))
                 .request(HttpMethod.PUT, exampleModel);
         assertEquals(Response.Status.OK.getStatusCode(), usersResponse.statusCode());
-        
+
         final UserModel userModel = objectMapper.readValue(usersResponse.body(), UserModel.class);
         assertEquals(exampleModel.getEmail(), userModel.getEmail());
     }
@@ -78,7 +78,7 @@ public abstract class AbstractUserResourceFuncTest {
                 .username("user")
                 .password("user")
                 .request();
-        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), usersResponse.statusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), usersResponse.statusCode());
     }
 
     @Test
@@ -88,7 +88,7 @@ public abstract class AbstractUserResourceFuncTest {
                 .username("user")
                 .password("user")
                 .request(HttpMethod.PUT, exampleModel);
-        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), usersResponse.statusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), usersResponse.statusCode());
     }
 
     protected String getUserNameQueryParam(UserModel userModel) {

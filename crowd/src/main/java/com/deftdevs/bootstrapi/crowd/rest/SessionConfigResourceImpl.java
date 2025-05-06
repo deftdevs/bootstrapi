@@ -1,10 +1,11 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
-import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
+import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 import com.deftdevs.bootstrapi.crowd.model.SessionConfigModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.SessionConfigResource;
 import com.deftdevs.bootstrapi.crowd.service.api.SessionConfigService;
 
+import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
@@ -14,6 +15,7 @@ public class SessionConfigResourceImpl implements SessionConfigResource {
 
     private final SessionConfigService sessionConfigService;
 
+    @Inject
     public SessionConfigResourceImpl(
             final SessionConfigService sessionConfigService) {
 

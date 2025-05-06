@@ -74,8 +74,7 @@ public class ServiceConfig {
     public SettingsBrandingService settingsBrandingService() {
         return new SettingsBrandingServiceImpl(
                 atlassianConfig.colourSchemeManager(),
-                atlassianConfig.siteLogoManager(),
-                atlassianConfig.faviconManager());
+                atlassianConfig.siteLogoManager());
     }
 
     @Bean

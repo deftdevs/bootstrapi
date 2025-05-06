@@ -63,15 +63,4 @@ public class ServiceConfig {
                 atlassianConfig.globalPermissionManager());
     }
 
-    @Bean
-    public SettingsBrandingService settingsBrandingService() {
-        return new SettingsBrandingServiceImpl(
-                atlassianConfig.applicationProperties(),
-                atlassianConfig.jiraAuthenticationContext(),
-                atlassianConfig.jiraHome(),
-                atlassianConfig.pluginSettingsFactory(),
-                atlassianConfig.lookAndFeelProperties(),
-                atlassianConfig.uploadService());
-    }
-
 }

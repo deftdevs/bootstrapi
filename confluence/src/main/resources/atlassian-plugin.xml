@@ -7,14 +7,6 @@
         <param name="plugin-logo">images/deftdevs.png</param>
     </plugin-info>
 
-    <resource type="i18n" name="i18n" location="deftdevs-bootstrapi-confluence-plugin"/>
-
-    <web-resource key="deftdevs-bootstrapi-confluence-web-resource" name="BootstrAPI Web Resource">
-        <dependency>com.atlassian.auiplugin:ajs</dependency>
-        <resource type="download" name="images/" location="/images"/>
-        <context>bootstrapi-confluence-plugin</context>
-    </web-resource>
-
     <rest key="deftdevs-bootstrapi-rest" name="BootstrAPI REST" path="/bootstrapi" version="1"/>
 
 </atlassian-plugin>

@@ -11,7 +11,6 @@ import com.atlassian.crowd.manager.application.DefaultGroupMembershipService;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.crowd.manager.mail.MailConfigurationService;
 import com.atlassian.crowd.manager.property.PropertyManager;
-import com.atlassian.crowd.service.license.LicenseService;
 import com.atlassian.oauth.consumer.ConsumerService;
 import com.atlassian.oauth.consumer.ConsumerTokenStore;
 import com.atlassian.oauth.serviceprovider.ServiceProviderConsumerStore;
@@ -67,11 +66,6 @@ public class AtlassianConfig {
     @Bean
     public DirectoryManager directoryManager() {
         return importOsgiService(DirectoryManager.class);
-    }
-
-    @Bean
-    public LicenseService licenseService() {
-        return importOsgiService(LicenseService.class);
     }
 
     @Bean

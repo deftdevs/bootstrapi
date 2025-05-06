@@ -5,7 +5,7 @@
 
     <groupId>com.deftdevs</groupId>
     <artifactId>bootstrapi-parent</artifactId>
-    <version>1.0.0-RC1-SNAPSHOT</version>
+    <version>1.0.0-rc1-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>BootstrAPI parent POM</name>
@@ -83,7 +83,7 @@
         <sonar.java.binaries>target/classes</sonar.java.binaries>
         <!-- other properties -->
         <atlassian.amps.version>9.3.4</atlassian.amps.version>
-        <atlassian.platform.version>6.5.44</atlassian.platform.version>
+        <atlassian.platform.version>7.3.11</atlassian.platform.version>
         <atlassian.applinks-plugin.version>10.3.1</atlassian.applinks-plugin.version>
         <atlassian.authentication.version>5.3.1</atlassian.authentication.version>
         <atlassian.oauth.version>6.1.9</atlassian.oauth.version>
@@ -208,6 +208,36 @@
                 <groupId>org.osgi</groupId>
                 <artifactId>osgi.core</artifactId>
                 <version>${osgi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>3.3.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
+                <version>3.0.0</version>
+            </dependency>
+
+            <dependency>
+                <groupId>jakarta.inject</groupId>
+                <artifactId>jakarta.inject-api</artifactId>
+                <version>1.0.5</version>
+            </dependency>
+
+            <dependency>
+                <groupId>jakarta.validation</groupId>
+                <artifactId>jakarta.validation-api</artifactId>
+                <version>2.0.2</version>
+            </dependency>
+
+            <dependency>
+                <groupId>jakarta.xml.bind</groupId>
+                <artifactId>jakarta.xml.bind-api</artifactId>
+                <version>2.3.3</version>
             </dependency>
 
             <dependency>

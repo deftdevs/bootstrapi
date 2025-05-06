@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.commons.exception.web.mapper;
 
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import org.codehaus.jackson.map.JsonMappingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.core.Response;

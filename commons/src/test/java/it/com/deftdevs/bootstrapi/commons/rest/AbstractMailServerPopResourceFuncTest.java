@@ -2,7 +2,7 @@ package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.MailServerPopModel;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.HttpMethod;
@@ -63,7 +63,7 @@ public abstract class AbstractMailServerPopResourceFuncTest {
                 .password("user")
                 .request();
 
-        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), mailServerPopResponse.statusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), mailServerPopResponse.statusCode());
     }
 
     @Test
@@ -73,7 +73,7 @@ public abstract class AbstractMailServerPopResourceFuncTest {
                 .password("user")
                 .request(HttpMethod.PUT, getExampleModel());
 
-        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), mailServerPopResponse.statusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), mailServerPopResponse.statusCode());
     }
 
     protected void assertMailServerModelAgainstExample(MailServerPopModel bean) {

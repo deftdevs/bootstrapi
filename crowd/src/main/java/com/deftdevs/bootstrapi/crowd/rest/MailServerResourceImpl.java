@@ -1,11 +1,12 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
-import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
+import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
 import com.deftdevs.bootstrapi.commons.rest.api.MailServerSmtpResource;
 import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
 
+import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
@@ -15,6 +16,7 @@ public class MailServerResourceImpl implements MailServerSmtpResource {
 
     private final MailServerService mailServerService;
 
+    @Inject
     public MailServerResourceImpl(
             final MailServerService mailServerService) {
 

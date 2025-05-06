@@ -1,7 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.http.PATCH;
 import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpModel;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoModel;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
@@ -13,6 +12,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
+import javax.ws.rs.PATCH;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;

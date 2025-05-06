@@ -2,7 +2,7 @@ package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.SettingsModel;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.HttpMethod;
@@ -60,7 +60,7 @@ public abstract class AbstractSettingsResourceFuncTest {
                 .password("user")
                 .request();
 
-        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), settingsResponse.statusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), settingsResponse.statusCode());
     }
 
     @Test
@@ -70,7 +70,7 @@ public abstract class AbstractSettingsResourceFuncTest {
                 .password("user")
                 .request(HttpMethod.PUT, getExampleModel());
 
-        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), settingsResponse.statusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), settingsResponse.statusCode());
     }
 
     protected SettingsModel getExampleModel() {
