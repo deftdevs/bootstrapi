@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.confluence.model.util;
 
-import com.atlassian.crowd.directory.RemoteCrowdDirectory;
+import com.atlassian.crowd.directory.RemoteDirectory;
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.model.directory.ImmutableDirectory;
@@ -18,7 +18,7 @@ import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.atlassian.crowd.directory.RemoteCrowdDirectory.*;
+import static com.atlassian.crowd.directory.RemoteDirectory.*;
 import static com.atlassian.crowd.directory.SynchronisableDirectoryProperties.*;
 import static com.atlassian.crowd.model.directory.DirectoryImpl.ATTRIBUTE_KEY_USE_NESTED_GROUPS;
 import static com.deftdevs.bootstrapi.commons.util.ConversionUtil.*;
@@ -56,7 +56,7 @@ public class DirectoryBeanUtil {
             attributes.put(SYNC_GROUP_MEMBERSHIP_AFTER_SUCCESSFUL_USER_AUTH_ENABLED, directoryBean.getAdvanced().getUpdateGroupMembershipMethod());
         }
 
-        return ImmutableDirectory.builder(directoryBean.getName(), DirectoryBeanUtil.getDirectoryType(directoryBean), RemoteCrowdDirectory.class.getName())
+        return ImmutableDirectory.builder(directoryBean.getName(), DirectoryBeanUtil.getDirectoryType(directoryBean), RemoteDirectory.class.getName())
                 .setActive(directoryBean.getActive() != null && directoryBean.getActive())
                 .setDescription(directoryBean.getDescription())
                 .setAttributes(attributes)
