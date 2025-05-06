@@ -44,7 +44,7 @@ Set global permissions configuration
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **PermissionsGlobalBean** | [**PermissionsGlobalBean**](../Models/PermissionsGlobalBean.md)|  | |
+| **PermissionsGlobalBean** | [**PermissionsGlobalBean**](../Models/PermissionsGlobalBean.md)|  | [optional] |
 
 ### Return type
 

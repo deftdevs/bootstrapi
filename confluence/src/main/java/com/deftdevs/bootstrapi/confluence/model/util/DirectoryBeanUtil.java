@@ -4,33 +4,39 @@ import com.atlassian.crowd.directory.RemoteDirectory;
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.model.directory.ImmutableDirectory;
-import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
-import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean;
+import com.deftdevs.bootstrapi.commons.model.*;
 import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean.DirectoryCrowdAdvanced;
 import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean.DirectoryCrowdServer;
 import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean.DirectoryCrowdServer.DirectoryCrowdServerProxy;
-import com.deftdevs.bootstrapi.commons.model.DirectoryGenericBean;
-import com.deftdevs.bootstrapi.commons.model.DirectoryInternalBean;
-import com.deftdevs.bootstrapi.commons.model.DirectoryLdapBean;
 
 import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
 
-import static com.atlassian.crowd.directory.RemoteDirectory.*;
 import static com.atlassian.crowd.directory.SynchronisableDirectoryProperties.*;
 import static com.atlassian.crowd.model.directory.DirectoryImpl.ATTRIBUTE_KEY_USE_NESTED_GROUPS;
 import static com.deftdevs.bootstrapi.commons.util.ConversionUtil.*;
 
 public class DirectoryBeanUtil {
 
+    public static final String DESCRIPTIVE_NAME = "Remote Crowd Directory";
+    public static final String APPLICATION_NAME = "application.name";
+    public static final String APPLICATION_PASSWORD = "application.password";
+    public static final String CROWD_SERVER_URL = "crowd.server.url";
+    public static final String AUTHENTICATION_METHOD_ATTRIBUTE = "authentication.method";
+    public static final String CROWD_HTTP_TIMEOUT = "crowd.server.http.timeout";
+    public static final String CROWD_HTTP_MAX_CONNECTIONS = "crowd.server.http.max.connections";
+    public static final String CROWD_HTTP_PROXY_HOST = "crowd.server.http.proxy.host";
+    public static final String CROWD_HTTP_PROXY_PORT = "crowd.server.http.proxy.port";
+    public static final String CROWD_HTTP_PROXY_USERNAME = "crowd.server.http.proxy.username";
+    public static final String CROWD_HTTP_PROXY_PASSWORD = "crowd.server.http.proxy.password";
+
     /**
      * Build directory directory.
      *
      * @return the directory
      */
-    @NotNull
     public static Directory toDirectory(
             @NotNull final DirectoryCrowdBean directoryBean) {
 
@@ -69,7 +75,6 @@ public class DirectoryBeanUtil {
      * @param directory the directory
      * @return the user directory bean
      */
-    @NotNull
     public static AbstractDirectoryBean toDirectoryBean(
             @NotNull final Directory directory) {
 

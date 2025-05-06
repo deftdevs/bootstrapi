@@ -20,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.List;
 import java.util.Locale;
@@ -81,7 +80,10 @@ public class GadgetsServiceImpl implements GadgetsService {
     }
 
     @Override
-    public GadgetBean setGadget(long id, @NotNull GadgetBean gadgetBean) {
+    public GadgetBean setGadget(
+            long id,
+            GadgetBean gadgetBean) {
+
         deleteGadget(id);
         return addGadget(gadgetBean);
     }

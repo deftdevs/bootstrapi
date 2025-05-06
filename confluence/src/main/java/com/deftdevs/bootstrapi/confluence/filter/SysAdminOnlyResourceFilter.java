@@ -2,10 +2,10 @@ package com.deftdevs.bootstrapi.confluence.filter;
 
 import com.atlassian.confluence.security.PermissionManager;
 import com.atlassian.confluence.user.AuthenticatedUserThreadLocal;
+import com.atlassian.confluence.user.ConfluenceUser;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.plugins.rest.common.security.AuthenticationRequiredException;
 import com.atlassian.plugins.rest.common.security.AuthorisationException;
-import com.atlassian.user.User;
 import com.sun.jersey.spi.container.ContainerRequest;
 import com.sun.jersey.spi.container.ContainerRequestFilter;
 import com.sun.jersey.spi.container.ContainerResponseFilter;
@@ -42,7 +42,7 @@ public class SysAdminOnlyResourceFilter implements ResourceFilter, ContainerRequ
     }
 
     public ContainerRequest filter(ContainerRequest containerRequest) {
-        User loggedInUser = AuthenticatedUserThreadLocal.get();
+        ConfluenceUser loggedInUser = AuthenticatedUserThreadLocal.get();
         if (loggedInUser == null) {
             throw new AuthenticationRequiredException();
         } else if (!permissionManager.isSystemAdministrator(loggedInUser)) {

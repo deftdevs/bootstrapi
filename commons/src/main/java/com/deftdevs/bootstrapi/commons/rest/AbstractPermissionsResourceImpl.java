@@ -6,7 +6,6 @@ import com.deftdevs.bootstrapi.commons.service.api.PermissionsService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.core.Response;
 
 @Component
@@ -26,7 +25,7 @@ public abstract class AbstractPermissionsResourceImpl implements PermissionsReso
 
     @Override
     public Response setPermissionGlobal(
-            @NotNull final PermissionsGlobalBean permissionsGlobalBean) {
+            final PermissionsGlobalBean permissionsGlobalBean) {
         return Response.ok(permissionsService.setPermissionsGlobal(permissionsGlobalBean)).build();
     }
 

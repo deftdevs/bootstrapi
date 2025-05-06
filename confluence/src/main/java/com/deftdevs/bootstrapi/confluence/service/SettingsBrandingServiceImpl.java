@@ -24,7 +24,6 @@ import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -58,7 +57,7 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     @Override
     public SettingsBrandingColorSchemeBean setColourScheme(
-            @NotNull SettingsBrandingColorSchemeBean colorSchemeBean) {
+            SettingsBrandingColorSchemeBean colorSchemeBean) {
         BaseColourScheme baseColourScheme = new BaseColourScheme(colourSchemeManager.getGlobalColourScheme());
         BaseColourScheme newColourScheme = SettingsBrandingColorSchemeBeanUtil.toGlobalColorScheme(colorSchemeBean, baseColourScheme);
         colourSchemeManager.saveGlobalColourScheme(newColourScheme);
@@ -72,7 +71,7 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     @Override
     public void setLogo(
-            @NotNull InputStream inputStream) {
+            InputStream inputStream) {
         try {
             File file = File.createTempFile("bootstrapi-temp", null);
             FileUtils.copyInputStreamToFile(inputStream, file);
@@ -100,7 +99,8 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     @Override
     public void setFavicon(
-            @NotNull InputStream inputStream) {
+            InputStream inputStream) {
+
         try {
             File file = File.createTempFile("bootstrapi-temp", null);
             FileUtils.copyInputStreamToFile(inputStream, file);
