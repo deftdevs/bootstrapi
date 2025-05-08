@@ -78,7 +78,7 @@
         <sonar.projectKey>deftdevs_bootstrapi</sonar.projectKey>
         <!-- other properties -->
         <atlassian.amps.version>9.3.3</atlassian.amps.version>
-        <atlassian.platform.version>6.5.44</atlassian.platform.version>
+        <atlassian.platform.version>7.3.12</atlassian.platform.version>
         <atlassian.applinks-plugin.version>10.3.0</atlassian.applinks-plugin.version>
         <atlassian.authentication.version>5.2.4</atlassian.authentication.version>
         <atlassian.oauth.version>6.1.9</atlassian.oauth.version>
