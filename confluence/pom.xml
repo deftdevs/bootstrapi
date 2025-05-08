@@ -125,12 +125,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.atlassian.confluence</groupId>
-            <artifactId>confluence-rest-v2-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>com.atlassian.confluence.plugins</groupId>
             <artifactId>confluence-lookandfeel</artifactId>
             <version>${confluence.version}</version>
