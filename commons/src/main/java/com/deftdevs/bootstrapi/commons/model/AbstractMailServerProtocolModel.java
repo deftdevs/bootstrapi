@@ -1,11 +1,11 @@
 package com.deftdevs.bootstrapi.commons.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsExclude;
 import org.apache.commons.lang3.builder.HashCodeExclude;
-import org.codehaus.jackson.annotate.JsonIgnore;
 
 import javax.xml.bind.annotation.XmlElement;
 
@@ -46,7 +46,8 @@ public abstract class AbstractMailServerProtocolModel {
      *
      * @param port the port
      */
-    @JsonIgnore     //prevent "Conflicting setter definitions for property \"port\", see https://stackoverflow.com/questions/6346018/deserializing-json-into-object-with-overloaded-methods-using-jackson
+    @JsonIgnore
+    //prevent "Conflicting setter definitions for property \"port\", see https://stackoverflow.com/questions/6346018/deserializing-json-into-object-with-overloaded-methods-using-jackson
     public void setPort(
             final int port) {
 

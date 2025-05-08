@@ -48,6 +48,7 @@
 
     <properties>
         <maven-jar-plugin.version>3.4.2</maven-jar-plugin.version>
+        <jackson.version>2.17.3</jackson.version>
     </properties>
 
     <dependencyManagement>
@@ -63,14 +64,6 @@
     </dependencyManagement>
 
     <dependencies>
-
-        <!-- compile dependencies -->
-
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-jaxrs</artifactId>
-            <scope>compile</scope>
-        </dependency>
 
         <!-- behave like a compile dependencies -->
 
@@ -171,6 +164,20 @@
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-context</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.fasterxml.jackson.module</groupId>
+            <artifactId>jackson-module-jaxb-annotations</artifactId>
+            <version>${jackson.version}</version>
             <scope>provided</scope>
         </dependency>
 
