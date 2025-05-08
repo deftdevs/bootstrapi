@@ -7,7 +7,6 @@ import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
 import com.deftdevs.bootstrapi.commons.service.api.PermissionsService;
 import com.deftdevs.bootstrapi.confluence.model.util.PermissionsGlobalModelUtil;
 
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
@@ -34,7 +33,7 @@ public class PermissionsServiceImpl implements PermissionsService {
 
     @Override
     public PermissionsGlobalModel setPermissionsGlobal(
-            @NotNull final PermissionsGlobalModel permissionsGlobalModel) {
+            final PermissionsGlobalModel permissionsGlobalModel) {
 
         setPermissionsGlobalForGroups(permissionsGlobalModel);
         setPermissionsGlobalForAnonymous(permissionsGlobalModel);
@@ -42,7 +41,7 @@ public class PermissionsServiceImpl implements PermissionsService {
     }
 
     private void setPermissionsGlobalForGroups(
-            @NotNull final PermissionsGlobalModel permissionsGlobalModel) {
+            final PermissionsGlobalModel permissionsGlobalModel) {
 
         final Map<String, ? extends Collection<String>> requestGroupPermissions = permissionsGlobalModel.getGroupPermissions();
 
@@ -96,7 +95,7 @@ public class PermissionsServiceImpl implements PermissionsService {
     }
 
     private void setPermissionsGlobalForAnonymous(
-            @NotNull final PermissionsGlobalModel permissionsGlobalModel) {
+            final PermissionsGlobalModel permissionsGlobalModel) {
 
         if (permissionsGlobalModel.getAnonymousPermissions() == null) {
             return;

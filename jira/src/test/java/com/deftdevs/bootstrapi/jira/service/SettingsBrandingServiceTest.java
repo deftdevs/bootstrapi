@@ -85,7 +85,7 @@ class SettingsBrandingServiceTest {
 
     @Test
     void testGetLogo() throws URISyntaxException {
-        final URL logoUrl = getClass().getResource("/images/" + LookAndFeelConstants.JIRA_SCALED_LOGO_FILENAME);
+        final URL logoUrl = getClass().getResource("/images/" + LookAndFeelConstants.JIRA_SCALED_DEFAULT_LOGO_FILENAME);
         assert logoUrl != null;
         final File imagesDirectory = new File(logoUrl.toURI()).getParentFile();
 
@@ -99,7 +99,7 @@ class SettingsBrandingServiceTest {
         Files.createDirectories(logoDirectory.toPath());
         doReturn(logoDirectory).when(uploadService).getLogoDirectory();
 
-        try (InputStream is = getClass().getClassLoader().getResourceAsStream("images/" + LookAndFeelConstants.JIRA_SCALED_LOGO_FILENAME)) {
+        try (InputStream is = getClass().getClassLoader().getResourceAsStream("images/" + LookAndFeelConstants.JIRA_SCALED_DEFAULT_LOGO_FILENAME)) {
             try (MockedStatic<ComponentAccessor> componentAccessorMockedStatic = mockStatic(ComponentAccessor.class)) {
                 componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(LnFDefaultColorProvider.class)).thenReturn(mock(LnFDefaultColorProvider.class));
                 componentAccessorMockedStatic.when(() -> ComponentAccessor.getComponent(LogoProvider.class)).thenReturn(mock(LogoProvider.class));

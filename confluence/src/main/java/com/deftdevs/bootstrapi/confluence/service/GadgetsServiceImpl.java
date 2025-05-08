@@ -16,7 +16,6 @@ import com.deftdevs.bootstrapi.commons.service.api.GadgetsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.List;
 import java.util.Locale;
@@ -27,7 +26,7 @@ import java.util.stream.StreamSupport;
 public class GadgetsServiceImpl implements GadgetsService {
 
     private static final Logger log = LoggerFactory.getLogger(GadgetsServiceImpl.class);
-    
+
     private final ExternalGadgetSpecStore externalGadgetSpecStore;
     private final GadgetSpecFactory gadgetSpecFactory;
     private final LocaleManager localeManager;
@@ -55,18 +54,22 @@ public class GadgetsServiceImpl implements GadgetsService {
     }
 
     @Override
-    public GadgetModel getGadget(long id) {
+    public GadgetModel getGadget(
+            final long id) {
+
         return findGadget(id);
     }
 
     @Override
-    public List<GadgetModel> setGadgets(List<GadgetModel> gadgetModels) {
+    public List<GadgetModel> setGadgets(
+            final List<GadgetModel> gadgetModels) {
+
         //as the gadget only consists of an url, only new gadgets need to be added, existing gadget urls remain
         List<GadgetModel> existingGadgets = getGadgets();
         gadgetModels.forEach(gadgetModel -> {
             Optional<GadgetModel> gadget = existingGadgets.stream()
                     .filter(bean -> bean.getUrl().toString().equals(gadgetModel.getUrl().toString())).findFirst();
-            if (!gadget.isPresent()) {
+            if (gadget.isEmpty()) {
                 addGadget(gadgetModel);
             }
         });
@@ -74,13 +77,18 @@ public class GadgetsServiceImpl implements GadgetsService {
     }
 
     @Override
-    public GadgetModel setGadget(long id, @NotNull GadgetModel gadgetModel) {
+    public GadgetModel setGadget(
+            final long id,
+            final GadgetModel gadgetModel) {
+
         deleteGadget(id);
         return addGadget(gadgetModel);
     }
 
     @Override
-    public GadgetModel addGadget(GadgetModel gadgetModel) {
+    public GadgetModel addGadget(
+            final GadgetModel gadgetModel) {
+
         URI url = gadgetModel.getUrl();
         GadgetModel addedGadgetModel = new GadgetModel();
         ExternalGadgetSpec addedGadget = externalGadgetSpecStore.add(url);
@@ -106,7 +114,9 @@ public class GadgetsServiceImpl implements GadgetsService {
     }
 
     @Override
-    public void deleteGadgets(boolean force) {
+    public void deleteGadgets(
+            final boolean force) {
+
         if (!force) {
             throw new BadRequestException("'force = true' must be supplied to delete all entries");
         } else {
@@ -115,7 +125,8 @@ public class GadgetsServiceImpl implements GadgetsService {
     }
 
     @Override
-    public void deleteGadget(long id) {
+    public void deleteGadget(
+            final long id) {
 
         //ensure gadget exists
         findGadget(id);
@@ -124,9 +135,11 @@ public class GadgetsServiceImpl implements GadgetsService {
         externalGadgetSpecStore.remove(ExternalGadgetSpecId.valueOf(String.valueOf(id)));
     }
 
-    private GadgetModel findGadget(long id) {
+    private GadgetModel findGadget(
+            final long id) {
+
         Optional<GadgetModel> result = getGadgets().stream().filter(gadget -> gadget.getId().equals(id)).findFirst();
-        if (!result.isPresent()) {
+        if (result.isEmpty()) {
             throw new NotFoundException(String.format("gadget with id '%s' could not be found", id));
         } else {
             return result.get();

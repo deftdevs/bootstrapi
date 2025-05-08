@@ -70,7 +70,7 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     @Override
     public InputStream getLogo() {
-        return getLogoStream(LookAndFeelConstants.JIRA_SCALED_LIGHT_THEME_LOGO_FILENAME);
+        return getLogoStream(LookAndFeelConstants.JIRA_SCALED_DEFAULT_LOGO_FILENAME);
     }
 
     @Override
