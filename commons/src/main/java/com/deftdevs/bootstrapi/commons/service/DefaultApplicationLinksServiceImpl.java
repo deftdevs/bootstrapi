@@ -19,7 +19,6 @@ import com.atlassian.applinks.internal.common.status.oauth.OAuthConfig;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
 import com.atlassian.applinks.spi.link.MutableApplicationLink;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
-import com.atlassian.applinks.spi.manifest.ManifestNotFoundException;
 import com.atlassian.applinks.spi.util.TypeAccessor;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
@@ -41,7 +40,6 @@ import java.util.stream.StreamSupport;
 
 import static com.atlassian.applinks.internal.status.error.ApplinkErrorType.CONNECTION_REFUSED;
 import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus.*;
-import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus.CONFIGURATION_ERROR;
 
 public class DefaultApplicationLinksServiceImpl implements ApplicationLinksService {
 
@@ -171,7 +169,7 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
         ApplicationLink applicationLink;
         try {
             applicationLink = mutatingApplicationLinkService.createApplicationLink(applicationType, applicationLinkDetails);
-        } catch (ManifestNotFoundException e) {
+        } catch (Exception e) {
             throw new BadRequestException(e.getMessage());
         }
 
