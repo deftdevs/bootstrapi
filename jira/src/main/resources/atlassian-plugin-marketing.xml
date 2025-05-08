@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <atlassian-plugin-marketing>
     <compatibility>
-        <product name="jira" min="8.0.0" max="8.8.1"/>
+        <product name="jira" min="10.0.0" max="10.3.5"/>
     </compatibility>
     <logo image="images/deftdevs.png"/>
 </atlassian-plugin-marketing>
