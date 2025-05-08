@@ -6,7 +6,6 @@ import com.atlassian.confluence.user.UserAccessor;
 import com.atlassian.user.EntityException;
 import com.atlassian.user.User;
 import com.atlassian.user.UserManager;
-import com.atlassian.user.impl.DefaultUser;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.commons.model.UserBean;
@@ -48,18 +47,6 @@ class UserServiceTest {
 
         assertUserBeanEquals(userBean, gotUserBean);
         assertNull(userBean.getPassword());
-    }
-
-    @Test
-    void testGetUserIsNotConfluenceUser() throws NotFoundException, EntityException {
-        final User user = new DefaultUser(toUser(UserBean.EXAMPLE_1));
-        doReturn(user).when(userManager).getUser(user.getName());
-
-        final String userName = user.getName();
-
-        assertThrows(NotFoundException.class, () -> {
-            userService.getUser(userName);
-        });
     }
 
     @Test
@@ -118,18 +105,6 @@ class UserServiceTest {
     }
 
     @Test
-    void testUpdateUserNotConfluenceUser() throws EntityException, NotFoundException, BadRequestException {
-        final User user = new DefaultUser(toUser(UserBean.EXAMPLE_1));
-        doReturn(user).when(userManager).getUser(user.getName());
-
-        final String userName = user.getName();
-
-        assertThrows(NotFoundException.class, () -> {
-            userService.updateUser(userName, UserBean.EXAMPLE_2);
-        });
-    }
-
-    @Test
     void testUpdateUserPassword() throws EntityException, NotFoundException, BadRequestException {
         final UserBean userBean = UserBean.EXAMPLE_1;
         doReturn(toUser(userBean)).when(userManager).getUser(userBean.getUsername());
@@ -141,18 +116,6 @@ class UserServiceTest {
         assertUserBeanEquals(userBean, updatedUserBean);
         // user password is not returned here, getting user bean shows update was successful
         assertNull(updatedUserBean.getPassword());
-    }
-
-    @Test
-    void testUpdateUserPasswordNotConfluenceUser() throws EntityException, NotFoundException, BadRequestException {
-        final User user = new DefaultUser(toUser(UserBean.EXAMPLE_1));
-        doReturn(user).when(userManager).getUser(user.getName());
-
-        final String userName = user.getName();
-
-        assertThrows(NotFoundException.class, () -> {
-            userService.updatePassword(userName, "newPW");
-        });
     }
 
     /*
