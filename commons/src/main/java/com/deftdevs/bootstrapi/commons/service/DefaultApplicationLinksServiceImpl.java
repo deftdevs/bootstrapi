@@ -19,7 +19,6 @@ import com.atlassian.applinks.internal.common.status.oauth.OAuthConfig;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
 import com.atlassian.applinks.spi.link.MutableApplicationLink;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
-import com.atlassian.applinks.spi.manifest.ManifestNotFoundException;
 import com.atlassian.applinks.spi.util.TypeAccessor;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
@@ -171,7 +170,7 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
         ApplicationLink applicationLink;
         try {
             applicationLink = mutatingApplicationLinkService.createApplicationLink(applicationType, applicationLinkDetails);
-        } catch (ManifestNotFoundException e) {
+        } catch (Exception e) {
             throw new BadRequestException(e.getMessage());
         }
 
