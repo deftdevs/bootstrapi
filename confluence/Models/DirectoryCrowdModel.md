@@ -9,6 +9,7 @@
 | **active** | **Boolean** |  | [optional] [default to null] |
 | **createdDate** | **Date** |  | [optional] [default to null] |
 | **updatedDate** | **Date** |  | [optional] [default to null] |
+| **testConnection** | **Boolean** |  | [optional] [default to null] |
 | **type** | **String** |  | [default to null] |
 | **testConnection** | **Boolean** |  | [optional] [default to null] |
 | **server** | [**DirectoryCrowdServer**](DirectoryCrowdServer.md) |  | [optional] [default to null] |

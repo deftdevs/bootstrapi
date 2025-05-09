@@ -91,7 +91,6 @@ public class DirectoriesServiceTest {
 
         final AbstractDirectoryModel directoryModel = DirectoryModelUtil.toDirectoryModel(directoryAzureAd);
         final Map<String, AbstractDirectoryModel> directoryModels = Collections.singletonMap(directoryModel.getName(), directoryModel);
-        final boolean testConnection = false;
 
         assertThrows(BadRequestException.class, () -> {
             spy.setDirectories(directoryModels);
