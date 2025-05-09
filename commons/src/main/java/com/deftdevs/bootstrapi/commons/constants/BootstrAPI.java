@@ -2,7 +2,8 @@ package com.deftdevs.bootstrapi.commons.constants;
 
 public class BootstrAPI {
 
-    public static final String ALL                          = "all";
+    public static final String _ALL                         = "_all";
+
     public static final String APPLICATION                  = "application";
     public static final String APPLICATIONS                 = "applications";
     public static final String APPLICATION_LINK             = "application-link";
