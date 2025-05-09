@@ -29,13 +29,6 @@ All URIs are relative to *https://<CONFLUENCE_URL>/rest/bootstrapi/1*
 *DirectoryApi* | [**deleteDirectory**](Apis/DirectoryApi.md#deletedirectory) | **DELETE** /directory/{id} | Delete a user directory |
 *DirectoryApi* | [**getDirectory**](Apis/DirectoryApi.md#getdirectory) | **GET** /directory/{id} | Get a user directory |
 *DirectoryApi* | [**updateDirectory**](Apis/DirectoryApi.md#updatedirectory) | **PUT** /directory/{id} | Update a user directory |
-| *GadgetApi* | [**createGadget**](Apis/GadgetApi.md#creategadget) | **POST** /gadget | Add a gadget |
-*GadgetApi* | [**deleteGadget**](Apis/GadgetApi.md#deletegadget) | **DELETE** /gadget/{id} | Delete a gadget |
-*GadgetApi* | [**getGadget**](Apis/GadgetApi.md#getgadget) | **GET** /gadget/{id} | Get a gadget |
-*GadgetApi* | [**updateGadget**](Apis/GadgetApi.md#updategadget) | **PUT** /gadget/{id} | Update a gadget |
-| *GadgetsApi* | [**deleteGadgets**](Apis/GadgetsApi.md#deletegadgets) | **DELETE** /gadgets | Delete all gadgets |
-*GadgetsApi* | [**getGadgets**](Apis/GadgetsApi.md#getgadgets) | **GET** /gadgets | Get all gadgets |
-*GadgetsApi* | [**setGadgets**](Apis/GadgetsApi.md#setgadgets) | **PUT** /gadgets | Set a list of gadgets |
 | *LicenseApi* | [**addLicense**](Apis/LicenseApi.md#addlicense) | **POST** /license | Add a license |
 | *LicensesApi* | [**getLicenses**](Apis/LicensesApi.md#getlicenses) | **GET** /licenses | Get all licenses information |
 *LicensesApi* | [**setLicenses**](Apis/LicensesApi.md#setlicenses) | **PUT** /licenses | Set a list of licenses |
@@ -46,15 +39,9 @@ All URIs are relative to *https://<CONFLUENCE_URL>/rest/bootstrapi/1*
 | *PermissionsApi* | [**getPermissionGlobal**](Apis/PermissionsApi.md#getpermissionglobal) | **GET** /permissions/global | Get global permissions configuration |
 *PermissionsApi* | [**setPermissionGlobal**](Apis/PermissionsApi.md#setpermissionglobal) | **PUT** /permissions/global | Set global permissions configuration |
 | *PingApi* | [**getPing**](Apis/PingApi.md#getping) | **GET** /ping | Ping method for probing the REST API. |
-| *SettingsApi* | [**getBrandingColorScheme**](Apis/SettingsApi.md#getbrandingcolorscheme) | **GET** /settings/branding/color-scheme | Get the color scheme |
-*SettingsApi* | [**getBrandingFavicon**](Apis/SettingsApi.md#getbrandingfavicon) | **GET** /settings/branding/favicon | Get the favicon |
-*SettingsApi* | [**getBrandingLogo**](Apis/SettingsApi.md#getbrandinglogo) | **GET** /settings/branding/logo | Get the logo |
-*SettingsApi* | [**getCustomHtml**](Apis/SettingsApi.md#getcustomhtml) | **GET** /settings/custom-html | Get the custom HTML |
+| *SettingsApi* | [**getCustomHtml**](Apis/SettingsApi.md#getcustomhtml) | **GET** /settings/custom-html | Get the custom HTML |
 *SettingsApi* | [**getSettings**](Apis/SettingsApi.md#getsettings) | **GET** /settings | Get the general settings |
 *SettingsApi* | [**getSettingsSecurity**](Apis/SettingsApi.md#getsettingssecurity) | **GET** /settings/security | Get the security settings |
-*SettingsApi* | [**setBrandingColorScheme**](Apis/SettingsApi.md#setbrandingcolorscheme) | **PUT** /settings/branding/color-scheme | Set the color scheme |
-*SettingsApi* | [**setBrandingFavicon**](Apis/SettingsApi.md#setbrandingfavicon) | **PUT** /settings/branding/favicon | Set the favicon |
-*SettingsApi* | [**setBrandingLogo**](Apis/SettingsApi.md#setbrandinglogo) | **PUT** /settings/branding/logo | Set the logo |
 *SettingsApi* | [**setCustomHtml**](Apis/SettingsApi.md#setcustomhtml) | **PUT** /settings/custom-html | Set the custom HTML |
 *SettingsApi* | [**setSettings**](Apis/SettingsApi.md#setsettings) | **PUT** /settings | Set the general settings |
 *SettingsApi* | [**setSettingsSecurity**](Apis/SettingsApi.md#setsettingssecurity) | **PUT** /settings/security | Set the security settings |
@@ -91,14 +78,12 @@ All URIs are relative to *https://<CONFLUENCE_URL>/rest/bootstrapi/1*
  - [DirectoryLdapServer](./Models/DirectoryLdapServer.md)
  - [DirectoryPermissions](./Models/DirectoryPermissions.md)
  - [ErrorCollection](./Models/ErrorCollection.md)
- - [GadgetBean](./Models/GadgetBean.md)
  - [GroupBean](./Models/GroupBean.md)
  - [LicenseBean](./Models/LicenseBean.md)
  - [MailServerPopBean](./Models/MailServerPopBean.md)
  - [MailServerSmtpBean](./Models/MailServerSmtpBean.md)
  - [PermissionsGlobalBean](./Models/PermissionsGlobalBean.md)
  - [SettingsBean](./Models/SettingsBean.md)
- - [SettingsBrandingColorSchemeBean](./Models/SettingsBrandingColorSchemeBean.md)
  - [SettingsCustomHtmlBean](./Models/SettingsCustomHtmlBean.md)
  - [SettingsSecurityBean](./Models/SettingsSecurityBean.md)
  - [UserBean](./Models/UserBean.md)

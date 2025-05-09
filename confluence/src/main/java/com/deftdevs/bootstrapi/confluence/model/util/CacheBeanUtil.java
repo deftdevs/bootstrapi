@@ -13,7 +13,6 @@ public class CacheBeanUtil {
      *
      * @return the cache
      */
-    @NotNull
     public static CacheBean toCacheBean(
             @NotNull final ManagedCache managedCache) {
 

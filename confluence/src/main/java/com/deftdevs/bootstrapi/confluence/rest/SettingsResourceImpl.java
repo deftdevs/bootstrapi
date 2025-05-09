@@ -1,11 +1,10 @@
 package com.deftdevs.bootstrapi.confluence.rest;
 
+import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
 import com.deftdevs.bootstrapi.commons.rest.AbstractSettingsResourceImpl;
-import com.deftdevs.bootstrapi.confluence.filter.SysAdminOnlyResourceFilter;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
-import com.sun.jersey.spi.container.ResourceFilters;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.stereotype.Component;
 
@@ -19,7 +18,7 @@ import javax.ws.rs.core.MediaType;
 @Tag(name = BootstrAPI.SETTINGS)
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
-@ResourceFilters(SysAdminOnlyResourceFilter.class)
+@SystemAdminOnly
 @Component
 public class SettingsResourceImpl extends AbstractSettingsResourceImpl<SettingsBean, ConfluenceSettingsService> {
 

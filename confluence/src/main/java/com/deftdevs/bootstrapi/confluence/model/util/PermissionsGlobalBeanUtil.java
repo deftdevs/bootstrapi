@@ -9,7 +9,6 @@ import java.util.stream.Collectors;
 
 public class PermissionsGlobalBeanUtil {
 
-    @NotNull
     public static PermissionsGlobalBean toPermissionsGlobalBean(
             @NotNull final List<SpacePermission> spacePermissions) {
 
