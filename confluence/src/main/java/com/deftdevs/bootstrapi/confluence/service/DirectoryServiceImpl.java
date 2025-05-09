@@ -15,6 +15,7 @@ import com.deftdevs.bootstrapi.confluence.model.util.DirectoryModelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -54,7 +55,8 @@ public class DirectoryServiceImpl implements DirectoriesService {
     }
 
     @Override
-    public List<AbstractDirectoryModel> setDirectories(List<AbstractDirectoryModel> directoryModels, boolean testConnection) {
+    public List<AbstractDirectoryModel> setDirectories(
+            final List<AbstractDirectoryModel> directoryModels) {
 
         final Map<String, Directory> existingDirectoriesByName = crowdDirectoryService.findAllDirectories().stream()
                 .collect(Collectors.toMap(Directory::getName, Function.identity()));
@@ -64,9 +66,9 @@ public class DirectoryServiceImpl implements DirectoriesService {
                 DirectoryCrowdModel crowdRequestModel = (DirectoryCrowdModel) directoryRequestModel;
 
                 if (existingDirectoriesByName.containsKey(crowdRequestModel.getName())) {
-                    setDirectory(existingDirectoriesByName.get(crowdRequestModel.getName()).getId(), crowdRequestModel, testConnection);
+                    setDirectory(existingDirectoriesByName.get(crowdRequestModel.getName()).getId(), crowdRequestModel, false);
                 } else {
-                    addDirectory(crowdRequestModel, testConnection);
+                    addDirectory(crowdRequestModel, false);
                 }
             } else {
                 throw new BadRequestException(format("Updating directory type '%s' is not supported (yet)", directoryRequestModel.getClass()));
@@ -77,9 +79,9 @@ public class DirectoryServiceImpl implements DirectoriesService {
 
     @Override
     public AbstractDirectoryModel setDirectory(
-            long id,
-            AbstractDirectoryModel abstractDirectoryModel,
-            boolean testConnection) {
+            final long id,
+            final AbstractDirectoryModel abstractDirectoryModel,
+            final boolean testConnection) {
 
         if (abstractDirectoryModel instanceof DirectoryCrowdModel) {
             return setDirectoryCrowd(id, (DirectoryCrowdModel) abstractDirectoryModel, testConnection);
