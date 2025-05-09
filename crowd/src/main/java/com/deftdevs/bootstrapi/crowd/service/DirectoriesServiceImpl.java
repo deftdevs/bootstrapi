@@ -66,19 +66,18 @@ public class DirectoriesServiceImpl implements DirectoriesService {
 
     @Override
     public List<AbstractDirectoryModel> setDirectories(
-            @NotNull final List<AbstractDirectoryModel> directoryModels,
-            final boolean testConnection) {
+            @NotNull final List<AbstractDirectoryModel> directoryBeans) {
 
         final Map<String, Directory> existingDirectoriesByName = findAllDirectories().stream()
                 .collect(Collectors.toMap(Directory::getName, Function.identity()));
 
         final List<AbstractDirectoryModel> resultDirectories = new ArrayList<>();
 
-        for (AbstractDirectoryModel directoryModel : directoryModels) {
-            if (existingDirectoriesByName.containsKey(directoryModel.getName())) {
-                resultDirectories.add(setDirectory(existingDirectoriesByName.get(directoryModel.getName()).getId(), directoryModel, testConnection));
+        for (AbstractDirectoryModel directoryBean : directoryBeans) {
+            if (existingDirectoriesByName.containsKey(directoryBean.getName())) {
+                resultDirectories.add(setDirectory(existingDirectoriesByName.get(directoryBean.getName()).getId(), directoryBean, false));
             } else {
-                resultDirectories.add(addDirectory(directoryModel, testConnection));
+                resultDirectories.add(addDirectory(directoryBean, false));
             }
         }
 

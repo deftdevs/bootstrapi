@@ -55,7 +55,8 @@ public class DirectoryServiceImpl implements DirectoriesService {
     }
 
     @Override
-    public List<AbstractDirectoryModel> setDirectories(List<AbstractDirectoryModel> directoryModels, boolean testConnection) {
+    public List<AbstractDirectoryModel> setDirectories(
+            final List<AbstractDirectoryModel> directoryModels) {
 
         final Map<String, Directory> existingDirectoriesByName = crowdDirectoryService.findAllDirectories().stream()
                 .collect(Collectors.toMap(Directory::getName, Function.identity()));
@@ -65,9 +66,9 @@ public class DirectoryServiceImpl implements DirectoriesService {
                 DirectoryCrowdModel crowdRequestModel = (DirectoryCrowdModel) directoryRequestModel;
 
                 if (existingDirectoriesByName.containsKey(crowdRequestModel.getName())) {
-                    setDirectory(existingDirectoriesByName.get(crowdRequestModel.getName()).getId(), crowdRequestModel, testConnection);
+                    setDirectory(existingDirectoriesByName.get(crowdRequestModel.getName()).getId(), crowdRequestModel, false);
                 } else {
-                    addDirectory(crowdRequestModel, testConnection);
+                    addDirectory(crowdRequestModel, false);
                 }
             } else {
                 throw new BadRequestException(format("Updating directory type '%s' is not supported (yet)", directoryRequestModel.getClass()));
@@ -77,7 +78,11 @@ public class DirectoryServiceImpl implements DirectoriesService {
     }
 
     @Override
-    public AbstractDirectoryModel setDirectory(long id, @NotNull AbstractDirectoryModel abstractDirectoryModel, boolean testConnection) {
+    public AbstractDirectoryModel setDirectory(
+            final long id,
+            final @NotNull AbstractDirectoryModel abstractDirectoryModel,
+            final boolean testConnection) {
+
         if (abstractDirectoryModel instanceof DirectoryCrowdModel) {
             return setDirectoryCrowd(id, (DirectoryCrowdModel) abstractDirectoryModel, testConnection);
         } else {
