@@ -76,6 +76,11 @@
         <sonar.organization>deftdevs</sonar.organization>
         <sonar.host.url>https://sonarcloud.io</sonar.host.url>
         <sonar.projectKey>deftdevs_bootstrapi</sonar.projectKey>
+        <sonar.java.codeCoveragePlugin>jacoco</sonar.java.codeCoveragePlugin>
+        <sonar.coverage.jacoco.xmlReportPaths>${project.reporting.outputDirectory}/jacoco/jacoco.xml</sonar.coverage.jacoco.xmlReportPaths>
+        <sonar.exclusions>**/target/**,**/generated-sources/**,**/node_modules/**</sonar.exclusions>
+        <sonar.test.exclusions>**/test/**/*Test.java,**/test/**/*IT.java</sonar.test.exclusions>
+        <sonar.java.binaries>target/classes</sonar.java.binaries>
         <!-- other properties -->
         <atlassian.amps.version>9.3.3</atlassian.amps.version>
         <atlassian.platform.version>6.5.44</atlassian.platform.version>
@@ -343,6 +348,31 @@
                                     </includes>
                                 </resource>
                             </resources>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco.maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>prepare-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                    </execution>
+                    <execution>
+                        <id>report</id>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                        <configuration>
+                            <formats>
+                                <format>XML</format>
+                            </formats>
                         </configuration>
                     </execution>
                 </executions>
