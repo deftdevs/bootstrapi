@@ -5,7 +5,7 @@ import com.deftdevs.bootstrapi.commons.model.UserBean;
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
 import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
 import com.deftdevs.bootstrapi.crowd.model._AllBean;
-import com.deftdevs.bootstrapi.crowd.model._AllBeanConfigStatus;
+import com.deftdevs.bootstrapi.commons.model.type._AllBeanStatus;
 import com.deftdevs.bootstrapi.commons.service.api._AllService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -53,11 +53,11 @@ public class AllResourceTest {
         applications.put(ApplicationBean.EXAMPLE_1.getName(), ApplicationBean.EXAMPLE_1);
         allBean.setApplications(applications);
 
-        Map<String, _AllBeanConfigStatus> status = new HashMap<>();
-        status.put("settings", _AllBeanConfigStatus.success());
-        status.put("users", _AllBeanConfigStatus.success());
-        status.put("groups", _AllBeanConfigStatus.success());
-        status.put("applications", _AllBeanConfigStatus.success());
+        Map<String, _AllBeanStatus> status = new HashMap<>();
+        status.put("settings", _AllBeanStatus.success());
+        status.put("users", _AllBeanStatus.success());
+        status.put("groups", _AllBeanStatus.success());
+        status.put("applications", _AllBeanStatus.success());
         allBean.setStatus(status);
     }
 

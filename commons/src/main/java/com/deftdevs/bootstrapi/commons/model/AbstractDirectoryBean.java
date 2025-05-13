@@ -59,4 +59,7 @@ public abstract class AbstractDirectoryBean {
     @XmlElement
     private Date updatedDate;
 
+    @XmlElement
+    private Boolean testConnection;
+
 }

@@ -1,16 +1,14 @@
 package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
-import com.deftdevs.bootstrapi.commons.model.GroupBean;
-import com.deftdevs.bootstrapi.commons.model.UserBean;
-import com.deftdevs.bootstrapi.commons.service.api.UsersService;
-import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
+import com.deftdevs.bootstrapi.commons.model.type._AllBeanStatus;
+import com.deftdevs.bootstrapi.commons.service._AbstractAllServiceImpl;
+import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
+import com.deftdevs.bootstrapi.commons.service.api._AllService;
 import com.deftdevs.bootstrapi.crowd.model._AllBean;
-import com.deftdevs.bootstrapi.crowd.model._AllBeanConfigStatus;
 import com.deftdevs.bootstrapi.crowd.service.api.ApplicationsService;
 import com.deftdevs.bootstrapi.crowd.service.api.CrowdSettingsGeneralService;
-import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
-import com.deftdevs.bootstrapi.commons.service.api._AllService;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
@@ -19,171 +17,125 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.function.Function;
 
 @Component
 @ExportAsService(_AllService.class)
-public class _AllServiceImpl implements _AllService<_AllBean> {
+public class _AllServiceImpl extends _AbstractAllServiceImpl<_AllBean> {
 
     private final CrowdSettingsGeneralService settingsService;
-    private final UsersService usersService;
-    private final GroupsService groupsService;
+    private final DirectoriesService directoriesService;
     private final ApplicationsService applicationsService;
 
     @Inject
     public _AllServiceImpl(
             final CrowdSettingsGeneralService settingsService,
-            final UsersService usersService,
-            final GroupsService groupsService,
+            final DirectoriesService directoriesService,
             final ApplicationsService applicationsService) {
 
         this.settingsService = settingsService;
-        this.usersService = usersService;
-        this.groupsService = groupsService;
+        this.directoriesService = directoriesService;
         this.applicationsService = applicationsService;
     }
 
     @Override
-    public _AllBean setAll(
-            final _AllBean allBean) {
-
+    public _AllBean setAll(final _AllBean allBean) {
         final _AllBean result = new _AllBean();
-        final Map<String, _AllBeanConfigStatus> status = new HashMap<>();
+        final Map<String, _AllBeanStatus> status = new HashMap<>();
 
-        // Apply settings
-        if (allBean.getSettings() != null) {
-            try {
-                result.setSettings(settingsService.setSettingsGeneral(allBean.getSettings()));
-                status.put("settings", _AllBeanConfigStatus.success());
-            } catch (Exception e) {
-                status.put("settings", _AllBeanConfigStatus.error(
-                        Response.Status.INTERNAL_SERVER_ERROR,
-                        "Failed to apply settings",
-                        e.getMessage()
-                ));
-            }
-        }
+//        // Handle settings
+//        if (allBean.getSettings() != null) {
+//            try {
+//                result.setSettings(settingsService.setSettingsGeneral(allBean.getSettings()));
+//                status.put("settings", _AllBeanStatus.success());
+//            } catch (Exception e) {
+//                status.put("settings", _AllBeanStatus.error(
+//                        Response.Status.INTERNAL_SERVER_ERROR,
+//                        "Failed to apply settings",
+//                        e.getMessage()
+//                ));
+//            }
+//        }
 
-        // Apply groups (before users, since users may reference groups)
-        Map<String, GroupBean> groupsMap = allBean.getGroups();
-        if (groupsMap != null && !groupsMap.isEmpty()) {
-            try {
-                // Validate group identifiers
-                for (Map.Entry<String, GroupBean> entry : groupsMap.entrySet()) {
-                    String key = entry.getKey();
-                    GroupBean group = entry.getValue();
-                    if (group.getName() == null) {
-                        group.setName(key);
-                    } else if (!key.equals(group.getName())) {
-                        status.put("groups", _AllBeanConfigStatus.error(
-                            Response.Status.BAD_REQUEST,
-                            "Group identifier mismatch",
-                            String.format("Map key '%s' does not match group name '%s'", key, group.getName())
-                        ));
-                        continue;
-                    }
-                }
+        setEntity(allBean.getSettings(), settingsService::setSettingsGeneral);
 
-                if (!status.containsKey("groups")) {
-                    List<GroupBean> groupsList = new ArrayList<>(groupsMap.values());
-                    List<GroupBean> updatedGroups = groupsService.setGroups(1L, groupsList);
+        setEntities(allBean.getDirectories(), AbstractDirectoryBean::getName, directoriesService::setDirectories);
 
-                    Map<String, GroupBean> resultGroups = new HashMap<>();
-                    for (GroupBean group : updatedGroups) {
-                        resultGroups.put(group.getName(), group);
-                    }
-                    result.setGroups(resultGroups);
-                    status.put("groups", _AllBeanConfigStatus.success());
-                }
-            } catch (Exception e) {
-                status.put("groups", _AllBeanConfigStatus.error(
-                        Response.Status.BAD_REQUEST,
-                        "Failed to apply groups configuration",
-                        e.getMessage()
-                ));
-            }
-        }
+//        // Process entities using a generic handler
+//        processEntities(allBean.getGroups(), "groups", GroupBean::getName, GroupsService::setGroups, result::setGroups, status);
 
-        // Apply users
-        Map<String, UserBean> usersMap = allBean.getUsers();
-        if (usersMap != null && !usersMap.isEmpty()) {
-            try {
-                // Validate user identifiers
-                for (Map.Entry<String, UserBean> entry : usersMap.entrySet()) {
-                    String key = entry.getKey();
-                    UserBean user = entry.getValue();
-                    if (user.getUsername() == null) {
-                        user.setUsername(key);
-                    } else if (!key.equals(user.getUsername())) {
-                        status.put("users", _AllBeanConfigStatus.error(
-                            Response.Status.BAD_REQUEST,
-                            "User identifier mismatch",
-                            String.format("Map key '%s' does not match username '%s'", key, user.getUsername())
-                        ));
-                        continue;
-                    }
-                }
-
-                if (!status.containsKey("users")) {
-                    List<UserBean> usersList = new ArrayList<>(usersMap.values());
-                    List<UserBean> updatedUsers = usersService.setUsers(1L, usersList);
-
-                    Map<String, UserBean> resultUsers = new HashMap<>();
-                    for (UserBean user : updatedUsers) {
-                        resultUsers.put(user.getUsername(), user);
-                    }
-                    result.setUsers(resultUsers);
-                    status.put("users", _AllBeanConfigStatus.success());
-                }
-            } catch (Exception e) {
-                status.put("users", _AllBeanConfigStatus.error(
-                        Response.Status.BAD_REQUEST,
-                        "Failed to apply users configuration",
-                        e.getMessage()
-                ));
-            }
-        }
-
-        // Apply applications
-        Map<String, ApplicationBean> appsMap = allBean.getApplications();
-        if (appsMap != null && !appsMap.isEmpty()) {
-            try {
-                // Validate application identifiers
-                for (Map.Entry<String, ApplicationBean> entry : appsMap.entrySet()) {
-                    String key = entry.getKey();
-                    ApplicationBean app = entry.getValue();
-                    if (app.getName() == null) {
-                        app.setName(key);
-                    } else if (!key.equals(app.getName())) {
-                        status.put("applications", _AllBeanConfigStatus.error(
-                            Response.Status.BAD_REQUEST,
-                            "Application identifier mismatch",
-                            String.format("Map key '%s' does not match application name '%s'", key, app.getName())
-                        ));
-                        continue;
-                    }
-                }
-
-                if (!status.containsKey("applications")) {
-                    List<ApplicationBean> appsList = new ArrayList<>(appsMap.values());
-                    List<ApplicationBean> updatedApps = applicationsService.setApplications(appsList);
-
-                    Map<String, ApplicationBean> resultApps = new HashMap<>();
-                    for (ApplicationBean app : updatedApps) {
-                        resultApps.put(app.getName(), app);
-                    }
-                    result.setApplications(resultApps);
-                    status.put("applications", _AllBeanConfigStatus.success());
-                }
-            } catch (Exception e) {
-                status.put("applications", _AllBeanConfigStatus.error(
-                        Response.Status.BAD_REQUEST,
-                        "Failed to apply applications configuration",
-                        e.getMessage()
-                ));
-            }
-        }
+//        processEntities(allBean.getUsers(), "users", UserBean::getUsername,
+//                users -> usersService.setUsers(1L, users), result::setUsers, status);
+//
+//        processEntities(allBean.getApplications(), "applications", ApplicationBean::getName,
+//                applicationsService::setApplications, result::setApplications, status);
 
         result.setStatus(status);
         return result;
+    }
+
+    private <T> void processEntities(
+            Map<String, T> entityMap,
+            String entityType,
+            Function<T, String> getIdentifier,
+            Function<List<T>, List<T>> updateFunction,
+            BiFunction<Map<String, T>, _AllBean, _AllBean> resultSetter,
+            Map<String, _AllBeanStatus> status) {
+
+        if (entityMap == null || entityMap.isEmpty()) {
+            return;
+        }
+
+        try {
+            // Validate entity identifiers
+            for (Map.Entry<String, T> entry : entityMap.entrySet()) {
+                String key = entry.getKey();
+                T entity = entry.getValue();
+                String identifier = getIdentifier.apply(entity);
+
+                if (identifier == null) {
+                    // Try to set the key as the identifier using reflection
+                    try {
+                        entity.getClass().getMethod("set" + entityType.substring(0, 1).toUpperCase() +
+                                entityType.substring(1, entityType.length() - 1), String.class)
+                                .invoke(entity, key);
+                    } catch (Exception e) {
+                        // If reflection fails, report the error
+                        status.put(entityType, _AllBeanStatus.error(
+                            Response.Status.BAD_REQUEST,
+                            entityType + " identifier missing",
+                            "Could not set identifier for key: " + key
+                        ));
+                        return;
+                    }
+                } else if (!key.equals(identifier)) {
+                    status.put(entityType, _AllBeanStatus.error(
+                        Response.Status.BAD_REQUEST,
+                        entityType.substring(0, 1).toUpperCase() + entityType.substring(1) + " identifier mismatch",
+                        String.format("Map key '%s' does not match %s '%s'", key, entityType.substring(0, entityType.length() - 1), identifier)
+                    ));
+                    return;
+                }
+            }
+
+            if (!status.containsKey(entityType)) {
+                List<T> entityList = new ArrayList<>(entityMap.values());
+                List<T> updatedEntities = updateFunction.apply(entityList);
+
+                Map<String, T> resultMap = new HashMap<>();
+                for (T entity : updatedEntities) {
+                    resultMap.put(getIdentifier.apply(entity), entity);
+                }
+                resultSetter.apply(resultMap, null);
+                status.put(entityType, _AllBeanStatus.success());
+            }
+        } catch (Exception e) {
+            status.put(entityType, _AllBeanStatus.error(
+                    Response.Status.BAD_REQUEST,
+                    "Failed to apply " + entityType + " configuration",
+                    e.getMessage()
+            ));
+        }
     }
 }

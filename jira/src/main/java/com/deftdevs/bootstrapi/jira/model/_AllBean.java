@@ -1,8 +1,8 @@
-package com.deftdevs.bootstrapi.crowd.model;
+package com.deftdevs.bootstrapi.jira.model;
 
-import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
+import com.deftdevs.bootstrapi.commons.model.GroupBean;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.commons.model.UserBean;
 import com.deftdevs.bootstrapi.commons.model.type._AllBeanStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -15,18 +15,19 @@ import java.util.Map;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement(name = BootstrAPI._ALL)
+@XmlRootElement(name = "all")
 public class _AllBean {
 
     @XmlElement
     private SettingsBean settings;
 
     @XmlElement
-    private Map<String, AbstractDirectoryBean> directories;
+    private Map<String, UserBean> users;
 
     @XmlElement
-    private Map<String, ApplicationBean> applications;
+    private Map<String, GroupBean> groups;
 
     @XmlElement
     private Map<String, _AllBeanStatus> status;
+
 }
