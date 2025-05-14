@@ -14,7 +14,6 @@ public class SettingsBrandingColorSchemeBeanUtil {
      *
      * @param colourScheme the colour scheme
      */
-    @NotNull
     public static SettingsBrandingColorSchemeBean toSettingsBrandingColorSchemeBean(
             @NotNull final ColourScheme colourScheme) {
 
@@ -44,7 +43,6 @@ public class SettingsBrandingColorSchemeBeanUtil {
      * @param schemeBean the colour scheme bean
      * @param baseScheme optional - the initial base scheme to modify
      */
-    @NotNull
     public static BaseColourScheme toGlobalColorScheme(
             @NotNull final SettingsBrandingColorSchemeBean schemeBean,
             final ColourScheme baseScheme) {

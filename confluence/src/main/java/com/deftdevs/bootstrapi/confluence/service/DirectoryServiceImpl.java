@@ -19,7 +19,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -82,7 +81,11 @@ public class DirectoryServiceImpl implements DirectoriesService {
     }
 
     @Override
-    public AbstractDirectoryBean setDirectory(long id, @NotNull AbstractDirectoryBean abstractDirectoryBean, boolean testConnection) {
+    public AbstractDirectoryBean setDirectory(
+            long id,
+            AbstractDirectoryBean abstractDirectoryBean,
+            boolean testConnection) {
+
         if (abstractDirectoryBean instanceof DirectoryCrowdBean) {
             return setDirectoryCrowd(id, (DirectoryCrowdBean) abstractDirectoryBean, testConnection);
         } else {
@@ -90,7 +93,11 @@ public class DirectoryServiceImpl implements DirectoriesService {
         }
     }
 
-    private AbstractDirectoryBean setDirectoryCrowd(long id, @NotNull DirectoryCrowdBean crowdBean, boolean testConnection) {
+    private AbstractDirectoryBean setDirectoryCrowd(
+            long id,
+            DirectoryCrowdBean crowdBean,
+            boolean testConnection) {
+
         Directory existingDirectory = findDirectory(id);
         Directory directory = validateAndCreateDirectoryConfig(crowdBean, testConnection);
 
@@ -115,7 +122,10 @@ public class DirectoryServiceImpl implements DirectoriesService {
     }
 
     @Override
-    public AbstractDirectoryBean addDirectory(AbstractDirectoryBean abstractDirectoryBean, boolean testConnection) {
+    public AbstractDirectoryBean addDirectory(
+            AbstractDirectoryBean abstractDirectoryBean,
+            boolean testConnection) {
+
         if (abstractDirectoryBean instanceof DirectoryCrowdBean) {
             DirectoryCrowdBean crowdBean = (DirectoryCrowdBean) abstractDirectoryBean;
             Directory directory = validateAndCreateDirectoryConfig(crowdBean, testConnection);

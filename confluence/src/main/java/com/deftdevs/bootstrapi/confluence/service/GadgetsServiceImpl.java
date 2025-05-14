@@ -11,8 +11,10 @@ import com.atlassian.gadgets.directory.spi.ExternalGadgetSpecStore;
 import com.atlassian.gadgets.spec.GadgetSpecFactory;
 import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import com.atlassian.spring.container.ContainerManager;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
+import com.deftdevs.bootstrapi.commons.exception.web.ServiceUnavailableException;
 import com.deftdevs.bootstrapi.commons.model.GadgetBean;
 import com.deftdevs.bootstrapi.commons.service.api.GadgetsService;
 import org.slf4j.Logger;
@@ -20,7 +22,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.List;
 import java.util.Locale;
@@ -34,23 +35,23 @@ public class GadgetsServiceImpl implements GadgetsService {
 
     private static final Logger log = LoggerFactory.getLogger(GadgetsServiceImpl.class);
 
-
     private final ExternalGadgetSpecStore externalGadgetSpecStore;
     private final GadgetSpecFactory gadgetSpecFactory;
     private final LocaleManager localeManager;
 
     @Inject
     public GadgetsServiceImpl(
-            @ComponentImport ExternalGadgetSpecStore externalGadgetSpecStore,
-            @ComponentImport GadgetSpecFactory gadgetSpecFactory,
             @ComponentImport LocaleManager localeManager) {
-        this.externalGadgetSpecStore = externalGadgetSpecStore;
-        this.gadgetSpecFactory = gadgetSpecFactory;
+
+        this.externalGadgetSpecStore = ContainerManager.getComponent("externalGadgetSpecStore", ExternalGadgetSpecStore.class);
+        this.gadgetSpecFactory = ContainerManager.getComponent("gadgetSpecFactory", GadgetSpecFactory.class);
         this.localeManager = localeManager;
     }
 
     @Override
     public List<GadgetBean> getGadgets() {
+        checkGadgetsAvailable();
+
         Iterable<ExternalGadgetSpec> specIterable = externalGadgetSpecStore.entries();
         return StreamSupport.stream(specIterable.spliterator(), false)
                 .map(spec -> {
@@ -62,18 +63,26 @@ public class GadgetsServiceImpl implements GadgetsService {
     }
 
     @Override
-    public GadgetBean getGadget(long id) {
+    public GadgetBean getGadget(
+            final long id) {
+
+        checkGadgetsAvailable();
+
         return findGadget(id);
     }
 
     @Override
-    public List<GadgetBean> setGadgets(List<GadgetBean> gadgetBeans) {
+    public List<GadgetBean> setGadgets(
+            final List<GadgetBean> gadgetBeans) {
+
+        checkGadgetsAvailable();
+
         //as the gadget only consists of an url, only new gadgets need to be added, existing gadget urls remain
         List<GadgetBean> existingGadgets = getGadgets();
         gadgetBeans.forEach(gadgetBean -> {
             Optional<GadgetBean> gadget = existingGadgets.stream()
                     .filter(bean -> bean.getUrl().toString().equals(gadgetBean.getUrl().toString())).findFirst();
-            if (!gadget.isPresent()) {
+            if (gadget.isEmpty()) {
                 addGadget(gadgetBean);
             }
         });
@@ -81,13 +90,22 @@ public class GadgetsServiceImpl implements GadgetsService {
     }
 
     @Override
-    public GadgetBean setGadget(long id, @NotNull GadgetBean gadgetBean) {
+    public GadgetBean setGadget(
+            final long id,
+            GadgetBean gadgetBean) {
+
+        checkGadgetsAvailable();
+
         deleteGadget(id);
         return addGadget(gadgetBean);
     }
 
     @Override
-    public GadgetBean addGadget(GadgetBean gadgetBean) {
+    public GadgetBean addGadget(
+            final GadgetBean gadgetBean) {
+
+        checkGadgetsAvailable();
+
         URI url = gadgetBean.getUrl();
         GadgetBean addedGadgetBean = new GadgetBean();
         ExternalGadgetSpec addedGadget = externalGadgetSpecStore.add(url);
@@ -113,7 +131,11 @@ public class GadgetsServiceImpl implements GadgetsService {
     }
 
     @Override
-    public void deleteGadgets(boolean force) {
+    public void deleteGadgets(
+            final boolean force) {
+
+        checkGadgetsAvailable();
+
         if (!force) {
             throw new BadRequestException("'force = true' must be supplied to delete all entries");
         } else {
@@ -122,7 +144,10 @@ public class GadgetsServiceImpl implements GadgetsService {
     }
 
     @Override
-    public void deleteGadget(long id) {
+    public void deleteGadget(
+            final long id) {
+
+        checkGadgetsAvailable();
 
         //ensure gadget exists
         findGadget(id);
@@ -131,12 +156,20 @@ public class GadgetsServiceImpl implements GadgetsService {
         externalGadgetSpecStore.remove(ExternalGadgetSpecId.valueOf(String.valueOf(id)));
     }
 
-    private GadgetBean findGadget(long id) {
+    private GadgetBean findGadget(
+            final long id) {
+
         Optional<GadgetBean> result = getGadgets().stream().filter(gadget -> gadget.getId().equals(id)).findFirst();
-        if (!result.isPresent()) {
+        if (result.isEmpty()) {
             throw new NotFoundException(String.format("gadget with id '%s' could not be found", id));
         } else {
             return result.get();
+        }
+    }
+
+    private void checkGadgetsAvailable() {
+        if (externalGadgetSpecStore == null || gadgetSpecFactory == null) {
+            throw new ServiceUnavailableException("Gadgets functionality is not available. Please ensure the 'Gadgets for Confluence' plugin is installed.");
         }
     }
 }

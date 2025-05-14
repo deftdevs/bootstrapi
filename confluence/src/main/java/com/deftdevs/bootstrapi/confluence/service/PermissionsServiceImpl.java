@@ -11,7 +11,6 @@ import com.deftdevs.bootstrapi.confluence.model.util.PermissionsGlobalBeanUtil;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Map;
@@ -42,7 +41,7 @@ public class PermissionsServiceImpl implements PermissionsService {
 
     @Override
     public PermissionsGlobalBean setPermissionsGlobal(
-            @NotNull final PermissionsGlobalBean permissionsGlobalBean) {
+            final PermissionsGlobalBean permissionsGlobalBean) {
 
         setPermissionsGlobalForGroups(permissionsGlobalBean);
         setPermissionsGlobalForAnonymous(permissionsGlobalBean);
@@ -50,7 +49,7 @@ public class PermissionsServiceImpl implements PermissionsService {
     }
 
     private void setPermissionsGlobalForGroups(
-            @NotNull final PermissionsGlobalBean permissionsGlobalBean) {
+            final PermissionsGlobalBean permissionsGlobalBean) {
 
         final Map<String, ? extends Collection<String>> requestGroupPermissions = permissionsGlobalBean.getGroupPermissions();
 
@@ -104,7 +103,7 @@ public class PermissionsServiceImpl implements PermissionsService {
     }
 
     private void setPermissionsGlobalForAnonymous(
-            @NotNull final PermissionsGlobalBean permissionsGlobalBean) {
+            final PermissionsGlobalBean permissionsGlobalBean) {
 
         if (permissionsGlobalBean.getAnonymousPermissions() == null) {
             return;
