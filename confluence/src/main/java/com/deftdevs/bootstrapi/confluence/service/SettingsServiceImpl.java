@@ -3,23 +3,17 @@ package com.deftdevs.bootstrapi.confluence.service;
 import com.atlassian.confluence.setup.settings.CustomHtmlSettings;
 import com.atlassian.confluence.setup.settings.GlobalSettingsManager;
 import com.atlassian.confluence.setup.settings.Settings;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.model.SettingsModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
 import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlModel;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import java.net.URI;
 
-@Component
 public class SettingsServiceImpl implements ConfluenceSettingsService {
 
-    @ComponentImport
     private final GlobalSettingsManager globalSettingsManager;
 
-    @Inject
     public SettingsServiceImpl(
             final GlobalSettingsManager globalSettingsManager) {
 
