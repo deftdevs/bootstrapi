@@ -18,7 +18,7 @@ public class SettingsBrandingColorSchemeModelUtil {
      */
     @NotNull
     public static SettingsBrandingColorSchemeModel getSettingsBrandingColorSchemeModel(
-            @NotNull final ApplicationProperties applicationProperties) {
+            final ApplicationProperties applicationProperties) {
 
         final SettingsBrandingColorSchemeModel schemeModel = new SettingsBrandingColorSchemeModel();
         Map<String, Object> propertyMap = applicationProperties.asMap();
@@ -48,7 +48,7 @@ public class SettingsBrandingColorSchemeModelUtil {
      */
     @NotNull
     public static void setGlobalColorScheme(
-            @NotNull final SettingsBrandingColorSchemeModel schemeModel,
+            final SettingsBrandingColorSchemeModel schemeModel,
             boolean setNullValues,
             final ApplicationProperties applicationProperties) {
 

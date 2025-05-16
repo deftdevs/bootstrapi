@@ -51,6 +51,6 @@ public interface SettingsBannerResource {
             }
     )
     Response setBanner(
-            @NotNull final SettingsBannerModel bean);
+            final SettingsBannerModel bean);
 
 }

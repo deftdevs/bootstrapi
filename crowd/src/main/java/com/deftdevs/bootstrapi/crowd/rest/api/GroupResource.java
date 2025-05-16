@@ -32,8 +32,8 @@ public interface GroupResource {
             }
     )
     Response getGroup(
-            @NotNull @QueryParam("directoryId") final long directoryId,
-            @NotNull @QueryParam("name") final String groupName);
+            @QueryParam("directoryId") final long directoryId,
+            @QueryParam("name") final String groupName);
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -53,8 +53,8 @@ public interface GroupResource {
             }
     )
     Response createGroup(
-            @NotNull @QueryParam("directoryId") final long directoryId,
-            @NotNull final GroupModel groupModel);
+            @QueryParam("directoryId") final long directoryId,
+            final GroupModel groupModel);
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -74,8 +74,8 @@ public interface GroupResource {
             }
     )
     Response updateGroup(
-            @NotNull @QueryParam("directoryId") final long directoryId,
-            @NotNull @QueryParam("name") final String groupName,
-            @NotNull final GroupModel groupModel);
+            @QueryParam("directoryId") final long directoryId,
+            @QueryParam("name") final String groupName,
+            final GroupModel groupModel);
 
 }

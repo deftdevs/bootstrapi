@@ -2,7 +2,6 @@ package com.deftdevs.bootstrapi.commons.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
 
-import javax.validation.constraints.NotNull;
 
 public interface SettingsSecurityService<B extends SettingsSecurityModel> {
 
@@ -20,6 +19,6 @@ public interface SettingsSecurityService<B extends SettingsSecurityModel> {
      * @return the security settings
      */
     B setSettingsSecurity(
-            @NotNull final B settingsSecurityModel);
+            final B settingsSecurityModel);
 
 }

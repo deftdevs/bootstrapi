@@ -17,7 +17,7 @@ Add a license
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **body** | **String**|  | |
+| **body** | **String**|  | [optional] |
 
 ### Return type
 

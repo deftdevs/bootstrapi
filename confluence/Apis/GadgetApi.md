@@ -22,7 +22,7 @@ Add a gadget
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **GadgetModel** | [**GadgetModel**](../Models/GadgetModel.md)|  | |
+| **GadgetModel** | [**GadgetModel**](../Models/GadgetModel.md)|  | [optional] |
 
 ### Return type
 
@@ -98,7 +98,7 @@ Update a gadget
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | **Long**|  | [default to null] |
-| **GadgetModel** | [**GadgetModel**](../Models/GadgetModel.md)|  | |
+| **GadgetModel** | [**GadgetModel**](../Models/GadgetModel.md)|  | [optional] |
 
 ### Return type
 

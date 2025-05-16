@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -54,7 +53,7 @@ public interface GadgetResource {
             }
     )
     Response createGadget(
-            @NotNull final GadgetModel gadgetModel);
+            final GadgetModel gadgetModel);
 
     @PUT
     @Path("{id}")
@@ -76,7 +75,7 @@ public interface GadgetResource {
     )
     Response updateGadget(
             @PathParam("id") final long id,
-            @NotNull final GadgetModel gadgetModel);
+            final GadgetModel gadgetModel);
 
     @DELETE
     @Path("{id}")

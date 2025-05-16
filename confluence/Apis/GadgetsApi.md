@@ -70,7 +70,7 @@ Set a list of gadgets
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **GadgetModel** | [**List**](../Models/GadgetModel.md)|  | |
+| **GadgetModel** | [**List**](../Models/GadgetModel.md)|  | [optional] |
 
 ### Return type
 

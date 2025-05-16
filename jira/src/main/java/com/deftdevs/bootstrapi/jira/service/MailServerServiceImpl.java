@@ -35,7 +35,7 @@ public class MailServerServiceImpl implements MailServerService {
 
     @Override
     public MailServerSmtpModel setMailServerSmtp(
-            @NotNull MailServerSmtpModel mailServerSmtpModel) {
+            MailServerSmtpModel mailServerSmtpModel) {
 
         final SMTPMailServer smtpMailServer = mailServerManager.isDefaultSMTPMailServerDefined()
                 ? mailServerManager.getDefaultSMTPMailServer()
@@ -100,7 +100,7 @@ public class MailServerServiceImpl implements MailServerService {
 
     @Override
     public MailServerPopModel setMailServerPop(
-            @NotNull MailServerPopModel mailServerPopModel) {
+            MailServerPopModel mailServerPopModel) {
 
         final PopMailServer popMailServer = mailServerManager.getDefaultPopMailServer() != null
                 ? mailServerManager.getDefaultPopMailServer()

@@ -4,7 +4,7 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **Long** |  | [optional] [default to null] |
-| **name** | **String** |  | [default to null] |
+| **name** | **String** |  | [optional] [default to null] |
 | **description** | **String** |  | [optional] [default to null] |
 | **active** | **Boolean** |  | [optional] [default to null] |
 | **createdDate** | **Date** |  | [optional] [default to null] |

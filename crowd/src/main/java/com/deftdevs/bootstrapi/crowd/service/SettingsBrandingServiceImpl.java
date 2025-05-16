@@ -75,7 +75,7 @@ public class SettingsBrandingServiceImpl implements CrowdSettingsBrandingService
 
     @Override
     public void setLogo(
-            @NotNull InputStream inputStream) {
+            InputStream inputStream) {
 
         ImageInfo imageInfo = getImageInfo(inputStream);
 

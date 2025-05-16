@@ -4,7 +4,6 @@ import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URI;
@@ -43,19 +42,15 @@ public class ApplicationLinkModel {
     private UUID uuid;
 
     @XmlElement
-    @NotNull
     private String name;
 
     @XmlElement
-    @NotNull
     private ApplicationLinkType type;
 
     @XmlElement
-    @NotNull
     private URI displayUrl;
 
     @XmlElement
-    @NotNull
     private URI rpcUrl;
 
     @XmlElement

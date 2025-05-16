@@ -2,7 +2,6 @@ package com.deftdevs.bootstrapi.commons.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.GadgetModel;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public interface GadgetsService {
@@ -30,7 +29,7 @@ public interface GadgetsService {
      * @return the updated gadgets
      */
     List<GadgetModel> setGadgets(
-            @NotNull final List<GadgetModel> gadgetModels);
+            final List<GadgetModel> gadgetModels);
 
     /**
      * Updates a single gadgets.
@@ -41,7 +40,7 @@ public interface GadgetsService {
      */
     GadgetModel setGadget(
             final long id,
-            @NotNull final GadgetModel gadgetModel);
+            final GadgetModel gadgetModel);
 
     /**
      * Add one single gadget.
@@ -50,7 +49,7 @@ public interface GadgetsService {
      * @return the added gadget
      */
     GadgetModel addGadget(
-            @NotNull final GadgetModel gadgetModel);
+            final GadgetModel gadgetModel);
 
     /**
      * Deletes all gadgets

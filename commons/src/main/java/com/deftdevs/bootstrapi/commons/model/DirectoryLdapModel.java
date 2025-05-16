@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -32,7 +31,6 @@ public class DirectoryLdapModel extends AbstractDirectoryModel {
     public static class DirectoryLdapServer {
 
         @XmlElement
-        @NotNull
         private String host;
 
         @XmlElement

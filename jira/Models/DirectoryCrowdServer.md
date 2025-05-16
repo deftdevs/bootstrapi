@@ -3,10 +3,10 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **url** | **URI** |  | [default to null] |
+| **url** | **URI** |  | [optional] [default to null] |
 | **proxy** | [**DirectoryCrowdServerProxy**](DirectoryCrowdServerProxy.md) |  | [optional] [default to null] |
-| **appUsername** | **String** |  | [default to null] |
-| **appPassword** | **String** |  | [default to null] |
+| **appUsername** | **String** |  | [optional] [default to null] |
+| **appPassword** | **String** |  | [optional] [default to null] |
 | **connectionTimeoutInMillis** | **Long** |  | [optional] [default to null] |
 | **maxConnections** | **Integer** |  | [optional] [default to null] |
 

@@ -79,7 +79,7 @@ public class DirectoryServiceImpl implements DirectoriesService {
     }
 
     @Override
-    public AbstractDirectoryModel setDirectory(long id, @NotNull AbstractDirectoryModel abstractDirectoryModel, boolean testConnection) {
+    public AbstractDirectoryModel setDirectory(long id, AbstractDirectoryModel abstractDirectoryModel, boolean testConnection) {
         if (abstractDirectoryModel instanceof DirectoryCrowdModel) {
             return setDirectoryCrowd(id, (DirectoryCrowdModel) abstractDirectoryModel, testConnection);
         } else {
@@ -87,7 +87,7 @@ public class DirectoryServiceImpl implements DirectoriesService {
         }
     }
 
-    private AbstractDirectoryModel setDirectoryCrowd(long id, @NotNull DirectoryCrowdModel crowdModel, boolean testConnection) {
+    private AbstractDirectoryModel setDirectoryCrowd(long id, DirectoryCrowdModel crowdModel, boolean testConnection) {
         Directory existingDirectory = findDirectory(id);
         Directory directory = validateAndCreateDirectoryConfig(crowdModel, testConnection);
 

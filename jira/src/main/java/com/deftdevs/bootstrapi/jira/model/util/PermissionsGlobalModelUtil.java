@@ -13,7 +13,7 @@ public class PermissionsGlobalModelUtil {
 
     @NotNull
     public static PermissionsGlobalModel toPermissionsGlobalModel(
-            @NotNull final List<GlobalPermissionEntry> globalPermissions) {
+            final List<GlobalPermissionEntry> globalPermissions) {
 
         final TreeMap<String, TreeSet<String>> groupGlobalPermissions = new TreeMap<>();
 

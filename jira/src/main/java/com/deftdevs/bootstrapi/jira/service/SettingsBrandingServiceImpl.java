@@ -63,7 +63,7 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     @Override
     public SettingsBrandingColorSchemeModel setColourScheme(
-            @NotNull SettingsBrandingColorSchemeModel colorSchemeModel) {
+            SettingsBrandingColorSchemeModel colorSchemeModel) {
         SettingsBrandingColorSchemeModelUtil.setGlobalColorScheme(colorSchemeModel, false, applicationProperties);
         return SettingsBrandingColorSchemeModelUtil.getSettingsBrandingColorSchemeModel(applicationProperties);
     }
@@ -75,7 +75,7 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     @Override
     public void setLogo(
-            @NotNull InputStream inputStream) {
+            InputStream inputStream) {
 
         ImageScaler imageScaler = new ImageScaler();
         LogoUploader logoUploader = new LogoUploader(applicationProperties, jiraHome, imageScaler, authenticationContext.getI18nHelper(), uploadService);
@@ -99,7 +99,7 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     @Override
     public void setFavicon(
-            @NotNull InputStream inputStream) {
+            InputStream inputStream) {
 
         ImageScaler imageScaler = new ImageScaler();
         final LogoUploader logoUploader = new LogoUploader(applicationProperties, jiraHome, imageScaler, authenticationContext.getI18nHelper(), uploadService);
