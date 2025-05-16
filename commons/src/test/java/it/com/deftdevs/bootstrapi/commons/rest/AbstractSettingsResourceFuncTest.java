@@ -60,7 +60,7 @@ public abstract class AbstractSettingsResourceFuncTest {
                 .password("user")
                 .request();
 
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), settingsResponse.statusCode());
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), settingsResponse.statusCode());
     }
 
     @Test
@@ -70,7 +70,7 @@ public abstract class AbstractSettingsResourceFuncTest {
                 .password("user")
                 .request(HttpMethod.PUT, getExampleBean());
 
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), settingsResponse.statusCode());
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), settingsResponse.statusCode());
     }
 
     protected SettingsBean getExampleBean() {

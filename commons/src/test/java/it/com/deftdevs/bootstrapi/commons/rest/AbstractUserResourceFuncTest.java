@@ -78,7 +78,7 @@ public abstract class AbstractUserResourceFuncTest {
                 .username("user")
                 .password("user")
                 .request();
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), usersResponse.statusCode());
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), usersResponse.statusCode());
     }
 
     @Test
@@ -88,7 +88,7 @@ public abstract class AbstractUserResourceFuncTest {
                 .username("user")
                 .password("user")
                 .request(HttpMethod.PUT, exampleBean);
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), usersResponse.statusCode());
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), usersResponse.statusCode());
     }
 
     protected String getUserNameQueryParam(UserBean userBean) {

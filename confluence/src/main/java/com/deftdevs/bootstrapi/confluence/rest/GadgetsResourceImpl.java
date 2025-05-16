@@ -1,7 +1,6 @@
 package com.deftdevs.bootstrapi.confluence.rest;
 
-import com.sun.jersey.spi.container.ResourceFilters;
-import com.deftdevs.bootstrapi.confluence.filter.SysAdminOnlyResourceFilter;
+import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.rest.AbstractGadgetsResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.GadgetsService;
@@ -11,12 +10,14 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 
 @Path(BootstrAPI.GADGETS)
-@ResourceFilters(SysAdminOnlyResourceFilter.class)
+@SystemAdminOnly
 @Component
 public class GadgetsResourceImpl extends AbstractGadgetsResourceImpl {
 
     @Inject
-    public GadgetsResourceImpl(GadgetsService gadgetsService) {
+    public GadgetsResourceImpl(
+            final GadgetsService gadgetsService) {
+
         super(gadgetsService);
     }
 }

@@ -63,7 +63,7 @@ public abstract class AbstractMailServerPopResourceFuncTest {
                 .password("user")
                 .request();
 
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), mailServerPopResponse.statusCode());
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), mailServerPopResponse.statusCode());
     }
 
     @Test
@@ -73,7 +73,7 @@ public abstract class AbstractMailServerPopResourceFuncTest {
                 .password("user")
                 .request(HttpMethod.PUT, getExampleBean());
 
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), mailServerPopResponse.statusCode());
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), mailServerPopResponse.statusCode());
     }
 
     protected void assertMailServerBeanAgainstExample(MailServerPopBean bean) {

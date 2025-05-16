@@ -54,7 +54,7 @@ public abstract class AbstractApplicationLinksResourceFuncTest {
                 .username("user")
                 .password("user")
                 .request();
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), applicationLinksResource.statusCode());
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), applicationLinksResource.statusCode());
     }
 
     protected ApplicationLinkBean getExampleBean() {

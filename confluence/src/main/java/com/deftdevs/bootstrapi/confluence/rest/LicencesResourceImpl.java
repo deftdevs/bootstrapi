@@ -1,7 +1,6 @@
 package com.deftdevs.bootstrapi.confluence.rest;
 
-import com.sun.jersey.spi.container.ResourceFilters;
-import com.deftdevs.bootstrapi.confluence.filter.SysAdminOnlyResourceFilter;
+import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.rest.AbstractLicensesResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
@@ -11,7 +10,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 
 @Path(BootstrAPI.LICENSES)
-@ResourceFilters(SysAdminOnlyResourceFilter.class)
+@SystemAdminOnly
 @Component
 public class LicencesResourceImpl extends AbstractLicensesResourceImpl {
 

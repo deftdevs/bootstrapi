@@ -1,6 +1,5 @@
 package com.deftdevs.bootstrapi.jira.rest;
 
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.rest.AbstractApplicationLinkResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
