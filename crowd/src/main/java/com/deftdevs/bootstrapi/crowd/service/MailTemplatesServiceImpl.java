@@ -2,7 +2,6 @@ package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.exception.ObjectNotFoundException;
 import com.atlassian.crowd.manager.property.PropertyManager;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.crowd.model.MailTemplatesBean;
 import com.deftdevs.bootstrapi.crowd.service.api.MailTemplatesService;
@@ -13,7 +12,6 @@ import javax.inject.Inject;
 import static com.atlassian.crowd.model.property.Property.*;
 
 @Component
-@ExportAsService(MailTemplatesService.class)
 public class MailTemplatesServiceImpl implements MailTemplatesService {
 
     private final PropertyManager propertyManager;

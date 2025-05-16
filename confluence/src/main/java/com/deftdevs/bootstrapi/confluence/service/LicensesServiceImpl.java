@@ -1,6 +1,5 @@
 package com.deftdevs.bootstrapi.confluence.service;
 
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.i18n.InvalidOperationException;
 import com.atlassian.sal.api.license.LicenseHandler;
@@ -19,7 +18,6 @@ import java.util.List;
 import static com.atlassian.confluence.setup.ConfluenceBootstrapConstants.DEFAULT_LICENSE_REGISTRY_KEY;
 
 @Component
-@ExportAsService(LicensesService.class)
 public class LicensesServiceImpl implements LicensesService {
 
     private final LicenseHandler licenseHandler;

@@ -2,7 +2,6 @@ package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.confluence.user.ConfluenceUser;
 import com.atlassian.confluence.user.UserAccessor;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.user.EntityException;
 import com.atlassian.user.User;
@@ -21,7 +20,6 @@ import java.util.List;
 import static com.deftdevs.bootstrapi.commons.util.BeanValidationUtil.validate;
 
 @Component
-@ExportAsService(UsersService.class)
 public class UsersServiceImpl implements UsersService {
 
     private final UserManager userManager;

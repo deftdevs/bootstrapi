@@ -4,7 +4,6 @@ import com.atlassian.crowd.manager.property.PropertyManager;
 import com.atlassian.crowd.manager.property.PropertyManagerException;
 import com.atlassian.crowd.model.lookandfeel.LookAndFeelConfiguration;
 import com.atlassian.crowd.util.ImageInfo;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageBean;
@@ -25,7 +24,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-@ExportAsService(SettingsBrandingService.class)
 public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     private final PropertyManager propertyManager;

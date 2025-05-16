@@ -7,7 +7,6 @@ import com.atlassian.mail.server.MailServerManager;
 import com.atlassian.mail.server.PopMailServer;
 import com.atlassian.mail.server.SMTPMailServer;
 import com.atlassian.mail.server.impl.PopMailServerImpl;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
@@ -21,7 +20,6 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 
 @Component
-@ExportAsService(MailServerService.class)
 public class MailServerServiceImpl implements MailServerService {
 
     private final MailServerManager mailServerManager;

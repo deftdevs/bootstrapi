@@ -1,17 +1,18 @@
 package com.deftdevs.bootstrapi.crowd.service;
 
-import com.atlassian.crowd.exception.*;
+import com.atlassian.crowd.exception.InvalidGroupException;
+import com.atlassian.crowd.exception.OperationFailedException;
+import com.atlassian.crowd.exception.ReadOnlyGroupException;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.crowd.manager.directory.DirectoryPermissionException;
 import com.atlassian.crowd.model.group.Group;
 import com.atlassian.crowd.model.group.GroupTemplate;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import com.deftdevs.bootstrapi.commons.exception.DirectoryNotFoundException;
+import com.deftdevs.bootstrapi.commons.exception.GroupNotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.model.GroupBean;
-import com.deftdevs.bootstrapi.commons.exception.DirectoryNotFoundException;
-import com.deftdevs.bootstrapi.commons.exception.GroupNotFoundException;
 import com.deftdevs.bootstrapi.crowd.model.util.GroupBeanUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-@ExportAsService(GroupsService.class)
 public class GroupsServiceImpl implements GroupsService {
 
     @ComponentImport

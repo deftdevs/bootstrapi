@@ -7,8 +7,8 @@ import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.crowd.search.EntityDescriptor;
 import com.atlassian.crowd.search.builder.QueryBuilder;
 import com.atlassian.crowd.search.query.entity.EntityQuery;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import com.deftdevs.bootstrapi.commons.exception.DirectoryNotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.exception.web.ServiceUnavailableException;
@@ -18,7 +18,6 @@ import com.deftdevs.bootstrapi.commons.model.GroupBean;
 import com.deftdevs.bootstrapi.commons.model.UserBean;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
-import com.deftdevs.bootstrapi.commons.exception.DirectoryNotFoundException;
 import com.deftdevs.bootstrapi.crowd.model.util.DirectoryBeanUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
@@ -36,7 +35,6 @@ import java.util.stream.Collectors;
 import static com.atlassian.crowd.embedded.api.DirectoryType.INTERNAL;
 
 @Component
-@ExportAsService(DirectoriesService.class)
 public class DirectoriesServiceImpl implements DirectoriesService {
 
     private static final int RETRY_AFTER_IN_SECONDS = 5;

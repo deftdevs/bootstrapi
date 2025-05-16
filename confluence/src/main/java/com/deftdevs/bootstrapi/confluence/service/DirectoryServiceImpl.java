@@ -5,7 +5,6 @@ import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.embedded.impl.ImmutableDirectory;
 import com.atlassian.crowd.exception.DirectoryCurrentlySynchronisingException;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
@@ -29,7 +28,6 @@ import java.util.stream.Collectors;
 import static java.lang.String.format;
 
 @Component
-@ExportAsService(DirectoriesService.class)
 public class DirectoryServiceImpl implements DirectoriesService {
 
     private static final Logger log = LoggerFactory.getLogger(DirectoryServiceImpl.class);

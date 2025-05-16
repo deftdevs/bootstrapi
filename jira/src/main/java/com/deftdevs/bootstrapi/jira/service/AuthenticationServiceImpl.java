@@ -1,6 +1,5 @@
 package com.deftdevs.bootstrapi.jira.service;
 
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.plugins.authentication.api.config.IdpConfig;
 import com.atlassian.plugins.authentication.api.config.IdpConfigService;
@@ -21,7 +20,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
-@ExportAsService(JiraAuthenticationService.class)
 public class AuthenticationServiceImpl implements JiraAuthenticationService {
 
     @ComponentImport

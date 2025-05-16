@@ -10,7 +10,6 @@ import com.atlassian.jira.lookandfeel.LookAndFeelProperties;
 import com.atlassian.jira.lookandfeel.upload.LogoUploader;
 import com.atlassian.jira.lookandfeel.upload.UploadService;
 import com.atlassian.jira.security.JiraAuthenticationContext;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
@@ -34,7 +33,6 @@ import static com.atlassian.jira.lookandfeel.LookAndFeelConstants.JIRA_SCALED_LO
 import static org.apache.commons.lang3.BooleanUtils.toStringTrueFalse;
 
 @Component
-@ExportAsService(SettingsBrandingService.class)
 public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     private final ApplicationProperties applicationProperties;
