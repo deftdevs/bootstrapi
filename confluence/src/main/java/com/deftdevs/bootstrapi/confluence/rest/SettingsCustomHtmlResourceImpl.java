@@ -5,20 +5,16 @@ import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlModel;
 import com.deftdevs.bootstrapi.confluence.rest.api.SettingsCustomHtmlResource;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 @Path(BootstrAPI.SETTINGS + "/" + BootstrAPI.SETTINGS_CUSTOM_HTML)
 @SystemAdminOnly
-@Component
 public class SettingsCustomHtmlResourceImpl implements SettingsCustomHtmlResource {
 
     private final ConfluenceSettingsService settingsService;
 
-    @Inject
     public SettingsCustomHtmlResourceImpl(
             final ConfluenceSettingsService settingsService) {
 

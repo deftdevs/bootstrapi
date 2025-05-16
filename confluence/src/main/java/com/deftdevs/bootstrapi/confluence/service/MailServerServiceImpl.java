@@ -7,7 +7,6 @@ import com.atlassian.mail.server.MailServerManager;
 import com.atlassian.mail.server.PopMailServer;
 import com.atlassian.mail.server.SMTPMailServer;
 import com.atlassian.mail.server.impl.PopMailServerImpl;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.MailServerPopModel;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
@@ -15,17 +14,14 @@ import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
 import com.deftdevs.bootstrapi.confluence.model.util.MailServerPopModelUtil;
 import com.deftdevs.bootstrapi.confluence.model.util.MailServerSmtpModelUtil;
 import com.deftdevs.bootstrapi.confluence.util.MailProtocolUtil;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
-
-@Component
 public class MailServerServiceImpl implements MailServerService {
 
     private final MailServerManager mailServerManager;
 
-    @Inject
-    public MailServerServiceImpl(@ComponentImport final MailServerManager mailServerManager) {
+    public MailServerServiceImpl(
+            final MailServerManager mailServerManager) {
+
         this.mailServerManager = mailServerManager;
     }
 

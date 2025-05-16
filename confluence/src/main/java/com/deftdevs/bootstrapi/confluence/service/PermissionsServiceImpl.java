@@ -2,14 +2,11 @@ package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.confluence.security.SpacePermission;
 import com.atlassian.confluence.security.SpacePermissionManager;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
 import com.deftdevs.bootstrapi.commons.service.api.PermissionsService;
 import com.deftdevs.bootstrapi.confluence.model.util.PermissionsGlobalModelUtil;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.HashSet;
@@ -20,13 +17,10 @@ import java.util.stream.Collectors;
 
 import static com.atlassian.confluence.security.SpacePermission.INVALID_ANONYMOUS_PERMISSIONS;
 
-@Component
 public class PermissionsServiceImpl implements PermissionsService {
 
-    @ComponentImport
     private final SpacePermissionManager spacePermissionManager;
 
-    @Inject
     public PermissionsServiceImpl(
             final SpacePermissionManager spacePermissionManager) {
 

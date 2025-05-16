@@ -6,9 +6,7 @@ import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
 import com.deftdevs.bootstrapi.commons.rest.AbstractSettingsSecurityResourceImpl;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -19,10 +17,8 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @SystemAdminOnly
-@Component
 public class SettingsSecurityResourceImpl extends AbstractSettingsSecurityResourceImpl<SettingsSecurityModel, ConfluenceSettingsService> {
 
-    @Inject
     public SettingsSecurityResourceImpl(
             final ConfluenceSettingsService settingsService) {
 
