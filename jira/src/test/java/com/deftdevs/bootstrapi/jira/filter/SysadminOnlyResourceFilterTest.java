@@ -1,10 +1,9 @@
 package com.deftdevs.bootstrapi.jira.filter;
 
-import com.atlassian.plugins.rest.common.security.AuthenticationRequiredException;
-import com.atlassian.plugins.rest.common.security.AuthorisationException;
 import com.atlassian.sal.api.user.UserKey;
 import com.atlassian.sal.api.user.UserManager;
 import com.atlassian.sal.api.user.UserProfile;
+import com.deftdevs.bootstrapi.commons.exception.web.UnauthorizedException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,7 +36,7 @@ class SysadminOnlyResourceFilterTest {
 
     @Test
     void testAdminAccessNoUser() {
-        assertThrows(AuthenticationRequiredException.class, () -> {
+        assertThrows(UnauthorizedException.class, () -> {
             sysadminOnlyResourceFilter.filter(null);
         });
     }
@@ -47,7 +46,7 @@ class SysadminOnlyResourceFilterTest {
         final UserProfile userProfile = mock(UserProfile.class);
         doReturn(userProfile).when(userManager).getRemoteUser();
 
-        assertThrows(AuthorisationException.class, () -> {
+        assertThrows(UnauthorizedException.class, () -> {
             sysadminOnlyResourceFilter.filter(null);
         });
     }

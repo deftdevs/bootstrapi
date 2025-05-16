@@ -1,10 +1,9 @@
 package com.deftdevs.bootstrapi.jira.filter;
 
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import com.atlassian.plugins.rest.common.security.AuthenticationRequiredException;
-import com.atlassian.plugins.rest.common.security.AuthorisationException;
 import com.atlassian.sal.api.user.UserManager;
 import com.atlassian.sal.api.user.UserProfile;
+import com.deftdevs.bootstrapi.commons.exception.web.UnauthorizedException;
 import com.sun.jersey.spi.container.ContainerRequest;
 import com.sun.jersey.spi.container.ContainerRequestFilter;
 import com.sun.jersey.spi.container.ContainerResponseFilter;
@@ -40,10 +39,8 @@ public class SysadminOnlyResourceFilter implements ContainerRequestFilter, Resou
 
         final UserProfile loggedInUser = userManager.getRemoteUser();
 
-        if (loggedInUser == null) {
-            throw new AuthenticationRequiredException();
-        } else if (!userManager.isSystemAdmin(loggedInUser.getUserKey())) {
-            throw new AuthorisationException("Client must be authenticated as an system administrator to access this resource.");
+        if (loggedInUser == null || !userManager.isSystemAdmin(loggedInUser.getUserKey())) {
+            throw new UnauthorizedException("Client must be authenticated as a system administrator to access this resource.");
         }
 
         return containerRequest;

@@ -1,8 +1,7 @@
 package com.deftdevs.bootstrapi.confluence.rest;
 
-import com.sun.jersey.spi.container.ResourceFilters;
+import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.confluence.filter.SysAdminOnlyResourceFilter;
 import com.deftdevs.bootstrapi.confluence.model.CacheBean;
 import com.deftdevs.bootstrapi.confluence.rest.api.CachesResource;
 import com.deftdevs.bootstrapi.confluence.service.api.CachesService;
@@ -13,7 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 @Path(BootstrAPI.CACHES)
-@ResourceFilters(SysAdminOnlyResourceFilter.class)
+@SystemAdminOnly
 @Component
 public class CachesResourceImpl implements CachesResource {
 
@@ -22,6 +21,7 @@ public class CachesResourceImpl implements CachesResource {
     @Inject
     public CachesResourceImpl(
             final CachesService cachesService) {
+
         this.cachesService = cachesService;
     }
 

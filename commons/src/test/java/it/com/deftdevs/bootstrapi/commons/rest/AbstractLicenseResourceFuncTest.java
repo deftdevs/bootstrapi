@@ -78,7 +78,7 @@ public abstract class AbstractLicenseResourceFuncTest {
                 .password("user")
                 .request();
 
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), licensesResponse.statusCode());
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), licensesResponse.statusCode());
     }
 
     @Test
@@ -88,7 +88,7 @@ public abstract class AbstractLicenseResourceFuncTest {
                 .password("user")
                 .request(HttpMethod.PUT, getExampleBean());
 
-        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), licensesResponse.statusCode());
+        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), licensesResponse.statusCode());
     }
 
     protected List<LicenseBean> getExampleBean() {
