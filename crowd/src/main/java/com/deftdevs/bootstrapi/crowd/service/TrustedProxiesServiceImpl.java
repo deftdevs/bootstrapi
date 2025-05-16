@@ -1,21 +1,15 @@
 package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.proxy.TrustedProxyManager;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.crowd.service.api.TrustedProxiesService;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
 public class TrustedProxiesServiceImpl implements TrustedProxiesService {
 
-    @ComponentImport
     private final TrustedProxyManager trustedProxyManager;
 
-    @Inject
     public TrustedProxiesServiceImpl(
             final TrustedProxyManager trustedProxyManager) {
 

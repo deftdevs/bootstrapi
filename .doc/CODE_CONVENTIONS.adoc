@@ -157,15 +157,15 @@ public interface EntitiesResource {
 ----
 @Path(BootstrAPI.ENTITIES)
 @ResourceFilters(AdminOnlyResourceFilter.class)
-@Component
 public class EntitiesResourceImpl implements EntitiesResource {
 
     private static final Logger log = LoggerFactory.getLogger(EntitiesResourceImpl.class);
 
     private final EntitiesService entitiesService;
 
-    @Inject
-    public EntitiesResourceImpl(EntitiesService entitiesService) {
+    public EntitiesResourceImpl(
+            final EntitiesService entitiesService) {
+
         this.entitiesService = entitiesService;
     }
 

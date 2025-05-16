@@ -7,7 +7,6 @@ import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.crowd.search.EntityDescriptor;
 import com.atlassian.crowd.search.builder.QueryBuilder;
 import com.atlassian.crowd.search.query.entity.EntityQuery;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.DirectoryNotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
@@ -20,10 +19,8 @@ import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
 import com.deftdevs.bootstrapi.crowd.model.util.DirectoryModelUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -34,19 +31,14 @@ import java.util.stream.Collectors;
 
 import static com.atlassian.crowd.embedded.api.DirectoryType.INTERNAL;
 
-@Component
 public class DirectoriesServiceImpl implements DirectoriesService {
 
     private static final int RETRY_AFTER_IN_SECONDS = 5;
 
-    @ComponentImport
     private final DirectoryManager directoryManager;
-
     private final GroupsService groupsService;
-
     private final UsersService usersService;
 
-    @Inject
     public DirectoriesServiceImpl(
             final DirectoryManager directoryManager,
             final GroupsService groupsService,

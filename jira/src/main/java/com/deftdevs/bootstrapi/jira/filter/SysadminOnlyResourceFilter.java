@@ -1,6 +1,5 @@
 package com.deftdevs.bootstrapi.jira.filter;
 
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.user.UserManager;
 import com.atlassian.sal.api.user.UserProfile;
 import com.deftdevs.bootstrapi.commons.exception.web.UnauthorizedException;
@@ -8,16 +7,13 @@ import com.sun.jersey.spi.container.ContainerRequest;
 import com.sun.jersey.spi.container.ContainerRequestFilter;
 import com.sun.jersey.spi.container.ContainerResponseFilter;
 import com.sun.jersey.spi.container.ResourceFilter;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.ws.rs.ext.Provider;
 
 /**
  * The Sysadmin only resource filter.
  */
 @Provider
-@Component
 public class SysadminOnlyResourceFilter implements ContainerRequestFilter, ResourceFilter {
 
     private final UserManager userManager;
@@ -27,9 +23,8 @@ public class SysadminOnlyResourceFilter implements ContainerRequestFilter, Resou
      *
      * @param userManager           the user manager
      */
-    @Inject
     public SysadminOnlyResourceFilter(
-            @ComponentImport final UserManager userManager) {
+            final UserManager userManager) {
 
         this.userManager = userManager;
     }

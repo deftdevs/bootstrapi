@@ -6,17 +6,13 @@ import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpModel;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoModel;
 import com.deftdevs.bootstrapi.commons.rest.AbstractAuthenticationResourceImpl;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceAuthenticationService;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.ws.rs.Path;
 
 @Path(BootstrAPI.AUTHENTICATION)
 @SystemAdminOnly
-@Component
 public class AuthenticationResourceImpl extends AbstractAuthenticationResourceImpl<AbstractAuthenticationIdpModel, AuthenticationSsoModel, ConfluenceAuthenticationService> {
 
-    @Inject
     public AuthenticationResourceImpl(
             final ConfluenceAuthenticationService authenticationService) {
 

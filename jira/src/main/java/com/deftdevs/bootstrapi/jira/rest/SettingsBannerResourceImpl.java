@@ -6,14 +6,12 @@ import com.deftdevs.bootstrapi.jira.model.SettingsBannerModel;
 import com.deftdevs.bootstrapi.jira.rest.api.SettingsBannerResource;
 import com.deftdevs.bootstrapi.jira.service.api.JiraSettingsService;
 import com.sun.jersey.spi.container.ResourceFilters;
-import org.springframework.stereotype.Component;
 
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 @Path(BootstrAPI.SETTINGS + "/" + BootstrAPI.SETTINGS_BANNER)
 @ResourceFilters(SysadminOnlyResourceFilter.class)
-@Component
 public class SettingsBannerResourceImpl implements SettingsBannerResource {
 
     private final JiraSettingsService settingsService;

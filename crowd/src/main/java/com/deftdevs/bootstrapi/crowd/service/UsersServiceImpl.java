@@ -12,20 +12,17 @@ import com.atlassian.crowd.model.user.UserTemplateWithAttributes;
 import com.atlassian.crowd.search.EntityDescriptor;
 import com.atlassian.crowd.search.builder.QueryBuilder;
 import com.atlassian.crowd.search.query.entity.EntityQuery;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
+import com.deftdevs.bootstrapi.commons.exception.DirectoryNotFoundException;
+import com.deftdevs.bootstrapi.commons.exception.UserNotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import com.deftdevs.bootstrapi.commons.model.UserModel;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
-import com.deftdevs.bootstrapi.commons.exception.DirectoryNotFoundException;
-import com.deftdevs.bootstrapi.commons.exception.UserNotFoundException;
 import com.deftdevs.bootstrapi.crowd.model.util.UserModelUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -34,18 +31,12 @@ import java.util.stream.Collectors;
 
 import static com.atlassian.crowd.model.user.UserConstants.*;
 
-@Component
 public class UsersServiceImpl implements UsersService {
 
-    @ComponentImport
     private final CrowdService crowdService;
-
-    @ComponentImport
     private final DirectoryManager directoryManager;
-
     private final GroupsService groupsService;
 
-    @Inject
     public UsersServiceImpl(
             final CrowdService crowdService,
             final DirectoryManager directoryManager,

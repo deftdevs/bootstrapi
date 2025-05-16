@@ -2,25 +2,22 @@ package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.license.CrowdLicenseManager;
 import com.atlassian.crowd.manager.license.CrowdLicenseManagerException;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 
-import javax.inject.Inject;
-import javax.inject.Named;
 import java.util.Collections;
 import java.util.List;
 
 import static com.deftdevs.bootstrapi.crowd.model.util.LicenseModelUtil.toLicenseModel;
 
-@Named
 public class LicensesServiceImpl implements LicensesService {
 
     private final CrowdLicenseManager licenseManager;
 
-    @Inject
-    public LicensesServiceImpl(@ComponentImport CrowdLicenseManager licenseManager) {
+    public LicensesServiceImpl(
+            final CrowdLicenseManager licenseManager) {
+
         this.licenseManager = licenseManager;
     }
 

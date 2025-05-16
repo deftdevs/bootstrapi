@@ -5,20 +5,16 @@ import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.GroupResource;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-@Component
 @SystemAdminOnly
 @Path(BootstrAPI.GROUP)
 public class GroupResourceImpl implements GroupResource {
 
     private final GroupsService groupsService;
 
-    @Inject
     public GroupResourceImpl(
             final GroupsService groupsService) {
 

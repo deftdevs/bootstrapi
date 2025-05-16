@@ -12,7 +12,6 @@ import com.atlassian.favicon.core.UploadedFaviconFile;
 import com.atlassian.favicon.core.exceptions.ImageStorageException;
 import com.atlassian.favicon.core.exceptions.InvalidImageDataException;
 import com.atlassian.favicon.core.exceptions.UnsupportedImageTypeException;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
@@ -20,16 +19,13 @@ import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsBrandingService;
 import com.deftdevs.bootstrapi.confluence.model.util.SettingsBrandingColorSchemeModelUtil;
 import org.apache.commons.io.FileUtils;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
 
-@Component
 public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     private static final int DEFAULT_FAVICON_DIMENSION = 16;
@@ -38,11 +34,11 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
     private final FaviconManager faviconManager;
     private final SiteLogoManager siteLogoManager;
 
-    @Inject
     public SettingsBrandingServiceImpl(
-            @ComponentImport ColourSchemeManager colourSchemeManager,
-            @ComponentImport SiteLogoManager siteLogoManager,
-            @ComponentImport FaviconManager faviconManager) {
+            final ColourSchemeManager colourSchemeManager,
+            final SiteLogoManager siteLogoManager,
+            final FaviconManager faviconManager) {
+
         this.colourSchemeManager = colourSchemeManager;
         this.siteLogoManager = siteLogoManager;
         this.faviconManager = faviconManager;

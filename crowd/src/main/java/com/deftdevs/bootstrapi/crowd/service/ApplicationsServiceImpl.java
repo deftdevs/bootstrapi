@@ -11,35 +11,28 @@ import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.crowd.model.application.Application;
 import com.atlassian.crowd.model.application.ApplicationDirectoryMapping;
 import com.atlassian.crowd.model.application.ImmutableApplicationDirectoryMapping;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.crowd.model.ApplicationModel;
 import com.deftdevs.bootstrapi.crowd.model.util.ApplicationModelUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.ApplicationsService;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Nonnull;
-import javax.inject.Inject;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@Component
 public class ApplicationsServiceImpl implements ApplicationsService {
 
     private final ApplicationManager applicationManager;
-
     private final DefaultGroupMembershipService defaultGroupMembershipService;
-
     private final DirectoryManager directoryManager;
 
-    @Inject
     public ApplicationsServiceImpl(
-            @ComponentImport final ApplicationManager applicationManager,
-            @ComponentImport final DefaultGroupMembershipService defaultGroupMembershipService,
-            @ComponentImport final DirectoryManager directoryManager) {
+            final ApplicationManager applicationManager,
+            final DefaultGroupMembershipService defaultGroupMembershipService,
+            final DirectoryManager directoryManager) {
 
         this.applicationManager = applicationManager;
         this.defaultGroupMembershipService = defaultGroupMembershipService;

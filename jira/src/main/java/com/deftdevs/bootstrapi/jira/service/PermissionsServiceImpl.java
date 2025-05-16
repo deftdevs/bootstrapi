@@ -4,29 +4,26 @@ import com.atlassian.jira.permission.GlobalPermissionKey;
 import com.atlassian.jira.permission.GlobalPermissionType;
 import com.atlassian.jira.security.GlobalPermissionEntry;
 import com.atlassian.jira.security.GlobalPermissionManager;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
 import com.deftdevs.bootstrapi.commons.service.api.PermissionsService;
 import com.deftdevs.bootstrapi.jira.model.util.PermissionsGlobalModelUtil;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Component
 public class PermissionsServiceImpl implements PermissionsService {
 
-    @ComponentImport
     private final GlobalPermissionManager globalPermissionManager;
 
-    @Inject
     public PermissionsServiceImpl(
             final GlobalPermissionManager globalPermissionManager) {
 

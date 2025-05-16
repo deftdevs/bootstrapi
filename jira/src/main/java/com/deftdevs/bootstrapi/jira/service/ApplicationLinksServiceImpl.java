@@ -3,21 +3,15 @@ package com.deftdevs.bootstrapi.jira.service;
 import com.atlassian.applinks.core.ApplinkStatusService;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
 import com.atlassian.applinks.spi.util.TypeAccessor;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.helper.api.ApplicationLinksAuthConfigHelper;
 import com.deftdevs.bootstrapi.commons.service.DefaultApplicationLinksServiceImpl;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
-
-@Component
 public class ApplicationLinksServiceImpl extends DefaultApplicationLinksServiceImpl {
 
-    @Inject
     public ApplicationLinksServiceImpl(
-            @ComponentImport final MutatingApplicationLinkService mutatingApplicationLinkService,
-            @ComponentImport final ApplinkStatusService applinkStatusService,
-            @ComponentImport final TypeAccessor typeAccessor,
+            final MutatingApplicationLinkService mutatingApplicationLinkService,
+            final ApplinkStatusService applinkStatusService,
+            final TypeAccessor typeAccessor,
             final ApplicationLinksAuthConfigHelper applicationLinksAuthConfigHelper) {
 
         super(mutatingApplicationLinkService, applinkStatusService, typeAccessor, applicationLinksAuthConfigHelper);
