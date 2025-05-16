@@ -11,7 +11,6 @@ import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.crowd.model.application.Application;
 import com.atlassian.crowd.model.application.ApplicationDirectoryMapping;
 import com.atlassian.crowd.model.application.ImmutableApplicationDirectoryMapping;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
@@ -28,7 +27,6 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
-@ExportAsService(ApplicationsService.class)
 public class ApplicationsServiceImpl implements ApplicationsService {
 
     private final ApplicationManager applicationManager;

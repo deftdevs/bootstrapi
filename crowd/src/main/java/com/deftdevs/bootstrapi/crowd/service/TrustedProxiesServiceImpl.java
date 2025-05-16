@@ -1,7 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.proxy.TrustedProxyManager;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.crowd.service.api.TrustedProxiesService;
 import org.springframework.stereotype.Component;
@@ -11,7 +10,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-@ExportAsService(TrustedProxiesService.class)
 public class TrustedProxiesServiceImpl implements TrustedProxiesService {
 
     @ComponentImport

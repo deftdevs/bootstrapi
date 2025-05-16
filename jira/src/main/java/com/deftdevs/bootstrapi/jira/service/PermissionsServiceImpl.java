@@ -4,7 +4,6 @@ import com.atlassian.jira.permission.GlobalPermissionKey;
 import com.atlassian.jira.permission.GlobalPermissionType;
 import com.atlassian.jira.security.GlobalPermissionEntry;
 import com.atlassian.jira.security.GlobalPermissionManager;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
@@ -22,7 +21,6 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @Component
-@ExportAsService(PermissionsService.class)
 public class PermissionsServiceImpl implements PermissionsService {
 
     @ComponentImport

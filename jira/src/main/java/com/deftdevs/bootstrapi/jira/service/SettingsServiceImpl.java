@@ -2,7 +2,6 @@ package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.jira.config.properties.APKeys;
 import com.atlassian.jira.config.properties.ApplicationProperties;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.SettingsBean;
@@ -18,7 +17,6 @@ import java.net.URI;
 import static com.atlassian.jira.config.properties.APKeys.*;
 
 @Component
-@ExportAsService({SettingsService.class, JiraSettingsService.class})
 public class SettingsServiceImpl implements JiraSettingsService {
 
     private final ApplicationProperties applicationProperties;

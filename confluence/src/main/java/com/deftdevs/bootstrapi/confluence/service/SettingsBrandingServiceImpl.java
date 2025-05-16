@@ -12,7 +12,6 @@ import com.atlassian.favicon.core.UploadedFaviconFile;
 import com.atlassian.favicon.core.exceptions.ImageStorageException;
 import com.atlassian.favicon.core.exceptions.InvalidImageDataException;
 import com.atlassian.favicon.core.exceptions.UnsupportedImageTypeException;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
@@ -31,7 +30,6 @@ import java.io.InputStream;
 import java.util.Optional;
 
 @Component
-@ExportAsService(SettingsBrandingService.class)
 public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     private static final int DEFAULT_FAVICON_DIMENSION = 16;

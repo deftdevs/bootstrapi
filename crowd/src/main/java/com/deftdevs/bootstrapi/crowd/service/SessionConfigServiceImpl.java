@@ -1,7 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.property.PropertyManager;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.deftdevs.bootstrapi.crowd.model.SessionConfigBean;
 import com.deftdevs.bootstrapi.crowd.service.api.SessionConfigService;
 import org.springframework.stereotype.Component;
@@ -9,7 +8,6 @@ import org.springframework.stereotype.Component;
 import javax.inject.Inject;
 
 @Component
-@ExportAsService(SessionConfigService.class)
 public class SessionConfigServiceImpl implements SessionConfigService {
 
     private final PropertyManager propertyManager;

@@ -12,7 +12,6 @@ import com.atlassian.crowd.model.user.UserTemplateWithAttributes;
 import com.atlassian.crowd.search.EntityDescriptor;
 import com.atlassian.crowd.search.builder.QueryBuilder;
 import com.atlassian.crowd.search.query.entity.EntityQuery;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
@@ -36,7 +35,6 @@ import java.util.stream.Collectors;
 import static com.atlassian.crowd.model.user.UserConstants.*;
 
 @Component
-@ExportAsService(UsersService.class)
 public class UsersServiceImpl implements UsersService {
 
     @ComponentImport

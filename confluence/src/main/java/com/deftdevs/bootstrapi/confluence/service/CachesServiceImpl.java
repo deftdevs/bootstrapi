@@ -1,9 +1,7 @@
 package com.deftdevs.bootstrapi.confluence.service;
 
-
 import com.atlassian.cache.CacheManager;
 import com.atlassian.cache.ManagedCache;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
@@ -17,7 +15,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-@ExportAsService(CachesService.class)
 public class CachesServiceImpl implements CachesService {
 
     private final CacheManager cacheManager;

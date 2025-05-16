@@ -1,7 +1,6 @@
 package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.jira.license.JiraLicenseManager;
-import com.atlassian.plugin.spring.scanner.annotation.export.ExportAsService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.model.LicenseBean;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
@@ -14,7 +13,6 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 @Component
-@ExportAsService(LicensesService.class)
 public class LicensesServiceImpl implements LicensesService {
 
     private final JiraLicenseManager licenseManager;
