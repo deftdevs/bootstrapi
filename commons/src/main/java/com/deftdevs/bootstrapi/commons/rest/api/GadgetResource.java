@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.commons.model.GadgetBean;
+import com.deftdevs.bootstrapi.commons.model.GadgetModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,7 +23,7 @@ public interface GadgetResource {
             summary = "Get a gadget",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetModel.class)),
                             description = "Returns the requested gadget."
                     ),
                     @ApiResponse(
@@ -41,10 +41,10 @@ public interface GadgetResource {
     @Operation(
             tags = { BootstrAPI.GADGET },
             summary = "Add a gadget",
-            description = "Upon successful request, returns a `GadgetBean` object of the created gadget.",
+            description = "Upon successful request, returns a `GadgetModel` object of the created gadget.",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetModel.class)),
                             description = "Returns the added gadget."
                     ),
                     @ApiResponse(
@@ -54,7 +54,7 @@ public interface GadgetResource {
             }
     )
     Response createGadget(
-            @NotNull final GadgetBean gadgetBean);
+            @NotNull final GadgetModel gadgetModel);
 
     @PUT
     @Path("{id}")
@@ -65,7 +65,7 @@ public interface GadgetResource {
             summary = "Update a gadget",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = GadgetModel.class)),
                             description = "Returns the updated gadget."
                     ),
                     @ApiResponse(
@@ -76,7 +76,7 @@ public interface GadgetResource {
     )
     Response updateGadget(
             @PathParam("id") final long id,
-            @NotNull final GadgetBean gadgetBean);
+            @NotNull final GadgetModel gadgetModel);
 
     @DELETE
     @Path("{id}")

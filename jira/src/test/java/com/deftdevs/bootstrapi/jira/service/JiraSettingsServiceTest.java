@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -43,25 +43,25 @@ class JiraSettingsServiceTest {
         doReturn(CONTACT_MESSAGE).when(applicationProperties).getString(JIRA_CONTACT_ADMINISTRATORS_MESSSAGE);
         doReturn(EXTERNAL_USER_MANAGEMENT).when(applicationProperties).getString(JIRA_OPTION_USER_EXTERNALMGT);
 
-        final SettingsBean settingsBean = settingsService.getSettingsGeneral();
+        final SettingsModel settingsModel = settingsService.getSettingsGeneral();
 
-        assertEquals(BASE_URL, settingsBean.getBaseUrl());
-        assertEquals(MODE_PUBLIC, settingsBean.getMode());
-        assertEquals(TITLE, settingsBean.getTitle());
-        assertEquals(CONTACT_MESSAGE, settingsBean.getContactMessage());
-        assertEquals(EXTERNAL_USER_MANAGEMENT, String.valueOf(settingsBean.getExternalUserManagement()));
+        assertEquals(BASE_URL, settingsModel.getBaseUrl());
+        assertEquals(MODE_PUBLIC, settingsModel.getMode());
+        assertEquals(TITLE, settingsModel.getTitle());
+        assertEquals(CONTACT_MESSAGE, settingsModel.getContactMessage());
+        assertEquals(EXTERNAL_USER_MANAGEMENT, String.valueOf(settingsModel.getExternalUserManagement()));
     }
 
     @Test
     void testSetSettingsGeneral() {
-        final SettingsBean settingsBean = new SettingsBean();
-        settingsBean.setBaseUrl(BASE_URL);
-        settingsBean.setMode(MODE_PUBLIC);
-        settingsBean.setTitle(TITLE);
-        settingsBean.setContactMessage(CONTACT_MESSAGE);
-        settingsBean.setExternalUserManagement(Boolean.parseBoolean(EXTERNAL_USER_MANAGEMENT));
+        final SettingsModel settingsModel = new SettingsModel();
+        settingsModel.setBaseUrl(BASE_URL);
+        settingsModel.setMode(MODE_PUBLIC);
+        settingsModel.setTitle(TITLE);
+        settingsModel.setContactMessage(CONTACT_MESSAGE);
+        settingsModel.setExternalUserManagement(Boolean.parseBoolean(EXTERNAL_USER_MANAGEMENT));
 
-        settingsService.setSettingsGeneral(settingsBean);
+        settingsService.setSettingsGeneral(settingsModel);
 
         verify(applicationProperties).setString(JIRA_BASEURL, BASE_URL.toString());
         verify(applicationProperties).setString(JIRA_MODE, MODE_PUBLIC);
@@ -71,10 +71,10 @@ class JiraSettingsServiceTest {
     }
 
     @Test
-    void testSetSettingsGeneralEmptyBean() {
-        final SettingsBean settingsBean = new SettingsBean();
+    void testSetSettingsGeneralEmptyModel() {
+        final SettingsModel settingsModel = new SettingsModel();
 
-        settingsService.setSettingsGeneral(settingsBean);
+        settingsService.setSettingsGeneral(settingsModel);
 
         verify(applicationProperties, never()).setString(JIRA_BASEURL, BASE_URL.toString());
         verify(applicationProperties, never()).setString(JIRA_MODE, MODE_PUBLIC);
@@ -84,22 +84,22 @@ class JiraSettingsServiceTest {
 
     @Test
     void testSetSettingsGeneralUnsupportedMode() {
-        final SettingsBean settingsBean = new SettingsBean();
-        settingsBean.setMode("unsupported");
+        final SettingsModel settingsModel = new SettingsModel();
+        settingsModel.setMode("unsupported");
 
         assertThrows(BadRequestException.class, () -> {
-            settingsService.setSettingsGeneral(settingsBean);
+            settingsService.setSettingsGeneral(settingsModel);
         });
     }
 
     @Test
     void testSetSettingsGeneralInvalidCombination() {
-        final SettingsBean settingsBean = new SettingsBean();
-        settingsBean.setMode(MODE_PUBLIC);
+        final SettingsModel settingsModel = new SettingsModel();
+        settingsModel.setMode(MODE_PUBLIC);
         doReturn(true).when(applicationProperties).getOption(JIRA_OPTION_USER_EXTERNALMGT);
 
         assertThrows(BadRequestException.class, () -> {
-            settingsService.setSettingsGeneral(settingsBean);
+            settingsService.setSettingsGeneral(settingsModel);
         });
     }
 

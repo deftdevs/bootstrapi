@@ -1,4 +1,4 @@
-# ApplicationLinkBean
+# ApplicationLinkModel
 ## Properties
 
 | Name | Type | Description | Notes |

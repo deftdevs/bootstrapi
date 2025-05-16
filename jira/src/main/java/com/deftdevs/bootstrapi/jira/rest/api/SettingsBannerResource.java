@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.jira.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.jira.model.SettingsBannerBean;
+import com.deftdevs.bootstrapi.jira.model.SettingsBannerModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,7 +22,7 @@ public interface SettingsBannerResource {
             summary = "Get the banner",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBannerBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBannerModel.class)),
                             description = "Returns the banner"
                     ),
                     @ApiResponse(
@@ -41,7 +41,7 @@ public interface SettingsBannerResource {
             summary = "Set the banner",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBannerBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBannerModel.class)),
                             description = "Returns the updated banner"
                     ),
                     @ApiResponse(
@@ -51,6 +51,6 @@ public interface SettingsBannerResource {
             }
     )
     Response setBanner(
-            @NotNull final SettingsBannerBean bean);
+            @NotNull final SettingsBannerModel bean);
 
 }

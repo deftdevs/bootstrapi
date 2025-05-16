@@ -1,7 +1,7 @@
 package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.junit.jupiter.api.Test;
@@ -24,31 +24,31 @@ public abstract class AbstractLicenseResourceFuncTest {
                 .request();
         assertEquals(Response.Status.OK.getStatusCode(), licensesResponse.statusCode());
 
-        final List<LicenseBean> licenseBeans = objectMapper.readValue(licensesResponse.body(), new TypeReference<List<LicenseBean>>(){});
-        assertNotNull(licenseBeans);
-        assertNotEquals(0, ((List<LicenseBean>) licenseBeans).size());
-        assertNotNull(((List<LicenseBean>) licenseBeans).iterator().next().getOrganization());
+        final List<LicenseModel> licenseModels = objectMapper.readValue(licensesResponse.body(), new TypeReference<List<LicenseModel>>(){});
+        assertNotNull(licenseModels);
+        assertNotEquals(0, ((List<LicenseModel>) licenseModels).size());
+        assertNotNull(((List<LicenseModel>) licenseModels).iterator().next().getOrganization());
     }
 
     @Test
     void testSetLicenses() throws Exception {
         final HttpResponse<String> licensesResponse = HttpRequestHelper.builder(BootstrAPI.LICENSES)
-                .request(HttpMethod.PUT, getExampleBean());
+                .request(HttpMethod.PUT, getExampleModel());
         assertEquals(Response.Status.OK.getStatusCode(), licensesResponse.statusCode());
 
-        final List<LicenseBean> licenseBeans = objectMapper.readValue(licensesResponse.body(), new TypeReference<List<LicenseBean>>(){});
-        assertEquals(getExampleBean().iterator().next().getDescription(), licenseBeans.iterator().next().getDescription());
+        final List<LicenseModel> licenseModels = objectMapper.readValue(licensesResponse.body(), new TypeReference<List<LicenseModel>>(){});
+        assertEquals(getExampleModel().iterator().next().getDescription(), licenseModels.iterator().next().getDescription());
     }
 
     @Test
     void testAddLicenses() throws Exception {
-        final LicenseBean licenseBean = getExampleBean().iterator().next();
+        final LicenseModel licenseModel = getExampleModel().iterator().next();
         final HttpResponse<String> licensesResponse = HttpRequestHelper.builder(BootstrAPI.LICENSES)
-                .request(HttpMethod.POST, licenseBean);
+                .request(HttpMethod.POST, licenseModel);
         assertEquals(Response.Status.OK.getStatusCode(), licensesResponse.statusCode());
 
-        final List<LicenseBean> licenseBeans = objectMapper.readValue(licensesResponse.body(), new TypeReference<List<LicenseBean>>(){});
-        assertEquals(licenseBean.getDescription(), licenseBeans.iterator().next().getDescription());
+        final List<LicenseModel> licenseModels = objectMapper.readValue(licensesResponse.body(), new TypeReference<List<LicenseModel>>(){});
+        assertEquals(licenseModel.getDescription(), licenseModels.iterator().next().getDescription());
     }
 
     @Test
@@ -66,7 +66,7 @@ public abstract class AbstractLicenseResourceFuncTest {
         final HttpResponse<String> licensesResponse = HttpRequestHelper.builder(BootstrAPI.LICENSES)
                 .username("wrong")
                 .password("password")
-                .request(HttpMethod.PUT, getExampleBean());
+                .request(HttpMethod.PUT, getExampleModel());
 
         assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), licensesResponse.statusCode());
     }
@@ -86,12 +86,12 @@ public abstract class AbstractLicenseResourceFuncTest {
         final HttpResponse<String> licensesResponse = HttpRequestHelper.builder(BootstrAPI.LICENSES)
                 .username("user")
                 .password("user")
-                .request(HttpMethod.PUT, getExampleBean());
+                .request(HttpMethod.PUT, getExampleModel());
 
         assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), licensesResponse.statusCode());
     }
 
-    protected List<LicenseBean> getExampleBean() {
-        return Collections.singletonList(LicenseBean.EXAMPLE_2_DEVELOPER_LICENSE);
+    protected List<LicenseModel> getExampleModel() {
+        return Collections.singletonList(LicenseModel.EXAMPLE_2_DEVELOPER_LICENSE);
     }
 }

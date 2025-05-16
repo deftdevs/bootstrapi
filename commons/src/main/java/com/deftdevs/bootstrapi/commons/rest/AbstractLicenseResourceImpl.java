@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import com.deftdevs.bootstrapi.commons.rest.api.LicenseResource;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 
@@ -18,7 +18,7 @@ public abstract class AbstractLicenseResourceImpl implements LicenseResource {
     public Response addLicense(
             final String licenseKey) {
 
-        final LicenseBean addedLicenseBean = licensesService.addLicense(licenseKey);
-        return Response.ok(addedLicenseBean).build();
+        final LicenseModel addedLicenseModel = licensesService.addLicense(licenseKey);
+        return Response.ok(addedLicenseModel).build();
     }
 }

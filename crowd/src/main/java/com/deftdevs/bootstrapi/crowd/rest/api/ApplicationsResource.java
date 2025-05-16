@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.crowd.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
+import com.deftdevs.bootstrapi.crowd.model.ApplicationModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -21,10 +21,10 @@ public interface ApplicationsResource {
     @Operation(
             tags = { BootstrAPI.APPLICATIONS },
             summary = "Get all applications",
-            description = "Upon successful request, returns a `ApplicationsBean` object containing all applications",
+            description = "Upon successful request, returns a `ApplicationsModel` object containing all applications",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApplicationBean.class))),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApplicationModel.class))),
                             description = "Returns all applications."
                     ),
                     @ApiResponse(
@@ -44,7 +44,7 @@ public interface ApplicationsResource {
             description = "NOTE: All existing applications with the same 'name' attribute are updated.",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApplicationBean.class))),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApplicationModel.class))),
                             description = "Returns all applications."
                     ),
                     @ApiResponse(
@@ -54,7 +54,7 @@ public interface ApplicationsResource {
             }
     )
     Response setApplications(
-            List<ApplicationBean> applicationBeans);
+            List<ApplicationModel> applicationModels);
 
     @DELETE
     @Operation(

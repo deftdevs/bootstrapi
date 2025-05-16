@@ -47,7 +47,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List**](../Models/AbstractDirectoryBean.md)
+[**List**](../Models/AbstractDirectoryModel.md)
 
 ### Authorization
 
@@ -60,7 +60,7 @@ This endpoint does not need any parameter.
 
 <a name="setDirectories"></a>
 # **setDirectories**
-> List setDirectories(AbstractDirectoryBean, test-connection)
+> List setDirectories(AbstractDirectoryModel, test-connection)
 
 Set a list of user directories
 
@@ -70,12 +70,12 @@ Set a list of user directories
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **AbstractDirectoryBean** | [**List**](../Models/AbstractDirectoryBean.md)|  | |
+| **AbstractDirectoryModel** | [**List**](../Models/AbstractDirectoryModel.md)|  | |
 | **test-connection** | **Boolean**|  | [optional] [default to false] |
 
 ### Return type
 
-[**List**](../Models/AbstractDirectoryBean.md)
+[**List**](../Models/AbstractDirectoryModel.md)
 
 ### Authorization
 

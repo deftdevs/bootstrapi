@@ -1,4 +1,4 @@
-# AbstractAuthenticationIdpBean
+# AbstractAuthenticationIdpModel
 ## Properties
 
 | Name | Type | Description | Notes |

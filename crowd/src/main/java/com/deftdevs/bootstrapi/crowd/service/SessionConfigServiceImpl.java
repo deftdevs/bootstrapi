@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.property.PropertyManager;
-import com.deftdevs.bootstrapi.crowd.model.SessionConfigBean;
+import com.deftdevs.bootstrapi.crowd.model.SessionConfigModel;
 import com.deftdevs.bootstrapi.crowd.service.api.SessionConfigService;
 import org.springframework.stereotype.Component;
 
@@ -20,24 +20,24 @@ public class SessionConfigServiceImpl implements SessionConfigService {
     }
 
     @Override
-    public SessionConfigBean getSessionConfig() {
-        final SessionConfigBean sessionConfigBean = new SessionConfigBean();
-        sessionConfigBean.setSessionTimeoutInMinutes(propertyManager.getSessionTime());
-        sessionConfigBean.setRequireConsistentClientIP(propertyManager.isIncludeIpAddressInValidationFactors());
+    public SessionConfigModel getSessionConfig() {
+        final SessionConfigModel sessionConfigModel = new SessionConfigModel();
+        sessionConfigModel.setSessionTimeoutInMinutes(propertyManager.getSessionTime());
+        sessionConfigModel.setRequireConsistentClientIP(propertyManager.isIncludeIpAddressInValidationFactors());
 
-        return sessionConfigBean;
+        return sessionConfigModel;
     }
 
     @Override
-    public SessionConfigBean setSessionConfig(
-            final SessionConfigBean sessionConfigBean) {
+    public SessionConfigModel setSessionConfig(
+            final SessionConfigModel sessionConfigModel) {
 
-        if (sessionConfigBean.getSessionTimeoutInMinutes() != null) {
-            propertyManager.setSessionTime(sessionConfigBean.getSessionTimeoutInMinutes());
+        if (sessionConfigModel.getSessionTimeoutInMinutes() != null) {
+            propertyManager.setSessionTime(sessionConfigModel.getSessionTimeoutInMinutes());
         }
 
-        if (sessionConfigBean.getRequireConsistentClientIP() != null) {
-            propertyManager.setIncludeIpAddressInValidationFactors(sessionConfigBean.getRequireConsistentClientIP());
+        if (sessionConfigModel.getRequireConsistentClientIP() != null) {
+            propertyManager.setIncludeIpAddressInValidationFactors(sessionConfigModel.getRequireConsistentClientIP());
         }
 
         return getSessionConfig();

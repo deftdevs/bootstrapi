@@ -1,9 +1,9 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpBean;
-import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpOidcBean;
-import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpSamlBean;
-import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpModel;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpOidcModel;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationIdpSamlModel;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoModel;
 import com.deftdevs.bootstrapi.commons.rest.impl.TestAuthenticationResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.AuthenticationService;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,56 +34,56 @@ class AuthenticationResourceTest {
 
     @Test
     void testGetAuthenticationIdps() {
-        final List<AbstractAuthenticationIdpBean> authenticationIdpBeans = Arrays.asList(
-                AuthenticationIdpOidcBean.EXAMPLE_1,
-                AuthenticationIdpSamlBean.EXAMPLE_1
+        final List<AbstractAuthenticationIdpModel> authenticationIdpModels = Arrays.asList(
+                AuthenticationIdpOidcModel.EXAMPLE_1,
+                AuthenticationIdpSamlModel.EXAMPLE_1
         );
-        doReturn(authenticationIdpBeans).when(authenticationService).getAuthenticationIdps();
+        doReturn(authenticationIdpModels).when(authenticationService).getAuthenticationIdps();
 
         final Response response = resource.getAuthenticationIdps();
         assertEquals(200, response.getStatus());
 
-        final List<AbstractAuthenticationIdpBean> authenticationIdpBeansResponse = (List<AbstractAuthenticationIdpBean>) response.getEntity();
-        assertEquals(authenticationIdpBeans, authenticationIdpBeansResponse);
+        final List<AbstractAuthenticationIdpModel> authenticationIdpModelsResponse = (List<AbstractAuthenticationIdpModel>) response.getEntity();
+        assertEquals(authenticationIdpModels, authenticationIdpModelsResponse);
     }
 
     @Test
     void testSetAuthenticationIdps() {
-        final List<AbstractAuthenticationIdpBean> authenticationIdpBeans = Arrays.asList(
-                AuthenticationIdpOidcBean.EXAMPLE_1,
-                AuthenticationIdpSamlBean.EXAMPLE_1
+        final List<AbstractAuthenticationIdpModel> authenticationIdpModels = Arrays.asList(
+                AuthenticationIdpOidcModel.EXAMPLE_1,
+                AuthenticationIdpSamlModel.EXAMPLE_1
         );
-        doReturn(authenticationIdpBeans).when(authenticationService).setAuthenticationIdps(authenticationIdpBeans);
+        doReturn(authenticationIdpModels).when(authenticationService).setAuthenticationIdps(authenticationIdpModels);
 
-        final Response response = resource.setAuthenticationIdps(authenticationIdpBeans);
+        final Response response = resource.setAuthenticationIdps(authenticationIdpModels);
         assertEquals(200, response.getStatus());
 
-        final List<AbstractAuthenticationIdpBean> authenticationIdpBeansResponse = (List<AbstractAuthenticationIdpBean>) response.getEntity();
-        assertEquals(authenticationIdpBeans, authenticationIdpBeansResponse);
+        final List<AbstractAuthenticationIdpModel> authenticationIdpModelsResponse = (List<AbstractAuthenticationIdpModel>) response.getEntity();
+        assertEquals(authenticationIdpModels, authenticationIdpModelsResponse);
     }
 
     @Test
     void testGetAuthenticationSso() {
-        final AuthenticationSsoBean authenticationSsoBean = AuthenticationSsoBean.EXAMPLE_1;
-        doReturn(authenticationSsoBean).when(authenticationService).getAuthenticationSso();
+        final AuthenticationSsoModel authenticationSsoModel = AuthenticationSsoModel.EXAMPLE_1;
+        doReturn(authenticationSsoModel).when(authenticationService).getAuthenticationSso();
 
         final Response response = resource.getAuthenticationSso();
         assertEquals(200, response.getStatus());
 
-        final AuthenticationSsoBean authenticationSsoBeanResponse = (AuthenticationSsoBean) response.getEntity();
-        assertEquals(authenticationSsoBean, authenticationSsoBeanResponse);
+        final AuthenticationSsoModel authenticationSsoModelResponse = (AuthenticationSsoModel) response.getEntity();
+        assertEquals(authenticationSsoModel, authenticationSsoModelResponse);
     }
 
     @Test
     void testSetAuthenticationSso() {
-        final AuthenticationSsoBean authenticationSsoBean = AuthenticationSsoBean.EXAMPLE_1;
-        doReturn(authenticationSsoBean).when(authenticationService).setAuthenticationSso(authenticationSsoBean);
+        final AuthenticationSsoModel authenticationSsoModel = AuthenticationSsoModel.EXAMPLE_1;
+        doReturn(authenticationSsoModel).when(authenticationService).setAuthenticationSso(authenticationSsoModel);
 
-        final Response response = resource.setAuthenticationSso(authenticationSsoBean);
+        final Response response = resource.setAuthenticationSso(authenticationSsoModel);
         assertEquals(200, response.getStatus());
 
-        final AuthenticationSsoBean authenticationSsoBeanResponse = (AuthenticationSsoBean) response.getEntity();
-        assertEquals(authenticationSsoBean, authenticationSsoBeanResponse);
+        final AuthenticationSsoModel authenticationSsoModelResponse = (AuthenticationSsoModel) response.getEntity();
+        assertEquals(authenticationSsoModel, authenticationSsoModelResponse);
     }
 
 }

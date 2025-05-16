@@ -4,9 +4,9 @@ import com.atlassian.confluence.setup.settings.CustomHtmlSettings;
 import com.atlassian.confluence.setup.settings.GlobalSettingsManager;
 import com.atlassian.confluence.setup.settings.Settings;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import com.deftdevs.bootstrapi.commons.model.SettingsBean;
-import com.deftdevs.bootstrapi.commons.model.SettingsSecurityBean;
-import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
+import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlModel;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
 import org.springframework.stereotype.Component;
 
@@ -27,36 +27,36 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
     }
 
     @Override
-    public SettingsBean getSettingsGeneral() {
+    public SettingsModel getSettingsGeneral() {
         final Settings settings = globalSettingsManager.getGlobalSettings();
 
-        final SettingsBean settingsBean = new SettingsBean();
-        settingsBean.setBaseUrl(URI.create(settings.getBaseUrl()));
-        settingsBean.setTitle(settings.getSiteTitle());
-        settingsBean.setContactMessage(settings.getCustomContactMessage());
-        settingsBean.setExternalUserManagement(settings.isExternalUserManagement());
+        final SettingsModel settingsModel = new SettingsModel();
+        settingsModel.setBaseUrl(URI.create(settings.getBaseUrl()));
+        settingsModel.setTitle(settings.getSiteTitle());
+        settingsModel.setContactMessage(settings.getCustomContactMessage());
+        settingsModel.setExternalUserManagement(settings.isExternalUserManagement());
 
-        return settingsBean;
+        return settingsModel;
     }
 
     @Override
-    public SettingsBean setSettingsGeneral(SettingsBean settingsBean) {
+    public SettingsModel setSettingsGeneral(SettingsModel settingsModel) {
         final Settings settings = globalSettingsManager.getGlobalSettings();
 
-        if (settingsBean.getBaseUrl() != null) {
-            settings.setBaseUrl(settingsBean.getBaseUrl().toString());
+        if (settingsModel.getBaseUrl() != null) {
+            settings.setBaseUrl(settingsModel.getBaseUrl().toString());
         }
 
-        if (settingsBean.getTitle() != null) {
-            settings.setSiteTitle(settingsBean.getTitle());
+        if (settingsModel.getTitle() != null) {
+            settings.setSiteTitle(settingsModel.getTitle());
         }
 
-        if (settingsBean.getContactMessage() != null) {
-            settings.setCustomContactMessage(settingsBean.getContactMessage());
+        if (settingsModel.getContactMessage() != null) {
+            settings.setCustomContactMessage(settingsModel.getContactMessage());
         }
 
-        if (settingsBean.getExternalUserManagement() != null) {
-            settings.setExternalUserManagement(settingsBean.getExternalUserManagement());
+        if (settingsModel.getExternalUserManagement() != null) {
+            settings.setExternalUserManagement(settingsModel.getExternalUserManagement());
         }
 
         globalSettingsManager.updateGlobalSettings(settings);
@@ -65,10 +65,10 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
     }
 
     @Override
-    public SettingsCustomHtmlBean getCustomHtml() {
+    public SettingsCustomHtmlModel getCustomHtml() {
         final CustomHtmlSettings customHtmlSettings = globalSettingsManager.getGlobalSettings().getCustomHtmlSettings();
 
-        return SettingsCustomHtmlBean.builder()
+        return SettingsCustomHtmlModel.builder()
                 .beforeHeadEnd(customHtmlSettings.getBeforeHeadEnd())
                 .afterBodyStart(customHtmlSettings.getAfterBodyStart())
                 .beforeBodyEnd(customHtmlSettings.getBeforeBodyEnd())
@@ -76,22 +76,22 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
     }
 
     @Override
-    public SettingsCustomHtmlBean setCustomHtml(
-            final SettingsCustomHtmlBean settingsCustomHtmlBean) {
+    public SettingsCustomHtmlModel setCustomHtml(
+            final SettingsCustomHtmlModel settingsCustomHtmlModel) {
 
         final Settings settings = globalSettingsManager.getGlobalSettings();
         final CustomHtmlSettings customHtmlSettings = settings.getCustomHtmlSettings();
 
-        if (settingsCustomHtmlBean.getBeforeHeadEnd() != null) {
-            customHtmlSettings.setBeforeHeadEnd(settingsCustomHtmlBean.getBeforeHeadEnd());
+        if (settingsCustomHtmlModel.getBeforeHeadEnd() != null) {
+            customHtmlSettings.setBeforeHeadEnd(settingsCustomHtmlModel.getBeforeHeadEnd());
         }
 
-        if (settingsCustomHtmlBean.getAfterBodyStart() != null) {
-            customHtmlSettings.setAfterBodyStart(settingsCustomHtmlBean.getAfterBodyStart());
+        if (settingsCustomHtmlModel.getAfterBodyStart() != null) {
+            customHtmlSettings.setAfterBodyStart(settingsCustomHtmlModel.getAfterBodyStart());
         }
 
-        if (settingsCustomHtmlBean.getBeforeBodyEnd() != null) {
-            customHtmlSettings.setBeforeBodyEnd(settingsCustomHtmlBean.getBeforeBodyEnd());
+        if (settingsCustomHtmlModel.getBeforeBodyEnd() != null) {
+            customHtmlSettings.setBeforeBodyEnd(settingsCustomHtmlModel.getBeforeBodyEnd());
         }
 
         globalSettingsManager.updateGlobalSettings(settings);
@@ -100,27 +100,27 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
     }
 
     @Override
-    public SettingsSecurityBean getSettingsSecurity() {
+    public SettingsSecurityModel getSettingsSecurity() {
         final Settings settings = globalSettingsManager.getGlobalSettings();
 
-        return SettingsSecurityBean.builder()
+        return SettingsSecurityModel.builder()
                 .webSudoEnabled(settings.getWebSudoEnabled())
                 .webSudoTimeout(settings.getWebSudoTimeout())
                 .build();
     }
 
     @Override
-    public SettingsSecurityBean setSettingsSecurity(
-            final SettingsSecurityBean settingsSecurityBean) {
+    public SettingsSecurityModel setSettingsSecurity(
+            final SettingsSecurityModel settingsSecurityModel) {
 
         final Settings settings = globalSettingsManager.getGlobalSettings();
 
-        if (settingsSecurityBean.getWebSudoEnabled() != null) {
-            settings.setWebSudoEnabled(settingsSecurityBean.getWebSudoEnabled());
+        if (settingsSecurityModel.getWebSudoEnabled() != null) {
+            settings.setWebSudoEnabled(settingsSecurityModel.getWebSudoEnabled());
         }
 
-        if (settingsSecurityBean.getWebSudoTimeout() != null) {
-            settings.setWebSudoTimeout(settingsSecurityBean.getWebSudoTimeout());
+        if (settingsSecurityModel.getWebSudoTimeout() != null) {
+            settings.setWebSudoTimeout(settingsSecurityModel.getWebSudoTimeout());
         }
 
         return getSettingsSecurity();

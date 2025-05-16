@@ -4,8 +4,8 @@ import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.crowd.manager.mail.MailConfigurationService;
 import com.atlassian.crowd.manager.mail.MockMailConfiguration;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
-import com.deftdevs.bootstrapi.crowd.model.util.MailServerSmtpBeanUtil;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
+import com.deftdevs.bootstrapi.crowd.model.util.MailServerSmtpModelUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -49,17 +49,17 @@ public class MailServerServiceTest {
         final MailConfiguration emptyMailConfiguration = MailConfiguration.builder().build();
         doReturn(emptyMailConfiguration).when(mailConfigurationService).getMailConfiguration();
 
-        final MailServerSmtpBean mailServerSmtpBean = new MailServerSmtpBean();
-        mailServerService.setMailServerSmtp(mailServerSmtpBean);
+        final MailServerSmtpModel mailServerSmtpModel = new MailServerSmtpModel();
+        mailServerService.setMailServerSmtp(mailServerSmtpModel);
 
         final ArgumentCaptor<MailConfiguration> mailConfigurationCaptor = ArgumentCaptor.forClass(MailConfiguration.class);
         verify(mailConfigurationService).saveConfiguration(mailConfigurationCaptor.capture());
-        final MailServerSmtpBean updatedMailServerSmtpBean = MailServerSmtpBeanUtil.toMailServerSmtpBean(mailConfigurationCaptor.getValue());
+        final MailServerSmtpModel updatedMailServerSmtpModel = MailServerSmtpModelUtil.toMailServerSmtpModel(mailConfigurationCaptor.getValue());
 
-        assertEquals(mailServerSmtpBean.getAdminContact(), updatedMailServerSmtpBean.getAdminContact());
-        assertEquals(mailServerSmtpBean.getFrom(), updatedMailServerSmtpBean.getFrom());
-        assertEquals(mailServerSmtpBean.getPrefix(), updatedMailServerSmtpBean.getPrefix());
-        assertEquals(mailServerSmtpBean.getHost(), updatedMailServerSmtpBean.getHost());
+        assertEquals(mailServerSmtpModel.getAdminContact(), updatedMailServerSmtpModel.getAdminContact());
+        assertEquals(mailServerSmtpModel.getFrom(), updatedMailServerSmtpModel.getFrom());
+        assertEquals(mailServerSmtpModel.getPrefix(), updatedMailServerSmtpModel.getPrefix());
+        assertEquals(mailServerSmtpModel.getHost(), updatedMailServerSmtpModel.getHost());
     }
 
     @Test
@@ -67,17 +67,17 @@ public class MailServerServiceTest {
         final MailConfiguration emptyMailConfiguration = MailConfiguration.builder().build();
         doReturn(emptyMailConfiguration).when(mailConfigurationService).getMailConfiguration();
 
-        final MailServerSmtpBean mailServerSmtpBean = MailServerSmtpBean.EXAMPLE_1;
+        final MailServerSmtpModel mailServerSmtpModel = MailServerSmtpModel.EXAMPLE_1;
 
-        mailServerService.setMailServerSmtp(mailServerSmtpBean);
+        mailServerService.setMailServerSmtp(mailServerSmtpModel);
 
         final ArgumentCaptor<MailConfiguration> mailConfigurationCaptor = ArgumentCaptor.forClass(MailConfiguration.class);
         verify(mailConfigurationService).saveConfiguration(mailConfigurationCaptor.capture());
-        final MailServerSmtpBean updatedMailServerSmtpBean = MailServerSmtpBeanUtil.toMailServerSmtpBean(mailConfigurationCaptor.getValue());
+        final MailServerSmtpModel updatedMailServerSmtpModel = MailServerSmtpModelUtil.toMailServerSmtpModel(mailConfigurationCaptor.getValue());
 
-        assertEquals(mailServerSmtpBean.getFrom(), updatedMailServerSmtpBean.getFrom());
-        assertEquals(mailServerSmtpBean.getPrefix(), updatedMailServerSmtpBean.getPrefix());
-        assertEquals(mailServerSmtpBean.getHost(), updatedMailServerSmtpBean.getHost());
+        assertEquals(mailServerSmtpModel.getFrom(), updatedMailServerSmtpModel.getFrom());
+        assertEquals(mailServerSmtpModel.getPrefix(), updatedMailServerSmtpModel.getPrefix());
+        assertEquals(mailServerSmtpModel.getHost(), updatedMailServerSmtpModel.getHost());
     }
 
     @Test
@@ -85,11 +85,11 @@ public class MailServerServiceTest {
         final MailConfiguration emptyMailConfiguration = MailConfiguration.builder().build();
         doReturn(emptyMailConfiguration).when(mailConfigurationService).getMailConfiguration();
 
-        final MailServerSmtpBean mailServerSmtpBean = MailServerSmtpBean.EXAMPLE_1;
-        mailServerSmtpBean.setFrom("@wrong@format@");
+        final MailServerSmtpModel mailServerSmtpModel = MailServerSmtpModel.EXAMPLE_1;
+        mailServerSmtpModel.setFrom("@wrong@format@");
 
         assertThrows(BadRequestException.class, () -> {
-            mailServerService.setMailServerSmtp(mailServerSmtpBean);
+            mailServerService.setMailServerSmtp(mailServerSmtpModel);
         });
     }
 

@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsModel;
 import com.deftdevs.bootstrapi.commons.rest.impl.TestSettingsResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
 import org.junit.jupiter.api.BeforeEach;
@@ -29,27 +29,27 @@ class SettingsResourceTest {
 
     @Test
     void testGetSettings() {
-        final SettingsBean bean = SettingsBean.EXAMPLE_1;
+        final SettingsModel bean = SettingsModel.EXAMPLE_1;
 
         doReturn(bean).when(settingsService).getSettingsGeneral();
 
         final Response response = resource.getSettings();
         assertEquals(200, response.getStatus());
-        final SettingsBean settingsBean = (SettingsBean) response.getEntity();
+        final SettingsModel settingsModel = (SettingsModel) response.getEntity();
 
-        assertEquals(settingsBean, bean);
+        assertEquals(settingsModel, bean);
     }
 
     @Test
     void testSetSettings() {
-        final SettingsBean bean = SettingsBean.EXAMPLE_1;
+        final SettingsModel bean = SettingsModel.EXAMPLE_1;
 
         doReturn(bean).when(settingsService).setSettingsGeneral(bean);
 
         final Response response = resource.setSettings(bean);
         assertEquals(200, response.getStatus());
-        final SettingsBean settingsBean = (SettingsBean) response.getEntity();
+        final SettingsModel settingsModel = (SettingsModel) response.getEntity();
 
-        assertEquals(settingsBean, bean);
+        assertEquals(settingsModel, bean);
     }
 }

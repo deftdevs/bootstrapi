@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
-import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
+import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdModel;
 import com.deftdevs.bootstrapi.commons.rest.impl.TestDirectoryResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,41 +31,41 @@ class DirectoryResourceTest {
 
     @Test
     void testGetDirectory() {
-        DirectoryCrowdBean directoryBean = DirectoryCrowdBean.EXAMPLE_1;
+        DirectoryCrowdModel directoryModel = DirectoryCrowdModel.EXAMPLE_1;
 
-        doReturn(directoryBean).when(directoriesService).getDirectory(1L);
+        doReturn(directoryModel).when(directoriesService).getDirectory(1L);
 
         final Response response = resource.getDirectory(1L);
         assertEquals(200, response.getStatus());
-        final AbstractDirectoryBean directoryBeanResponse = (AbstractDirectoryBean) response.getEntity();
+        final AbstractDirectoryModel directoryModelResponse = (AbstractDirectoryModel) response.getEntity();
 
-        assertEquals(directoryBean, directoryBeanResponse);
+        assertEquals(directoryModel, directoryModelResponse);
     }
 
     @Test
     void testCreateDirectory() {
-        DirectoryCrowdBean bean = DirectoryCrowdBean.EXAMPLE_1;
+        DirectoryCrowdModel bean = DirectoryCrowdModel.EXAMPLE_1;
 
         doReturn(bean).when(directoriesService).addDirectory(bean, false);
 
         final Response response = resource.createDirectory(Boolean.FALSE, bean);
         assertEquals(200, response.getStatus());
-        final AbstractDirectoryBean responseBean = (AbstractDirectoryBean) response.getEntity();
+        final AbstractDirectoryModel responseModel = (AbstractDirectoryModel) response.getEntity();
 
-        assertEquals(bean.getName(), responseBean.getName());
+        assertEquals(bean.getName(), responseModel.getName());
     }
 
     @Test
     void testUpdateDirectory() {
-        DirectoryCrowdBean directoryBean = DirectoryCrowdBean.EXAMPLE_1;
+        DirectoryCrowdModel directoryModel = DirectoryCrowdModel.EXAMPLE_1;
 
-        doReturn(directoryBean).when(directoriesService).setDirectory(1L, directoryBean, false);
+        doReturn(directoryModel).when(directoriesService).setDirectory(1L, directoryModel, false);
 
-        final Response response = resource.updateDirectory(1L, Boolean.FALSE, directoryBean);
+        final Response response = resource.updateDirectory(1L, Boolean.FALSE, directoryModel);
         assertEquals(200, response.getStatus());
-        final AbstractDirectoryBean directoryBeanResponse = (AbstractDirectoryBean) response.getEntity();
+        final AbstractDirectoryModel directoryModelResponse = (AbstractDirectoryModel) response.getEntity();
 
-        assertEquals(directoryBean, directoryBeanResponse);
+        assertEquals(directoryModel, directoryModelResponse);
     }
 
     @Test

@@ -11,7 +11,7 @@ All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
 
 <a name="createGroup"></a>
 # **createGroup**
-> GroupBean createGroup(directoryId, GroupBean)
+> GroupModel createGroup(directoryId, GroupModel)
 
 Create a group
 
@@ -20,11 +20,11 @@ Create a group
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **directoryId** | **Long**|  | [default to null] |
-| **GroupBean** | [**GroupBean**](../Models/GroupBean.md)|  | |
+| **GroupModel** | [**GroupModel**](../Models/GroupModel.md)|  | |
 
 ### Return type
 
-[**GroupBean**](../Models/GroupBean.md)
+[**GroupModel**](../Models/GroupModel.md)
 
 ### Authorization
 
@@ -37,7 +37,7 @@ Create a group
 
 <a name="getGroup"></a>
 # **getGroup**
-> GroupBean getGroup(directoryId, name)
+> GroupModel getGroup(directoryId, name)
 
 Get a group
 
@@ -50,7 +50,7 @@ Get a group
 
 ### Return type
 
-[**GroupBean**](../Models/GroupBean.md)
+[**GroupModel**](../Models/GroupModel.md)
 
 ### Authorization
 
@@ -63,7 +63,7 @@ Get a group
 
 <a name="updateGroup"></a>
 # **updateGroup**
-> GroupBean updateGroup(directoryId, name, GroupBean)
+> GroupModel updateGroup(directoryId, name, GroupModel)
 
 Update a group
 
@@ -73,11 +73,11 @@ Update a group
 |------------- | ------------- | ------------- | -------------|
 | **directoryId** | **Long**|  | [default to null] |
 | **name** | **String**|  | [default to null] |
-| **GroupBean** | [**GroupBean**](../Models/GroupBean.md)|  | |
+| **GroupModel** | [**GroupModel**](../Models/GroupModel.md)|  | |
 
 ### Return type
 
-[**GroupBean**](../Models/GroupBean.md)
+[**GroupModel**](../Models/GroupModel.md)
 
 ### Authorization
 

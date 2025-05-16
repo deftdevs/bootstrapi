@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.confluence.rest;
 
 import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.confluence.model.CacheBean;
+import com.deftdevs.bootstrapi.confluence.model.CacheModel;
 import com.deftdevs.bootstrapi.confluence.rest.api.CachesResource;
 import com.deftdevs.bootstrapi.confluence.service.api.CachesService;
 import org.springframework.stereotype.Component;
@@ -42,7 +42,7 @@ public class CachesResourceImpl implements CachesResource {
     }
 
     @Override
-    public Response updateCache(String name, CacheBean cache) {
+    public Response updateCache(String name, CacheModel cache) {
 
         cachesService.setMaxCacheSize(name, cache.getMaxObjectCount());
         return Response.ok(cachesService.getCache(name)).build();

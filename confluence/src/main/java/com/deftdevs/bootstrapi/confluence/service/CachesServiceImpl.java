@@ -5,8 +5,8 @@ import com.atlassian.cache.ManagedCache;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
-import com.deftdevs.bootstrapi.confluence.model.CacheBean;
-import com.deftdevs.bootstrapi.confluence.model.util.CacheBeanUtil;
+import com.deftdevs.bootstrapi.confluence.model.CacheModel;
+import com.deftdevs.bootstrapi.confluence.model.util.CacheModelUtil;
 import com.deftdevs.bootstrapi.confluence.service.api.CachesService;
 import org.springframework.stereotype.Component;
 
@@ -26,16 +26,16 @@ public class CachesServiceImpl implements CachesService {
     }
 
     @Override
-    public List<CacheBean> getAllCaches() {
+    public List<CacheModel> getAllCaches() {
         return cacheManager.getManagedCaches().stream()
-                .map(CacheBeanUtil::toCacheBean)
+                .map(CacheModelUtil::toCacheModel)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public CacheBean getCache(String name) {
+    public CacheModel getCache(String name) {
         ManagedCache cache = findCache(name);
-        return CacheBeanUtil.toCacheBean(cache);
+        return CacheModelUtil.toCacheModel(cache);
     }
 
     @Override

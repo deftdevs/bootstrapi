@@ -9,10 +9,10 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.web.ServiceUnavailableException;
-import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
-import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
+import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdModel;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
-import com.deftdevs.bootstrapi.confluence.model.util.DirectoryBeanUtil;
+import com.deftdevs.bootstrapi.confluence.model.util.DirectoryModelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
@@ -41,56 +41,56 @@ public class DirectoryServiceImpl implements DirectoriesService {
     }
 
     @Override
-    public List<AbstractDirectoryBean> getDirectories() {
-        List<AbstractDirectoryBean> beans = new ArrayList<>();
+    public List<AbstractDirectoryModel> getDirectories() {
+        List<AbstractDirectoryModel> beans = new ArrayList<>();
         for (Directory directory : crowdDirectoryService.findAllDirectories()) {
-            AbstractDirectoryBean crowdBean;
-            crowdBean = DirectoryBeanUtil.toDirectoryBean(directory);
-            beans.add(crowdBean);
+            AbstractDirectoryModel crowdModel;
+            crowdModel = DirectoryModelUtil.toDirectoryModel(directory);
+            beans.add(crowdModel);
         }
         return beans;
     }
 
     @Override
-    public AbstractDirectoryBean getDirectory(long id) {
+    public AbstractDirectoryModel getDirectory(long id) {
         Directory directory = findDirectory(id);
-        return DirectoryBeanUtil.toDirectoryBean(directory);
+        return DirectoryModelUtil.toDirectoryModel(directory);
     }
 
     @Override
-    public List<AbstractDirectoryBean> setDirectories(List<AbstractDirectoryBean> directoryBeans, boolean testConnection) {
+    public List<AbstractDirectoryModel> setDirectories(List<AbstractDirectoryModel> directoryModels, boolean testConnection) {
 
         final Map<String, Directory> existingDirectoriesByName = crowdDirectoryService.findAllDirectories().stream()
                 .collect(Collectors.toMap(Directory::getName, Function.identity()));
 
-        directoryBeans.forEach(directoryRequestBean -> {
-            if (directoryRequestBean instanceof DirectoryCrowdBean) {
-                DirectoryCrowdBean crowdRequestBean = (DirectoryCrowdBean) directoryRequestBean;
+        directoryModels.forEach(directoryRequestModel -> {
+            if (directoryRequestModel instanceof DirectoryCrowdModel) {
+                DirectoryCrowdModel crowdRequestModel = (DirectoryCrowdModel) directoryRequestModel;
 
-                if (existingDirectoriesByName.containsKey(crowdRequestBean.getName())) {
-                    setDirectory(existingDirectoriesByName.get(crowdRequestBean.getName()).getId(), crowdRequestBean, testConnection);
+                if (existingDirectoriesByName.containsKey(crowdRequestModel.getName())) {
+                    setDirectory(existingDirectoriesByName.get(crowdRequestModel.getName()).getId(), crowdRequestModel, testConnection);
                 } else {
-                    addDirectory(crowdRequestBean, testConnection);
+                    addDirectory(crowdRequestModel, testConnection);
                 }
             } else {
-                throw new BadRequestException(format("Updating directory type '%s' is not supported (yet)", directoryRequestBean.getClass()));
+                throw new BadRequestException(format("Updating directory type '%s' is not supported (yet)", directoryRequestModel.getClass()));
             }
         });
         return getDirectories();
     }
 
     @Override
-    public AbstractDirectoryBean setDirectory(long id, @NotNull AbstractDirectoryBean abstractDirectoryBean, boolean testConnection) {
-        if (abstractDirectoryBean instanceof DirectoryCrowdBean) {
-            return setDirectoryCrowd(id, (DirectoryCrowdBean) abstractDirectoryBean, testConnection);
+    public AbstractDirectoryModel setDirectory(long id, @NotNull AbstractDirectoryModel abstractDirectoryModel, boolean testConnection) {
+        if (abstractDirectoryModel instanceof DirectoryCrowdModel) {
+            return setDirectoryCrowd(id, (DirectoryCrowdModel) abstractDirectoryModel, testConnection);
         } else {
-            throw new BadRequestException(format("Setting directory type '%s' is not supported (yet)", abstractDirectoryBean.getClass()));
+            throw new BadRequestException(format("Setting directory type '%s' is not supported (yet)", abstractDirectoryModel.getClass()));
         }
     }
 
-    private AbstractDirectoryBean setDirectoryCrowd(long id, @NotNull DirectoryCrowdBean crowdBean, boolean testConnection) {
+    private AbstractDirectoryModel setDirectoryCrowd(long id, @NotNull DirectoryCrowdModel crowdModel, boolean testConnection) {
         Directory existingDirectory = findDirectory(id);
-        Directory directory = validateAndCreateDirectoryConfig(crowdBean, testConnection);
+        Directory directory = validateAndCreateDirectoryConfig(crowdModel, testConnection);
 
         ImmutableDirectory.Builder directoryBuilder = ImmutableDirectory.newBuilder(existingDirectory);
 
@@ -109,18 +109,18 @@ public class DirectoryServiceImpl implements DirectoriesService {
         directoryBuilder.setActive(directory.isActive());
         Directory updatedDirectory = directoryBuilder.toDirectory();
         Directory responseDirectory = crowdDirectoryService.updateDirectory(updatedDirectory);
-        return DirectoryBeanUtil.toDirectoryBean(responseDirectory);
+        return DirectoryModelUtil.toDirectoryModel(responseDirectory);
     }
 
     @Override
-    public AbstractDirectoryBean addDirectory(AbstractDirectoryBean abstractDirectoryBean, boolean testConnection) {
-        if (abstractDirectoryBean instanceof DirectoryCrowdBean) {
-            DirectoryCrowdBean crowdBean = (DirectoryCrowdBean) abstractDirectoryBean;
-            Directory directory = validateAndCreateDirectoryConfig(crowdBean, testConnection);
+    public AbstractDirectoryModel addDirectory(AbstractDirectoryModel abstractDirectoryModel, boolean testConnection) {
+        if (abstractDirectoryModel instanceof DirectoryCrowdModel) {
+            DirectoryCrowdModel crowdModel = (DirectoryCrowdModel) abstractDirectoryModel;
+            Directory directory = validateAndCreateDirectoryConfig(crowdModel, testConnection);
             Directory addedDirectory = crowdDirectoryService.addDirectory(directory);
-            return DirectoryBeanUtil.toDirectoryBean(addedDirectory);
+            return DirectoryModelUtil.toDirectoryModel(addedDirectory);
         } else {
-            throw new BadRequestException(format("Adding directory type '%s' is not supported (yet)", abstractDirectoryBean.getClass()));
+            throw new BadRequestException(format("Adding directory type '%s' is not supported (yet)", abstractDirectoryModel.getClass()));
         }
     }
 
@@ -161,9 +161,9 @@ public class DirectoryServiceImpl implements DirectoriesService {
         return directory;
     }
 
-    private Directory validateAndCreateDirectoryConfig(DirectoryCrowdBean crowdBean, boolean testConnection) {
-        Directory directory = DirectoryBeanUtil.toDirectory(crowdBean);
-        String directoryName = crowdBean.getName();
+    private Directory validateAndCreateDirectoryConfig(DirectoryCrowdModel crowdModel, boolean testConnection) {
+        Directory directory = DirectoryModelUtil.toDirectory(crowdModel);
+        String directoryName = crowdModel.getName();
         if (testConnection) {
             log.debug("testing user directory connection for {}", directoryName);
             crowdDirectoryService.testConnection(directory);

@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
-import com.deftdevs.bootstrapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,38 +29,38 @@ public class GroupResourceTest {
 
     @Test
     public void testGetGroup() {
-        final GroupBean groupBean = GroupBean.EXAMPLE_1;
-        doReturn(groupBean).when(groupsService).getGroup(anyLong(), anyString());
+        final GroupModel groupModel = GroupModel.EXAMPLE_1;
+        doReturn(groupModel).when(groupsService).getGroup(anyLong(), anyString());
 
-        final Response response = groupResource.getGroup(0L, groupBean.getName());
+        final Response response = groupResource.getGroup(0L, groupModel.getName());
         assertEquals(200, response.getStatus());
 
-        final GroupBean responseGroupBean = (GroupBean) response.getEntity();
-        assertEquals(groupBean, responseGroupBean);
+        final GroupModel responseGroupModel = (GroupModel) response.getEntity();
+        assertEquals(groupModel, responseGroupModel);
     }
 
     @Test
     public void testCreateGroup() {
-        final GroupBean groupBean = GroupBean.EXAMPLE_1;
-        doReturn(groupBean).when(groupsService).createGroup(anyLong(), any());
+        final GroupModel groupModel = GroupModel.EXAMPLE_1;
+        doReturn(groupModel).when(groupsService).createGroup(anyLong(), any());
 
-        final Response response = groupResource.createGroup(0L, groupBean);
+        final Response response = groupResource.createGroup(0L, groupModel);
         assertEquals(200, response.getStatus());
 
-        final GroupBean responseGroupBean = (GroupBean) response.getEntity();
-        assertEquals(groupBean, responseGroupBean);
+        final GroupModel responseGroupModel = (GroupModel) response.getEntity();
+        assertEquals(groupModel, responseGroupModel);
     }
 
     @Test
     public void testUpdateGroup() {
-        final GroupBean groupBean = GroupBean.EXAMPLE_1;
-        doReturn(groupBean).when(groupsService).updateGroup(anyLong(), anyString(), any());
+        final GroupModel groupModel = GroupModel.EXAMPLE_1;
+        doReturn(groupModel).when(groupsService).updateGroup(anyLong(), anyString(), any());
 
-        final Response response = groupResource.updateGroup(0L, groupBean.getName(), groupBean);
+        final Response response = groupResource.updateGroup(0L, groupModel.getName(), groupModel);
         assertEquals(200, response.getStatus());
 
-        final GroupBean responseGroupBean = (GroupBean) response.getEntity();
-        assertEquals(groupBean, responseGroupBean);
+        final GroupModel responseGroupModel = (GroupModel) response.getEntity();
+        assertEquals(groupModel, responseGroupModel);
     }
 
 }

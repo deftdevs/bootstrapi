@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
-import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerPopModel;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
 import com.deftdevs.bootstrapi.commons.rest.impl.TestMailServerResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
 import javax.ws.rs.core.Response;
@@ -29,53 +29,53 @@ class MailServerResourceTest {
 
     @Test
     void testGetMailServerSmtpSettings() {
-        final MailServerSmtpBean bean = MailServerSmtpBean.EXAMPLE_1;
+        final MailServerSmtpModel bean = MailServerSmtpModel.EXAMPLE_1;
 
         doReturn(bean).when(mailServerService).getMailServerSmtp();
 
         final Response response = resource.getMailServerSmtp();
         assertEquals(200, response.getStatus());
-        final MailServerSmtpBean smtpBean = (MailServerSmtpBean) response.getEntity();
+        final MailServerSmtpModel smtpModel = (MailServerSmtpModel) response.getEntity();
 
-        assertEquals(smtpBean, bean);
+        assertEquals(smtpModel, bean);
     }
 
     @Test
     void testSetMailServerSmtpSettings() {
-        final MailServerSmtpBean bean = MailServerSmtpBean.EXAMPLE_1;
+        final MailServerSmtpModel bean = MailServerSmtpModel.EXAMPLE_1;
 
         doReturn(bean).when(mailServerService).setMailServerSmtp(bean);
 
         final Response response = resource.setMailServerSmtp(bean);
         assertEquals(200, response.getStatus());
-        final MailServerSmtpBean smtpBean = (MailServerSmtpBean) response.getEntity();
+        final MailServerSmtpModel smtpModel = (MailServerSmtpModel) response.getEntity();
 
-        assertEquals(smtpBean, bean);
+        assertEquals(smtpModel, bean);
     }
 
     @Test
     void testGetMailServerPopSettings() {
-        final MailServerPopBean bean = MailServerPopBean.EXAMPLE_1;
+        final MailServerPopModel bean = MailServerPopModel.EXAMPLE_1;
 
         doReturn(bean).when(mailServerService).getMailServerPop();
 
         final Response response = resource.getMailServerPop();
         assertEquals(200, response.getStatus());
-        final MailServerPopBean popBean = (MailServerPopBean) response.getEntity();
+        final MailServerPopModel popModel = (MailServerPopModel) response.getEntity();
 
-        assertEquals(popBean, bean);
+        assertEquals(popModel, bean);
     }
 
     @Test
     void testSetMailServerPopSettings() {
-        final MailServerPopBean bean = MailServerPopBean.EXAMPLE_1;
+        final MailServerPopModel bean = MailServerPopModel.EXAMPLE_1;
 
         doReturn(bean).when(mailServerService).setMailServerPop(bean);
 
         final Response response = resource.setMailServerPop(bean);
         assertEquals(200, response.getStatus());
-        final MailServerPopBean popBean = (MailServerPopBean) response.getEntity();
+        final MailServerPopModel popModel = (MailServerPopModel) response.getEntity();
 
-        assertEquals(popBean, bean);
+        assertEquals(popModel, bean);
     }
 }

@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.confluence.rest;
 
 import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlBean;
+import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlModel;
 import com.deftdevs.bootstrapi.confluence.rest.api.SettingsCustomHtmlResource;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
 import org.springframework.stereotype.Component;
@@ -27,15 +27,15 @@ public class SettingsCustomHtmlResourceImpl implements SettingsCustomHtmlResourc
 
     @Override
     public Response getCustomHtml() {
-        final SettingsCustomHtmlBean result = settingsService.getCustomHtml();
+        final SettingsCustomHtmlModel result = settingsService.getCustomHtml();
         return Response.ok(result).build();
     }
 
     @Override
     public Response setCustomHtml(
-            final SettingsCustomHtmlBean bean) {
+            final SettingsCustomHtmlModel bean) {
 
-        final SettingsCustomHtmlBean result = settingsService.setCustomHtml(bean);
+        final SettingsCustomHtmlModel result = settingsService.setCustomHtml(bean);
         return Response.ok(result).build();
     }
 }

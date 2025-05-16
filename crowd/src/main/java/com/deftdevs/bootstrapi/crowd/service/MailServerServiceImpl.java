@@ -3,10 +3,10 @@ package com.deftdevs.bootstrapi.crowd.service;
 import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.crowd.manager.mail.MailConfigurationService;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
-import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
-import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerPopModel;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
 import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
-import com.deftdevs.bootstrapi.crowd.model.util.MailServerSmtpBeanUtil;
+import com.deftdevs.bootstrapi.crowd.model.util.MailServerSmtpModelUtil;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
@@ -25,31 +25,31 @@ public class MailServerServiceImpl implements MailServerService {
     }
 
     @Override
-    public MailServerSmtpBean getMailServerSmtp() {
+    public MailServerSmtpModel getMailServerSmtp() {
         if (mailConfigurationService.isConfigured()) {
-            return MailServerSmtpBeanUtil.toMailServerSmtpBean(mailConfigurationService.getMailConfiguration());
+            return MailServerSmtpModelUtil.toMailServerSmtpModel(mailConfigurationService.getMailConfiguration());
         }
 
         return null;
     }
 
     @Override
-    public MailServerSmtpBean setMailServerSmtp(
-            final MailServerSmtpBean mailServerSmtpBean) {
+    public MailServerSmtpModel setMailServerSmtp(
+            final MailServerSmtpModel mailServerSmtpModel) {
 
         final MailConfiguration mailConfiguration = mailConfigurationService.getMailConfiguration();
-        mailConfigurationService.saveConfiguration(MailServerSmtpBeanUtil.toMailConfiguration(mailServerSmtpBean, mailConfiguration));
+        mailConfigurationService.saveConfiguration(MailServerSmtpModelUtil.toMailConfiguration(mailServerSmtpModel, mailConfiguration));
         return getMailServerSmtp();
     }
 
     @Override
-    public MailServerPopBean getMailServerPop() {
+    public MailServerPopModel getMailServerPop() {
         throw new UnsupportedOperationException("Getting POP mail server is not supported by Crowd");
     }
 
     @Override
-    public MailServerPopBean setMailServerPop(
-            final MailServerPopBean mailServerPopBean) {
+    public MailServerPopModel setMailServerPop(
+            final MailServerPopModel mailServerPopModel) {
 
         throw new UnsupportedOperationException("Setting POP mail server is not supported by Crowd");
     }

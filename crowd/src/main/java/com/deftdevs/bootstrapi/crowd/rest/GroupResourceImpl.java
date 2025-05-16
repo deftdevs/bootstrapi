@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.GroupResource;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
@@ -30,27 +30,27 @@ public class GroupResourceImpl implements GroupResource {
             final long directoryId,
             final String groupName) {
 
-        final GroupBean groupBean = groupsService.getGroup(directoryId, groupName);
-        return Response.ok(groupBean).build();
+        final GroupModel groupModel = groupsService.getGroup(directoryId, groupName);
+        return Response.ok(groupModel).build();
     }
 
     @Override
     public Response createGroup(
             final long directoryId,
-            final GroupBean groupBean) {
+            final GroupModel groupModel) {
 
-        final GroupBean resultGroupBean = groupsService.createGroup(directoryId, groupBean);
-        return Response.ok(resultGroupBean).build();
+        final GroupModel resultGroupModel = groupsService.createGroup(directoryId, groupModel);
+        return Response.ok(resultGroupModel).build();
     }
 
     @Override
     public Response updateGroup(
             final long directoryId,
             final String groupName,
-            final GroupBean groupBean) {
+            final GroupModel groupModel) {
 
-        final GroupBean resultGroupBean = groupsService.updateGroup(directoryId, groupName, groupBean);
-        return Response.ok(resultGroupBean).build();
+        final GroupModel resultGroupModel = groupsService.updateGroup(directoryId, groupName, groupModel);
+        return Response.ok(resultGroupModel).build();
     }
 
 }

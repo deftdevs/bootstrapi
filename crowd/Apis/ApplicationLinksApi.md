@@ -47,7 +47,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List**](../Models/ApplicationLinkBean.md)
+[**List**](../Models/ApplicationLinkModel.md)
 
 ### Authorization
 
@@ -60,7 +60,7 @@ This endpoint does not need any parameter.
 
 <a name="setApplicationLinks"></a>
 # **setApplicationLinks**
-> List setApplicationLinks(ApplicationLinkBean, ignore-setup-errors)
+> List setApplicationLinks(ApplicationLinkModel, ignore-setup-errors)
 
 Set a list of application links
 
@@ -70,12 +70,12 @@ Set a list of application links
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ApplicationLinkBean** | [**List**](../Models/ApplicationLinkBean.md)|  | |
+| **ApplicationLinkModel** | [**List**](../Models/ApplicationLinkModel.md)|  | |
 | **ignore-setup-errors** | **Boolean**|  | [optional] [default to false] |
 
 ### Return type
 
-[**List**](../Models/ApplicationLinkBean.md)
+[**List**](../Models/ApplicationLinkModel.md)
 
 ### Authorization
 

@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.service.api;
 
-import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
 
 import javax.validation.constraints.NotNull;
 import java.io.InputStream;
@@ -12,16 +12,16 @@ public interface SettingsBrandingService {
      *
      * @return the colour scheme
      */
-    SettingsBrandingColorSchemeBean getColourScheme();
+    SettingsBrandingColorSchemeModel getColourScheme();
 
     /**
      * Set the colour scheme
      *
-     * @param colourSchemeBean the colour scheme to set
+     * @param colourSchemeModel the colour scheme to set
      * @return the updated colour scheme
      */
-    SettingsBrandingColorSchemeBean setColourScheme(
-            @NotNull final SettingsBrandingColorSchemeBean colourSchemeBean);
+    SettingsBrandingColorSchemeModel setColourScheme(
+            @NotNull final SettingsBrandingColorSchemeModel colourSchemeModel);
 
     /**
      * Get the logo binary.

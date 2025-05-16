@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,10 +25,10 @@ public interface LicensesResource {
     @Operation(
             tags = { BootstrAPI.LICENSES },
             summary = "Get all licenses information",
-            description = "Upon successful request, returns a `LicensesBean` object containing license details. Be aware that `products` collection of the `LicenseBean` contains the product display names, not the product key names",
+            description = "Upon successful request, returns a `LicensesModel` object containing license details. Be aware that `products` collection of the `LicenseModel` contains the product display names, not the product key names",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = LicenseBean.class))),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = LicenseModel.class))),
                             description = "Returns a list of all licenses (NOTE: for all applications except Jira this will return a single license)"
                     ),
                     @ApiResponse(
@@ -47,7 +47,7 @@ public interface LicensesResource {
             summary = "Set a list of licenses",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = LicenseBean.class))),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = LicenseModel.class))),
                             description = "Returns all license details"
                     ),
                     @ApiResponse(

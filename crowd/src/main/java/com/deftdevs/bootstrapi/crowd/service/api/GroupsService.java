@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.service.api;
 
-import com.deftdevs.bootstrapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.commons.model.GroupModel;
 
 import java.util.List;
 
@@ -13,7 +13,7 @@ public interface GroupsService {
      * @param groupName the groupName
      * @return the group bean
      */
-    GroupBean getGroup(
+    GroupModel getGroup(
             final long directoryId,
             final String groupName);
 
@@ -22,47 +22,47 @@ public interface GroupsService {
      *
      * @param directoryId the directory id
      * @param groupName the group name
-     * @param groupBean the group bean
+     * @param groupModel the group bean
      * @return the set user bean
      */
-    GroupBean setGroup(
+    GroupModel setGroup(
             final long directoryId,
             final String groupName,
-            final GroupBean groupBean);
+            final GroupModel groupModel);
 
     /**
      * Create a group.
      *
      * @param directoryId the directory id
-     * @param groupBean the group bean
+     * @param groupModel the group bean
      * @return the group bean
      */
-    GroupBean createGroup(
+    GroupModel createGroup(
             long directoryId,
-            GroupBean groupBean);
+            GroupModel groupModel);
 
     /**
      * Update a group.
      *
      * @param directoryId the directory id
      * @param groupName the group name
-     * @param groupBean the group bean
+     * @param groupModel the group bean
      * @return the group bean
      */
-    GroupBean updateGroup(
+    GroupModel updateGroup(
             long directoryId,
             String groupName,
-            GroupBean groupBean);
+            GroupModel groupModel);
 
     /**
      * Set (add or update) groups.
      *
      * @param directoryId the directory id
-     * @param groupBeans the group beans
+     * @param groupModels the group beans
      * @return the set group beans
      */
-    List<GroupBean> setGroups(
+    List<GroupModel> setGroups(
             final long directoryId,
-            final List<GroupBean> groupBeans);
+            final List<GroupModel> groupModels);
 
 }

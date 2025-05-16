@@ -1,4 +1,4 @@
-# GroupBean
+# GroupModel
 ## Properties
 
 | Name | Type | Description | Notes |

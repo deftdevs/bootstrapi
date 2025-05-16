@@ -7,9 +7,9 @@ import com.atlassian.crowd.model.group.Group;
 import com.atlassian.crowd.model.group.GroupTemplate;
 import com.atlassian.crowd.model.group.ImmutableGroup;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import com.deftdevs.bootstrapi.commons.exception.GroupNotFoundException;
-import com.deftdevs.bootstrapi.crowd.model.util.GroupBeanUtil;
+import com.deftdevs.bootstrapi.crowd.model.util.GroupModelUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -43,8 +43,8 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        final GroupBean groupBean = groupsService.getGroup(group.getDirectoryId(), group.getName());
-        assertEquals(group.getName(), groupBean.getName());
+        final GroupModel groupModel = groupsService.getGroup(group.getDirectoryId(), group.getName());
+        assertEquals(group.getName(), groupModel.getName());
     }
 
     @Test
@@ -58,27 +58,27 @@ public class GroupsServiceTest {
 
     @Test
     public void testCreateGroup() throws Exception {
-        final GroupBean groupBean = GroupBean.EXAMPLE_1;
+        final GroupModel groupModel = GroupModel.EXAMPLE_1;
         // return the same group as the one we are adding
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addGroup(anyLong(), any());
 
         final ArgumentCaptor<GroupTemplate> groupTemplateArgumentCaptor = ArgumentCaptor.forClass(GroupTemplate.class);
-        groupsService.createGroup(0L, groupBean);
+        groupsService.createGroup(0L, groupModel);
         verify(directoryManager).addGroup(anyLong(), groupTemplateArgumentCaptor.capture());
-        assertEquals(groupBean.getName(), groupTemplateArgumentCaptor.getValue().getName());
-        assertEquals(groupBean.getDescription(), groupTemplateArgumentCaptor.getValue().getDescription());
-        assertEquals(groupBean.getActive(), groupTemplateArgumentCaptor.getValue().isActive());
+        assertEquals(groupModel.getName(), groupTemplateArgumentCaptor.getValue().getName());
+        assertEquals(groupModel.getDescription(), groupTemplateArgumentCaptor.getValue().getDescription());
+        assertEquals(groupModel.getActive(), groupTemplateArgumentCaptor.getValue().isActive());
     }
 
     @Test
     public void testCreateGroupActiveByDefault() throws Exception {
-        final GroupBean groupBean = GroupBeanUtil.toGroupBean(getTestGroup());
-        groupBean.setActive(null);
+        final GroupModel groupModel = GroupModelUtil.toGroupModel(getTestGroup());
+        groupModel.setActive(null);
         // return the same group as the one we are adding
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addGroup(anyLong(), any());
 
         final ArgumentCaptor<GroupTemplate> groupTemplateArgumentCaptor = ArgumentCaptor.forClass(GroupTemplate.class);
-        groupsService.createGroup(0L, groupBean);
+        groupsService.createGroup(0L, groupModel);
         verify(directoryManager).addGroup(anyLong(), groupTemplateArgumentCaptor.capture());
         assertTrue(groupTemplateArgumentCaptor.getValue().isActive());
     }
@@ -88,10 +88,10 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        final GroupBean groupBean = GroupBeanUtil.toGroupBean(group);
+        final GroupModel groupModel = GroupModelUtil.toGroupModel(group);
 
         assertThrows(BadRequestException.class, () -> {
-            groupsService.createGroup(group.getDirectoryId(), groupBean);
+            groupsService.createGroup(group.getDirectoryId(), groupModel);
         });
     }
 
@@ -99,11 +99,11 @@ public class GroupsServiceTest {
     public void testCreateGroupNoName() throws DirectoryNotFoundException, OperationFailedException, com.atlassian.crowd.exception.GroupNotFoundException {
         final Group group = getTestGroup();
 
-        final GroupBean groupBean = GroupBeanUtil.toGroupBean(group);
-        groupBean.setName(null);
+        final GroupModel groupModel = GroupModelUtil.toGroupModel(group);
+        groupModel.setName(null);
 
         assertThrows(BadRequestException.class, () -> {
-            groupsService.createGroup(group.getDirectoryId(), groupBean);
+            groupsService.createGroup(group.getDirectoryId(), groupModel);
         });
     }
 
@@ -118,25 +118,25 @@ public class GroupsServiceTest {
         // return the same group as the one we are updating
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).updateGroup(anyLong(), any());
 
-        final GroupBean renamedGroupBean = GroupBeanUtil.toGroupBean(renamedGroup);
-        renamedGroupBean.setDescription("Other description");
-        renamedGroupBean.setActive(false);
+        final GroupModel renamedGroupModel = GroupModelUtil.toGroupModel(renamedGroup);
+        renamedGroupModel.setDescription("Other description");
+        renamedGroupModel.setActive(false);
 
         final ArgumentCaptor<GroupTemplate> groupTemplateArgumentCaptor = ArgumentCaptor.forClass(GroupTemplate.class);
-        groupsService.updateGroup(group.getDirectoryId(), group.getName(), renamedGroupBean);
+        groupsService.updateGroup(group.getDirectoryId(), group.getName(), renamedGroupModel);
         verify(directoryManager).updateGroup(anyLong(), groupTemplateArgumentCaptor.capture());
-        assertEquals(renamedGroupBean.getName(), groupTemplateArgumentCaptor.getValue().getName());
-        assertEquals(renamedGroupBean.getDescription(), groupTemplateArgumentCaptor.getValue().getDescription());
-        assertEquals(renamedGroupBean.getActive(), groupTemplateArgumentCaptor.getValue().isActive());
+        assertEquals(renamedGroupModel.getName(), groupTemplateArgumentCaptor.getValue().getName());
+        assertEquals(renamedGroupModel.getDescription(), groupTemplateArgumentCaptor.getValue().getDescription());
+        assertEquals(renamedGroupModel.getActive(), groupTemplateArgumentCaptor.getValue().isActive());
     }
 
     @Test
     public void testUpdateGroupNotFound() {
         final Group group = getTestGroup();
-        final GroupBean groupBean = GroupBeanUtil.toGroupBean(group);
+        final GroupModel groupModel = GroupModelUtil.toGroupModel(group);
 
         assertThrows(GroupNotFoundException.class, () -> {
-            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupBean);
+            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupModel);
         });
     }
 
@@ -145,10 +145,10 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        final GroupBean groupBean = new GroupBean();
-        groupBean.setName(group.getName());
+        final GroupModel groupModel = new GroupModel();
+        groupModel.setName(group.getName());
 
-        groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupBean);
+        groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupModel);
         verify(directoryManager, never()).renameGroup(anyLong(), anyString(), anyString());
         verify(directoryManager, never()).updateGroup(anyLong(), any());
     }
@@ -156,39 +156,39 @@ public class GroupsServiceTest {
     @Test
     public void testSetGroupAddNew() {
         final Group group = getTestGroup();
-        final GroupBean groupBean = GroupBean.EXAMPLE_1;
+        final GroupModel groupModel = GroupModel.EXAMPLE_1;
         final GroupsServiceImpl spy = spy(groupsService);
-        doReturn(groupBean).when(spy).createGroup(anyLong(), any());
+        doReturn(groupModel).when(spy).createGroup(anyLong(), any());
 
-        spy.setGroup(group.getDirectoryId(), groupBean.getName(), groupBean);
+        spy.setGroup(group.getDirectoryId(), groupModel.getName(), groupModel);
         verify(spy).createGroup(anyLong(), any());
     }
 
     @Test
     public void testSetGroupUpdateExisting() {
         final Group group = getTestGroup();
-        final GroupBean groupBean = GroupBeanUtil.toGroupBean(group);
-        assertNotNull(groupBean);
+        final GroupModel groupModel = GroupModelUtil.toGroupModel(group);
+        assertNotNull(groupModel);
 
         final GroupsServiceImpl spy = spy(groupsService);
         doReturn(group).when(spy).findGroup(group.getDirectoryId(), group.getName());
-        doReturn(groupBean).when(spy).updateGroup(group.getDirectoryId(), group.getName(), groupBean);
+        doReturn(groupModel).when(spy).updateGroup(group.getDirectoryId(), group.getName(), groupModel);
 
-        spy.setGroup(group.getDirectoryId(), groupBean.getName(), groupBean);
+        spy.setGroup(group.getDirectoryId(), groupModel.getName(), groupModel);
         verify(spy).updateGroup(anyLong(), anyString(), any());
     }
 
     @Test
     public void testSetGroups() {
-        final List<GroupBean> groupBeans = new ArrayList<>();
-        groupBeans.add(GroupBean.EXAMPLE_1);
-        groupBeans.add(GroupBean.EXAMPLE_2);
+        final List<GroupModel> groupModels = new ArrayList<>();
+        groupModels.add(GroupModel.EXAMPLE_1);
+        groupModels.add(GroupModel.EXAMPLE_2);
 
         final GroupsServiceImpl spy = spy(groupsService);
         doAnswer(invocation -> invocation.getArguments()[2]).when(spy).setGroup(anyLong(), any(), any());
 
-        spy.setGroups(0L, groupBeans);
-        verify(spy, times(groupBeans.size())).setGroup(anyLong(), any(), any());
+        spy.setGroups(0L, groupModels);
+        verify(spy, times(groupModels.size())).setGroup(anyLong(), any(), any());
     }
 
     @Test
@@ -227,18 +227,18 @@ public class GroupsServiceTest {
         doThrow(new DirectoryPermissionException()).when(directoryManager).addGroup(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
-            groupsService.createGroup(0L, GroupBean.EXAMPLE_1);
+            groupsService.createGroup(0L, GroupModel.EXAMPLE_1);
         });
     }
 
     @Test
     public void testCreateGroupInvalidGroupException() throws Exception {
         final Group group = getTestGroup();
-        final GroupBean groupBean = GroupBeanUtil.toGroupBean(group);
+        final GroupModel groupModel = GroupModelUtil.toGroupModel(group);
         doThrow(new InvalidGroupException(group, "Exception")).when(directoryManager).addGroup(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
-            groupsService.createGroup(0L, groupBean);
+            groupsService.createGroup(0L, groupModel);
         });
     }
 
@@ -248,7 +248,7 @@ public class GroupsServiceTest {
         doThrow(new DirectoryNotFoundException(directoryId)).when(directoryManager).addGroup(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
-            groupsService.createGroup(directoryId, GroupBean.EXAMPLE_1);
+            groupsService.createGroup(directoryId, GroupModel.EXAMPLE_1);
         });
     }
 
@@ -257,85 +257,85 @@ public class GroupsServiceTest {
         doThrow(new OperationFailedException()).when(directoryManager).addGroup(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
-            groupsService.createGroup(0L, GroupBean.EXAMPLE_1);
+            groupsService.createGroup(0L, GroupModel.EXAMPLE_1);
         });
     }
 
     @Test
     public void testUpdateGroupDirectoryPermissionException() throws Exception {
         final Group group = getTestGroup();
-        final GroupBean groupBean = GroupBeanUtil.toGroupBean(group);
+        final GroupModel groupModel = GroupModelUtil.toGroupModel(group);
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).updateGroup(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
-            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupBean);
+            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupModel);
         });
     }
 
     @Test
     public void testUpdateGroupInvalidGroupException() throws Exception {
         final Group group = getTestGroup();
-        final GroupBean groupBean = GroupBeanUtil.toGroupBean(group);
+        final GroupModel groupModel = GroupModelUtil.toGroupModel(group);
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
         doThrow(new InvalidGroupException(group, "Exception")).when(directoryManager).updateGroup(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
-            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupBean);
+            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupModel);
         });
     }
 
     @Test
     public void testUpdateGroupReadOnlyGroupException() throws Exception {
         final Group group = getTestGroup();
-        final GroupBean groupBean = GroupBeanUtil.toGroupBean(group);
+        final GroupModel groupModel = GroupModelUtil.toGroupModel(group);
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
         doThrow(new ReadOnlyGroupException(group.getName())).when(directoryManager).updateGroup(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
-            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupBean);
+            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupModel);
         });
     }
 
     @Test
     public void testUpdateGroupDirectoryNotFoundException() throws Exception {
         final Group group = getTestGroup();
-        final GroupBean groupBean = GroupBeanUtil.toGroupBean(group);
+        final GroupModel groupModel = GroupModelUtil.toGroupModel(group);
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
         doThrow(new DirectoryNotFoundException(group.getDirectoryId())).when(directoryManager).updateGroup(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
-            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupBean);
+            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupModel);
         });
     }
 
     @Test
     public void testUpdateGroupGroupNotFoundException() throws Exception {
         final Group group = getTestGroup();
-        final GroupBean groupBean = GroupBeanUtil.toGroupBean(group);
+        final GroupModel groupModel = GroupModelUtil.toGroupModel(group);
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
         doThrow(new com.atlassian.crowd.exception.GroupNotFoundException(group.getName())).when(directoryManager).updateGroup(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
-            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupBean);
+            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupModel);
         });
     }
 
     @Test
     public void testUpdateGroupOperationFailedException() throws Exception {
         final Group group = getTestGroup();
-        final GroupBean groupBean = GroupBeanUtil.toGroupBean(group);
+        final GroupModel groupModel = GroupModelUtil.toGroupModel(group);
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
         doThrow(new OperationFailedException()).when(directoryManager).updateGroup(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
-            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupBean);
+            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupModel);
         });
     }
 
@@ -344,13 +344,13 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        final GroupBean groupBean = new GroupBean();
-        groupBean.setName("new_group_name");
+        final GroupModel groupModel = new GroupModel();
+        groupModel.setName("new_group_name");
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).renameGroup(anyLong(), anyString(), anyString());
 
         assertThrows(WebApplicationException.class, () -> {
-            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupBean);
+            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupModel);
         });
     }
 
@@ -359,13 +359,13 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        final GroupBean groupBean = new GroupBean();
-        groupBean.setName("new_group_name");
+        final GroupModel groupModel = new GroupModel();
+        groupModel.setName("new_group_name");
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).renameGroup(anyLong(), anyString(), anyString());
 
         assertThrows(WebApplicationException.class, () -> {
-            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupBean);
+            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupModel);
         });
     }
 
@@ -374,13 +374,13 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        final GroupBean groupBean = new GroupBean();
-        groupBean.setName("new_group_name");
+        final GroupModel groupModel = new GroupModel();
+        groupModel.setName("new_group_name");
 
         doThrow(new InvalidGroupException(group, "message")).when(directoryManager).renameGroup(anyLong(), anyString(), anyString());
 
         assertThrows(WebApplicationException.class, () -> {
-            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupBean);
+            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupModel);
         });
     }
 
@@ -389,13 +389,13 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        final GroupBean groupBean = new GroupBean();
-        groupBean.setName("new_group_name");
+        final GroupModel groupModel = new GroupModel();
+        groupModel.setName("new_group_name");
 
         doThrow(new InvalidGroupException(group, "message")).when(directoryManager).renameGroup(anyLong(), anyString(), anyString());
 
         assertThrows(WebApplicationException.class, () -> {
-            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupBean);
+            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupModel);
         });
     }
 
@@ -404,13 +404,13 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        final GroupBean groupBean = new GroupBean();
-        groupBean.setName("new_group_name");
+        final GroupModel groupModel = new GroupModel();
+        groupModel.setName("new_group_name");
 
         doThrow(new OperationFailedException()).when(directoryManager).renameGroup(anyLong(), anyString(), anyString());
 
         assertThrows(WebApplicationException.class, () -> {
-            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupBean);
+            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupModel);
         });
     }
 
@@ -419,13 +419,13 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        final GroupBean groupBean = new GroupBean();
-        groupBean.setName("new_group_name");
+        final GroupModel groupModel = new GroupModel();
+        groupModel.setName("new_group_name");
 
         doThrow(new OperationFailedException()).when(directoryManager).renameGroup(anyLong(), anyString(), anyString());
 
         assertThrows(WebApplicationException.class, () -> {
-            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupBean);
+            groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupModel);
         });
     }
 

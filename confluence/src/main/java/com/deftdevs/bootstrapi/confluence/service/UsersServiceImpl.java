@@ -9,15 +9,15 @@ import com.atlassian.user.UserManager;
 import com.atlassian.user.impl.DefaultUser;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
-import com.deftdevs.bootstrapi.commons.model.UserBean;
+import com.deftdevs.bootstrapi.commons.model.UserModel;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
-import com.deftdevs.bootstrapi.confluence.model.util.UserBeanUtil;
+import com.deftdevs.bootstrapi.confluence.model.util.UserModelUtil;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
 import java.util.List;
 
-import static com.deftdevs.bootstrapi.commons.util.BeanValidationUtil.validate;
+import static com.deftdevs.bootstrapi.commons.util.ModelValidationUtil.validate;
 
 @Component
 public class UsersServiceImpl implements UsersService {
@@ -36,15 +36,15 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public UserBean getUser(
+    public UserModel getUser(
             final String userName) throws NotFoundException {
 
         final User user = findConfluenceUser(userName);
-        return UserBeanUtil.toUserBean(user);
+        return UserModelUtil.toUserModel(user);
     }
 
     @Override
-    public UserBean getUser(
+    public UserModel getUser(
             final long directoryId,
             final String username) {
 
@@ -53,16 +53,16 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public UserBean updateUser(
+    public UserModel updateUser(
             final String userName,
-            final UserBean userBean) {
+            final UserModel userModel) {
 
-        validate(userBean);
+        validate(userModel);
         User user = findConfluenceUser(userName);
 
-        if (userBean.getUsername() != null && !userName.equals(userBean.getUsername())) {
+        if (userModel.getUsername() != null && !userName.equals(userModel.getUsername())) {
             try {
-                user = userAccessor.renameUser((ConfluenceUser)user, userBean.getUsername());
+                user = userAccessor.renameUser((ConfluenceUser)user, userModel.getUsername());
             } catch (EntityException e) {
                 throw new BadRequestException(String.format("Error trying to update username for user: %s. " +
                         "New username might already exist, operation is not permitted or the crowd service could not " +
@@ -72,14 +72,14 @@ public class UsersServiceImpl implements UsersService {
         // userManager.saveUser will convert this user into a ConfluenceUser
         final DefaultUser updateUser = new DefaultUser(user);
 
-        if (userBean.getFullName() != null) {
-            updateUser.setFullName(userBean.getFullName());
+        if (userModel.getFullName() != null) {
+            updateUser.setFullName(userModel.getFullName());
         }
-        if (userBean.getEmail() != null) {
-            updateUser.setEmail(userBean.getEmail());
+        if (userModel.getEmail() != null) {
+            updateUser.setEmail(userModel.getEmail());
         }
-        if (userBean.getPassword() != null) {
-            updatePassword(userName, userBean.getPassword());
+        if (userModel.getPassword() != null) {
+            updatePassword(userName, userModel.getPassword());
         }
 
         try {
@@ -88,29 +88,29 @@ public class UsersServiceImpl implements UsersService {
             throw new BadRequestException(String.format("User %s cannot be updated", userName));
         }
 
-        return UserBeanUtil.toUserBean(updateUser);
+        return UserModelUtil.toUserModel(updateUser);
     }
 
     @Override
-    public UserBean setUser(
+    public UserModel setUser(
             final long directoryId,
-            final UserBean userBean) {
+            final UserModel userModel) {
 
         // Not yet implemented
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public List<UserBean> setUsers(
+    public List<UserModel> setUsers(
             final long directoryId,
-            final List<UserBean> userBeans) {
+            final List<UserModel> userModels) {
 
         // Not yet implemented
         throw new UnsupportedOperationException();
     }
 
     @Override
-    public UserBean updatePassword(
+    public UserModel updatePassword(
             final String username,
             final String password) throws NotFoundException, BadRequestException {
 
@@ -122,7 +122,7 @@ public class UsersServiceImpl implements UsersService {
             throw new BadRequestException(String.format("Password for user %s cannot be set", username));
         }
 
-        return UserBeanUtil.toUserBean(user);
+        return UserModelUtil.toUserModel(user);
     }
 
     private User findConfluenceUser(

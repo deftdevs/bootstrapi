@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.service.api;
 
-import com.deftdevs.bootstrapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -12,23 +12,23 @@ public interface LicensesService {
      *
      * @return the licenses
      */
-    List<LicenseBean> getLicenses();
+    List<LicenseModel> getLicenses();
 
     /**
      * Set a list of licenses.
      *
      * @return the licenses
      */
-    List<LicenseBean> setLicenses(
+    List<LicenseModel> setLicenses(
             List<String> licenseKeys);
 
     /**
      * Add a single license
      *
-     * @param licenseBean the single license to set
+     * @param licenseModel the single license to set
      * @return the added license
      */
-    LicenseBean addLicense(
-            @NotNull final String licenseBean);
+    LicenseModel addLicense(
+            @NotNull final String licenseModel);
 
 }

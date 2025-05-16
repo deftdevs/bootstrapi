@@ -5,8 +5,8 @@ import com.atlassian.cache.CacheStatisticsKey;
 import com.atlassian.cache.ManagedCache;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
-import com.deftdevs.bootstrapi.confluence.model.CacheBean;
-import com.deftdevs.bootstrapi.confluence.model.util.CacheBeanUtil;
+import com.deftdevs.bootstrapi.confluence.model.CacheModel;
+import com.deftdevs.bootstrapi.confluence.model.util.CacheModelUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -50,7 +50,7 @@ class CachesServiceTest {
 
         doReturn(cacheCollection).when(cacheManager).getManagedCaches();
 
-        assertEquals(CacheBeanUtil.toCacheBean(cache), cachesService.getAllCaches().iterator().next());
+        assertEquals(CacheModelUtil.toCacheModel(cache), cachesService.getAllCaches().iterator().next());
 
     }
 
@@ -65,9 +65,9 @@ class CachesServiceTest {
 
         doReturn(cache).when(cacheManager).getManagedCache("test_cache");
 
-        CacheBean cacheBean = cachesService.getCache("test_cache");
+        CacheModel cacheModel = cachesService.getCache("test_cache");
 
-        assertEquals(cacheBean, CacheBeanUtil.toCacheBean(cache));
+        assertEquals(cacheModel, CacheModelUtil.toCacheModel(cache));
 
     }
 

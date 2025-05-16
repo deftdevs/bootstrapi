@@ -1,12 +1,12 @@
 package com.deftdevs.bootstrapi.crowd.service.api;
 
-import com.deftdevs.bootstrapi.crowd.model.SessionConfigBean;
+import com.deftdevs.bootstrapi.crowd.model.SessionConfigModel;
 
 public interface SessionConfigService {
 
-    SessionConfigBean getSessionConfig();
+    SessionConfigModel getSessionConfig();
 
-    SessionConfigBean setSessionConfig(
-            SessionConfigBean sessionConfigBean);
+    SessionConfigModel setSessionConfig(
+            SessionConfigModel sessionConfigModel);
 
 }

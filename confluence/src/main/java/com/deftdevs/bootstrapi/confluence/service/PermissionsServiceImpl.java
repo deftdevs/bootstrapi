@@ -4,9 +4,9 @@ import com.atlassian.confluence.security.SpacePermission;
 import com.atlassian.confluence.security.SpacePermissionManager;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalBean;
+import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
 import com.deftdevs.bootstrapi.commons.service.api.PermissionsService;
-import com.deftdevs.bootstrapi.confluence.model.util.PermissionsGlobalBeanUtil;
+import com.deftdevs.bootstrapi.confluence.model.util.PermissionsGlobalModelUtil;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
@@ -34,23 +34,23 @@ public class PermissionsServiceImpl implements PermissionsService {
     }
 
     @Override
-    public PermissionsGlobalBean getPermissionsGlobal() {
-        return PermissionsGlobalBeanUtil.toPermissionsGlobalBean(spacePermissionManager.getGlobalPermissions());
+    public PermissionsGlobalModel getPermissionsGlobal() {
+        return PermissionsGlobalModelUtil.toPermissionsGlobalModel(spacePermissionManager.getGlobalPermissions());
     }
 
     @Override
-    public PermissionsGlobalBean setPermissionsGlobal(
-            @NotNull final PermissionsGlobalBean permissionsGlobalBean) {
+    public PermissionsGlobalModel setPermissionsGlobal(
+            @NotNull final PermissionsGlobalModel permissionsGlobalModel) {
 
-        setPermissionsGlobalForGroups(permissionsGlobalBean);
-        setPermissionsGlobalForAnonymous(permissionsGlobalBean);
+        setPermissionsGlobalForGroups(permissionsGlobalModel);
+        setPermissionsGlobalForAnonymous(permissionsGlobalModel);
         return getPermissionsGlobal();
     }
 
     private void setPermissionsGlobalForGroups(
-            @NotNull final PermissionsGlobalBean permissionsGlobalBean) {
+            @NotNull final PermissionsGlobalModel permissionsGlobalModel) {
 
-        final Map<String, ? extends Collection<String>> requestGroupPermissions = permissionsGlobalBean.getGroupPermissions();
+        final Map<String, ? extends Collection<String>> requestGroupPermissions = permissionsGlobalModel.getGroupPermissions();
 
         if (requestGroupPermissions == null) {
             return;
@@ -102,9 +102,9 @@ public class PermissionsServiceImpl implements PermissionsService {
     }
 
     private void setPermissionsGlobalForAnonymous(
-            @NotNull final PermissionsGlobalBean permissionsGlobalBean) {
+            @NotNull final PermissionsGlobalModel permissionsGlobalModel) {
 
-        if (permissionsGlobalBean.getAnonymousPermissions() == null) {
+        if (permissionsGlobalModel.getAnonymousPermissions() == null) {
             return;
         }
 
@@ -119,7 +119,7 @@ public class PermissionsServiceImpl implements PermissionsService {
                         )
                 );
 
-        final Set<String> requestAnonymousPermissions = new HashSet<>(permissionsGlobalBean.getAnonymousPermissions());
+        final Set<String> requestAnonymousPermissions = new HashSet<>(permissionsGlobalModel.getAnonymousPermissions());
 
         // remove all anonymous global permissions that currently exist but are not contained in the request
         for (Map.Entry<String, SpacePermission> permissionEntry : existingAnonymousPermissions.entrySet()) {

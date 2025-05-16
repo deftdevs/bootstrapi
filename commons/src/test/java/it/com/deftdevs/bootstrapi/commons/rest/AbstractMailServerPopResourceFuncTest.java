@@ -1,7 +1,7 @@
 package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerPopModel;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
@@ -22,18 +22,18 @@ public abstract class AbstractMailServerPopResourceFuncTest {
                 .request();
         assertEquals(Response.Status.OK.getStatusCode(), mailServerPopResponse.statusCode());
 
-        final MailServerPopBean mailServerPopBean = objectMapper.readValue(mailServerPopResponse.body(), MailServerPopBean.class);
-        assertNotNull(mailServerPopBean);
+        final MailServerPopModel mailServerPopModel = objectMapper.readValue(mailServerPopResponse.body(), MailServerPopModel.class);
+        assertNotNull(mailServerPopModel);
     }
 
     @Test
     void testSetMailServerPop() throws Exception {
         final HttpResponse<String> mailServerPopResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
-                .request(HttpMethod.PUT, getExampleBean());
+                .request(HttpMethod.PUT, getExampleModel());
         assertEquals(Response.Status.OK.getStatusCode(), mailServerPopResponse.statusCode());
 
-        final MailServerPopBean mailServerPopBean = objectMapper.readValue(mailServerPopResponse.body(), MailServerPopBean.class);
-        assertMailServerBeanAgainstExample(mailServerPopBean);
+        final MailServerPopModel mailServerPopModel = objectMapper.readValue(mailServerPopResponse.body(), MailServerPopModel.class);
+        assertMailServerModelAgainstExample(mailServerPopModel);
     }
 
     @Test
@@ -51,7 +51,7 @@ public abstract class AbstractMailServerPopResourceFuncTest {
         final HttpResponse<String> mailServerPopResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
                 .username("wrong")
                 .password("password")
-                .request(HttpMethod.PUT, getExampleBean());
+                .request(HttpMethod.PUT, getExampleModel());
 
         assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), mailServerPopResponse.statusCode());
     }
@@ -71,20 +71,20 @@ public abstract class AbstractMailServerPopResourceFuncTest {
         final HttpResponse<String> mailServerPopResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
                 .username("user")
                 .password("user")
-                .request(HttpMethod.PUT, getExampleBean());
+                .request(HttpMethod.PUT, getExampleModel());
 
         assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), mailServerPopResponse.statusCode());
     }
 
-    protected void assertMailServerBeanAgainstExample(MailServerPopBean bean) {
-        MailServerPopBean exampleBean = getExampleBean();
-        //although field 'password' in 'AbstractMailServerProtocolBean' is annotated with '@EqualsExclude' equals still yields false if
+    protected void assertMailServerModelAgainstExample(MailServerPopModel bean) {
+        MailServerPopModel exampleModel = getExampleModel();
+        //although field 'password' in 'AbstractMailServerProtocolModel' is annotated with '@EqualsExclude' equals still yields false if
         //not the same. Thus, we need to reset the example password manually
-        exampleBean.setPassword(null);
-        assertEquals(exampleBean, bean);
+        exampleModel.setPassword(null);
+        assertEquals(exampleModel, bean);
     }
 
-    protected MailServerPopBean getExampleBean() {
-        return MailServerPopBean.EXAMPLE_2;
+    protected MailServerPopModel getExampleModel() {
+        return MailServerPopModel.EXAMPLE_2;
     }
 }

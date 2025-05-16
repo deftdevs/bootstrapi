@@ -16,9 +16,9 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
-import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsBrandingService;
-import com.deftdevs.bootstrapi.confluence.model.util.SettingsBrandingColorSchemeBeanUtil;
+import com.deftdevs.bootstrapi.confluence.model.util.SettingsBrandingColorSchemeModelUtil;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
 
@@ -49,18 +49,18 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
     }
 
     @Override
-    public SettingsBrandingColorSchemeBean getColourScheme() {
+    public SettingsBrandingColorSchemeModel getColourScheme() {
         ColourScheme globalColourScheme = colourSchemeManager.getGlobalColourScheme();
-        return SettingsBrandingColorSchemeBeanUtil.toSettingsBrandingColorSchemeBean(globalColourScheme);
+        return SettingsBrandingColorSchemeModelUtil.toSettingsBrandingColorSchemeModel(globalColourScheme);
     }
 
     @Override
-    public SettingsBrandingColorSchemeBean setColourScheme(
-            @NotNull SettingsBrandingColorSchemeBean colorSchemeBean) {
+    public SettingsBrandingColorSchemeModel setColourScheme(
+            @NotNull SettingsBrandingColorSchemeModel colorSchemeModel) {
         BaseColourScheme baseColourScheme = new BaseColourScheme(colourSchemeManager.getGlobalColourScheme());
-        BaseColourScheme newColourScheme = SettingsBrandingColorSchemeBeanUtil.toGlobalColorScheme(colorSchemeBean, baseColourScheme);
+        BaseColourScheme newColourScheme = SettingsBrandingColorSchemeModelUtil.toGlobalColorScheme(colorSchemeModel, baseColourScheme);
         colourSchemeManager.saveGlobalColourScheme(newColourScheme);
-        return SettingsBrandingColorSchemeBeanUtil.toSettingsBrandingColorSchemeBean(newColourScheme);
+        return SettingsBrandingColorSchemeModelUtil.toSettingsBrandingColorSchemeModel(newColourScheme);
     }
 
     @Override

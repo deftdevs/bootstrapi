@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.commons.exception;
 
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
-import com.deftdevs.bootstrapi.commons.model.UserBean;
+import com.deftdevs.bootstrapi.commons.model.UserModel;
 
 @SuppressWarnings("java:S110")
 public class UserNotFoundException extends NotFoundException {
@@ -21,9 +21,9 @@ public class UserNotFoundException extends NotFoundException {
     }
 
     public UserNotFoundException(
-            final UserBean userBean) {
+            final UserModel userModel) {
 
-        this(userBean.getUsername());
+        this(userModel.getUsername());
     }
 
 }

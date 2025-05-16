@@ -1,7 +1,7 @@
 package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
@@ -22,18 +22,18 @@ public abstract class AbstractMailServerSmtpResourceFuncTest {
                 .request();
         assertEquals(Response.Status.OK.getStatusCode(), mailServerSmtpResponse.statusCode());
 
-        final MailServerSmtpBean mailServerSmtpBean = objectMapper.readValue(mailServerSmtpResponse.body(), MailServerSmtpBean.class);
-        assertNotNull(mailServerSmtpBean);
+        final MailServerSmtpModel mailServerSmtpModel = objectMapper.readValue(mailServerSmtpResponse.body(), MailServerSmtpModel.class);
+        assertNotNull(mailServerSmtpModel);
     }
 
     @Test
     void testSetMailServerImap() throws Exception {
         final HttpResponse<String> mailServerSmtpResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
-                .request(HttpMethod.PUT, getExampleBean());
+                .request(HttpMethod.PUT, getExampleModel());
         assertEquals(Response.Status.OK.getStatusCode(), mailServerSmtpResponse.statusCode());
 
-        final MailServerSmtpBean mailServerSmtpBean = objectMapper.readValue(mailServerSmtpResponse.body(), MailServerSmtpBean.class);
-        assertMailServerBeanAgainstExample(mailServerSmtpBean);
+        final MailServerSmtpModel mailServerSmtpModel = objectMapper.readValue(mailServerSmtpResponse.body(), MailServerSmtpModel.class);
+        assertMailServerModelAgainstExample(mailServerSmtpModel);
     }
 
     @Test
@@ -51,7 +51,7 @@ public abstract class AbstractMailServerSmtpResourceFuncTest {
         final HttpResponse<String> mailServerSmtpResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
                 .username("wrong")
                 .password("password")
-                .request(HttpMethod.PUT, getExampleBean());
+                .request(HttpMethod.PUT, getExampleModel());
 
         assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), mailServerSmtpResponse.statusCode());
     }
@@ -71,20 +71,20 @@ public abstract class AbstractMailServerSmtpResourceFuncTest {
         final HttpResponse<String> mailServerSmtpResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
                 .username("user")
                 .password("user")
-                .request(HttpMethod.PUT, getExampleBean());
+                .request(HttpMethod.PUT, getExampleModel());
 
         assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), mailServerSmtpResponse.statusCode());
     }
 
-    protected void assertMailServerBeanAgainstExample(MailServerSmtpBean bean) {
-        MailServerSmtpBean exampleBean = getExampleBean();
-        //although field 'password' in 'AbstractMailServerProtocolBean' is annotated with '@EqualsExclude' equals still yields false if
+    protected void assertMailServerModelAgainstExample(MailServerSmtpModel bean) {
+        MailServerSmtpModel exampleModel = getExampleModel();
+        //although field 'password' in 'AbstractMailServerProtocolModel' is annotated with '@EqualsExclude' equals still yields false if
         //not the same. Thus, we need to reset the example password manually
-        exampleBean.setPassword(null);
-        assertEquals(exampleBean, bean);
+        exampleModel.setPassword(null);
+        assertEquals(exampleModel, bean);
     }
 
-    protected MailServerSmtpBean getExampleBean() {
-        return MailServerSmtpBean.EXAMPLE_2;
+    protected MailServerSmtpModel getExampleModel() {
+        return MailServerSmtpModel.EXAMPLE_2;
     }
 }

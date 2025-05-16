@@ -1,4 +1,4 @@
-# DirectoryCrowdBean
+# DirectoryCrowdModel
 ## Properties
 
 | Name | Type | Description | Notes |

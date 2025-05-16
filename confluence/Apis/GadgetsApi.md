@@ -47,7 +47,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List**](../Models/GadgetBean.md)
+[**List**](../Models/GadgetModel.md)
 
 ### Authorization
 
@@ -60,7 +60,7 @@ This endpoint does not need any parameter.
 
 <a name="setGadgets"></a>
 # **setGadgets**
-> List setGadgets(GadgetBean)
+> List setGadgets(GadgetModel)
 
 Set a list of gadgets
 
@@ -70,11 +70,11 @@ Set a list of gadgets
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **GadgetBean** | [**List**](../Models/GadgetBean.md)|  | |
+| **GadgetModel** | [**List**](../Models/GadgetModel.md)|  | |
 
 ### Return type
 
-[**List**](../Models/GadgetBean.md)
+[**List**](../Models/GadgetModel.md)
 
 ### Authorization
 

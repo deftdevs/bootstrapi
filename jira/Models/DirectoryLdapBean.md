@@ -1,4 +1,4 @@
-# DirectoryLdapBean
+# DirectoryLdapModel
 ## Properties
 
 | Name | Type | Description | Notes |

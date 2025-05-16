@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import com.deftdevs.bootstrapi.commons.rest.impl.TestLicensesResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 import org.junit.jupiter.api.BeforeEach;
@@ -31,26 +31,26 @@ class LicensesResourceTest {
 
     @Test
     void testGetLicenses() {
-        final List<LicenseBean> licenseBeans = Collections.singletonList(LicenseBean.EXAMPLE_1);
-        doReturn(licenseBeans).when(licensesService).getLicenses();
+        final List<LicenseModel> licenseModels = Collections.singletonList(LicenseModel.EXAMPLE_1);
+        doReturn(licenseModels).when(licensesService).getLicenses();
 
         final Response response = resource.getLicenses();
         assertEquals(200, response.getStatus());
 
-        final List<LicenseBean> resultLicenseBeans = (List<LicenseBean>) response.getEntity();
-        assertEquals(resultLicenseBeans, licenseBeans);
+        final List<LicenseModel> resultLicenseModels = (List<LicenseModel>) response.getEntity();
+        assertEquals(resultLicenseModels, licenseModels);
     }
 
     @Test
     void testSetLicenses() {
         final List<String> licenses = List.of("ABC...");
-        final List<LicenseBean> licenseBeans = List.of(LicenseBean.EXAMPLE_1);
-        doReturn(licenseBeans).when(licensesService).setLicenses(licenses);
+        final List<LicenseModel> licenseModels = List.of(LicenseModel.EXAMPLE_1);
+        doReturn(licenseModels).when(licensesService).setLicenses(licenses);
 
         final Response response = resource.setLicenses(licenses);
         assertEquals(200, response.getStatus());
 
-        final List<LicenseBean> resultLicenseBeans = (List<LicenseBean>) response.getEntity();
-        assertEquals(licenseBeans, resultLicenseBeans);
+        final List<LicenseModel> resultLicenseModels = (List<LicenseModel>) response.getEntity();
+        assertEquals(licenseModels, resultLicenseModels);
     }
 }

@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
-import com.deftdevs.bootstrapi.crowd.model.SessionConfigBean;
+import com.deftdevs.bootstrapi.crowd.model.SessionConfigModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.SessionConfigResource;
 import com.deftdevs.bootstrapi.crowd.service.api.SessionConfigService;
 import org.springframework.stereotype.Component;
@@ -31,9 +31,9 @@ public class SessionConfigResourceImpl implements SessionConfigResource {
 
     @Override
     public Response setSessionConfig(
-            final SessionConfigBean sessionConfigBean) {
+            final SessionConfigModel sessionConfigModel) {
 
-        return Response.ok(sessionConfigService.setSessionConfig(sessionConfigBean)).build();
+        return Response.ok(sessionConfigService.setSessionConfig(sessionConfigModel)).build();
     }
 
 }

@@ -1,4 +1,4 @@
-# TrustedProxiesBean
+# TrustedProxiesModel
 ## Properties
 
 | Name | Type | Description | Notes |

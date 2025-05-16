@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.service.api;
 
-import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -15,7 +15,7 @@ public interface DirectoriesService {
      *
      * @return the directories
      */
-    List<AbstractDirectoryBean> getDirectories();
+    List<AbstractDirectoryModel> getDirectories();
 
     /**
      * Gets a single directory.
@@ -23,7 +23,7 @@ public interface DirectoriesService {
      * @param id the directory id to query
      * @return the directory
      */
-    AbstractDirectoryBean getDirectory(
+    AbstractDirectoryModel getDirectory(
             final long id);
 
     /**
@@ -33,8 +33,8 @@ public interface DirectoriesService {
      * @param testConnection whether to test connection
      * @return the directories
      */
-    List<AbstractDirectoryBean> setDirectories(
-            @NotNull List<AbstractDirectoryBean> directories,
+    List<AbstractDirectoryModel> setDirectories(
+            @NotNull List<AbstractDirectoryModel> directories,
             boolean testConnection);
 
     /**
@@ -45,9 +45,9 @@ public interface DirectoriesService {
      * @param testConnection whether to test connection
      * @return the directories
      */
-    AbstractDirectoryBean setDirectory(
+    AbstractDirectoryModel setDirectory(
             long id,
-            @NotNull AbstractDirectoryBean directory,
+            @NotNull AbstractDirectoryModel directory,
             boolean testConnection);
 
     /**
@@ -57,8 +57,8 @@ public interface DirectoriesService {
      * @param testConnection whether to test connection
      * @return the added directory
      */
-    AbstractDirectoryBean addDirectory(
-            @NotNull AbstractDirectoryBean directory,
+    AbstractDirectoryModel addDirectory(
+            @NotNull AbstractDirectoryModel directory,
             boolean testConnection);
 
     /**

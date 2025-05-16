@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
 import com.deftdevs.bootstrapi.commons.rest.api.SettingsBrandingResource;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsBrandingService;
 
@@ -17,14 +17,14 @@ public abstract class AbstractSettingsBrandingResourceImpl implements SettingsBr
 
     @Override
     public Response getBrandingColorScheme() {
-        final SettingsBrandingColorSchemeBean colourSchemeBean = brandingService.getColourScheme();
-        return Response.ok(colourSchemeBean).build();
+        final SettingsBrandingColorSchemeModel colourSchemeModel = brandingService.getColourScheme();
+        return Response.ok(colourSchemeModel).build();
     }
 
     @Override
-    public Response setBrandingColorScheme(SettingsBrandingColorSchemeBean bean) {
-        final SettingsBrandingColorSchemeBean colourSchemeBean = brandingService.setColourScheme(bean);
-        return Response.ok(colourSchemeBean).build();
+    public Response setBrandingColorScheme(SettingsBrandingColorSchemeModel bean) {
+        final SettingsBrandingColorSchemeModel colourSchemeModel = brandingService.setColourScheme(bean);
+        return Response.ok(colourSchemeModel).build();
     }
 
     @Override

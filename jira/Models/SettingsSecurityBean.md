@@ -1,4 +1,4 @@
-# SettingsSecurityBean
+# SettingsSecurityModel
 ## Properties
 
 | Name | Type | Description | Notes |

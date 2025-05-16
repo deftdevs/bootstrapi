@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.service.api;
 
-import com.deftdevs.bootstrapi.commons.model.GadgetBean;
+import com.deftdevs.bootstrapi.commons.model.GadgetModel;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -12,7 +12,7 @@ public interface GadgetsService {
      *
      * @return the gadgets
      */
-    List<GadgetBean> getGadgets();
+    List<GadgetModel> getGadgets();
 
     /**
      * Gets a single gadget.
@@ -20,37 +20,37 @@ public interface GadgetsService {
      * @param id the gadget id to query
      * @return the gadget
      */
-    GadgetBean getGadget(
+    GadgetModel getGadget(
             final long id);
 
     /**
      * Sets or updates the gadgets set.
      *
-     * @param gadgetBeans the gadget beans
+     * @param gadgetModels the gadget beans
      * @return the updated gadgets
      */
-    List<GadgetBean> setGadgets(
-            @NotNull final List<GadgetBean> gadgetBeans);
+    List<GadgetModel> setGadgets(
+            @NotNull final List<GadgetModel> gadgetModels);
 
     /**
      * Updates a single gadgets.
      *
      * @param id         the gadget id to update
-     * @param gadgetBean the gadgets bean
+     * @param gadgetModel the gadgets bean
      * @return the updated gadgets
      */
-    GadgetBean setGadget(
+    GadgetModel setGadget(
             final long id,
-            @NotNull final GadgetBean gadgetBean);
+            @NotNull final GadgetModel gadgetModel);
 
     /**
      * Add one single gadget.
      *
-     * @param gadgetBean the gadget bean to add
+     * @param gadgetModel the gadget bean to add
      * @return the added gadget
      */
-    GadgetBean addGadget(
-            @NotNull final GadgetBean gadgetBean);
+    GadgetModel addGadget(
+            @NotNull final GadgetModel gadgetModel);
 
     /**
      * Deletes all gadgets

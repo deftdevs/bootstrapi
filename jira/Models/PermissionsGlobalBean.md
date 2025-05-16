@@ -1,4 +1,4 @@
-# PermissionsGlobalBean
+# PermissionsGlobalModel
 ## Properties
 
 | Name | Type | Description | Notes |

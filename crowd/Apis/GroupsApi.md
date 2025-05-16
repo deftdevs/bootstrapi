@@ -9,7 +9,7 @@ All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
 
 <a name="setGroups"></a>
 # **setGroups**
-> GroupBean setGroups(directoryId, GroupBean)
+> GroupModel setGroups(directoryId, GroupModel)
 
 Set groups
 
@@ -18,11 +18,11 @@ Set groups
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **directoryId** | **Long**|  | [default to null] |
-| **GroupBean** | [**List**](../Models/GroupBean.md)|  | |
+| **GroupModel** | [**List**](../Models/GroupModel.md)|  | |
 
 ### Return type
 
-[**GroupBean**](../Models/GroupBean.md)
+[**GroupModel**](../Models/GroupModel.md)
 
 ### Authorization
 

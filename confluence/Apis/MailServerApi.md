@@ -12,7 +12,7 @@ All URIs are relative to *https://&lt;CONFLUENCE_URL&gt;/rest/bootstrapi/1*
 
 <a name="getMailServerPop"></a>
 # **getMailServerPop**
-> MailServerPopBean getMailServerPop()
+> MailServerPopModel getMailServerPop()
 
 Get the default POP mail server
 
@@ -21,7 +21,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**MailServerPopBean**](../Models/MailServerPopBean.md)
+[**MailServerPopModel**](../Models/MailServerPopModel.md)
 
 ### Authorization
 
@@ -34,7 +34,7 @@ This endpoint does not need any parameter.
 
 <a name="getMailServerSmtp"></a>
 # **getMailServerSmtp**
-> MailServerSmtpBean getMailServerSmtp()
+> MailServerSmtpModel getMailServerSmtp()
 
 Get the default SMTP mail server
 
@@ -43,7 +43,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**MailServerSmtpBean**](../Models/MailServerSmtpBean.md)
+[**MailServerSmtpModel**](../Models/MailServerSmtpModel.md)
 
 ### Authorization
 
@@ -56,7 +56,7 @@ This endpoint does not need any parameter.
 
 <a name="setMailServerPop"></a>
 # **setMailServerPop**
-> MailServerPopBean setMailServerPop(MailServerPopBean)
+> MailServerPopModel setMailServerPop(MailServerPopModel)
 
 Set the default POP mail server
 
@@ -64,11 +64,11 @@ Set the default POP mail server
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **MailServerPopBean** | [**MailServerPopBean**](../Models/MailServerPopBean.md)|  | |
+| **MailServerPopModel** | [**MailServerPopModel**](../Models/MailServerPopModel.md)|  | |
 
 ### Return type
 
-[**MailServerPopBean**](../Models/MailServerPopBean.md)
+[**MailServerPopModel**](../Models/MailServerPopModel.md)
 
 ### Authorization
 
@@ -81,7 +81,7 @@ Set the default POP mail server
 
 <a name="setMailServerSmtp"></a>
 # **setMailServerSmtp**
-> MailServerSmtpBean setMailServerSmtp(MailServerSmtpBean)
+> MailServerSmtpModel setMailServerSmtp(MailServerSmtpModel)
 
 Set the default SMTP mail server
 
@@ -89,11 +89,11 @@ Set the default SMTP mail server
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **MailServerSmtpBean** | [**MailServerSmtpBean**](../Models/MailServerSmtpBean.md)|  | |
+| **MailServerSmtpModel** | [**MailServerSmtpModel**](../Models/MailServerSmtpModel.md)|  | |
 
 ### Return type
 
-[**MailServerSmtpBean**](../Models/MailServerSmtpBean.md)
+[**MailServerSmtpModel**](../Models/MailServerSmtpModel.md)
 
 ### Authorization
 

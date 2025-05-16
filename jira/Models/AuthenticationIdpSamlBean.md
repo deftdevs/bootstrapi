@@ -1,4 +1,4 @@
-# AuthenticationIdpSamlBean
+# AuthenticationIdpSamlModel
 ## Properties
 
 | Name | Type | Description | Notes |

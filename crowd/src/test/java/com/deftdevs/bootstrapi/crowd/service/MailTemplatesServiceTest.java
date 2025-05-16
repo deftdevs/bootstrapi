@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.property.PropertyManager;
-import com.deftdevs.bootstrapi.crowd.model.MailTemplatesBean;
+import com.deftdevs.bootstrapi.crowd.model.MailTemplatesModel;
 import lombok.SneakyThrows;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -60,7 +60,7 @@ public class MailTemplatesServiceTest {
 
     @Test
     public void testGetMailTemplates() {
-        final MailTemplatesBean mailTemplates = mailTemplateService.getMailTemplates();
+        final MailTemplatesModel mailTemplates = mailTemplateService.getMailTemplates();
 
         assertEquals(FORGOTTEN_PASSWORD_EMAIL_TEMPLATE, mailTemplates.getForgottenPassword());
         assertEquals(FORGOTTEN_USERNAME_EMAIL_TEMPLATE, mailTemplates.getForgottenUsername());
@@ -71,15 +71,15 @@ public class MailTemplatesServiceTest {
 
     @Test
     public void testSetMailTemplates() {
-        final MailTemplatesBean inputMailTemplatesBean = new MailTemplatesBean();
-        inputMailTemplatesBean.setForgottenPassword("1");
-        inputMailTemplatesBean.setForgottenUsername("2");
-        inputMailTemplatesBean.setPasswordExpirationReminder("3");
-        inputMailTemplatesBean.setEmailChangeValidation("4");
-        inputMailTemplatesBean.setEmailChangeInfo("5");
+        final MailTemplatesModel inputMailTemplatesModel = new MailTemplatesModel();
+        inputMailTemplatesModel.setForgottenPassword("1");
+        inputMailTemplatesModel.setForgottenUsername("2");
+        inputMailTemplatesModel.setPasswordExpirationReminder("3");
+        inputMailTemplatesModel.setEmailChangeValidation("4");
+        inputMailTemplatesModel.setEmailChangeInfo("5");
 
-        final MailTemplatesBean outputMailTemplatesBean = mailTemplateService.setMailTemplates(inputMailTemplatesBean);
+        final MailTemplatesModel outputMailTemplatesModel = mailTemplateService.setMailTemplates(inputMailTemplatesModel);
 
-        assertEquals(inputMailTemplatesBean, outputMailTemplatesBean);
+        assertEquals(inputMailTemplatesModel, outputMailTemplatesModel);
     }
 }

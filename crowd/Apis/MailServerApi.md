@@ -10,7 +10,7 @@ All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
 
 <a name="getMailServerSmtp"></a>
 # **getMailServerSmtp**
-> MailServerSmtpBean getMailServerSmtp()
+> MailServerSmtpModel getMailServerSmtp()
 
 Get the default SMTP mail server
 
@@ -19,7 +19,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**MailServerSmtpBean**](../Models/MailServerSmtpBean.md)
+[**MailServerSmtpModel**](../Models/MailServerSmtpModel.md)
 
 ### Authorization
 
@@ -32,7 +32,7 @@ This endpoint does not need any parameter.
 
 <a name="setMailServerSmtp"></a>
 # **setMailServerSmtp**
-> MailServerSmtpBean setMailServerSmtp(MailServerSmtpBean)
+> MailServerSmtpModel setMailServerSmtp(MailServerSmtpModel)
 
 Set the default SMTP mail server
 
@@ -40,11 +40,11 @@ Set the default SMTP mail server
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **MailServerSmtpBean** | [**MailServerSmtpBean**](../Models/MailServerSmtpBean.md)|  | |
+| **MailServerSmtpModel** | [**MailServerSmtpModel**](../Models/MailServerSmtpModel.md)|  | |
 
 ### Return type
 
-[**MailServerSmtpBean**](../Models/MailServerSmtpBean.md)
+[**MailServerSmtpModel**](../Models/MailServerSmtpModel.md)
 
 ### Authorization
 

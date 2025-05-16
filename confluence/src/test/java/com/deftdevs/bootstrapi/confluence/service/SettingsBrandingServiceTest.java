@@ -11,7 +11,7 @@ import com.atlassian.favicon.core.exceptions.ImageStorageException;
 import com.atlassian.favicon.core.exceptions.InvalidImageDataException;
 import com.atlassian.favicon.core.exceptions.UnsupportedImageTypeException;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -24,7 +24,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Optional;
 
-import static com.deftdevs.bootstrapi.confluence.model.util.SettingsBrandingColorSchemeBeanUtil.toGlobalColorScheme;
+import static com.deftdevs.bootstrapi.confluence.model.util.SettingsBrandingColorSchemeModelUtil.toGlobalColorScheme;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -51,25 +51,25 @@ class SettingsBrandingServiceTest {
     @Test
     void testGetColourScheme() {
 
-        BaseColourScheme dummyBaseColourScheme = toGlobalColorScheme(SettingsBrandingColorSchemeBean.EXAMPLE_1, null);
+        BaseColourScheme dummyBaseColourScheme = toGlobalColorScheme(SettingsBrandingColorSchemeModel.EXAMPLE_1, null);
         doReturn(dummyBaseColourScheme).when(colourSchemeManager).getGlobalColourScheme();
 
-        SettingsBrandingColorSchemeBean colourScheme = settingsBrandingService.getColourScheme();
+        SettingsBrandingColorSchemeModel colourScheme = settingsBrandingService.getColourScheme();
 
-        assertEquals(SettingsBrandingColorSchemeBean.EXAMPLE_1.getTopBar(), colourScheme.getTopBar());
+        assertEquals(SettingsBrandingColorSchemeModel.EXAMPLE_1.getTopBar(), colourScheme.getTopBar());
     }
 
     @Test
     void testSetColourScheme() {
 
-        SettingsBrandingColorSchemeBean schemeBean = SettingsBrandingColorSchemeBean.EXAMPLE_1;
-        BaseColourScheme dummyBaseColourScheme = toGlobalColorScheme(schemeBean, null);
+        SettingsBrandingColorSchemeModel schemeModel = SettingsBrandingColorSchemeModel.EXAMPLE_1;
+        BaseColourScheme dummyBaseColourScheme = toGlobalColorScheme(schemeModel, null);
         doReturn(dummyBaseColourScheme).when(colourSchemeManager).getGlobalColourScheme();
 
-        SettingsBrandingColorSchemeBean colourScheme = settingsBrandingService.setColourScheme(schemeBean);
+        SettingsBrandingColorSchemeModel colourScheme = settingsBrandingService.setColourScheme(schemeModel);
         verify(colourSchemeManager).saveGlobalColourScheme(any());
 
-        assertEquals(schemeBean.getTopBar(), colourScheme.getTopBar());
+        assertEquals(schemeModel.getTopBar(), colourScheme.getTopBar());
     }
 
     @Test

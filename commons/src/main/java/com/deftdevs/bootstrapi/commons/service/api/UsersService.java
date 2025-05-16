@@ -1,9 +1,8 @@
 package com.deftdevs.bootstrapi.commons.service.api;
 
-import com.deftdevs.bootstrapi.commons.model.UserBean;
+import com.deftdevs.bootstrapi.commons.model.UserModel;
 
 import javax.validation.constraints.NotNull;
-import java.util.List;
 import java.util.List;
 
 public interface UsersService {
@@ -14,7 +13,7 @@ public interface UsersService {
      * @param username the username
      * @return the user bean
      */
-    UserBean getUser(
+    UserModel getUser(
             @NotNull final String username);
 
     /**
@@ -24,7 +23,7 @@ public interface UsersService {
      * @param username the username
      * @return the user bean
      */
-    UserBean getUser(
+    UserModel getUser(
             final long directoryId,
             @NotNull final String username);
 
@@ -32,34 +31,34 @@ public interface UsersService {
      * Set (add or update) user.
      *
      * @param directoryId the directory id
-     * @param userBean the user bean
+     * @param userModel the user bean
      * @return the set user bean
      */
-    UserBean setUser(
+    UserModel setUser(
             final long directoryId,
-            @NotNull final UserBean userBean);
+            @NotNull final UserModel userModel);
 
     /**
      * Set (add or update) users.
      *
      * @param directoryId the directory id
-     * @param userBeans the user beans
+     * @param userModels the user beans
      * @return the set user beans
      */
-    List<UserBean> setUsers(
+    List<UserModel> setUsers(
             final long directoryId,
-            @NotNull final List<UserBean> userBeans);
+            @NotNull final List<UserModel> userModels);
 
     /**
      * Update the user.
      *
      * @param username the username
-     * @param userBean the user bean
+     * @param userModel the user bean
      * @return the updated user bean
      */
-    UserBean updateUser(
+    UserModel updateUser(
             @NotNull final String username,
-            @NotNull final UserBean userBean);
+            @NotNull final UserModel userModel);
 
     /**
      * Update the user password.
@@ -68,7 +67,7 @@ public interface UsersService {
      * @param password the password
      * @return the updated user bean
      */
-    UserBean updatePassword(
+    UserModel updatePassword(
             @NotNull final String username,
             @NotNull final String password);
 

@@ -6,10 +6,10 @@ import com.atlassian.plugins.authentication.api.config.IdpConfigService;
 import com.atlassian.plugins.authentication.api.config.SsoConfig;
 import com.atlassian.plugins.authentication.api.config.SsoConfigService;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpBean;
-import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
-import com.deftdevs.bootstrapi.confluence.model.util.AuthenticationIdpBeanUtil;
-import com.deftdevs.bootstrapi.confluence.model.util.AuthenticationSsoBeanUtil;
+import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpModel;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoModel;
+import com.deftdevs.bootstrapi.confluence.model.util.AuthenticationIdpModelUtil;
+import com.deftdevs.bootstrapi.confluence.model.util.AuthenticationSsoModelUtil;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceAuthenticationService;
 import org.springframework.stereotype.Component;
 
@@ -37,53 +37,53 @@ public class AuthenticationServiceImpl implements ConfluenceAuthenticationServic
     }
 
     @Override
-    public List<AbstractAuthenticationIdpBean> getAuthenticationIdps() {
+    public List<AbstractAuthenticationIdpModel> getAuthenticationIdps() {
         return idpConfigService.getIdpConfigs().stream()
-                .map(AuthenticationIdpBeanUtil::toAuthenticationIdpBean)
-                .sorted(authenticationIdpBeanComparator)
+                .map(AuthenticationIdpModelUtil::toAuthenticationIdpModel)
+                .sorted(authenticationIdpModelComparator)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public List<AbstractAuthenticationIdpBean> setAuthenticationIdps(
-            final List<AbstractAuthenticationIdpBean> authenticationIdpBeans) {
+    public List<AbstractAuthenticationIdpModel> setAuthenticationIdps(
+            final List<AbstractAuthenticationIdpModel> authenticationIdpModels) {
 
-        return authenticationIdpBeans.stream()
+        return authenticationIdpModels.stream()
                 .map(this::setAuthenticationIdp)
-                .sorted(authenticationIdpBeanComparator)
+                .sorted(authenticationIdpModelComparator)
                 .collect(Collectors.toList());
     }
 
-    public AbstractAuthenticationIdpBean setAuthenticationIdp(
-            final AbstractAuthenticationIdpBean authenticationIdpBean) {
+    public AbstractAuthenticationIdpModel setAuthenticationIdp(
+            final AbstractAuthenticationIdpModel authenticationIdpModel) {
 
-        if (authenticationIdpBean.getName() == null || authenticationIdpBean.getName().trim().isEmpty()) {
+        if (authenticationIdpModel.getName() == null || authenticationIdpModel.getName().trim().isEmpty()) {
             throw new BadRequestException("The name cannot be empty");
         }
 
-        final IdpConfig existingIdpConfig = findIdpConfigByName(authenticationIdpBean.getName());
+        final IdpConfig existingIdpConfig = findIdpConfigByName(authenticationIdpModel.getName());
 
         if (existingIdpConfig == null) {
-            final IdpConfig idpConfig = AuthenticationIdpBeanUtil.toIdpConfig(authenticationIdpBean);
+            final IdpConfig idpConfig = AuthenticationIdpModelUtil.toIdpConfig(authenticationIdpModel);
             final IdpConfig addedIdpConfig = idpConfigService.addIdpConfig(idpConfig);
-            return AuthenticationIdpBeanUtil.toAuthenticationIdpBean(addedIdpConfig);
+            return AuthenticationIdpModelUtil.toAuthenticationIdpModel(addedIdpConfig);
         }
 
-        final IdpConfig idpConfig = AuthenticationIdpBeanUtil.toIdpConfig(authenticationIdpBean, existingIdpConfig);
+        final IdpConfig idpConfig = AuthenticationIdpModelUtil.toIdpConfig(authenticationIdpModel, existingIdpConfig);
         final IdpConfig updatedIdpConfig = idpConfigService.updateIdpConfig(idpConfig);
-        return AuthenticationIdpBeanUtil.toAuthenticationIdpBean(updatedIdpConfig);
+        return AuthenticationIdpModelUtil.toAuthenticationIdpModel(updatedIdpConfig);
     }
 
     @Override
-    public AuthenticationSsoBean getAuthenticationSso() {
-        return AuthenticationSsoBeanUtil.toAuthenticationSsoBean(ssoConfigService.getSsoConfig());
+    public AuthenticationSsoModel getAuthenticationSso() {
+        return AuthenticationSsoModelUtil.toAuthenticationSsoModel(ssoConfigService.getSsoConfig());
     }
 
     @Override
-    public AuthenticationSsoBean setAuthenticationSso(AuthenticationSsoBean authenticationSsoBean) {
+    public AuthenticationSsoModel setAuthenticationSso(AuthenticationSsoModel authenticationSsoModel) {
         final SsoConfig existingSsoConfig = ssoConfigService.getSsoConfig();
-        final SsoConfig ssoConfig = AuthenticationSsoBeanUtil.toSsoConfig(authenticationSsoBean, existingSsoConfig);
-        return AuthenticationSsoBeanUtil.toAuthenticationSsoBean(ssoConfigService.updateSsoConfig(ssoConfig));
+        final SsoConfig ssoConfig = AuthenticationSsoModelUtil.toSsoConfig(authenticationSsoModel, existingSsoConfig);
+        return AuthenticationSsoModelUtil.toAuthenticationSsoModel(ssoConfigService.updateSsoConfig(ssoConfig));
     }
 
     IdpConfig findIdpConfigByName(
@@ -98,6 +98,6 @@ public class AuthenticationServiceImpl implements ConfluenceAuthenticationServic
         return idpConfigsByName.get(name);
     }
 
-    static Comparator<AbstractAuthenticationIdpBean> authenticationIdpBeanComparator = (a1, a2) -> a1.getName().compareToIgnoreCase(a2.getName());
+    static Comparator<AbstractAuthenticationIdpModel> authenticationIdpModelComparator = (a1, a2) -> a1.getName().compareToIgnoreCase(a2.getName());
 
 }

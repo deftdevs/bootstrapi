@@ -10,7 +10,7 @@ All URIs are relative to *https://&lt;JIRA_URL&gt;/rest/bootstrapi/1*
 
 <a name="getPermissionGlobal"></a>
 # **getPermissionGlobal**
-> PermissionsGlobalBean getPermissionGlobal()
+> PermissionsGlobalModel getPermissionGlobal()
 
 Get global permissions configuration
 
@@ -21,7 +21,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**PermissionsGlobalBean**](../Models/PermissionsGlobalBean.md)
+[**PermissionsGlobalModel**](../Models/PermissionsGlobalModel.md)
 
 ### Authorization
 
@@ -34,7 +34,7 @@ This endpoint does not need any parameter.
 
 <a name="setPermissionGlobal"></a>
 # **setPermissionGlobal**
-> PermissionsGlobalBean setPermissionGlobal(PermissionsGlobalBean)
+> PermissionsGlobalModel setPermissionGlobal(PermissionsGlobalModel)
 
 Set global permissions configuration
 
@@ -44,11 +44,11 @@ Set global permissions configuration
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **PermissionsGlobalBean** | [**PermissionsGlobalBean**](../Models/PermissionsGlobalBean.md)|  | |
+| **PermissionsGlobalModel** | [**PermissionsGlobalModel**](../Models/PermissionsGlobalModel.md)|  | |
 
 ### Return type
 
-[**PermissionsGlobalBean**](../Models/PermissionsGlobalBean.md)
+[**PermissionsGlobalModel**](../Models/PermissionsGlobalModel.md)
 
 ### Authorization
 

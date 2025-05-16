@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.GroupsResource;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
@@ -29,10 +29,10 @@ public class GroupsResourceImpl implements GroupsResource {
     @Override
     public Response setGroups(
             final long directoryId,
-            final List<GroupBean> groupBeans) {
+            final List<GroupModel> groupModels) {
 
-        final List<GroupBean> resultGroupBeans = groupsService.setGroups(directoryId, groupBeans);
-        return Response.ok(resultGroupBeans).build();
+        final List<GroupModel> resultGroupModels = groupsService.setGroups(directoryId, groupModels);
+        return Response.ok(resultGroupModels).build();
     }
 
 }

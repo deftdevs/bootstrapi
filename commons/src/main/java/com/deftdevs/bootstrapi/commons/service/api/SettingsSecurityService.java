@@ -1,10 +1,10 @@
 package com.deftdevs.bootstrapi.commons.service.api;
 
-import com.deftdevs.bootstrapi.commons.model.SettingsSecurityBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
 
 import javax.validation.constraints.NotNull;
 
-public interface SettingsSecurityService<B extends SettingsSecurityBean> {
+public interface SettingsSecurityService<B extends SettingsSecurityModel> {
 
     /**
      * Get the security settings.
@@ -16,10 +16,10 @@ public interface SettingsSecurityService<B extends SettingsSecurityBean> {
     /**
      * Set the settings
      *
-     * @param settingsSecurityBean the security settings to set
+     * @param settingsSecurityModel the security settings to set
      * @return the security settings
      */
     B setSettingsSecurity(
-            @NotNull final B settingsSecurityBean);
+            @NotNull final B settingsSecurityModel);
 
 }

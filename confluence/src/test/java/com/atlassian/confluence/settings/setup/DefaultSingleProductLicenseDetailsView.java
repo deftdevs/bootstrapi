@@ -1,7 +1,7 @@
 package com.atlassian.confluence.settings.setup;
 
 import com.atlassian.sal.api.license.SingleProductLicenseDetailsView;
-import com.deftdevs.bootstrapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -9,10 +9,10 @@ import java.util.Date;
 
 public class DefaultSingleProductLicenseDetailsView implements SingleProductLicenseDetailsView {
 
-    private final LicenseBean licenseBean;
+    private final LicenseModel licenseModel;
 
-    public DefaultSingleProductLicenseDetailsView(LicenseBean licenseBean) {
-        this.licenseBean = licenseBean;
+    public DefaultSingleProductLicenseDetailsView(LicenseModel licenseModel) {
+        this.licenseModel = licenseModel;
     }
 
     @Override
@@ -23,12 +23,12 @@ public class DefaultSingleProductLicenseDetailsView implements SingleProductLice
     @Nonnull
     @Override
     public String getLicenseTypeName() {
-        return licenseBean.getType();
+        return licenseModel.getType();
     }
 
     @Override
     public String getOrganisationName() {
-        return licenseBean.getOrganization();
+        return licenseModel.getOrganization();
     }
 
     @Nullable
@@ -39,7 +39,7 @@ public class DefaultSingleProductLicenseDetailsView implements SingleProductLice
 
     @Override
     public String getDescription() {
-        return licenseBean.getDescription();
+        return licenseModel.getDescription();
     }
 
     @Override
@@ -55,7 +55,7 @@ public class DefaultSingleProductLicenseDetailsView implements SingleProductLice
     @Nullable
     @Override
     public Date getLicenseExpiryDate() {
-        return licenseBean.getExpiryDate();
+        return licenseModel.getExpiryDate();
     }
 
     @Nullable
@@ -87,13 +87,13 @@ public class DefaultSingleProductLicenseDetailsView implements SingleProductLice
 
     @Override
     public int getNumberOfUsers() {
-        return licenseBean.getMaxUsers();
+        return licenseModel.getMaxUsers();
     }
 
     @Nonnull
     @Override
     public String getProductDisplayName() {
-        return licenseBean.getProducts().iterator().next();
+        return licenseModel.getProducts().iterator().next();
     }
 
     @Nullable

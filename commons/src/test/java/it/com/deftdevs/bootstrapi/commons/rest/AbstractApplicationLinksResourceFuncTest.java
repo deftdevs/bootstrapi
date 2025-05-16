@@ -1,7 +1,7 @@
 package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.type.TypeReference;
 import org.junit.jupiter.api.Test;
@@ -26,17 +26,17 @@ public abstract class AbstractApplicationLinksResourceFuncTest {
 
     @Test
     void testSetApplicationLinks() throws Exception {
-        final ApplicationLinkBean applicationLinkBean = getExampleBean();
+        final ApplicationLinkModel applicationLinkModel = getExampleModel();
 
         final HttpResponse<String> applicationLinksResponse = HttpRequestHelper.builder(BootstrAPI.APPLICATION_LINKS + "?" + "ignoreSetupErrors")
-                .request(HttpMethod.PUT, Collections.singletonList(applicationLinkBean));
+                .request(HttpMethod.PUT, Collections.singletonList(applicationLinkModel));
         assertEquals(Response.Status.OK.getStatusCode(), applicationLinksResponse.statusCode());
 
-        final List<ApplicationLinkBean> applicationLinkBeans = objectMapper.readValue(applicationLinksResponse.body(), new TypeReference<List<ApplicationLinkBean>>(){});
-        assertEquals(1, applicationLinkBeans.size());
+        final List<ApplicationLinkModel> applicationLinkModels = objectMapper.readValue(applicationLinksResponse.body(), new TypeReference<List<ApplicationLinkModel>>(){});
+        assertEquals(1, applicationLinkModels.size());
 
-        final ApplicationLinkBean responseApplicationLinkBean = applicationLinkBeans.iterator().next();
-        assertEquals(applicationLinkBean.getRpcUrl(), responseApplicationLinkBean.getRpcUrl());
+        final ApplicationLinkModel responseApplicationLinkModel = applicationLinkModels.iterator().next();
+        assertEquals(applicationLinkModel.getRpcUrl(), responseApplicationLinkModel.getRpcUrl());
     }
 
     @Test
@@ -57,8 +57,8 @@ public abstract class AbstractApplicationLinksResourceFuncTest {
         assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), applicationLinksResource.statusCode());
     }
 
-    protected ApplicationLinkBean getExampleBean() {
-        return ApplicationLinkBean.EXAMPLE_1;
+    protected ApplicationLinkModel getExampleModel() {
+        return ApplicationLinkModel.EXAMPLE_1;
     }
 
 }

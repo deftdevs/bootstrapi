@@ -2,8 +2,8 @@ package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.confluence.security.SpacePermission;
 import com.atlassian.confluence.security.SpacePermissionManager;
-import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalBean;
-import com.deftdevs.bootstrapi.confluence.model.util.PermissionsGlobalBeanUtil;
+import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
+import com.deftdevs.bootstrapi.confluence.model.util.PermissionsGlobalModelUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -37,8 +37,8 @@ class PermissionsServiceTest {
         final PermissionsServiceImpl spy = spy(permissionsService);
         doReturn(Collections.singletonList(globalPermissionEntry)).when(spacePermissionManager).getGlobalPermissions();
 
-        final PermissionsGlobalBean permissionsGlobalBean = spy.getPermissionsGlobal();
-        final Map<String, ? extends Collection<String>> groupPermissions = permissionsGlobalBean.getGroupPermissions();
+        final PermissionsGlobalModel permissionsGlobalModel = spy.getPermissionsGlobal();
+        final Map<String, ? extends Collection<String>> groupPermissions = permissionsGlobalModel.getGroupPermissions();
         assertTrue(groupPermissions.containsKey(group));
 
         final Set<String> permissions = new HashSet<>(groupPermissions.get(group));
@@ -54,8 +54,8 @@ class PermissionsServiceTest {
         doReturn(Arrays.asList(globalPermissionEntryToRetain, globalPermissionEntryToRemove)).when(spacePermissionManager).getGlobalPermissions();
 
         final List<SpacePermission> requestGlobalPermissions = Arrays.asList(globalPermissionEntryToAdd, globalPermissionEntryToRetain);
-        final PermissionsGlobalBean requestPermissionsGLobalBean = PermissionsGlobalBeanUtil.toPermissionsGlobalBean(requestGlobalPermissions);
-        permissionsService.setPermissionsGlobal(requestPermissionsGLobalBean);
+        final PermissionsGlobalModel requestPermissionsGLobalModel = PermissionsGlobalModelUtil.toPermissionsGlobalModel(requestGlobalPermissions);
+        permissionsService.setPermissionsGlobal(requestPermissionsGLobalModel);
 
         verify(spacePermissionManager).savePermission(globalPermissionEntryToAdd);
         verify(spacePermissionManager).removePermission(globalPermissionEntryToRemove);
@@ -68,8 +68,8 @@ class PermissionsServiceTest {
         final PermissionsServiceImpl spy = spy(permissionsService);
         doReturn(Collections.singletonList(globalPermissionEntry)).when(spacePermissionManager).getGlobalPermissions();
 
-        final PermissionsGlobalBean permissionsGlobalBean = spy.getPermissionsGlobal();
-        final Set<String> anonymousPermissions = new HashSet<>(permissionsGlobalBean.getAnonymousPermissions());
+        final PermissionsGlobalModel permissionsGlobalModel = spy.getPermissionsGlobal();
+        final Set<String> anonymousPermissions = new HashSet<>(permissionsGlobalModel.getAnonymousPermissions());
         assertTrue(anonymousPermissions.contains(globalPermissionEntry.getType()));
     }
 
@@ -80,8 +80,8 @@ class PermissionsServiceTest {
         doReturn(List.of(globalPermissionEntryToRemove)).when(spacePermissionManager).getGlobalPermissions();
 
         final List<SpacePermission> requestGlobalPermissions = List.of(globalPermissionEntryToAdd);
-        final PermissionsGlobalBean requestPermissionsGLobalBean = PermissionsGlobalBeanUtil.toPermissionsGlobalBean(requestGlobalPermissions);
-        permissionsService.setPermissionsGlobal(requestPermissionsGLobalBean);
+        final PermissionsGlobalModel requestPermissionsGLobalModel = PermissionsGlobalModelUtil.toPermissionsGlobalModel(requestGlobalPermissions);
+        permissionsService.setPermissionsGlobal(requestPermissionsGLobalModel);
 
         verify(spacePermissionManager).savePermission(globalPermissionEntryToAdd);
         verify(spacePermissionManager).removePermission(globalPermissionEntryToRemove);

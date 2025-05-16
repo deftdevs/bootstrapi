@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.confluence.rest;
 
 import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsModel;
 import com.deftdevs.bootstrapi.commons.rest.AbstractSettingsResourceImpl;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -20,7 +20,7 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 @SystemAdminOnly
 @Component
-public class SettingsResourceImpl extends AbstractSettingsResourceImpl<SettingsBean, ConfluenceSettingsService> {
+public class SettingsResourceImpl extends AbstractSettingsResourceImpl<SettingsModel, ConfluenceSettingsService> {
 
     @Inject
     public SettingsResourceImpl(

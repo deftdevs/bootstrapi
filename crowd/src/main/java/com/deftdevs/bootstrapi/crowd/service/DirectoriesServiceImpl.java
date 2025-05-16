@@ -12,13 +12,13 @@ import com.deftdevs.bootstrapi.commons.exception.DirectoryNotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.exception.web.ServiceUnavailableException;
-import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
-import com.deftdevs.bootstrapi.commons.model.DirectoryInternalBean;
-import com.deftdevs.bootstrapi.commons.model.GroupBean;
-import com.deftdevs.bootstrapi.commons.model.UserBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
+import com.deftdevs.bootstrapi.commons.model.DirectoryInternalModel;
+import com.deftdevs.bootstrapi.commons.model.GroupModel;
+import com.deftdevs.bootstrapi.commons.model.UserModel;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
-import com.deftdevs.bootstrapi.crowd.model.util.DirectoryBeanUtil;
+import com.deftdevs.bootstrapi.crowd.model.util.DirectoryModelUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
 
@@ -58,35 +58,35 @@ public class DirectoriesServiceImpl implements DirectoriesService {
     }
 
     @Override
-    public List<AbstractDirectoryBean> getDirectories() {
+    public List<AbstractDirectoryModel> getDirectories() {
         return findAllDirectories().stream()
-                .map(DirectoryBeanUtil::toDirectoryBean)
+                .map(DirectoryModelUtil::toDirectoryModel)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public AbstractDirectoryBean getDirectory(
+    public AbstractDirectoryModel getDirectory(
             final long id) {
 
         final Directory directory = findDirectory(id);
-        return DirectoryBeanUtil.toDirectoryBean(directory);
+        return DirectoryModelUtil.toDirectoryModel(directory);
     }
 
     @Override
-    public List<AbstractDirectoryBean> setDirectories(
-            @NotNull final List<AbstractDirectoryBean> directoryBeans,
+    public List<AbstractDirectoryModel> setDirectories(
+            @NotNull final List<AbstractDirectoryModel> directoryModels,
             final boolean testConnection) {
 
         final Map<String, Directory> existingDirectoriesByName = findAllDirectories().stream()
                 .collect(Collectors.toMap(Directory::getName, Function.identity()));
 
-        final List<AbstractDirectoryBean> resultDirectories = new ArrayList<>();
+        final List<AbstractDirectoryModel> resultDirectories = new ArrayList<>();
 
-        for (AbstractDirectoryBean directoryBean : directoryBeans) {
-            if (existingDirectoriesByName.containsKey(directoryBean.getName())) {
-                resultDirectories.add(setDirectory(existingDirectoriesByName.get(directoryBean.getName()).getId(), directoryBean, testConnection));
+        for (AbstractDirectoryModel directoryModel : directoryModels) {
+            if (existingDirectoriesByName.containsKey(directoryModel.getName())) {
+                resultDirectories.add(setDirectory(existingDirectoriesByName.get(directoryModel.getName()).getId(), directoryModel, testConnection));
             } else {
-                resultDirectories.add(addDirectory(directoryBean, testConnection));
+                resultDirectories.add(addDirectory(directoryModel, testConnection));
             }
         }
 
@@ -94,19 +94,19 @@ public class DirectoriesServiceImpl implements DirectoriesService {
     }
 
     @Override
-    public AbstractDirectoryBean setDirectory(
+    public AbstractDirectoryModel setDirectory(
             final long id,
-            @NotNull final AbstractDirectoryBean directoryBean,
+            @NotNull final AbstractDirectoryModel directoryModel,
             final boolean testConnection) {
 
         final Directory existingDirectory = findDirectory(id);
-        final AbstractDirectoryBean resultDirectoryBean;
+        final AbstractDirectoryModel resultDirectoryModel;
 
         try {
-            final Directory mergedDirectory = DirectoryBeanUtil.toDirectory(directoryBean, existingDirectory);
+            final Directory mergedDirectory = DirectoryModelUtil.toDirectory(directoryModel, existingDirectory);
             final Directory updatedDirectory = directoryManager.updateDirectory(mergedDirectory);
-            resultDirectoryBean = DirectoryBeanUtil.toDirectoryBean(updatedDirectory);
-        } catch (DirectoryBeanUtil.UnsupportedDirectoryBeanException e) {
+            resultDirectoryModel = DirectoryModelUtil.toDirectoryModel(updatedDirectory);
+        } catch (DirectoryModelUtil.UnsupportedDirectoryModelException e) {
             throw new BadRequestException(String.format(
                     "Setting directory type '%s' is not supported (yet)", e.getMessage()));
         } catch (com.atlassian.crowd.exception.DirectoryNotFoundException e) {
@@ -115,32 +115,32 @@ public class DirectoriesServiceImpl implements DirectoriesService {
                     "When trying to update directory '%s', it could not be found anymore", existingDirectory.getName()));
         }
 
-        handleGroupsAndUsers(directoryBean, resultDirectoryBean);
+        handleGroupsAndUsers(directoryModel, resultDirectoryModel);
 
-        return resultDirectoryBean;
+        return resultDirectoryModel;
     }
 
     @Override
-    public AbstractDirectoryBean addDirectory(
-            final @NotNull AbstractDirectoryBean directoryBean,
+    public AbstractDirectoryModel addDirectory(
+            final @NotNull AbstractDirectoryModel directoryModel,
             final boolean testConnection) {
 
-        final AbstractDirectoryBean resultDirectoryBean;
+        final AbstractDirectoryModel resultDirectoryModel;
 
         try {
-            final Directory directory = DirectoryBeanUtil.toDirectory(directoryBean);
+            final Directory directory = DirectoryModelUtil.toDirectory(directoryModel);
             final Directory addedDirectory = directoryManager.addDirectory(directory);
-            resultDirectoryBean = DirectoryBeanUtil.toDirectoryBean(addedDirectory);
-        } catch (DirectoryBeanUtil.UnsupportedDirectoryBeanException e) {
+            resultDirectoryModel = DirectoryModelUtil.toDirectoryModel(addedDirectory);
+        } catch (DirectoryModelUtil.UnsupportedDirectoryModelException e) {
             throw new BadRequestException(String.format(
                     "Adding directory type '%s' is not supported (yet)", e.getMessage()));
         } catch (DirectoryInstantiationException e) {
-            throw new InternalServerErrorException(String.format("Could not create directory '%s'", directoryBean.getName()));
+            throw new InternalServerErrorException(String.format("Could not create directory '%s'", directoryModel.getName()));
         }
 
-        handleGroupsAndUsers(directoryBean, resultDirectoryBean);
+        handleGroupsAndUsers(directoryModel, resultDirectoryModel);
 
-        return resultDirectoryBean;
+        return resultDirectoryModel;
     }
 
     @Override
@@ -199,21 +199,21 @@ public class DirectoriesServiceImpl implements DirectoriesService {
         return directoryManager.searchDirectories(allDirectoriesEntityQuery);
     }
 
-    private void handleGroupsAndUsers(AbstractDirectoryBean directoryBean, AbstractDirectoryBean resultDirectoryBean) {
-        if (DirectoryInternalBean.class.equals(directoryBean.getClass()) && directoryBean.getClass().equals(resultDirectoryBean.getClass())) {
-            final DirectoryInternalBean directoryInternalBean = (DirectoryInternalBean) directoryBean;
-            final DirectoryInternalBean resultDirectoryInternalBean = (DirectoryInternalBean) resultDirectoryBean;
+    private void handleGroupsAndUsers(AbstractDirectoryModel directoryModel, AbstractDirectoryModel resultDirectoryModel) {
+        if (DirectoryInternalModel.class.equals(directoryModel.getClass()) && directoryModel.getClass().equals(resultDirectoryModel.getClass())) {
+            final DirectoryInternalModel directoryInternalModel = (DirectoryInternalModel) directoryModel;
+            final DirectoryInternalModel resultDirectoryInternalModel = (DirectoryInternalModel) resultDirectoryModel;
 
-            if (directoryInternalBean.getGroups() != null) {
+            if (directoryInternalModel.getGroups() != null) {
                 // this is the new implementation using a groups bean
-                final List<GroupBean> resultGroupBeans = groupsService.setGroups(resultDirectoryInternalBean.getId(), directoryInternalBean.getGroups());
-                resultDirectoryInternalBean.setGroups(resultGroupBeans);
+                final List<GroupModel> resultGroupModels = groupsService.setGroups(resultDirectoryInternalModel.getId(), directoryInternalModel.getGroups());
+                resultDirectoryInternalModel.setGroups(resultGroupModels);
             }
 
-            if (directoryInternalBean.getUsers() != null) {
+            if (directoryInternalModel.getUsers() != null) {
                 // this is the old implementation using a list of users
-                final List<UserBean> resultUserBeans = usersService.setUsers(resultDirectoryInternalBean.getId(), directoryInternalBean.getUsers());
-                resultDirectoryInternalBean.setUsers(resultUserBeans);
+                final List<UserModel> resultUserModels = usersService.setUsers(resultDirectoryInternalModel.getId(), directoryInternalModel.getUsers());
+                resultDirectoryInternalModel.setUsers(resultUserModels);
             }
         }
     }

@@ -12,7 +12,7 @@ All URIs are relative to *https://&lt;JIRA_URL&gt;/rest/bootstrapi/1*
 
 <a name="createDirectory"></a>
 # **createDirectory**
-> AbstractDirectoryBean createDirectory(AbstractDirectoryBean, test-connection)
+> AbstractDirectoryModel createDirectory(AbstractDirectoryModel, test-connection)
 
 Create a user directory
 
@@ -20,12 +20,12 @@ Create a user directory
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **AbstractDirectoryBean** | [**AbstractDirectoryBean**](../Models/AbstractDirectoryBean.md)|  | |
+| **AbstractDirectoryModel** | [**AbstractDirectoryModel**](../Models/AbstractDirectoryModel.md)|  | |
 | **test-connection** | **Boolean**|  | [optional] [default to false] |
 
 ### Return type
 
-[**AbstractDirectoryBean**](../Models/AbstractDirectoryBean.md)
+[**AbstractDirectoryModel**](../Models/AbstractDirectoryModel.md)
 
 ### Authorization
 
@@ -63,7 +63,7 @@ null (empty response body)
 
 <a name="getDirectory"></a>
 # **getDirectory**
-> AbstractDirectoryBean getDirectory(id)
+> AbstractDirectoryModel getDirectory(id)
 
 Get a user directory
 
@@ -75,7 +75,7 @@ Get a user directory
 
 ### Return type
 
-[**AbstractDirectoryBean**](../Models/AbstractDirectoryBean.md)
+[**AbstractDirectoryModel**](../Models/AbstractDirectoryModel.md)
 
 ### Authorization
 
@@ -88,7 +88,7 @@ Get a user directory
 
 <a name="updateDirectory"></a>
 # **updateDirectory**
-> AbstractDirectoryBean updateDirectory(id, AbstractDirectoryBean, test-connection)
+> AbstractDirectoryModel updateDirectory(id, AbstractDirectoryModel, test-connection)
 
 Update a user directory
 
@@ -97,12 +97,12 @@ Update a user directory
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | **Long**|  | [default to null] |
-| **AbstractDirectoryBean** | [**AbstractDirectoryBean**](../Models/AbstractDirectoryBean.md)|  | |
+| **AbstractDirectoryModel** | [**AbstractDirectoryModel**](../Models/AbstractDirectoryModel.md)|  | |
 | **test-connection** | **Boolean**|  | [optional] [default to false] |
 
 ### Return type
 
-[**AbstractDirectoryBean**](../Models/AbstractDirectoryBean.md)
+[**AbstractDirectoryModel**](../Models/AbstractDirectoryModel.md)
 
 ### Authorization
 

@@ -20,7 +20,7 @@ All URIs are relative to *https://&lt;CONFLUENCE_URL&gt;/rest/bootstrapi/1*
 
 <a name="getBrandingColorScheme"></a>
 # **getBrandingColorScheme**
-> SettingsBrandingColorSchemeBean getBrandingColorScheme()
+> SettingsBrandingColorSchemeModel getBrandingColorScheme()
 
 Get the color scheme
 
@@ -29,7 +29,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SettingsBrandingColorSchemeBean**](../Models/SettingsBrandingColorSchemeBean.md)
+[**SettingsBrandingColorSchemeModel**](../Models/SettingsBrandingColorSchemeModel.md)
 
 ### Authorization
 
@@ -86,7 +86,7 @@ This endpoint does not need any parameter.
 
 <a name="getCustomHtml"></a>
 # **getCustomHtml**
-> SettingsCustomHtmlBean getCustomHtml()
+> SettingsCustomHtmlModel getCustomHtml()
 
 Get the custom HTML
 
@@ -95,7 +95,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SettingsCustomHtmlBean**](../Models/SettingsCustomHtmlBean.md)
+[**SettingsCustomHtmlModel**](../Models/SettingsCustomHtmlModel.md)
 
 ### Authorization
 
@@ -108,7 +108,7 @@ This endpoint does not need any parameter.
 
 <a name="getSettings"></a>
 # **getSettings**
-> SettingsBean getSettings()
+> SettingsModel getSettings()
 
 Get the general settings
 
@@ -117,7 +117,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SettingsBean**](../Models/SettingsBean.md)
+[**SettingsModel**](../Models/SettingsModel.md)
 
 ### Authorization
 
@@ -130,7 +130,7 @@ This endpoint does not need any parameter.
 
 <a name="getSettingsSecurity"></a>
 # **getSettingsSecurity**
-> SettingsSecurityBean getSettingsSecurity()
+> SettingsSecurityModel getSettingsSecurity()
 
 Get the security settings
 
@@ -139,7 +139,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SettingsSecurityBean**](../Models/SettingsSecurityBean.md)
+[**SettingsSecurityModel**](../Models/SettingsSecurityModel.md)
 
 ### Authorization
 
@@ -152,7 +152,7 @@ This endpoint does not need any parameter.
 
 <a name="setBrandingColorScheme"></a>
 # **setBrandingColorScheme**
-> SettingsBrandingColorSchemeBean setBrandingColorScheme(SettingsBrandingColorSchemeBean)
+> SettingsBrandingColorSchemeModel setBrandingColorScheme(SettingsBrandingColorSchemeModel)
 
 Set the color scheme
 
@@ -160,11 +160,11 @@ Set the color scheme
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **SettingsBrandingColorSchemeBean** | [**SettingsBrandingColorSchemeBean**](../Models/SettingsBrandingColorSchemeBean.md)|  | |
+| **SettingsBrandingColorSchemeModel** | [**SettingsBrandingColorSchemeModel**](../Models/SettingsBrandingColorSchemeModel.md)|  | |
 
 ### Return type
 
-[**SettingsBrandingColorSchemeBean**](../Models/SettingsBrandingColorSchemeBean.md)
+[**SettingsBrandingColorSchemeModel**](../Models/SettingsBrandingColorSchemeModel.md)
 
 ### Authorization
 
@@ -227,7 +227,7 @@ null (empty response body)
 
 <a name="setCustomHtml"></a>
 # **setCustomHtml**
-> SettingsCustomHtmlBean setCustomHtml(SettingsCustomHtmlBean)
+> SettingsCustomHtmlModel setCustomHtml(SettingsCustomHtmlModel)
 
 Set the custom HTML
 
@@ -235,11 +235,11 @@ Set the custom HTML
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **SettingsCustomHtmlBean** | [**SettingsCustomHtmlBean**](../Models/SettingsCustomHtmlBean.md)|  | |
+| **SettingsCustomHtmlModel** | [**SettingsCustomHtmlModel**](../Models/SettingsCustomHtmlModel.md)|  | |
 
 ### Return type
 
-[**SettingsCustomHtmlBean**](../Models/SettingsCustomHtmlBean.md)
+[**SettingsCustomHtmlModel**](../Models/SettingsCustomHtmlModel.md)
 
 ### Authorization
 
@@ -252,7 +252,7 @@ Set the custom HTML
 
 <a name="setSettings"></a>
 # **setSettings**
-> SettingsBean setSettings(SettingsBean)
+> SettingsModel setSettings(SettingsModel)
 
 Set the general settings
 
@@ -260,11 +260,11 @@ Set the general settings
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **SettingsBean** | [**SettingsBean**](../Models/SettingsBean.md)|  | |
+| **SettingsModel** | [**SettingsModel**](../Models/SettingsModel.md)|  | |
 
 ### Return type
 
-[**SettingsBean**](../Models/SettingsBean.md)
+[**SettingsModel**](../Models/SettingsModel.md)
 
 ### Authorization
 
@@ -277,7 +277,7 @@ Set the general settings
 
 <a name="setSettingsSecurity"></a>
 # **setSettingsSecurity**
-> SettingsSecurityBean setSettingsSecurity(SettingsSecurityBean)
+> SettingsSecurityModel setSettingsSecurity(SettingsSecurityModel)
 
 Set the security settings
 
@@ -285,11 +285,11 @@ Set the security settings
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **SettingsSecurityBean** | [**SettingsSecurityBean**](../Models/SettingsSecurityBean.md)|  | |
+| **SettingsSecurityModel** | [**SettingsSecurityModel**](../Models/SettingsSecurityModel.md)|  | |
 
 ### Return type
 
-[**SettingsSecurityBean**](../Models/SettingsSecurityBean.md)
+[**SettingsSecurityModel**](../Models/SettingsSecurityModel.md)
 
 ### Authorization
 

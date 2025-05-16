@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.atlassian.crowd.exception.ObjectNotFoundException;
-import com.deftdevs.bootstrapi.crowd.model.MailTemplatesBean;
+import com.deftdevs.bootstrapi.crowd.model.MailTemplatesModel;
 import com.deftdevs.bootstrapi.crowd.service.api.MailTemplatesService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -30,26 +30,26 @@ public class MailTemplateResourceTest {
 
     @Test
     public void testGetMailTemplates() throws ObjectNotFoundException {
-        final MailTemplatesBean mailTemplatesBean = MailTemplatesBean.EXAMPLE_1;
-        doReturn(mailTemplatesBean).when(mailTemplatesService).getMailTemplates();
+        final MailTemplatesModel mailTemplatesModel = MailTemplatesModel.EXAMPLE_1;
+        doReturn(mailTemplatesModel).when(mailTemplatesService).getMailTemplates();
 
         final Response response = mailTemplateResource.getMailTemplates();
         assertEquals(200, response.getStatus());
 
-        final MailTemplatesBean responseMailTemplatesBean = (MailTemplatesBean) response.getEntity();
-        assertEquals(mailTemplatesBean, responseMailTemplatesBean);
+        final MailTemplatesModel responseMailTemplatesModel = (MailTemplatesModel) response.getEntity();
+        assertEquals(mailTemplatesModel, responseMailTemplatesModel);
     }
 
     @Test
     public void testSetMailTemplates() {
-        final MailTemplatesBean mailTemplatesBean = MailTemplatesBean.EXAMPLE_2;
-        doReturn(mailTemplatesBean).when(mailTemplatesService).setMailTemplates(any(MailTemplatesBean.class));
+        final MailTemplatesModel mailTemplatesModel = MailTemplatesModel.EXAMPLE_2;
+        doReturn(mailTemplatesModel).when(mailTemplatesService).setMailTemplates(any(MailTemplatesModel.class));
 
-        final Response response = mailTemplateResource.setMailTemplates(mailTemplatesBean);
+        final Response response = mailTemplateResource.setMailTemplates(mailTemplatesModel);
         assertEquals(200, response.getStatus());
 
-        final MailTemplatesBean responseMailTemplatesBean = (MailTemplatesBean) response.getEntity();
-        assertEquals(mailTemplatesBean, responseMailTemplatesBean);
+        final MailTemplatesModel responseMailTemplatesModel = (MailTemplatesModel) response.getEntity();
+        assertEquals(mailTemplatesModel, responseMailTemplatesModel);
     }
 
 }

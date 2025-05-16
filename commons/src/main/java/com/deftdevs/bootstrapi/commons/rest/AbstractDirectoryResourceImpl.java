@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
 import com.deftdevs.bootstrapi.commons.rest.api.DirectoryResource;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 
@@ -17,27 +17,27 @@ public abstract class AbstractDirectoryResourceImpl implements DirectoryResource
     @Override
     public Response getDirectory(
             final long id) {
-        final AbstractDirectoryBean directoryBean = directoriesService.getDirectory(id);
-        return Response.ok(directoryBean).build();
+        final AbstractDirectoryModel directoryModel = directoriesService.getDirectory(id);
+        return Response.ok(directoryModel).build();
     }
 
     @Override
     public Response updateDirectory(
             final long id,
             final boolean testConnection,
-            final AbstractDirectoryBean directory) {
+            final AbstractDirectoryModel directory) {
 
-        AbstractDirectoryBean resultDirectoryBean  = directoriesService.setDirectory(id, directory, testConnection);
-        return Response.ok(resultDirectoryBean).build();
+        AbstractDirectoryModel resultDirectoryModel  = directoriesService.setDirectory(id, directory, testConnection);
+        return Response.ok(resultDirectoryModel).build();
     }
 
     @Override
     public Response createDirectory(
             final boolean testConnection,
-            final AbstractDirectoryBean directory) {
+            final AbstractDirectoryModel directory) {
 
-        AbstractDirectoryBean addedDirectoryBean = directoriesService.addDirectory(directory, testConnection);
-        return Response.ok(addedDirectoryBean).build();
+        AbstractDirectoryModel addedDirectoryModel = directoriesService.addDirectory(directory, testConnection);
+        return Response.ok(addedDirectoryModel).build();
     }
 
     @Override

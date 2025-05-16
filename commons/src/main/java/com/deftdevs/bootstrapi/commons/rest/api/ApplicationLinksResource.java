@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -24,7 +24,7 @@ public interface ApplicationLinksResource {
             summary = "Get all application links",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApplicationLinkBean.class))),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApplicationLinkModel.class))),
                             description = "Returns all application links."
                     ),
                     @ApiResponse(
@@ -44,7 +44,7 @@ public interface ApplicationLinksResource {
             description = "NOTE: All existing application links with the same 'rpcUrl' attribute are updated.",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApplicationLinkBean.class))),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApplicationLinkModel.class))),
                             description = "Returns all application links."
                     ),
                     @ApiResponse(
@@ -55,7 +55,7 @@ public interface ApplicationLinksResource {
     )
     Response setApplicationLinks(
             @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
-            @NotNull final List<ApplicationLinkBean> applicationLinkBeans);
+            @NotNull final List<ApplicationLinkModel> applicationLinkModels);
 
     @DELETE
     @Operation(

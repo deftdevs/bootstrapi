@@ -21,7 +21,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List**](../Models/AbstractAuthenticationIdpBean.md)
+[**List**](../Models/AbstractAuthenticationIdpModel.md)
 
 ### Authorization
 
@@ -34,7 +34,7 @@ This endpoint does not need any parameter.
 
 <a name="getAuthenticationSso"></a>
 # **getAuthenticationSso**
-> AuthenticationSsoBean getAuthenticationSso()
+> AuthenticationSsoModel getAuthenticationSso()
 
 Get authentication SSO configuration
 
@@ -43,7 +43,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**AuthenticationSsoBean**](../Models/AuthenticationSsoBean.md)
+[**AuthenticationSsoModel**](../Models/AuthenticationSsoModel.md)
 
 ### Authorization
 
@@ -56,7 +56,7 @@ This endpoint does not need any parameter.
 
 <a name="setAuthenticationIdps"></a>
 # **setAuthenticationIdps**
-> List setAuthenticationIdps(AbstractAuthenticationIdpBean)
+> List setAuthenticationIdps(AbstractAuthenticationIdpModel)
 
 Set all authentication identity providers
 
@@ -64,11 +64,11 @@ Set all authentication identity providers
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **AbstractAuthenticationIdpBean** | [**List**](../Models/AbstractAuthenticationIdpBean.md)|  | [optional] |
+| **AbstractAuthenticationIdpModel** | [**List**](../Models/AbstractAuthenticationIdpModel.md)|  | [optional] |
 
 ### Return type
 
-[**List**](../Models/AbstractAuthenticationIdpBean.md)
+[**List**](../Models/AbstractAuthenticationIdpModel.md)
 
 ### Authorization
 
@@ -81,7 +81,7 @@ Set all authentication identity providers
 
 <a name="setAuthenticationSso"></a>
 # **setAuthenticationSso**
-> AuthenticationSsoBean setAuthenticationSso(AuthenticationSsoBean)
+> AuthenticationSsoModel setAuthenticationSso(AuthenticationSsoModel)
 
 Set authentication SSO configuration
 
@@ -89,11 +89,11 @@ Set authentication SSO configuration
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **AuthenticationSsoBean** | [**AuthenticationSsoBean**](../Models/AuthenticationSsoBean.md)|  | [optional] |
+| **AuthenticationSsoModel** | [**AuthenticationSsoModel**](../Models/AuthenticationSsoModel.md)|  | [optional] |
 
 ### Return type
 
-[**AuthenticationSsoBean**](../Models/AuthenticationSsoBean.md)
+[**AuthenticationSsoModel**](../Models/AuthenticationSsoModel.md)
 
 ### Authorization
 

@@ -12,10 +12,10 @@ import com.atlassian.crowd.model.user.User;
 import com.atlassian.crowd.model.user.UserTemplate;
 import com.atlassian.crowd.model.user.UserTemplateWithAttributes;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.model.GroupBean;
-import com.deftdevs.bootstrapi.commons.model.UserBean;
+import com.deftdevs.bootstrapi.commons.model.GroupModel;
+import com.deftdevs.bootstrapi.commons.model.UserModel;
 import com.deftdevs.bootstrapi.commons.exception.UserNotFoundException;
-import com.deftdevs.bootstrapi.crowd.model.util.UserBeanUtil;
+import com.deftdevs.bootstrapi.crowd.model.util.UserModelUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -62,8 +62,8 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = usersService.getUser(user.getDirectoryId(), user.getName());
-        assertEquals(user.getName(), userBean.getUsername());
+        final UserModel userModel = usersService.getUser(user.getDirectoryId(), user.getName());
+        assertEquals(user.getName(), userModel.getUsername());
     }
 
     @Test
@@ -71,8 +71,8 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = usersService.getUser(user.getName());
-        assertEquals(user.getName(), userBean.getUsername());
+        final UserModel userModel = usersService.getUser(user.getName());
+        assertEquals(user.getName(), userModel.getUsername());
     }
 
     @Test
@@ -100,42 +100,42 @@ public class UsersServiceTest {
     @Test
     public void testSetUserAddNew() {
         final User user = getTestUser();
-        final UserBean userBean = UserBeanUtil.toUserBean(user);
+        final UserModel userModel = UserModelUtil.toUserModel(user);
         final UsersServiceImpl spy = spy(usersService);
-        doReturn(userBean).when(spy).addUser(anyLong(), any(UserBean.class));
+        doReturn(userModel).when(spy).addUser(anyLong(), any(UserModel.class));
 
-        spy.setUser(user.getDirectoryId(), userBean);
-        verify(spy).addUser(anyLong(), any(UserBean.class));
+        spy.setUser(user.getDirectoryId(), userModel);
+        verify(spy).addUser(anyLong(), any(UserModel.class));
     }
 
     @Test
     public void testSetUserUpdateExisting() throws CrowdException {
         final User user = getTestUser();
-        final UserBean userBean = UserBeanUtil.toUserBean(user);
-        assertNotNull(userBean);
+        final UserModel userModel = UserModelUtil.toUserModel(user);
+        assertNotNull(userModel);
 
         final UsersServiceImpl spy = spy(usersService);
         doReturn(user).when(spy).findUser(user.getDirectoryId(), user.getName());
-        doReturn(userBean).when(spy).updateUser(user.getDirectoryId(), user.getName(), userBean);
+        doReturn(userModel).when(spy).updateUser(user.getDirectoryId(), user.getName(), userModel);
 
-        spy.setUser(user.getDirectoryId(), userBean);
+        spy.setUser(user.getDirectoryId(), userModel);
         verify(spy).updateUser(anyLong(), anyString(), any());
     }
 
     @Test
     public void testSetUsers() {
         final User user = getTestUser();
-        final UserBean userBean = UserBeanUtil.toUserBean(user);
-        userBean.setPassword("s3cr3t");
+        final UserModel userModel = UserModelUtil.toUserModel(user);
+        userModel.setPassword("s3cr3t");
 
-        final List<UserBean> userBeans = new ArrayList<>();
-        userBeans.add(userBean);
-        userBeans.add(UserBean.EXAMPLE_1);
+        final List<UserModel> userModels = new ArrayList<>();
+        userModels.add(userModel);
+        userModels.add(UserModel.EXAMPLE_1);
         final UsersServiceImpl spy = spy(usersService);
         doAnswer(invocation -> invocation.getArguments()[1]).when(spy).setUser(anyLong(), any());
 
-        spy.setUsers(user.getDirectoryId(), userBeans);
-        verify(spy, times(userBeans.size())).setUser(anyLong(), any());
+        spy.setUsers(user.getDirectoryId(), userModels);
+        verify(spy, times(userModels.size())).setUser(anyLong(), any());
     }
 
     @Test
@@ -148,17 +148,17 @@ public class UsersServiceTest {
         // return the same user as the one we are adding
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addUser(anyLong(), any(), any());
 
-        final UserBean userBean = UserBean.EXAMPLE_1;
-        userBean.setPassword("s3cr3t");
+        final UserModel userModel = UserModel.EXAMPLE_1;
+        userModel.setPassword("s3cr3t");
 
         final ArgumentCaptor<UserTemplateWithAttributes> userTemplateArgumentCaptor = ArgumentCaptor.forClass(UserTemplateWithAttributes.class);
-        usersService.addUser(1L, userBean);
+        usersService.addUser(1L, userModel);
         verify(directoryManager).addUser(anyLong(), userTemplateArgumentCaptor.capture(), any());
-        assertEquals(userBean.getFirstName(), userTemplateArgumentCaptor.getValue().getFirstName());
-        assertEquals(userBean.getLastName(), userTemplateArgumentCaptor.getValue().getLastName());
-        assertEquals(userBean.getFullName(), userTemplateArgumentCaptor.getValue().getDisplayName());
-        assertEquals(userBean.getEmail(), userTemplateArgumentCaptor.getValue().getEmailAddress());
-        assertEquals(userBean.getActive(), userTemplateArgumentCaptor.getValue().isActive());
+        assertEquals(userModel.getFirstName(), userTemplateArgumentCaptor.getValue().getFirstName());
+        assertEquals(userModel.getLastName(), userTemplateArgumentCaptor.getValue().getLastName());
+        assertEquals(userModel.getFullName(), userTemplateArgumentCaptor.getValue().getDisplayName());
+        assertEquals(userModel.getEmail(), userTemplateArgumentCaptor.getValue().getEmailAddress());
+        assertEquals(userModel.getActive(), userTemplateArgumentCaptor.getValue().isActive());
     }
 
     @Test
@@ -166,11 +166,11 @@ public class UsersServiceTest {
         // return the same user as the one we are adding
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addUser(anyLong(), any(), any());
 
-        final UserBean userBean = UserBean.EXAMPLE_1;
-        userBean.setActive(null);
+        final UserModel userModel = UserModel.EXAMPLE_1;
+        userModel.setActive(null);
 
         final ArgumentCaptor<UserTemplateWithAttributes> userTemplateArgumentCaptor = ArgumentCaptor.forClass(UserTemplateWithAttributes.class);
-        usersService.addUser(1L, userBean);
+        usersService.addUser(1L, userModel);
         verify(directoryManager).addUser(anyLong(), userTemplateArgumentCaptor.capture(), any());
         assertTrue(userTemplateArgumentCaptor.getValue().isActive());
     }
@@ -180,13 +180,13 @@ public class UsersServiceTest {
         // return the same user as the one we are adding
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addUser(anyLong(), any(), any());
 
-        final UserBean userBean = UserBeanUtil.toUserBean(getTestUser());
-        final List<GroupBean> groupBeans = Collections.singletonList(GroupBean.EXAMPLE_1);
-        userBean.setPassword("12345");
-        userBean.setGroups(groupBeans);
+        final UserModel userModel = UserModelUtil.toUserModel(getTestUser());
+        final List<GroupModel> groupModels = Collections.singletonList(GroupModel.EXAMPLE_1);
+        userModel.setPassword("12345");
+        userModel.setGroups(groupModels);
 
-        usersService.addUser(1L, userBean);
-        verify(groupsService, times(groupBeans.size())).setGroup(anyLong(), anyString(), any());
+        usersService.addUser(1L, userModel);
+        verify(groupsService, times(groupModels.size())).setGroup(anyLong(), anyString(), any());
     }
 
     @Test
@@ -194,21 +194,21 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = UserBeanUtil.toUserBean(user);
+        final UserModel userModel = UserModelUtil.toUserModel(user);
 
         assertThrows(BadRequestException.class, () -> {
-            usersService.addUser(user.getDirectoryId(), userBean);
+            usersService.addUser(user.getDirectoryId(), userModel);
         });
     }
 
     @Test
     public void testAddUserNoName() throws CrowdException {
         final User user = getTestUser();
-        final UserBean userBean = UserBeanUtil.toUserBean(user);
-        userBean.setUsername(null);
+        final UserModel userModel = UserModelUtil.toUserModel(user);
+        userModel.setUsername(null);
 
         assertThrows(BadRequestException.class, () -> {
-            usersService.addUser(user.getDirectoryId(), userBean);
+            usersService.addUser(user.getDirectoryId(), userModel);
         });
     }
 
@@ -217,21 +217,21 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = UserBeanUtil.toUserBean(user);
+        final UserModel userModel = UserModelUtil.toUserModel(user);
 
         assertThrows(BadRequestException.class, () -> {
-            usersService.addUser(user.getDirectoryId(), "Other", userBean);
+            usersService.addUser(user.getDirectoryId(), "Other", userModel);
         });
     }
 
     @Test
     public void testAddUserDetailMissing() throws CrowdException {
         final User user = getTestUser();
-        final UserBean userBean = UserBeanUtil.toUserBean(user);
-        userBean.setFirstName(null);
+        final UserModel userModel = UserModelUtil.toUserModel(user);
+        userModel.setFirstName(null);
 
         assertThrows(BadRequestException.class, () -> {
-            usersService.addUser(user.getDirectoryId(), userBean);
+            usersService.addUser(user.getDirectoryId(), userModel);
         });
     }
 
@@ -240,11 +240,11 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = UserBeanUtil.toUserBean(user);
-        userBean.setPassword(null);
+        final UserModel userModel = UserModelUtil.toUserModel(user);
+        userModel.setPassword(null);
 
         assertThrows(BadRequestException.class, () -> {
-            usersService.addUser(user.getDirectoryId(), userBean);
+            usersService.addUser(user.getDirectoryId(), userModel);
         });
     }
 
@@ -255,21 +255,21 @@ public class UsersServiceTest {
         // return the same user as the one we are updating
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).updateUser(anyLong(), any());
 
-        final UserBean userBean = new UserBean();
-        userBean.setFirstName("Other");
-        userBean.setLastName("Full Name");
-        userBean.setFullName("Other Full Name");
-        userBean.setEmail("other@example.com");
-        userBean.setActive(false);
+        final UserModel userModel = new UserModel();
+        userModel.setFirstName("Other");
+        userModel.setLastName("Full Name");
+        userModel.setFullName("Other Full Name");
+        userModel.setEmail("other@example.com");
+        userModel.setActive(false);
 
         final ArgumentCaptor<UserTemplate> userTemplateArgumentCaptor = ArgumentCaptor.forClass(UserTemplate.class);
-        usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+        usersService.updateUser(user.getDirectoryId(), user.getName(), userModel);
         verify(directoryManager).updateUser(anyLong(), userTemplateArgumentCaptor.capture());
-        assertEquals(userBean.getFirstName(), userTemplateArgumentCaptor.getValue().getFirstName());
-        assertEquals(userBean.getLastName(), userTemplateArgumentCaptor.getValue().getLastName());
-        assertEquals(userBean.getFullName(), userTemplateArgumentCaptor.getValue().getDisplayName());
-        assertEquals(userBean.getEmail(), userTemplateArgumentCaptor.getValue().getEmailAddress());
-        assertEquals(userBean.getActive(), userTemplateArgumentCaptor.getValue().isActive());
+        assertEquals(userModel.getFirstName(), userTemplateArgumentCaptor.getValue().getFirstName());
+        assertEquals(userModel.getLastName(), userTemplateArgumentCaptor.getValue().getLastName());
+        assertEquals(userModel.getFullName(), userTemplateArgumentCaptor.getValue().getDisplayName());
+        assertEquals(userModel.getEmail(), userTemplateArgumentCaptor.getValue().getEmailAddress());
+        assertEquals(userModel.getActive(), userTemplateArgumentCaptor.getValue().isActive());
     }
 
     @Test
@@ -279,12 +279,12 @@ public class UsersServiceTest {
         // return the same user as the one we are updating
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).updateUser(anyLong(), any());
 
-        final UserBean userBean = UserBeanUtil.toUserBean(getTestUser());
-        final List<GroupBean> groupBeans = Collections.singletonList(GroupBean.EXAMPLE_1);
-        userBean.setGroups(groupBeans);
+        final UserModel userModel = UserModelUtil.toUserModel(getTestUser());
+        final List<GroupModel> groupModels = Collections.singletonList(GroupModel.EXAMPLE_1);
+        userModel.setGroups(groupModels);
 
-        usersService.updateUser(1L, user.getName(), userBean);
-        verify(groupsService, times(groupBeans.size())).setGroup(anyLong(), anyString(), any());
+        usersService.updateUser(1L, user.getName(), userModel);
+        verify(groupsService, times(groupModels.size())).setGroup(anyLong(), anyString(), any());
     }
 
     @Test
@@ -292,10 +292,10 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setUsername(user.getName());
+        final UserModel userModel = new UserModel();
+        userModel.setUsername(user.getName());
 
-        usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+        usersService.updateUser(user.getDirectoryId(), user.getName(), userModel);
         verify(directoryManager, never()).renameUser(anyLong(), anyString(), anyString());
         verify(directoryManager, never()).updateUser(anyLong(), any());
         verify(directoryManager, never()).updateUserCredential(anyLong(), anyString(), any());
@@ -304,10 +304,10 @@ public class UsersServiceTest {
     @Test
     public void testUpdateUserNotFound() throws CrowdException, PermissionException {
         final User user = getTestUser();
-        final UserBean userBean = UserBeanUtil.toUserBean(user);
+        final UserModel userModel = UserModelUtil.toUserModel(user);
 
         assertThrows(UserNotFoundException.class, () -> {
-            usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+            usersService.updateUser(user.getDirectoryId(), user.getName(), userModel);
         });
     }
 
@@ -318,21 +318,21 @@ public class UsersServiceTest {
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).updateUser(anyLong(), any());
 
-        final UserBean userBean = new UserBean();
-        userBean.setFirstName("Other");
-        userBean.setLastName("Full Name");
-        userBean.setFullName("Other Full Name");
-        userBean.setEmail("other@example.com");
-        userBean.setActive(false);
+        final UserModel userModel = new UserModel();
+        userModel.setFirstName("Other");
+        userModel.setLastName("Full Name");
+        userModel.setFullName("Other Full Name");
+        userModel.setEmail("other@example.com");
+        userModel.setActive(false);
 
         final ArgumentCaptor<UserTemplate> userTemplateArgumentCaptor = ArgumentCaptor.forClass(UserTemplate.class);
-        usersService.updateUser(user.getName(), userBean);
+        usersService.updateUser(user.getName(), userModel);
         verify(directoryManager).updateUser(anyLong(), userTemplateArgumentCaptor.capture());
-        assertEquals(userBean.getFirstName(), userTemplateArgumentCaptor.getValue().getFirstName());
-        assertEquals(userBean.getLastName(), userTemplateArgumentCaptor.getValue().getLastName());
-        assertEquals(userBean.getFullName(), userTemplateArgumentCaptor.getValue().getDisplayName());
-        assertEquals(userBean.getEmail(), userTemplateArgumentCaptor.getValue().getEmailAddress());
-        assertEquals(userBean.getActive(), userTemplateArgumentCaptor.getValue().isActive());
+        assertEquals(userModel.getFirstName(), userTemplateArgumentCaptor.getValue().getFirstName());
+        assertEquals(userModel.getLastName(), userTemplateArgumentCaptor.getValue().getLastName());
+        assertEquals(userModel.getFullName(), userTemplateArgumentCaptor.getValue().getDisplayName());
+        assertEquals(userModel.getEmail(), userTemplateArgumentCaptor.getValue().getEmailAddress());
+        assertEquals(userModel.getActive(), userTemplateArgumentCaptor.getValue().isActive());
     }
 
     @Test
@@ -341,13 +341,13 @@ public class UsersServiceTest {
         doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setUsername("new_username");
-        doReturn(user).when(directoryManager).renameUser(user.getDirectoryId(), user.getName(), userBean.getUsername());
+        final UserModel userModel = new UserModel();
+        userModel.setUsername("new_username");
+        doReturn(user).when(directoryManager).renameUser(user.getDirectoryId(), user.getName(), userModel.getUsername());
 
-        usersService.updateUser(user.getName(), userBean);
+        usersService.updateUser(user.getName(), userModel);
         // we are just checking that the rename method was called
-        verify(directoryManager).renameUser(user.getDirectoryId(), user.getName(), userBean.getUsername());
+        verify(directoryManager).renameUser(user.getDirectoryId(), user.getName(), userModel.getUsername());
     }
 
     @Test
@@ -356,10 +356,10 @@ public class UsersServiceTest {
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
         // Just setting the same username and nothing else should not trigger any update
-        final UserBean userBean = new UserBean();
-        userBean.setUsername(user.getName());
+        final UserModel userModel = new UserModel();
+        userModel.setUsername(user.getName());
 
-        usersService.updateUser(user.getName(), userBean);
+        usersService.updateUser(user.getName(), userModel);
         verify(directoryManager, never()).renameUser(anyLong(), anyString(), anyString());
         verify(directoryManager, never()).updateUser(anyLong(), any());
         verify(directoryManager, never()).updateUserCredential(anyLong(), anyString(), any());
@@ -370,13 +370,13 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setPassword("s3cr3t");
+        final UserModel userModel = new UserModel();
+        userModel.setPassword("s3cr3t");
 
         final ArgumentCaptor<PasswordCredential> passwordCredentialArgumentCaptor = ArgumentCaptor.forClass(PasswordCredential.class);
-        usersService.updateUser(user.getName(), userBean);
+        usersService.updateUser(user.getName(), userModel);
         verify(directoryManager).updateUserCredential(anyLong(), anyString(), passwordCredentialArgumentCaptor.capture());
-        assertEquals(userBean.getPassword(), passwordCredentialArgumentCaptor.getValue().getCredential());
+        assertEquals(userModel.getPassword(), passwordCredentialArgumentCaptor.getValue().getCredential());
     }
 
     @Test
@@ -473,13 +473,13 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setUsername("new_username");
+        final UserModel userModel = new UserModel();
+        userModel.setUsername("new_username");
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
 
         assertThrows(WebApplicationException.class, () -> {
-            usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+            usersService.updateUser(user.getDirectoryId(), user.getName(), userModel);
         });
     }
 
@@ -488,13 +488,13 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setUsername("new_username");
+        final UserModel userModel = new UserModel();
+        userModel.setUsername("new_username");
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
 
         assertThrows(WebApplicationException.class, () -> {
-            usersService.updateUser(user.getName(), userBean);
+            usersService.updateUser(user.getName(), userModel);
         });
     }
 
@@ -503,13 +503,13 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setUsername("new_username");
+        final UserModel userModel = new UserModel();
+        userModel.setUsername("new_username");
 
-        doThrow(new UserAlreadyExistsException(user.getDirectoryId(), userBean.getUsername())).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
+        doThrow(new UserAlreadyExistsException(user.getDirectoryId(), userModel.getUsername())).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
 
         assertThrows(WebApplicationException.class, () -> {
-            usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+            usersService.updateUser(user.getDirectoryId(), user.getName(), userModel);
         });
     }
 
@@ -518,13 +518,13 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setUsername("new_username");
+        final UserModel userModel = new UserModel();
+        userModel.setUsername("new_username");
 
-        doThrow(new UserAlreadyExistsException(user.getDirectoryId(), userBean.getUsername())).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
+        doThrow(new UserAlreadyExistsException(user.getDirectoryId(), userModel.getUsername())).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
 
         assertThrows(WebApplicationException.class, () -> {
-            usersService.updateUser(user.getName(), userBean);
+            usersService.updateUser(user.getName(), userModel);
         });
     }
 
@@ -533,13 +533,13 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setUsername("new_username");
+        final UserModel userModel = new UserModel();
+        userModel.setUsername("new_username");
 
         doThrow(new InvalidUserException(user, "message")).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
 
         assertThrows(WebApplicationException.class, () -> {
-            usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+            usersService.updateUser(user.getDirectoryId(), user.getName(), userModel);
         });
     }
 
@@ -548,13 +548,13 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setUsername("new_username");
+        final UserModel userModel = new UserModel();
+        userModel.setUsername("new_username");
 
         doThrow(new InvalidUserException(user, "message")).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
 
         assertThrows(WebApplicationException.class, () -> {
-            usersService.updateUser(user.getName(), userBean);
+            usersService.updateUser(user.getName(), userModel);
         });
     }
 
@@ -563,13 +563,13 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setUsername("new_username");
+        final UserModel userModel = new UserModel();
+        userModel.setUsername("new_username");
 
         doThrow(new OperationFailedException()).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
 
         assertThrows(WebApplicationException.class, () -> {
-            usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+            usersService.updateUser(user.getDirectoryId(), user.getName(), userModel);
         });
     }
 
@@ -578,13 +578,13 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setUsername("new_username");
+        final UserModel userModel = new UserModel();
+        userModel.setUsername("new_username");
 
         doThrow(new OperationFailedException()).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
 
         assertThrows(WebApplicationException.class, () -> {
-            usersService.updateUser(user.getName(), userBean);
+            usersService.updateUser(user.getName(), userModel);
         });
     }
 
@@ -593,24 +593,24 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setFullName("Other Full Name");
+        final UserModel userModel = new UserModel();
+        userModel.setFullName("Other Full Name");
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).updateUser(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
-            usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+            usersService.updateUser(user.getDirectoryId(), user.getName(), userModel);
         });
     }
 
     @Test
     public void testUpdateUserNotFoundExceptionAnyDirectory() throws CrowdException {
         final User user = getTestUser();
-        final UserBean userBean = new UserBean();
-        userBean.setFullName("Other Full Name");
+        final UserModel userModel = new UserModel();
+        userModel.setFullName("Other Full Name");
 
         assertThrows(WebApplicationException.class, () -> {
-            usersService.updateUser(user.getName(), userBean);
+            usersService.updateUser(user.getName(), userModel);
         });
     }
 
@@ -619,13 +619,13 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setFullName("Other Full Name");
+        final UserModel userModel = new UserModel();
+        userModel.setFullName("Other Full Name");
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).updateUser(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
-            usersService.updateUser(user.getName(), userBean);
+            usersService.updateUser(user.getName(), userModel);
         });
     }
 
@@ -634,13 +634,13 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setFullName("Other Full Name");
+        final UserModel userModel = new UserModel();
+        userModel.setFullName("Other Full Name");
 
         doThrow(new InvalidUserException(user, "message")).when(directoryManager).updateUser(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
-            usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+            usersService.updateUser(user.getDirectoryId(), user.getName(), userModel);
         });
     }
 
@@ -649,13 +649,13 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setFullName("Other Full Name");
+        final UserModel userModel = new UserModel();
+        userModel.setFullName("Other Full Name");
 
         doThrow(new InvalidUserException(user, "message")).when(directoryManager).updateUser(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
-            usersService.updateUser(user.getName(), userBean);
+            usersService.updateUser(user.getName(), userModel);
         });
     }
 
@@ -664,13 +664,13 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setEmail("other@example.com");
+        final UserModel userModel = new UserModel();
+        userModel.setEmail("other@example.com");
 
         doThrow(new OperationFailedException()).when(directoryManager).updateUser(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
-            usersService.updateUser(user.getDirectoryId(), user.getName(), userBean);
+            usersService.updateUser(user.getDirectoryId(), user.getName(), userModel);
         });
     }
 
@@ -679,13 +679,13 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserBean userBean = new UserBean();
-        userBean.setEmail("other@example.com");
+        final UserModel userModel = new UserModel();
+        userModel.setEmail("other@example.com");
 
         doThrow(new OperationFailedException()).when(directoryManager).updateUser(anyLong(), any());
 
         assertThrows(WebApplicationException.class, () -> {
-            usersService.updateUser(user.getName(), userBean);
+            usersService.updateUser(user.getName(), userModel);
         });
     }
 

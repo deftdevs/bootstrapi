@@ -15,12 +15,12 @@ import com.atlassian.crowd.search.query.entity.EntityQuery;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
-import com.deftdevs.bootstrapi.commons.model.GroupBean;
-import com.deftdevs.bootstrapi.commons.model.UserBean;
+import com.deftdevs.bootstrapi.commons.model.GroupModel;
+import com.deftdevs.bootstrapi.commons.model.UserModel;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
 import com.deftdevs.bootstrapi.commons.exception.DirectoryNotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.UserNotFoundException;
-import com.deftdevs.bootstrapi.crowd.model.util.UserBeanUtil;
+import com.deftdevs.bootstrapi.crowd.model.util.UserModelUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
 
@@ -57,7 +57,7 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public UserBean getUser(
+    public UserModel getUser(
             final long directoryId,
             final String username) {
 
@@ -67,96 +67,96 @@ public class UsersServiceImpl implements UsersService {
             throw new UserNotFoundException(username);
         }
 
-        return UserBeanUtil.toUserBean(user);
+        return UserModelUtil.toUserModel(user);
     }
 
-    public UserBean setUser(
+    public UserModel setUser(
             final long directoryId,
-            final UserBean userBean) {
+            final UserModel userModel) {
 
-        final User user = findUser(directoryId, userBean.getUsername());
+        final User user = findUser(directoryId, userModel.getUsername());
 
         if (user == null) {
-            return addUser(directoryId, userBean);
+            return addUser(directoryId, userModel);
         }
 
-        return updateUser(directoryId, user.getName(), userBean);
+        return updateUser(directoryId, user.getName(), userModel);
     }
 
     @Override
-    public List<UserBean> setUsers(
+    public List<UserModel> setUsers(
             final long directoryId,
-            final List<UserBean> userBeans) {
+            final List<UserModel> userModels) {
 
-        if (userBeans == null) {
+        if (userModels == null) {
             return Collections.emptyList();
         }
 
-        return userBeans.stream()
-                .map(userBean -> setUser(directoryId, userBean))
+        return userModels.stream()
+                .map(userModel -> setUser(directoryId, userModel))
                 .collect(Collectors.toList());
     }
 
-    public UserBean addUser(
+    public UserModel addUser(
             final long directoryId,
-            final UserBean userBean) {
+            final UserModel userModel) {
 
-        return addUser(directoryId, userBean.getUsername(), userBean);
+        return addUser(directoryId, userModel.getUsername(), userModel);
     }
 
-    UserBean addUser(
+    UserModel addUser(
             final long directoryId,
             final String username,
-            final UserBean userBean) {
+            final UserModel userModel) {
 
-        final User existingUser = findUser(directoryId, userBean.getUsername());
+        final User existingUser = findUser(directoryId, userModel.getUsername());
 
         if (existingUser != null) {
-            throw new BadRequestException(String.format("User '%s' already exists", userBean.getUsername()));
+            throw new BadRequestException(String.format("User '%s' already exists", userModel.getUsername()));
         }
 
-        if (userBean.getUsername() == null) {
+        if (userModel.getUsername() == null) {
             if (username == null) {
                 throw new BadRequestException("Cannot create user, username is required");
             }
 
-            userBean.setUsername(username);
+            userModel.setUsername(username);
         }
 
-        if (username != null && !userBean.getUsername().equals(username)) {
+        if (username != null && !userModel.getUsername().equals(username)) {
             throw new BadRequestException("Cannot create user, two different usernames provided");
         }
 
-        if (userBean.getFirstName() == null || userBean.getLastName() == null || userBean.getFullName() == null || userBean.getEmail() == null) {
+        if (userModel.getFirstName() == null || userModel.getLastName() == null || userModel.getFullName() == null || userModel.getEmail() == null) {
             throw new BadRequestException("Cannot create user, first name, last name, display (full) name and email are required");
         }
 
-        if (userBean.getPassword() == null) {
+        if (userModel.getPassword() == null) {
             throw new BadRequestException("Cannot create user, password is required");
         }
 
-        final UserTemplateWithAttributes userTemplate = new UserTemplateWithAttributes(userBean.getUsername(), directoryId);
-        userTemplate.setFirstName(userBean.getFirstName());
-        userTemplate.setLastName(userBean.getLastName());
-        userTemplate.setDisplayName(userBean.getFullName());
-        userTemplate.setEmailAddress(userBean.getEmail());
-        userTemplate.setActive(userBean.getActive() == null || userBean.getActive());
+        final UserTemplateWithAttributes userTemplate = new UserTemplateWithAttributes(userModel.getUsername(), directoryId);
+        userTemplate.setFirstName(userModel.getFirstName());
+        userTemplate.setLastName(userModel.getLastName());
+        userTemplate.setDisplayName(userModel.getFullName());
+        userTemplate.setEmailAddress(userModel.getEmail());
+        userTemplate.setActive(userModel.getActive() == null || userModel.getActive());
 
-        final User user = createUser(directoryId, userTemplate, userBean.getPassword());
-        final UserBean resultUserBean = UserBeanUtil.toUserBean(user);
+        final User user = createUser(directoryId, userTemplate, userModel.getPassword());
+        final UserModel resultUserModel = UserModelUtil.toUserModel(user);
 
-        if (userBean.getGroups() != null) {
-            final List<GroupBean> resultGroupBeans = addUserToGroups(directoryId, userBean.getUsername(), userBean.getGroups());
-            resultUserBean.setGroups(resultGroupBeans);
+        if (userModel.getGroups() != null) {
+            final List<GroupModel> resultGroupModels = addUserToGroups(directoryId, userModel.getUsername(), userModel.getGroups());
+            resultUserModel.setGroups(resultGroupModels);
         }
 
-        return resultUserBean;
+        return resultUserModel;
     }
 
-    UserBean updateUser(
+    UserModel updateUser(
             final long directoryId,
             final String username,
-            final UserBean userBean) {
+            final UserModel userModel) {
 
         User user = findUser(directoryId, username);
 
@@ -164,26 +164,26 @@ public class UsersServiceImpl implements UsersService {
             throw new UserNotFoundException(username);
         }
 
-        if (userBean.getUsername() != null && !username.equals(userBean.getUsername())) {
-            user = renameUser(user, userBean.getUsername());
+        if (userModel.getUsername() != null && !username.equals(userModel.getUsername())) {
+            user = renameUser(user, userModel.getUsername());
         }
 
-        if (userBean.getFirstName() != null || userBean.getLastName() != null || userBean.getFullName() != null || userBean.getEmail() != null) {
-            user = updateUser(user.getDirectoryId(), getUserTemplate(user, userBean));
+        if (userModel.getFirstName() != null || userModel.getLastName() != null || userModel.getFullName() != null || userModel.getEmail() != null) {
+            user = updateUser(user.getDirectoryId(), getUserTemplate(user, userModel));
         }
 
-        if (userBean.getPassword() != null) {
-            updatePassword(user, userBean.getPassword());
+        if (userModel.getPassword() != null) {
+            updatePassword(user, userModel.getPassword());
         }
 
-        final UserBean resultUserBean = UserBeanUtil.toUserBean(user);
+        final UserModel resultUserModel = UserModelUtil.toUserModel(user);
 
-        if (userBean.getGroups() != null) {
-            final List<GroupBean> resultGroupBeans = addUserToGroups(directoryId, userBean.getUsername(), userBean.getGroups());
-            resultUserBean.setGroups(resultGroupBeans);
+        if (userModel.getGroups() != null) {
+            final List<GroupModel> resultGroupModels = addUserToGroups(directoryId, userModel.getUsername(), userModel.getGroups());
+            resultUserModel.setGroups(resultGroupModels);
         }
 
-        return resultUserBean;
+        return resultUserModel;
     }
 
     @Nullable
@@ -209,7 +209,7 @@ public class UsersServiceImpl implements UsersService {
      */
     @Override
     @Deprecated
-    public UserBean getUser(
+    public UserModel getUser(
             final String username) {
 
         final User user = findUserAllDirectories(username);
@@ -218,7 +218,7 @@ public class UsersServiceImpl implements UsersService {
             throw new UserNotFoundException(username);
         }
 
-        return UserBeanUtil.toUserBean(user);
+        return UserModelUtil.toUserModel(user);
     }
 
     /*
@@ -230,9 +230,9 @@ public class UsersServiceImpl implements UsersService {
      */
     @Override
     @Deprecated
-    public UserBean updateUser(
+    public UserModel updateUser(
             final String username,
-            final UserBean userBean) {
+            final UserModel userModel) {
 
         final User user = findUserAllDirectories(username);
 
@@ -240,7 +240,7 @@ public class UsersServiceImpl implements UsersService {
             throw new UserNotFoundException(username);
         }
 
-        return updateUser(user.getDirectoryId(), username, userBean);
+        return updateUser(user.getDirectoryId(), username, userModel);
     }
 
     /**
@@ -248,7 +248,7 @@ public class UsersServiceImpl implements UsersService {
      */
     @Override
     @Deprecated
-    public UserBean updatePassword(
+    public UserModel updatePassword(
             final String username,
             final String password) {
 
@@ -259,7 +259,7 @@ public class UsersServiceImpl implements UsersService {
         }
 
         updatePassword(user, password);
-        return UserBeanUtil.toUserBean(user);
+        return UserModelUtil.toUserModel(user);
     }
 
     /**
@@ -401,20 +401,20 @@ public class UsersServiceImpl implements UsersService {
         }
     }
 
-    List<GroupBean> addUserToGroups(
+    List<GroupModel> addUserToGroups(
             final long directoryId,
             final String username,
-            final List<GroupBean> groupBeans) {
+            final List<GroupModel> groupModels) {
 
-        final List<GroupBean> resultGroupBeans = new ArrayList<>();
+        final List<GroupModel> resultGroupModels = new ArrayList<>();
 
-        if (groupBeans != null) {
-            for (GroupBean groupBean : groupBeans) {
-                final GroupBean resultGroupBean = groupsService.setGroup(directoryId, groupBean.getName(), groupBean);
+        if (groupModels != null) {
+            for (GroupModel groupModel : groupModels) {
+                final GroupModel resultGroupModel = groupsService.setGroup(directoryId, groupModel.getName(), groupModel);
 
                 try {
-                    directoryManager.addUserToGroup(directoryId, username, groupBean.getName());
-                    resultGroupBeans.add(resultGroupBean);
+                    directoryManager.addUserToGroup(directoryId, username, groupModel.getName());
+                    resultGroupModels.add(resultGroupModel);
                 } catch (DirectoryPermissionException | ReadOnlyGroupException e) {
                     throw new BadRequestException(e);
                 } catch (com.atlassian.crowd.exception.DirectoryNotFoundException |
@@ -427,33 +427,33 @@ public class UsersServiceImpl implements UsersService {
             }
         }
 
-        return resultGroupBeans;
+        return resultGroupModels;
     }
 
     private static UserTemplate getUserTemplate(
             final User user,
-            final UserBean userBean) {
+            final UserModel userModel) {
 
         final UserTemplate userTemplate = new UserTemplate(user);
 
-        if (userBean.getFirstName() != null) {
-            userTemplate.setFirstName(userBean.getFirstName());
+        if (userModel.getFirstName() != null) {
+            userTemplate.setFirstName(userModel.getFirstName());
         }
 
-        if (userBean.getLastName() != null) {
-            userTemplate.setLastName(userBean.getLastName());
+        if (userModel.getLastName() != null) {
+            userTemplate.setLastName(userModel.getLastName());
         }
 
-        if (userBean.getFullName() != null) {
-            userTemplate.setDisplayName(userBean.getFullName());
+        if (userModel.getFullName() != null) {
+            userTemplate.setDisplayName(userModel.getFullName());
         }
 
-        if (userBean.getEmail() != null) {
-            userTemplate.setEmailAddress(userBean.getEmail());
+        if (userModel.getEmail() != null) {
+            userTemplate.setEmailAddress(userModel.getEmail());
         }
 
-        if (userBean.getActive() != null) {
-            userTemplate.setActive(userBean.getActive());
+        if (userModel.getActive() != null) {
+            userTemplate.setActive(userModel.getActive());
         }
 
         return userTemplate;

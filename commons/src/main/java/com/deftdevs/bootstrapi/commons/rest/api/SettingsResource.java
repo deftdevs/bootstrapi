@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -13,14 +13,14 @@ import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.Response;
 
-public interface SettingsResource<B extends SettingsBean> {
+public interface SettingsResource<B extends SettingsModel> {
 
     @GET
     @Operation(
             summary = BootstrAPI.SETTINGS_GENERAL_GET_SUMMARY,
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsModel.class)),
                             description = BootstrAPI.SETTINGS_GENERAL_GET_RESPONSE_DESCRIPTION
                     ),
                     @ApiResponse(
@@ -36,7 +36,7 @@ public interface SettingsResource<B extends SettingsBean> {
             summary = BootstrAPI.SETTINGS_GENERAL_PUT_SUMMARY,
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsModel.class)),
                             description = BootstrAPI.SETTINGS_GENERAL_PUT_RESPONSE_DESCRIPTION
                     ),
                     @ApiResponse(

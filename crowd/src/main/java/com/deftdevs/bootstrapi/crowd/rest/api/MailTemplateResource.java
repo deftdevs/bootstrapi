@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.rest.api;
 
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.crowd.model.MailTemplatesBean;
+import com.deftdevs.bootstrapi.crowd.model.MailTemplatesModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -24,7 +24,7 @@ public interface MailTemplateResource {
             tags = {MAIL_TEMPLATES},
             summary = "Get the mail templates",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = MailTemplatesBean.class))),
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = MailTemplatesModel.class))),
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
@@ -37,11 +37,11 @@ public interface MailTemplateResource {
             tags = {MAIL_TEMPLATES},
             summary = "Set the mail templates",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = MailTemplatesBean.class))),
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = MailTemplatesModel.class))),
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
     Response setMailTemplates(
-            MailTemplatesBean mailTemplatesBean);
+            MailTemplatesModel mailTemplatesModel);
 
 }

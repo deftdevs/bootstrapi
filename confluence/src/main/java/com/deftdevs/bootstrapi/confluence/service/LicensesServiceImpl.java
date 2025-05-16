@@ -6,9 +6,9 @@ import com.atlassian.sal.api.license.LicenseHandler;
 import com.atlassian.sal.api.license.SingleProductLicenseDetailsView;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
-import com.deftdevs.bootstrapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
-import com.deftdevs.bootstrapi.confluence.model.util.LicenseBeanUtil;
+import com.deftdevs.bootstrapi.confluence.model.util.LicenseModelUtil;
 import org.springframework.stereotype.Component;
 
 import javax.inject.Inject;
@@ -28,18 +28,18 @@ public class LicensesServiceImpl implements LicensesService {
     }
 
     @Override
-    public List<LicenseBean> getLicenses() {
+    public List<LicenseModel> getLicenses() {
         final SingleProductLicenseDetailsView confluenceLicenseView = licenseHandler.getProductLicenseDetails(DEFAULT_LICENSE_REGISTRY_KEY);
 
         if (confluenceLicenseView == null) {
             throw new InternalServerErrorException("Cannot get license details");
         }
 
-        return Collections.singletonList(LicenseBeanUtil.toLicenseBean(confluenceLicenseView));
+        return Collections.singletonList(LicenseModelUtil.toLicenseModel(confluenceLicenseView));
     }
 
     @Override
-    public List<LicenseBean> setLicenses(
+    public List<LicenseModel> setLicenses(
             final List<String> licenseKeys) {
 
         licenseKeys.forEach(this::addLicense);
@@ -47,7 +47,7 @@ public class LicensesServiceImpl implements LicensesService {
     }
 
     @Override
-    public LicenseBean addLicense(
+    public LicenseModel addLicense(
             final String licenseKey) {
 
         try {
@@ -61,7 +61,7 @@ public class LicensesServiceImpl implements LicensesService {
             throw new InternalServerErrorException("Cannot get license details");
         }
 
-        return LicenseBeanUtil.toLicenseBean(productLicenseDetails);
+        return LicenseModelUtil.toLicenseModel(productLicenseDetails);
     }
 
 }

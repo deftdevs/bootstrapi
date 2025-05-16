@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.GadgetBean;
+import com.deftdevs.bootstrapi.commons.model.GadgetModel;
 import com.deftdevs.bootstrapi.commons.rest.api.GadgetsResource;
 import com.deftdevs.bootstrapi.commons.service.api.GadgetsService;
 
@@ -17,15 +17,15 @@ public abstract class AbstractGadgetsResourceImpl implements GadgetsResource {
 
     @Override
     public Response getGadgets() {
-        final List<GadgetBean> gadgetBeans = gadgetsService.getGadgets();
-        return Response.ok(gadgetBeans).build();
+        final List<GadgetModel> gadgetModels = gadgetsService.getGadgets();
+        return Response.ok(gadgetModels).build();
     }
 
     @Override
     public Response setGadgets(
-            final List<GadgetBean> gadgetBeans) {
-        List<GadgetBean> updatedGadgetBeans = gadgetsService.setGadgets(gadgetBeans);
-        return Response.ok(updatedGadgetBeans).build();
+            final List<GadgetModel> gadgetModels) {
+        List<GadgetModel> updatedGadgetModels = gadgetsService.setGadgets(gadgetModels);
+        return Response.ok(updatedGadgetModels).build();
     }
 
     @Override

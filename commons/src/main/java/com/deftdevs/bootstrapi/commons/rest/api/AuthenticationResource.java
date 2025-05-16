@@ -2,8 +2,8 @@ package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.http.PATCH;
-import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpBean;
-import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractAuthenticationIdpModel;
+import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoModel;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -19,7 +19,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-public interface AuthenticationResource<IB extends AbstractAuthenticationIdpBean, SB extends AuthenticationSsoBean> {
+public interface AuthenticationResource<IB extends AbstractAuthenticationIdpModel, SB extends AuthenticationSsoModel> {
 
     @GET
     @Path(BootstrAPI.AUTHENTICATION_IDPS)
@@ -29,7 +29,7 @@ public interface AuthenticationResource<IB extends AbstractAuthenticationIdpBean
             summary = "Get all authentication identity providers",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = AbstractAuthenticationIdpBean.class))),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = AbstractAuthenticationIdpModel.class))),
                             description = "Returns all authentication identity providers."),
                     @ApiResponse(
                             content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
@@ -48,7 +48,7 @@ public interface AuthenticationResource<IB extends AbstractAuthenticationIdpBean
             summary = "Set all authentication identity providers",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = AbstractAuthenticationIdpBean.class))),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = AbstractAuthenticationIdpModel.class))),
                             description = "Returns the set authentication identity providers."),
                     @ApiResponse(
                             content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
@@ -57,7 +57,7 @@ public interface AuthenticationResource<IB extends AbstractAuthenticationIdpBean
             }
     )
     Response setAuthenticationIdps(
-            final List<IB> authenticationIdpBeans);
+            final List<IB> authenticationIdpModels);
 
     @GET
     @Path(BootstrAPI.AUTHENTICATION_SSO)
@@ -67,7 +67,7 @@ public interface AuthenticationResource<IB extends AbstractAuthenticationIdpBean
             summary = "Get authentication SSO configuration",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = AuthenticationSsoBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = AuthenticationSsoModel.class)),
                             description = "Returns the authentication SSO configuration."),
                     @ApiResponse(
                             content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
@@ -86,7 +86,7 @@ public interface AuthenticationResource<IB extends AbstractAuthenticationIdpBean
             summary = "Set authentication SSO configuration",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = AuthenticationSsoBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = AuthenticationSsoModel.class)),
                             description = "Returns the set authentication SSO configuration."),
                     @ApiResponse(
                             content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
@@ -95,6 +95,6 @@ public interface AuthenticationResource<IB extends AbstractAuthenticationIdpBean
             }
     )
     Response setAuthenticationSso(
-            final SB authenticationSsoBean);
+            final SB authenticationSsoModel);
 
 }

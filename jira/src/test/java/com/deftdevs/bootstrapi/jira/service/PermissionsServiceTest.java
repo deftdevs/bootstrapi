@@ -4,8 +4,8 @@ import com.atlassian.jira.permission.GlobalPermissionKey;
 import com.atlassian.jira.permission.GlobalPermissionType;
 import com.atlassian.jira.security.GlobalPermissionEntry;
 import com.atlassian.jira.security.GlobalPermissionManager;
-import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalBean;
-import com.deftdevs.bootstrapi.jira.model.util.PermissionsGlobalBeanUtil;
+import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
+import com.deftdevs.bootstrapi.jira.model.util.PermissionsGlobalModelUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,8 +39,8 @@ class PermissionsServiceTest {
         final PermissionsServiceImpl spy = spy(permissionsService);
         doReturn(Collections.singletonList(globalPermissionEntry)).when(spy).getGlobalPermissions();
 
-        final PermissionsGlobalBean permissionsGlobalBean = spy.getPermissionsGlobal();
-        final Map<String, ? extends Collection<String>> groupPermissions = permissionsGlobalBean.getGroupPermissions();
+        final PermissionsGlobalModel permissionsGlobalModel = spy.getPermissionsGlobal();
+        final Map<String, ? extends Collection<String>> groupPermissions = permissionsGlobalModel.getGroupPermissions();
         assertTrue(groupPermissions.containsKey(group));
 
         final Set<String> permissions = new HashSet<>(groupPermissions.get(group));
@@ -66,8 +66,8 @@ class PermissionsServiceTest {
         doReturn(globalPermissionTypeToRemove).when(spy).getGlobalPermissionType(globalPermissionTypeToRemove.getKey());
 
         final List<GlobalPermissionEntry> requestGlobalPermissions = Arrays.asList(globalPermissionEntryToAdd, globalPermissionEntryToRetain);
-        final PermissionsGlobalBean requestPermissionsGLobalBean = PermissionsGlobalBeanUtil.toPermissionsGlobalBean(requestGlobalPermissions);
-        spy.setPermissionsGlobal(requestPermissionsGLobalBean);
+        final PermissionsGlobalModel requestPermissionsGLobalModel = PermissionsGlobalModelUtil.toPermissionsGlobalModel(requestGlobalPermissions);
+        spy.setPermissionsGlobal(requestPermissionsGLobalModel);
 
         verify(globalPermissionManager).addPermission(globalPermissionTypeToAdd, group);
         verify(globalPermissionManager).removePermission(globalPermissionTypeToRemove, group);

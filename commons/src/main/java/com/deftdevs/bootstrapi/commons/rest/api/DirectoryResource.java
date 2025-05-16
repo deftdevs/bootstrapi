@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -23,7 +23,7 @@ public interface DirectoryResource {
             summary = "Get a user directory",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryModel.class)),
                             description = "Returns the requested directory."
                     ),
                     @ApiResponse(
@@ -43,7 +43,7 @@ public interface DirectoryResource {
             summary = "Create a user directory",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryModel.class)),
                             description = "Returns the added directory."
                     ),
                     @ApiResponse(
@@ -54,7 +54,7 @@ public interface DirectoryResource {
     )
     Response createDirectory(
             @QueryParam("test-connection") @DefaultValue("false") final boolean testConnection,
-            @NotNull final AbstractDirectoryBean directory);
+            @NotNull final AbstractDirectoryModel directory);
 
     @PUT
     @Path("{id}")
@@ -65,7 +65,7 @@ public interface DirectoryResource {
             summary = "Update a user directory",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = AbstractDirectoryModel.class)),
                             description = "Returns the updated directory."
                     ),
                     @ApiResponse(
@@ -77,7 +77,7 @@ public interface DirectoryResource {
     Response updateDirectory(
             @PathParam("id") final long id,
             @QueryParam("test-connection") @DefaultValue("false") final boolean testConnection,
-            @NotNull final AbstractDirectoryBean directory);
+            @NotNull final AbstractDirectoryModel directory);
 
     @DELETE
     @Path("{id}")

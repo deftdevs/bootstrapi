@@ -1,15 +1,15 @@
 package com.deftdevs.bootstrapi.crowd.service.api;
 
-import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageBean;
+import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageModel;
 
 import java.io.InputStream;
 
 public interface SettingsBrandingService {
 
-    SettingsBrandingLoginPageBean getLoginPage();
+    SettingsBrandingLoginPageModel getLoginPage();
 
-    SettingsBrandingLoginPageBean setLoginPage(
-            SettingsBrandingLoginPageBean settingsBrandingLoginPageBean);
+    SettingsBrandingLoginPageModel setLoginPage(
+            SettingsBrandingLoginPageModel settingsBrandingLoginPageModel);
 
     void setLogo(InputStream inputStream);
 

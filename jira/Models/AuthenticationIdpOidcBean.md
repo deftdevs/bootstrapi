@@ -1,4 +1,4 @@
-# AuthenticationIdpOidcBean
+# AuthenticationIdpOidcModel
 ## Properties
 
 | Name | Type | Description | Notes |
