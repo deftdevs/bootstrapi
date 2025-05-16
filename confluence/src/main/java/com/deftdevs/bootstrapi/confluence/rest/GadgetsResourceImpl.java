@@ -16,4 +16,5 @@ public class GadgetsResourceImpl extends AbstractGadgetsResourceImpl {
 
         super(gadgetsService);
     }
+
 }
