@@ -16,7 +16,7 @@ import com.atlassian.crowd.model.directory.ImmutableDirectory;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
-import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
+import com.deftdevs.bootstrapi.crowd.model.ApplicationModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,10 +29,10 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
-import static com.deftdevs.bootstrapi.crowd.model.ApplicationBean.EXAMPLE_1;
-import static com.deftdevs.bootstrapi.crowd.model.ApplicationBean.EXAMPLE_2;
-import static com.deftdevs.bootstrapi.crowd.model.util.ApplicationBeanUtil.toApplication;
-import static com.deftdevs.bootstrapi.crowd.model.util.ApplicationBeanUtil.toStringCollection;
+import static com.deftdevs.bootstrapi.crowd.model.ApplicationModel.EXAMPLE_1;
+import static com.deftdevs.bootstrapi.crowd.model.ApplicationModel.EXAMPLE_2;
+import static com.deftdevs.bootstrapi.crowd.model.util.ApplicationModelUtil.toApplication;
+import static com.deftdevs.bootstrapi.crowd.model.util.ApplicationModelUtil.toStringCollection;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -64,12 +64,12 @@ public class ApplicationsServiceTest {
         Application application = toApplication(EXAMPLE_1);
         doReturn(application).when(applicationManager).findById(anyLong());
 
-        ApplicationBean resultingApplicationBean = applicationsService.getApplication(1L);
-        assertEquals(EXAMPLE_1.getName(), resultingApplicationBean.getName());
-        assertEquals(EXAMPLE_1.getDescription(), resultingApplicationBean.getDescription());
-        assertEquals(EXAMPLE_1.getActive(), resultingApplicationBean.getActive());
-        assertEquals(EXAMPLE_1.getType(), resultingApplicationBean.getType());
-        assertEquals(EXAMPLE_1.getRemoteAddresses(), resultingApplicationBean.getRemoteAddresses());
+        ApplicationModel resultingApplicationModel = applicationsService.getApplication(1L);
+        assertEquals(EXAMPLE_1.getName(), resultingApplicationModel.getName());
+        assertEquals(EXAMPLE_1.getDescription(), resultingApplicationModel.getDescription());
+        assertEquals(EXAMPLE_1.getActive(), resultingApplicationModel.getActive());
+        assertEquals(EXAMPLE_1.getType(), resultingApplicationModel.getType());
+        assertEquals(EXAMPLE_1.getRemoteAddresses(), resultingApplicationModel.getRemoteAddresses());
     }
 
     @Test
@@ -78,16 +78,16 @@ public class ApplicationsServiceTest {
         final List<Application> applications = Collections.singletonList(application);
         doReturn(applications).when(applicationManager).findAll();
 
-        final List<ApplicationBean> applicationBeans = applicationsService.getApplications();
-        assertNotNull(applicationBeans);
-        assertEquals(1,applicationBeans.size());
+        final List<ApplicationModel> applicationModels = applicationsService.getApplications();
+        assertNotNull(applicationModels);
+        assertEquals(1, applicationModels.size());
 
-        final ApplicationBean resultApplicationBean = applicationBeans.iterator().next();
-        assertEquals(EXAMPLE_1.getName(), resultApplicationBean.getName());
-        assertEquals(EXAMPLE_1.getDescription(), resultApplicationBean.getDescription());
-        assertEquals(EXAMPLE_1.getActive(), resultApplicationBean.getActive());
-        assertEquals(EXAMPLE_1.getType(), resultApplicationBean.getType());
-        assertEquals(EXAMPLE_1.getRemoteAddresses(), resultApplicationBean.getRemoteAddresses());
+        final ApplicationModel resultApplicationModel = applicationModels.iterator().next();
+        assertEquals(EXAMPLE_1.getName(), resultApplicationModel.getName());
+        assertEquals(EXAMPLE_1.getDescription(), resultApplicationModel.getDescription());
+        assertEquals(EXAMPLE_1.getActive(), resultApplicationModel.getActive());
+        assertEquals(EXAMPLE_1.getType(), resultApplicationModel.getType());
+        assertEquals(EXAMPLE_1.getRemoteAddresses(), resultApplicationModel.getRemoteAddresses());
     }
 
     @Test
@@ -96,57 +96,57 @@ public class ApplicationsServiceTest {
         doReturn(application).when(applicationManager).findById(application.getId());
         doReturn(application).when(applicationManager).add(application);
 
-        ApplicationBean resultApplicationBean = applicationsService.addApplication(EXAMPLE_1);
-        assertEquals(EXAMPLE_1.getActive(), resultApplicationBean.getActive());
-        assertEquals(EXAMPLE_1.getName(), resultApplicationBean.getName());
-        assertEquals(EXAMPLE_1.getDescription(), resultApplicationBean.getDescription());
-        assertEquals(EXAMPLE_1.getType(), resultApplicationBean.getType());
-        assertEquals(EXAMPLE_1.getRemoteAddresses(), resultApplicationBean.getRemoteAddresses());
+        ApplicationModel resultApplicationModel = applicationsService.addApplication(EXAMPLE_1);
+        assertEquals(EXAMPLE_1.getActive(), resultApplicationModel.getActive());
+        assertEquals(EXAMPLE_1.getName(), resultApplicationModel.getName());
+        assertEquals(EXAMPLE_1.getDescription(), resultApplicationModel.getDescription());
+        assertEquals(EXAMPLE_1.getType(), resultApplicationModel.getType());
+        assertEquals(EXAMPLE_1.getRemoteAddresses(), resultApplicationModel.getRemoteAddresses());
     }
 
     @Test
     public void testAddApplicationEnsurePersistenceCalls() throws InvalidCredentialException, ApplicationAlreadyExistsException, ApplicationNotFoundException {
-        final ApplicationBean applicationBean = EXAMPLE_1;
-        final Application applicationWithDirectoryMappings = ImmutableApplication.builder(toApplication(applicationBean))
-                .setApplicationDirectoryMappings(applicationsService.toApplicationDirectoryMappings(applicationBean.getDirectoryMappings()))
+        final ApplicationModel applicationModel = EXAMPLE_1;
+        final Application applicationWithDirectoryMappings = ImmutableApplication.builder(toApplication(applicationModel))
+                .setApplicationDirectoryMappings(applicationsService.toApplicationDirectoryMappings(applicationModel.getDirectoryMappings()))
                 .build();
         doReturn(applicationWithDirectoryMappings).when(applicationManager).add(any(Application.class));
         doReturn(applicationWithDirectoryMappings).when(applicationManager).findById(applicationWithDirectoryMappings.getId());
 
         final ApplicationsServiceImpl spy = spy(applicationsService);
-        spy.addApplication(applicationBean);
+        spy.addApplication(applicationModel);
         verify(spy).persistApplicationDirectoryMappings(any(), any());
-        verify(spy).persistApplicationBeanAuthenticationGroups(any(), any());
-        verify(spy).persistApplicationBeanAutoAssignmentGroups(any(), any());
+        verify(spy).persistApplicationModelAuthenticationGroups(any(), any());
+        verify(spy).persistApplicationModelAutoAssignmentGroups(any(), any());
     }
 
     @Test
     public void testSetApplicationAllAttributes() throws ApplicationNotFoundException, ApplicationManagerException {
         Application application1 = toApplication(EXAMPLE_1);
-        ApplicationBean requestApplicationBean = new ApplicationBean();
-        requestApplicationBean.setId(application1.getId());
-        requestApplicationBean.setName("Changed Name");
-        requestApplicationBean.setDescription("Changed Description");
-        requestApplicationBean.setActive(false);
-        requestApplicationBean.setPassword("password1");
-        requestApplicationBean.setRemoteAddresses(Collections.singletonList("127.0.0.5"));
-        Application application2 = toApplication(requestApplicationBean);
+        ApplicationModel requestApplicationModel = new ApplicationModel();
+        requestApplicationModel.setId(application1.getId());
+        requestApplicationModel.setName("Changed Name");
+        requestApplicationModel.setDescription("Changed Description");
+        requestApplicationModel.setActive(false);
+        requestApplicationModel.setPassword("password1");
+        requestApplicationModel.setRemoteAddresses(Collections.singletonList("127.0.0.5"));
+        Application application2 = toApplication(requestApplicationModel);
 
         doReturn(application1).when(applicationManager).findById(anyLong());
         doReturn(application2).when(applicationManager).update(any(Application.class));
 
         final ArgumentCaptor<Application> applicationCaptor = ArgumentCaptor.forClass(Application.class);
-        applicationsService.setApplication(EXAMPLE_1.getId(), requestApplicationBean);
+        applicationsService.setApplication(EXAMPLE_1.getId(), requestApplicationModel);
         verify(applicationManager).update(applicationCaptor.capture());
         verify(applicationManager).updateCredential(any(), any());
         final Application updatedApplication = applicationCaptor.getValue();
 
         assertNotNull(updatedApplication);
-        assertEquals(requestApplicationBean.getName(), updatedApplication.getName());
-        assertEquals(requestApplicationBean.getDescription(), updatedApplication.getDescription());
-        assertEquals(requestApplicationBean.getActive(), updatedApplication.isActive());
+        assertEquals(requestApplicationModel.getName(), updatedApplication.getName());
+        assertEquals(requestApplicationModel.getDescription(), updatedApplication.getDescription());
+        assertEquals(requestApplicationModel.getActive(), updatedApplication.isActive());
         // it's not possible to change the application type
-        assertEquals(requestApplicationBean.getRemoteAddresses() , toStringCollection(updatedApplication.getRemoteAddresses()));
+        assertEquals(requestApplicationModel.getRemoteAddresses() , toStringCollection(updatedApplication.getRemoteAddresses()));
     }
 
     @Test
@@ -154,10 +154,10 @@ public class ApplicationsServiceTest {
         Application application = toApplication(EXAMPLE_1);
         doReturn(application).when(applicationManager).findById(anyLong());
         doReturn(application).when(applicationManager).update(any(Application.class));
-        ApplicationBean requestApplicationBean = new ApplicationBean();
+        ApplicationModel requestApplicationModel = new ApplicationModel();
 
         final ArgumentCaptor<Application> applicationCaptor = ArgumentCaptor.forClass(Application.class);
-        applicationsService.setApplication(100, requestApplicationBean);
+        applicationsService.setApplication(100, requestApplicationModel);
         verify(applicationManager).update(applicationCaptor.capture());
         final Application updatedApplication = applicationCaptor.getValue();
 
@@ -171,18 +171,18 @@ public class ApplicationsServiceTest {
 
     @Test
     public void testSetApplicationEnsurePersistenceCalls() throws ApplicationNotFoundException, ApplicationManagerException {
-        final ApplicationBean applicationBean = EXAMPLE_1;
-        final Application applicationWithDirectoryMappings = ImmutableApplication.builder(toApplication(applicationBean))
-                .setApplicationDirectoryMappings(applicationsService.toApplicationDirectoryMappings(applicationBean.getDirectoryMappings()))
+        final ApplicationModel applicationModel = EXAMPLE_1;
+        final Application applicationWithDirectoryMappings = ImmutableApplication.builder(toApplication(applicationModel))
+                .setApplicationDirectoryMappings(applicationsService.toApplicationDirectoryMappings(applicationModel.getDirectoryMappings()))
                 .build();
         doReturn(applicationWithDirectoryMappings).when(applicationManager).findById(applicationWithDirectoryMappings.getId());
         doReturn(applicationWithDirectoryMappings).when(applicationManager).update(any(Application.class));
 
         final ApplicationsServiceImpl spy = spy(applicationsService);
-        spy.setApplication(applicationBean.getId(), applicationBean);
+        spy.setApplication(applicationModel.getId(), applicationModel);
         verify(spy).persistApplicationDirectoryMappings(any(), any());
-        verify(spy).persistApplicationBeanAuthenticationGroups(any(), any());
-        verify(spy).persistApplicationBeanAutoAssignmentGroups(any(), any());
+        verify(spy).persistApplicationModelAuthenticationGroups(any(), any());
+        verify(spy).persistApplicationModelAutoAssignmentGroups(any(), any());
     }
 
     @Test
@@ -190,7 +190,7 @@ public class ApplicationsServiceTest {
         final Application applicationExample1 = ImmutableApplication.builder(toApplication(EXAMPLE_1))
                 .setId(EXAMPLE_1.getId())
                 .build();
-        final List<ApplicationBean> applicationBeans = Arrays.asList(EXAMPLE_1, EXAMPLE_2);
+        final List<ApplicationModel> applicationModels = Arrays.asList(EXAMPLE_1, EXAMPLE_2);
         doReturn(applicationExample1).when(applicationManager).findByName(EXAMPLE_1.getName());
         doThrow(new ApplicationNotFoundException("")).when(applicationManager).findByName(EXAMPLE_2.getName());
 
@@ -198,10 +198,10 @@ public class ApplicationsServiceTest {
         doReturn(EXAMPLE_1).when(spy).setApplication(EXAMPLE_1.getId(), EXAMPLE_1);
         doReturn(EXAMPLE_2).when(spy).addApplication(EXAMPLE_2);
 
-        final List<ApplicationBean> responseApplicationBeans = spy.setApplications(applicationBeans);
+        final List<ApplicationModel> responseApplicationModels = spy.setApplications(applicationModels);
         verify(spy).setApplication(EXAMPLE_1.getId(), EXAMPLE_1);
         verify(spy).addApplication(EXAMPLE_2);
-        assertEquals(applicationBeans.size(), responseApplicationBeans.size());
+        assertEquals(applicationModels.size(), responseApplicationModels.size());
     }
 
     @Test
@@ -267,7 +267,7 @@ public class ApplicationsServiceTest {
     }
 
     @Test
-    public void testSetBeanApplicationNotFoundException() throws ApplicationNotFoundException {
+    public void testSetModelApplicationNotFoundException() throws ApplicationNotFoundException {
         doThrow(new ApplicationNotFoundException("app")).when(applicationManager).findById(anyLong());
 
         assertThrows(NotFoundException.class, () -> {
@@ -276,7 +276,7 @@ public class ApplicationsServiceTest {
     }
 
     @Test
-    public void testSetBeanApplicationManagerException() throws ApplicationNotFoundException, ApplicationManagerException {
+    public void testSetModelApplicationManagerException() throws ApplicationNotFoundException, ApplicationManagerException {
         doReturn(toApplication(EXAMPLE_1)).when(applicationManager).findById(anyLong());
         doThrow(new ApplicationManagerException("x")).when(applicationManager).update(any(Application.class));
 

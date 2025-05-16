@@ -14,7 +14,7 @@ import com.atlassian.jira.lookandfeel.upload.UploadService;
 import com.atlassian.jira.security.JiraAuthenticationContext;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
-import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,7 +29,7 @@ import java.net.URL;
 import java.nio.file.Files;
 import java.util.Map;
 
-import static com.deftdevs.bootstrapi.jira.model.util.SettingsColourSchemeBeanUtilTest.getDummyBaseColourScheme;
+import static com.deftdevs.bootstrapi.jira.model.util.SettingsColourSchemeModelUtilTest.getDummyBaseColourScheme;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.Mockito.*;
@@ -65,22 +65,22 @@ class SettingsBrandingServiceTest {
         Map<String, Object> dummyBaseColourScheme = getDummyBaseColourScheme();
         doReturn(dummyBaseColourScheme).when(applicationProperties).asMap();
 
-        SettingsBrandingColorSchemeBean colourScheme = settingsBrandingService.getColourScheme();
+        SettingsBrandingColorSchemeModel colourScheme = settingsBrandingService.getColourScheme();
 
-        assertEquals(SettingsBrandingColorSchemeBean.EXAMPLE_1.getTopBar(), colourScheme.getTopBar());
+        assertEquals(SettingsBrandingColorSchemeModel.EXAMPLE_1.getTopBar(), colourScheme.getTopBar());
     }
 
     @Test
     void testSetColourScheme() {
 
-        SettingsBrandingColorSchemeBean schemeBean = SettingsBrandingColorSchemeBean.EXAMPLE_1;
+        SettingsBrandingColorSchemeModel schemeModel = SettingsBrandingColorSchemeModel.EXAMPLE_1;
 
         Map<String, Object> dummyBaseColourScheme = getDummyBaseColourScheme();
         doReturn(dummyBaseColourScheme).when(applicationProperties).asMap();
 
-        SettingsBrandingColorSchemeBean colourScheme = settingsBrandingService.setColourScheme(schemeBean);
+        SettingsBrandingColorSchemeModel colourScheme = settingsBrandingService.setColourScheme(schemeModel);
 
-        assertEquals(schemeBean.getTopBar(), colourScheme.getTopBar());
+        assertEquals(schemeModel.getTopBar(), colourScheme.getTopBar());
     }
 
     @Test

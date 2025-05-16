@@ -1,7 +1,7 @@
 package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsModel;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
@@ -21,18 +21,18 @@ public abstract class AbstractSettingsResourceFuncTest {
                 .request();
         assertEquals(Response.Status.OK.getStatusCode(), settingsResponse.statusCode());
 
-        final SettingsBean settingsBean = objectMapper.readValue(settingsResponse.body(), SettingsBean.class);
-        assertNotNull(settingsBean.getTitle());
+        final SettingsModel settingsModel = objectMapper.readValue(settingsResponse.body(), SettingsModel.class);
+        assertNotNull(settingsModel.getTitle());
     }
 
     @Test
     void testSetSettings() throws Exception {
         final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS)
-                .request(HttpMethod.PUT, getExampleBean());
+                .request(HttpMethod.PUT, getExampleModel());
         assertEquals(Response.Status.OK.getStatusCode(), settingsResponse.statusCode());
 
-        final SettingsBean settingsBean = objectMapper.readValue(settingsResponse.body(), SettingsBean.class);
-        assertEquals(getExampleBean(), settingsBean);
+        final SettingsModel settingsModel = objectMapper.readValue(settingsResponse.body(), SettingsModel.class);
+        assertEquals(getExampleModel(), settingsModel);
     }
 
     @Test
@@ -49,7 +49,7 @@ public abstract class AbstractSettingsResourceFuncTest {
         final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS)
                 .username("wrong")
                 .password("password")
-                .request(HttpMethod.PUT, getExampleBean());
+                .request(HttpMethod.PUT, getExampleModel());
         assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), settingsResponse.statusCode());
     }
 
@@ -68,12 +68,12 @@ public abstract class AbstractSettingsResourceFuncTest {
         final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS)
                 .username("user")
                 .password("user")
-                .request(HttpMethod.PUT, getExampleBean());
+                .request(HttpMethod.PUT, getExampleModel());
 
         assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), settingsResponse.statusCode());
     }
 
-    protected SettingsBean getExampleBean() {
-        return SettingsBean.EXAMPLE_1;
+    protected SettingsModel getExampleModel() {
+        return SettingsModel.EXAMPLE_1;
     }
 }

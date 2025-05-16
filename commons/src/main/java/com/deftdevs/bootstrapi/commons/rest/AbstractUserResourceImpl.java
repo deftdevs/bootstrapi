@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.UserBean;
+import com.deftdevs.bootstrapi.commons.model.UserModel;
 import com.deftdevs.bootstrapi.commons.rest.api.UserResource;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
 
@@ -18,17 +18,17 @@ public class AbstractUserResourceImpl implements UserResource {
     public Response getUser(
             final String username) {
 
-        final UserBean userBean = usersService.getUser(username);
-        return Response.ok(userBean).build();
+        final UserModel userModel = usersService.getUser(username);
+        return Response.ok(userModel).build();
     }
 
     @Override
     public Response setUser(
             final String username,
-            final UserBean userBean) {
+            final UserModel userModel) {
 
-        final UserBean updatedUserBean = usersService.updateUser(username, userBean);
-        return Response.ok(updatedUserBean).build();
+        final UserModel updatedUserModel = usersService.updateUser(username, userModel);
+        return Response.ok(updatedUserModel).build();
     }
 
     @Override
@@ -36,8 +36,8 @@ public class AbstractUserResourceImpl implements UserResource {
             final String username,
             final String password) {
 
-        final UserBean updatedUserBean = usersService.updatePassword(username, password);
-        return Response.ok(updatedUserBean).build();
+        final UserModel updatedUserModel = usersService.updatePassword(username, password);
+        return Response.ok(updatedUserModel).build();
     }
 
 }

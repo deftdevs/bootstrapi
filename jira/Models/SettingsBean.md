@@ -1,4 +1,4 @@
-# SettingsBean
+# SettingsModel
 ## Properties
 
 | Name | Type | Description | Notes |

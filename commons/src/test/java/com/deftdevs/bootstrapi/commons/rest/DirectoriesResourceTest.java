@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
-import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
+import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdModel;
 import com.deftdevs.bootstrapi.commons.rest.impl.TestDirectoriesResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 import org.junit.jupiter.api.BeforeEach;
@@ -34,29 +34,29 @@ class DirectoriesResourceTest {
 
     @Test
     void testGetDirectories() {
-        final DirectoryCrowdBean initialDirectoryBean = DirectoryCrowdBean.EXAMPLE_1;
-        final List<AbstractDirectoryBean> directoryBeans = Collections.singletonList(initialDirectoryBean);
-        doReturn(directoryBeans).when(directoriesService).getDirectories();
+        final DirectoryCrowdModel initialDirectoryModel = DirectoryCrowdModel.EXAMPLE_1;
+        final List<AbstractDirectoryModel> directoryModels = Collections.singletonList(initialDirectoryModel);
+        doReturn(directoryModels).when(directoriesService).getDirectories();
 
         final Response response = resource.getDirectories();
         assertEquals(200, response.getStatus());
 
-        final List<AbstractDirectoryBean> responseDirectoryBeans = (List<AbstractDirectoryBean>) response.getEntity();
-        assertEquals(initialDirectoryBean, responseDirectoryBeans.iterator().next());
+        final List<AbstractDirectoryModel> responseDirectoryModels = (List<AbstractDirectoryModel>) response.getEntity();
+        assertEquals(initialDirectoryModel, responseDirectoryModels.iterator().next());
     }
 
     @Test
     void testSetDirectories() {
-        final DirectoryCrowdBean directoryBean1 = DirectoryCrowdBean.EXAMPLE_1;
-        final DirectoryCrowdBean directoryBean2 = DirectoryCrowdBean.EXAMPLE_3;
-        final List<AbstractDirectoryBean> directoryBeans = Arrays.asList(directoryBean1, directoryBean2);
-        doReturn(directoryBeans).when(directoriesService).setDirectories(directoryBeans, false);
+        final DirectoryCrowdModel directoryModel1 = DirectoryCrowdModel.EXAMPLE_1;
+        final DirectoryCrowdModel directoryModel2 = DirectoryCrowdModel.EXAMPLE_3;
+        final List<AbstractDirectoryModel> directoryModels = Arrays.asList(directoryModel1, directoryModel2);
+        doReturn(directoryModels).when(directoriesService).setDirectories(directoryModels, false);
 
-        final Response response = resource.setDirectories(Boolean.FALSE, directoryBeans);
+        final Response response = resource.setDirectories(Boolean.FALSE, directoryModels);
         assertEquals(200, response.getStatus());
 
-        final List<AbstractDirectoryBean> responseDirectoryBeans = (List<AbstractDirectoryBean>) response.getEntity();
-        assertEquals(directoryBeans.size(), responseDirectoryBeans.size());
+        final List<AbstractDirectoryModel> responseDirectoryModels = (List<AbstractDirectoryModel>) response.getEntity();
+        assertEquals(directoryModels.size(), responseDirectoryModels.size());
     }
 
     @Test

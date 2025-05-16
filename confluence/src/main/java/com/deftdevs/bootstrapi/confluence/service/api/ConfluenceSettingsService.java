@@ -1,18 +1,18 @@
 package com.deftdevs.bootstrapi.confluence.service.api;
 
-import com.deftdevs.bootstrapi.commons.model.SettingsBean;
-import com.deftdevs.bootstrapi.commons.model.SettingsSecurityBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsSecurityService;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
-import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlBean;
+import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlModel;
 
 public interface ConfluenceSettingsService extends
-        SettingsService<SettingsBean>,
-        SettingsSecurityService<SettingsSecurityBean> {
+        SettingsService<SettingsModel>,
+        SettingsSecurityService<SettingsSecurityModel> {
 
-    SettingsCustomHtmlBean getCustomHtml();
+    SettingsCustomHtmlModel getCustomHtml();
 
-    SettingsCustomHtmlBean setCustomHtml(
-            SettingsCustomHtmlBean settingsCustomHtmlBean);
+    SettingsCustomHtmlModel setCustomHtml(
+            SettingsCustomHtmlModel settingsCustomHtmlModel);
 
 }

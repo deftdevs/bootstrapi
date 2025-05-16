@@ -10,7 +10,7 @@ All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
 
 <a name="getMailTemplates"></a>
 # **getMailTemplates**
-> MailTemplatesBean getMailTemplates()
+> MailTemplatesModel getMailTemplates()
 
 Get the mail templates
 
@@ -19,7 +19,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**MailTemplatesBean**](../Models/MailTemplatesBean.md)
+[**MailTemplatesModel**](../Models/MailTemplatesModel.md)
 
 ### Authorization
 
@@ -32,7 +32,7 @@ This endpoint does not need any parameter.
 
 <a name="setMailTemplates"></a>
 # **setMailTemplates**
-> MailTemplatesBean setMailTemplates(MailTemplatesBean)
+> MailTemplatesModel setMailTemplates(MailTemplatesModel)
 
 Set the mail templates
 
@@ -40,11 +40,11 @@ Set the mail templates
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **MailTemplatesBean** | [**MailTemplatesBean**](../Models/MailTemplatesBean.md)|  | [optional] |
+| **MailTemplatesModel** | [**MailTemplatesModel**](../Models/MailTemplatesModel.md)|  | [optional] |
 
 ### Return type
 
-[**MailTemplatesBean**](../Models/MailTemplatesBean.md)
+[**MailTemplatesModel**](../Models/MailTemplatesModel.md)
 
 ### Authorization
 

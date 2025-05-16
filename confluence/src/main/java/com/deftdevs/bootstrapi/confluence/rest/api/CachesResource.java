@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.confluence.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.confluence.model.CacheBean;
+import com.deftdevs.bootstrapi.confluence.model.CacheModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -22,7 +22,7 @@ public interface CachesResource {
             summary = "Read all cache information",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = CacheBean.class))),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = CacheModel.class))),
                             description = "Returns all information for current cache configuration."),
                     @ApiResponse(
                             content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
@@ -40,7 +40,7 @@ public interface CachesResource {
             summary = "Read cache information for a specified cache",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = CacheBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = CacheModel.class)),
                             description = "Returns configuration for a given cache."),
                     @ApiResponse(
                             content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
@@ -59,7 +59,7 @@ public interface CachesResource {
             summary = "Update an existing cache-size. Only Setting maxObjectCount is supported.",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = CacheBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = CacheModel.class)),
                             description = "Returns the modified Cache."
                     ),
                     @ApiResponse(
@@ -68,7 +68,7 @@ public interface CachesResource {
                     )
             }
     )
-    Response updateCache(@PathParam("name") final String name, final CacheBean cache);
+    Response updateCache(@PathParam("name") final String name, final CacheModel cache);
 
     @POST
     @Path("{name}/" + BootstrAPI.CACHE_FLUSH)
@@ -80,7 +80,7 @@ public interface CachesResource {
             description = "Empties the specified cache",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = CacheBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = CacheModel.class)),
                             description = "Returns the emptied Cache."
                     ),
                     @ApiResponse(

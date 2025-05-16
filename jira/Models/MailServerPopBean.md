@@ -1,4 +1,4 @@
-# MailServerPopBean
+# MailServerPopModel
 ## Properties
 
 | Name | Type | Description | Notes |

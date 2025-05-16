@@ -12,7 +12,7 @@ All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
 
 <a name="createApplication"></a>
 # **createApplication**
-> ApplicationBean createApplication(ApplicationBean)
+> ApplicationModel createApplication(ApplicationModel)
 
 Create an application
 
@@ -20,11 +20,11 @@ Create an application
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ApplicationBean** | [**ApplicationBean**](../Models/ApplicationBean.md)|  | [optional] |
+| **ApplicationModel** | [**ApplicationModel**](../Models/ApplicationModel.md)|  | [optional] |
 
 ### Return type
 
-[**ApplicationBean**](../Models/ApplicationBean.md)
+[**ApplicationModel**](../Models/ApplicationModel.md)
 
 ### Authorization
 
@@ -74,7 +74,7 @@ Get an application
 
 ### Return type
 
-[**List**](../Models/ApplicationBean.md)
+[**List**](../Models/ApplicationModel.md)
 
 ### Authorization
 
@@ -87,7 +87,7 @@ Get an application
 
 <a name="updateApplication"></a>
 # **updateApplication**
-> ApplicationBean updateApplication(id, ApplicationBean)
+> ApplicationModel updateApplication(id, ApplicationModel)
 
 Update an application
 
@@ -96,11 +96,11 @@ Update an application
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | **Long**|  | [default to null] |
-| **ApplicationBean** | [**ApplicationBean**](../Models/ApplicationBean.md)|  | [optional] |
+| **ApplicationModel** | [**ApplicationModel**](../Models/ApplicationModel.md)|  | [optional] |
 
 ### Return type
 
-[**ApplicationBean**](../Models/ApplicationBean.md)
+[**ApplicationModel**](../Models/ApplicationModel.md)
 
 ### Authorization
 

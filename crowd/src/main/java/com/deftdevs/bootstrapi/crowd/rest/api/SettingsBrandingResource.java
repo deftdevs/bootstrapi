@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.crowd.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageBean;
+import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,7 +22,7 @@ public interface SettingsBrandingResource {
             tags = { BootstrAPI.SETTINGS },
             summary = "Get the login-page settings",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingLoginPageBean.class))),
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingLoginPageModel.class))),
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
@@ -36,12 +36,12 @@ public interface SettingsBrandingResource {
             tags = { BootstrAPI.SETTINGS },
             summary = "Set the login-page settings",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingLoginPageBean.class))),
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingLoginPageModel.class))),
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
     Response setLoginPage(
-            SettingsBrandingLoginPageBean settingsBrandingLoginPageBean);
+            SettingsBrandingLoginPageModel settingsBrandingLoginPageModel);
 
     @PUT
     @Consumes(BootstrAPI.MEDIA_TYPE_IMAGE)

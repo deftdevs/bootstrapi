@@ -1,4 +1,4 @@
-# DirectoryDelegatingBean
+# DirectoryDelegatingModel
 ## Properties
 
 | Name | Type | Description | Notes |

@@ -13,7 +13,7 @@ All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
 
 <a name="getLoginPage"></a>
 # **getLoginPage**
-> SettingsBrandingLoginPageBean getLoginPage()
+> SettingsBrandingLoginPageModel getLoginPage()
 
 Get the login-page settings
 
@@ -22,7 +22,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SettingsBrandingLoginPageBean**](../Models/SettingsBrandingLoginPageBean.md)
+[**SettingsBrandingLoginPageModel**](../Models/SettingsBrandingLoginPageModel.md)
 
 ### Authorization
 
@@ -35,7 +35,7 @@ This endpoint does not need any parameter.
 
 <a name="getSettings"></a>
 # **getSettings**
-> SettingsBean getSettings()
+> SettingsModel getSettings()
 
 Get the general settings
 
@@ -44,7 +44,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SettingsBean**](../Models/SettingsBean.md)
+[**SettingsModel**](../Models/SettingsModel.md)
 
 ### Authorization
 
@@ -57,7 +57,7 @@ This endpoint does not need any parameter.
 
 <a name="setLoginPage"></a>
 # **setLoginPage**
-> SettingsBrandingLoginPageBean setLoginPage(SettingsBrandingLoginPageBean)
+> SettingsBrandingLoginPageModel setLoginPage(SettingsBrandingLoginPageModel)
 
 Set the login-page settings
 
@@ -65,11 +65,11 @@ Set the login-page settings
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **SettingsBrandingLoginPageBean** | [**SettingsBrandingLoginPageBean**](../Models/SettingsBrandingLoginPageBean.md)|  | [optional] |
+| **SettingsBrandingLoginPageModel** | [**SettingsBrandingLoginPageModel**](../Models/SettingsBrandingLoginPageModel.md)|  | [optional] |
 
 ### Return type
 
-[**SettingsBrandingLoginPageBean**](../Models/SettingsBrandingLoginPageBean.md)
+[**SettingsBrandingLoginPageModel**](../Models/SettingsBrandingLoginPageModel.md)
 
 ### Authorization
 
@@ -107,7 +107,7 @@ Set the logo
 
 <a name="setSettings"></a>
 # **setSettings**
-> SettingsBean setSettings(SettingsBean)
+> SettingsModel setSettings(SettingsModel)
 
 Set the general settings
 
@@ -115,11 +115,11 @@ Set the general settings
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **SettingsBean** | [**SettingsBean**](../Models/SettingsBean.md)|  | |
+| **SettingsModel** | [**SettingsModel**](../Models/SettingsModel.md)|  | |
 
 ### Return type
 
-[**SettingsBean**](../Models/SettingsBean.md)
+[**SettingsModel**](../Models/SettingsModel.md)
 
 ### Authorization
 

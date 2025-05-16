@@ -9,10 +9,10 @@ import com.atlassian.crowd.model.directory.ImmutableDirectory;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.web.ServiceUnavailableException;
-import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
-import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdBean;
-import com.deftdevs.bootstrapi.commons.model.DirectoryLdapBean;
-import com.deftdevs.bootstrapi.confluence.model.util.DirectoryBeanUtil;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
+import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdModel;
+import com.deftdevs.bootstrapi.commons.model.DirectoryLdapModel;
+import com.deftdevs.bootstrapi.confluence.model.util.DirectoryModelUtil;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -48,8 +48,8 @@ class DirectoryServiceTest {
         final Directory directory = createDirectory();
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
 
-        final List<AbstractDirectoryBean> directories = directoryService.getDirectories();
-        assertEquals(directories.iterator().next(), DirectoryBeanUtil.toDirectoryBean(directory));
+        final List<AbstractDirectoryModel> directories = directoryService.getDirectories();
+        assertEquals(directories.iterator().next(), DirectoryModelUtil.toDirectoryModel(directory));
     }
 
     @Test
@@ -67,9 +67,9 @@ class DirectoryServiceTest {
         Directory directory = createDirectory();
         doReturn(directory).when(crowdDirectoryService).findDirectoryById(1L);
 
-        AbstractDirectoryBean directoryBean = directoryService.getDirectory(1L);
+        AbstractDirectoryModel directoryModel = directoryService.getDirectory(1L);
 
-        assertEquals(DirectoryBeanUtil.toDirectoryBean(directory), directoryBean);
+        assertEquals(DirectoryModelUtil.toDirectoryModel(directory), directoryModel);
     }
 
     @Test
@@ -86,9 +86,9 @@ class DirectoryServiceTest {
         doReturn(directory).when(crowdDirectoryService).addDirectory(any());
         doReturn(Collections.emptyList()).when(crowdDirectoryService).findAllDirectories();
 
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
-        directoryBean.getServer().setAppPassword("test");
-        directoryService.setDirectories(Collections.singletonList(directoryBean), false);
+        DirectoryCrowdModel directoryModel = (DirectoryCrowdModel) DirectoryModelUtil.toDirectoryModel(directory);
+        directoryModel.getServer().setAppPassword("test");
+        directoryService.setDirectories(Collections.singletonList(directoryModel), false);
     }
 
     @Test
@@ -98,10 +98,10 @@ class DirectoryServiceTest {
         doReturn(directory).when(crowdDirectoryService).updateDirectory(any());
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
 
-        final DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
-        directoryBean.getServer().setAppPassword("test");
-        final List<AbstractDirectoryBean> directoryAdded = directoryService.setDirectories(Collections.singletonList(directoryBean), false);
-        assertEquals(directoryAdded.iterator().next().getName(), directoryBean.getName());
+        final DirectoryCrowdModel directoryModel = (DirectoryCrowdModel) DirectoryModelUtil.toDirectoryModel(directory);
+        directoryModel.getServer().setAppPassword("test");
+        final List<AbstractDirectoryModel> directoryAdded = directoryService.setDirectories(Collections.singletonList(directoryModel), false);
+        assertEquals(directoryAdded.iterator().next().getName(), directoryModel.getName());
     }
 
     @Test
@@ -111,10 +111,10 @@ class DirectoryServiceTest {
         doReturn(directory).when(crowdDirectoryService).updateDirectory(any());
         doReturn(Collections.singletonList(directory)).when(crowdDirectoryService).findAllDirectories();
 
-        final DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
-        directoryBean.getServer().setAppPassword("test");
-        List<AbstractDirectoryBean> directoryAdded = directoryService.setDirectories(Collections.singletonList(directoryBean), true);
-        assertEquals(directoryAdded.iterator().next().getName(), directoryBean.getName());
+        final DirectoryCrowdModel directoryModel = (DirectoryCrowdModel) DirectoryModelUtil.toDirectoryModel(directory);
+        directoryModel.getServer().setAppPassword("test");
+        List<AbstractDirectoryModel> directoryAdded = directoryService.setDirectories(Collections.singletonList(directoryModel), true);
+        assertEquals(directoryAdded.iterator().next().getName(), directoryModel.getName());
     }
 
     @Test
@@ -124,11 +124,11 @@ class DirectoryServiceTest {
         doReturn(directory).when(crowdDirectoryService).findDirectoryById(1L);
         doReturn(directory).when(crowdDirectoryService).updateDirectory(any());
 
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
-        directoryBean.getServer().setAppPassword("test");
-        AbstractDirectoryBean directoryAdded = directoryService.setDirectory(1L, directoryBean, true);
+        DirectoryCrowdModel directoryModel = (DirectoryCrowdModel) DirectoryModelUtil.toDirectoryModel(directory);
+        directoryModel.getServer().setAppPassword("test");
+        AbstractDirectoryModel directoryAdded = directoryService.setDirectory(1L, directoryModel, true);
 
-        assertEquals(directoryBean.getName(), directoryAdded.getName());
+        assertEquals(directoryModel.getName(), directoryAdded.getName());
     }
 
     @Test
@@ -138,33 +138,33 @@ class DirectoryServiceTest {
         doReturn(directory).when(crowdDirectoryService).findDirectoryById(1L);
         doReturn(directory).when(crowdDirectoryService).updateDirectory(any());
 
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
-        directoryBean.setDescription(null);
-        directoryBean.setName(null);
+        DirectoryCrowdModel directoryModel = (DirectoryCrowdModel) DirectoryModelUtil.toDirectoryModel(directory);
+        directoryModel.setDescription(null);
+        directoryModel.setName(null);
 
-        directoryBean.getServer().setAppPassword("test");
-        AbstractDirectoryBean directoryAdded = directoryService.setDirectory(1L, directoryBean, true);
+        directoryModel.getServer().setAppPassword("test");
+        AbstractDirectoryModel directoryAdded = directoryService.setDirectory(1L, directoryModel, true);
 
-        assertEquals(directoryBean.getDescription(), directoryAdded.getDescription());
+        assertEquals(directoryModel.getDescription(), directoryAdded.getDescription());
         assertEquals(directory.getName(), directoryAdded.getName());
     }
 
     @Test
     void testSetDirectoryUnsupportedType() {
-        final DirectoryLdapBean directoryLdapBean = new DirectoryLdapBean();
+        final DirectoryLdapModel directoryLdapModel = new DirectoryLdapModel();
 
         assertThrows(BadRequestException.class, () -> {
-            directoryService.setDirectory(1L, directoryLdapBean, false);
+            directoryService.setDirectory(1L, directoryLdapModel, false);
         });
     }
 
     @Test
     void testSetDirectoryNotExisting() {
         final Directory directory = createDirectory();
-        final AbstractDirectoryBean directoryBean = DirectoryBeanUtil.toDirectoryBean(directory);
+        final AbstractDirectoryModel directoryModel = DirectoryModelUtil.toDirectoryModel(directory);
 
         assertThrows(NotFoundException.class, () -> {
-            directoryService.setDirectory(1L, directoryBean, false);
+            directoryService.setDirectory(1L, directoryModel, false);
         });
     }
 
@@ -174,10 +174,10 @@ class DirectoryServiceTest {
         doReturn(responseDirectory).when(crowdDirectoryService).addDirectory(any());
 
         Directory directory = createDirectory();
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
+        DirectoryCrowdModel directoryModel = (DirectoryCrowdModel) DirectoryModelUtil.toDirectoryModel(directory);
 
         assertThrows(IllegalArgumentException.class, () -> {
-            directoryService.addDirectory(directoryBean, false);
+            directoryService.addDirectory(directoryModel, false);
         });
     }
 
@@ -186,19 +186,19 @@ class DirectoryServiceTest {
         Directory directory = createDirectory();
         doReturn(directory).when(crowdDirectoryService).addDirectory(any(Directory.class));
 
-        DirectoryCrowdBean directoryBean = (DirectoryCrowdBean)DirectoryBeanUtil.toDirectoryBean(directory);
-        directoryBean.getServer().setAppPassword("test");
+        DirectoryCrowdModel directoryModel = (DirectoryCrowdModel) DirectoryModelUtil.toDirectoryModel(directory);
+        directoryModel.getServer().setAppPassword("test");
 
-        AbstractDirectoryBean directoryAdded = directoryService.addDirectory(directoryBean, false);
-        assertEquals(directoryAdded.getName(), directoryBean.getName());
+        AbstractDirectoryModel directoryAdded = directoryService.addDirectory(directoryModel, false);
+        assertEquals(directoryAdded.getName(), directoryModel.getName());
     }
 
     @Test
     void testAddDirectoryUnsupportedType() {
-        final DirectoryLdapBean directoryLdapBean = new DirectoryLdapBean();
+        final DirectoryLdapModel directoryLdapModel = new DirectoryLdapModel();
 
         assertThrows(BadRequestException.class, () -> {
-            directoryService.addDirectory(directoryLdapBean, false);
+            directoryService.addDirectory(directoryLdapModel, false);
         });
     }
 

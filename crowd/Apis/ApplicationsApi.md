@@ -42,14 +42,14 @@ null (empty response body)
 
 Get all applications
 
-    Upon successful request, returns a &#x60;ApplicationsBean&#x60; object containing all applications
+    Upon successful request, returns a &#x60;ApplicationsModel&#x60; object containing all applications
 
 ### Parameters
 This endpoint does not need any parameter.
 
 ### Return type
 
-[**List**](../Models/ApplicationBean.md)
+[**List**](../Models/ApplicationModel.md)
 
 ### Authorization
 
@@ -62,7 +62,7 @@ This endpoint does not need any parameter.
 
 <a name="setApplications"></a>
 # **setApplications**
-> List setApplications(ApplicationBean)
+> List setApplications(ApplicationModel)
 
 Set a list of applications
 
@@ -72,11 +72,11 @@ Set a list of applications
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ApplicationBean** | [**List**](../Models/ApplicationBean.md)|  | [optional] |
+| **ApplicationModel** | [**List**](../Models/ApplicationModel.md)|  | [optional] |
 
 ### Return type
 
-[**List**](../Models/ApplicationBean.md)
+[**List**](../Models/ApplicationModel.md)
 
 ### Authorization
 

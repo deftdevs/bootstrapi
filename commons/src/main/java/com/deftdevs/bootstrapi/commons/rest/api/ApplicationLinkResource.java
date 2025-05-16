@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -25,7 +25,7 @@ public interface ApplicationLinkResource {
             description = "Upon successful request, ",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkModel.class)),
                             description = "Returns the requested application link."
                     ),
                     @ApiResponse(
@@ -45,7 +45,7 @@ public interface ApplicationLinkResource {
             summary = "Create an application link",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkModel.class)),
                             description = "Returns the added application link."
                     ),
                     @ApiResponse(
@@ -56,7 +56,7 @@ public interface ApplicationLinkResource {
     )
     Response createApplicationLink(
             @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
-            @NotNull final ApplicationLinkBean linkBean);
+            @NotNull final ApplicationLinkModel linkModel);
 
     @PUT
     @Path("{uuid}")
@@ -67,7 +67,7 @@ public interface ApplicationLinkResource {
             summary = "Update an application link",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationLinkModel.class)),
                             description = "Returns the updated application link."
                     ),
                     @ApiResponse(
@@ -79,7 +79,7 @@ public interface ApplicationLinkResource {
     Response updateApplicationLink(
             @PathParam("uuid") @NotNull final UUID uuid,
             @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
-            @NotNull final ApplicationLinkBean linksBeanBeans);
+            @NotNull final ApplicationLinkModel linksModelModels);
 
     @DELETE
     @Path("{uuid}")

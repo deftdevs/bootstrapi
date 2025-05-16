@@ -3,9 +3,9 @@ package com.deftdevs.bootstrapi.jira.service;
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.atlassian.jira.web.action.admin.EditAnnouncementBanner;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.model.SettingsBean;
-import com.deftdevs.bootstrapi.commons.model.SettingsSecurityBean;
-import com.deftdevs.bootstrapi.jira.model.SettingsBannerBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
+import com.deftdevs.bootstrapi.jira.model.SettingsBannerModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -46,25 +46,25 @@ class SettingsServiceTest {
         doReturn(CONTACT_MESSAGE).when(applicationProperties).getString(JIRA_CONTACT_ADMINISTRATORS_MESSSAGE);
         doReturn(EXTERNAL_USER_MANAGEMENT).when(applicationProperties).getString(JIRA_OPTION_USER_EXTERNALMGT);
 
-        final SettingsBean settingsBean = settingsService.getSettingsGeneral();
+        final SettingsModel settingsModel = settingsService.getSettingsGeneral();
 
-        assertEquals(BASE_URL, settingsBean.getBaseUrl());
-        assertEquals(MODE_PUBLIC, settingsBean.getMode());
-        assertEquals(TITLE, settingsBean.getTitle());
-        assertEquals(CONTACT_MESSAGE, settingsBean.getContactMessage());
-        assertEquals(EXTERNAL_USER_MANAGEMENT, String.valueOf(settingsBean.getExternalUserManagement()));
+        assertEquals(BASE_URL, settingsModel.getBaseUrl());
+        assertEquals(MODE_PUBLIC, settingsModel.getMode());
+        assertEquals(TITLE, settingsModel.getTitle());
+        assertEquals(CONTACT_MESSAGE, settingsModel.getContactMessage());
+        assertEquals(EXTERNAL_USER_MANAGEMENT, String.valueOf(settingsModel.getExternalUserManagement()));
     }
 
     @Test
     void testSetSettingsGeneral() {
-        final SettingsBean settingsBean = new SettingsBean();
-        settingsBean.setBaseUrl(BASE_URL);
-        settingsBean.setMode(MODE_PUBLIC);
-        settingsBean.setTitle(TITLE);
-        settingsBean.setContactMessage(CONTACT_MESSAGE);
-        settingsBean.setExternalUserManagement(Boolean.parseBoolean(EXTERNAL_USER_MANAGEMENT));
+        final SettingsModel settingsModel = new SettingsModel();
+        settingsModel.setBaseUrl(BASE_URL);
+        settingsModel.setMode(MODE_PUBLIC);
+        settingsModel.setTitle(TITLE);
+        settingsModel.setContactMessage(CONTACT_MESSAGE);
+        settingsModel.setExternalUserManagement(Boolean.parseBoolean(EXTERNAL_USER_MANAGEMENT));
 
-        settingsService.setSettingsGeneral(settingsBean);
+        settingsService.setSettingsGeneral(settingsModel);
 
         verify(applicationProperties).setString(JIRA_BASEURL, BASE_URL.toString());
         verify(applicationProperties).setString(JIRA_MODE, MODE_PUBLIC);
@@ -74,10 +74,10 @@ class SettingsServiceTest {
     }
 
     @Test
-    void testSetSettingsGeneralEmptyBean() {
-        final SettingsBean settingsBean = new SettingsBean();
+    void testSetSettingsGeneralEmptyModel() {
+        final SettingsModel settingsModel = new SettingsModel();
 
-        settingsService.setSettingsGeneral(settingsBean);
+        settingsService.setSettingsGeneral(settingsModel);
 
         verify(applicationProperties, never()).setString(JIRA_BASEURL, BASE_URL.toString());
         verify(applicationProperties, never()).setString(JIRA_MODE, MODE_PUBLIC);
@@ -87,44 +87,44 @@ class SettingsServiceTest {
 
     @Test
     void testGetSecurity() {
-        final SettingsSecurityBean settingsSecurityBean = SettingsSecurityBean.EXAMPLE_1;
-        doReturn(!settingsSecurityBean.getWebSudoEnabled()).when(applicationProperties).getOption(WebSudo.IS_DISABLED);
-        doReturn(String.valueOf(settingsSecurityBean.getWebSudoTimeout())).when(applicationProperties).getDefaultBackedString(WebSudo.TIMEOUT);
+        final SettingsSecurityModel settingsSecurityModel = SettingsSecurityModel.EXAMPLE_1;
+        doReturn(!settingsSecurityModel.getWebSudoEnabled()).when(applicationProperties).getOption(WebSudo.IS_DISABLED);
+        doReturn(String.valueOf(settingsSecurityModel.getWebSudoTimeout())).when(applicationProperties).getDefaultBackedString(WebSudo.TIMEOUT);
 
-        final SettingsSecurityBean resultSettingsSecurityBean = settingsService.getSettingsSecurity();
-        assertEquals(settingsSecurityBean.getWebSudoEnabled(), resultSettingsSecurityBean.getWebSudoEnabled());
-        assertEquals(settingsSecurityBean.getWebSudoTimeout(), resultSettingsSecurityBean.getWebSudoTimeout());
+        final SettingsSecurityModel resultSettingsSecurityModel = settingsService.getSettingsSecurity();
+        assertEquals(settingsSecurityModel.getWebSudoEnabled(), resultSettingsSecurityModel.getWebSudoEnabled());
+        assertEquals(settingsSecurityModel.getWebSudoTimeout(), resultSettingsSecurityModel.getWebSudoTimeout());
     }
 
     @Test
     void testSetSettingsSecurity() {
-        final SettingsSecurityBean settingsSecurityBean = SettingsSecurityBean.EXAMPLE_1;
+        final SettingsSecurityModel settingsSecurityModel = SettingsSecurityModel.EXAMPLE_1;
         final SettingsServiceImpl spy = spy(settingsService);
-        doReturn(settingsSecurityBean).when(spy).getSettingsSecurity();
+        doReturn(settingsSecurityModel).when(spy).getSettingsSecurity();
 
-        spy.setSettingsSecurity(settingsSecurityBean);
-        verify(applicationProperties).setOption(WebSudo.IS_DISABLED, !settingsSecurityBean.getWebSudoEnabled());
-        verify(applicationProperties).setString(WebSudo.TIMEOUT, String.valueOf(settingsSecurityBean.getWebSudoTimeout()));
+        spy.setSettingsSecurity(settingsSecurityModel);
+        verify(applicationProperties).setOption(WebSudo.IS_DISABLED, !settingsSecurityModel.getWebSudoEnabled());
+        verify(applicationProperties).setString(WebSudo.TIMEOUT, String.valueOf(settingsSecurityModel.getWebSudoTimeout()));
     }
 
     @Test
     void testSetSettingsGeneralUnsupportedMode() {
-        final SettingsBean settingsBean = new SettingsBean();
-        settingsBean.setMode("unsupported");
+        final SettingsModel settingsModel = new SettingsModel();
+        settingsModel.setMode("unsupported");
 
         assertThrows(BadRequestException.class, () -> {
-            settingsService.setSettingsGeneral(settingsBean);
+            settingsService.setSettingsGeneral(settingsModel);
         });
     }
 
     @Test
     void testSetSettingsGeneralInvalidCombination() {
-        final SettingsBean settingsBean = new SettingsBean();
-        settingsBean.setMode(MODE_PUBLIC);
+        final SettingsModel settingsModel = new SettingsModel();
+        settingsModel.setMode(MODE_PUBLIC);
         doReturn(true).when(applicationProperties).getOption(JIRA_OPTION_USER_EXTERNALMGT);
 
         assertThrows(BadRequestException.class, () -> {
-            settingsService.setSettingsGeneral(settingsBean);
+            settingsService.setSettingsGeneral(settingsModel);
         });
     }
 
@@ -135,24 +135,24 @@ class SettingsServiceTest {
         doReturn(content).when(applicationProperties).getDefaultBackedText(JIRA_ALERT_HEADER);
         doReturn(visibility).when(applicationProperties).getDefaultBackedString(JIRA_ALERT_HEADER_VISIBILITY);
 
-        final SettingsBannerBean bannerBean = settingsService.getSettingsBanner();
-        assertEquals(content, bannerBean.getContent());
-        assertEquals(visibility, bannerBean.getVisibility().name().toLowerCase());
+        final SettingsBannerModel bannerModel = settingsService.getSettingsBanner();
+        assertEquals(content, bannerModel.getContent());
+        assertEquals(visibility, bannerModel.getVisibility().name().toLowerCase());
     }
 
     @Test
     void testSetBanner() {
-        final SettingsBannerBean settingsBannerBean = SettingsBannerBean.builder()
+        final SettingsBannerModel settingsBannerModel = SettingsBannerModel.builder()
                 .content("Hello...")
-                .visibility(SettingsBannerBean.Visibility.valueOf(EditAnnouncementBanner.PRIVATE_BANNER.toUpperCase()))
+                .visibility(SettingsBannerModel.Visibility.valueOf(EditAnnouncementBanner.PRIVATE_BANNER.toUpperCase()))
                 .build();
 
         final SettingsServiceImpl spy = spy(settingsService);
-        doReturn(settingsBannerBean).when(spy).getSettingsBanner();
+        doReturn(settingsBannerModel).when(spy).getSettingsBanner();
 
-        spy.setSettingsBanner(settingsBannerBean);
-        verify(applicationProperties).setText(JIRA_ALERT_HEADER, settingsBannerBean.getContent());
-        verify(applicationProperties).setString(JIRA_ALERT_HEADER_VISIBILITY, settingsBannerBean.getVisibility().name().toLowerCase());
+        spy.setSettingsBanner(settingsBannerModel);
+        verify(applicationProperties).setText(JIRA_ALERT_HEADER, settingsBannerModel.getContent());
+        verify(applicationProperties).setString(JIRA_ALERT_HEADER_VISIBILITY, settingsBannerModel.getVisibility().name().toLowerCase());
         verify(spy).getSettingsBanner();
     }
 

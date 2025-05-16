@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerPopModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -27,7 +27,7 @@ public interface MailServerPopResource {
             summary = "Get the default POP mail server",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = MailServerPopBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = MailServerPopModel.class)),
                             description = "Returns the default POP mail server's details."
                     ),
                     @ApiResponse(
@@ -51,7 +51,7 @@ public interface MailServerPopResource {
             summary = "Set the default POP mail server",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = MailServerPopBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = MailServerPopModel.class)),
                             description = "Returns the default POP mail server's details."
                     ),
                     @ApiResponse(
@@ -61,6 +61,6 @@ public interface MailServerPopResource {
             }
     )
     Response setMailServerPop(
-            @NotNull final MailServerPopBean bean);
+            @NotNull final MailServerPopModel bean);
 
 }

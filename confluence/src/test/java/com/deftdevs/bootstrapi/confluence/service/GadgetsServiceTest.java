@@ -14,7 +14,7 @@ import com.atlassian.gadgets.spec.GadgetSpecFactory;
 import com.atlassian.sal.api.user.UserKey;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
-import com.deftdevs.bootstrapi.commons.model.GadgetBean;
+import com.deftdevs.bootstrapi.commons.model.GadgetModel;
 import com.deftdevs.bootstrapi.commons.service.api.GadgetsService;
 import org.apache.commons.lang.reflect.FieldUtils;
 import org.junit.jupiter.api.BeforeEach;
@@ -60,8 +60,8 @@ class GadgetsServiceTest {
         final ExternalGadgetSpec externalGadgetSpec = createExternalGadgetSpec();
         doReturn(Collections.singletonList(externalGadgetSpec)).when(externalGadgetSpecStore).entries();
 
-        final List<GadgetBean> gadgetBeans = gadgetsService.getGadgets();
-        assertEquals(externalGadgetSpec.getSpecUri(), gadgetBeans.iterator().next().getUrl());
+        final List<GadgetModel> gadgetModels = gadgetsService.getGadgets();
+        assertEquals(externalGadgetSpec.getSpecUri(), gadgetModels.iterator().next().getUrl());
     }
 
     @Test
@@ -69,9 +69,9 @@ class GadgetsServiceTest {
         ExternalGadgetSpec externalGadgetSpec = createExternalGadgetSpec();
         doReturn(Collections.singletonList(externalGadgetSpec)).when(externalGadgetSpecStore).entries();
 
-        GadgetBean gadgetBean = gadgetsService.getGadget(1L);
+        GadgetModel gadgetModel = gadgetsService.getGadget(1L);
 
-        assertEquals(externalGadgetSpec.getSpecUri(), gadgetBean.getUrl());
+        assertEquals(externalGadgetSpec.getSpecUri(), gadgetModel.getUrl());
     }
 
     @Test
@@ -87,8 +87,8 @@ class GadgetsServiceTest {
         doReturn(externalGadgetSpec).when(externalGadgetSpecStore).add(any());
 
         ConfluenceUser user = createConfluenceUser();
-        GadgetBean gadgetBean = new GadgetBean();
-        gadgetBean.setUrl(externalGadgetSpec.getSpecUri());
+        GadgetModel gadgetModel = new GadgetModel();
+        gadgetModel.setUrl(externalGadgetSpec.getSpecUri());
 
         GadgetSpec gadgetSpec = GadgetSpec.gadgetSpec(externalGadgetSpec.getSpecUri()).build();
         doReturn(gadgetSpec).when(gadgetSpecFactory).getGadgetSpec(any(URI.class), any(GadgetRequestContext.class));
@@ -96,8 +96,8 @@ class GadgetsServiceTest {
         try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
             authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
 
-            final GadgetBean responseGadgetBean = gadgetsService.addGadget(gadgetBean);
-            assertEquals(externalGadgetSpec.getSpecUri(), responseGadgetBean.getUrl());
+            final GadgetModel responseGadgetModel = gadgetsService.addGadget(gadgetModel);
+            assertEquals(externalGadgetSpec.getSpecUri(), responseGadgetModel.getUrl());
         }
     }
 
@@ -107,8 +107,8 @@ class GadgetsServiceTest {
         doReturn(externalGadgetSpec).when(externalGadgetSpecStore).add(any());
 
         ConfluenceUser user = createConfluenceUser();
-        GadgetBean gadgetBean = new GadgetBean();
-        gadgetBean.setUrl(externalGadgetSpec.getSpecUri());
+        GadgetModel gadgetModel = new GadgetModel();
+        gadgetModel.setUrl(externalGadgetSpec.getSpecUri());
 
         doReturn(Locale.GERMAN).when(localeManager).getLocale(user);
         doThrow(new GadgetParsingException("")).when(gadgetSpecFactory).getGadgetSpec((URI) any(), any());
@@ -117,7 +117,7 @@ class GadgetsServiceTest {
             authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
 
             assertThrows(BadRequestException.class, () -> {
-                gadgetsService.addGadget(gadgetBean);
+                gadgetsService.addGadget(gadgetModel);
             });
         }
     }
@@ -128,17 +128,17 @@ class GadgetsServiceTest {
         doReturn(Collections.singletonList(externalGadgetSpec)).when(externalGadgetSpecStore).entries();
 
         ConfluenceUser user = createConfluenceUser();
-        GadgetBean gadgetBean = new GadgetBean();
-        gadgetBean.setUrl(externalGadgetSpec.getSpecUri());
-        List<GadgetBean> gadgetBeansToSet = Collections.singletonList(gadgetBean);
+        GadgetModel gadgetModel = new GadgetModel();
+        gadgetModel.setUrl(externalGadgetSpec.getSpecUri());
+        List<GadgetModel> gadgetModelsToSet = Collections.singletonList(gadgetModel);
 
         GadgetSpec gadgetSpec = GadgetSpec.gadgetSpec(externalGadgetSpec.getSpecUri()).build();
 
         try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
             authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
 
-            final List<GadgetBean> gadgetBeans = gadgetsService.setGadgets(gadgetBeansToSet);
-            assertEquals(externalGadgetSpec.getSpecUri(), gadgetBeans.iterator().next().getUrl());
+            final List<GadgetModel> gadgetModels = gadgetsService.setGadgets(gadgetModelsToSet);
+            assertEquals(externalGadgetSpec.getSpecUri(), gadgetModels.iterator().next().getUrl());
         }
     }
 
@@ -149,9 +149,9 @@ class GadgetsServiceTest {
         doReturn(externalGadgetSpec).when(externalGadgetSpecStore).add(any());
 
         ConfluenceUser user = createConfluenceUser();
-        GadgetBean gadgetBean = new GadgetBean();
-        gadgetBean.setId(1L);
-        gadgetBean.setUrl(externalGadgetSpec.getSpecUri());
+        GadgetModel gadgetModel = new GadgetModel();
+        gadgetModel.setId(1L);
+        gadgetModel.setUrl(externalGadgetSpec.getSpecUri());
         GadgetSpec gadgetSpec = GadgetSpec.gadgetSpec(externalGadgetSpec.getSpecUri()).build();
 
         doReturn(Locale.GERMAN).when(localeManager).getLocale(user);
@@ -160,8 +160,8 @@ class GadgetsServiceTest {
         try (MockedStatic<AuthenticatedUserThreadLocal> authenticatedUserThreadLocalMockedStatic = mockStatic(AuthenticatedUserThreadLocal.class)) {
             authenticatedUserThreadLocalMockedStatic.when(AuthenticatedUserThreadLocal::get).thenReturn(user);
 
-            GadgetBean responseGadgetBean = gadgetsService.setGadget(1L, gadgetBean);
-            assertEquals(externalGadgetSpec.getSpecUri(), responseGadgetBean.getUrl());
+            GadgetModel responseGadgetModel = gadgetsService.setGadget(1L, gadgetModel);
+            assertEquals(externalGadgetSpec.getSpecUri(), responseGadgetModel.getUrl());
         }
     }
 

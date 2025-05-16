@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.commons.exception;
 
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
-import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
 
 @SuppressWarnings("java:S110")
 public class DirectoryNotFoundException extends NotFoundException {
@@ -21,9 +21,9 @@ public class DirectoryNotFoundException extends NotFoundException {
     }
 
     public DirectoryNotFoundException(
-            final AbstractDirectoryBean directoryBean) {
+            final AbstractDirectoryModel directoryModel) {
 
-        this(directoryBean.getName());
+        this(directoryModel.getName());
     }
 
 }

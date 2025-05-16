@@ -6,7 +6,7 @@ import com.atlassian.crowd.model.lookandfeel.LookAndFeelConfiguration;
 import com.atlassian.crowd.util.ImageInfo;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
-import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageBean;
+import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageModel;
 import com.deftdevs.bootstrapi.crowd.service.api.SettingsBrandingService;
 import org.apache.commons.io.FileUtils;
 import org.springframework.stereotype.Component;
@@ -36,36 +36,36 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
     }
 
     @Override
-    public SettingsBrandingLoginPageBean getLoginPage() {
-        final SettingsBrandingLoginPageBean settingsBrandingLoginPageBean = new SettingsBrandingLoginPageBean();
+    public SettingsBrandingLoginPageModel getLoginPage() {
+        final SettingsBrandingLoginPageModel settingsBrandingLoginPageModel = new SettingsBrandingLoginPageModel();
 
         LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration();
-        settingsBrandingLoginPageBean.setHeader(lookAndFeelConfiguration.getHeader());
-        settingsBrandingLoginPageBean.setContent(lookAndFeelConfiguration.getWelcomeText());
-        settingsBrandingLoginPageBean.setButtonColor(lookAndFeelConfiguration.getPrimaryColor());
-        settingsBrandingLoginPageBean.setShowLogo(lookAndFeelConfiguration.isShowLogo());
+        settingsBrandingLoginPageModel.setHeader(lookAndFeelConfiguration.getHeader());
+        settingsBrandingLoginPageModel.setContent(lookAndFeelConfiguration.getWelcomeText());
+        settingsBrandingLoginPageModel.setButtonColor(lookAndFeelConfiguration.getPrimaryColor());
+        settingsBrandingLoginPageModel.setShowLogo(lookAndFeelConfiguration.isShowLogo());
 
-        return settingsBrandingLoginPageBean;
+        return settingsBrandingLoginPageModel;
     }
 
     @Override
-    public SettingsBrandingLoginPageBean setLoginPage(
-            SettingsBrandingLoginPageBean settingsBrandingLoginPageBean) {
+    public SettingsBrandingLoginPageModel setLoginPage(
+            SettingsBrandingLoginPageModel settingsBrandingLoginPageModel) {
 
         LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration();
         LookAndFeelConfiguration.Builder builder = LookAndFeelConfiguration.builder(lookAndFeelConfiguration);
 
-        if (settingsBrandingLoginPageBean.getShowLogo() != null) {
-            builder.setShowLogo(settingsBrandingLoginPageBean.getShowLogo());
+        if (settingsBrandingLoginPageModel.getShowLogo() != null) {
+            builder.setShowLogo(settingsBrandingLoginPageModel.getShowLogo());
         }
-        if (settingsBrandingLoginPageBean.getHeader() != null) {
-            builder.setHeader(settingsBrandingLoginPageBean.getHeader());
+        if (settingsBrandingLoginPageModel.getHeader() != null) {
+            builder.setHeader(settingsBrandingLoginPageModel.getHeader());
         }
-        if (settingsBrandingLoginPageBean.getContent() != null) {
-            builder.setWelcomeText(settingsBrandingLoginPageBean.getContent());
+        if (settingsBrandingLoginPageModel.getContent() != null) {
+            builder.setWelcomeText(settingsBrandingLoginPageModel.getContent());
         }
-        if (settingsBrandingLoginPageBean.getButtonColor() != null) {
-            builder.setPrimaryColor(settingsBrandingLoginPageBean.getButtonColor());
+        if (settingsBrandingLoginPageModel.getButtonColor() != null) {
+            builder.setPrimaryColor(settingsBrandingLoginPageModel.getButtonColor());
         }
 
         try {

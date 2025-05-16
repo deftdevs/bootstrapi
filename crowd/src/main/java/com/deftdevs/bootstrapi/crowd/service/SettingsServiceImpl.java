@@ -4,7 +4,7 @@ import com.atlassian.crowd.manager.property.PropertyManager;
 import com.atlassian.crowd.manager.property.PropertyManagerException;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
-import com.deftdevs.bootstrapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsModel;
 import com.deftdevs.bootstrapi.crowd.service.api.CrowdSettingsGeneralService;
 import org.springframework.stereotype.Component;
 
@@ -22,24 +22,24 @@ public class SettingsServiceImpl
     }
 
     @Override
-    public SettingsBean getSettingsGeneral() {
-        SettingsBean settingsBean = new SettingsBean();
+    public SettingsModel getSettingsGeneral() {
+        SettingsModel settingsModel = new SettingsModel();
         try {
-            settingsBean.setBaseUrl(propertyManager.getBaseUrl());
-            settingsBean.setTitle(propertyManager.getDeploymentTitle());
+            settingsModel.setBaseUrl(propertyManager.getBaseUrl());
+            settingsModel.setTitle(propertyManager.getDeploymentTitle());
         } catch (PropertyManagerException e) {
             throw new InternalServerErrorException(e);
         }
-        return settingsBean;
+        return settingsModel;
     }
 
     @Override
-    public SettingsBean setSettingsGeneral(SettingsBean settingsBean) {
-        if (settingsBean.getBaseUrl() != null) {
-            propertyManager.setBaseUrl(settingsBean.getBaseUrl());
+    public SettingsModel setSettingsGeneral(SettingsModel settingsModel) {
+        if (settingsModel.getBaseUrl() != null) {
+            propertyManager.setBaseUrl(settingsModel.getBaseUrl());
         }
-        if (settingsBean.getTitle() != null) {
-            propertyManager.setDeploymentTitle(settingsBean.getTitle());
+        if (settingsModel.getTitle() != null) {
+            propertyManager.setDeploymentTitle(settingsModel.getTitle());
         }
         return getSettingsGeneral();
     }

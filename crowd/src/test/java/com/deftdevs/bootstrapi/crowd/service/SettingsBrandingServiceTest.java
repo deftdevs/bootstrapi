@@ -6,7 +6,7 @@ import com.atlassian.crowd.model.lookandfeel.LookAndFeelConfiguration;
 import com.atlassian.crowd.util.ImageInfo;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
-import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageBean;
+import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -36,11 +36,11 @@ public class SettingsBrandingServiceTest {
     @Test
     public void getLoginPage() throws PropertyManagerException {
 
-        LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration(SettingsBrandingLoginPageBean.EXAMPLE_1);
+        LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration(SettingsBrandingLoginPageModel.EXAMPLE_1);
         Optional<LookAndFeelConfiguration> lookAndFeelConfigurationOptional = Optional.of(lookAndFeelConfiguration);
         doReturn(lookAndFeelConfigurationOptional).when(propertyManager).getLookAndFeelConfiguration();
 
-        SettingsBrandingLoginPageBean result = settingsBrandingService.getLoginPage();
+        SettingsBrandingLoginPageModel result = settingsBrandingService.getLoginPage();
 
         assertEquals(lookAndFeelConfiguration.getHeader(), result.getHeader());
         assertEquals(lookAndFeelConfiguration.getWelcomeText(), result.getContent());
@@ -67,34 +67,34 @@ public class SettingsBrandingServiceTest {
     @Test
     public void setLoginPage() throws PropertyManagerException {
 
-        SettingsBrandingLoginPageBean settingsBrandingLoginPageBean = SettingsBrandingLoginPageBean.EXAMPLE_2;
+        SettingsBrandingLoginPageModel settingsBrandingLoginPageModel = SettingsBrandingLoginPageModel.EXAMPLE_2;
 
-        LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration(SettingsBrandingLoginPageBean.EXAMPLE_1);
+        LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration(SettingsBrandingLoginPageModel.EXAMPLE_1);
         Optional<LookAndFeelConfiguration> lookAndFeelConfigurationOptional = Optional.of(lookAndFeelConfiguration);
         doReturn(lookAndFeelConfigurationOptional).when(propertyManager).getLookAndFeelConfiguration();
 
-        settingsBrandingService.setLoginPage(settingsBrandingLoginPageBean);
+        settingsBrandingService.setLoginPage(settingsBrandingLoginPageModel);
 
         final ArgumentCaptor<LookAndFeelConfiguration> captor = ArgumentCaptor.forClass(LookAndFeelConfiguration.class);
         verify(propertyManager).setLookAndFeelConfiguration(captor.capture(), any());
         LookAndFeelConfiguration captorValue = captor.getValue();
 
-        assertEquals(settingsBrandingLoginPageBean.getHeader(), captorValue.getHeader());
-        assertEquals(settingsBrandingLoginPageBean.getContent(), captorValue.getWelcomeText());
-        assertEquals(settingsBrandingLoginPageBean.getButtonColor(), captorValue.getPrimaryColor());
-        assertEquals(settingsBrandingLoginPageBean.getShowLogo(), captorValue.isShowLogo());
+        assertEquals(settingsBrandingLoginPageModel.getHeader(), captorValue.getHeader());
+        assertEquals(settingsBrandingLoginPageModel.getContent(), captorValue.getWelcomeText());
+        assertEquals(settingsBrandingLoginPageModel.getButtonColor(), captorValue.getPrimaryColor());
+        assertEquals(settingsBrandingLoginPageModel.getShowLogo(), captorValue.isShowLogo());
     }
 
     @Test
     public void setLoginPageDefaultConfig() throws PropertyManagerException {
 
-        SettingsBrandingLoginPageBean settingsBrandingLoginPageBean = new SettingsBrandingLoginPageBean();
+        SettingsBrandingLoginPageModel settingsBrandingLoginPageModel = new SettingsBrandingLoginPageModel();
 
-        LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration(SettingsBrandingLoginPageBean.EXAMPLE_1);
+        LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration(SettingsBrandingLoginPageModel.EXAMPLE_1);
         Optional<LookAndFeelConfiguration> lookAndFeelConfigurationOptional = Optional.of(lookAndFeelConfiguration);
         doReturn(lookAndFeelConfigurationOptional).when(propertyManager).getLookAndFeelConfiguration();
 
-        settingsBrandingService.setLoginPage(settingsBrandingLoginPageBean);
+        settingsBrandingService.setLoginPage(settingsBrandingLoginPageModel);
 
         final ArgumentCaptor<LookAndFeelConfiguration> captor = ArgumentCaptor.forClass(LookAndFeelConfiguration.class);
         verify(propertyManager).setLookAndFeelConfiguration(captor.capture(), any());
@@ -109,9 +109,9 @@ public class SettingsBrandingServiceTest {
     @Test
     public void setLoginPageBadRequestException() throws PropertyManagerException {
 
-        SettingsBrandingLoginPageBean settingsBrandingLoginPageBean = new SettingsBrandingLoginPageBean();
+        SettingsBrandingLoginPageModel settingsBrandingLoginPageModel = new SettingsBrandingLoginPageModel();
 
-        LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration(SettingsBrandingLoginPageBean.EXAMPLE_2);
+        LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration(SettingsBrandingLoginPageModel.EXAMPLE_2);
         Optional<LookAndFeelConfiguration> lookAndFeelConfigurationOptional = Optional.of(lookAndFeelConfiguration);
         doReturn(lookAndFeelConfigurationOptional).when(propertyManager).getLookAndFeelConfiguration();
 
@@ -119,7 +119,7 @@ public class SettingsBrandingServiceTest {
 
 
         assertThrows(BadRequestException.class, () -> {
-            settingsBrandingService.setLoginPage(settingsBrandingLoginPageBean);
+            settingsBrandingService.setLoginPage(settingsBrandingLoginPageModel);
         });
     }
 
@@ -152,7 +152,7 @@ public class SettingsBrandingServiceTest {
         });
     }
 
-    private LookAndFeelConfiguration getLookAndFeelConfiguration(SettingsBrandingLoginPageBean bean) {
+    private LookAndFeelConfiguration getLookAndFeelConfiguration(SettingsBrandingLoginPageModel bean) {
 
         LookAndFeelConfiguration.Builder lookAndFeelConfiguration = LookAndFeelConfiguration.builder();
         if (bean != null) {

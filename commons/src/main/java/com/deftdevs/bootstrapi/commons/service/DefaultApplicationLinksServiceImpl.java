@@ -24,9 +24,9 @@ import com.atlassian.applinks.spi.util.TypeAccessor;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.commons.helper.api.ApplicationLinksAuthConfigHelper;
-import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
-import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkType;
-import com.deftdevs.bootstrapi.commons.model.util.ApplicationLinkBeanUtil;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel.ApplicationLinkType;
+import com.deftdevs.bootstrapi.commons.model.util.ApplicationLinkModelUtil;
 import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
 import org.apache.commons.lang3.NotImplementedException;
 import org.slf4j.Logger;
@@ -40,8 +40,8 @@ import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import static com.atlassian.applinks.internal.status.error.ApplinkErrorType.CONNECTION_REFUSED;
-import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus.*;
-import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean.ApplicationLinkStatus.CONFIGURATION_ERROR;
+import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel.ApplicationLinkStatus.*;
+import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel.ApplicationLinkStatus.CONFIGURATION_ERROR;
 
 public class DefaultApplicationLinksServiceImpl implements ApplicationLinksService {
 
@@ -68,16 +68,16 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
     }
 
     @Override
-    public List<ApplicationLinkBean> getApplicationLinks() {
+    public List<ApplicationLinkModel> getApplicationLinks() {
         final Iterable<ApplicationLink> applicationLinksIterable = mutatingApplicationLinkService.getApplicationLinks();
 
         return StreamSupport.stream(applicationLinksIterable.spliterator(),false)
-                .map(this::getApplicationLinkBean)
+                .map(this::getApplicationLinkModel)
                 .collect(Collectors.toList());
     }
 
     @Override
-    public ApplicationLinkBean getApplicationLink(
+    public ApplicationLinkModel getApplicationLink(
             final UUID uuid) {
 
         final ApplicationId id = new ApplicationId(uuid.toString());
@@ -89,26 +89,26 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
                 throw new NotFoundException(String.format("Application link with ID '%s' was not found!", id));
             }
 
-            return getApplicationLinkBean(applicationLink);
+            return getApplicationLinkModel(applicationLink);
         } catch (TypeNotInstalledException e) {
             throw new BadRequestException(e.getMessage());
         }
     }
 
     @Override
-    public List<ApplicationLinkBean> setApplicationLinks(
-            final List<ApplicationLinkBean> applicationLinkBeans,
+    public List<ApplicationLinkModel> setApplicationLinks(
+            final List<ApplicationLinkModel> applicationLinkModels,
             final boolean ignoreSetupErrors) {
 
         // existing application links map
-        final Map<URI, ApplicationLinkBean> linkBeanMap = getApplicationLinks().stream()
-                .collect(Collectors.toMap(ApplicationLinkBean::getRpcUrl, link -> link));
+        final Map<URI, ApplicationLinkModel> linkModelMap = getApplicationLinks().stream()
+                .collect(Collectors.toMap(ApplicationLinkModel::getRpcUrl, link -> link));
 
         // find existing link by rpcUrl
-        for (ApplicationLinkBean applicationLink : applicationLinkBeans) {
+        for (ApplicationLinkModel applicationLink : applicationLinkModels) {
             URI key = applicationLink.getRpcUrl();
-            if (linkBeanMap.containsKey(key)) {
-                setApplicationLink(linkBeanMap.get(key).getUuid(), applicationLink, ignoreSetupErrors);
+            if (linkModelMap.containsKey(key)) {
+                setApplicationLink(linkModelMap.get(key).getUuid(), applicationLink, ignoreSetupErrors);
             } else {
                 addApplicationLink(applicationLink, ignoreSetupErrors);
             }
@@ -118,19 +118,19 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
     }
 
     @Override
-    public ApplicationLinkBean setApplicationLink(
+    public ApplicationLinkModel setApplicationLink(
             final UUID uuid,
-            final ApplicationLinkBean applicationLinkBean,
+            final ApplicationLinkModel applicationLinkModel,
             final boolean ignoreSetupErrors) {
 
         final ApplicationId applicationId = new ApplicationId(uuid.toString());
 
         try {
             final MutableApplicationLink applicationLink = mutatingApplicationLinkService.getApplicationLink(applicationId);
-            final OAuthConfig outgoingOAuthConfig = ApplicationLinkBeanUtil.toOAuthConfig(applicationLinkBean.getOutgoingAuthType());
-            final OAuthConfig incomingOAuthConfig = ApplicationLinkBeanUtil.toOAuthConfig(applicationLinkBean.getIncomingAuthType());
-            final ApplicationType applicationType = buildApplicationType(applicationLinkBean.getType());
-            final ApplicationLinkDetails applicationLinkDetails = ApplicationLinkBeanUtil.toApplicationLinkDetails(applicationLinkBean);
+            final OAuthConfig outgoingOAuthConfig = ApplicationLinkModelUtil.toOAuthConfig(applicationLinkModel.getOutgoingAuthType());
+            final OAuthConfig incomingOAuthConfig = ApplicationLinkModelUtil.toOAuthConfig(applicationLinkModel.getIncomingAuthType());
+            final ApplicationType applicationType = buildApplicationType(applicationLinkModel.getType());
+            final ApplicationLinkDetails applicationLinkDetails = ApplicationLinkModelUtil.toApplicationLinkDetails(applicationLinkModel);
 
             // entity must be removed first (there is no update method that can change types)
             mutatingApplicationLinkService.deleteApplicationLink(applicationLink);
@@ -142,21 +142,21 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
             setOutgoingOAuthConfig(applicationLink, outgoingOAuthConfig);
             setIncomingOAuthConfig(applicationLink, incomingOAuthConfig, ignoreSetupErrors);
 
-            return getApplicationLinkBean(recreatedApplicationLink);
+            return getApplicationLinkModel(recreatedApplicationLink);
         } catch (TypeNotInstalledException e) {
             throw new BadRequestException(e.getMessage());
         }
     }
 
     @Override
-    public ApplicationLinkBean addApplicationLink(
-            final ApplicationLinkBean applicationLinkBean,
+    public ApplicationLinkModel addApplicationLink(
+            final ApplicationLinkModel applicationLinkModel,
             final boolean ignoreSetupErrors) {
 
-        final ApplicationLinkDetails applicationLinkDetails = ApplicationLinkBeanUtil.toApplicationLinkDetails(applicationLinkBean);
-        final OAuthConfig outgoingOAuthConfig = ApplicationLinkBeanUtil.toOAuthConfig(applicationLinkBean.getOutgoingAuthType());
-        final OAuthConfig incomingOAuthConfig = ApplicationLinkBeanUtil.toOAuthConfig(applicationLinkBean.getIncomingAuthType());
-        final ApplicationType applicationType = buildApplicationType(applicationLinkBean.getType());
+        final ApplicationLinkDetails applicationLinkDetails = ApplicationLinkModelUtil.toApplicationLinkDetails(applicationLinkModel);
+        final OAuthConfig outgoingOAuthConfig = ApplicationLinkModelUtil.toOAuthConfig(applicationLinkModel.getOutgoingAuthType());
+        final OAuthConfig incomingOAuthConfig = ApplicationLinkModelUtil.toOAuthConfig(applicationLinkModel.getIncomingAuthType());
+        final ApplicationType applicationType = buildApplicationType(applicationLinkModel.getType());
 
         //check if there is already an application link of supplied type and if yes, remove it
         Class<? extends ApplicationType> appType = applicationType != null ? applicationType.getClass() : null;
@@ -179,7 +179,7 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
         setOutgoingOAuthConfig(applicationLink, outgoingOAuthConfig);
         setIncomingOAuthConfig(applicationLink, incomingOAuthConfig, ignoreSetupErrors);
 
-        return getApplicationLinkBean(applicationLink);
+        return getApplicationLinkModel(applicationLink);
     }
 
     @Override
@@ -256,7 +256,7 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
         }
     }
 
-    protected ApplicationLinkBean.ApplicationLinkStatus getStatus(
+    protected ApplicationLinkModel.ApplicationLinkStatus getStatus(
             final ApplicationLink applicationLink) {
 
         try {
@@ -272,10 +272,10 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
         return CONFIGURATION_ERROR;
     }
 
-    private ApplicationLinkBean getApplicationLinkBean(
+    private ApplicationLinkModel getApplicationLinkModel(
             final ApplicationLink applicationLink) {
 
-        return ApplicationLinkBeanUtil.toApplicationLinkBean(
+        return ApplicationLinkModelUtil.toApplicationLinkModel(
                 applicationLink,
                 getOutgoingOAuthConfig(applicationLink),
                 getIncomingOAuthConfig(applicationLink),

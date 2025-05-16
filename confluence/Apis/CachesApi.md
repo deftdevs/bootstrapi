@@ -12,7 +12,7 @@ All URIs are relative to *https://&lt;CONFLUENCE_URL&gt;/rest/bootstrapi/1*
 
 <a name="flushCache"></a>
 # **flushCache**
-> CacheBean flushCache(name)
+> CacheModel flushCache(name)
 
 Flushes a cache
 
@@ -26,7 +26,7 @@ Flushes a cache
 
 ### Return type
 
-[**CacheBean**](../Models/CacheBean.md)
+[**CacheModel**](../Models/CacheModel.md)
 
 ### Authorization
 
@@ -39,7 +39,7 @@ Flushes a cache
 
 <a name="getCache"></a>
 # **getCache**
-> CacheBean getCache(name)
+> CacheModel getCache(name)
 
 Read cache information for a specified cache
 
@@ -51,7 +51,7 @@ Read cache information for a specified cache
 
 ### Return type
 
-[**CacheBean**](../Models/CacheBean.md)
+[**CacheModel**](../Models/CacheModel.md)
 
 ### Authorization
 
@@ -73,7 +73,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List**](../Models/CacheBean.md)
+[**List**](../Models/CacheModel.md)
 
 ### Authorization
 
@@ -86,7 +86,7 @@ This endpoint does not need any parameter.
 
 <a name="updateCache"></a>
 # **updateCache**
-> CacheBean updateCache(name, CacheBean)
+> CacheModel updateCache(name, CacheModel)
 
 Update an existing cache-size. Only Setting maxObjectCount is supported.
 
@@ -95,11 +95,11 @@ Update an existing cache-size. Only Setting maxObjectCount is supported.
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **name** | **String**|  | [default to null] |
-| **CacheBean** | [**CacheBean**](../Models/CacheBean.md)|  | [optional] |
+| **CacheModel** | [**CacheModel**](../Models/CacheModel.md)|  | [optional] |
 
 ### Return type
 
-[**CacheBean**](../Models/CacheBean.md)
+[**CacheModel**](../Models/CacheModel.md)
 
 ### Authorization
 

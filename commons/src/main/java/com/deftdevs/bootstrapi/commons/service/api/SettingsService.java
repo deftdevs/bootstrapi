@@ -1,10 +1,10 @@
 package com.deftdevs.bootstrapi.commons.service.api;
 
-import com.deftdevs.bootstrapi.commons.model.SettingsBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsModel;
 
 import javax.validation.constraints.NotNull;
 
-public interface SettingsService<B extends SettingsBean> {
+public interface SettingsService<B extends SettingsModel> {
 
     /**
      * Get the settings.
@@ -16,10 +16,10 @@ public interface SettingsService<B extends SettingsBean> {
     /**
      * Set the settings
      *
-     * @param settingsBean the general settings to set
+     * @param settingsModel the general settings to set
      * @return the settings
      */
     B setSettingsGeneral(
-            @NotNull final B settingsBean);
+            @NotNull final B settingsModel);
 
 }

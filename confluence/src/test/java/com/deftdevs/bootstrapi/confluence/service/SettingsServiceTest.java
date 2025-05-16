@@ -5,9 +5,9 @@ import com.atlassian.confluence.settings.setup.OtherTestSettings;
 import com.atlassian.confluence.setup.settings.CustomHtmlSettings;
 import com.atlassian.confluence.setup.settings.GlobalSettingsManager;
 import com.atlassian.confluence.setup.settings.Settings;
-import com.deftdevs.bootstrapi.commons.model.SettingsBean;
-import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlBean;
-import com.deftdevs.bootstrapi.commons.model.SettingsSecurityBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -39,15 +39,15 @@ class SettingsServiceTest {
 
         doReturn(settings).when(globalSettingsManager).getGlobalSettings();
 
-        final SettingsBean settingsBean = settingsService.getSettingsGeneral();
+        final SettingsModel settingsModel = settingsService.getSettingsGeneral();
 
-        final SettingsBean settingsBeanRef = new SettingsBean();
-        settingsBeanRef.setBaseUrl(URI.create(settings.getBaseUrl()));
-        settingsBeanRef.setTitle(settings.getSiteTitle());
-        settingsBeanRef.setContactMessage(settings.getCustomContactMessage());
-        settingsBeanRef.setExternalUserManagement(settings.isExternalUserManagement());
+        final SettingsModel settingsModelRef = new SettingsModel();
+        settingsModelRef.setBaseUrl(URI.create(settings.getBaseUrl()));
+        settingsModelRef.setTitle(settings.getSiteTitle());
+        settingsModelRef.setContactMessage(settings.getCustomContactMessage());
+        settingsModelRef.setExternalUserManagement(settings.isExternalUserManagement());
 
-        assertEquals(settingsBeanRef, settingsBean);
+        assertEquals(settingsModelRef, settingsModel);
     }
 
     @Test
@@ -57,36 +57,36 @@ class SettingsServiceTest {
 
         final Settings updateSettings = new OtherTestSettings();
 
-        final SettingsBean requestBean = new SettingsBean();
-        requestBean.setBaseUrl(URI.create(updateSettings.getBaseUrl()));
-        requestBean.setTitle(updateSettings.getSiteTitle());
-        requestBean.setContactMessage(updateSettings.getCustomContactMessage());
-        requestBean.setExternalUserManagement(updateSettings.isExternalUserManagement());
+        final SettingsModel requestModel = new SettingsModel();
+        requestModel.setBaseUrl(URI.create(updateSettings.getBaseUrl()));
+        requestModel.setTitle(updateSettings.getSiteTitle());
+        requestModel.setContactMessage(updateSettings.getCustomContactMessage());
+        requestModel.setExternalUserManagement(updateSettings.isExternalUserManagement());
 
-        final SettingsBean responseBean = settingsService.setSettingsGeneral(requestBean);
+        final SettingsModel responseModel = settingsService.setSettingsGeneral(requestModel);
 
         final ArgumentCaptor<Settings> settingsCaptor = ArgumentCaptor.forClass(Settings.class);
         verify(globalSettingsManager).updateGlobalSettings(settingsCaptor.capture());
         final Settings settings = settingsCaptor.getValue();
 
-        final SettingsBean settingsBean = new SettingsBean();
-        settingsBean.setBaseUrl(URI.create(settings.getBaseUrl()));
-        settingsBean.setTitle(settings.getSiteTitle());
-        settingsBean.setContactMessage(settings.getCustomContactMessage());
-        settingsBean.setExternalUserManagement(settings.isExternalUserManagement());
+        final SettingsModel settingsModel = new SettingsModel();
+        settingsModel.setBaseUrl(URI.create(settings.getBaseUrl()));
+        settingsModel.setTitle(settings.getSiteTitle());
+        settingsModel.setContactMessage(settings.getCustomContactMessage());
+        settingsModel.setExternalUserManagement(settings.isExternalUserManagement());
 
-        assertEquals(requestBean, settingsBean);
-        assertEquals(requestBean, responseBean);
+        assertEquals(requestModel, settingsModel);
+        assertEquals(requestModel, responseModel);
     }
 
     @Test
     void testSetSettingsDefaultConfig(){
-        final SettingsBean settingsBean = new SettingsBean();
+        final SettingsModel settingsModel = new SettingsModel();
 
         final Settings defaultSettings = new DefaultTestSettings();
         doReturn(defaultSettings).when(globalSettingsManager).getGlobalSettings();
 
-        settingsService.setSettingsGeneral(settingsBean);
+        settingsService.setSettingsGeneral(settingsModel);
 
         final ArgumentCaptor<Settings> settingsCaptor = ArgumentCaptor.forClass(Settings.class);
         verify(globalSettingsManager).updateGlobalSettings(settingsCaptor.capture());
@@ -100,17 +100,17 @@ class SettingsServiceTest {
 
     @Test
     void testGetCustomHtml() {
-        final SettingsCustomHtmlBean customHtmlBean = SettingsCustomHtmlBean.EXAMPLE_1;
+        final SettingsCustomHtmlModel customHtmlModel = SettingsCustomHtmlModel.EXAMPLE_1;
         final CustomHtmlSettings customHtmlSettings = new CustomHtmlSettings(
-                customHtmlBean.getBeforeHeadEnd(),
-                customHtmlBean.getAfterBodyStart(),
-                customHtmlBean.getBeforeBodyEnd());
+                customHtmlModel.getBeforeHeadEnd(),
+                customHtmlModel.getAfterBodyStart(),
+                customHtmlModel.getBeforeBodyEnd());
         final Settings settings = new Settings();
         settings.setCustomHtmlSettings(customHtmlSettings);
         doReturn(settings).when(globalSettingsManager).getGlobalSettings();
 
-        final SettingsCustomHtmlBean result = settingsService.getCustomHtml();
-        assertEquals(customHtmlBean, result);
+        final SettingsCustomHtmlModel result = settingsService.getCustomHtml();
+        assertEquals(customHtmlModel, result);
     }
 
     @Test
@@ -119,28 +119,28 @@ class SettingsServiceTest {
         doReturn(new CustomHtmlSettings()).when(settings).getCustomHtmlSettings();
         doReturn(settings).when(globalSettingsManager).getGlobalSettings();
 
-        final SettingsCustomHtmlBean customHtmlBean = SettingsCustomHtmlBean.EXAMPLE_1;
+        final SettingsCustomHtmlModel customHtmlModel = SettingsCustomHtmlModel.EXAMPLE_1;
         final SettingsServiceImpl spy = spy(settingsService);
-        doReturn(customHtmlBean).when(spy).getCustomHtml();
+        doReturn(customHtmlModel).when(spy).getCustomHtml();
 
         final ArgumentCaptor<Settings> settingsArgumentCaptor = ArgumentCaptor.forClass(Settings.class);
-        spy.setCustomHtml(customHtmlBean);
+        spy.setCustomHtml(customHtmlModel);
         verify(globalSettingsManager).updateGlobalSettings(settingsArgumentCaptor.capture());
 
         final Settings capuredSettings = settingsArgumentCaptor.getValue();
-        assertEquals(customHtmlBean.getBeforeHeadEnd(), capuredSettings.getCustomHtmlSettings().getBeforeHeadEnd());
+        assertEquals(customHtmlModel.getBeforeHeadEnd(), capuredSettings.getCustomHtmlSettings().getBeforeHeadEnd());
     }
 
     @Test
     void testGetSecurity() {
-        final SettingsSecurityBean settingsSecurityBean = SettingsSecurityBean.EXAMPLE_1;
+        final SettingsSecurityModel settingsSecurityModel = SettingsSecurityModel.EXAMPLE_1;
         final Settings settings = mock(Settings.class);
-        doReturn(settingsSecurityBean.getWebSudoEnabled()).when(settings).getWebSudoEnabled();
-        doReturn(settingsSecurityBean.getWebSudoTimeout()).when(settings).getWebSudoTimeout();
+        doReturn(settingsSecurityModel.getWebSudoEnabled()).when(settings).getWebSudoEnabled();
+        doReturn(settingsSecurityModel.getWebSudoTimeout()).when(settings).getWebSudoTimeout();
         doReturn(settings).when(globalSettingsManager).getGlobalSettings();
 
-        final SettingsSecurityBean resultSettingsSecurityBean = settingsService.getSettingsSecurity();
-        assertEquals(settingsSecurityBean, resultSettingsSecurityBean);
+        final SettingsSecurityModel resultSettingsSecurityModel = settingsService.getSettingsSecurity();
+        assertEquals(settingsSecurityModel, resultSettingsSecurityModel);
     }
 
     @Test
@@ -148,13 +148,13 @@ class SettingsServiceTest {
         final Settings settings = mock(Settings.class);
         doReturn(settings).when(globalSettingsManager).getGlobalSettings();
 
-        final SettingsSecurityBean settingsSecurityBean = SettingsSecurityBean.EXAMPLE_1;
+        final SettingsSecurityModel settingsSecurityModel = SettingsSecurityModel.EXAMPLE_1;
         final SettingsServiceImpl spy = spy(settingsService);
-        doReturn(settingsSecurityBean).when(spy).getSettingsSecurity();
+        doReturn(settingsSecurityModel).when(spy).getSettingsSecurity();
 
-        spy.setSettingsSecurity(settingsSecurityBean);
-        verify(settings).setWebSudoEnabled(settingsSecurityBean.getWebSudoEnabled());
-        verify(settings).setWebSudoTimeout(settingsSecurityBean.getWebSudoTimeout());
+        spy.setSettingsSecurity(settingsSecurityModel);
+        verify(settings).setWebSudoEnabled(settingsSecurityModel.getWebSudoEnabled());
+        verify(settings).setWebSudoTimeout(settingsSecurityModel.getWebSudoTimeout());
     }
 
 }

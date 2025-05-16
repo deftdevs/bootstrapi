@@ -1,4 +1,4 @@
-# LicenseBean
+# LicenseModel
 ## Properties
 
 | Name | Type | Description | Notes |

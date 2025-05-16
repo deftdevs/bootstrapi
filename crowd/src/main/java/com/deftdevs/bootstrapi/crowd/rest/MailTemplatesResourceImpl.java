@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
-import com.deftdevs.bootstrapi.crowd.model.MailTemplatesBean;
+import com.deftdevs.bootstrapi.crowd.model.MailTemplatesModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.MailTemplateResource;
 import com.deftdevs.bootstrapi.crowd.service.api.MailTemplatesService;
 import org.springframework.stereotype.Component;
@@ -31,8 +31,8 @@ public class MailTemplatesResourceImpl implements MailTemplateResource {
 
     @Override
     public Response setMailTemplates(
-            final MailTemplatesBean mailTemplatesBean) {
+            final MailTemplatesModel mailTemplatesModel) {
 
-        return Response.ok(mailTemplatesService.setMailTemplates(mailTemplatesBean)).build();
+        return Response.ok(mailTemplatesService.setMailTemplates(mailTemplatesModel)).build();
     }
 }

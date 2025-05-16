@@ -1,18 +1,18 @@
 package com.deftdevs.bootstrapi.jira.service.api;
 
-import com.deftdevs.bootstrapi.commons.model.SettingsBean;
-import com.deftdevs.bootstrapi.commons.model.SettingsSecurityBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsSecurityService;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
-import com.deftdevs.bootstrapi.jira.model.SettingsBannerBean;
+import com.deftdevs.bootstrapi.jira.model.SettingsBannerModel;
 
 public interface JiraSettingsService extends
-        SettingsService<SettingsBean>,
-        SettingsSecurityService<SettingsSecurityBean> {
+        SettingsService<SettingsModel>,
+        SettingsSecurityService<SettingsSecurityModel> {
 
-    SettingsBannerBean getSettingsBanner();
+    SettingsBannerModel getSettingsBanner();
 
-    SettingsBannerBean setSettingsBanner(
-            SettingsBannerBean settingsBannerBean);
+    SettingsBannerModel setSettingsBanner(
+            SettingsBannerModel settingsBannerModel);
 
 }

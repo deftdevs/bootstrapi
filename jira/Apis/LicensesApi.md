@@ -14,14 +14,14 @@ All URIs are relative to *https://&lt;JIRA_URL&gt;/rest/bootstrapi/1*
 
 Get all licenses information
 
-    Upon successful request, returns a &#x60;LicensesBean&#x60; object containing license details. Be aware that &#x60;products&#x60; collection of the &#x60;LicenseBean&#x60; contains the product display names, not the product key names
+    Upon successful request, returns a &#x60;LicensesModel&#x60; object containing license details. Be aware that &#x60;products&#x60; collection of the &#x60;LicenseModel&#x60; contains the product display names, not the product key names
 
 ### Parameters
 This endpoint does not need any parameter.
 
 ### Return type
 
-[**List**](../Models/LicenseBean.md)
+[**List**](../Models/LicenseModel.md)
 
 ### Authorization
 
@@ -46,7 +46,7 @@ Set a list of licenses
 
 ### Return type
 
-[**List**](../Models/LicenseBean.md)
+[**List**](../Models/LicenseModel.md)
 
 ### Authorization
 

@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.confluence.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlBean;
+import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,7 +25,7 @@ public interface SettingsCustomHtmlResource {
             summary = "Get the custom HTML",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsCustomHtmlBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsCustomHtmlModel.class)),
                             description = "Returns the custom HTML"
                     ),
                     @ApiResponse(
@@ -44,7 +44,7 @@ public interface SettingsCustomHtmlResource {
             summary = "Set the custom HTML",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsCustomHtmlBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsCustomHtmlModel.class)),
                             description = "Returns the updated custom HTML"
                     ),
                     @ApiResponse(
@@ -54,6 +54,6 @@ public interface SettingsCustomHtmlResource {
             }
     )
     Response setCustomHtml(
-            @NotNull final SettingsCustomHtmlBean bean);
+            @NotNull final SettingsCustomHtmlModel bean);
 
 }

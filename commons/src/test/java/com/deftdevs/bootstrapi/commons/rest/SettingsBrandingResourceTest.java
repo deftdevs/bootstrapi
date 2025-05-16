@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
 import com.deftdevs.bootstrapi.commons.rest.impl.TestSettingsBrandingResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsBrandingService;
 import javax.ws.rs.core.Response;
@@ -32,28 +32,28 @@ class SettingsBrandingResourceTest {
 
     @Test
     void testGetColourScheme() {
-        final SettingsBrandingColorSchemeBean bean = SettingsBrandingColorSchemeBean.EXAMPLE_1;
+        final SettingsBrandingColorSchemeModel bean = SettingsBrandingColorSchemeModel.EXAMPLE_1;
 
         doReturn(bean).when(brandingService).getColourScheme();
 
         final Response response = resource.getBrandingColorScheme();
         assertEquals(200, response.getStatus());
-        final SettingsBrandingColorSchemeBean colourSchemeBean = (SettingsBrandingColorSchemeBean) response.getEntity();
+        final SettingsBrandingColorSchemeModel colourSchemeModel = (SettingsBrandingColorSchemeModel) response.getEntity();
 
-        assertEquals(colourSchemeBean, bean);
+        assertEquals(colourSchemeModel, bean);
     }
 
     @Test
     void testSetColourScheme() {
-        final SettingsBrandingColorSchemeBean bean = SettingsBrandingColorSchemeBean.EXAMPLE_1;
+        final SettingsBrandingColorSchemeModel bean = SettingsBrandingColorSchemeModel.EXAMPLE_1;
 
         doReturn(bean).when(brandingService).setColourScheme(bean);
 
         final Response response = resource.setBrandingColorScheme(bean);
         assertEquals(200, response.getStatus());
-        final SettingsBrandingColorSchemeBean colourSchemeBean = (SettingsBrandingColorSchemeBean) response.getEntity();
+        final SettingsBrandingColorSchemeModel colourSchemeModel = (SettingsBrandingColorSchemeModel) response.getEntity();
 
-        assertEquals(colourSchemeBean, bean);
+        assertEquals(colourSchemeModel, bean);
     }
 
     @Test

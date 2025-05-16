@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.GadgetBean;
+import com.deftdevs.bootstrapi.commons.model.GadgetModel;
 import com.deftdevs.bootstrapi.commons.rest.impl.TestGadgetResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.GadgetsService;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,39 +30,39 @@ class GadgetResourceTest {
 
     @Test
     void testGetGadget() {
-        final GadgetBean bean = GadgetBean.EXAMPLE_1;
+        final GadgetModel bean = GadgetModel.EXAMPLE_1;
 
         doReturn(bean).when(gadgetsService).getGadget(1L);
 
         final Response response = resource.getGadget(1L);
         assertEquals(200, response.getStatus());
-        final GadgetBean gadgetBean = (GadgetBean) response.getEntity();
+        final GadgetModel gadgetModel = (GadgetModel) response.getEntity();
 
-        assertEquals(gadgetBean, bean);
+        assertEquals(gadgetModel, bean);
     }
 
     @Test
     void testCreateGadget() {
-        final GadgetBean bean = GadgetBean.EXAMPLE_1;
+        final GadgetModel bean = GadgetModel.EXAMPLE_1;
         doReturn(bean).when(gadgetsService).addGadget(bean);
 
         final Response response = resource.createGadget(bean);
         assertEquals(200, response.getStatus());
 
-        final GadgetBean responseBean = (GadgetBean) response.getEntity();
-        assertEquals(bean, responseBean);
+        final GadgetModel responseModel = (GadgetModel) response.getEntity();
+        assertEquals(bean, responseModel);
     }
 
     @Test
     void testUpdateGadget() {
-        final GadgetBean bean = GadgetBean.EXAMPLE_1;
+        final GadgetModel bean = GadgetModel.EXAMPLE_1;
         doReturn(bean).when(gadgetsService).setGadget(1L, bean);
 
         final Response response = resource.updateGadget(1L, bean);
         assertEquals(200, response.getStatus());
 
-        final GadgetBean gadgetBean = (GadgetBean) response.getEntity();
-        assertEquals(gadgetBean, bean);
+        final GadgetModel gadgetModel = (GadgetModel) response.getEntity();
+        assertEquals(gadgetModel, bean);
     }
 
     @Test

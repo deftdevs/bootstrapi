@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.commons.model.GadgetBean;
+import com.deftdevs.bootstrapi.commons.model.GadgetModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,7 +24,7 @@ public interface GadgetsResource {
             summary = "Get all gadgets",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = GadgetBean.class))),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = GadgetModel.class))),
                             description = "Returns all gadgets."
                     ),
                     @ApiResponse(
@@ -44,7 +44,7 @@ public interface GadgetsResource {
             description = "NOTE: This will only create gadgets that does not exist yet as there is no real 'update'.",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = GadgetBean.class))),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = GadgetModel.class))),
                             description = "Returns all gadgets."
                     ),
                     @ApiResponse(
@@ -54,7 +54,7 @@ public interface GadgetsResource {
             }
     )
     Response setGadgets(
-            @NotNull final List<GadgetBean> gadgetBeans);
+            @NotNull final List<GadgetModel> gadgetModels);
 
     @DELETE
     @Operation(

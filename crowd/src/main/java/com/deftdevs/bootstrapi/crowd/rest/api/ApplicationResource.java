@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.crowd.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
+import com.deftdevs.bootstrapi.crowd.model.ApplicationModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -24,7 +24,7 @@ public interface ApplicationResource {
             summary = "Get an application",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApplicationBean.class))),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = ApplicationModel.class))),
                             description = "Returns the requested application."
                     ),
                     @ApiResponse(
@@ -44,7 +44,7 @@ public interface ApplicationResource {
             summary = "Create an application",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationModel.class)),
                             description = "Returns the added application."
                     ),
                     @ApiResponse(
@@ -54,7 +54,7 @@ public interface ApplicationResource {
             }
     )
     Response createApplication(
-            ApplicationBean applicationBean);
+            ApplicationModel applicationModel);
 
     @PUT
     @Path("{id}")
@@ -65,7 +65,7 @@ public interface ApplicationResource {
             summary = "Update an application",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = ApplicationModel.class)),
                             description = "Returns the updated application."
                     ),
                     @ApiResponse(
@@ -76,7 +76,7 @@ public interface ApplicationResource {
     )
     Response updateApplication(
             @PathParam("id") long id,
-            ApplicationBean applicationsBeanBeans);
+            ApplicationModel applicationsModelModels);
 
     @DELETE
     @Path("{id}")

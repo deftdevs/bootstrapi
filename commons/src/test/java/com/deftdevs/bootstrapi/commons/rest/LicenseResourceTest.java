@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import com.deftdevs.bootstrapi.commons.rest.impl.TestLicenseResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 import org.junit.jupiter.api.BeforeEach;
@@ -30,13 +30,13 @@ class LicenseResourceTest {
     @Test
     void testAddLicense() {
         final String licenseKey = "ABC...";
-        final LicenseBean licenseBean = LicenseBean.EXAMPLE_1;
-        doReturn(licenseBean).when(licensesService).addLicense(licenseKey);
+        final LicenseModel licenseModel = LicenseModel.EXAMPLE_1;
+        doReturn(licenseModel).when(licensesService).addLicense(licenseKey);
 
         final Response response = resource.addLicense(licenseKey);
         assertEquals(200, response.getStatus());
 
-        final LicenseBean responseBean = (LicenseBean) response.getEntity();
-        assertEquals(licenseBean, responseBean);
+        final LicenseModel responseModel = (LicenseModel) response.getEntity();
+        assertEquals(licenseModel, responseModel);
     }
 }

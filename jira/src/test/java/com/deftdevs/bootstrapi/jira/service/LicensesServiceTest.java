@@ -4,7 +4,7 @@ import com.atlassian.application.api.ApplicationKey;
 import com.atlassian.jira.license.JiraLicenseManager;
 import com.atlassian.jira.license.LicenseDetails;
 import com.atlassian.jira.license.LicensedApplications;
-import com.deftdevs.bootstrapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,11 +44,11 @@ class LicensesServiceTest {
         doReturn(TESTING).when(licenseDetails).getLicenseType();
         doReturn(Collections.singletonList(licenseDetails)).when(licenseManager).getLicenses();
 
-        final List<LicenseBean> licenseBeans = licensesService.getLicenses();
-        assertEquals(1, licenseBeans.size());
+        final List<LicenseModel> licenseModels = licensesService.getLicenses();
+        assertEquals(1, licenseModels.size());
 
-        final LicenseBean licenseBean = licenseBeans.iterator().next();
-        assertNotNull(licenseBean);
+        final LicenseModel licenseModel = licenseModels.iterator().next();
+        assertNotNull(licenseModel);
     }
 
     @Test

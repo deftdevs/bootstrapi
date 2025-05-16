@@ -4,7 +4,7 @@ import com.atlassian.confluence.settings.setup.DefaultSingleProductLicenseDetail
 import com.atlassian.sal.api.i18n.InvalidOperationException;
 import com.atlassian.sal.api.license.LicenseHandler;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -35,10 +35,10 @@ class LicensesServiceTest {
 
     @Test
     void testGetLicense() {
-        final DefaultSingleProductLicenseDetailsView testLicense = new DefaultSingleProductLicenseDetailsView(LicenseBean.EXAMPLE_1);
+        final DefaultSingleProductLicenseDetailsView testLicense = new DefaultSingleProductLicenseDetailsView(LicenseModel.EXAMPLE_1);
         doReturn(testLicense).when(licenseHandler).getProductLicenseDetails(DEFAULT_LICENSE_REGISTRY_KEY);
 
-        final List<LicenseBean> licenses = licensesService.getLicenses();
+        final List<LicenseModel> licenses = licensesService.getLicenses();
         assertEquals(testLicense.getDescription(), licenses.iterator().next().getDescription());
     }
 
@@ -47,7 +47,7 @@ class LicensesServiceTest {
         final String license1 = "1";
         final String license2 = "2";
         final List<String> licenses = List.of(license1, license2);
-        final DefaultSingleProductLicenseDetailsView testLicense = new DefaultSingleProductLicenseDetailsView(LicenseBean.EXAMPLE_1);
+        final DefaultSingleProductLicenseDetailsView testLicense = new DefaultSingleProductLicenseDetailsView(LicenseModel.EXAMPLE_1);
         doReturn(testLicense).when(licenseHandler).getProductLicenseDetails(any());
 
         final LicensesServiceImpl spy = spy(licensesService);
@@ -58,17 +58,17 @@ class LicensesServiceTest {
 
     @Test
     void testAddLicense() {
-        final LicenseBean licenseBean = LicenseBean.EXAMPLE_1;
-        final DefaultSingleProductLicenseDetailsView testLicense = new DefaultSingleProductLicenseDetailsView(licenseBean);
+        final LicenseModel licenseModel = LicenseModel.EXAMPLE_1;
+        final DefaultSingleProductLicenseDetailsView testLicense = new DefaultSingleProductLicenseDetailsView(licenseModel);
         doReturn(testLicense).when(licenseHandler).getProductLicenseDetails(any());
 
-        final LicenseBean updatedLicenseBean = licensesService.addLicense("ABC...");
-        assertEquals(testLicense.getDescription(), updatedLicenseBean.getDescription());
+        final LicenseModel updatedLicenseModel = licensesService.addLicense("ABC...");
+        assertEquals(testLicense.getDescription(), updatedLicenseModel.getDescription());
     }
 
     @Test
     void testAddLicenseWithError() throws InvalidOperationException {
-        final LicenseBean licenseBean = LicenseBean.EXAMPLE_1;
+        final LicenseModel licenseModel = LicenseModel.EXAMPLE_1;
         doThrow(new InvalidOperationException("", "")).when(licenseHandler).addProductLicense(any(), any());
 
         assertThrows(BadRequestException.class, () -> {

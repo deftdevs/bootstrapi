@@ -1,4 +1,4 @@
-# AuthenticationSsoBean
+# AuthenticationSsoModel
 ## Properties
 
 | Name | Type | Description | Notes |

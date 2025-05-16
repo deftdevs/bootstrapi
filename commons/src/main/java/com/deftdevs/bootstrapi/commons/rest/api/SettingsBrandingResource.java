@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -28,7 +28,7 @@ public interface SettingsBrandingResource {
             summary = "Get the color scheme",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingColorSchemeBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingColorSchemeModel.class)),
                             description = "Returns the color scheme"
                     ),
                     @ApiResponse(
@@ -48,7 +48,7 @@ public interface SettingsBrandingResource {
             summary = "Set the color scheme",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingColorSchemeBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingColorSchemeModel.class)),
                             description = "Returns the updated color scheme"
                     ),
                     @ApiResponse(
@@ -58,7 +58,7 @@ public interface SettingsBrandingResource {
             }
     )
     Response setBrandingColorScheme(
-            @NotNull final SettingsBrandingColorSchemeBean bean);
+            @NotNull final SettingsBrandingColorSchemeModel bean);
 
     @GET
     @Path(BootstrAPI.LOGO)

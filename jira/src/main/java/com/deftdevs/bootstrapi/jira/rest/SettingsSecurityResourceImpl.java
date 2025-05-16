@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.jira.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.SettingsSecurityBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
 import com.deftdevs.bootstrapi.commons.rest.AbstractSettingsSecurityResourceImpl;
 import com.deftdevs.bootstrapi.jira.filter.SysadminOnlyResourceFilter;
 import com.deftdevs.bootstrapi.jira.service.api.JiraSettingsService;
@@ -21,7 +21,7 @@ import javax.ws.rs.core.MediaType;
 @Produces(MediaType.APPLICATION_JSON)
 @ResourceFilters(SysadminOnlyResourceFilter.class)
 @Component
-public class SettingsSecurityResourceImpl extends AbstractSettingsSecurityResourceImpl<SettingsSecurityBean, JiraSettingsService> {
+public class SettingsSecurityResourceImpl extends AbstractSettingsSecurityResourceImpl<SettingsSecurityModel, JiraSettingsService> {
 
     @Inject
     public SettingsSecurityResourceImpl(JiraSettingsService settingsService) {

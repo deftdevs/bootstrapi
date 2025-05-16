@@ -1,4 +1,4 @@
-# SettingsBrandingColorSchemeBean
+# SettingsBrandingColorSchemeModel
 ## Properties
 
 | Name | Type | Description | Notes |

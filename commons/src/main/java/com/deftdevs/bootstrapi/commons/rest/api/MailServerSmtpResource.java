@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -27,7 +27,7 @@ public interface MailServerSmtpResource {
             summary = "Get the default SMTP mail server",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = MailServerSmtpBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = MailServerSmtpModel.class)),
                             description = "Returns the default SMTP mail server's details."
                     ),
                     @ApiResponse(
@@ -51,7 +51,7 @@ public interface MailServerSmtpResource {
             summary = "Set the default SMTP mail server",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = MailServerSmtpBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = MailServerSmtpModel.class)),
                             description = "Returns the default SMTP mail server's details."
                     ),
                     @ApiResponse(
@@ -61,6 +61,6 @@ public interface MailServerSmtpResource {
             }
     )
     Response setMailServerSmtp(
-            @NotNull final MailServerSmtpBean bean);
+            @NotNull final MailServerSmtpModel bean);
 
 }

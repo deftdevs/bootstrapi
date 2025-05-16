@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.jira.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.jira.filter.SysadminOnlyResourceFilter;
-import com.deftdevs.bootstrapi.jira.model.SettingsBannerBean;
+import com.deftdevs.bootstrapi.jira.model.SettingsBannerModel;
 import com.deftdevs.bootstrapi.jira.rest.api.SettingsBannerResource;
 import com.deftdevs.bootstrapi.jira.service.api.JiraSettingsService;
 import com.sun.jersey.spi.container.ResourceFilters;
@@ -26,15 +26,15 @@ public class SettingsBannerResourceImpl implements SettingsBannerResource {
 
     @Override
     public Response getBanner() {
-        final SettingsBannerBean result = settingsService.getSettingsBanner();
+        final SettingsBannerModel result = settingsService.getSettingsBanner();
         return Response.ok(result).build();
     }
 
     @Override
     public Response setBanner(
-            final SettingsBannerBean settingsBannerBean) {
+            final SettingsBannerModel settingsBannerModel) {
 
-        final SettingsBannerBean result = settingsService.setSettingsBanner(settingsBannerBean);
+        final SettingsBannerModel result = settingsService.setSettingsBanner(settingsBannerModel);
         return Response.ok(result).build();
     }
 

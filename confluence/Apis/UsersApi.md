@@ -11,7 +11,7 @@ All URIs are relative to *https://&lt;CONFLUENCE_URL&gt;/rest/bootstrapi/1*
 
 <a name="getUser"></a>
 # **getUser**
-> UserBean getUser(username)
+> UserModel getUser(username)
 
 Get a user
 
@@ -23,7 +23,7 @@ Get a user
 
 ### Return type
 
-[**UserBean**](../Models/UserBean.md)
+[**UserModel**](../Models/UserModel.md)
 
 ### Authorization
 
@@ -36,7 +36,7 @@ Get a user
 
 <a name="setUser"></a>
 # **setUser**
-> UserBean setUser(username, UserBean)
+> UserModel setUser(username, UserModel)
 
 Update an user
 
@@ -45,11 +45,11 @@ Update an user
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **username** | **String**|  | [default to null] |
-| **UserBean** | [**UserBean**](../Models/UserBean.md)|  | |
+| **UserModel** | [**UserModel**](../Models/UserModel.md)|  | |
 
 ### Return type
 
-[**UserBean**](../Models/UserBean.md)
+[**UserModel**](../Models/UserModel.md)
 
 ### Authorization
 
@@ -62,7 +62,7 @@ Update an user
 
 <a name="setUserPassword"></a>
 # **setUserPassword**
-> UserBean setUserPassword(username, body)
+> UserModel setUserPassword(username, body)
 
 Update a user password
 
@@ -75,7 +75,7 @@ Update a user password
 
 ### Return type
 
-[**UserBean**](../Models/UserBean.md)
+[**UserModel**](../Models/UserModel.md)
 
 ### Authorization
 

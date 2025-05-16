@@ -9,7 +9,7 @@ All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
 
 <a name="setAll"></a>
 # **setAll**
-> setAll(AllBean)
+> setAll(AllModel)
 
 Set the whole configuration
 
@@ -17,7 +17,7 @@ Set the whole configuration
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **AllBean** | [**AllBean**](../Models/AllBean.md)|  | [optional] |
+| **AllModel** | [**AllModel**](../Models/AllModel.md)|  | [optional] |
 
 ### Return type
 

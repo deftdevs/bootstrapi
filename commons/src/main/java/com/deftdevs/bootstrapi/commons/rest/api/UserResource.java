@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.commons.model.UserBean;
+import com.deftdevs.bootstrapi.commons.model.UserModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -27,7 +27,7 @@ public interface UserResource {
             summary = "Get a user",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = UserModel.class)),
                             description = "Returns the requested user details"
                     ),
                     @ApiResponse(
@@ -47,7 +47,7 @@ public interface UserResource {
             summary = "Update an user",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = UserModel.class)),
                             description = "Returns the updated user details"
                     ),
                     @ApiResponse(
@@ -58,7 +58,7 @@ public interface UserResource {
     )
     Response setUser(
             @NotNull @QueryParam("username") final String username,
-            @NotNull final UserBean userBean);
+            @NotNull final UserModel userModel);
 
     @PUT
     @Path(BootstrAPI.USER_PASSWORD)
@@ -69,7 +69,7 @@ public interface UserResource {
             summary = "Update a user password",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = UserBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = UserModel.class)),
                             description = "Returns the user details"
                     ),
                     @ApiResponse(

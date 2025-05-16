@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
 import com.deftdevs.bootstrapi.commons.rest.api.MailServerSmtpResource;
 import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
 import org.springframework.stereotype.Component;
@@ -27,19 +27,19 @@ public class MailServerResourceImpl implements MailServerSmtpResource {
 
     @Override
     public Response getMailServerSmtp() {
-        final MailServerSmtpBean smtpBean = mailServerService.getMailServerSmtp();
+        final MailServerSmtpModel smtpModel = mailServerService.getMailServerSmtp();
 
-        if (smtpBean == null) {
+        if (smtpModel == null) {
             return Response.noContent().build();
         }
 
-        return Response.ok(smtpBean).build();
+        return Response.ok(smtpModel).build();
     }
 
     @Override
-    public Response setMailServerSmtp(MailServerSmtpBean bean) {
-        final MailServerSmtpBean updatedSmtpBean = mailServerService.setMailServerSmtp(bean);
-        return Response.ok(updatedSmtpBean).build();
+    public Response setMailServerSmtp(MailServerSmtpModel bean) {
+        final MailServerSmtpModel updatedSmtpModel = mailServerService.setMailServerSmtp(bean);
+        return Response.ok(updatedSmtpModel).build();
     }
 
 }

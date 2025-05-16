@@ -3,7 +3,7 @@ package com.deftdevs.bootstrapi.crowd.rest.api;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.http.PATCH;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -25,7 +25,7 @@ public interface GroupsResource {
             summary = "Set groups",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = GroupBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = GroupModel.class)),
                             description = "Returns the updated groups details"
                     ),
                     @ApiResponse(
@@ -36,6 +36,6 @@ public interface GroupsResource {
     )
     Response setGroups(
             @NotNull @QueryParam("directoryId") final long directoryId,
-            @NotNull final List<GroupBean> groupBeans);
+            @NotNull final List<GroupModel> groupModels);
 
 }

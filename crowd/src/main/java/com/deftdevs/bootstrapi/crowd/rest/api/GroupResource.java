@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.crowd.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -22,7 +22,7 @@ public interface GroupResource {
             summary = "Get a group",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = GroupBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = GroupModel.class)),
                             description = "Returns the requested group details"
                     ),
                     @ApiResponse(
@@ -43,7 +43,7 @@ public interface GroupResource {
             summary = "Create a group",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = GroupBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = GroupModel.class)),
                             description = "Returns the updated group details"
                     ),
                     @ApiResponse(
@@ -54,7 +54,7 @@ public interface GroupResource {
     )
     Response createGroup(
             @NotNull @QueryParam("directoryId") final long directoryId,
-            @NotNull final GroupBean groupBean);
+            @NotNull final GroupModel groupModel);
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -64,7 +64,7 @@ public interface GroupResource {
             summary = "Update a group",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = GroupBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = GroupModel.class)),
                             description = "Returns the updated group details"
                     ),
                     @ApiResponse(
@@ -76,6 +76,6 @@ public interface GroupResource {
     Response updateGroup(
             @NotNull @QueryParam("directoryId") final long directoryId,
             @NotNull @QueryParam("name") final String groupName,
-            @NotNull final GroupBean groupBean);
+            @NotNull final GroupModel groupModel);
 
 }

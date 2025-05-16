@@ -7,7 +7,7 @@ import com.atlassian.extras.api.Organisation;
 import com.atlassian.extras.api.Product;
 import com.atlassian.extras.api.crowd.CrowdLicense;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -17,7 +17,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.List;
 
-import static com.deftdevs.bootstrapi.commons.model.LicenseBean.EXAMPLE_2_DEVELOPER_LICENSE;
+import static com.deftdevs.bootstrapi.commons.model.LicenseModel.EXAMPLE_2_DEVELOPER_LICENSE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -41,13 +41,13 @@ public class LicensesServiceTest {
         final CrowdLicense license = createMockCrowdLicense();
         doReturn(license).when(licenseManager).getLicense();
 
-        final List<LicenseBean> licenseBeans = licensesService.getLicenses();
-        final LicenseBean returnedBean = licenseBeans.iterator().next();
-        assertEquals(returnedBean.getDescription(), EXAMPLE_2_DEVELOPER_LICENSE.getDescription());
-        assertEquals(returnedBean.getOrganization(), EXAMPLE_2_DEVELOPER_LICENSE.getOrganization());
-        assertEquals(returnedBean.getType(), LicenseType.TESTING.toString());
-        assertEquals(returnedBean.getExpiryDate(), EXAMPLE_2_DEVELOPER_LICENSE.getExpiryDate());
-        assertEquals(returnedBean.getMaxUsers(), EXAMPLE_2_DEVELOPER_LICENSE.getMaxUsers());
+        final List<LicenseModel> licenseModels = licensesService.getLicenses();
+        final LicenseModel returnedModel = licenseModels.iterator().next();
+        assertEquals(returnedModel.getDescription(), EXAMPLE_2_DEVELOPER_LICENSE.getDescription());
+        assertEquals(returnedModel.getOrganization(), EXAMPLE_2_DEVELOPER_LICENSE.getOrganization());
+        assertEquals(returnedModel.getType(), LicenseType.TESTING.toString());
+        assertEquals(returnedModel.getExpiryDate(), EXAMPLE_2_DEVELOPER_LICENSE.getExpiryDate());
+        assertEquals(returnedModel.getMaxUsers(), EXAMPLE_2_DEVELOPER_LICENSE.getMaxUsers());
     }
 
     @Test
@@ -70,12 +70,12 @@ public class LicensesServiceTest {
         final CrowdLicense license = createMockCrowdLicense();
         doReturn(license).when(licenseManager).storeLicense("ABC...");
 
-        final LicenseBean licenseBean = licensesService.addLicense("ABC...");
-        assertEquals(licenseBean.getDescription(), EXAMPLE_2_DEVELOPER_LICENSE.getDescription());
-        assertEquals(licenseBean.getOrganization(), EXAMPLE_2_DEVELOPER_LICENSE.getOrganization());
-        assertEquals(licenseBean.getType(), LicenseType.TESTING.toString());
-        assertEquals(licenseBean.getExpiryDate(), EXAMPLE_2_DEVELOPER_LICENSE.getExpiryDate());
-        assertEquals(licenseBean.getMaxUsers(), EXAMPLE_2_DEVELOPER_LICENSE.getMaxUsers());
+        final LicenseModel licenseModel = licensesService.addLicense("ABC...");
+        assertEquals(licenseModel.getDescription(), EXAMPLE_2_DEVELOPER_LICENSE.getDescription());
+        assertEquals(licenseModel.getOrganization(), EXAMPLE_2_DEVELOPER_LICENSE.getOrganization());
+        assertEquals(licenseModel.getType(), LicenseType.TESTING.toString());
+        assertEquals(licenseModel.getExpiryDate(), EXAMPLE_2_DEVELOPER_LICENSE.getExpiryDate());
+        assertEquals(licenseModel.getMaxUsers(), EXAMPLE_2_DEVELOPER_LICENSE.getMaxUsers());
     }
 
     @Test

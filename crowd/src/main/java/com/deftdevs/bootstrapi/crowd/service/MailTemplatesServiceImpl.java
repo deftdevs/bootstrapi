@@ -3,7 +3,7 @@ package com.deftdevs.bootstrapi.crowd.service;
 import com.atlassian.crowd.exception.ObjectNotFoundException;
 import com.atlassian.crowd.manager.property.PropertyManager;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
-import com.deftdevs.bootstrapi.crowd.model.MailTemplatesBean;
+import com.deftdevs.bootstrapi.crowd.model.MailTemplatesModel;
 import com.deftdevs.bootstrapi.crowd.service.api.MailTemplatesService;
 import org.springframework.stereotype.Component;
 
@@ -24,44 +24,44 @@ public class MailTemplatesServiceImpl implements MailTemplatesService {
     }
 
     @Override
-    public MailTemplatesBean getMailTemplates() {
-        final MailTemplatesBean mailTemplatesBean = new MailTemplatesBean();
+    public MailTemplatesModel getMailTemplates() {
+        final MailTemplatesModel mailTemplatesModel = new MailTemplatesModel();
 
         try {
-            mailTemplatesBean.setForgottenPassword(propertyManager.getProperty(FORGOTTEN_PASSWORD_EMAIL_TEMPLATE));
-            mailTemplatesBean.setForgottenUsername(propertyManager.getProperty(FORGOTTEN_USERNAME_EMAIL_TEMPLATE));
-            mailTemplatesBean.setPasswordExpirationReminder(propertyManager.getProperty(PASSWORD_EXPIRATION_REMINDER_EMAIL_TEMPLATE));
-            mailTemplatesBean.setEmailChangeValidation(propertyManager.getProperty(EMAIL_CHANGE_VALIDATION_EMAIL_TEMPLATE));
-            mailTemplatesBean.setEmailChangeInfo(propertyManager.getProperty(EMAIL_CHANGE_INFO_EMAIL_TEMPLATE));
+            mailTemplatesModel.setForgottenPassword(propertyManager.getProperty(FORGOTTEN_PASSWORD_EMAIL_TEMPLATE));
+            mailTemplatesModel.setForgottenUsername(propertyManager.getProperty(FORGOTTEN_USERNAME_EMAIL_TEMPLATE));
+            mailTemplatesModel.setPasswordExpirationReminder(propertyManager.getProperty(PASSWORD_EXPIRATION_REMINDER_EMAIL_TEMPLATE));
+            mailTemplatesModel.setEmailChangeValidation(propertyManager.getProperty(EMAIL_CHANGE_VALIDATION_EMAIL_TEMPLATE));
+            mailTemplatesModel.setEmailChangeInfo(propertyManager.getProperty(EMAIL_CHANGE_INFO_EMAIL_TEMPLATE));
         } catch (final ObjectNotFoundException e) {
             throw new NotFoundException(e.getMessage());
         }
 
-        return mailTemplatesBean;
+        return mailTemplatesModel;
     }
 
     @Override
-    public MailTemplatesBean setMailTemplates(
-            final MailTemplatesBean mailTemplatesBean) {
+    public MailTemplatesModel setMailTemplates(
+            final MailTemplatesModel mailTemplatesModel) {
 
-        if (mailTemplatesBean.getForgottenPassword() != null) {
-            propertyManager.setProperty(FORGOTTEN_PASSWORD_EMAIL_TEMPLATE, mailTemplatesBean.getForgottenPassword());
+        if (mailTemplatesModel.getForgottenPassword() != null) {
+            propertyManager.setProperty(FORGOTTEN_PASSWORD_EMAIL_TEMPLATE, mailTemplatesModel.getForgottenPassword());
         }
 
-        if (mailTemplatesBean.getForgottenUsername() != null) {
-            propertyManager.setProperty(FORGOTTEN_USERNAME_EMAIL_TEMPLATE, mailTemplatesBean.getForgottenUsername());
+        if (mailTemplatesModel.getForgottenUsername() != null) {
+            propertyManager.setProperty(FORGOTTEN_USERNAME_EMAIL_TEMPLATE, mailTemplatesModel.getForgottenUsername());
         }
 
-        if (mailTemplatesBean.getPasswordExpirationReminder() != null) {
-            propertyManager.setProperty(PASSWORD_EXPIRATION_REMINDER_EMAIL_TEMPLATE, mailTemplatesBean.getPasswordExpirationReminder());
+        if (mailTemplatesModel.getPasswordExpirationReminder() != null) {
+            propertyManager.setProperty(PASSWORD_EXPIRATION_REMINDER_EMAIL_TEMPLATE, mailTemplatesModel.getPasswordExpirationReminder());
         }
 
-        if (mailTemplatesBean.getEmailChangeValidation() != null) {
-            propertyManager.setProperty(EMAIL_CHANGE_VALIDATION_EMAIL_TEMPLATE, mailTemplatesBean.getEmailChangeValidation());
+        if (mailTemplatesModel.getEmailChangeValidation() != null) {
+            propertyManager.setProperty(EMAIL_CHANGE_VALIDATION_EMAIL_TEMPLATE, mailTemplatesModel.getEmailChangeValidation());
         }
 
-        if (mailTemplatesBean.getEmailChangeInfo() != null) {
-            propertyManager.setProperty(EMAIL_CHANGE_INFO_EMAIL_TEMPLATE, mailTemplatesBean.getEmailChangeInfo());
+        if (mailTemplatesModel.getEmailChangeInfo() != null) {
+            propertyManager.setProperty(EMAIL_CHANGE_INFO_EMAIL_TEMPLATE, mailTemplatesModel.getEmailChangeInfo());
         }
 
         return getMailTemplates();

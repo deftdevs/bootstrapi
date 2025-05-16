@@ -12,7 +12,7 @@ import com.atlassian.gadgets.spec.GadgetSpecFactory;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
-import com.deftdevs.bootstrapi.commons.model.GadgetBean;
+import com.deftdevs.bootstrapi.commons.model.GadgetModel;
 import com.deftdevs.bootstrapi.commons.service.api.GadgetsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,46 +48,46 @@ public class GadgetsServiceImpl implements GadgetsService {
     }
 
     @Override
-    public List<GadgetBean> getGadgets() {
+    public List<GadgetModel> getGadgets() {
         Iterable<ExternalGadgetSpec> specIterable = externalGadgetSpecStore.entries();
         return StreamSupport.stream(specIterable.spliterator(), false)
                 .map(spec -> {
-                    GadgetBean gadgetBean = new GadgetBean();
-                    gadgetBean.setId(Long.valueOf(spec.getId().value()));
-                    gadgetBean.setUrl(spec.getSpecUri());
-                    return gadgetBean;
+                    GadgetModel gadgetModel = new GadgetModel();
+                    gadgetModel.setId(Long.valueOf(spec.getId().value()));
+                    gadgetModel.setUrl(spec.getSpecUri());
+                    return gadgetModel;
                 }).collect(Collectors.toList());
     }
 
     @Override
-    public GadgetBean getGadget(long id) {
+    public GadgetModel getGadget(long id) {
         return findGadget(id);
     }
 
     @Override
-    public List<GadgetBean> setGadgets(List<GadgetBean> gadgetBeans) {
+    public List<GadgetModel> setGadgets(List<GadgetModel> gadgetModels) {
         //as the gadget only consists of an url, only new gadgets need to be added, existing gadget urls remain
-        List<GadgetBean> existingGadgets = getGadgets();
-        gadgetBeans.forEach(gadgetBean -> {
-            Optional<GadgetBean> gadget = existingGadgets.stream()
-                    .filter(bean -> bean.getUrl().toString().equals(gadgetBean.getUrl().toString())).findFirst();
+        List<GadgetModel> existingGadgets = getGadgets();
+        gadgetModels.forEach(gadgetModel -> {
+            Optional<GadgetModel> gadget = existingGadgets.stream()
+                    .filter(bean -> bean.getUrl().toString().equals(gadgetModel.getUrl().toString())).findFirst();
             if (!gadget.isPresent()) {
-                addGadget(gadgetBean);
+                addGadget(gadgetModel);
             }
         });
         return getGadgets();
     }
 
     @Override
-    public GadgetBean setGadget(long id, @NotNull GadgetBean gadgetBean) {
+    public GadgetModel setGadget(long id, @NotNull GadgetModel gadgetModel) {
         deleteGadget(id);
-        return addGadget(gadgetBean);
+        return addGadget(gadgetModel);
     }
 
     @Override
-    public GadgetBean addGadget(GadgetBean gadgetBean) {
-        URI url = gadgetBean.getUrl();
-        GadgetBean addedGadgetBean = new GadgetBean();
+    public GadgetModel addGadget(GadgetModel gadgetModel) {
+        URI url = gadgetModel.getUrl();
+        GadgetModel addedGadgetModel = new GadgetModel();
         ExternalGadgetSpec addedGadget = externalGadgetSpecStore.add(url);
         try{
             //validate gadget url
@@ -102,12 +102,12 @@ public class GadgetsServiceImpl implements GadgetsService {
                     .build();
             gadgetSpecFactory.getGadgetSpec(url, requestContext);
 
-            addedGadgetBean.setUrl(addedGadget.getSpecUri());
+            addedGadgetModel.setUrl(addedGadget.getSpecUri());
         } catch (GadgetParsingException e) {
             externalGadgetSpecStore.remove(addedGadget.getId());
             throw new BadRequestException("Invalid Gadget URL");
         }
-        return addedGadgetBean;
+        return addedGadgetModel;
     }
 
     @Override
@@ -129,8 +129,8 @@ public class GadgetsServiceImpl implements GadgetsService {
         externalGadgetSpecStore.remove(ExternalGadgetSpecId.valueOf(String.valueOf(id)));
     }
 
-    private GadgetBean findGadget(long id) {
-        Optional<GadgetBean> result = getGadgets().stream().filter(gadget -> gadget.getId().equals(id)).findFirst();
+    private GadgetModel findGadget(long id) {
+        Optional<GadgetModel> result = getGadgets().stream().filter(gadget -> gadget.getId().equals(id)).findFirst();
         if (!result.isPresent()) {
             throw new NotFoundException(String.format("gadget with id '%s' could not be found", id));
         } else {

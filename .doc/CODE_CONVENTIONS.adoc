@@ -8,7 +8,7 @@ The code conventions are valid for all BootstrAPI modules.
 
 === Quick Reference
 
-* Model Class: `EntityBean`
+* Model Class: `EntityModel`
 * Model JSON Name: `entity` (`@XmlRootElement(name = BootstrAPI.ENTITY)`)
 * REST Endpoint Class: `EntitiesResource`
 * REST Endpoint Name: `entities` (`@Path(BootstrAPI.ENTITIES)`)
@@ -33,7 +33,7 @@ Example:
 @Data
 @NoArgsConstructor
 @XmlRootElement(name = BootstrAPI.ENTITY)
-public class EntityBean {
+public class EntityModel {
 
     @XmlElement
     @NotNull
@@ -117,7 +117,7 @@ public interface EntitiesResource {
             summary = "Get the list of entities",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = EntitiyBean.class))),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = EntitiyModel.class))),
                             description = ""
                     ),
                     @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
@@ -134,7 +134,7 @@ public interface EntitiesResource {
             description = "A new entity can be added here if no other entity with the same name already exists",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = EntityBean.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = EntityModel.class)),
                             description = ""
                     ),
                     @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
@@ -142,7 +142,7 @@ public interface EntitiesResource {
     )
     Response addEntity(
             @QueryParam("doSomethingAfterAdding") @DefaultValue("false") final boolean doSomethingAfterAdding,
-            @NotNull final EntityBean entity);
+            @NotNull final EntityModel entity);
 
 }
 ----
@@ -173,8 +173,8 @@ public class EntitiesResourceImpl implements EntitiesResource {
     public Response getEntities() {
         final ErrorCollection errorCollection = new ErrorCollection();
         try {
-            final List<EntitiesBean> entitieBeans = entitiesService.getEntities();
-            return Response.ok(entitiesBeanBeans).build();
+            final List<EntitiesModel> entitieModels = entitiesService.getEntities();
+            return Response.ok(entitiesModelModels).build();
         } catch (Exception e) {
             log.error(e.getMessage(), e);
             errorCollection.addErrorMessage(e.getMessage());
@@ -185,11 +185,11 @@ public class EntitiesResourceImpl implements EntitiesResource {
     @Override
     public Response addEntity(
             final boolean doSomethingAfterAdding,
-            @NotNull final EntityBean entity) {
+            @NotNull final EntityModel entity) {
 
         final ErrorCollection errorCollection = new ErrorCollection();
         try {
-            EntityBean addedEntity = entitiesService.addEntity(entity, doSomethingAfterAdding);
+            EntityModel addedEntity = entitiesService.addEntity(entity, doSomethingAfterAdding);
             return Response.ok(addedEntity).build();
         } catch (Exception e) {
             log.error(e.getMessage(), e);

@@ -12,8 +12,8 @@ import com.deftdevs.bootstrapi.commons.exception.DirectoryNotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.GroupNotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
-import com.deftdevs.bootstrapi.commons.model.GroupBean;
-import com.deftdevs.bootstrapi.crowd.model.util.GroupBeanUtil;
+import com.deftdevs.bootstrapi.commons.model.GroupModel;
+import com.deftdevs.bootstrapi.crowd.model.util.GroupModelUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.springframework.stereotype.Component;
 
@@ -37,7 +37,7 @@ public class GroupsServiceImpl implements GroupsService {
     }
 
     @Override
-    public GroupBean getGroup(
+    public GroupModel getGroup(
             final long directoryId,
             final String groupName) {
 
@@ -47,30 +47,30 @@ public class GroupsServiceImpl implements GroupsService {
             throw new GroupNotFoundException(groupName);
         }
 
-        return GroupBeanUtil.toGroupBean(group);
+        return GroupModelUtil.toGroupModel(group);
     }
 
     @Override
-    public GroupBean createGroup(
+    public GroupModel createGroup(
             final long directoryId,
-            final GroupBean groupBean) {
+            final GroupModel groupModel) {
 
-        if (groupBean.getName() == null) {
+        if (groupModel.getName() == null) {
             throw new BadRequestException("Cannot create group, group name is required");
         }
 
-        final Group existingGroup = findGroup(directoryId, groupBean.getName());
+        final Group existingGroup = findGroup(directoryId, groupModel.getName());
 
         if (existingGroup != null) {
-            throw new BadRequestException(String.format("Group '%s' already exists", groupBean.getName()));
+            throw new BadRequestException(String.format("Group '%s' already exists", groupModel.getName()));
         }
 
-        final GroupTemplate groupTemplate = new GroupTemplate(groupBean.getName(), directoryId);
-        groupTemplate.setDescription(groupBean.getDescription());
-        groupTemplate.setActive(groupBean.getActive() == null || groupBean.getActive());
+        final GroupTemplate groupTemplate = new GroupTemplate(groupModel.getName(), directoryId);
+        groupTemplate.setDescription(groupModel.getDescription());
+        groupTemplate.setActive(groupModel.getActive() == null || groupModel.getActive());
 
         try {
-            return GroupBeanUtil.toGroupBean(directoryManager.addGroup(directoryId, groupTemplate));
+            return GroupModelUtil.toGroupModel(directoryManager.addGroup(directoryId, groupTemplate));
         } catch (DirectoryPermissionException | InvalidGroupException e) {
             // A permission exception should only happen if we try adding the group
             // a user in a read-only directory, so treat this as a bad request
@@ -83,10 +83,10 @@ public class GroupsServiceImpl implements GroupsService {
     }
 
     @Override
-    public GroupBean updateGroup(
+    public GroupModel updateGroup(
             final long directoryId,
             final String groupName,
-            final GroupBean groupBean) {
+            final GroupModel groupModel) {
 
         Group group = findGroup(directoryId, groupName);
 
@@ -94,43 +94,43 @@ public class GroupsServiceImpl implements GroupsService {
             throw new GroupNotFoundException(groupName);
         }
 
-        if (groupBean.getName() != null && !groupBean.getName().equals(group.getName())) {
-            group = renameGroup(directoryId, groupName, groupBean.getName());
+        if (groupModel.getName() != null && !groupModel.getName().equals(group.getName())) {
+            group = renameGroup(directoryId, groupName, groupModel.getName());
         }
 
-        if (groupBean.getDescription() != null || groupBean.getActive() != null) {
-            group = updateGroup(directoryId, createGroupTemplate(group, groupBean));
+        if (groupModel.getDescription() != null || groupModel.getActive() != null) {
+            group = updateGroup(directoryId, createGroupTemplate(group, groupModel));
         }
 
-        return GroupBeanUtil.toGroupBean(group);
+        return GroupModelUtil.toGroupModel(group);
     }
 
     @Override
-    public GroupBean setGroup(
+    public GroupModel setGroup(
             final long directoryId,
             final String groupName,
-            final GroupBean groupBean) {
+            final GroupModel groupModel) {
 
         final Group group = findGroup(directoryId, groupName);
 
         if (group == null) {
-            return createGroup(directoryId, groupBean);
+            return createGroup(directoryId, groupModel);
         }
 
-        return updateGroup(directoryId, groupName, groupBean);
+        return updateGroup(directoryId, groupName, groupModel);
     }
 
     @Override
-    public List<GroupBean> setGroups(
+    public List<GroupModel> setGroups(
             final long directoryId,
-            final List<GroupBean> groupBeans) {
+            final List<GroupModel> groupModels) {
 
-        if (groupBeans == null) {
+        if (groupModels == null) {
             return Collections.emptyList();
         }
 
-        return groupBeans.stream()
-                .map(groupBean -> setGroup(directoryId, groupBean.getName(), groupBean))
+        return groupModels.stream()
+                .map(groupModel -> setGroup(directoryId, groupModel.getName(), groupModel))
                 .collect(Collectors.toList());
     }
 
@@ -191,15 +191,15 @@ public class GroupsServiceImpl implements GroupsService {
 
     GroupTemplate createGroupTemplate(
             final Group group,
-            final GroupBean groupBean) {
+            final GroupModel groupModel) {
 
         final GroupTemplate groupTemplate = new GroupTemplate(group);
 
-        if (groupBean.getDescription() != null) {
-            groupTemplate.setDescription(groupBean.getDescription());
+        if (groupModel.getDescription() != null) {
+            groupTemplate.setDescription(groupModel.getDescription());
         }
-        if (groupBean.getActive() != null) {
-            groupTemplate.setActive(groupBean.getActive());
+        if (groupModel.getActive() != null) {
+            groupTemplate.setActive(groupModel.getActive());
         }
 
         return groupTemplate;

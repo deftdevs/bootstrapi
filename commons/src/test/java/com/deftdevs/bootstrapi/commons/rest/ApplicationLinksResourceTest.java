@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.ApplicationLinkBean;
+import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel;
 import com.deftdevs.bootstrapi.commons.rest.impl.TestApplicationLinksResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
 import org.junit.jupiter.api.BeforeEach;
@@ -32,26 +32,26 @@ class ApplicationLinksResourceTest {
 
     @Test
     void testGetApplicationLinks() {
-        final List<ApplicationLinkBean> applicationLinkBeans = Collections.singletonList(ApplicationLinkBean.EXAMPLE_1);
-        doReturn(applicationLinkBeans).when(applicationLinksService).getApplicationLinks();
+        final List<ApplicationLinkModel> applicationLinkModels = Collections.singletonList(ApplicationLinkModel.EXAMPLE_1);
+        doReturn(applicationLinkModels).when(applicationLinksService).getApplicationLinks();
 
         final Response response = resource.getApplicationLinks();
         assertEquals(200, response.getStatus());
 
-        final List<ApplicationLinkBean> responseApplicationLinkBeans = (List<ApplicationLinkBean>) response.getEntity();
-        assertEquals(responseApplicationLinkBeans, applicationLinkBeans);
+        final List<ApplicationLinkModel> responseApplicationLinkModels = (List<ApplicationLinkModel>) response.getEntity();
+        assertEquals(responseApplicationLinkModels, applicationLinkModels);
     }
 
     @Test
     void testSetApplicationLinks() {
-        final List<ApplicationLinkBean> applicationLinkBeans = Collections.singletonList(ApplicationLinkBean.EXAMPLE_1);
-        doReturn(applicationLinkBeans).when(applicationLinksService).setApplicationLinks(applicationLinkBeans, true);
+        final List<ApplicationLinkModel> applicationLinkModels = Collections.singletonList(ApplicationLinkModel.EXAMPLE_1);
+        doReturn(applicationLinkModels).when(applicationLinksService).setApplicationLinks(applicationLinkModels, true);
 
-        final Response response = resource.setApplicationLinks(true, applicationLinkBeans);
+        final Response response = resource.setApplicationLinks(true, applicationLinkModels);
         assertEquals(200, response.getStatus());
 
-        final List<ApplicationLinkBean> resultApplicationLinkBeans = (List<ApplicationLinkBean>) response.getEntity();
-        assertEquals(resultApplicationLinkBeans, applicationLinkBeans);
+        final List<ApplicationLinkModel> resultApplicationLinkModels = (List<ApplicationLinkModel>) response.getEntity();
+        assertEquals(resultApplicationLinkModels, applicationLinkModels);
     }
 
     @Test

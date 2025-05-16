@@ -3,7 +3,7 @@ package com.deftdevs.bootstrapi.crowd.rest;
 
 import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageBean;
+import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.SettingsBrandingResource;
 import com.deftdevs.bootstrapi.crowd.service.api.SettingsBrandingService;
 import org.springframework.stereotype.Component;
@@ -34,9 +34,9 @@ public class SettingsBrandingResourceImpl implements SettingsBrandingResource {
 
     @Override
     public Response setLoginPage(
-            SettingsBrandingLoginPageBean settingsBrandingLoginPageBean) {
+            SettingsBrandingLoginPageModel settingsBrandingLoginPageModel) {
 
-        return Response.ok(settingsBrandingService.setLoginPage(settingsBrandingLoginPageBean)).build();
+        return Response.ok(settingsBrandingService.setLoginPage(settingsBrandingLoginPageModel)).build();
     }
 
     @Override

@@ -1,4 +1,4 @@
-# DirectoryGenericBean
+# DirectoryGenericModel
 ## Properties
 
 | Name | Type | Description | Notes |

@@ -9,11 +9,11 @@ import com.atlassian.mail.server.impl.PopMailServerImpl;
 import com.atlassian.mail.server.impl.SMTPMailServerImpl;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.model.MailServerPopBean;
-import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerPopModel;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
 import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
-import com.deftdevs.bootstrapi.jira.model.util.MailServerPopBeanUtil;
-import com.deftdevs.bootstrapi.jira.model.util.MailServerSmtpBeanUtil;
+import com.deftdevs.bootstrapi.jira.model.util.MailServerPopModelUtil;
+import com.deftdevs.bootstrapi.jira.model.util.MailServerSmtpModelUtil;
 import com.deftdevs.bootstrapi.jira.util.MailProtocolUtil;
 import org.springframework.stereotype.Component;
 
@@ -33,14 +33,14 @@ public class MailServerServiceImpl implements MailServerService {
     }
 
     @Override
-    public MailServerSmtpBean getMailServerSmtp() {
+    public MailServerSmtpModel getMailServerSmtp() {
         final SMTPMailServer smtpMailServer = mailServerManager.getDefaultSMTPMailServer();
-        return MailServerSmtpBeanUtil.toMailServerSmtpBean(smtpMailServer);
+        return MailServerSmtpModelUtil.toMailServerSmtpModel(smtpMailServer);
     }
 
     @Override
-    public MailServerSmtpBean setMailServerSmtp(
-            @NotNull MailServerSmtpBean mailServerSmtpBean) {
+    public MailServerSmtpModel setMailServerSmtp(
+            @NotNull MailServerSmtpModel mailServerSmtpModel) {
 
         final SMTPMailServer smtpMailServer = mailServerManager.isDefaultSMTPMailServerDefined()
                 ? mailServerManager.getDefaultSMTPMailServer()
@@ -48,41 +48,41 @@ public class MailServerServiceImpl implements MailServerService {
 
         assert smtpMailServer != null;
 
-        if (mailServerSmtpBean.getName() != null) {
-            smtpMailServer.setName(mailServerSmtpBean.getName());
+        if (mailServerSmtpModel.getName() != null) {
+            smtpMailServer.setName(mailServerSmtpModel.getName());
         }
 
-        if (mailServerSmtpBean.getDescription() != null) {
-            smtpMailServer.setDescription(mailServerSmtpBean.getDescription());
+        if (mailServerSmtpModel.getDescription() != null) {
+            smtpMailServer.setDescription(mailServerSmtpModel.getDescription());
         }
 
-        if (mailServerSmtpBean.getFrom() != null) {
-            smtpMailServer.setDefaultFrom(mailServerSmtpBean.getFrom());
+        if (mailServerSmtpModel.getFrom() != null) {
+            smtpMailServer.setDefaultFrom(mailServerSmtpModel.getFrom());
         }
 
-        if (mailServerSmtpBean.getPrefix() != null) {
-            smtpMailServer.setPrefix(mailServerSmtpBean.getPrefix());
+        if (mailServerSmtpModel.getPrefix() != null) {
+            smtpMailServer.setPrefix(mailServerSmtpModel.getPrefix());
         }
 
-        smtpMailServer.setMailProtocol(MailProtocolUtil.find(mailServerSmtpBean.getProtocol(), MailProtocol.SMTP));
+        smtpMailServer.setMailProtocol(MailProtocolUtil.find(mailServerSmtpModel.getProtocol(), MailProtocol.SMTP));
 
-        if (mailServerSmtpBean.getHost() != null) {
-            smtpMailServer.setHostname(mailServerSmtpBean.getHost());
+        if (mailServerSmtpModel.getHost() != null) {
+            smtpMailServer.setHostname(mailServerSmtpModel.getHost());
         }
 
-        if (mailServerSmtpBean.getPort() != null) {
-            smtpMailServer.setPort(String.valueOf(mailServerSmtpBean.getPort()));
+        if (mailServerSmtpModel.getPort() != null) {
+            smtpMailServer.setPort(String.valueOf(mailServerSmtpModel.getPort()));
         } else {
             smtpMailServer.setPort(smtpMailServer.getMailProtocol().getDefaultPort());
         }
 
-        smtpMailServer.setTlsRequired(mailServerSmtpBean.getUseTls());
+        smtpMailServer.setTlsRequired(mailServerSmtpModel.getUseTls());
 
-        if (mailServerSmtpBean.getUsername() != null) {
-            smtpMailServer.setUsername(mailServerSmtpBean.getUsername());
+        if (mailServerSmtpModel.getUsername() != null) {
+            smtpMailServer.setUsername(mailServerSmtpModel.getUsername());
         }
 
-        smtpMailServer.setTimeout(mailServerSmtpBean.getTimeout());
+        smtpMailServer.setTimeout(mailServerSmtpModel.getTimeout());
 
         try {
             if (mailServerManager.isDefaultSMTPMailServerDefined()) {
@@ -94,18 +94,18 @@ public class MailServerServiceImpl implements MailServerService {
             throw new BadRequestException(e.getMessage());
         }
 
-        return mailServerSmtpBean;
+        return mailServerSmtpModel;
     }
 
     @Override
-    public MailServerPopBean getMailServerPop() {
+    public MailServerPopModel getMailServerPop() {
         final PopMailServer popMailServer = mailServerManager.getDefaultPopMailServer();
-        return MailServerPopBeanUtil.toMailServerPopBean(popMailServer);
+        return MailServerPopModelUtil.toMailServerPopModel(popMailServer);
     }
 
     @Override
-    public MailServerPopBean setMailServerPop(
-            @NotNull MailServerPopBean mailServerPopBean) {
+    public MailServerPopModel setMailServerPop(
+            @NotNull MailServerPopModel mailServerPopModel) {
 
         final PopMailServer popMailServer = mailServerManager.getDefaultPopMailServer() != null
                 ? mailServerManager.getDefaultPopMailServer()
@@ -113,31 +113,31 @@ public class MailServerServiceImpl implements MailServerService {
 
         assert popMailServer != null;
 
-        if (mailServerPopBean.getName() != null) {
-            popMailServer.setName(mailServerPopBean.getName());
+        if (mailServerPopModel.getName() != null) {
+            popMailServer.setName(mailServerPopModel.getName());
         }
 
-        if (mailServerPopBean.getDescription() != null) {
-            popMailServer.setDescription(mailServerPopBean.getDescription());
+        if (mailServerPopModel.getDescription() != null) {
+            popMailServer.setDescription(mailServerPopModel.getDescription());
         }
 
-        popMailServer.setMailProtocol(MailProtocolUtil.find(mailServerPopBean.getProtocol(), MailProtocol.POP));
+        popMailServer.setMailProtocol(MailProtocolUtil.find(mailServerPopModel.getProtocol(), MailProtocol.POP));
 
-        if (mailServerPopBean.getHost() != null) {
-            popMailServer.setHostname(mailServerPopBean.getHost());
+        if (mailServerPopModel.getHost() != null) {
+            popMailServer.setHostname(mailServerPopModel.getHost());
         }
 
-        if (mailServerPopBean.getPort() != null) {
-            popMailServer.setPort(String.valueOf(mailServerPopBean.getPort()));
+        if (mailServerPopModel.getPort() != null) {
+            popMailServer.setPort(String.valueOf(mailServerPopModel.getPort()));
         } else {
             popMailServer.setPort(popMailServer.getMailProtocol().getDefaultPort());
         }
 
-        if (mailServerPopBean.getUsername() != null) {
-            popMailServer.setUsername(mailServerPopBean.getUsername());
+        if (mailServerPopModel.getUsername() != null) {
+            popMailServer.setUsername(mailServerPopModel.getUsername());
         }
 
-        popMailServer.setTimeout(mailServerPopBean.getTimeout());
+        popMailServer.setTimeout(mailServerPopModel.getTimeout());
 
         try {
             if (mailServerManager.getDefaultPopMailServer() != null) {
@@ -149,7 +149,7 @@ public class MailServerServiceImpl implements MailServerService {
             throw new BadRequestException(e.getMessage());
         }
 
-        return mailServerPopBean;
+        return mailServerPopModel;
     }
 
 }

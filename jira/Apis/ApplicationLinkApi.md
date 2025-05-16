@@ -12,7 +12,7 @@ All URIs are relative to *https://&lt;JIRA_URL&gt;/rest/bootstrapi/1*
 
 <a name="createApplicationLink"></a>
 # **createApplicationLink**
-> ApplicationLinkBean createApplicationLink(ApplicationLinkBean, ignore-setup-errors)
+> ApplicationLinkModel createApplicationLink(ApplicationLinkModel, ignore-setup-errors)
 
 Create an application link
 
@@ -20,12 +20,12 @@ Create an application link
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ApplicationLinkBean** | [**ApplicationLinkBean**](../Models/ApplicationLinkBean.md)|  | |
+| **ApplicationLinkModel** | [**ApplicationLinkModel**](../Models/ApplicationLinkModel.md)|  | |
 | **ignore-setup-errors** | **Boolean**|  | [optional] [default to false] |
 
 ### Return type
 
-[**ApplicationLinkBean**](../Models/ApplicationLinkBean.md)
+[**ApplicationLinkModel**](../Models/ApplicationLinkModel.md)
 
 ### Authorization
 
@@ -63,7 +63,7 @@ null (empty response body)
 
 <a name="getApplicationLink"></a>
 # **getApplicationLink**
-> ApplicationLinkBean getApplicationLink(uuid)
+> ApplicationLinkModel getApplicationLink(uuid)
 
 Get an application link
 
@@ -77,7 +77,7 @@ Get an application link
 
 ### Return type
 
-[**ApplicationLinkBean**](../Models/ApplicationLinkBean.md)
+[**ApplicationLinkModel**](../Models/ApplicationLinkModel.md)
 
 ### Authorization
 
@@ -90,7 +90,7 @@ Get an application link
 
 <a name="updateApplicationLink"></a>
 # **updateApplicationLink**
-> ApplicationLinkBean updateApplicationLink(uuid, ApplicationLinkBean, ignore-setup-errors)
+> ApplicationLinkModel updateApplicationLink(uuid, ApplicationLinkModel, ignore-setup-errors)
 
 Update an application link
 
@@ -99,12 +99,12 @@ Update an application link
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **uuid** | **UUID**|  | [default to null] |
-| **ApplicationLinkBean** | [**ApplicationLinkBean**](../Models/ApplicationLinkBean.md)|  | |
+| **ApplicationLinkModel** | [**ApplicationLinkModel**](../Models/ApplicationLinkModel.md)|  | |
 | **ignore-setup-errors** | **Boolean**|  | [optional] [default to false] |
 
 ### Return type
 
-[**ApplicationLinkBean**](../Models/ApplicationLinkBean.md)
+[**ApplicationLinkModel**](../Models/ApplicationLinkModel.md)
 
 ### Authorization
 

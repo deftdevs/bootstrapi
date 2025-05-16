@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.rest.api;
 
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.crowd.model.SessionConfigBean;
+import com.deftdevs.bootstrapi.crowd.model.SessionConfigModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -24,7 +24,7 @@ public interface SessionConfigResource {
             tags = {SESSION_CONFIG},
             summary = "Get the session config",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SessionConfigBean.class))),
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SessionConfigModel.class))),
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
@@ -37,11 +37,11 @@ public interface SessionConfigResource {
             tags = {SESSION_CONFIG},
             summary = "Set the session config",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SessionConfigBean.class))),
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SessionConfigModel.class))),
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
     Response setSessionConfig(
-            SessionConfigBean sessionConfigBean);
+            SessionConfigModel sessionConfigModel);
 
 }

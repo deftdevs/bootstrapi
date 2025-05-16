@@ -1,4 +1,4 @@
-# MailServerSmtpBean
+# MailServerSmtpModel
 ## Properties
 
 | Name | Type | Description | Notes |

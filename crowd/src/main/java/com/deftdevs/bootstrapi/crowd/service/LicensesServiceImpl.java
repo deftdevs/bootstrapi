@@ -4,7 +4,7 @@ import com.atlassian.crowd.manager.license.CrowdLicenseManager;
 import com.atlassian.crowd.manager.license.CrowdLicenseManagerException;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.model.LicenseBean;
+import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 
 import javax.inject.Inject;
@@ -12,7 +12,7 @@ import javax.inject.Named;
 import java.util.Collections;
 import java.util.List;
 
-import static com.deftdevs.bootstrapi.crowd.model.util.LicenseBeanUtil.toLicenseBean;
+import static com.deftdevs.bootstrapi.crowd.model.util.LicenseModelUtil.toLicenseModel;
 
 @Named
 public class LicensesServiceImpl implements LicensesService {
@@ -25,12 +25,12 @@ public class LicensesServiceImpl implements LicensesService {
     }
 
     @Override
-    public List<LicenseBean> getLicenses() {
-        return Collections.singletonList(toLicenseBean(licenseManager.getLicense()));
+    public List<LicenseModel> getLicenses() {
+        return Collections.singletonList(toLicenseModel(licenseManager.getLicense()));
     }
 
     @Override
-    public List<LicenseBean> setLicenses(
+    public List<LicenseModel> setLicenses(
             final List<String> licenseKeys) {
 
         licenseKeys.forEach(this::addLicense);
@@ -38,11 +38,11 @@ public class LicensesServiceImpl implements LicensesService {
     }
 
     @Override
-    public LicenseBean addLicense(
+    public LicenseModel addLicense(
             final String licenseKey) {
 
         try {
-            return toLicenseBean(licenseManager.storeLicense(licenseKey));
+            return toLicenseModel(licenseManager.storeLicense(licenseKey));
         } catch (CrowdLicenseManagerException e) {
             throw new BadRequestException(e.getMessage());
         }

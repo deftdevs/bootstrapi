@@ -7,9 +7,9 @@ import com.atlassian.jira.security.GlobalPermissionManager;
 import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
-import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalBean;
+import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
 import com.deftdevs.bootstrapi.commons.service.api.PermissionsService;
-import com.deftdevs.bootstrapi.jira.model.util.PermissionsGlobalBeanUtil;
+import com.deftdevs.bootstrapi.jira.model.util.PermissionsGlobalModelUtil;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Nonnull;
@@ -34,20 +34,20 @@ public class PermissionsServiceImpl implements PermissionsService {
     }
 
     @Override
-    public PermissionsGlobalBean getPermissionsGlobal() {
-        return PermissionsGlobalBeanUtil.toPermissionsGlobalBean(getGlobalPermissions());
+    public PermissionsGlobalModel getPermissionsGlobal() {
+        return PermissionsGlobalModelUtil.toPermissionsGlobalModel(getGlobalPermissions());
     }
 
     @Override
-    public PermissionsGlobalBean setPermissionsGlobal(
-            @NotNull final PermissionsGlobalBean permissionsGlobalBean) {
+    public PermissionsGlobalModel setPermissionsGlobal(
+            @NotNull final PermissionsGlobalModel permissionsGlobalModel) {
 
-        setPermissionsGlobalForGroup(permissionsGlobalBean);
+        setPermissionsGlobalForGroup(permissionsGlobalModel);
         return getPermissionsGlobal();
     }
 
     private void setPermissionsGlobalForGroup(
-            @NotNull final PermissionsGlobalBean permissionsGlobalBean) {
+            @NotNull final PermissionsGlobalModel permissionsGlobalModel) {
 
         final Map<String, Set<String>> existingGroupPermissions = getGlobalPermissions().stream()
                 .filter(permission -> permission.getGroup() != null)
@@ -56,7 +56,7 @@ public class PermissionsServiceImpl implements PermissionsService {
                         Collectors.mapping(GlobalPermissionEntry::getPermissionKey, Collectors.toSet())
                 ));
 
-        final Map<String, ? extends Collection<String>> requestGroupPermissions = permissionsGlobalBean.getGroupPermissions();
+        final Map<String, ? extends Collection<String>> requestGroupPermissions = permissionsGlobalModel.getGroupPermissions();
         final Set<String> validGlobalPermissions = Stream.concat(
                 GlobalPermissionKey.DEFAULT_APP_GLOBAL_PERMISSIONS.stream(),
                 Stream.of(GlobalPermissionKey.ADMINISTER, GlobalPermissionKey.SYSTEM_ADMIN)

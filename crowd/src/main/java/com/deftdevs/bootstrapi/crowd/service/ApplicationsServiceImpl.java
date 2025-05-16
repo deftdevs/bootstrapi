@@ -15,8 +15,8 @@ import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
-import com.deftdevs.bootstrapi.crowd.model.ApplicationBean;
-import com.deftdevs.bootstrapi.crowd.model.util.ApplicationBeanUtil;
+import com.deftdevs.bootstrapi.crowd.model.ApplicationModel;
+import com.deftdevs.bootstrapi.crowd.model.util.ApplicationModelUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.ApplicationsService;
 import org.springframework.stereotype.Component;
 
@@ -47,50 +47,50 @@ public class ApplicationsServiceImpl implements ApplicationsService {
     }
 
     @Override
-    public List<ApplicationBean> getApplications() {
+    public List<ApplicationModel> getApplications() {
         return applicationManager.findAll().stream()
-                .map(application -> ApplicationBeanUtil.toApplicationBean(application, defaultGroupMembershipService))
+                .map(application -> ApplicationModelUtil.toApplicationModel(application, defaultGroupMembershipService))
                 .collect(Collectors.toList());
     }
 
     @Override
-    public ApplicationBean getApplication(
+    public ApplicationModel getApplication(
             final long id) {
 
         try {
-            return ApplicationBeanUtil.toApplicationBean(applicationManager.findById(id), defaultGroupMembershipService);
+            return ApplicationModelUtil.toApplicationModel(applicationManager.findById(id), defaultGroupMembershipService);
         } catch (ApplicationNotFoundException e) {
             throw new NotFoundException(e);
         }
     }
 
     @Override
-    public List<ApplicationBean> setApplications(
-            final List<ApplicationBean> applicationBeans) {
+    public List<ApplicationModel> setApplications(
+            final List<ApplicationModel> applicationModels) {
 
-        final List<ApplicationBean> resultApplicationBeans = new ArrayList<>();
+        final List<ApplicationModel> resultApplicationModels = new ArrayList<>();
 
-        for (ApplicationBean applicationBean : applicationBeans) {
+        for (ApplicationModel applicationModel : applicationModels) {
             try {
-                final Application application = applicationManager.findByName(applicationBean.getName());
-                resultApplicationBeans.add(setApplication(application.getId(), applicationBean));
+                final Application application = applicationManager.findByName(applicationModel.getName());
+                resultApplicationModels.add(setApplication(application.getId(), applicationModel));
             } catch (ApplicationNotFoundException ignored) {
-                resultApplicationBeans.add(addApplication(applicationBean));
+                resultApplicationModels.add(addApplication(applicationModel));
             }
         }
 
-        return resultApplicationBeans;
+        return resultApplicationModels;
     }
 
     @Override
-    public ApplicationBean addApplication(
-            final ApplicationBean applicationBean) {
+    public ApplicationModel addApplication(
+            final ApplicationModel applicationModel) {
 
         try {
-            final Application createdApplication = applicationManager.add(ApplicationBeanUtil.toApplication(applicationBean));
-            persistApplicationDirectoryMappings(createdApplication, applicationBean);
-            persistApplicationBeanAuthenticationGroups(createdApplication, applicationBean);
-            persistApplicationBeanAutoAssignmentGroups(createdApplication, applicationBean);
+            final Application createdApplication = applicationManager.add(ApplicationModelUtil.toApplication(applicationModel));
+            persistApplicationDirectoryMappings(createdApplication, applicationModel);
+            persistApplicationModelAuthenticationGroups(createdApplication, applicationModel);
+            persistApplicationModelAutoAssignmentGroups(createdApplication, applicationModel);
             return getApplication(createdApplication.getId());
         } catch (InvalidCredentialException | ApplicationAlreadyExistsException e) {
             throw new BadRequestException(e);
@@ -98,22 +98,22 @@ public class ApplicationsServiceImpl implements ApplicationsService {
     }
 
     @Override
-    public ApplicationBean setApplication(
+    public ApplicationModel setApplication(
             final long id,
-            final ApplicationBean applicationBean) {
+            final ApplicationModel applicationModel) {
 
         try {
             final Application existingApplication = applicationManager.findById(id);
-            final Application modifiedApplication = ApplicationBeanUtil.toApplication(applicationBean, existingApplication);
+            final Application modifiedApplication = ApplicationModelUtil.toApplication(applicationModel, existingApplication);
             final Application updatedApplication = applicationManager.update(modifiedApplication);
 
-            if (applicationBean.getPassword() != null) {
-                applicationManager.updateCredential(updatedApplication, PasswordCredential.unencrypted(applicationBean.getPassword()));
+            if (applicationModel.getPassword() != null) {
+                applicationManager.updateCredential(updatedApplication, PasswordCredential.unencrypted(applicationModel.getPassword()));
             }
 
-            persistApplicationDirectoryMappings(updatedApplication, applicationBean);
-            persistApplicationBeanAuthenticationGroups(updatedApplication, applicationBean);
-            persistApplicationBeanAutoAssignmentGroups(updatedApplication, applicationBean);
+            persistApplicationDirectoryMappings(updatedApplication, applicationModel);
+            persistApplicationModelAuthenticationGroups(updatedApplication, applicationModel);
+            persistApplicationModelAutoAssignmentGroups(updatedApplication, applicationModel);
             return getApplication(updatedApplication.getId());
         } catch (ApplicationNotFoundException e) {
             throw new NotFoundException(e);
@@ -151,23 +151,23 @@ public class ApplicationsServiceImpl implements ApplicationsService {
 
     void persistApplicationDirectoryMappings(
             final Application application,
-            final ApplicationBean applicationBean) {
+            final ApplicationModel applicationModel) {
 
-        if (applicationBean.getDirectoryMappings() == null) {
+        if (applicationModel.getDirectoryMappings() == null) {
             return;
         }
 
         final Map<String, ApplicationDirectoryMapping> applicationDirectoryMappingsByDirectoryName = application.getApplicationDirectoryMappings().stream()
                 .collect(Collectors.toMap(adm -> adm.getDirectory().getName(), Function.identity()));
-        final Map<String, ApplicationBean.ApplicationDirectoryMapping> applicationBeanDirectoryMappingsByDirectoryName = applicationBean.getDirectoryMappings().stream()
-                .collect(Collectors.toMap(ApplicationBean.ApplicationDirectoryMapping::getDirectoryName, Function.identity()));
+        final Map<String, ApplicationModel.ApplicationDirectoryMapping> applicationModelDirectoryMappingsByDirectoryName = applicationModel.getDirectoryMappings().stream()
+                .collect(Collectors.toMap(ApplicationModel.ApplicationDirectoryMapping::getDirectoryName, Function.identity()));
 
         final List<ApplicationDirectoryMapping> applicationDirectoryMappingsToCreate = new ArrayList<>();
         final List<ApplicationDirectoryMapping> applicationDirectoryMappingsToUpdate = new ArrayList<>();
 
         // before performing any actual changes using the application manager, we first collect all data
         // and wait for any potential validation errors (performed in the `toApplicationDirectoryMapping` method)
-        for (ApplicationDirectoryMapping applicationDirectoryMapping : toApplicationDirectoryMappings(applicationBeanDirectoryMappingsByDirectoryName.values())) {
+        for (ApplicationDirectoryMapping applicationDirectoryMapping : toApplicationDirectoryMappings(applicationModelDirectoryMappingsByDirectoryName.values())) {
             if (!applicationDirectoryMappingsByDirectoryName.containsKey(applicationDirectoryMapping.getDirectory().getName())) {
                 applicationDirectoryMappingsToCreate.add(applicationDirectoryMapping);
             } else {
@@ -184,22 +184,22 @@ public class ApplicationsServiceImpl implements ApplicationsService {
         }
 
         for (ApplicationDirectoryMapping applicationDirectoryMapping : applicationDirectoryMappingsByDirectoryName.values()) {
-            if (!applicationBeanDirectoryMappingsByDirectoryName.containsKey(applicationDirectoryMapping.getDirectory().getName())) {
+            if (!applicationModelDirectoryMappingsByDirectoryName.containsKey(applicationDirectoryMapping.getDirectory().getName())) {
                 removeApplicationDirectoryMapping(application, applicationDirectoryMapping);
             }
         }
     }
 
-    void persistApplicationBeanAuthenticationGroups(
+    void persistApplicationModelAuthenticationGroups(
             final Application application,
-            final ApplicationBean applicationBean) {
+            final ApplicationModel applicationModel) {
 
-        if (applicationBean.getDirectoryMappings() == null) {
+        if (applicationModel.getDirectoryMappings() == null) {
             return;
         }
 
-        final Map<String, List<String>> authenticationGroupsByDirectoryName = applicationBean.getDirectoryMappings().stream()
-                .collect(Collectors.toMap(ApplicationBean.ApplicationDirectoryMapping::getDirectoryName, ApplicationBean.ApplicationDirectoryMapping::getAuthenticationGroups));
+        final Map<String, List<String>> authenticationGroupsByDirectoryName = applicationModel.getDirectoryMappings().stream()
+                .collect(Collectors.toMap(ApplicationModel.ApplicationDirectoryMapping::getDirectoryName, ApplicationModel.ApplicationDirectoryMapping::getAuthenticationGroups));
 
         for (ApplicationDirectoryMapping applicationDirectoryMapping : application.getApplicationDirectoryMappings()) {
             final Set<String> authenticationGroups = new HashSet<>(authenticationGroupsByDirectoryName.getOrDefault(
@@ -217,17 +217,17 @@ public class ApplicationsServiceImpl implements ApplicationsService {
         }
     }
 
-    void persistApplicationBeanAutoAssignmentGroups(
+    void persistApplicationModelAutoAssignmentGroups(
             final Application application,
-            final ApplicationBean applicationBean) {
+            final ApplicationModel applicationModel) {
 
-        if (applicationBean.getDirectoryMappings() == null) {
+        if (applicationModel.getDirectoryMappings() == null) {
             return;
         }
 
-        final Map<String, List<String>> autoAssignmentGroupsByDirectoryName = applicationBean.getDirectoryMappings().stream()
+        final Map<String, List<String>> autoAssignmentGroupsByDirectoryName = applicationModel.getDirectoryMappings().stream()
                 .collect(Collectors.toMap(
-                        ApplicationBean.ApplicationDirectoryMapping::getDirectoryName,
+                        ApplicationModel.ApplicationDirectoryMapping::getDirectoryName,
                         adm -> adm.getAutoAssignmentGroups() != null ? adm.getAutoAssignmentGroups() : Collections.emptyList()));
 
         for (ApplicationDirectoryMapping applicationDirectoryMapping : application.getApplicationDirectoryMappings()) {
@@ -255,26 +255,26 @@ public class ApplicationsServiceImpl implements ApplicationsService {
 
     @Nonnull
     List<ApplicationDirectoryMapping> toApplicationDirectoryMappings(
-            @Nonnull final Collection<ApplicationBean.ApplicationDirectoryMapping> applicationBeanDirectoryMappings) {
+            @Nonnull final Collection<ApplicationModel.ApplicationDirectoryMapping> applicationModelDirectoryMappings) {
 
-        return applicationBeanDirectoryMappings.stream()
+        return applicationModelDirectoryMappings.stream()
                 .map(this::toApplicationDirectoryMapping)
                 .collect(Collectors.toList());
     }
 
     @Nonnull
     ApplicationDirectoryMapping toApplicationDirectoryMapping(
-            @Nonnull final ApplicationBean.ApplicationDirectoryMapping applicationBeanDirectoryMapping) {
+            @Nonnull final ApplicationModel.ApplicationDirectoryMapping applicationModelDirectoryMapping) {
 
-        if (applicationBeanDirectoryMapping.getDirectoryName() == null || applicationBeanDirectoryMapping.getDirectoryName().isEmpty()) {
+        if (applicationModelDirectoryMapping.getDirectoryName() == null || applicationModelDirectoryMapping.getDirectoryName().isEmpty()) {
             throw new BadRequestException("Application directory mapping must contain a directory name");
         }
 
         final ImmutableApplicationDirectoryMapping.Builder applicationDirectoryMappingBuilder = ImmutableApplicationDirectoryMapping.builder();
-        applicationDirectoryMappingBuilder.setDirectory(findDirectory(applicationBeanDirectoryMapping.getDirectoryName(), directoryManager));
+        applicationDirectoryMappingBuilder.setDirectory(findDirectory(applicationModelDirectoryMapping.getDirectoryName(), directoryManager));
 
-        if (applicationBeanDirectoryMapping.getAuthenticationAllowAll() != null) {
-            final boolean authenticationAllowAll = applicationBeanDirectoryMapping.getAuthenticationAllowAll();
+        if (applicationModelDirectoryMapping.getAuthenticationAllowAll() != null) {
+            final boolean authenticationAllowAll = applicationModelDirectoryMapping.getAuthenticationAllowAll();
             applicationDirectoryMappingBuilder.setAllowAllToAuthenticate(authenticationAllowAll);
 
             // don't require to set authentication groups if all users are allowed to authenticate
@@ -284,14 +284,14 @@ public class ApplicationsServiceImpl implements ApplicationsService {
         }
 
         // even if all users are allowed to authenticate, it does not hurt to set (ignored) authentication groups if they got passed
-        if (applicationBeanDirectoryMapping.getAuthenticationGroups() != null) {
-            applicationDirectoryMappingBuilder.setAuthorisedGroupNames(new HashSet<>(applicationBeanDirectoryMapping.getAuthenticationGroups()));
+        if (applicationModelDirectoryMapping.getAuthenticationGroups() != null) {
+            applicationDirectoryMappingBuilder.setAuthorisedGroupNames(new HashSet<>(applicationModelDirectoryMapping.getAuthenticationGroups()));
         }
 
         // the auto assignment groups must be set after these mappings have been persisted...
 
-        if (applicationBeanDirectoryMapping.getAllowedOperations() != null) {
-            applicationDirectoryMappingBuilder.setAllowedOperations(new HashSet<>(applicationBeanDirectoryMapping.getAllowedOperations()));
+        if (applicationModelDirectoryMapping.getAllowedOperations() != null) {
+            applicationDirectoryMappingBuilder.setAllowedOperations(new HashSet<>(applicationModelDirectoryMapping.getAllowedOperations()));
         }
 
         return applicationDirectoryMappingBuilder.build();

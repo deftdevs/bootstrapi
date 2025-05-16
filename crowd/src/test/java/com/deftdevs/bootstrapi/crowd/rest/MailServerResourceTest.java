@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
-import com.deftdevs.bootstrapi.commons.model.MailServerSmtpBean;
+import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
 import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,14 +29,14 @@ public class MailServerResourceTest {
 
     @Test
     public void testGetMailServerSmtp() {
-        final MailServerSmtpBean mailServerSmtpBean = MailServerSmtpBean.EXAMPLE_1;
-        doReturn(mailServerSmtpBean).when(mailServerService).getMailServerSmtp();
+        final MailServerSmtpModel mailServerSmtpModel = MailServerSmtpModel.EXAMPLE_1;
+        doReturn(mailServerSmtpModel).when(mailServerService).getMailServerSmtp();
 
         final Response response = mailServerResource.getMailServerSmtp();
         assertEquals(200, response.getStatus());
 
-        final MailServerSmtpBean responseMailServerSmtpBean = (MailServerSmtpBean) response.getEntity();
-        assertEquals(mailServerSmtpBean, responseMailServerSmtpBean);
+        final MailServerSmtpModel responseMailServerSmtpModel = (MailServerSmtpModel) response.getEntity();
+        assertEquals(mailServerSmtpModel, responseMailServerSmtpModel);
     }
 
     @Test
@@ -47,14 +47,14 @@ public class MailServerResourceTest {
 
     @Test
     public void testSetMailServerSmtp() {
-        final MailServerSmtpBean mailServerSmtpBean = MailServerSmtpBean.EXAMPLE_2;
-        doReturn(mailServerSmtpBean).when(mailServerService).setMailServerSmtp(any(MailServerSmtpBean.class));
+        final MailServerSmtpModel mailServerSmtpModel = MailServerSmtpModel.EXAMPLE_2;
+        doReturn(mailServerSmtpModel).when(mailServerService).setMailServerSmtp(any(MailServerSmtpModel.class));
 
-        final Response response = mailServerResource.setMailServerSmtp(mailServerSmtpBean);
+        final Response response = mailServerResource.setMailServerSmtp(mailServerSmtpModel);
         assertEquals(200, response.getStatus());
 
-        final MailServerSmtpBean responseMailServerSmtpBean = (MailServerSmtpBean) response.getEntity();
-        assertEquals(mailServerSmtpBean, responseMailServerSmtpBean);
+        final MailServerSmtpModel responseMailServerSmtpModel = (MailServerSmtpModel) response.getEntity();
+        assertEquals(mailServerSmtpModel, responseMailServerSmtpModel);
     }
 
 }

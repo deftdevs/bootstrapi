@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalBean;
+import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -23,7 +23,7 @@ public interface PermissionsResource {
             summary = "Get global permissions configuration",
             description = "Get the global permissions for ... TODO",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = PermissionsGlobalBean.class))),
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = PermissionsGlobalModel.class))),
                     @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
@@ -38,11 +38,11 @@ public interface PermissionsResource {
             summary = "Set global permissions configuration",
             description = "Set the global permissions for ... TODO",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = PermissionsGlobalBean.class))),
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = PermissionsGlobalModel.class))),
                     @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
     Response setPermissionGlobal(
-            @NotNull PermissionsGlobalBean permissionsGlobalBean);
+            @NotNull PermissionsGlobalModel permissionsGlobalModel);
 
 }

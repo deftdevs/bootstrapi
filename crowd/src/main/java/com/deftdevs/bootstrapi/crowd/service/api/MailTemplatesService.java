@@ -1,12 +1,12 @@
 package com.deftdevs.bootstrapi.crowd.service.api;
 
-import com.deftdevs.bootstrapi.crowd.model.MailTemplatesBean;
+import com.deftdevs.bootstrapi.crowd.model.MailTemplatesModel;
 
 public interface MailTemplatesService {
 
-    MailTemplatesBean getMailTemplates();
+    MailTemplatesModel getMailTemplates();
 
-    MailTemplatesBean setMailTemplates(
-            MailTemplatesBean mailTemplatesBean);
+    MailTemplatesModel setMailTemplates(
+            MailTemplatesModel mailTemplatesModel);
 
 }

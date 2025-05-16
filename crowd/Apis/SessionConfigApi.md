@@ -10,7 +10,7 @@ All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
 
 <a name="getSessionConfig"></a>
 # **getSessionConfig**
-> SessionConfigBean getSessionConfig()
+> SessionConfigModel getSessionConfig()
 
 Get the session config
 
@@ -19,7 +19,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SessionConfigBean**](../Models/SessionConfigBean.md)
+[**SessionConfigModel**](../Models/SessionConfigModel.md)
 
 ### Authorization
 
@@ -32,7 +32,7 @@ This endpoint does not need any parameter.
 
 <a name="setSessionConfig"></a>
 # **setSessionConfig**
-> SessionConfigBean setSessionConfig(SessionConfigBean)
+> SessionConfigModel setSessionConfig(SessionConfigModel)
 
 Set the session config
 
@@ -40,11 +40,11 @@ Set the session config
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **SessionConfigBean** | [**SessionConfigBean**](../Models/SessionConfigBean.md)|  | [optional] |
+| **SessionConfigModel** | [**SessionConfigModel**](../Models/SessionConfigModel.md)|  | [optional] |
 
 ### Return type
 
-[**SessionConfigBean**](../Models/SessionConfigBean.md)
+[**SessionConfigModel**](../Models/SessionConfigModel.md)
 
 ### Authorization
 

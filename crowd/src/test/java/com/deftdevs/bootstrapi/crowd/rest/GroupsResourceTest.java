@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
-import com.deftdevs.bootstrapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -31,14 +31,14 @@ public class GroupsResourceTest {
 
     @Test
     public void testSetGroups() {
-        final List<GroupBean> groupBeans = Collections.singletonList(GroupBean.EXAMPLE_1);
-        doReturn(groupBeans).when(groupsService).setGroups(anyLong(), any());
+        final List<GroupModel> groupModels = Collections.singletonList(GroupModel.EXAMPLE_1);
+        doReturn(groupModels).when(groupsService).setGroups(anyLong(), any());
 
-        final Response response = groupsResource.setGroups(0L, groupBeans);
+        final Response response = groupsResource.setGroups(0L, groupModels);
         assertEquals(200, response.getStatus());
 
-        final List<GroupBean> responseGroupBeans = (List<GroupBean>) response.getEntity();
-        assertEquals(groupBeans, responseGroupBeans);
+        final List<GroupModel> responseGroupModels = (List<GroupModel>) response.getEntity();
+        assertEquals(groupModels, responseGroupModels);
     }
 
 }

@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.commons.exception;
 
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
-import com.deftdevs.bootstrapi.commons.model.GroupBean;
+import com.deftdevs.bootstrapi.commons.model.GroupModel;
 
 @SuppressWarnings("java:S110")
 public class GroupNotFoundException extends NotFoundException {
@@ -21,9 +21,9 @@ public class GroupNotFoundException extends NotFoundException {
     }
 
     public GroupNotFoundException(
-            final GroupBean groupBean) {
+            final GroupModel groupModel) {
 
-        this(groupBean.getName());
+        this(groupModel.getName());
     }
 
 }

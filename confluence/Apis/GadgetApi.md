@@ -12,21 +12,21 @@ All URIs are relative to *https://&lt;CONFLUENCE_URL&gt;/rest/bootstrapi/1*
 
 <a name="createGadget"></a>
 # **createGadget**
-> GadgetBean createGadget(GadgetBean)
+> GadgetModel createGadget(GadgetModel)
 
 Add a gadget
 
-    Upon successful request, returns a &#x60;GadgetBean&#x60; object of the created gadget.
+    Upon successful request, returns a &#x60;GadgetModel&#x60; object of the created gadget.
 
 ### Parameters
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **GadgetBean** | [**GadgetBean**](../Models/GadgetBean.md)|  | |
+| **GadgetModel** | [**GadgetModel**](../Models/GadgetModel.md)|  | |
 
 ### Return type
 
-[**GadgetBean**](../Models/GadgetBean.md)
+[**GadgetModel**](../Models/GadgetModel.md)
 
 ### Authorization
 
@@ -64,7 +64,7 @@ null (empty response body)
 
 <a name="getGadget"></a>
 # **getGadget**
-> GadgetBean getGadget(id)
+> GadgetModel getGadget(id)
 
 Get a gadget
 
@@ -76,7 +76,7 @@ Get a gadget
 
 ### Return type
 
-[**GadgetBean**](../Models/GadgetBean.md)
+[**GadgetModel**](../Models/GadgetModel.md)
 
 ### Authorization
 
@@ -89,7 +89,7 @@ Get a gadget
 
 <a name="updateGadget"></a>
 # **updateGadget**
-> GadgetBean updateGadget(id, GadgetBean)
+> GadgetModel updateGadget(id, GadgetModel)
 
 Update a gadget
 
@@ -98,11 +98,11 @@ Update a gadget
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | **Long**|  | [default to null] |
-| **GadgetBean** | [**GadgetBean**](../Models/GadgetBean.md)|  | |
+| **GadgetModel** | [**GadgetModel**](../Models/GadgetModel.md)|  | |
 
 ### Return type
 
-[**GadgetBean**](../Models/GadgetBean.md)
+[**GadgetModel**](../Models/GadgetModel.md)
 
 ### Authorization
 

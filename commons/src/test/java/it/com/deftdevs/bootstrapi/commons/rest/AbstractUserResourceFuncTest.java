@@ -1,7 +1,7 @@
 package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.UserBean;
+import com.deftdevs.bootstrapi.commons.model.UserModel;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
@@ -21,40 +21,40 @@ public abstract class AbstractUserResourceFuncTest {
 
     @Test
     void testGetUser() throws Exception {
-        final UserBean exampleBean = getExampleBean();
-        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleBean))
+        final UserModel exampleModel = getExampleModel();
+        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleModel))
                 .request();
         assertEquals(Response.Status.OK.getStatusCode(), usersResponse.statusCode());
 
-        final UserBean userBean = objectMapper.readValue(usersResponse.body(), UserBean.class);
-        assertNotNull(userBean);
+        final UserModel userModel = objectMapper.readValue(usersResponse.body(), UserModel.class);
+        assertNotNull(userModel);
     }
 
     @Test
     void testSetUserEmailAddress() throws Exception {
-        final UserBean exampleBean = getExampleBean();
-        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleBean))
-                .request(HttpMethod.PUT, exampleBean);
+        final UserModel exampleModel = getExampleModel();
+        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleModel))
+                .request(HttpMethod.PUT, exampleModel);
         assertEquals(Response.Status.OK.getStatusCode(), usersResponse.statusCode());
         
-        final UserBean userBean = objectMapper.readValue(usersResponse.body(), UserBean.class);
-        assertEquals(exampleBean.getEmail(), userBean.getEmail());
+        final UserModel userModel = objectMapper.readValue(usersResponse.body(), UserModel.class);
+        assertEquals(exampleModel.getEmail(), userModel.getEmail());
     }
 
     @Test
     void testSetUserPassword() throws Exception {
-        final UserBean exampleBean = getExampleBean();
+        final UserModel exampleModel = getExampleModel();
         final HttpResponse<String> usersResponse = HttpRequestHelper
-                .builder(BootstrAPI.USER + "/" + BootstrAPI.USER_PASSWORD + getUserNameQueryParam(exampleBean))
+                .builder(BootstrAPI.USER + "/" + BootstrAPI.USER_PASSWORD + getUserNameQueryParam(exampleModel))
                 .contentMediaType(MediaType.TEXT_PLAIN)
-                .request(HttpMethod.PUT, exampleBean.getPassword());
+                .request(HttpMethod.PUT, exampleModel.getPassword());
         assertEquals(Response.Status.OK.getStatusCode(), usersResponse.statusCode());
     }
 
     @Test
     public void testGetUserUnauthenticated() throws Exception {
-        final UserBean exampleBean = getExampleBean();
-        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleBean))
+        final UserModel exampleModel = getExampleModel();
+        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleModel))
                 .username("wrong")
                 .password("password")
                 .request();
@@ -63,18 +63,18 @@ public abstract class AbstractUserResourceFuncTest {
 
     @Test
     public void testSetUserEmailAddressUnauthenticated() throws Exception {
-        final UserBean exampleBean = getExampleBean();
-        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleBean))
+        final UserModel exampleModel = getExampleModel();
+        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleModel))
                 .username("wrong")
                 .password("password")
-                .request(HttpMethod.PUT, exampleBean);
+                .request(HttpMethod.PUT, exampleModel);
         assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), usersResponse.statusCode());
     }
 
     @Test
     void testGetUserUnauthorized() throws Exception {
-        final UserBean exampleBean = getExampleBean();
-        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleBean))
+        final UserModel exampleModel = getExampleModel();
+        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleModel))
                 .username("user")
                 .password("user")
                 .request();
@@ -83,19 +83,19 @@ public abstract class AbstractUserResourceFuncTest {
 
     @Test
     void testSetUserEmailAddressUnauthorized() throws Exception {
-        final UserBean exampleBean = getExampleBean();
-        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleBean))
+        final UserModel exampleModel = getExampleModel();
+        final HttpResponse<String> usersResponse = HttpRequestHelper.builder(BootstrAPI.USER + getUserNameQueryParam(exampleModel))
                 .username("user")
                 .password("user")
-                .request(HttpMethod.PUT, exampleBean);
+                .request(HttpMethod.PUT, exampleModel);
         assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), usersResponse.statusCode());
     }
 
-    protected String getUserNameQueryParam(UserBean userBean) {
-        return "?" + PARAM_USERNAME + "=" + userBean.getUsername();
+    protected String getUserNameQueryParam(UserModel userModel) {
+        return "?" + PARAM_USERNAME + "=" + userModel.getUsername();
     }
 
-    protected UserBean getExampleBean() {
-        return UserBean.EXAMPLE_3_ADMIN;
+    protected UserModel getExampleModel() {
+        return UserModel.EXAMPLE_3_ADMIN;
     }
 }

@@ -15,9 +15,9 @@ import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import com.google.common.base.Suppliers;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
-import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeBean;
+import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsBrandingService;
-import com.deftdevs.bootstrapi.jira.model.util.SettingsBrandingColorSchemeBeanUtil;
+import com.deftdevs.bootstrapi.jira.model.util.SettingsBrandingColorSchemeModelUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 
@@ -40,7 +40,7 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
     private final JiraHome jiraHome;
     private final JiraAuthenticationContext authenticationContext;
     private final PluginSettings globalSettings;
-    private final Supplier<LookAndFeelBean> lookAndFeelBeanSupplier;
+    private final Supplier<LookAndFeelBean> lookAndFeelModelSupplier;
     private final LookAndFeelProperties lookAndFeelProperties;
 
     @Inject
@@ -57,20 +57,20 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
         this.authenticationContext = authenticationContext;
         this.globalSettings = globalSettingsFactory.createGlobalSettings();
         //noinspection deprecation
-        this.lookAndFeelBeanSupplier = Suppliers.memoize(() -> LookAndFeelBean.getInstance(applicationProperties));
+        this.lookAndFeelModelSupplier = Suppliers.memoize(() -> LookAndFeelBean.getInstance(applicationProperties));
         this.lookAndFeelProperties = lookAndFeelProperties;
     }
 
     @Override
-    public SettingsBrandingColorSchemeBean getColourScheme() {
-        return SettingsBrandingColorSchemeBeanUtil.getSettingsBrandingColorSchemeBean(applicationProperties);
+    public SettingsBrandingColorSchemeModel getColourScheme() {
+        return SettingsBrandingColorSchemeModelUtil.getSettingsBrandingColorSchemeModel(applicationProperties);
     }
 
     @Override
-    public SettingsBrandingColorSchemeBean setColourScheme(
-            @NotNull SettingsBrandingColorSchemeBean colorSchemeBean) {
-        SettingsBrandingColorSchemeBeanUtil.setGlobalColorScheme(colorSchemeBean, false, applicationProperties);
-        return SettingsBrandingColorSchemeBeanUtil.getSettingsBrandingColorSchemeBean(applicationProperties);
+    public SettingsBrandingColorSchemeModel setColourScheme(
+            @NotNull SettingsBrandingColorSchemeModel colorSchemeModel) {
+        SettingsBrandingColorSchemeModelUtil.setGlobalColorScheme(colorSchemeModel, false, applicationProperties);
+        return SettingsBrandingColorSchemeModelUtil.getSettingsBrandingColorSchemeModel(applicationProperties);
     }
 
     @Override
@@ -88,7 +88,7 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
                 LookAndFeelConstants.JIRA_LOGO_FILENAME,
                 JIRA_SCALED_LOGO_FILENAME);
 
-        LookAndFeelBean lfb = lookAndFeelBeanSupplier.get();
+        LookAndFeelBean lfb = lookAndFeelModelSupplier.get();
         lfb.setLogoWidth(Integer.toString(logoUploader.getResizedWidth()));
         lfb.setLogoHeight(Integer.toString(logoUploader.getResizedHeight()));
         lfb.setLogoUrl(ensureUrlCorrect(logoUrl));
@@ -114,7 +114,7 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
                 LookAndFeelConstants.JIRA_SCALED_FAVICON_FILENAME,
                 LookAndFeelConstants.JIRA_FAVICON_IEFORMAT_FILENAME);
 
-        LookAndFeelBean lfb = lookAndFeelBeanSupplier.get();
+        LookAndFeelBean lfb = lookAndFeelModelSupplier.get();
         lfb.setFaviconUrl(ensureUrlCorrect(faviconUrl));
         lfb.setFaviconHiResUrl("/" + LookAndFeelConstants.JIRA_FAVICON_HIRES_FILENAME);
         globalSettings.put(LookAndFeelConstants.USING_CUSTOM_FAVICON, toStringTrueFalse(true));

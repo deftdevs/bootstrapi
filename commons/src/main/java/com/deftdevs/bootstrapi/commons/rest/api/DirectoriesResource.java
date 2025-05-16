@@ -1,7 +1,7 @@
 package com.deftdevs.bootstrapi.commons.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryBean;
+import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
@@ -24,7 +24,7 @@ public interface DirectoriesResource {
             summary = "Get all user directories",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = AbstractDirectoryBean.class))),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = AbstractDirectoryModel.class))),
                             description = "Returns all directories."
                     ),
                     @ApiResponse(
@@ -44,7 +44,7 @@ public interface DirectoriesResource {
             description = "NOTE: All existing directories with the same 'name' attribute are updated.",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = AbstractDirectoryBean.class))),
+                            responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = AbstractDirectoryModel.class))),
                             description = "Returns all directories."
                     ),
                     @ApiResponse(
@@ -55,7 +55,7 @@ public interface DirectoriesResource {
     )
     Response setDirectories(
             @QueryParam("test-connection") @DefaultValue("false") final boolean testConnection,
-            @NotNull final List<AbstractDirectoryBean> directories);
+            @NotNull final List<AbstractDirectoryModel> directories);
 
     @DELETE
     @Operation(

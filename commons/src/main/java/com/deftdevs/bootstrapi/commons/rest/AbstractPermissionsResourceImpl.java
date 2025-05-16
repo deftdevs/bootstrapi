@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.commons.rest;
 
-import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalBean;
+import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
 import com.deftdevs.bootstrapi.commons.rest.api.PermissionsResource;
 import com.deftdevs.bootstrapi.commons.service.api.PermissionsService;
 import org.springframework.stereotype.Component;
@@ -26,8 +26,8 @@ public abstract class AbstractPermissionsResourceImpl implements PermissionsReso
 
     @Override
     public Response setPermissionGlobal(
-            @NotNull final PermissionsGlobalBean permissionsGlobalBean) {
-        return Response.ok(permissionsService.setPermissionsGlobal(permissionsGlobalBean)).build();
+            @NotNull final PermissionsGlobalModel permissionsGlobalModel) {
+        return Response.ok(permissionsService.setPermissionsGlobal(permissionsGlobalModel)).build();
     }
 
 }
