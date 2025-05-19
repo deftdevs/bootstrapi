@@ -5,7 +5,6 @@ import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.embedded.impl.ImmutableDirectory;
 import com.atlassian.crowd.exception.DirectoryCurrentlySynchronisingException;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.web.ServiceUnavailableException;
@@ -15,9 +14,7 @@ import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 import com.deftdevs.bootstrapi.confluence.model.util.DirectoryModelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
@@ -27,7 +24,6 @@ import java.util.stream.Collectors;
 
 import static java.lang.String.format;
 
-@Component
 public class DirectoryServiceImpl implements DirectoriesService {
 
     private static final Logger log = LoggerFactory.getLogger(DirectoryServiceImpl.class);
@@ -35,8 +31,9 @@ public class DirectoryServiceImpl implements DirectoriesService {
 
     private final CrowdDirectoryService crowdDirectoryService;
 
-    @Inject
-    public DirectoryServiceImpl(@ComponentImport CrowdDirectoryService crowdDirectoryService) {
+    public DirectoryServiceImpl(
+            final CrowdDirectoryService crowdDirectoryService) {
+
         this.crowdDirectoryService = crowdDirectoryService;
     }
 

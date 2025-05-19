@@ -9,16 +9,13 @@ import com.atlassian.gadgets.directory.spi.ExternalGadgetSpec;
 import com.atlassian.gadgets.directory.spi.ExternalGadgetSpecId;
 import com.atlassian.gadgets.directory.spi.ExternalGadgetSpecStore;
 import com.atlassian.gadgets.spec.GadgetSpecFactory;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.commons.model.GadgetModel;
 import com.deftdevs.bootstrapi.commons.service.api.GadgetsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.List;
@@ -27,21 +24,19 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
-@Component
 public class GadgetsServiceImpl implements GadgetsService {
 
     private static final Logger log = LoggerFactory.getLogger(GadgetsServiceImpl.class);
-
-
+    
     private final ExternalGadgetSpecStore externalGadgetSpecStore;
     private final GadgetSpecFactory gadgetSpecFactory;
     private final LocaleManager localeManager;
 
-    @Inject
     public GadgetsServiceImpl(
-            @ComponentImport ExternalGadgetSpecStore externalGadgetSpecStore,
-            @ComponentImport GadgetSpecFactory gadgetSpecFactory,
-            @ComponentImport LocaleManager localeManager) {
+            final ExternalGadgetSpecStore externalGadgetSpecStore,
+            final GadgetSpecFactory gadgetSpecFactory,
+            final LocaleManager localeManager) {
+
         this.externalGadgetSpecStore = externalGadgetSpecStore;
         this.gadgetSpecFactory = gadgetSpecFactory;
         this.localeManager = localeManager;

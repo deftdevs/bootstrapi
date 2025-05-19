@@ -7,7 +7,6 @@ import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.crowd.manager.directory.DirectoryPermissionException;
 import com.atlassian.crowd.model.group.Group;
 import com.atlassian.crowd.model.group.GroupTemplate;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.deftdevs.bootstrapi.commons.exception.DirectoryNotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.GroupNotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
@@ -15,21 +14,16 @@ import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorExceptio
 import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import com.deftdevs.bootstrapi.crowd.model.util.GroupModelUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
-import org.springframework.stereotype.Component;
 
 import javax.annotation.Nullable;
-import javax.inject.Inject;
 import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
-@Component
 public class GroupsServiceImpl implements GroupsService {
 
-    @ComponentImport
     private final DirectoryManager directoryManager;
 
-    @Inject
     public GroupsServiceImpl(
             final DirectoryManager directoryManager) {
 

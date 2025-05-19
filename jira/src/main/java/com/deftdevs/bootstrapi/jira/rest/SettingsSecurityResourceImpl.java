@@ -7,9 +7,7 @@ import com.deftdevs.bootstrapi.jira.filter.SysadminOnlyResourceFilter;
 import com.deftdevs.bootstrapi.jira.service.api.JiraSettingsService;
 import com.sun.jersey.spi.container.ResourceFilters;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -20,10 +18,8 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @ResourceFilters(SysadminOnlyResourceFilter.class)
-@Component
 public class SettingsSecurityResourceImpl extends AbstractSettingsSecurityResourceImpl<SettingsSecurityModel, JiraSettingsService> {
 
-    @Inject
     public SettingsSecurityResourceImpl(JiraSettingsService settingsService) {
         super(settingsService);
     }

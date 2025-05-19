@@ -4,20 +4,16 @@ import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
 import com.deftdevs.bootstrapi.crowd.model.MailTemplatesModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.MailTemplateResource;
 import com.deftdevs.bootstrapi.crowd.service.api.MailTemplatesService;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
-@Component
 @SystemAdminOnly
 @Path(MailTemplateResource.MAIL_TEMPLATES)
 public class MailTemplatesResourceImpl implements MailTemplateResource {
 
     private final MailTemplatesService mailTemplatesService;
 
-    @Inject
     public MailTemplatesResourceImpl(
             final MailTemplatesService mailTemplatesService) {
 

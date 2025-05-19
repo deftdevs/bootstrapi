@@ -2,7 +2,6 @@ package com.deftdevs.bootstrapi.confluence.service;
 
 import com.atlassian.confluence.user.ConfluenceUser;
 import com.atlassian.confluence.user.UserAccessor;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.user.EntityException;
 import com.atlassian.user.User;
 import com.atlassian.user.UserManager;
@@ -12,24 +11,20 @@ import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.commons.model.UserModel;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
 import com.deftdevs.bootstrapi.confluence.model.util.UserModelUtil;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import java.util.List;
 
 import static com.deftdevs.bootstrapi.commons.util.ModelValidationUtil.validate;
 
-@Component
 public class UsersServiceImpl implements UsersService {
 
     private final UserManager userManager;
 
     private final UserAccessor userAccessor;
 
-    @Inject
     public UsersServiceImpl(
-            @ComponentImport final UserManager userManager,
-            @ComponentImport final UserAccessor userAccessor) {
+            final UserManager userManager,
+            final UserAccessor userAccessor) {
 
         this.userManager = userManager;
         this.userAccessor = userAccessor;

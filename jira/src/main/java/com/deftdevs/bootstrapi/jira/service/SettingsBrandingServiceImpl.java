@@ -10,18 +10,15 @@ import com.atlassian.jira.lookandfeel.LookAndFeelProperties;
 import com.atlassian.jira.lookandfeel.upload.LogoUploader;
 import com.atlassian.jira.lookandfeel.upload.UploadService;
 import com.atlassian.jira.security.JiraAuthenticationContext;
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.sal.api.pluginsettings.PluginSettings;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
-import com.google.common.base.Suppliers;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsBrandingService;
 import com.deftdevs.bootstrapi.jira.model.util.SettingsBrandingColorSchemeModelUtil;
+import com.google.common.base.Suppliers;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.FileInputStream;
@@ -32,7 +29,6 @@ import java.util.function.Supplier;
 import static com.atlassian.jira.lookandfeel.LookAndFeelConstants.JIRA_SCALED_LOGO_FILENAME;
 import static org.apache.commons.lang3.BooleanUtils.toStringTrueFalse;
 
-@Component
 public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     private final ApplicationProperties applicationProperties;
@@ -43,19 +39,19 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
     private final Supplier<LookAndFeelBean> lookAndFeelModelSupplier;
     private final LookAndFeelProperties lookAndFeelProperties;
 
-    @Inject
     public SettingsBrandingServiceImpl(
-            @ComponentImport ApplicationProperties applicationProperties,
-            @ComponentImport JiraAuthenticationContext authenticationContext,
-            @ComponentImport JiraHome jiraHome,
-            @ComponentImport PluginSettingsFactory globalSettingsFactory,
-            @ComponentImport LookAndFeelProperties lookAndFeelProperties,
-            @ComponentImport UploadService uploadService) {
+            final ApplicationProperties applicationProperties,
+            final JiraAuthenticationContext authenticationContext,
+            final JiraHome jiraHome,
+            final PluginSettingsFactory pluginSettingsFactory,
+            final LookAndFeelProperties lookAndFeelProperties,
+            final UploadService uploadService) {
+
         this.applicationProperties = applicationProperties;
         this.uploadService = uploadService;
         this.jiraHome = jiraHome;
         this.authenticationContext = authenticationContext;
-        this.globalSettings = globalSettingsFactory.createGlobalSettings();
+        this.globalSettings = pluginSettingsFactory.createGlobalSettings();
         //noinspection deprecation
         this.lookAndFeelModelSupplier = Suppliers.memoize(() -> LookAndFeelBean.getInstance(applicationProperties));
         this.lookAndFeelProperties = lookAndFeelProperties;

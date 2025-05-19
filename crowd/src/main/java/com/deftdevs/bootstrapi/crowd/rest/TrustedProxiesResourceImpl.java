@@ -3,21 +3,17 @@ package com.deftdevs.bootstrapi.crowd.rest;
 import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
 import com.deftdevs.bootstrapi.crowd.rest.api.TrustedProxiesResource;
 import com.deftdevs.bootstrapi.crowd.service.api.TrustedProxiesService;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.List;
 
-@Component
 @SystemAdminOnly
 @Path(TrustedProxiesResource.TRUSTED_PROXIES)
 public class TrustedProxiesResourceImpl implements TrustedProxiesResource {
 
     private final TrustedProxiesService trustedProxiesService;
 
-    @Inject
     public TrustedProxiesResourceImpl(
             final TrustedProxiesService trustedProxiesService) {
 

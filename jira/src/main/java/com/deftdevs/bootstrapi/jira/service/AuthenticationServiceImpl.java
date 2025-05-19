@@ -1,6 +1,5 @@
 package com.deftdevs.bootstrapi.jira.service;
 
-import com.atlassian.plugin.spring.scanner.annotation.imports.ComponentImport;
 import com.atlassian.plugins.authentication.api.config.IdpConfig;
 import com.atlassian.plugins.authentication.api.config.IdpConfigService;
 import com.atlassian.plugins.authentication.api.config.SsoConfig;
@@ -11,7 +10,6 @@ import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoModel;
 import com.deftdevs.bootstrapi.jira.model.util.AuthenticationIdpModelUtil;
 import com.deftdevs.bootstrapi.jira.model.util.AuthenticationSsoModelUtil;
 import com.deftdevs.bootstrapi.jira.service.api.JiraAuthenticationService;
-import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
 import java.util.List;
@@ -19,13 +17,9 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-@Component
 public class AuthenticationServiceImpl implements JiraAuthenticationService {
 
-    @ComponentImport
     private final IdpConfigService idpConfigService;
-
-    @ComponentImport
     private final SsoConfigService ssoConfigService;
 
     public AuthenticationServiceImpl(

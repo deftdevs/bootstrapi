@@ -5,18 +5,13 @@ import com.atlassian.crowd.manager.property.PropertyManager;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.crowd.model.MailTemplatesModel;
 import com.deftdevs.bootstrapi.crowd.service.api.MailTemplatesService;
-import org.springframework.stereotype.Component;
-
-import javax.inject.Inject;
 
 import static com.atlassian.crowd.model.property.Property.*;
 
-@Component
 public class MailTemplatesServiceImpl implements MailTemplatesService {
 
     private final PropertyManager propertyManager;
 
-    @Inject
     public MailTemplatesServiceImpl(
             final PropertyManager propertyManager) {
 

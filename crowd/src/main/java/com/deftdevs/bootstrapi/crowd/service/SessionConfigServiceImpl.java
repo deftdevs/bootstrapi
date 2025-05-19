@@ -3,16 +3,11 @@ package com.deftdevs.bootstrapi.crowd.service;
 import com.atlassian.crowd.manager.property.PropertyManager;
 import com.deftdevs.bootstrapi.crowd.model.SessionConfigModel;
 import com.deftdevs.bootstrapi.crowd.service.api.SessionConfigService;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
-
-@Component
 public class SessionConfigServiceImpl implements SessionConfigService {
 
     private final PropertyManager propertyManager;
 
-    @Inject
     public SessionConfigServiceImpl(
             final PropertyManager propertyManager) {
 

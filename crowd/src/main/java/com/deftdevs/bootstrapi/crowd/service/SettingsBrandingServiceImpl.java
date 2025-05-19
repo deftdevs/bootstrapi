@@ -7,11 +7,9 @@ import com.atlassian.crowd.util.ImageInfo;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageModel;
-import com.deftdevs.bootstrapi.crowd.service.api.SettingsBrandingService;
+import com.deftdevs.bootstrapi.crowd.service.api.CrowdSettingsBrandingService;
 import org.apache.commons.io.FileUtils;
-import org.springframework.stereotype.Component;
 
-import javax.inject.Inject;
 import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.IOException;
@@ -23,12 +21,10 @@ import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@Component
-public class SettingsBrandingServiceImpl implements SettingsBrandingService {
+public class SettingsBrandingServiceImpl implements CrowdSettingsBrandingService {
 
     private final PropertyManager propertyManager;
 
-    @Inject
     public SettingsBrandingServiceImpl(
             final PropertyManager propertyManager) {
 

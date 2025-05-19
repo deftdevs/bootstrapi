@@ -88,14 +88,15 @@
         <atlassian.authentication.version>5.3.1</atlassian.authentication.version>
         <atlassian.oauth.version>6.1.9</atlassian.oauth.version>
         <atlassian.sal.version>6.0.5</atlassian.sal.version>
-        <atlassian.plugins-osgi-testrunner.version>2.0.10</atlassian.plugins-osgi-testrunner.version>
-        <atlassian.spring-scanner.version>5.1.0</atlassian.spring-scanner.version>
+        <atlassian.plugins.osgi.javaconfig.version>0.6.0</atlassian.plugins.osgi.javaconfig.version>
+        <atlassian.plugins.osgi.testrunner.version>2.0.10</atlassian.plugins.osgi.testrunner.version>
         <jacoco.maven-plugin.version>0.8.13</jacoco.maven-plugin.version>
         <lombok.version>1.18.38</lombok.version>
         <maven.compiler-plugin.version>3.14.0</maven.compiler-plugin.version>
         <maven.release-plugin.version>3.1.1</maven.release-plugin.version>
         <maven.resources-plugin.version>3.3.1</maven.resources-plugin.version>
         <openapi-generator.version>7.13.0</openapi-generator.version>
+        <osgi.version>8.0.0</osgi.version>
         <swagger.version>2.2.32</swagger.version>
         <!-- ... -->
         <hibernate-validator.version>6.2.5.Final</hibernate-validator.version>
@@ -192,14 +193,20 @@
 
             <dependency>
                 <groupId>com.atlassian.plugins</groupId>
-                <artifactId>atlassian-plugins-osgi-testrunner</artifactId>
-                <version>${atlassian.plugins-osgi-testrunner.version}</version>
+                <artifactId>atlassian-plugins-osgi-javaconfig</artifactId>
+                <version>${atlassian.plugins.osgi.javaconfig.version}</version>
             </dependency>
 
             <dependency>
-                <groupId>com.atlassian.plugin</groupId>
-                <artifactId>atlassian-spring-scanner-annotation</artifactId>
-                <version>${atlassian.spring-scanner.version}</version>
+                <groupId>com.atlassian.plugins</groupId>
+                <artifactId>atlassian-plugins-osgi-testrunner</artifactId>
+                <version>${atlassian.plugins.osgi.testrunner.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>osgi.core</artifactId>
+                <version>${osgi.version}</version>
             </dependency>
 
             <dependency>
@@ -267,12 +274,6 @@
                     <groupId>com.atlassian.maven.plugins</groupId>
                     <artifactId>jira-maven-plugin</artifactId>
                     <version>${atlassian.amps.version}</version>
-                </plugin>
-
-                <plugin>
-                    <groupId>com.atlassian.plugin</groupId>
-                    <artifactId>atlassian-spring-scanner-maven-plugin</artifactId>
-                    <version>${atlassian.spring-scanner.version}</version>
                 </plugin>
 
                 <plugin>
