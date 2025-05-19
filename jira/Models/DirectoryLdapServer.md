@@ -3,7 +3,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **host** | **String** |  | [optional] [default to null] |
+| **host** | **String** |  | [default to null] |
 | **port** | **Integer** |  | [optional] [default to null] |
 | **useSsl** | **Boolean** |  | [optional] [default to null] |
 | **username** | **String** |  | [optional] [default to null] |

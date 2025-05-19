@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 
+import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URI;
@@ -32,15 +33,18 @@ public class DirectoryCrowdModel extends AbstractDirectoryModel {
     public static class DirectoryCrowdServer {
 
         @XmlElement
+        @NotNull
         private URI url;
 
         @XmlElement
         private DirectoryCrowdServerProxy proxy;
 
         @XmlElement
+        @NotNull
         private String appUsername;
 
         @XmlElement
+        @NotNull
         private String appPassword;
 
         @XmlElement
