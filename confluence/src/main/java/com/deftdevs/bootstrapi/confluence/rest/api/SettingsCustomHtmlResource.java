@@ -54,6 +54,6 @@ public interface SettingsCustomHtmlResource {
             }
     )
     Response setCustomHtml(
-            @NotNull final SettingsCustomHtmlModel bean);
+            final SettingsCustomHtmlModel bean);
 
 }

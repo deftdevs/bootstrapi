@@ -26,7 +26,6 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.function.Supplier;
 
-import static com.atlassian.jira.lookandfeel.LookAndFeelConstants.JIRA_SCALED_LOGO_FILENAME;
 import static org.apache.commons.lang3.BooleanUtils.toStringTrueFalse;
 
 public class SettingsBrandingServiceImpl implements SettingsBrandingService {
@@ -64,31 +63,31 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     @Override
     public SettingsBrandingColorSchemeModel setColourScheme(
-            @NotNull SettingsBrandingColorSchemeModel colorSchemeModel) {
+            SettingsBrandingColorSchemeModel colorSchemeModel) {
         SettingsBrandingColorSchemeModelUtil.setGlobalColorScheme(colorSchemeModel, false, applicationProperties);
         return SettingsBrandingColorSchemeModelUtil.getSettingsBrandingColorSchemeModel(applicationProperties);
     }
 
     @Override
     public InputStream getLogo() {
-        return getLogoStream(JIRA_SCALED_LOGO_FILENAME);
+        return getLogoStream(LookAndFeelConstants.JIRA_SCALED_DEFAULT_LOGO_FILENAME);
     }
 
     @Override
     public void setLogo(
-            @NotNull InputStream inputStream) {
+            InputStream inputStream) {
 
         ImageScaler imageScaler = new ImageScaler();
         LogoUploader logoUploader = new LogoUploader(applicationProperties, jiraHome, imageScaler, authenticationContext.getI18nHelper(), uploadService);
         String logoUrl = logoUploader.saveLogo(inputStream,
-                LookAndFeelConstants.JIRA_LOGO_FILENAME,
-                JIRA_SCALED_LOGO_FILENAME);
+                LookAndFeelConstants.JIRA_DEFAULT_LOGO_FILENAME,
+                LookAndFeelConstants.JIRA_SCALED_DEFAULT_LOGO_FILENAME);
 
         LookAndFeelBean lfb = lookAndFeelModelSupplier.get();
         lfb.setLogoWidth(Integer.toString(logoUploader.getResizedWidth()));
         lfb.setLogoHeight(Integer.toString(logoUploader.getResizedHeight()));
         lfb.setLogoUrl(ensureUrlCorrect(logoUrl));
-        globalSettings.put(LookAndFeelConstants.USING_CUSTOM_LOGO, toStringTrueFalse(true));
+        globalSettings.put(LookAndFeelConstants.USING_CUSTOM_DEFAULT_LOGO, toStringTrueFalse(true));
 
         lookAndFeelProperties.setLogoChoice(LogoChoice.UPLOAD);
     }
@@ -100,7 +99,7 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     @Override
     public void setFavicon(
-            @NotNull InputStream inputStream) {
+            InputStream inputStream) {
 
         ImageScaler imageScaler = new ImageScaler();
         final LogoUploader logoUploader = new LogoUploader(applicationProperties, jiraHome, imageScaler, authenticationContext.getI18nHelper(), uploadService);

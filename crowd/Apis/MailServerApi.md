@@ -40,7 +40,7 @@ Set the default SMTP mail server
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **MailServerSmtpModel** | [**MailServerSmtpModel**](../Models/MailServerSmtpModel.md)|  | |
+| **MailServerSmtpModel** | [**MailServerSmtpModel**](../Models/MailServerSmtpModel.md)|  | [optional] |
 
 ### Return type
 

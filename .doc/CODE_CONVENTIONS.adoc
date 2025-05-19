@@ -36,7 +36,6 @@ Example:
 public class EntityModel {
 
     @XmlElement
-    @NotNull
     private String name;
 
     @XmlElement
@@ -142,7 +141,7 @@ public interface EntitiesResource {
     )
     Response addEntity(
             @QueryParam("doSomethingAfterAdding") @DefaultValue("false") final boolean doSomethingAfterAdding,
-            @NotNull final EntityModel entity);
+            final EntityModel entity);
 
 }
 ----
@@ -185,7 +184,7 @@ public class EntitiesResourceImpl implements EntitiesResource {
     @Override
     public Response addEntity(
             final boolean doSomethingAfterAdding,
-            @NotNull final EntityModel entity) {
+            final EntityModel entity) {
 
         final ErrorCollection errorCollection = new ErrorCollection();
         try {

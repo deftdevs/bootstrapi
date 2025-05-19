@@ -1,6 +1,6 @@
 package com.deftdevs.bootstrapi.confluence.rest;
 
-import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
+import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.rest.AbstractGadgetsResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.GadgetsService;
@@ -16,4 +16,5 @@ public class GadgetsResourceImpl extends AbstractGadgetsResourceImpl {
 
         super(gadgetsService);
     }
+
 }

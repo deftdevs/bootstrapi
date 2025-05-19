@@ -31,7 +31,7 @@ public class ApplicationLinkModelUtil {
      */
     @NotNull
     public static ApplicationLinkModel toApplicationLinkModel(
-            @NotNull final ApplicationLink applicationLink) {
+            final ApplicationLink applicationLink) {
 
         final ApplicationLinkModel applicationLinkModel = new ApplicationLinkModel();
         applicationLinkModel.setUuid(UUID.fromString(applicationLink.getId().get()));
@@ -54,10 +54,10 @@ public class ApplicationLinkModelUtil {
      */
     @NotNull
     public static ApplicationLinkModel toApplicationLinkModel(
-            @NotNull final ApplicationLink applicationLink,
-            @NotNull final OAuthConfig outgoingOAuthConfig,
-            @NotNull final OAuthConfig incomingOAuthConfig,
-            @NotNull final ApplicationLinkModel.ApplicationLinkStatus applicationLinkStatus) {
+            final ApplicationLink applicationLink,
+            final OAuthConfig outgoingOAuthConfig,
+            final OAuthConfig incomingOAuthConfig,
+            final ApplicationLinkModel.ApplicationLinkStatus applicationLinkStatus) {
 
         final ApplicationLinkModel applicationLinkModel = toApplicationLinkModel(applicationLink);
         applicationLinkModel.setOutgoingAuthType(toApplicationLinkAuthType(outgoingOAuthConfig));
@@ -73,7 +73,7 @@ public class ApplicationLinkModelUtil {
      */
     @NotNull
     public static ApplicationLinkDetails toApplicationLinkDetails(
-            @NotNull final ApplicationLinkModel applicationLinkModel) {
+            final ApplicationLinkModel applicationLinkModel) {
 
         return ApplicationLinkDetails.builder()
                 .name(applicationLinkModel.getName())
@@ -92,7 +92,7 @@ public class ApplicationLinkModelUtil {
      */
     @NotNull
     public static ApplicationLinkModel.ApplicationLinkAuthType toApplicationLinkAuthType(
-            @NotNull final OAuthConfig oAuthConfig) {
+            final OAuthConfig oAuthConfig) {
 
         if (!oAuthConfig.isEnabled()) {
             return ApplicationLinkModel.ApplicationLinkAuthType.DISABLED;
@@ -118,7 +118,7 @@ public class ApplicationLinkModelUtil {
      */
     @NotNull
     public static OAuthConfig toOAuthConfig(
-            @NotNull final ApplicationLinkModel.ApplicationLinkAuthType applicationLinkAuthType) {
+            final ApplicationLinkModel.ApplicationLinkAuthType applicationLinkAuthType) {
 
         if (applicationLinkAuthType.equals(ApplicationLinkModel.ApplicationLinkAuthType.OAUTH)) {
             return OAuthConfig.createDefaultOAuthConfig();
@@ -138,7 +138,7 @@ public class ApplicationLinkModelUtil {
      * @return the linktype
      */
     private static ApplicationLinkType getLinkTypeFromAppType(
-            @NotNull final ApplicationType type) {
+            final ApplicationType type) {
 
         if (type instanceof BambooApplicationType) {
             return BAMBOO;

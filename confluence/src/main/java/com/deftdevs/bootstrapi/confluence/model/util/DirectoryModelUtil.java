@@ -1,19 +1,14 @@
 package com.deftdevs.bootstrapi.confluence.model.util;
 
-import com.atlassian.crowd.directory.RemoteCrowdDirectory;
+import com.atlassian.crowd.directory.RemoteDirectory;
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.model.directory.ImmutableDirectory;
-import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
-import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdModel;
+import com.deftdevs.bootstrapi.commons.model.*;
 import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdModel.DirectoryCrowdAdvanced;
 import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdModel.DirectoryCrowdServer;
 import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdModel.DirectoryCrowdServer.DirectoryCrowdServerProxy;
-import com.deftdevs.bootstrapi.commons.model.DirectoryGenericModel;
-import com.deftdevs.bootstrapi.commons.model.DirectoryInternalModel;
-import com.deftdevs.bootstrapi.commons.model.DirectoryLdapModel;
 
-import javax.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,13 +21,12 @@ import static com.deftdevs.bootstrapi.commons.util.ConversionUtil.*;
 public class DirectoryModelUtil {
 
     /**
-     * Build directory directory.
+     * Build directory.
      *
      * @return the directory
      */
-    @NotNull
     public static Directory toDirectory(
-            @NotNull final DirectoryCrowdModel directoryModel) {
+            final DirectoryCrowdModel directoryModel) {
 
         final Map<String, String> attributes = new HashMap<>();
         if (directoryModel.getServer() != null) {
@@ -56,7 +50,7 @@ public class DirectoryModelUtil {
             attributes.put(SYNC_GROUP_MEMBERSHIP_AFTER_SUCCESSFUL_USER_AUTH_ENABLED, directoryModel.getAdvanced().getUpdateGroupMembershipMethod());
         }
 
-        return ImmutableDirectory.builder(directoryModel.getName(), DirectoryModelUtil.getDirectoryType(directoryModel), RemoteCrowdDirectory.class.getName())
+        return ImmutableDirectory.builder(directoryModel.getName(), DirectoryModelUtil.getDirectoryType(directoryModel), RemoteDirectory.class.getName())
                 .setActive(directoryModel.getActive() != null && directoryModel.getActive())
                 .setDescription(directoryModel.getDescription())
                 .setAttributes(attributes)
@@ -69,9 +63,8 @@ public class DirectoryModelUtil {
      * @param directory the directory
      * @return the user directory bean
      */
-    @NotNull
     public static AbstractDirectoryModel toDirectoryModel(
-            @NotNull final Directory directory) {
+            final Directory directory) {
 
         final Map<String, String> attributes = directory.getAttributes();
         final AbstractDirectoryModel directoryModel;
@@ -115,7 +108,8 @@ public class DirectoryModelUtil {
     }
 
     public static DirectoryType getDirectoryType(
-            @NotNull final AbstractDirectoryModel directoryModel) {
+            final AbstractDirectoryModel directoryModel) {
+
         if (directoryModel instanceof DirectoryInternalModel) {
             return DirectoryType.INTERNAL;
         } else if (directoryModel instanceof DirectoryCrowdModel) {

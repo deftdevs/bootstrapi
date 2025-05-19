@@ -15,7 +15,6 @@ import com.atlassian.applinks.internal.status.oauth.ApplinkOAuthStatus;
 import com.atlassian.applinks.spi.auth.AuthenticationConfigurationException;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
-import com.atlassian.applinks.spi.manifest.ManifestNotFoundException;
 import com.atlassian.applinks.spi.util.TypeAccessor;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.types.DefaultApplicationLink;
@@ -162,8 +161,7 @@ class DefaultApplicationLinkServiceTest {
     }
 
     @Test
-    void testAddApplicationLinkWithoutExistingTargetLink()
-            throws URISyntaxException, ManifestNotFoundException, NoAccessException, NoSuchApplinkException {
+    void testAddApplicationLinkWithoutExistingTargetLink() throws Exception {
 
         ApplicationLink applicationLink = createApplicationLink();
         ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();
@@ -182,7 +180,7 @@ class DefaultApplicationLinkServiceTest {
     }
 
     @Test
-    void testAddApplicationLinkWithExistingTargetLink() throws URISyntaxException, ManifestNotFoundException, NoAccessException, NoSuchApplinkException {
+    void testAddApplicationLinkWithExistingTargetLink() throws Exception {
         ApplicationLink applicationLink = createApplicationLink();
         ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();
 
@@ -202,7 +200,7 @@ class DefaultApplicationLinkServiceTest {
 
     @Test
     @Disabled
-    void testAddApplicationLinkWithAuthenticatorErrorIgnored() throws URISyntaxException, ManifestNotFoundException, AuthenticationConfigurationException, NoAccessException, NoSuchApplinkException {
+    void testAddApplicationLinkWithAuthenticatorErrorIgnored() throws Exception {
         ApplicationLink applicationLink = createApplicationLink();
         ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();
 
@@ -221,7 +219,7 @@ class DefaultApplicationLinkServiceTest {
 
     @Test
     @Disabled
-    void testAddApplicationLinkWithAuthenticatorErrorNOTIgnored() throws URISyntaxException, ManifestNotFoundException, AuthenticationConfigurationException {
+    void testAddApplicationLinkWithAuthenticatorErrorNOTIgnored() throws Exception {
         ApplicationLink applicationLink = createApplicationLink();
         ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();
 
@@ -237,7 +235,7 @@ class DefaultApplicationLinkServiceTest {
     }
 
     @Test
-    void testApplicationLinkTypeConverter() throws URISyntaxException, ManifestNotFoundException, NoAccessException, NoSuchApplinkException {
+    void testApplicationLinkTypeConverter() throws Exception {
         for (ApplicationLinkType linkType : ApplicationLinkType.values()) {
             ApplicationLink applicationLink = createApplicationLink();
             ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();

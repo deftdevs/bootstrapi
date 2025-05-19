@@ -2,7 +2,6 @@ package com.deftdevs.bootstrapi.commons.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 import java.util.UUID;
 
@@ -33,7 +32,7 @@ public interface ApplicationLinksService {
      * @return the updated application links
      */
     List<ApplicationLinkModel> setApplicationLinks(
-            @NotNull final List<ApplicationLinkModel> applicationLinkModels,
+            final List<ApplicationLinkModel> applicationLinkModels,
             boolean ignoreSetupErrors);
 
     /**
@@ -46,8 +45,8 @@ public interface ApplicationLinksService {
      * @return the updated application link
      */
     ApplicationLinkModel setApplicationLink(
-            @NotNull final UUID uuid,
-            @NotNull final ApplicationLinkModel applicationLinkModel,
+            final UUID uuid,
+            final ApplicationLinkModel applicationLinkModel,
             boolean ignoreSetupErrors);
 
     /**
@@ -59,7 +58,7 @@ public interface ApplicationLinksService {
      * @return the added application link
      */
     ApplicationLinkModel addApplicationLink(
-            @NotNull final ApplicationLinkModel applicationLinkModel,
+            final ApplicationLinkModel applicationLinkModel,
             boolean ignoreSetupErrors);
 
     /**
@@ -76,6 +75,6 @@ public interface ApplicationLinksService {
      * @param uuid the application link uuid to delete
      */
     void deleteApplicationLink(
-            @NotNull final UUID uuid);
+            final UUID uuid);
 
 }

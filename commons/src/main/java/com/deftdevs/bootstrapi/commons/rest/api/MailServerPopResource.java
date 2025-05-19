@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -61,6 +60,6 @@ public interface MailServerPopResource {
             }
     )
     Response setMailServerPop(
-            @NotNull final MailServerPopModel bean);
+            final MailServerPopModel bean);
 
 }
