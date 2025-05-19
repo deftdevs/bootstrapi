@@ -1,11 +1,17 @@
 package com.deftdevs.bootstrapi.confluence.config;
 
+import com.atlassian.confluence.languages.LocaleManager;
+import com.atlassian.gadgets.directory.spi.ExternalGadgetSpecStore;
+import com.atlassian.gadgets.spec.GadgetSpecFactory;
 import com.deftdevs.bootstrapi.commons.service.api.*;
 import com.deftdevs.bootstrapi.confluence.service.*;
 import com.deftdevs.bootstrapi.confluence.service.api.CachesService;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceAuthenticationService;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
+import com.deftdevs.bootstrapi.confluence.service.unavailable.GadgetsServiceUnavailableImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -53,11 +59,26 @@ public class ServiceConfig {
     }
 
     @Bean
+    @ConditionalOnBean({
+            ExternalGadgetSpecStore.class,
+            GadgetSpecFactory.class,
+            LocaleManager.class,
+    })
     public GadgetsService gadgetsService() {
         return new GadgetsServiceImpl(
                 atlassianConfig.externalGadgetSpecStore(),
                 atlassianConfig.gadgetSpecFactory(),
                 atlassianConfig.localeManager());
+    }
+
+    @Bean
+    @ConditionalOnMissingBean({
+            ExternalGadgetSpecStore.class,
+            GadgetSpecFactory.class,
+            LocaleManager.class,
+    })
+    public GadgetsService gadgetsService1() {
+        return new GadgetsServiceUnavailableImpl();
     }
 
     @Bean

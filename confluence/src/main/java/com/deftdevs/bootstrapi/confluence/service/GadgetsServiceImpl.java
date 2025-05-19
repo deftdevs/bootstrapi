@@ -32,9 +32,9 @@ public class GadgetsServiceImpl implements GadgetsService {
     private final LocaleManager localeManager;
 
     public GadgetsServiceImpl(
-            final ExternalGadgetSpecStore externalGadgetSpecStore,
-            final GadgetSpecFactory gadgetSpecFactory,
-            final LocaleManager localeManager) {
+            ExternalGadgetSpecStore externalGadgetSpecStore,
+            GadgetSpecFactory gadgetSpecFactory,
+            LocaleManager localeManager) {
 
         this.externalGadgetSpecStore = externalGadgetSpecStore;
         this.gadgetSpecFactory = gadgetSpecFactory;
@@ -138,7 +138,7 @@ public class GadgetsServiceImpl implements GadgetsService {
     private GadgetModel findGadget(
             final long id) {
 
-        Optional<GadgetModel> result = getGadgets().stream().filter(gadget -> gadget.getId().equals(id)).findFirst();
+        final Optional<GadgetModel> result = getGadgets().stream().filter(gadget -> gadget.getId().equals(id)).findFirst();
         if (result.isEmpty()) {
             throw new NotFoundException(String.format("gadget with id '%s' could not be found", id));
         } else {
