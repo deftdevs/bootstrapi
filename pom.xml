@@ -84,7 +84,7 @@
         <!-- other properties -->
         <atlassian.amps.version>9.3.4</atlassian.amps.version>
         <atlassian.platform.version>6.5.44</atlassian.platform.version>
-        <atlassian.applinks-plugin.version>10.3.0</atlassian.applinks-plugin.version>
+        <atlassian.applinks-plugin.version>10.3.1</atlassian.applinks-plugin.version>
         <atlassian.authentication.version>5.3.1</atlassian.authentication.version>
         <atlassian.oauth.version>6.1.9</atlassian.oauth.version>
         <atlassian.sal.version>6.0.5</atlassian.sal.version>
