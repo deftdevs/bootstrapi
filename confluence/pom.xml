@@ -54,7 +54,7 @@
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <ajp.port>8109</ajp.port>
         <!-- other properties -->
-        <confluence.ancillary.plugins.version>20.0.41</confluence.ancillary.plugins.version>
+        <confluence.ancillary.plugins.version>20.0.50</confluence.ancillary.plugins.version>
     </properties>
 
     <dependencyManagement>
