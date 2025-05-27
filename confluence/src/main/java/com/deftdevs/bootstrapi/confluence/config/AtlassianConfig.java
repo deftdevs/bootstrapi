@@ -14,8 +14,6 @@ import com.atlassian.confluence.themes.ColourSchemeManager;
 import com.atlassian.confluence.user.UserAccessor;
 import com.atlassian.crowd.embedded.api.CrowdDirectoryService;
 import com.atlassian.favicon.core.FaviconManager;
-import com.atlassian.gadgets.directory.spi.ExternalGadgetSpecStore;
-import com.atlassian.gadgets.spec.GadgetSpecFactory;
 import com.atlassian.mail.server.MailServerManager;
 import com.atlassian.oauth.consumer.ConsumerService;
 import com.atlassian.oauth.consumer.ConsumerTokenStore;
@@ -75,18 +73,8 @@ public class AtlassianConfig {
     }
 
     @Bean
-    public ExternalGadgetSpecStore externalGadgetSpecStore() {
-        return importOsgiService(ExternalGadgetSpecStore.class);
-    }
-
-    @Bean
     public FaviconManager faviconManager() {
         return importOsgiService(FaviconManager.class);
-    }
-
-    @Bean
-    public GadgetSpecFactory gadgetSpecFactory() {
-        return importOsgiService(GadgetSpecFactory.class);
     }
 
     @Bean

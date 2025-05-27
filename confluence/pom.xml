@@ -180,18 +180,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>com.atlassian.gadgets</groupId>
-            <artifactId>atlassian-gadgets-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.gadgets</groupId>
-            <artifactId>atlassian-gadgets-spi</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
         <!-- deprecated, see https://github.com/deftdevs/bootstrapi/issues/59 -->
         <dependency>
             <groupId>com.atlassian.plugins.rest</groupId>
