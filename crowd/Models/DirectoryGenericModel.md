@@ -9,6 +9,7 @@
 | **active** | **Boolean** |  | [optional] [default to null] |
 | **createdDate** | **Date** |  | [optional] [default to null] |
 | **updatedDate** | **Date** |  | [optional] [default to null] |
+| **testConnection** | **Boolean** |  | [optional] [default to null] |
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

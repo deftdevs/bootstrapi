@@ -1,6 +1,6 @@
 # AllApi
 
-All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
+All URIs are relative to *https://&lt;JIRA_URL&gt;/rest/bootstrapi/1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
