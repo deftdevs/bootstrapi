@@ -104,6 +104,7 @@
         <jersey-common.version>2.46</jersey-common.version>
         <junit.version>5.13.0</junit.version>
         <mockito.version>5.13.0</mockito.version>
+        <bytebuddy.version>1.17.5</bytebuddy.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
     </properties>
 
@@ -227,6 +228,18 @@
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-junit-jupiter</artifactId>
                 <version>${mockito.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy</artifactId>
+                <version>${bytebuddy.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>net.bytebuddy</groupId>
+                <artifactId>byte-buddy-agent</artifactId>
+                <version>${bytebuddy.version}</version>
             </dependency>
 
             <dependency>
