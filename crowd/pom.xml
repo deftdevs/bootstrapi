@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.deftdevs</groupId>
         <artifactId>bootstrapi-parent</artifactId>
-        <version>0.12.1-SNAPSHOT</version>
+        <version>1.0.0-RC1-SNAPSHOT</version>
     </parent>
 
     <artifactId>bootstrapi-crowd-plugin</artifactId>

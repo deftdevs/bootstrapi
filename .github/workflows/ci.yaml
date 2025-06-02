@@ -4,9 +4,8 @@ on:
   push:
     branches:
       - 'main'
+      - 'prepare-1.0'
   pull_request:
-    branches:
-      - 'main'
   merge_group:
 
 jobs:
