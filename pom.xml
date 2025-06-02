@@ -482,7 +482,7 @@
         </repository>
         <repository>
             <id>atlassian</id>
-            <url>https://packages.atlassian.com/mvn/maven-external</url>
+            <url>https://maven.artifacts.atlassian.com</url>
         </repository>
         <repository>
             <id>jenkins</id>
@@ -501,7 +501,7 @@
         </pluginRepository>
         <pluginRepository>
             <id>atlassian</id>
-            <url>https://packages.atlassian.com/mvn/maven-external</url>
+            <url>https://maven.artifacts.atlassian.com</url>
         </pluginRepository>
         <pluginRepository>
             <id>jenkins</id>
