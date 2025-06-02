@@ -28,9 +28,6 @@ public class BootstrAPI {
     public static final String ERROR                        = "error";
     public static final String ERRORS                       = "errors";
     public static final String FAVICON                      = "favicon";
-    public static final String GADGET                       = "gadget";
-    public static final String GADGETS                      = "gadgets";
-    public static final String GADGET_EXTERNAL              = "external";
     public static final String GROUP                        = "group";
     public static final String GROUPS                       = "groups";
     public static final String HTTP                         = "http";

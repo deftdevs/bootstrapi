@@ -53,14 +53,6 @@ public class ServiceConfig {
     }
 
     @Bean
-    public GadgetsService gadgetsService() {
-        return new GadgetsServiceImpl(
-                atlassianConfig.externalGadgetSpecStore(),
-                atlassianConfig.gadgetSpecFactory(),
-                atlassianConfig.localeManager());
-    }
-
-    @Bean
     public LicensesService licensesService() {
         return new LicensesServiceImpl(
                 atlassianConfig.licenseHandler());
