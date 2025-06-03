@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -35,7 +34,7 @@ public interface ApplicationLinkResource {
             }
     )
     Response getApplicationLink(
-            @PathParam("uuid") @NotNull final UUID uuid);
+            @PathParam("uuid") final UUID uuid);
 
     @POST
     @Consumes(MediaType.APPLICATION_JSON)
@@ -56,7 +55,7 @@ public interface ApplicationLinkResource {
     )
     Response createApplicationLink(
             @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
-            @NotNull final ApplicationLinkModel linkModel);
+            final ApplicationLinkModel linkModel);
 
     @PUT
     @Path("{uuid}")
@@ -77,9 +76,9 @@ public interface ApplicationLinkResource {
             }
     )
     Response updateApplicationLink(
-            @PathParam("uuid") @NotNull final UUID uuid,
+            @PathParam("uuid") final UUID uuid,
             @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
-            @NotNull final ApplicationLinkModel linksModelModels);
+            final ApplicationLinkModel linksModelModels);
 
     @DELETE
     @Path("{uuid}")
@@ -98,6 +97,6 @@ public interface ApplicationLinkResource {
             }
     )
     Response deleteApplicationLink(
-            @PathParam("uuid") @NotNull final UUID uuid);
+            @PathParam("uuid") final UUID uuid);
 
 }

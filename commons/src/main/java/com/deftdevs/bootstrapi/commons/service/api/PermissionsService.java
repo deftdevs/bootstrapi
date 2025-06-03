@@ -2,7 +2,6 @@ package com.deftdevs.bootstrapi.commons.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
 
-import javax.validation.constraints.NotNull;
 
 public interface PermissionsService {
 
@@ -20,6 +19,6 @@ public interface PermissionsService {
      * @return global permissions
      */
     PermissionsGlobalModel setPermissionsGlobal(
-            @NotNull PermissionsGlobalModel permissionsGlobalModel);
+            PermissionsGlobalModel permissionsGlobalModel);
 
 }

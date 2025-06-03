@@ -35,7 +35,7 @@ public interface GroupsResource {
             }
     )
     Response setGroups(
-            @NotNull @QueryParam("directoryId") final long directoryId,
-            @NotNull final List<GroupModel> groupModels);
+            @QueryParam("directoryId") final long directoryId,
+            final List<GroupModel> groupModels);
 
 }

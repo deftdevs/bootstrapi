@@ -19,7 +19,7 @@ Get a user
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **username** | **String**|  | [default to null] |
+| **username** | **String**|  | [optional] [default to null] |
 
 ### Return type
 
@@ -44,8 +44,8 @@ Update an user
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **username** | **String**|  | [default to null] |
-| **UserModel** | [**UserModel**](../Models/UserModel.md)|  | |
+| **username** | **String**|  | [optional] [default to null] |
+| **UserModel** | [**UserModel**](../Models/UserModel.md)|  | [optional] |
 
 ### Return type
 
@@ -70,8 +70,8 @@ Update a user password
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **username** | **String**|  | [default to null] |
-| **body** | **String**|  | |
+| **username** | **String**|  | [optional] [default to null] |
+| **body** | **String**|  | [optional] |
 
 ### Return type
 

@@ -2,7 +2,6 @@ package com.deftdevs.bootstrapi.commons.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public interface LicensesService {
@@ -29,6 +28,6 @@ public interface LicensesService {
      * @return the added license
      */
     LicenseModel addLicense(
-            @NotNull final String licenseModel);
+            final String licenseModel);
 
 }

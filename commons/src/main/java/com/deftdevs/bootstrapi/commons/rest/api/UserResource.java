@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -37,7 +36,7 @@ public interface UserResource {
             }
     )
     Response getUser(
-            @NotNull @QueryParam("username") final String username);
+            @QueryParam("username") final String username);
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -57,8 +56,8 @@ public interface UserResource {
             }
     )
     Response setUser(
-            @NotNull @QueryParam("username") final String username,
-            @NotNull final UserModel userModel);
+            @QueryParam("username") final String username,
+            final UserModel userModel);
 
     @PUT
     @Path(BootstrAPI.USER_PASSWORD)
@@ -79,7 +78,7 @@ public interface UserResource {
             }
     )
     Response setUserPassword(
-            @NotNull @QueryParam("username") final String username,
-            @NotNull final String password);
+            @QueryParam("username") final String username,
+            final String password);
 
 }

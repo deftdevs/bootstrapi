@@ -29,7 +29,7 @@ public class DirectoryModelUtil {
      */
     @NotNull
     public static Directory toDirectory(
-            @NotNull final DirectoryCrowdModel directoryModel) {
+            final DirectoryCrowdModel directoryModel) {
 
         final Map<String, String> attributes = new HashMap<>();
         if (directoryModel.getServer() != null) {
@@ -69,7 +69,7 @@ public class DirectoryModelUtil {
      */
     @NotNull
     public static AbstractDirectoryModel toDirectoryModel(
-            @NotNull final Directory directory) {
+            final Directory directory) {
 
         final Map<String, String> attributes = directory.getAttributes();
         final AbstractDirectoryModel directoryModel;
@@ -113,7 +113,7 @@ public class DirectoryModelUtil {
     }
 
     public static DirectoryType getDirectoryType(
-            @NotNull final AbstractDirectoryModel directoryModel) {
+            final AbstractDirectoryModel directoryModel) {
         if (directoryModel instanceof DirectoryInternalModel) {
             return DirectoryType.INTERNAL;
         } else if (directoryModel instanceof DirectoryCrowdModel) {
