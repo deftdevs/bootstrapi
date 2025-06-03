@@ -12,7 +12,6 @@ import com.deftdevs.bootstrapi.jira.model.util.PermissionsGlobalModelUtil;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import javax.validation.constraints.NotNull;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -37,14 +36,14 @@ public class PermissionsServiceImpl implements PermissionsService {
 
     @Override
     public PermissionsGlobalModel setPermissionsGlobal(
-            @NotNull final PermissionsGlobalModel permissionsGlobalModel) {
+            final PermissionsGlobalModel permissionsGlobalModel) {
 
         setPermissionsGlobalForGroup(permissionsGlobalModel);
         return getPermissionsGlobal();
     }
 
     private void setPermissionsGlobalForGroup(
-            @NotNull final PermissionsGlobalModel permissionsGlobalModel) {
+            final PermissionsGlobalModel permissionsGlobalModel) {
 
         final Map<String, Set<String>> existingGroupPermissions = getGlobalPermissions().stream()
                 .filter(permission -> permission.getGroup() != null)

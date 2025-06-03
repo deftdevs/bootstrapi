@@ -160,7 +160,7 @@ Set the banner
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **SettingsBannerModel** | [**SettingsBannerModel**](../Models/SettingsBannerModel.md)|  | |
+| **SettingsBannerModel** | [**SettingsBannerModel**](../Models/SettingsBannerModel.md)|  | [optional] |
 
 ### Return type
 

@@ -64,7 +64,7 @@ Set the default POP mail server
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **MailServerPopModel** | [**MailServerPopModel**](../Models/MailServerPopModel.md)|  | |
+| **MailServerPopModel** | [**MailServerPopModel**](../Models/MailServerPopModel.md)|  | [optional] |
 
 ### Return type
 

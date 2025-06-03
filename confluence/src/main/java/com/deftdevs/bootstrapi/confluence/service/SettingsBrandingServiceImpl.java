@@ -20,7 +20,6 @@ import com.deftdevs.bootstrapi.commons.service.api.SettingsBrandingService;
 import com.deftdevs.bootstrapi.confluence.model.util.SettingsBrandingColorSchemeModelUtil;
 import org.apache.commons.io.FileUtils;
 
-import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
