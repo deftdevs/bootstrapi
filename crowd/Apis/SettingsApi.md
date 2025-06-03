@@ -115,7 +115,7 @@ Set the general settings
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **SettingsModel** | [**SettingsModel**](../Models/SettingsModel.md)|  | |
+| **SettingsModel** | [**SettingsModel**](../Models/SettingsModel.md)|  | [optional] |
 
 ### Return type
 

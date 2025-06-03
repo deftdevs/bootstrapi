@@ -2,7 +2,6 @@ package com.deftdevs.bootstrapi.commons.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.SettingsModel;
 
-import javax.validation.constraints.NotNull;
 
 public interface SettingsService<B extends SettingsModel> {
 
@@ -20,6 +19,6 @@ public interface SettingsService<B extends SettingsModel> {
      * @return the settings
      */
     B setSettingsGeneral(
-            @NotNull final B settingsModel);
+            final B settingsModel);
 
 }

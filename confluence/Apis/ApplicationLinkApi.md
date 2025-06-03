@@ -12,7 +12,7 @@ All URIs are relative to *https://&lt;CONFLUENCE_URL&gt;/rest/bootstrapi/1*
 
 <a name="createApplicationLink"></a>
 # **createApplicationLink**
-> ApplicationLinkModel createApplicationLink(ApplicationLinkModel, ignore-setup-errors)
+> ApplicationLinkModel createApplicationLink(ignore-setup-errors, ApplicationLinkModel)
 
 Create an application link
 
@@ -20,8 +20,8 @@ Create an application link
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ApplicationLinkModel** | [**ApplicationLinkModel**](../Models/ApplicationLinkModel.md)|  | |
 | **ignore-setup-errors** | **Boolean**|  | [optional] [default to false] |
+| **ApplicationLinkModel** | [**ApplicationLinkModel**](../Models/ApplicationLinkModel.md)|  | [optional] |
 
 ### Return type
 
@@ -90,7 +90,7 @@ Get an application link
 
 <a name="updateApplicationLink"></a>
 # **updateApplicationLink**
-> ApplicationLinkModel updateApplicationLink(uuid, ApplicationLinkModel, ignore-setup-errors)
+> ApplicationLinkModel updateApplicationLink(uuid, ignore-setup-errors, ApplicationLinkModel)
 
 Update an application link
 
@@ -99,8 +99,8 @@ Update an application link
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **uuid** | **UUID**|  | [default to null] |
-| **ApplicationLinkModel** | [**ApplicationLinkModel**](../Models/ApplicationLinkModel.md)|  | |
 | **ignore-setup-errors** | **Boolean**|  | [optional] [default to false] |
+| **ApplicationLinkModel** | [**ApplicationLinkModel**](../Models/ApplicationLinkModel.md)|  | [optional] |
 
 ### Return type
 

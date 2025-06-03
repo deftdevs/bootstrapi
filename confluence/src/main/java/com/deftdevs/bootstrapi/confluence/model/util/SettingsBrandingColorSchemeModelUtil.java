@@ -4,8 +4,6 @@ import com.atlassian.confluence.themes.BaseColourScheme;
 import com.atlassian.confluence.themes.ColourScheme;
 import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
 
-import javax.validation.constraints.NotNull;
-
 
 public class SettingsBrandingColorSchemeModelUtil {
 
@@ -14,9 +12,8 @@ public class SettingsBrandingColorSchemeModelUtil {
      *
      * @param colourScheme the colour scheme
      */
-    @NotNull
     public static SettingsBrandingColorSchemeModel toSettingsBrandingColorSchemeModel(
-            @NotNull final ColourScheme colourScheme) {
+            final ColourScheme colourScheme) {
 
         final SettingsBrandingColorSchemeModel schemeModel = new SettingsBrandingColorSchemeModel();
         schemeModel.setTopBar(colourScheme.get(ColourScheme.TOP_BAR));
@@ -44,9 +41,8 @@ public class SettingsBrandingColorSchemeModelUtil {
      * @param schemeModel the colour scheme bean
      * @param baseScheme optional - the initial base scheme to modify
      */
-    @NotNull
     public static BaseColourScheme toGlobalColorScheme(
-            @NotNull final SettingsBrandingColorSchemeModel schemeModel,
+            final SettingsBrandingColorSchemeModel schemeModel,
             final ColourScheme baseScheme) {
 
         final BaseColourScheme colourScheme = baseScheme == null ? new BaseColourScheme() : new BaseColourScheme(baseScheme);

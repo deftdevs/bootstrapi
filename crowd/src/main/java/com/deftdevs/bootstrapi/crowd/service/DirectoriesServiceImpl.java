@@ -66,7 +66,7 @@ public class DirectoriesServiceImpl implements DirectoriesService {
 
     @Override
     public List<AbstractDirectoryModel> setDirectories(
-            @NotNull final List<AbstractDirectoryModel> directoryModels,
+            final List<AbstractDirectoryModel> directoryModels,
             final boolean testConnection) {
 
         final Map<String, Directory> existingDirectoriesByName = findAllDirectories().stream()
@@ -88,7 +88,7 @@ public class DirectoriesServiceImpl implements DirectoriesService {
     @Override
     public AbstractDirectoryModel setDirectory(
             final long id,
-            @NotNull final AbstractDirectoryModel directoryModel,
+            final AbstractDirectoryModel directoryModel,
             final boolean testConnection) {
 
         final Directory existingDirectory = findDirectory(id);
@@ -114,7 +114,7 @@ public class DirectoriesServiceImpl implements DirectoriesService {
 
     @Override
     public AbstractDirectoryModel addDirectory(
-            final @NotNull AbstractDirectoryModel directoryModel,
+            final AbstractDirectoryModel directoryModel,
             final boolean testConnection) {
 
         final AbstractDirectoryModel resultDirectoryModel;

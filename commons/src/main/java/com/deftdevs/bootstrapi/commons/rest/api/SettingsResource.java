@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.core.Response;
@@ -46,6 +45,6 @@ public interface SettingsResource<B extends SettingsModel> {
             }
     )
     Response setSettings(
-            @NotNull final B bean);
+            final B bean);
 
 }

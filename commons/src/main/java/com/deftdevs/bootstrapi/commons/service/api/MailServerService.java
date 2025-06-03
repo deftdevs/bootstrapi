@@ -3,7 +3,6 @@ package com.deftdevs.bootstrapi.commons.service.api;
 import com.deftdevs.bootstrapi.commons.model.MailServerPopModel;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
 
-import javax.validation.constraints.NotNull;
 
 public interface MailServerService {
 
@@ -21,7 +20,7 @@ public interface MailServerService {
      * @return the smtp mailserver settings
      */
     MailServerSmtpModel setMailServerSmtp(
-            @NotNull final MailServerSmtpModel smtpModel);
+            final MailServerSmtpModel smtpModel);
 
     /**
      * Get the pop mailserver settings.
@@ -37,5 +36,5 @@ public interface MailServerService {
      * @return the pop mailserver settings
      */
     MailServerPopModel setMailServerPop(
-            @NotNull final MailServerPopModel popModel);
+            final MailServerPopModel popModel);
 }

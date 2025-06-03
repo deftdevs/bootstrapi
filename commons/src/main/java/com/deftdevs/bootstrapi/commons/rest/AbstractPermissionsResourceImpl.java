@@ -4,7 +4,6 @@ import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
 import com.deftdevs.bootstrapi.commons.rest.api.PermissionsResource;
 import com.deftdevs.bootstrapi.commons.service.api.PermissionsService;
 
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.core.Response;
 
 public abstract class AbstractPermissionsResourceImpl implements PermissionsResource {
@@ -22,7 +21,7 @@ public abstract class AbstractPermissionsResourceImpl implements PermissionsReso
 
     @Override
     public Response setPermissionGlobal(
-            @NotNull final PermissionsGlobalModel permissionsGlobalModel) {
+            final PermissionsGlobalModel permissionsGlobalModel) {
         return Response.ok(permissionsService.setPermissionsGlobal(permissionsGlobalModel)).build();
     }
 

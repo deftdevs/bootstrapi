@@ -3,15 +3,13 @@ package com.deftdevs.bootstrapi.confluence.model.util;
 import com.atlassian.confluence.security.SpacePermission;
 import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
 
-import javax.validation.constraints.NotNull;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class PermissionsGlobalModelUtil {
 
-    @NotNull
     public static PermissionsGlobalModel toPermissionsGlobalModel(
-            @NotNull final List<SpacePermission> spacePermissions) {
+            final List<SpacePermission> spacePermissions) {
 
         final HashSet<SpacePermission> globalPermissions = new HashSet<>(spacePermissions);
         final TreeSet<String> anonymousGlobalPermissions = new TreeSet<>();

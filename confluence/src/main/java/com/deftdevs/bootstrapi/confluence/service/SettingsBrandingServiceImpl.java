@@ -52,7 +52,8 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     @Override
     public SettingsBrandingColorSchemeModel setColourScheme(
-            @NotNull SettingsBrandingColorSchemeModel colorSchemeModel) {
+            final SettingsBrandingColorSchemeModel colorSchemeModel) {
+
         BaseColourScheme baseColourScheme = new BaseColourScheme(colourSchemeManager.getGlobalColourScheme());
         BaseColourScheme newColourScheme = SettingsBrandingColorSchemeModelUtil.toGlobalColorScheme(colorSchemeModel, baseColourScheme);
         colourSchemeManager.saveGlobalColourScheme(newColourScheme);
@@ -66,7 +67,8 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     @Override
     public void setLogo(
-            @NotNull InputStream inputStream) {
+            final InputStream inputStream) {
+
         try {
             File file = File.createTempFile("bootstrapi-temp", null);
             FileUtils.copyInputStreamToFile(inputStream, file);
@@ -94,7 +96,7 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     @Override
     public void setFavicon(
-            @NotNull InputStream inputStream) {
+            final InputStream inputStream) {
         try {
             File file = File.createTempFile("bootstrapi-temp", null);
             FileUtils.copyInputStreamToFile(inputStream, file);

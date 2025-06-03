@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -58,7 +57,7 @@ public interface SettingsBrandingResource {
             }
     )
     Response setBrandingColorScheme(
-            @NotNull final SettingsBrandingColorSchemeModel bean);
+            final SettingsBrandingColorSchemeModel bean);
 
     @GET
     @Path(BootstrAPI.LOGO)
@@ -98,7 +97,7 @@ public interface SettingsBrandingResource {
             }
     )
     Response setBrandingLogo(
-            @NotNull final InputStream binaryInputStream);
+            final InputStream binaryInputStream);
 
     @GET
     @Path(BootstrAPI.FAVICON)
@@ -138,5 +137,5 @@ public interface SettingsBrandingResource {
             }
     )
     Response setBrandingFavicon(
-            @NotNull final InputStream binaryInputStream);
+            final InputStream binaryInputStream);
 }

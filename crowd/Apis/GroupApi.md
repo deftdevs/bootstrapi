@@ -19,8 +19,8 @@ Create a group
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **directoryId** | **Long**|  | [default to null] |
-| **GroupModel** | [**GroupModel**](../Models/GroupModel.md)|  | |
+| **directoryId** | **Long**|  | [optional] [default to null] |
+| **GroupModel** | [**GroupModel**](../Models/GroupModel.md)|  | [optional] |
 
 ### Return type
 
@@ -45,8 +45,8 @@ Get a group
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **directoryId** | **Long**|  | [default to null] |
-| **name** | **String**|  | [default to null] |
+| **directoryId** | **Long**|  | [optional] [default to null] |
+| **name** | **String**|  | [optional] [default to null] |
 
 ### Return type
 
@@ -71,9 +71,9 @@ Update a group
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **directoryId** | **Long**|  | [default to null] |
-| **name** | **String**|  | [default to null] |
-| **GroupModel** | [**GroupModel**](../Models/GroupModel.md)|  | |
+| **directoryId** | **Long**|  | [optional] [default to null] |
+| **name** | **String**|  | [optional] [default to null] |
+| **GroupModel** | [**GroupModel**](../Models/GroupModel.md)|  | [optional] |
 
 ### Return type
 

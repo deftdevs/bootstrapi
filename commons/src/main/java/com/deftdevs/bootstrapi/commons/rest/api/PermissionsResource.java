@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -43,6 +42,6 @@ public interface PermissionsResource {
             }
     )
     Response setPermissionGlobal(
-            @NotNull PermissionsGlobalModel permissionsGlobalModel);
+            PermissionsGlobalModel permissionsGlobalModel);
 
 }
