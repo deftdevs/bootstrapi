@@ -50,7 +50,7 @@
 
     <properties>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <crowd.version>5.3.6</crowd.version>
+        <crowd.version>5.3.7</crowd.version>
         <crowd.data.version>5.2.2</crowd.data.version>
         <ajp.port>8409</ajp.port>
     </properties>
