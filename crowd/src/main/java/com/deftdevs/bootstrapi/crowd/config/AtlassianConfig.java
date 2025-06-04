@@ -4,14 +4,14 @@ import com.atlassian.applinks.core.ApplinkStatusService;
 import com.atlassian.applinks.spi.auth.AuthenticationConfigurationManager;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
 import com.atlassian.applinks.spi.util.TypeAccessor;
+import com.atlassian.config.bootstrap.AtlassianBootstrapManager;
 import com.atlassian.crowd.embedded.api.CrowdService;
 import com.atlassian.crowd.manager.application.ApplicationManager;
 import com.atlassian.crowd.manager.application.DefaultGroupMembershipService;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
-import com.atlassian.crowd.manager.license.CrowdLicenseManager;
 import com.atlassian.crowd.manager.mail.MailConfigurationService;
 import com.atlassian.crowd.manager.property.PropertyManager;
-import com.atlassian.crowd.manager.proxy.TrustedProxyManager;
+import com.atlassian.crowd.service.license.LicenseService;
 import com.atlassian.oauth.consumer.ConsumerService;
 import com.atlassian.oauth.consumer.ConsumerTokenStore;
 import com.atlassian.oauth.serviceprovider.ServiceProviderConsumerStore;
@@ -35,6 +35,11 @@ public class AtlassianConfig {
     }
 
     @Bean
+    public AtlassianBootstrapManager atlassianBootstrapManager() {
+        return importOsgiService(AtlassianBootstrapManager.class);
+    }
+
+    @Bean
     public AuthenticationConfigurationManager authenticationConfigurationManager() {
         return importOsgiService(AuthenticationConfigurationManager.class);
     }
@@ -50,11 +55,6 @@ public class AtlassianConfig {
     }
 
     @Bean
-    public CrowdLicenseManager crowdLicenseManager() {
-        return importOsgiService(CrowdLicenseManager.class);
-    }
-
-    @Bean
     public CrowdService crowdService() {
         return importOsgiService(CrowdService.class);
     }
@@ -67,6 +67,11 @@ public class AtlassianConfig {
     @Bean
     public DirectoryManager directoryManager() {
         return importOsgiService(DirectoryManager.class);
+    }
+
+    @Bean
+    public LicenseService licenseService() {
+        return importOsgiService(LicenseService.class);
     }
 
     @Bean
@@ -92,11 +97,6 @@ public class AtlassianConfig {
     @Bean
     public ServiceProviderTokenStore serviceProviderTokenStore() {
         return importOsgiService(ServiceProviderTokenStore.class);
-    }
-
-    @Bean
-    public TrustedProxyManager trustedProxyManager() {
-        return importOsgiService(TrustedProxyManager.class);
     }
 
     @Bean

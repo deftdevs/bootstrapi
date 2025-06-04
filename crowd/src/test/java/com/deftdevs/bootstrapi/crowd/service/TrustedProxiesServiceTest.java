@@ -1,6 +1,9 @@
 package com.deftdevs.bootstrapi.crowd.service;
 
-import com.atlassian.crowd.manager.proxy.TrustedProxyManager;
+import com.atlassian.crowd.manager.property.PropertyManager;
+import com.atlassian.crowd.manager.property.PropertyManagerException;
+import com.google.common.collect.ImmutableSet;
+import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -8,42 +11,41 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.Arrays;
-import java.util.List;
 import java.util.Collections;
 import java.util.HashSet;
+import java.util.List;
 
+import static com.deftdevs.bootstrapi.crowd.service.TrustedProxiesServiceImpl.SEPARATOR;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.anyString;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.lenient;
 
 @ExtendWith(MockitoExtension.class)
 public class TrustedProxiesServiceTest {
 
     @Mock
-    private TrustedProxyManager trustedProxyManager;
+    private PropertyManager propertyManager;
 
     private TrustedProxiesServiceImpl trustedProxiesService;
 
     private final HashSet<String> trustedProxies = new HashSet<>();
 
     @BeforeEach
-    public void setup() {
-        // run trustedProxies.add() when trustedProxyManager.addAddress() is called
+    public void setup() throws PropertyManagerException {
+        // return trustedProxies as comma-separated string when propertyManager.getTrustedProxyServers() is called
         lenient().doAnswer(invocation -> {
-            trustedProxies.add((String) invocation.getArguments()[0]);
-            return true;
-        }).when(trustedProxyManager).addAddress(anyString());
+            return StringUtils.join(trustedProxies, SEPARATOR);
+        }).when(propertyManager).getTrustedProxyServers();
 
-        // run trustedProxies.remove() when trustedProxyManager.removeAddress() is called
+        // set trustedProxies when propertyManager.setTrustedProxyServers() is called
         lenient().doAnswer(invocation -> {
-            trustedProxies.remove((String) invocation.getArguments()[0]);
+            final String[] trustedProxiesStrings = StringUtils.split((String) invocation.getArguments()[0], SEPARATOR);
+            trustedProxies.clear();
+            trustedProxies.addAll(ImmutableSet.copyOf(trustedProxiesStrings));
             return null; // return null since the method is void
-        }).when(trustedProxyManager).removeAddress(anyString());
+        }).when(propertyManager).setTrustedProxyServers(anyString());
 
-        // return trustedProxies when trustedProxyManager.getAddresses() is called
-        doReturn(trustedProxies).when(trustedProxyManager).getAddresses();
-
-        trustedProxiesService = new TrustedProxiesServiceImpl(trustedProxyManager);
+        trustedProxiesService = new TrustedProxiesServiceImpl(propertyManager);
     }
 
     @Test
@@ -59,7 +61,6 @@ public class TrustedProxiesServiceTest {
 
     @Test
     public void testSetTrustedProxies() {
-        final List<String> trustedProxies = Collections.singletonList(getExample1());
         final List<String> otherTrustedProxies = Arrays.asList("1.2.3.4", "5.6.7.8");
         final List<String> responseTrustedProxies = trustedProxiesService.setTrustedProxies(otherTrustedProxies);
         assertEquals(responseTrustedProxies, otherTrustedProxies);

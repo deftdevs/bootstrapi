@@ -1,7 +1,8 @@
 package com.deftdevs.bootstrapi.crowd.service;
 
-import com.atlassian.crowd.manager.license.CrowdLicenseManager;
-import com.atlassian.crowd.manager.license.CrowdLicenseManagerException;
+import com.atlassian.config.ConfigurationException;
+import com.atlassian.config.bootstrap.AtlassianBootstrapManager;
+import com.atlassian.crowd.service.license.LicenseService;
 import com.atlassian.extras.api.LicenseType;
 import com.atlassian.extras.api.Organisation;
 import com.atlassian.extras.api.Product;
@@ -18,28 +19,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static com.deftdevs.bootstrapi.commons.model.LicenseModel.EXAMPLE_2_DEVELOPER_LICENSE;
+import static com.deftdevs.bootstrapi.crowd.service.LicensesServiceImpl.LICENSE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 public class LicensesServiceTest {
 
     @Mock
-    private CrowdLicenseManager licenseManager;
+    private AtlassianBootstrapManager bootstrapManager;
+
+    @Mock
+    private LicenseService licenseService;
 
     private LicensesServiceImpl licensesService;
 
     @BeforeEach
     public void setup() {
-        licensesService = new LicensesServiceImpl(licenseManager);
+        licensesService = new LicensesServiceImpl(bootstrapManager, licenseService);
     }
 
     @Test
     public void testGetLicenses() {
-        final CrowdLicense license = createMockCrowdLicense();
-        doReturn(license).when(licenseManager).getLicense();
+        doReturn(createMockCrowdLicense()).when(licenseService).getLicense();
 
         final List<LicenseModel> licenseModels = licensesService.getLicenses();
         final LicenseModel returnedModel = licenseModels.iterator().next();
@@ -51,26 +54,28 @@ public class LicensesServiceTest {
     }
 
     @Test
-    public void testSetLicenses() throws CrowdLicenseManagerException {
-        final CrowdLicense license = createMockCrowdLicense();
-        doReturn(license).when(licenseManager).getLicense();
-        doReturn(license).when(licenseManager).storeLicense(anyString());
-
+    public void testSetLicenses() {
         final String license1 = "1";
         final String license2 = "2";
         final List<String> licenses = List.of(license1, license2);
-        final LicensesServiceImpl spy = spy(licensesService);
-        spy.setLicenses(licenses);
-        verify(spy).addLicense(license1);
-        verify(spy).addLicense(license2);
+        final LicensesServiceImpl licenseServiceSpy = spy(licensesService);
+        doReturn(createMockCrowdLicense()).when(licenseService).getLicense();
+
+        licenseServiceSpy.setLicenses(licenses);
+        verify(licenseServiceSpy).addLicense(license1);
+        verify(licenseServiceSpy).addLicense(license2);
     }
 
     @Test
-    public void testAddLicense() throws CrowdLicenseManagerException {
-        final CrowdLicense license = createMockCrowdLicense();
-        doReturn(license).when(licenseManager).storeLicense("ABC...");
+    public void testAddLicense() throws ConfigurationException {
+        final CrowdLicense crowdLicense = createMockCrowdLicense();
+        final LicensesServiceImpl licenseServiceSpy = spy(licensesService);
+        doReturn(crowdLicense).when(licenseService).getLicense();
 
-        final LicenseModel licenseModel = licensesService.addLicense("ABC...");
+        final String license = "ABC...";
+        final LicenseModel licenseModel = licenseServiceSpy.addLicense(license);
+        verify(bootstrapManager).setProperty(LICENSE, license);
+        verify(bootstrapManager).save();
         assertEquals(licenseModel.getDescription(), EXAMPLE_2_DEVELOPER_LICENSE.getDescription());
         assertEquals(licenseModel.getOrganization(), EXAMPLE_2_DEVELOPER_LICENSE.getOrganization());
         assertEquals(licenseModel.getType(), LicenseType.TESTING.toString());
@@ -79,8 +84,8 @@ public class LicensesServiceTest {
     }
 
     @Test
-    public void testAddLicenseBadRequestException() throws CrowdLicenseManagerException {
-        doThrow(new CrowdLicenseManagerException()).when(licenseManager).storeLicense(anyString());
+    public void testAddLicenseBadRequestException() throws ConfigurationException {
+        doThrow(new ConfigurationException("Failed")).when(bootstrapManager).save();
 
         assertThrows(BadRequestException.class, () -> {
             licensesService.addLicense("ABC...");
