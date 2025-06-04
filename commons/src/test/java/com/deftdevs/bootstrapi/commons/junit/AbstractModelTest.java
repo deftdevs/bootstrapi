@@ -1,6 +1,5 @@
 package com.deftdevs.bootstrapi.commons.junit;
 
-import com.google.common.base.CaseFormat;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -26,7 +25,7 @@ public abstract class AbstractModelTest extends AbstractTest {
         final String beanClassBaseName = beanClassName.substring(0, beanClassName.length() - CLASS_SUFFIX.length());
         final XmlRootElement xmlRootElement = getBaseClass().getAnnotation(XmlRootElement.class);
         assertNotNull(xmlRootElement);
-        assertEquals(CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_HYPHEN, beanClassBaseName), xmlRootElement.name(),
+        assertEquals(beanClassBaseName.replaceAll("([a-z])([A-Z])", "$1-$2").toLowerCase(), xmlRootElement.name(),
                 "The model class camel-case base name and the xml root element kebab-case base name should match");
     }
 
