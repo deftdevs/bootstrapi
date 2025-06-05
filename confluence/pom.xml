@@ -148,12 +148,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.atlassian.crowd</groupId>
-            <artifactId>embedded-crowd-core</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>com.atlassian.plugins.authentication</groupId>
             <artifactId>atlassian-authentication-plugin-api</artifactId>
             <scope>provided</scope>

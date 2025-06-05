@@ -74,7 +74,7 @@
                 <exclusions>
                     <!-- Somehow the missing version here in the dependency management causes issues during release -->
                     <exclusion>
-                        <groupId>jakarta.ws.rs</groupId>
+                        <groupId>javax.ws.rs</groupId>
                         <artifactId>jakarta.ws.rs-api</artifactId>
                     </exclusion>
                 </exclusions>
@@ -123,19 +123,19 @@
 
         <dependency>
             <groupId>com.atlassian.jira</groupId>
-            <artifactId>jira-core</artifactId>
+            <artifactId>jira-rest-api</artifactId>
             <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>jndi</groupId>
-                    <artifactId>jndi</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
-            <groupId>com.atlassian.jira</groupId>
-            <artifactId>jira-rest-api</artifactId>
+            <groupId>com.atlassian.crowd</groupId>
+            <artifactId>crowd-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.crowd</groupId>
+            <artifactId>crowd-remote</artifactId>
             <scope>provided</scope>
         </dependency>
 
