@@ -1,7 +1,6 @@
 package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.jira.config.properties.ApplicationProperties;
-import com.atlassian.jira.web.action.admin.EditAnnouncementBanner;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.SettingsModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
@@ -131,7 +130,7 @@ class SettingsServiceTest {
     @Test
     void testGetBanner() {
         final String content = "Banner!";
-        final String visibility = EditAnnouncementBanner.PUBLIC_BANNER;
+        final String visibility = "public";
         doReturn(content).when(applicationProperties).getDefaultBackedText(JIRA_ALERT_HEADER);
         doReturn(visibility).when(applicationProperties).getDefaultBackedString(JIRA_ALERT_HEADER_VISIBILITY);
 
@@ -144,7 +143,7 @@ class SettingsServiceTest {
     void testSetBanner() {
         final SettingsBannerModel settingsBannerModel = SettingsBannerModel.builder()
                 .content("Hello...")
-                .visibility(SettingsBannerModel.Visibility.valueOf(EditAnnouncementBanner.PRIVATE_BANNER.toUpperCase()))
+                .visibility(SettingsBannerModel.Visibility.valueOf("private".toUpperCase()))
                 .build();
 
         final SettingsServiceImpl spy = spy(settingsService);
