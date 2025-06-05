@@ -146,7 +146,7 @@
 
         <dependency>
             <groupId>com.atlassian.plugins.authentication</groupId>
-            <artifactId>atlassian-authentication-plugin</artifactId>
+            <artifactId>atlassian-authentication-plugin-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
