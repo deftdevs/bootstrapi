@@ -62,8 +62,7 @@ public class ServiceConfig {
     @Bean
     public LicensesService licensesService() {
         return new LicensesServiceImpl(
-                atlassianConfig.atlassianBootstrapManager(),
-                atlassianConfig.licenseService());
+                atlassianConfig.atlassianBootstrapManager());
     }
 
     @Bean

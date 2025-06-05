@@ -2,35 +2,31 @@ package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.config.ConfigurationException;
 import com.atlassian.config.bootstrap.AtlassianBootstrapManager;
-import com.atlassian.crowd.service.license.LicenseService;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 
 import java.util.Collections;
 import java.util.List;
 
-import static com.deftdevs.bootstrapi.crowd.model.util.LicenseModelUtil.toLicenseModel;
-
 public class LicensesServiceImpl implements LicensesService {
 
     public static final String LICENSE = "license";
 
+    private static final String ERROR_MESSAGE = "It is currently not possible to display license details in BootstrAPI for Crowd because of API changes made by Atlassian";
+
     private final AtlassianBootstrapManager bootstrapManager;
 
-    private final LicenseService licenseService;
-
     public LicensesServiceImpl(
-            final AtlassianBootstrapManager bootstrapManager,
-            final LicenseService licenseService) {
+            final AtlassianBootstrapManager bootstrapManager) {
 
         this.bootstrapManager = bootstrapManager;
-        this.licenseService = licenseService;
     }
 
     @Override
     public List<LicenseModel> getLicenses() {
-        return Collections.singletonList(toLicenseModel(licenseService.getLicense()));
+        throw new InternalServerErrorException(ERROR_MESSAGE);
     }
 
     @Override
@@ -38,7 +34,10 @@ public class LicensesServiceImpl implements LicensesService {
             final List<String> licenseKeys) {
 
         licenseKeys.forEach(this::addLicense);
-        return getLicenses();
+
+        final LicenseModel licenseModel = new LicenseModel();
+        licenseModel.setDescription(ERROR_MESSAGE);
+        return Collections.singletonList(licenseModel);
     }
 
     public LicenseModel addLicense(
@@ -51,7 +50,9 @@ public class LicensesServiceImpl implements LicensesService {
             throw new BadRequestException(e.getMessage());
         }
 
-        return toLicenseModel(licenseService.getLicense());
+        final LicenseModel licenseModel = new LicenseModel();
+        licenseModel.setDescription(ERROR_MESSAGE);
+        return licenseModel;
     }
 
 }

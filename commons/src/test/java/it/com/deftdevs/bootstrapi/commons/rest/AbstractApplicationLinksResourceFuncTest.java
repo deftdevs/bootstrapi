@@ -2,8 +2,8 @@ package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.HttpMethod;
@@ -54,7 +54,7 @@ public abstract class AbstractApplicationLinksResourceFuncTest {
                 .username("user")
                 .password("user")
                 .request();
-        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), applicationLinksResource.statusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), applicationLinksResource.statusCode());
     }
 
     protected ApplicationLinkModel getExampleModel() {

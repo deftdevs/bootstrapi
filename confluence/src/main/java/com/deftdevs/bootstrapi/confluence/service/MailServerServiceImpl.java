@@ -35,7 +35,7 @@ public class MailServerServiceImpl implements MailServerService {
     public MailServerSmtpModel setMailServerSmtp(MailServerSmtpModel mailServerSmtpModel) {
         final SMTPMailServer smtpMailServer = mailServerManager.isDefaultSMTPMailServerDefined()
                 ? mailServerManager.getDefaultSMTPMailServer()
-                : new SMTPMailServerImpl();
+                : new SMTPMailServerImpl.Builder<>().build();
 
         assert smtpMailServer != null;
 
@@ -100,7 +100,7 @@ public class MailServerServiceImpl implements MailServerService {
 
         final PopMailServer popMailServer = mailServerManager.getDefaultPopMailServer() != null
                 ? mailServerManager.getDefaultPopMailServer()
-                : new PopMailServerImpl();
+                : new PopMailServerImpl.Builder<>().build();
 
         assert popMailServer != null;
 

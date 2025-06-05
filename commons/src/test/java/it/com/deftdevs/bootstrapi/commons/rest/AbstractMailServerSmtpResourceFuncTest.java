@@ -2,7 +2,7 @@ package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
-import org.codehaus.jackson.map.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.HttpMethod;
@@ -63,7 +63,7 @@ public abstract class AbstractMailServerSmtpResourceFuncTest {
                 .password("user")
                 .request();
 
-        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), mailServerSmtpResponse.statusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), mailServerSmtpResponse.statusCode());
     }
 
     @Test
@@ -73,7 +73,7 @@ public abstract class AbstractMailServerSmtpResourceFuncTest {
                 .password("user")
                 .request(HttpMethod.PUT, getExampleModel());
 
-        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), mailServerSmtpResponse.statusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), mailServerSmtpResponse.statusCode());
     }
 
     protected void assertMailServerModelAgainstExample(MailServerSmtpModel bean) {

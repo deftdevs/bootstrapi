@@ -4,17 +4,7 @@ import com.atlassian.confluence.plugins.lookandfeel.SiteLogoManager;
 import com.atlassian.confluence.themes.BaseColourScheme;
 import com.atlassian.confluence.themes.ColourScheme;
 import com.atlassian.confluence.themes.ColourSchemeManager;
-import com.atlassian.core.util.thumbnail.ThumbnailDimension;
-import com.atlassian.favicon.core.FaviconManager;
-import com.atlassian.favicon.core.ImageType;
-import com.atlassian.favicon.core.StoredFavicon;
-import com.atlassian.favicon.core.UploadedFaviconFile;
-import com.atlassian.favicon.core.exceptions.ImageStorageException;
-import com.atlassian.favicon.core.exceptions.InvalidImageDataException;
-import com.atlassian.favicon.core.exceptions.UnsupportedImageTypeException;
-import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
-import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsBrandingService;
 import com.deftdevs.bootstrapi.confluence.model.util.SettingsBrandingColorSchemeModelUtil;
@@ -23,24 +13,22 @@ import org.apache.commons.io.FileUtils;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Optional;
 
 public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     private static final int DEFAULT_FAVICON_DIMENSION = 16;
 
+    private static final String ERROR_MESSAGE_FAVICON = "It is currently not possible to use the favicon endpoints in BootstrAPI for Confluence because of API changes made by Atlassian";;
+
     private final ColourSchemeManager colourSchemeManager;
-    private final FaviconManager faviconManager;
     private final SiteLogoManager siteLogoManager;
 
     public SettingsBrandingServiceImpl(
             final ColourSchemeManager colourSchemeManager,
-            final SiteLogoManager siteLogoManager,
-            final FaviconManager faviconManager) {
+            final SiteLogoManager siteLogoManager) {
 
         this.colourSchemeManager = colourSchemeManager;
         this.siteLogoManager = siteLogoManager;
-        this.faviconManager = faviconManager;
     }
 
     @Override
@@ -83,37 +71,13 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     @Override
     public InputStream getFavicon() {
-        if (faviconManager.isFaviconConfigured()) {
-            Optional<StoredFavicon> favicon = faviconManager.getFavicon(ImageType.PNG, new ThumbnailDimension(DEFAULT_FAVICON_DIMENSION, DEFAULT_FAVICON_DIMENSION));
-            if (favicon.isPresent()) {
-                return favicon.get().getImageDataStream();
-            }
-        }
-
-        throw new NotFoundException("No favicon configured");
+        throw new InternalServerErrorException(ERROR_MESSAGE_FAVICON);
     }
 
     @Override
     public void setFavicon(
             final InputStream inputStream) {
-        try {
-            File file = File.createTempFile("bootstrapi-temp", null);
-            FileUtils.copyInputStreamToFile(inputStream, file);
 
-            String contentType = file.toURI().toURL().openConnection().getContentType();
-            Optional<ImageType> imageType = ImageType.parseFromContentType(contentType);
-            if (!imageType.isPresent()) {
-                throw new BadRequestException("Image type could not be determined from source image.");
-            }
-
-            UploadedFaviconFile faviconFile = new UploadedFaviconFile(file, imageType.get());
-            faviconManager.setFavicon(faviconFile);
-
-            file.deleteOnExit();
-        } catch (IOException | ImageStorageException e) {
-            throw new InternalServerErrorException(e);
-        } catch (UnsupportedImageTypeException | InvalidImageDataException e) {
-            throw new BadRequestException(e);
-        }
+        throw new InternalServerErrorException(ERROR_MESSAGE_FAVICON);
     }
 }

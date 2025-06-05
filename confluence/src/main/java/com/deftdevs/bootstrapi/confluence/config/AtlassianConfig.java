@@ -13,7 +13,6 @@ import com.atlassian.confluence.setup.settings.GlobalSettingsManager;
 import com.atlassian.confluence.themes.ColourSchemeManager;
 import com.atlassian.confluence.user.UserAccessor;
 import com.atlassian.crowd.embedded.api.CrowdDirectoryService;
-import com.atlassian.favicon.core.FaviconManager;
 import com.atlassian.mail.server.MailServerManager;
 import com.atlassian.oauth.consumer.ConsumerService;
 import com.atlassian.oauth.consumer.ConsumerTokenStore;
@@ -70,11 +69,6 @@ public class AtlassianConfig {
     @Bean
     public CrowdDirectoryService crowdDirectoryService() {
         return importOsgiService(CrowdDirectoryService.class);
-    }
-
-    @Bean
-    public FaviconManager faviconManager() {
-        return importOsgiService(FaviconManager.class);
     }
 
     @Bean

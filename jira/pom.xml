@@ -6,7 +6,7 @@
     <parent>
         <groupId>com.deftdevs</groupId>
         <artifactId>bootstrapi-parent</artifactId>
-        <version>1.0.0-RC1-SNAPSHOT</version>
+        <version>1.0.0-rc1-SNAPSHOT</version>
     </parent>
 
     <artifactId>bootstrapi-jira-plugin</artifactId>
@@ -42,8 +42,8 @@
 
     <properties>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <jira.version>9.12.23</jira.version>
-        <jira.data.version>9.12.5</jira.data.version>
+        <jira.version>10.3.5</jira.version>
+        <jira.data.version>10.3.5</jira.data.version>
         <ajp.port>8209</ajp.port>
     </properties>
 
@@ -112,12 +112,6 @@
             <groupId>com.atlassian.jira</groupId>
             <artifactId>jira-api</artifactId>
             <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>javax.transaction</groupId>
-                    <artifactId>jta</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <dependency>
@@ -125,10 +119,6 @@
             <artifactId>jira-core</artifactId>
             <scope>provided</scope>
             <exclusions>
-                <exclusion>
-                    <groupId>javax.transaction</groupId>
-                    <artifactId>jta</artifactId>
-                </exclusion>
                 <exclusion>
                     <groupId>jndi</groupId>
                     <artifactId>jndi</artifactId>
@@ -139,20 +129,6 @@
         <dependency>
             <groupId>com.atlassian.jira</groupId>
             <artifactId>jira-rest-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.jira</groupId>
-            <artifactId>jira-lookandfeel-plugin</artifactId>
-            <version>${jira.version}</version>
-            <scope>provided</scope>
-        </dependency>
-
-        <!-- deprecated, see https://github.com/deftdevs/bootstrapi/issues/59 -->
-        <dependency>
-            <groupId>com.atlassian.plugins.rest</groupId>
-            <artifactId>atlassian-rest-common</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -240,20 +216,20 @@
         </dependency>
 
         <dependency>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-server</artifactId>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -292,20 +268,8 @@
         </dependency>
 
         <dependency>
-            <groupId>com.atlassian.plugins</groupId>
-            <artifactId>atlassian-plugins-osgi-testrunner</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-common</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-jaxrs</artifactId>
             <scope>test</scope>
         </dependency>
 
@@ -342,7 +306,7 @@
                     <instructions>
                         <Atlassian-Plugin-Key>${atlassian.plugin.key}</Atlassian-Plugin-Key>
                         <Import-Package>
-                            *;version="0";resolution:=optional
+                            *;resolution:="optional"
                         </Import-Package>
                         <Export-Package />
                         <Spring-Context>*</Spring-Context>
