@@ -3,8 +3,12 @@ name: Release
 on:
   workflow_dispatch:
     inputs:
-      version:
+      releaseVersion:
         description: 'Release version (only if different from current SNAPSHOT version)'
+        type: string
+        required: false
+      developmentVersion:
+        description: 'Development version after release (only if different from auto-generated version)'
         type: string
         required: false
 
@@ -47,4 +51,4 @@ jobs:
         MAVEN_CENTRAL_PASSWORD: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
         RELEASE_GPG_PASSPHRASE: ${{ secrets.RELEASE_GPG_PASSPHRASE }}
       run: |
-        mvn -B -P release release:prepare release:perform -DreleaseVersion=${{ inputs.version }} -Darguments="-DskipITs"
+        mvn -B -P release release:prepare release:perform -DreleaseVersion=${{ inputs.releaseVersion }} -DdevelopmentVersion=${{ inputs.developmentVersion }} -Darguments="-DskipITs"
