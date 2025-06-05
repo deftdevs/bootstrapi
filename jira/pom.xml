@@ -71,6 +71,13 @@
                 <version>${jira.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+                <exclusions>
+                    <!-- Somehow the missing version here in the dependency management causes issues during release -->
+                    <exclusion>
+                        <groupId>jakarta.ws.rs</groupId>
+                        <artifactId>jakarta.ws.rs-api</artifactId>
+                    </exclusion>
+                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>
