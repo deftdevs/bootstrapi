@@ -42,7 +42,7 @@
 
     <properties>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <jira.version>10.3.5</jira.version>
+        <jira.version>10.3.6</jira.version>
         <jira.data.version>10.3.5</jira.data.version>
         <ajp.port>8209</ajp.port>
     </properties>
@@ -63,21 +63,6 @@
                 <version>${jira.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-            </dependency>
-
-            <dependency>
-                <groupId>com.atlassian.jira</groupId>
-                <artifactId>jira-plugins</artifactId>
-                <version>${jira.version}</version>
-                <type>pom</type>
-                <scope>import</scope>
-                <exclusions>
-                    <!-- Somehow the missing version here in the dependency management causes issues during release -->
-                    <exclusion>
-                        <groupId>javax.ws.rs</groupId>
-                        <artifactId>jakarta.ws.rs-api</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
         </dependencies>
     </dependencyManagement>

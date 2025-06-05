@@ -251,6 +251,14 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Needed only because the version is unset in the Crowd dependency management -->
+        <dependency>
+            <groupId>com.nimbusds</groupId>
+            <artifactId>nimbus-jose-jwt</artifactId>
+            <version>9.37.3</version>
+            <scope>runtime</scope>
+        </dependency>
+
         <!-- test dependencies -->
 
         <dependency>
