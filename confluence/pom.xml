@@ -49,7 +49,7 @@
     </developers>
 
     <properties>
-        <confluence.version>8.5.22</confluence.version>
+        <confluence.version>8.8.1</confluence.version>
         <confluence.data.version>8.5.6</confluence.data.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <ajp.port>8109</ajp.port>
