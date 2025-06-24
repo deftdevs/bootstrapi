@@ -101,14 +101,14 @@
         <maven.resources-plugin.version>3.3.1</maven.resources-plugin.version>
         <openapi-generator.version>7.13.0</openapi-generator.version>
         <osgi.version>8.0.0</osgi.version>
-        <swagger.version>2.2.32</swagger.version>
+        <swagger.version>2.2.34</swagger.version>
         <!-- ... -->
         <hibernate-validator.version>6.2.5.Final</hibernate-validator.version>
         <jakarta.el-api.version>3.0.4</jakarta.el-api.version>
         <jersey-common.version>2.47</jersey-common.version>
-        <junit.version>5.13.0</junit.version>
+        <junit.version>5.13.2</junit.version>
         <mockito.version>5.18.0</mockito.version>
-        <bytebuddy.version>1.17.5</bytebuddy.version>
+        <bytebuddy.version>1.17.6</bytebuddy.version>
         <validation-api.version>2.0.1.Final</validation-api.version>
     </properties>
 
@@ -464,7 +464,7 @@
                     <plugin>
                         <groupId>org.sonatype.central</groupId>
                         <artifactId>central-publishing-maven-plugin</artifactId>
-                        <version>0.7.0</version>
+                        <version>0.8.0</version>
                         <extensions>true</extensions>
                         <configuration>
                             <publishingServerId>central</publishingServerId>
