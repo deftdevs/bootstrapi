@@ -42,7 +42,7 @@ Set a list of licenses
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **request\_body** | [**List**](../Models/string.md)|  | |
+| **request\_body** | [**List**](../Models/string.md)|  | [optional] |
 
 ### Return type
 

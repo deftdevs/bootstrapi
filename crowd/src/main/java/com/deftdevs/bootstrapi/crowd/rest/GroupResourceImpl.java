@@ -1,11 +1,12 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
-import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
+import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.GroupResource;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 
+import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
@@ -15,6 +16,7 @@ public class GroupResourceImpl implements GroupResource {
 
     private final GroupsService groupsService;
 
+    @Inject
     public GroupResourceImpl(
             final GroupsService groupsService) {
 

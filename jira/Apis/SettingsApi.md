@@ -160,7 +160,7 @@ Set the banner
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **SettingsBannerModel** | [**SettingsBannerModel**](../Models/SettingsBannerModel.md)|  | |
+| **SettingsBannerModel** | [**SettingsBannerModel**](../Models/SettingsBannerModel.md)|  | [optional] |
 
 ### Return type
 
@@ -185,7 +185,7 @@ Set the color scheme
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **SettingsBrandingColorSchemeModel** | [**SettingsBrandingColorSchemeModel**](../Models/SettingsBrandingColorSchemeModel.md)|  | |
+| **SettingsBrandingColorSchemeModel** | [**SettingsBrandingColorSchemeModel**](../Models/SettingsBrandingColorSchemeModel.md)|  | [optional] |
 
 ### Return type
 
@@ -210,7 +210,7 @@ Set the favicon
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **body** | **Object**|  | |
+| **body** | **Object**|  | [optional] |
 
 ### Return type
 
@@ -235,7 +235,7 @@ Set the logo
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **body** | **Object**|  | |
+| **body** | **Object**|  | [optional] |
 
 ### Return type
 
@@ -260,7 +260,7 @@ Set the general settings
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **SettingsModel** | [**SettingsModel**](../Models/SettingsModel.md)|  | |
+| **SettingsModel** | [**SettingsModel**](../Models/SettingsModel.md)|  | [optional] |
 
 ### Return type
 
@@ -285,7 +285,7 @@ Set the security settings
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **SettingsSecurityModel** | [**SettingsSecurityModel**](../Models/SettingsSecurityModel.md)|  | |
+| **SettingsSecurityModel** | [**SettingsSecurityModel**](../Models/SettingsSecurityModel.md)|  | [optional] |
 
 ### Return type
 

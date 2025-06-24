@@ -15,7 +15,6 @@ import com.deftdevs.bootstrapi.jira.model.util.DirectoryModelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -79,7 +78,7 @@ public class DirectoryServiceImpl implements DirectoriesService {
     }
 
     @Override
-    public AbstractDirectoryModel setDirectory(long id, @NotNull AbstractDirectoryModel abstractDirectoryModel, boolean testConnection) {
+    public AbstractDirectoryModel setDirectory(long id, AbstractDirectoryModel abstractDirectoryModel, boolean testConnection) {
         if (abstractDirectoryModel instanceof DirectoryCrowdModel) {
             return setDirectoryCrowd(id, (DirectoryCrowdModel) abstractDirectoryModel, testConnection);
         } else {
@@ -87,7 +86,7 @@ public class DirectoryServiceImpl implements DirectoriesService {
         }
     }
 
-    private AbstractDirectoryModel setDirectoryCrowd(long id, @NotNull DirectoryCrowdModel crowdModel, boolean testConnection) {
+    private AbstractDirectoryModel setDirectoryCrowd(long id, DirectoryCrowdModel crowdModel, boolean testConnection) {
         Directory existingDirectory = findDirectory(id);
         Directory directory = validateAndCreateDirectoryConfig(crowdModel, testConnection);
 

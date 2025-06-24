@@ -12,7 +12,7 @@ All URIs are relative to *https://&lt;CONFLUENCE_URL&gt;/rest/bootstrapi/1*
 
 <a name="createDirectory"></a>
 # **createDirectory**
-> AbstractDirectoryModel createDirectory(AbstractDirectoryModel, test-connection)
+> AbstractDirectoryModel createDirectory(test-connection, AbstractDirectoryModel)
 
 Create a user directory
 
@@ -20,8 +20,8 @@ Create a user directory
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **AbstractDirectoryModel** | [**AbstractDirectoryModel**](../Models/AbstractDirectoryModel.md)|  | |
 | **test-connection** | **Boolean**|  | [optional] [default to false] |
+| **AbstractDirectoryModel** | [**AbstractDirectoryModel**](../Models/AbstractDirectoryModel.md)|  | [optional] |
 
 ### Return type
 
@@ -88,7 +88,7 @@ Get a user directory
 
 <a name="updateDirectory"></a>
 # **updateDirectory**
-> AbstractDirectoryModel updateDirectory(id, AbstractDirectoryModel, test-connection)
+> AbstractDirectoryModel updateDirectory(id, test-connection, AbstractDirectoryModel)
 
 Update a user directory
 
@@ -97,8 +97,8 @@ Update a user directory
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | **Long**|  | [default to null] |
-| **AbstractDirectoryModel** | [**AbstractDirectoryModel**](../Models/AbstractDirectoryModel.md)|  | |
 | **test-connection** | **Boolean**|  | [optional] [default to false] |
+| **AbstractDirectoryModel** | [**AbstractDirectoryModel**](../Models/AbstractDirectoryModel.md)|  | [optional] |
 
 ### Return type
 

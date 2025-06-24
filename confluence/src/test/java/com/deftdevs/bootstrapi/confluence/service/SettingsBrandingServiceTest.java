@@ -4,25 +4,16 @@ import com.atlassian.confluence.plugins.lookandfeel.SiteLogo;
 import com.atlassian.confluence.plugins.lookandfeel.SiteLogoManager;
 import com.atlassian.confluence.themes.BaseColourScheme;
 import com.atlassian.confluence.themes.ColourSchemeManager;
-import com.atlassian.favicon.core.FaviconManager;
-import com.atlassian.favicon.core.ImageType;
-import com.atlassian.favicon.core.StoredFavicon;
-import com.atlassian.favicon.core.exceptions.ImageStorageException;
-import com.atlassian.favicon.core.exceptions.InvalidImageDataException;
-import com.atlassian.favicon.core.exceptions.UnsupportedImageTypeException;
-import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
-import org.mockito.MockedStatic;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.Optional;
 
 import static com.deftdevs.bootstrapi.confluence.model.util.SettingsBrandingColorSchemeModelUtil.toGlobalColorScheme;
 import static org.junit.jupiter.api.Assertions.*;
@@ -35,9 +26,6 @@ class SettingsBrandingServiceTest {
     private ColourSchemeManager colourSchemeManager;
 
     @Mock
-    private FaviconManager faviconManager;
-
-    @Mock
     private SiteLogoManager siteLogoManager;
 
     @Mock
@@ -45,7 +33,7 @@ class SettingsBrandingServiceTest {
 
     @BeforeEach
     public void setup() {
-        settingsBrandingService = new SettingsBrandingServiceImpl(colourSchemeManager, siteLogoManager, faviconManager);
+        settingsBrandingService = new SettingsBrandingServiceImpl(colourSchemeManager, siteLogoManager);
     }
 
     @Test
@@ -91,41 +79,6 @@ class SettingsBrandingServiceTest {
         settingsBrandingService.setLogo(is);
 
         verify(siteLogoManager).uploadLogo(any(), any());
-    }
-
-    @Test
-    void testGetFavicon() {
-
-        InputStream is = new ByteArrayInputStream("".getBytes());
-        StoredFavicon storedFavicon = new StoredFavicon(is, "img/png", 100);
-        doReturn(true).when(faviconManager).isFaviconConfigured();
-        doReturn(Optional.of(storedFavicon)).when(faviconManager).getFavicon(any(), any());
-
-        InputStream favImage = settingsBrandingService.getFavicon();
-
-        assertNotNull(favImage);
-    }
-
-    @Test
-    void testSetFavicon() throws InvalidImageDataException, UnsupportedImageTypeException, ImageStorageException {
-
-        InputStream is = new ByteArrayInputStream("".getBytes());
-
-        try (MockedStatic<ImageType> imageTypeMockedStatic = mockStatic(ImageType.class)) {
-            imageTypeMockedStatic.when(() -> ImageType.parseFromContentType("content/unknown")).thenReturn(Optional.of(ImageType.PNG));
-
-            settingsBrandingService.setFavicon(is);
-            verify(faviconManager).setFavicon(any());
-        }
-    }
-
-    @Test
-    void testSetFaviconNoParseableImageType() {
-        final InputStream is = new ByteArrayInputStream("".getBytes());
-
-        assertThrows(BadRequestException.class, () -> {
-            settingsBrandingService.setFavicon(is);
-        });
     }
 
 }

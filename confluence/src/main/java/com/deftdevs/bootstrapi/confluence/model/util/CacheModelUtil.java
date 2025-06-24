@@ -4,8 +4,6 @@ import com.atlassian.cache.CacheStatisticsKey;
 import com.atlassian.cache.ManagedCache;
 import com.deftdevs.bootstrapi.confluence.model.CacheModel;
 
-import javax.validation.constraints.NotNull;
-
 public class CacheModelUtil {
 
     /**
@@ -13,9 +11,8 @@ public class CacheModelUtil {
      *
      * @return the cache
      */
-    @NotNull
     public static CacheModel toCacheModel(
-            @NotNull final ManagedCache managedCache) {
+            final ManagedCache managedCache) {
 
         CacheModel cacheModel = new CacheModel();
         cacheModel.setName(managedCache.getName());
@@ -28,14 +25,18 @@ public class CacheModelUtil {
         return cacheModel;
     }
 
-    private static double getEffectiveness(ManagedCache cache) {
+    private static double getEffectiveness(
+            final ManagedCache cache) {
+
         long hit = cache.getStatistics().get(CacheStatisticsKey.HIT_COUNT).get();
         long miss = cache.getStatistics().get(CacheStatisticsKey.MISS_COUNT).get();
         return (double) hit * 100 / (hit + miss);
     }
 
 
-    private static Double getUtilization(ManagedCache cache) {
+    private static Double getUtilization(
+            final ManagedCache cache) {
+
         // currentMaxEntries can be null so check this first
 
         long objects = cache.getStatistics().get(CacheStatisticsKey.SIZE).get();

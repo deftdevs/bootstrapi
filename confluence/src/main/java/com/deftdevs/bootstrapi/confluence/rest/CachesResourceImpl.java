@@ -1,11 +1,12 @@
 package com.deftdevs.bootstrapi.confluence.rest;
 
-import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
+import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.confluence.model.CacheModel;
 import com.deftdevs.bootstrapi.confluence.rest.api.CachesResource;
 import com.deftdevs.bootstrapi.confluence.service.api.CachesService;
 
+import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
@@ -15,6 +16,7 @@ public class CachesResourceImpl implements CachesResource {
 
     private final CachesService cachesService;
 
+    @Inject
     public CachesResourceImpl(
             final CachesService cachesService) {
 

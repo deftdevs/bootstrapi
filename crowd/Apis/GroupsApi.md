@@ -17,8 +17,8 @@ Set groups
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **directoryId** | **Long**|  | [default to null] |
-| **GroupModel** | [**List**](../Models/GroupModel.md)|  | |
+| **directoryId** | **Long**|  | [optional] [default to null] |
+| **GroupModel** | [**List**](../Models/GroupModel.md)|  | [optional] |
 
 ### Return type
 

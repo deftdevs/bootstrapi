@@ -1,7 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.http.PATCH;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import io.swagger.v3.oas.annotations.Operation;
@@ -35,7 +34,7 @@ public interface GroupsResource {
             }
     )
     Response setGroups(
-            @NotNull @QueryParam("directoryId") final long directoryId,
-            @NotNull final List<GroupModel> groupModels);
+            @QueryParam("directoryId") final long directoryId,
+            final List<GroupModel> groupModels);
 
 }

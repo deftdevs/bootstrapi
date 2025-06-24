@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.deftdevs</groupId>
         <artifactId>bootstrapi-parent</artifactId>
-        <version>0.12.1-SNAPSHOT</version>
+        <version>1.0.0-rc2-SNAPSHOT</version>
     </parent>
 
     <artifactId>bootstrapi-crowd-plugin</artifactId>
@@ -49,9 +49,9 @@
     </developers>
 
     <properties>
+        <crowd.version>6.3.1</crowd.version>
+        <crowd.data.version>6.3.1</crowd.data.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <crowd.version>5.3.7</crowd.version>
-        <crowd.data.version>5.2.2</crowd.data.version>
         <ajp.port>8409</ajp.port>
     </properties>
 
@@ -67,10 +67,17 @@
 
             <dependency>
                 <groupId>com.atlassian.crowd</groupId>
-                <artifactId>atlassian-crowd</artifactId>
+                <artifactId>crowd-api</artifactId>
                 <version>${crowd.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- Fix release by providing missing version from dependency management in crowd-api -->
+            <dependency>
+                <groupId>com.nimbusds</groupId>
+                <artifactId>nimbus-jose-jwt</artifactId>
+                <version>9.37.3</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
@@ -86,23 +93,17 @@
             <scope>compile</scope>
         </dependency>
 
-        <!-- behave like a compile dependencies -->
+        <dependency>
+            <groupId>io.swagger.core.v3</groupId>
+            <artifactId>swagger-annotations</artifactId>
+            <scope>compile</scope>
+        </dependency>
+
+        <!-- behave like compile dependencies -->
 
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-annotations</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>io.swagger.core.v3</groupId>
-            <artifactId>swagger-models</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -116,7 +117,19 @@
 
         <dependency>
             <groupId>com.atlassian.crowd</groupId>
-            <artifactId>crowd-core</artifactId>
+            <artifactId>crowd-ldap</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.crowd</groupId>
+            <artifactId>crowd-persistence</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.crowd</groupId>
+            <artifactId>crowd-server-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -132,13 +145,6 @@
             <scope>provided</scope>
         </dependency>
 
-        <!-- deprecated, see https://github.com/deftdevs/bootstrapi/issues/59 -->
-        <dependency>
-            <groupId>com.atlassian.plugins.rest</groupId>
-            <artifactId>atlassian-rest-common</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
         <dependency>
             <groupId>com.atlassian.plugins.rest</groupId>
             <artifactId>atlassian-rest-v2-api</artifactId>
@@ -147,7 +153,19 @@
 
         <dependency>
             <groupId>com.atlassian.plugins.authentication</groupId>
-            <artifactId>atlassian-authentication-plugin</artifactId>
+            <artifactId>atlassian-authentication-plugin-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.config</groupId>
+            <artifactId>atlassian-config</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.extras</groupId>
+            <artifactId>atlassian-extras-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -211,20 +229,26 @@
         </dependency>
 
         <dependency>
+            <groupId>jakarta.inject</groupId>
+            <artifactId>jakarta.inject-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.validation</groupId>
+            <artifactId>jakarta.validation-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>jakarta.ws.rs</groupId>
             <artifactId>jakarta.ws.rs-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
         <dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>javax.validation</groupId>
-            <artifactId>validation-api</artifactId>
+            <groupId>jakarta.xml.bind</groupId>
+            <artifactId>jakarta.xml.bind-api</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -263,20 +287,14 @@
         </dependency>
 
         <dependency>
-            <groupId>com.atlassian.plugins</groupId>
-            <artifactId>atlassian-plugins-osgi-testrunner</artifactId>
+            <groupId>com.sun.mail</groupId>
+            <artifactId>jakarta.mail</artifactId>
             <scope>test</scope>
         </dependency>
 
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-common</artifactId>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-jaxrs</artifactId>
             <scope>test</scope>
         </dependency>
     </dependencies>

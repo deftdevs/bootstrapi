@@ -1,29 +1,32 @@
 package com.deftdevs.bootstrapi.crowd.service;
 
-import com.atlassian.crowd.manager.license.CrowdLicenseManager;
-import com.atlassian.crowd.manager.license.CrowdLicenseManagerException;
+import com.atlassian.config.ConfigurationException;
+import com.atlassian.config.bootstrap.AtlassianBootstrapManager;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 
 import java.util.Collections;
 import java.util.List;
 
-import static com.deftdevs.bootstrapi.crowd.model.util.LicenseModelUtil.toLicenseModel;
-
 public class LicensesServiceImpl implements LicensesService {
 
-    private final CrowdLicenseManager licenseManager;
+    public static final String LICENSE = "license";
+
+    private static final String ERROR_MESSAGE = "It is currently not possible to display license details in BootstrAPI for Crowd because of API changes made by Atlassian";
+
+    private final AtlassianBootstrapManager bootstrapManager;
 
     public LicensesServiceImpl(
-            final CrowdLicenseManager licenseManager) {
+            final AtlassianBootstrapManager bootstrapManager) {
 
-        this.licenseManager = licenseManager;
+        this.bootstrapManager = bootstrapManager;
     }
 
     @Override
     public List<LicenseModel> getLicenses() {
-        return Collections.singletonList(toLicenseModel(licenseManager.getLicense()));
+        throw new InternalServerErrorException(ERROR_MESSAGE);
     }
 
     @Override
@@ -31,18 +34,25 @@ public class LicensesServiceImpl implements LicensesService {
             final List<String> licenseKeys) {
 
         licenseKeys.forEach(this::addLicense);
-        return getLicenses();
+
+        final LicenseModel licenseModel = new LicenseModel();
+        licenseModel.setDescription(ERROR_MESSAGE);
+        return Collections.singletonList(licenseModel);
     }
 
-    @Override
     public LicenseModel addLicense(
             final String licenseKey) {
 
         try {
-            return toLicenseModel(licenseManager.storeLicense(licenseKey));
-        } catch (CrowdLicenseManagerException e) {
+            bootstrapManager.setProperty(LICENSE, licenseKey);
+            bootstrapManager.save();
+        } catch (ConfigurationException e) {
             throw new BadRequestException(e.getMessage());
         }
+
+        final LicenseModel licenseModel = new LicenseModel();
+        licenseModel.setDescription(ERROR_MESSAGE);
+        return licenseModel;
     }
 
 }

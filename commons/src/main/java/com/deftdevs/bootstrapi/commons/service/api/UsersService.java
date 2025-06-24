@@ -2,7 +2,6 @@ package com.deftdevs.bootstrapi.commons.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.UserModel;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public interface UsersService {
@@ -14,7 +13,7 @@ public interface UsersService {
      * @return the user bean
      */
     UserModel getUser(
-            @NotNull final String username);
+            final String username);
 
     /**
      * Get the user.
@@ -25,7 +24,7 @@ public interface UsersService {
      */
     UserModel getUser(
             final long directoryId,
-            @NotNull final String username);
+            final String username);
 
     /**
      * Set (add or update) user.
@@ -36,7 +35,7 @@ public interface UsersService {
      */
     UserModel setUser(
             final long directoryId,
-            @NotNull final UserModel userModel);
+            final UserModel userModel);
 
     /**
      * Set (add or update) users.
@@ -47,7 +46,7 @@ public interface UsersService {
      */
     List<UserModel> setUsers(
             final long directoryId,
-            @NotNull final List<UserModel> userModels);
+            final List<UserModel> userModels);
 
     /**
      * Update the user.
@@ -57,8 +56,8 @@ public interface UsersService {
      * @return the updated user bean
      */
     UserModel updateUser(
-            @NotNull final String username,
-            @NotNull final UserModel userModel);
+            final String username,
+            final UserModel userModel);
 
     /**
      * Update the user password.
@@ -68,7 +67,7 @@ public interface UsersService {
      * @return the updated user bean
      */
     UserModel updatePassword(
-            @NotNull final String username,
-            @NotNull final String password);
+            final String username,
+            final String password);
 
 }

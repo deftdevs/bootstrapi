@@ -2,8 +2,8 @@ package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.LicenseModel;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.type.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.HttpMethod;
@@ -78,7 +78,7 @@ public abstract class AbstractLicenseResourceFuncTest {
                 .password("user")
                 .request();
 
-        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), licensesResponse.statusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), licensesResponse.statusCode());
     }
 
     @Test
@@ -88,7 +88,7 @@ public abstract class AbstractLicenseResourceFuncTest {
                 .password("user")
                 .request(HttpMethod.PUT, getExampleModel());
 
-        assertEquals(Response.Status.UNAUTHORIZED.getStatusCode(), licensesResponse.statusCode());
+        assertEquals(Response.Status.FORBIDDEN.getStatusCode(), licensesResponse.statusCode());
     }
 
     protected List<LicenseModel> getExampleModel() {

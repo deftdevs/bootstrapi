@@ -60,7 +60,7 @@ This endpoint does not need any parameter.
 
 <a name="setDirectories"></a>
 # **setDirectories**
-> List setDirectories(AbstractDirectoryModel, test-connection)
+> List setDirectories(test-connection, AbstractDirectoryModel)
 
 Set a list of user directories
 
@@ -70,8 +70,8 @@ Set a list of user directories
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **AbstractDirectoryModel** | [**List**](../Models/AbstractDirectoryModel.md)|  | |
 | **test-connection** | **Boolean**|  | [optional] [default to false] |
+| **AbstractDirectoryModel** | [**List**](../Models/AbstractDirectoryModel.md)|  | [optional] |
 
 ### Return type
 

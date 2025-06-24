@@ -2,7 +2,6 @@ package com.deftdevs.bootstrapi.commons.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
 
-import javax.validation.constraints.NotNull;
 import java.io.InputStream;
 
 public interface SettingsBrandingService {
@@ -21,7 +20,7 @@ public interface SettingsBrandingService {
      * @return the updated colour scheme
      */
     SettingsBrandingColorSchemeModel setColourScheme(
-            @NotNull final SettingsBrandingColorSchemeModel colourSchemeModel);
+            final SettingsBrandingColorSchemeModel colourSchemeModel);
 
     /**
      * Get the logo binary.
@@ -36,7 +35,7 @@ public interface SettingsBrandingService {
      * @param logoBinary the logo to set
      */
     void setLogo(
-            @NotNull InputStream logoBinary);
+            InputStream logoBinary);
 
     /**
      * Get the favicon binary.
@@ -51,6 +50,6 @@ public interface SettingsBrandingService {
      * @param faviconBinary the favicon to set
      */
     void setFavicon(
-            @NotNull InputStream faviconBinary);
+            InputStream faviconBinary);
 
 }

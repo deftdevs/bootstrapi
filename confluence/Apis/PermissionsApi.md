@@ -44,7 +44,7 @@ Set global permissions configuration
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **PermissionsGlobalModel** | [**PermissionsGlobalModel**](../Models/PermissionsGlobalModel.md)|  | |
+| **PermissionsGlobalModel** | [**PermissionsGlobalModel**](../Models/PermissionsGlobalModel.md)|  | [optional] |
 
 ### Return type
 

@@ -4,8 +4,8 @@ import com.atlassian.confluence.user.ConfluenceUser;
 import com.atlassian.confluence.user.UserAccessor;
 import com.atlassian.user.EntityException;
 import com.atlassian.user.User;
+import com.deftdevs.bootstrapi.confluence.atlassian.user.UserImpl;
 import com.atlassian.user.UserManager;
-import com.atlassian.user.impl.DefaultUser;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.commons.model.UserModel;
@@ -34,7 +34,7 @@ public class UsersServiceImpl implements UsersService {
     public UserModel getUser(
             final String userName) throws NotFoundException {
 
-        final User user = findConfluenceUser(userName);
+        final User user = findUser(userName);
         return UserModelUtil.toUserModel(user);
     }
 
@@ -53,7 +53,7 @@ public class UsersServiceImpl implements UsersService {
             final UserModel userModel) {
 
         validate(userModel);
-        User user = findConfluenceUser(userName);
+        User user = findUser(userName);
 
         if (userModel.getUsername() != null && !userName.equals(userModel.getUsername())) {
             try {
@@ -64,8 +64,8 @@ public class UsersServiceImpl implements UsersService {
                         "handle the request.", user.getName()));
             }
         }
-        // userManager.saveUser will convert this user into a ConfluenceUser
-        final DefaultUser updateUser = new DefaultUser(user);
+
+        final UserImpl updateUser = new UserImpl(user);
 
         if (userModel.getFullName() != null) {
             updateUser.setFullName(userModel.getFullName());
@@ -109,7 +109,7 @@ public class UsersServiceImpl implements UsersService {
             final String username,
             final String password) throws NotFoundException, BadRequestException {
 
-        final User user = findConfluenceUser(username);
+        final User user = findUser(username);
 
         try {
             userManager.alterPassword(user, password);
@@ -120,19 +120,18 @@ public class UsersServiceImpl implements UsersService {
         return UserModelUtil.toUserModel(user);
     }
 
-    private User findConfluenceUser(
+    private User findUser(
             final String username) {
 
-        final ConfluenceUser confluenceUser;
+        final User user;
 
         try {
-            // user *should* always be ConfluenceUser if not null
-            confluenceUser = (ConfluenceUser) userManager.getUser(username);
+            user = userManager.getUser(username);
         } catch (EntityException | ClassCastException e) {
             throw new NotFoundException(String.format("User %s cannot be found", username));
         }
 
-        return confluenceUser;
+        return user;
     }
 
 }

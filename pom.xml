@@ -5,7 +5,7 @@
 
     <groupId>com.deftdevs</groupId>
     <artifactId>bootstrapi-parent</artifactId>
-    <version>0.12.1-SNAPSHOT</version>
+    <version>1.0.0-rc2-SNAPSHOT</version>
     <packaging>pom</packaging>
 
     <name>BootstrAPI parent POM</name>
@@ -83,7 +83,7 @@
         <sonar.java.binaries>target/classes</sonar.java.binaries>
         <!-- other properties -->
         <atlassian.amps.version>9.4.0</atlassian.amps.version>
-        <atlassian.platform.version>6.5.48</atlassian.platform.version>
+        <atlassian.platform.version>7.3.11</atlassian.platform.version>
         <atlassian.applinks-plugin.version>10.3.1</atlassian.applinks-plugin.version>
         <atlassian.authentication.version>5.3.1</atlassian.authentication.version>
         <atlassian.oauth.version>6.1.9</atlassian.oauth.version>
@@ -91,6 +91,10 @@
         <atlassian.plugins.osgi.javaconfig.version>0.6.0</atlassian.plugins.osgi.javaconfig.version>
         <atlassian.plugins.osgi.testrunner.version>2.0.10</atlassian.plugins.osgi.testrunner.version>
         <jacoco.maven-plugin.version>0.8.13</jacoco.maven-plugin.version>
+        <jakarta.annotation.version>3.0.0</jakarta.annotation.version>
+        <jakarta.inject.version>1.0.5</jakarta.inject.version>
+        <jakarta.validation.version>2.0.2</jakarta.validation.version>
+        <jakarta.ws.rs.version>2.1.6</jakarta.ws.rs.version>
         <lombok.version>1.18.38</lombok.version>
         <maven.compiler-plugin.version>3.14.0</maven.compiler-plugin.version>
         <maven.release-plugin.version>3.1.1</maven.release-plugin.version>
@@ -164,7 +168,7 @@
 
             <dependency>
                 <groupId>com.atlassian.plugins.authentication</groupId>
-                <artifactId>atlassian-authentication-plugin</artifactId>
+                <artifactId>atlassian-authentication-plugin-api</artifactId>
                 <version>${atlassian.authentication.version}</version>
             </dependency>
 
@@ -208,6 +212,42 @@
                 <groupId>org.osgi</groupId>
                 <artifactId>osgi.core</artifactId>
                 <version>${osgi.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-web</artifactId>
+                <version>3.3.4</version>
+            </dependency>
+
+            <dependency>
+                <groupId>jakarta.annotation</groupId>
+                <artifactId>jakarta.annotation-api</artifactId>
+                <version>${jakarta.annotation.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>jakarta.inject</groupId>
+                <artifactId>jakarta.inject-api</artifactId>
+                <version>${jakarta.inject.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>jakarta.validation</groupId>
+                <artifactId>jakarta.validation-api</artifactId>
+                <version>${jakarta.validation.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>jakarta.ws.rs</groupId>
+                <artifactId>jakarta.ws.rs-api</artifactId>
+                <version>${jakarta.ws.rs.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>jakarta.xml.bind</groupId>
+                <artifactId>jakarta.xml.bind-api</artifactId>
+                <version>2.3.3</version>
             </dependency>
 
             <dependency>
@@ -399,6 +439,18 @@
             <id>release</id>
             <build>
                 <plugins>
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-install-plugin</artifactId>
+                        <version>3.1.4</version>
+                    </plugin>
+
+                    <plugin>
+                        <groupId>org.apache.maven.plugins</groupId>
+                        <artifactId>maven-deploy-plugin</artifactId>
+                        <version>3.1.4</version>
+                    </plugin>
+
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-release-plugin</artifactId>

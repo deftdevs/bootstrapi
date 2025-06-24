@@ -2,7 +2,6 @@ package com.deftdevs.bootstrapi.commons.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
 
-import javax.validation.constraints.NotNull;
 import java.util.List;
 
 /**
@@ -34,7 +33,7 @@ public interface DirectoriesService {
      * @return the directories
      */
     List<AbstractDirectoryModel> setDirectories(
-            @NotNull List<AbstractDirectoryModel> directories,
+            List<AbstractDirectoryModel> directories,
             boolean testConnection);
 
     /**
@@ -47,7 +46,7 @@ public interface DirectoriesService {
      */
     AbstractDirectoryModel setDirectory(
             long id,
-            @NotNull AbstractDirectoryModel directory,
+            AbstractDirectoryModel directory,
             boolean testConnection);
 
     /**
@@ -58,7 +57,7 @@ public interface DirectoriesService {
      * @return the added directory
      */
     AbstractDirectoryModel addDirectory(
-            @NotNull AbstractDirectoryModel directory,
+            AbstractDirectoryModel directory,
             boolean testConnection);
 
     /**

@@ -1,9 +1,10 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
-import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
+import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 import com.deftdevs.bootstrapi.crowd.rest.api.TrustedProxiesResource;
 import com.deftdevs.bootstrapi.crowd.service.api.TrustedProxiesService;
 
+import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.List;
@@ -14,6 +15,7 @@ public class TrustedProxiesResourceImpl implements TrustedProxiesResource {
 
     private final TrustedProxiesService trustedProxiesService;
 
+    @Inject
     public TrustedProxiesResourceImpl(
             final TrustedProxiesService trustedProxiesService) {
 

@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
@@ -54,7 +53,7 @@ public interface DirectoryResource {
     )
     Response createDirectory(
             @QueryParam("test-connection") @DefaultValue("false") final boolean testConnection,
-            @NotNull final AbstractDirectoryModel directory);
+            final AbstractDirectoryModel directory);
 
     @PUT
     @Path("{id}")
@@ -77,7 +76,7 @@ public interface DirectoryResource {
     Response updateDirectory(
             @PathParam("id") final long id,
             @QueryParam("test-connection") @DefaultValue("false") final boolean testConnection,
-            @NotNull final AbstractDirectoryModel directory);
+            final AbstractDirectoryModel directory);
 
     @DELETE
     @Path("{id}")

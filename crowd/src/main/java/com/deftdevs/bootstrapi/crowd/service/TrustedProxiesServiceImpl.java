@@ -1,24 +1,33 @@
 package com.deftdevs.bootstrapi.crowd.service;
 
-import com.atlassian.crowd.manager.proxy.TrustedProxyManager;
+import com.atlassian.crowd.manager.property.PropertyManager;
+import com.atlassian.crowd.manager.property.PropertyManagerException;
 import com.deftdevs.bootstrapi.crowd.service.api.TrustedProxiesService;
+import com.google.common.collect.ImmutableSet;
+import org.apache.commons.lang3.StringUtils;
 
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 public class TrustedProxiesServiceImpl implements TrustedProxiesService {
 
-    private final TrustedProxyManager trustedProxyManager;
+    public static final String SEPARATOR = ",";
+
+    private final PropertyManager propertyManager;
 
     public TrustedProxiesServiceImpl(
-            final TrustedProxyManager trustedProxyManager) {
+            final PropertyManager propertyManager) {
 
-        this.trustedProxyManager = trustedProxyManager;
+        this.propertyManager = propertyManager;
     }
 
     @Override
     public List<String> getTrustedProxies() {
-        return trustedProxyManager.getAddresses()
+        return getTrustedProxiesInternal()
                 .stream()
                 .sorted()
                 .collect(Collectors.toList());
@@ -28,18 +37,7 @@ public class TrustedProxiesServiceImpl implements TrustedProxiesService {
     public List<String> setTrustedProxies(
             final List<String> trustedProxies) {
 
-        for (String trustedProxy : trustedProxies) {
-            if (!trustedProxyManager.isTrusted(trustedProxy)) {
-                trustedProxyManager.addAddress(trustedProxy);
-            }
-        }
-
-        for (String trustedProxy : trustedProxyManager.getAddresses()) {
-            if (!trustedProxies.contains(trustedProxy)) {
-                trustedProxyManager.removeAddress(trustedProxy);
-            }
-        }
-
+        setTrustedProxiesInternal(trustedProxies);
         return getTrustedProxies();
     }
 
@@ -47,7 +45,9 @@ public class TrustedProxiesServiceImpl implements TrustedProxiesService {
     public List<String> addTrustedProxy(
             final String trustedProxy) {
 
-        trustedProxyManager.addAddress(trustedProxy);
+        final Set<String> trustedProxies = new HashSet<>(getTrustedProxiesInternal());
+        final boolean added = trustedProxies.add(trustedProxy);
+        if (added) setTrustedProxiesInternal(trustedProxies);
         return getTrustedProxies();
     }
 
@@ -55,8 +55,29 @@ public class TrustedProxiesServiceImpl implements TrustedProxiesService {
     public List<String> removeTrustedProxy(
             final String trustedProxy) {
 
-        trustedProxyManager.removeAddress(trustedProxy);
+        final Set<String> trustedProxies = new HashSet<>(getTrustedProxiesInternal());
+        final boolean removed = trustedProxies.remove(trustedProxy);
+        if (removed) setTrustedProxiesInternal(trustedProxies);
         return getTrustedProxies();
+    }
+
+    private Set<String> getTrustedProxiesInternal() {
+        try {
+            final String trustedProxyServers = this.propertyManager.getTrustedProxyServers();
+            if (!StringUtils.isBlank(trustedProxyServers)) {
+                final String[] trustedProxyServerStrings = StringUtils.split(trustedProxyServers, SEPARATOR);
+                return ImmutableSet.copyOf(trustedProxyServerStrings);
+            }
+        } catch (PropertyManagerException ignored) {}
+
+        return Collections.emptySet();
+    }
+
+    private void setTrustedProxiesInternal(
+            final Collection<String> trustedProxies) {
+
+        final String proxies = StringUtils.join(trustedProxies, SEPARATOR);
+        propertyManager.setTrustedProxyServers(proxies);
     }
 
 }

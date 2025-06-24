@@ -1,12 +1,13 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
 
-import com.atlassian.plugins.rest.common.security.SystemAdminOnly;
+import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.SettingsBrandingResource;
 import com.deftdevs.bootstrapi.crowd.service.api.CrowdSettingsBrandingService;
 
+import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
@@ -17,6 +18,7 @@ public class SettingsBrandingResourceImpl implements SettingsBrandingResource {
 
     private final CrowdSettingsBrandingService crowdSettingsBrandingService;
 
+    @Inject
     public SettingsBrandingResourceImpl(
             final CrowdSettingsBrandingService crowdSettingsBrandingService) {
 

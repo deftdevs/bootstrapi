@@ -62,7 +62,7 @@ public class ServiceConfig {
     @Bean
     public LicensesService licensesService() {
         return new LicensesServiceImpl(
-                atlassianConfig.crowdLicenseManager());
+                atlassianConfig.atlassianBootstrapManager());
     }
 
     @Bean
@@ -86,7 +86,7 @@ public class ServiceConfig {
     @Bean
     public TrustedProxiesService trustedProxiesService() {
         return new TrustedProxiesServiceImpl(
-                atlassianConfig.trustedProxyManager());
+                atlassianConfig.propertyManager());
     }
 
     @Bean
