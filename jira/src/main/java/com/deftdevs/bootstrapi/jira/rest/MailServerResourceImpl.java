@@ -5,7 +5,7 @@ import com.deftdevs.bootstrapi.commons.rest.AbstractMailServerResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
 import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.ws.rs.Path;
 
 @Path(BootstrAPI.MAIL_SERVER)

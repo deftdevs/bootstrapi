@@ -7,7 +7,7 @@ import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoModel;
 import com.deftdevs.bootstrapi.commons.rest.AbstractAuthenticationResourceImpl;
 import com.deftdevs.bootstrapi.jira.service.api.JiraAuthenticationService;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.ws.rs.Path;
 
 @Path(BootstrAPI.AUTHENTICATION)

@@ -6,7 +6,7 @@ import com.deftdevs.bootstrapi.jira.model.SettingsBannerModel;
 import com.deftdevs.bootstrapi.jira.rest.api.SettingsBannerResource;
 import com.deftdevs.bootstrapi.jira.service.api.JiraSettingsService;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 

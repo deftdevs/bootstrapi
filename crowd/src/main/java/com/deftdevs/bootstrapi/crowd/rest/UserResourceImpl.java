@@ -5,7 +5,7 @@ import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.rest.AbstractUserResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.ws.rs.Path;
 
 @SystemAdminOnly

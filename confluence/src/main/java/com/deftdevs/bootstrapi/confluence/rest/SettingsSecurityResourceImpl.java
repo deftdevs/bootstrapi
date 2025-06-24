@@ -7,7 +7,7 @@ import com.deftdevs.bootstrapi.commons.rest.AbstractSettingsSecurityResourceImpl
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;

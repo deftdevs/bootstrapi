@@ -6,7 +6,7 @@ import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.GroupsResource;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.List;

@@ -6,7 +6,7 @@ import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlModel;
 import com.deftdevs.bootstrapi.confluence.rest.api.SettingsCustomHtmlResource;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 

@@ -7,7 +7,7 @@ import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoModel;
 import com.deftdevs.bootstrapi.commons.rest.AbstractAuthenticationResourceImpl;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceAuthenticationService;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.ws.rs.Path;
 
 @Path(BootstrAPI.AUTHENTICATION)

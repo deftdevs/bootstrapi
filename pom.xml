@@ -92,7 +92,7 @@
         <atlassian.plugins.osgi.testrunner.version>2.0.10</atlassian.plugins.osgi.testrunner.version>
         <jacoco.maven-plugin.version>0.8.13</jacoco.maven-plugin.version>
         <jakarta.annotation.version>3.0.0</jakarta.annotation.version>
-        <jakarta.inject.version>1.0.5</jakarta.inject.version>
+        <jakarta.inject.version>2.0.1.MR</jakarta.inject.version>
         <jakarta.validation.version>2.0.2</jakarta.validation.version>
         <jakarta.ws.rs.version>2.1.6</jakarta.ws.rs.version>
         <lombok.version>1.18.38</lombok.version>

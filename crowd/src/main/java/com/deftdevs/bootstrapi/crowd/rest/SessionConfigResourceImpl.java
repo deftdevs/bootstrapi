@@ -5,7 +5,7 @@ import com.deftdevs.bootstrapi.crowd.model.SessionConfigModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.SessionConfigResource;
 import com.deftdevs.bootstrapi.crowd.service.api.SessionConfigService;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 

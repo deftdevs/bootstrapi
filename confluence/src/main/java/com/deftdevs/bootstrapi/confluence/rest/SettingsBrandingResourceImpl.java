@@ -5,7 +5,7 @@ import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.rest.AbstractSettingsBrandingResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsBrandingService;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.ws.rs.Path;
 
 @Path(BootstrAPI.SETTINGS + "/" + BootstrAPI.SETTINGS_BRANDING)

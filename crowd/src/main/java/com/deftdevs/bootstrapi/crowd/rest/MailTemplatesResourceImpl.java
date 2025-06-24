@@ -5,7 +5,7 @@ import com.deftdevs.bootstrapi.crowd.model.MailTemplatesModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.MailTemplateResource;
 import com.deftdevs.bootstrapi.crowd.service.api.MailTemplatesService;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 

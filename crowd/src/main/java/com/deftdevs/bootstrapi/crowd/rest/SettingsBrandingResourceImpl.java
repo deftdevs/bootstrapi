@@ -7,7 +7,7 @@ import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.SettingsBrandingResource;
 import com.deftdevs.bootstrapi.crowd.service.api.CrowdSettingsBrandingService;
 
-import javax.inject.Inject;
+import jakarta.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.io.InputStream;
