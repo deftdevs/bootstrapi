@@ -82,7 +82,7 @@
         <sonar.test.exclusions>**/test/**/*Test.java,**/test/**/*IT.java</sonar.test.exclusions>
         <sonar.java.binaries>target/classes</sonar.java.binaries>
         <!-- other properties -->
-        <atlassian.amps.version>9.3.6</atlassian.amps.version>
+        <atlassian.amps.version>9.4.0</atlassian.amps.version>
         <atlassian.platform.version>7.3.11</atlassian.platform.version>
         <atlassian.applinks-plugin.version>10.3.1</atlassian.applinks-plugin.version>
         <atlassian.authentication.version>5.3.1</atlassian.authentication.version>
