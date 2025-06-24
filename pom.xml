@@ -83,7 +83,7 @@
         <sonar.java.binaries>target/classes</sonar.java.binaries>
         <!-- other properties -->
         <atlassian.amps.version>9.3.6</atlassian.amps.version>
-        <atlassian.platform.version>6.5.47</atlassian.platform.version>
+        <atlassian.platform.version>6.5.48</atlassian.platform.version>
         <atlassian.applinks-plugin.version>10.3.1</atlassian.applinks-plugin.version>
         <atlassian.authentication.version>5.3.1</atlassian.authentication.version>
         <atlassian.oauth.version>6.1.9</atlassian.oauth.version>
