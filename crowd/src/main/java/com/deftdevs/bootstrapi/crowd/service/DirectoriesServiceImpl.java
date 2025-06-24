@@ -21,7 +21,7 @@ import com.deftdevs.bootstrapi.crowd.model.util.DirectoryModelUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 
 import javax.annotation.Nonnull;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;

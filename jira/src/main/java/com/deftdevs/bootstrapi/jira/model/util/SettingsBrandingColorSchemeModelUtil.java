@@ -4,7 +4,7 @@ import com.atlassian.jira.config.properties.APKeys;
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.Map;
 
 import static org.apache.commons.lang3.StringUtils.isBlank;

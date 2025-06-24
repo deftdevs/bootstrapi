@@ -1,10 +1,10 @@
 package com.deftdevs.bootstrapi.commons.util;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.ValidationException;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.ValidationException;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 public class ModelValidationUtil {
 
     /**
-     * Validates the given bean using javax.validation impl from hibernate reference.
+     * Validates the given bean using jakarta.validation impl from hibernate reference.
      *
      * @param bean the bean
      */

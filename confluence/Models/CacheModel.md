@@ -3,7 +3,7 @@
 
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
-| **name** | **String** |  | [default to null] |
+| **name** | **String** |  | [optional] [default to null] |
 | **maxObjectCount** | **Integer** |  | [optional] [default to null] |
 | **currentHeapSizeInByte** | **Long** |  | [optional] [default to null] |
 | **effectivenessInPercent** | **Double** |  | [optional] [default to null] |

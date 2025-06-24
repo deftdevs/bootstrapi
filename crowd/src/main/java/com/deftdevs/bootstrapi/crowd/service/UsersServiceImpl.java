@@ -23,7 +23,7 @@ import com.deftdevs.bootstrapi.crowd.model.util.UserModelUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 
 import javax.annotation.Nullable;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;

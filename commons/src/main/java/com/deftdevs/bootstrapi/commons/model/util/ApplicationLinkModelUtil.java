@@ -15,7 +15,7 @@ import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel.ApplicationLinkType;
 import org.apache.commons.lang3.NotImplementedException;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.UUID;
 
 import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel.ApplicationLinkType.*;
