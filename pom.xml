@@ -86,7 +86,7 @@
         <atlassian.platform.version>7.3.15</atlassian.platform.version>
         <atlassian.applinks-plugin.version>10.3.1</atlassian.applinks-plugin.version>
         <atlassian.authentication.version>5.3.1</atlassian.authentication.version>
-        <atlassian.oauth.version>6.1.9</atlassian.oauth.version>
+        <atlassian.oauth.version>7.0.2</atlassian.oauth.version>
         <atlassian.sal.version>7.0.0</atlassian.sal.version>
         <atlassian.plugins.osgi.javaconfig.version>0.6.0</atlassian.plugins.osgi.javaconfig.version>
         <atlassian.plugins.osgi.testrunner.version>2.0.10</atlassian.plugins.osgi.testrunner.version>
