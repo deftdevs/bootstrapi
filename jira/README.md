@@ -36,15 +36,9 @@ All URIs are relative to *https://<JIRA_URL>/rest/bootstrapi/1*
 *PermissionsApi* | [**setPermissionGlobal**](Apis/PermissionsApi.md#setpermissionglobal) | **PUT** /permissions/global | Set global permissions configuration |
 | *PingApi* | [**getPing**](Apis/PingApi.md#getping) | **GET** /ping | Ping method for probing the REST API. |
 | *SettingsApi* | [**getBanner**](Apis/SettingsApi.md#getbanner) | **GET** /settings/banner | Get the banner |
-*SettingsApi* | [**getBrandingColorScheme**](Apis/SettingsApi.md#getbrandingcolorscheme) | **GET** /settings/branding/color-scheme | Get the color scheme |
-*SettingsApi* | [**getBrandingFavicon**](Apis/SettingsApi.md#getbrandingfavicon) | **GET** /settings/branding/favicon | Get the favicon |
-*SettingsApi* | [**getBrandingLogo**](Apis/SettingsApi.md#getbrandinglogo) | **GET** /settings/branding/logo | Get the logo |
 *SettingsApi* | [**getSettings**](Apis/SettingsApi.md#getsettings) | **GET** /settings | Get the general settings |
 *SettingsApi* | [**getSettingsSecurity**](Apis/SettingsApi.md#getsettingssecurity) | **GET** /settings/security | Get the security settings |
 *SettingsApi* | [**setBanner**](Apis/SettingsApi.md#setbanner) | **PUT** /settings/banner | Set the banner |
-*SettingsApi* | [**setBrandingColorScheme**](Apis/SettingsApi.md#setbrandingcolorscheme) | **PUT** /settings/branding/color-scheme | Set the color scheme |
-*SettingsApi* | [**setBrandingFavicon**](Apis/SettingsApi.md#setbrandingfavicon) | **PUT** /settings/branding/favicon | Set the favicon |
-*SettingsApi* | [**setBrandingLogo**](Apis/SettingsApi.md#setbrandinglogo) | **PUT** /settings/branding/logo | Set the logo |
 *SettingsApi* | [**setSettings**](Apis/SettingsApi.md#setsettings) | **PUT** /settings | Set the general settings |
 *SettingsApi* | [**setSettingsSecurity**](Apis/SettingsApi.md#setsettingssecurity) | **PUT** /settings/security | Set the security settings |
 
@@ -82,7 +76,6 @@ All URIs are relative to *https://<JIRA_URL>/rest/bootstrapi/1*
  - [MailServerSmtpModel](./Models/MailServerSmtpModel.md)
  - [PermissionsGlobalModel](./Models/PermissionsGlobalModel.md)
  - [SettingsBannerModel](./Models/SettingsBannerModel.md)
- - [SettingsBrandingColorSchemeModel](./Models/SettingsBrandingColorSchemeModel.md)
  - [SettingsModel](./Models/SettingsModel.md)
  - [SettingsSecurityModel](./Models/SettingsSecurityModel.md)
  - [UserModel](./Models/UserModel.md)
