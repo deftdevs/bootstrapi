@@ -6,7 +6,6 @@
 | **name** | **String** |  | [optional] [default to null] |
 | **description** | **String** |  | [optional] [default to null] |
 | **host** | **String** |  | [optional] [default to null] |
-| **port** | **Integer** |  | [optional] [default to null] |
 | **protocol** | **String** |  | [optional] [default to null] |
 | **timeout** | **Long** |  | [optional] [default to null] |
 | **username** | **String** |  | [optional] [default to null] |
