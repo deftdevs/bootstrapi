@@ -15,23 +15,20 @@ import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
 import com.deftdevs.bootstrapi.commons.model.DirectoryInternalModel;
 import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import com.deftdevs.bootstrapi.commons.model.UserModel;
-import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
+import com.deftdevs.bootstrapi.commons.service.AbstractDirectoriesService;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
 import com.deftdevs.bootstrapi.crowd.model.util.DirectoryModelUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 
 import javax.annotation.Nonnull;
-import javax.validation.constraints.NotNull;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static com.atlassian.crowd.embedded.api.DirectoryType.INTERNAL;
 
-public class DirectoriesServiceImpl implements DirectoriesService {
+public class DirectoriesServiceImpl extends AbstractDirectoriesService {
 
     private static final int RETRY_AFTER_IN_SECONDS = 5;
 
@@ -62,27 +59,6 @@ public class DirectoriesServiceImpl implements DirectoriesService {
 
         final Directory directory = findDirectory(id);
         return DirectoryModelUtil.toDirectoryModel(directory);
-    }
-
-    @Override
-    public List<AbstractDirectoryModel> setDirectories(
-            final List<AbstractDirectoryModel> directoryModels,
-            final boolean testConnection) {
-
-        final Map<String, Directory> existingDirectoriesByName = findAllDirectories().stream()
-                .collect(Collectors.toMap(Directory::getName, Function.identity()));
-
-        final List<AbstractDirectoryModel> resultDirectories = new ArrayList<>();
-
-        for (AbstractDirectoryModel directoryModel : directoryModels) {
-            if (existingDirectoriesByName.containsKey(directoryModel.getName())) {
-                resultDirectories.add(setDirectory(existingDirectoriesByName.get(directoryModel.getName()).getId(), directoryModel, testConnection));
-            } else {
-                resultDirectories.add(addDirectory(directoryModel, testConnection));
-            }
-        }
-
-        return resultDirectories;
     }
 
     @Override
@@ -169,6 +145,11 @@ public class DirectoriesServiceImpl implements DirectoriesService {
         } catch (DirectoryCurrentlySynchronisingException e) {
             throw new ServiceUnavailableException(e, RETRY_AFTER_IN_SECONDS);
         }
+    }
+
+    @Override
+    protected Set<Class<? extends AbstractDirectoryModel>> getSupportedClassesForUpdate() {
+        return DirectoryModelUtil.SUPPORTED_DIRECTORY_BEAN_TYPES;
     }
 
     @Nonnull

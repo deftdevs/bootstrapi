@@ -3,6 +3,7 @@ package com.deftdevs.bootstrapi.commons.service.api;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 public interface ApplicationLinksService {
@@ -34,6 +35,15 @@ public interface ApplicationLinksService {
     List<ApplicationLinkModel> setApplicationLinks(
             final List<ApplicationLinkModel> applicationLinkModels,
             boolean ignoreSetupErrors);
+
+    /**
+     * Sets or updates the given application links
+     *
+     * @param applicationLinkModels the application links to set / update
+     * @return the updated application links
+     */
+    Map<String, ApplicationLinkModel> setApplicationLinks(
+            final Map<String, ApplicationLinkModel> applicationLinkModels);
 
     /**
      * Updates the given application link

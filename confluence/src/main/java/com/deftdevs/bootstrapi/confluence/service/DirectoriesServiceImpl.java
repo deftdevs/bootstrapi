@@ -10,27 +10,25 @@ import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.web.ServiceUnavailableException;
 import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
 import com.deftdevs.bootstrapi.commons.model.DirectoryCrowdModel;
-import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
+import com.deftdevs.bootstrapi.commons.service.AbstractDirectoriesService;
 import com.deftdevs.bootstrapi.confluence.model.util.DirectoryModelUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
+import java.util.Set;
 
 import static java.lang.String.format;
 
-public class DirectoryServiceImpl implements DirectoriesService {
+public class DirectoriesServiceImpl extends AbstractDirectoriesService {
 
-    private static final Logger log = LoggerFactory.getLogger(DirectoryServiceImpl.class);
+    private static final Logger log = LoggerFactory.getLogger(DirectoriesServiceImpl.class);
     public static final int RETRY_AFTER_IN_SECONDS = 5;
 
     private final CrowdDirectoryService crowdDirectoryService;
 
-    public DirectoryServiceImpl(
+    public DirectoriesServiceImpl(
             final CrowdDirectoryService crowdDirectoryService) {
 
         this.crowdDirectoryService = crowdDirectoryService;
@@ -54,37 +52,15 @@ public class DirectoryServiceImpl implements DirectoriesService {
     }
 
     @Override
-    public List<AbstractDirectoryModel> setDirectories(List<AbstractDirectoryModel> directoryModels, boolean testConnection) {
-
-        final Map<String, Directory> existingDirectoriesByName = crowdDirectoryService.findAllDirectories().stream()
-                .collect(Collectors.toMap(Directory::getName, Function.identity()));
-
-        directoryModels.forEach(directoryRequestModel -> {
-            if (directoryRequestModel instanceof DirectoryCrowdModel) {
-                DirectoryCrowdModel crowdRequestModel = (DirectoryCrowdModel) directoryRequestModel;
-
-                if (existingDirectoriesByName.containsKey(crowdRequestModel.getName())) {
-                    setDirectory(existingDirectoriesByName.get(crowdRequestModel.getName()).getId(), crowdRequestModel, testConnection);
-                } else {
-                    addDirectory(crowdRequestModel, testConnection);
-                }
-            } else {
-                throw new BadRequestException(format("Updating directory type '%s' is not supported (yet)", directoryRequestModel.getClass()));
-            }
-        });
-        return getDirectories();
-    }
-
-    @Override
     public AbstractDirectoryModel setDirectory(
-            long id,
-            AbstractDirectoryModel abstractDirectoryModel,
-            boolean testConnection) {
+            final long id,
+            final AbstractDirectoryModel directoryModel,
+            final boolean testConnection) {
 
-        if (abstractDirectoryModel instanceof DirectoryCrowdModel) {
-            return setDirectoryCrowd(id, (DirectoryCrowdModel) abstractDirectoryModel, testConnection);
+        if (directoryModel instanceof DirectoryCrowdModel) {
+            return setDirectoryCrowd(id, (DirectoryCrowdModel) directoryModel, testConnection);
         } else {
-            throw new BadRequestException(format("Setting directory type '%s' is not supported (yet)", abstractDirectoryModel.getClass()));
+            throw new BadRequestException(format("Setting directory type '%s' is not supported (yet)", directoryModel.getClass()));
         }
     }
 
@@ -118,16 +94,16 @@ public class DirectoryServiceImpl implements DirectoriesService {
 
     @Override
     public AbstractDirectoryModel addDirectory(
-            AbstractDirectoryModel abstractDirectoryModel,
+            AbstractDirectoryModel directoryModel,
             boolean testConnection) {
 
-        if (abstractDirectoryModel instanceof DirectoryCrowdModel) {
-            DirectoryCrowdModel crowdModel = (DirectoryCrowdModel) abstractDirectoryModel;
+        if (directoryModel instanceof DirectoryCrowdModel) {
+            DirectoryCrowdModel crowdModel = (DirectoryCrowdModel) directoryModel;
             Directory directory = validateAndCreateDirectoryConfig(crowdModel, testConnection);
             Directory addedDirectory = crowdDirectoryService.addDirectory(directory);
             return DirectoryModelUtil.toDirectoryModel(addedDirectory);
         } else {
-            throw new BadRequestException(format("Adding directory type '%s' is not supported (yet)", abstractDirectoryModel.getClass()));
+            throw new BadRequestException(format("Adding directory type '%s' is not supported (yet)", directoryModel.getClass()));
         }
     }
 
@@ -160,6 +136,11 @@ public class DirectoryServiceImpl implements DirectoriesService {
         }
     }
 
+    @Override
+    protected Set<Class<? extends AbstractDirectoryModel>> getSupportedClassesForUpdate() {
+        return Set.of(DirectoryCrowdModel.class);
+    }
+
     private Directory findDirectory(long id) {
         Directory directory = crowdDirectoryService.findDirectoryById(id);
         if (directory == null) {
@@ -177,5 +158,4 @@ public class DirectoryServiceImpl implements DirectoriesService {
         }
         return directory;
     }
-
 }

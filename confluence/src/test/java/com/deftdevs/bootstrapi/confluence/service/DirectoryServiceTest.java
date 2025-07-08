@@ -36,11 +36,11 @@ class DirectoryServiceTest {
     @Mock
     private CrowdDirectoryService crowdDirectoryService;
 
-    private DirectoryServiceImpl directoryService;
+    private DirectoriesServiceImpl directoryService;
 
     @BeforeEach
     public void setup() {
-        directoryService = new DirectoryServiceImpl(crowdDirectoryService);
+        directoryService = new DirectoriesServiceImpl(crowdDirectoryService);
     }
 
     @Test
@@ -88,7 +88,7 @@ class DirectoryServiceTest {
 
         DirectoryCrowdModel directoryModel = (DirectoryCrowdModel) DirectoryModelUtil.toDirectoryModel(directory);
         directoryModel.getServer().setAppPassword("test");
-        directoryService.setDirectories(Collections.singletonList(directoryModel), false);
+        directoryService.setDirectories(Collections.singletonList(directoryModel));
     }
 
     @Test
@@ -100,7 +100,7 @@ class DirectoryServiceTest {
 
         final DirectoryCrowdModel directoryModel = (DirectoryCrowdModel) DirectoryModelUtil.toDirectoryModel(directory);
         directoryModel.getServer().setAppPassword("test");
-        final List<AbstractDirectoryModel> directoryAdded = directoryService.setDirectories(Collections.singletonList(directoryModel), false);
+        final List<AbstractDirectoryModel> directoryAdded = directoryService.setDirectories(Collections.singletonList(directoryModel));
         assertEquals(directoryAdded.iterator().next().getName(), directoryModel.getName());
     }
 
@@ -113,7 +113,7 @@ class DirectoryServiceTest {
 
         final DirectoryCrowdModel directoryModel = (DirectoryCrowdModel) DirectoryModelUtil.toDirectoryModel(directory);
         directoryModel.getServer().setAppPassword("test");
-        List<AbstractDirectoryModel> directoryAdded = directoryService.setDirectories(Collections.singletonList(directoryModel), true);
+        List<AbstractDirectoryModel> directoryAdded = directoryService.setDirectories(Collections.singletonList(directoryModel));
         assertEquals(directoryAdded.iterator().next().getName(), directoryModel.getName());
     }
 
