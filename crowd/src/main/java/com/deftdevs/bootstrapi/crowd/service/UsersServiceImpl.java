@@ -88,6 +88,14 @@ public class UsersServiceImpl implements UsersService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public Map<String, UserModel> setUsers(
+            final long directoryId,
+            final Map<String, UserModel> userModels) {
+
+        return Map.of();
+    }
+
     public UserModel addUser(
             final long directoryId,
             final UserModel userModel) {

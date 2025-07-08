@@ -117,6 +117,11 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
     }
 
     @Override
+    public Map<String, ApplicationLinkModel> setApplicationLinks(Map<String, ApplicationLinkModel> applicationLinkModels) {
+        return Map.of();
+    }
+
+    @Override
     public ApplicationLinkModel setApplicationLink(
             final UUID uuid,
             final ApplicationLinkModel applicationLinkModel,
