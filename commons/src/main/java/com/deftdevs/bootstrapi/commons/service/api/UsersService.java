@@ -3,6 +3,7 @@ package com.deftdevs.bootstrapi.commons.service.api;
 import com.deftdevs.bootstrapi.commons.model.UserModel;
 
 import java.util.List;
+import java.util.Map;
 
 public interface UsersService {
 
@@ -47,6 +48,17 @@ public interface UsersService {
     List<UserModel> setUsers(
             final long directoryId,
             final List<UserModel> userModels);
+
+    /**
+     * Set (add or update) users.
+     *
+     * @param directoryId the directory id
+     * @param userModels the user beans
+     * @return the set user beans
+     */
+    Map<String, UserModel> setUsers(
+            final long directoryId,
+            final Map<String, UserModel> userModels);
 
     /**
      * Update the user.

@@ -48,7 +48,7 @@ public class ServiceConfig {
 
     @Bean
     public DirectoriesService directoriesService() {
-        return new DirectoryServiceImpl(
+        return new DirectoriesServiceImpl(
                 atlassianConfig.crowdDirectoryService());
     }
 

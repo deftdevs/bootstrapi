@@ -12,7 +12,7 @@ All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
 
 <a name="createDirectory"></a>
 # **createDirectory**
-> AbstractDirectoryModel createDirectory(test-connection, AbstractDirectoryModel)
+> AbstractDirectoryModel createDirectory(AbstractDirectoryModel)
 
 Create a user directory
 
@@ -20,7 +20,6 @@ Create a user directory
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **test-connection** | **Boolean**|  | [optional] [default to false] |
 | **AbstractDirectoryModel** | [**AbstractDirectoryModel**](../Models/AbstractDirectoryModel.md)|  | [optional] |
 
 ### Return type
@@ -88,7 +87,7 @@ Get a user directory
 
 <a name="updateDirectory"></a>
 # **updateDirectory**
-> AbstractDirectoryModel updateDirectory(id, test-connection, AbstractDirectoryModel)
+> AbstractDirectoryModel updateDirectory(id, AbstractDirectoryModel)
 
 Update a user directory
 
@@ -97,7 +96,6 @@ Update a user directory
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **id** | **Long**|  | [default to null] |
-| **test-connection** | **Boolean**|  | [optional] [default to false] |
 | **AbstractDirectoryModel** | [**AbstractDirectoryModel**](../Models/AbstractDirectoryModel.md)|  | [optional] |
 
 ### Return type

@@ -15,35 +15,31 @@ public abstract class AbstractDirectoryResourceImpl implements DirectoryResource
     }
 
     @Override
-    public Response getDirectory(
+    public AbstractDirectoryModel getDirectory(
             final long id) {
-        final AbstractDirectoryModel directoryModel = directoriesService.getDirectory(id);
-        return Response.ok(directoryModel).build();
+
+        return directoriesService.getDirectory(id);
     }
 
     @Override
-    public Response updateDirectory(
+    public AbstractDirectoryModel updateDirectory(
             final long id,
-            final boolean testConnection,
             final AbstractDirectoryModel directory) {
 
-        AbstractDirectoryModel resultDirectoryModel  = directoriesService.setDirectory(id, directory, testConnection);
-        return Response.ok(resultDirectoryModel).build();
+        return directoriesService.setDirectory(id, directory);
     }
 
     @Override
-    public Response createDirectory(
-            final boolean testConnection,
+    public AbstractDirectoryModel createDirectory(
             final AbstractDirectoryModel directory) {
 
-        AbstractDirectoryModel addedDirectoryModel = directoriesService.addDirectory(directory, testConnection);
-        return Response.ok(addedDirectoryModel).build();
+        return directoriesService.addDirectory(directory);
     }
 
     @Override
-    public Response deleteDirectory(
+    public void deleteDirectory(
             final long id) {
+
         directoriesService.deleteDirectory(id);
-        return Response.ok().build();
     }
 }

@@ -13,6 +13,7 @@ import com.deftdevs.bootstrapi.commons.service.api.UsersService;
 import com.deftdevs.bootstrapi.confluence.model.util.UserModelUtil;
 
 import java.util.List;
+import java.util.Map;
 
 import static com.deftdevs.bootstrapi.commons.util.ModelValidationUtil.validate;
 
@@ -102,6 +103,11 @@ public class UsersServiceImpl implements UsersService {
 
         // Not yet implemented
         throw new UnsupportedOperationException();
+    }
+
+    @Override
+    public Map<String, UserModel> setUsers(long directoryId, Map<String, UserModel> userModels) {
+        return Map.of();
     }
 
     @Override
