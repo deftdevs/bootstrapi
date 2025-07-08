@@ -8,9 +8,15 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 public interface DirectoryResource {
 
@@ -31,7 +37,7 @@ public interface DirectoryResource {
                     ),
             }
     )
-    Response getDirectory(
+    AbstractDirectoryModel getDirectory(
             @PathParam("id") final long id);
 
     @POST
@@ -51,8 +57,7 @@ public interface DirectoryResource {
                     ),
             }
     )
-    Response createDirectory(
-            @QueryParam("test-connection") @DefaultValue("false") final boolean testConnection,
+    AbstractDirectoryModel createDirectory(
             final AbstractDirectoryModel directory);
 
     @PUT
@@ -73,9 +78,8 @@ public interface DirectoryResource {
                     ),
             }
     )
-    Response updateDirectory(
+    AbstractDirectoryModel updateDirectory(
             @PathParam("id") final long id,
-            @QueryParam("test-connection") @DefaultValue("false") final boolean testConnection,
             final AbstractDirectoryModel directory);
 
     @DELETE
@@ -94,7 +98,7 @@ public interface DirectoryResource {
                     ),
             }
     )
-    Response deleteDirectory(
+    void deleteDirectory(
             @PathParam("id") final long id);
 
 }

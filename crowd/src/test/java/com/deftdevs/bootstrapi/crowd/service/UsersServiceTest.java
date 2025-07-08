@@ -140,7 +140,7 @@ public class UsersServiceTest {
 
     @Test
     public void testSetUsersNull() {
-        assertEquals(Collections.emptyList(), usersService.setUsers(getTestDirectory().getId(), null));
+        assertEquals(Collections.emptyList(), usersService.setUsers(getTestDirectory().getId(), (List<UserModel>) null));
     }
 
     @Test
