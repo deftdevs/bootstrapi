@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.commons.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
 
-import java.util.List;
+import java.util.Map;
 
 /**
  * The User directory service interface.
@@ -14,7 +14,7 @@ public interface DirectoriesService {
      *
      * @return the directories
      */
-    List<AbstractDirectoryModel> getDirectories();
+    Map<String, ? extends AbstractDirectoryModel> getDirectories();
 
     /**
      * Gets a single directory.
@@ -26,39 +26,33 @@ public interface DirectoriesService {
             final long id);
 
     /**
-     * Adds or Updates directory configurations. Any existing configurations with the same 'name' property is updated.
+     * Adds or Updates directory configurations. Any existing configurations with the same key is updated.
      *
-     * @param directories    the directories
-     * @param testConnection whether to test connection
+     * @param directoryModels the directories
      * @return the directories
      */
-    List<AbstractDirectoryModel> setDirectories(
-            List<AbstractDirectoryModel> directories,
-            boolean testConnection);
+    Map<String, ? extends AbstractDirectoryModel> setDirectories(
+            Map<String, ? extends AbstractDirectoryModel> directoryModels);
 
     /**
      * Updates a single directory configuration. Any existing configuration with the same 'name' property is updated.
      *
      * @param id             the directory id to update
-     * @param directory      the directory
-     * @param testConnection whether to test connection
+     * @param directoryModel the directory
      * @return the directories
      */
     AbstractDirectoryModel setDirectory(
             long id,
-            AbstractDirectoryModel directory,
-            boolean testConnection);
+            AbstractDirectoryModel directoryModel);
 
     /**
      * Adds a new directory configuration.
      *
-     * @param directory      the directories
-     * @param testConnection whether to test connection
+     * @param directoryModel the directories
      * @return the added directory
      */
     AbstractDirectoryModel addDirectory(
-            AbstractDirectoryModel directory,
-            boolean testConnection);
+            AbstractDirectoryModel directoryModel);
 
     /**
      * Deletes all directories

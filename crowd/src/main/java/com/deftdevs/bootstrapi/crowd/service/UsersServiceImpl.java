@@ -75,17 +75,20 @@ public class UsersServiceImpl implements UsersService {
     }
 
     @Override
-    public List<UserModel> setUsers(
+    public Map<String, UserModel> setUsers(
             final long directoryId,
-            final List<UserModel> userModels) {
+            final Map<String, UserModel> userModels) {
 
         if (userModels == null) {
-            return Collections.emptyList();
+            return Collections.emptyMap();
         }
 
-        return userModels.stream()
-                .map(userModel -> setUser(directoryId, userModel))
-                .collect(Collectors.toList());
+        final Map<String, UserModel> resultUserModels = new LinkedHashMap<>();
+        for (Map.Entry<String, UserModel> entry : userModels.entrySet()) {
+            final UserModel resultUserModel = setUser(directoryId, entry.getValue());
+            resultUserModels.put(resultUserModel.getUsername(), resultUserModel);
+        }
+        return resultUserModels;
     }
 
     public UserModel addUser(

@@ -9,7 +9,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
-import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Date;
@@ -48,7 +47,6 @@ public abstract class AbstractDirectoryModel {
     private Long id;
 
     @XmlElement
-    @NotNull
     private String name;
 
     @XmlElement

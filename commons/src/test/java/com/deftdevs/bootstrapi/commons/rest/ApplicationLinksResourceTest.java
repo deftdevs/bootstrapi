@@ -9,9 +9,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.ws.rs.core.Response;
 import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -32,25 +31,19 @@ class ApplicationLinksResourceTest {
 
     @Test
     void testGetApplicationLinks() {
-        final List<ApplicationLinkModel> applicationLinkModels = Collections.singletonList(ApplicationLinkModel.EXAMPLE_1);
+        final Map<String, ApplicationLinkModel> applicationLinkModels = Collections.singletonMap(ApplicationLinkModel.EXAMPLE_1.getName(), ApplicationLinkModel.EXAMPLE_1);
         doReturn(applicationLinkModels).when(applicationLinksService).getApplicationLinks();
 
-        final Response response = resource.getApplicationLinks();
-        assertEquals(200, response.getStatus());
-
-        final List<ApplicationLinkModel> responseApplicationLinkModels = (List<ApplicationLinkModel>) response.getEntity();
+        final Map<String, ApplicationLinkModel> responseApplicationLinkModels = resource.getApplicationLinks();
         assertEquals(responseApplicationLinkModels, applicationLinkModels);
     }
 
     @Test
     void testSetApplicationLinks() {
-        final List<ApplicationLinkModel> applicationLinkModels = Collections.singletonList(ApplicationLinkModel.EXAMPLE_1);
-        doReturn(applicationLinkModels).when(applicationLinksService).setApplicationLinks(applicationLinkModels, true);
+        final Map<String, ApplicationLinkModel> applicationLinkModels = Collections.singletonMap(ApplicationLinkModel.EXAMPLE_1.getName(), ApplicationLinkModel.EXAMPLE_1);
+        doReturn(applicationLinkModels).when(applicationLinksService).setApplicationLinks(applicationLinkModels);
 
-        final Response response = resource.setApplicationLinks(true, applicationLinkModels);
-        assertEquals(200, response.getStatus());
-
-        final List<ApplicationLinkModel> resultApplicationLinkModels = (List<ApplicationLinkModel>) response.getEntity();
+        final Map<String, ApplicationLinkModel> resultApplicationLinkModels = resource.setApplicationLinks(applicationLinkModels);
         assertEquals(resultApplicationLinkModels, applicationLinkModels);
     }
 

@@ -9,7 +9,7 @@ All URIs are relative to *https://CROWD_URL/rest/bootstrapi/1*
 
 <a name="setGroups"></a>
 # **setGroups**
-> GroupModel setGroups(directoryId, GroupModel)
+> GroupModel setGroups(directoryId, request\_body)
 
 Set groups
 
@@ -18,7 +18,7 @@ Set groups
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
 | **directoryId** | **Long**|  | [optional] [default to null] |
-| **GroupModel** | [**List**](../Models/GroupModel.md)|  | [optional] |
+| **request\_body** | [**Map**](../Models/GroupModel.md)|  | [optional] |
 
 ### Return type
 
