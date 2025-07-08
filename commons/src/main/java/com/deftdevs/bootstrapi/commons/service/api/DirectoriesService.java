@@ -3,6 +3,7 @@ package com.deftdevs.bootstrapi.commons.service.api;
 import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * The User directory service interface.
@@ -28,36 +29,43 @@ public interface DirectoriesService {
     /**
      * Adds or Updates directory configurations. Any existing configurations with the same 'name' property is updated.
      *
-     * @param directories    the directories
-     * @param testConnection whether to test connection
+     * @param directoryModels the directories
      * @return the directories
      */
     List<AbstractDirectoryModel> setDirectories(
-            List<AbstractDirectoryModel> directories,
-            boolean testConnection);
+            List<AbstractDirectoryModel> directoryModels);
+
+    /**
+     * Adds or Updates directory configurations. Any existing configurations with the same key is updated.
+     *
+     * @param directoryModels the directories
+     * @return the directories
+     */
+    Map<String, AbstractDirectoryModel> setDirectories(
+            Map<String, AbstractDirectoryModel> directoryModels);
 
     /**
      * Updates a single directory configuration. Any existing configuration with the same 'name' property is updated.
      *
      * @param id             the directory id to update
-     * @param directory      the directory
+     * @param directoryModel the directory
      * @param testConnection whether to test connection
      * @return the directories
      */
     AbstractDirectoryModel setDirectory(
             long id,
-            AbstractDirectoryModel directory,
+            AbstractDirectoryModel directoryModel,
             boolean testConnection);
 
     /**
      * Adds a new directory configuration.
      *
-     * @param directory      the directories
+     * @param directoryModel      the directories
      * @param testConnection whether to test connection
      * @return the added directory
      */
     AbstractDirectoryModel addDirectory(
-            AbstractDirectoryModel directory,
+            AbstractDirectoryModel directoryModel,
             boolean testConnection);
 
     /**
