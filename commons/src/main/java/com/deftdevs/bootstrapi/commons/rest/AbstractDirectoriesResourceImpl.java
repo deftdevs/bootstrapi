@@ -26,7 +26,7 @@ public abstract class AbstractDirectoriesResourceImpl implements DirectoriesReso
             final boolean testConnection,
             final List<AbstractDirectoryModel> directories) {
 
-        List<AbstractDirectoryModel> directoryModels = directoriesService.setDirectories(directories, testConnection);
+        List<AbstractDirectoryModel> directoryModels = directoriesService.setDirectories(directories);
         return Response.ok(directoryModels).build();
     }
 
