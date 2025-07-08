@@ -9,8 +9,8 @@
 | **active** | **Boolean** |  | [optional] [default to null] |
 | **createdDate** | **Date** |  | [optional] [default to null] |
 | **updatedDate** | **Date** |  | [optional] [default to null] |
-| **type** | **String** |  | [default to null] |
 | **testConnection** | **Boolean** |  | [optional] [default to null] |
+| **type** | **String** |  | [default to null] |
 | **server** | [**DirectoryLdapServer**](DirectoryLdapServer.md) |  | [optional] [default to null] |
 | **permissions** | [**DirectoryLdapPermissions**](DirectoryLdapPermissions.md) |  | [optional] [default to null] |
 | **advanced** | [**DirectoryInternalAdvanced**](DirectoryInternalAdvanced.md) |  | [optional] [default to null] |

@@ -61,4 +61,7 @@ public abstract class AbstractDirectoryModel {
     @XmlElement
     private Date updatedDate;
 
+    @XmlElement
+    private Boolean testConnection;
+
 }
