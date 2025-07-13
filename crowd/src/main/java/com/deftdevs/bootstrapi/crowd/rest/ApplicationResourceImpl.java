@@ -8,7 +8,6 @@ import com.deftdevs.bootstrapi.crowd.service.api.ApplicationsService;
 
 import javax.inject.Inject;
 import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
 
 @SystemAdminOnly
 @Path(BootstrAPI.APPLICATION)
@@ -24,28 +23,32 @@ public class ApplicationResourceImpl implements ApplicationResource {
     }
 
     @Override
-    public Response getApplication(
+    public ApplicationModel getApplication(
             final long id) {
-        return Response.ok(applicationsService.getApplication(id)).build();
+
+        return applicationsService.getApplication(id);
     }
 
     @Override
-    public Response updateApplication(
+    public ApplicationModel updateApplication(
             final long id,
             final ApplicationModel applicationModel) {
-        return Response.ok(applicationsService.setApplication(id, applicationModel)).build();
+
+        return applicationsService.setApplication(id, applicationModel);
     }
 
     @Override
-    public Response createApplication(
+    public ApplicationModel createApplication(
             final ApplicationModel applicationModel) {
-        return Response.ok(applicationsService.addApplication(applicationModel)).build();
+
+        return applicationsService.addApplication(applicationModel);
     }
 
     @Override
-    public Response deleteApplication(long id) {
+    public void deleteApplication(
+            final long id) {
+
         applicationsService.deleteApplication(id);
-        return Response.ok().build();
     }
 
 }

@@ -44,7 +44,7 @@ class ApplicationLinkModelUtilTest {
         assertEquals(bean.getName(), applicationLink.getName());
         assertEquals(bean.getDisplayUrl(), applicationLink.getDisplayUrl());
         assertEquals(bean.getRpcUrl(), applicationLink.getRpcUrl());
-        assertEquals(bean.isPrimary(), applicationLink.isPrimary());
+        assertEquals(bean.getPrimary(), applicationLink.isPrimary());
     }
 
     @Test
@@ -56,7 +56,7 @@ class ApplicationLinkModelUtilTest {
         assertEquals(bean.getName(), linkDetails.getName());
         assertEquals(bean.getDisplayUrl(), linkDetails.getDisplayUrl());
         assertEquals(bean.getRpcUrl(), linkDetails.getRpcUrl());
-        assertEquals(bean.isPrimary(), linkDetails.isPrimary());
+        assertEquals(bean.getPrimary(), linkDetails.isPrimary());
     }
 
     @Test

@@ -25,16 +25,27 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.deftdevs.bootstrapi.crowd.model.ApplicationModel.EXAMPLE_1;
 import static com.deftdevs.bootstrapi.crowd.model.ApplicationModel.EXAMPLE_2;
 import static com.deftdevs.bootstrapi.crowd.model.util.ApplicationModelUtil.toApplication;
 import static com.deftdevs.bootstrapi.crowd.model.util.ApplicationModelUtil.toStringCollection;
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.any;
+import static org.mockito.Mockito.anyLong;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.lenient;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 public class ApplicationsServiceTest {
@@ -78,11 +89,11 @@ public class ApplicationsServiceTest {
         final List<Application> applications = Collections.singletonList(application);
         doReturn(applications).when(applicationManager).findAll();
 
-        final List<ApplicationModel> applicationModels = applicationsService.getApplications();
+        final Map<String, ApplicationModel> applicationModels = applicationsService.getApplications();
         assertNotNull(applicationModels);
         assertEquals(1, applicationModels.size());
 
-        final ApplicationModel resultApplicationModel = applicationModels.iterator().next();
+        final ApplicationModel resultApplicationModel = applicationModels.values().iterator().next();
         assertEquals(EXAMPLE_1.getName(), resultApplicationModel.getName());
         assertEquals(EXAMPLE_1.getDescription(), resultApplicationModel.getDescription());
         assertEquals(EXAMPLE_1.getActive(), resultApplicationModel.getActive());
@@ -191,7 +202,8 @@ public class ApplicationsServiceTest {
         final Application applicationExample1 = ImmutableApplication.builder(toApplication(EXAMPLE_1))
                 .setId(EXAMPLE_1.getId())
                 .build();
-        final List<ApplicationModel> applicationModels = Arrays.asList(EXAMPLE_1, EXAMPLE_2);
+        final Map<String, ApplicationModel> applicationModels = Stream.of(EXAMPLE_1, EXAMPLE_2)
+                .collect(Collectors.toMap(ApplicationModel::getName, Function.identity()));
         doReturn(applicationExample1).when(applicationManager).findByName(EXAMPLE_1.getName());
         doThrow(new ApplicationNotFoundException("")).when(applicationManager).findByName(EXAMPLE_2.getName());
 
@@ -199,7 +211,7 @@ public class ApplicationsServiceTest {
         doReturn(EXAMPLE_1).when(spy).setApplication(EXAMPLE_1.getId(), EXAMPLE_1);
         doReturn(EXAMPLE_2).when(spy).addApplication(EXAMPLE_2);
 
-        final List<ApplicationModel> responseApplicationModels = spy.setApplications(applicationModels);
+        final Map<String, ApplicationModel> responseApplicationModels = spy.setApplications(applicationModels);
         verify(spy).setApplication(EXAMPLE_1.getId(), EXAMPLE_1);
         verify(spy).addApplication(EXAMPLE_2);
         assertEquals(applicationModels.size(), responseApplicationModels.size());
