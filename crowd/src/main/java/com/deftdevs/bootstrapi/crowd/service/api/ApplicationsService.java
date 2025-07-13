@@ -2,17 +2,17 @@ package com.deftdevs.bootstrapi.crowd.service.api;
 
 import com.deftdevs.bootstrapi.crowd.model.ApplicationModel;
 
-import java.util.List;
+import java.util.Map;
 
 public interface ApplicationsService {
 
-    List<ApplicationModel> getApplications();
+    Map<String, ApplicationModel> getApplications();
 
     ApplicationModel getApplication(
             long id);
 
-    List<ApplicationModel> setApplications(
-            List<ApplicationModel> applicationModels);
+    Map<String, ApplicationModel> setApplications(
+            Map<String, ApplicationModel> applicationModels);
 
     ApplicationModel setApplication(
             long id,

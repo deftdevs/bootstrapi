@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import java.util.Map;
 
 @SystemAdminOnly
 @Path(BootstrAPI.APPLICATIONS)
@@ -25,20 +26,22 @@ public class ApplicationsResourceImpl implements ApplicationsResource {
     }
 
     @Override
-    public Response getApplications() {
-        return Response.ok(applicationsService.getApplications()).build();
+    public Map<String, ApplicationModel> getApplications() {
+        return applicationsService.getApplications();
     }
 
     @Override
-    public Response setApplications(
-            final List<ApplicationModel> applicationModels) {
-        return Response.ok(applicationsService.setApplications(applicationModels)).build();
+    public Map<String, ApplicationModel> setApplications(
+            final Map<String, ApplicationModel> applicationModels) {
+
+        return applicationsService.setApplications(applicationModels);
     }
 
     @Override
-    public Response deleteApplications(boolean force) {
+    public void deleteApplications(
+            final boolean force) {
+
         applicationsService.deleteApplications(force);
-        return Response.ok().build();
     }
 
 }

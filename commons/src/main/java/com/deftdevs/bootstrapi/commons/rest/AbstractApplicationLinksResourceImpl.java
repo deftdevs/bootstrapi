@@ -4,8 +4,7 @@ import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel;
 import com.deftdevs.bootstrapi.commons.rest.api.ApplicationLinksResource;
 import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
 
-import javax.ws.rs.core.Response;
-import java.util.List;
+import java.util.Map;
 
 public abstract class AbstractApplicationLinksResourceImpl implements ApplicationLinksResource {
 
@@ -18,26 +17,21 @@ public abstract class AbstractApplicationLinksResourceImpl implements Applicatio
     }
 
     @Override
-    public Response getApplicationLinks() {
-        final List<ApplicationLinkModel> applicationLinkModels = applicationLinksService.getApplicationLinks();
-        return Response.ok(applicationLinkModels).build();
+    public Map<String, ApplicationLinkModel> getApplicationLinks() {
+        return applicationLinksService.getApplicationLinks();
     }
 
     @Override
-    public Response setApplicationLinks(
-            final boolean ignoreSetupErrors,
-            final List<ApplicationLinkModel> applicationLinkModels) {
+    public Map<String, ApplicationLinkModel> setApplicationLinks(
+            final Map<String, ApplicationLinkModel> applicationLinkModels) {
 
-        final List<ApplicationLinkModel> updatedApplicationLinkModels = applicationLinksService.setApplicationLinks(
-                applicationLinkModels, ignoreSetupErrors);
-        return Response.ok(updatedApplicationLinkModels).build();
+        return applicationLinksService.setApplicationLinks(applicationLinkModels);
     }
 
     @Override
-    public Response deleteApplicationLinks(
+    public void deleteApplicationLinks(
             final boolean force) {
 
         applicationLinksService.deleteApplicationLinks(force);
-        return Response.ok().build();
     }
 }
