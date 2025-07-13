@@ -9,10 +9,14 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.List;
+import java.util.Map;
 
 public interface ApplicationLinksResource {
 
@@ -32,7 +36,7 @@ public interface ApplicationLinksResource {
                     ),
             }
     )
-    Response getApplicationLinks();
+    Map<String, ApplicationLinkModel> getApplicationLinks();
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -52,9 +56,8 @@ public interface ApplicationLinksResource {
                     ),
             }
     )
-    Response setApplicationLinks(
-            @QueryParam("ignore-setup-errors") @DefaultValue("false") final boolean ignoreSetupErrors,
-            final List<ApplicationLinkModel> applicationLinkModels);
+    Map<String, ApplicationLinkModel> setApplicationLinks(
+            final Map<String, ApplicationLinkModel> applicationLinkModels);
 
     @DELETE
     @Operation(
@@ -72,7 +75,7 @@ public interface ApplicationLinksResource {
                     ),
             }
     )
-    Response deleteApplicationLinks(
+    void deleteApplicationLinks(
             @QueryParam("force") final boolean force);
 
 }

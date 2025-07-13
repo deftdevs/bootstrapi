@@ -62,7 +62,7 @@ This endpoint does not need any parameter.
 
 <a name="setApplications"></a>
 # **setApplications**
-> List setApplications(ApplicationModel)
+> List setApplications(request\_body)
 
 Set a list of applications
 
@@ -72,7 +72,7 @@ Set a list of applications
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ApplicationModel** | [**List**](../Models/ApplicationModel.md)|  | [optional] |
+| **request\_body** | [**Map**](../Models/ApplicationModel.md)|  | [optional] |
 
 ### Return type
 
