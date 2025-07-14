@@ -12,9 +12,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.ws.rs.core.Response;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
@@ -23,7 +21,7 @@ import static org.mockito.Mockito.doReturn;
 class AuthenticationResourceTest {
 
     @Mock
-    private AuthenticationService authenticationService;
+    private AuthenticationService<AbstractAuthenticationIdpModel, AuthenticationSsoModel> authenticationService;
 
     private TestAuthenticationResourceImpl resource;
 
@@ -34,31 +32,25 @@ class AuthenticationResourceTest {
 
     @Test
     void testGetAuthenticationIdps() {
-        final List<AbstractAuthenticationIdpModel> authenticationIdpModels = Arrays.asList(
-                AuthenticationIdpOidcModel.EXAMPLE_1,
-                AuthenticationIdpSamlModel.EXAMPLE_1
+        final Map<String, ? extends AbstractAuthenticationIdpModel> authenticationIdpModels = Map.of(
+                AuthenticationIdpOidcModel.EXAMPLE_1.getName(), AuthenticationIdpOidcModel.EXAMPLE_1,
+                AuthenticationIdpSamlModel.EXAMPLE_1.getName(), AuthenticationIdpSamlModel.EXAMPLE_1
         );
         doReturn(authenticationIdpModels).when(authenticationService).getAuthenticationIdps();
 
-        final Response response = resource.getAuthenticationIdps();
-        assertEquals(200, response.getStatus());
-
-        final List<AbstractAuthenticationIdpModel> authenticationIdpModelsResponse = (List<AbstractAuthenticationIdpModel>) response.getEntity();
+        final Map<String, ? extends AbstractAuthenticationIdpModel> authenticationIdpModelsResponse = resource.getAuthenticationIdps();
         assertEquals(authenticationIdpModels, authenticationIdpModelsResponse);
     }
 
     @Test
     void testSetAuthenticationIdps() {
-        final List<AbstractAuthenticationIdpModel> authenticationIdpModels = Arrays.asList(
-                AuthenticationIdpOidcModel.EXAMPLE_1,
-                AuthenticationIdpSamlModel.EXAMPLE_1
+        final Map<String, ? extends AbstractAuthenticationIdpModel> authenticationIdpModels = Map.of(
+                AuthenticationIdpOidcModel.EXAMPLE_1.getName(), AuthenticationIdpOidcModel.EXAMPLE_1,
+                AuthenticationIdpSamlModel.EXAMPLE_1.getName(), AuthenticationIdpSamlModel.EXAMPLE_1
         );
         doReturn(authenticationIdpModels).when(authenticationService).setAuthenticationIdps(authenticationIdpModels);
 
-        final Response response = resource.setAuthenticationIdps(authenticationIdpModels);
-        assertEquals(200, response.getStatus());
-
-        final List<AbstractAuthenticationIdpModel> authenticationIdpModelsResponse = (List<AbstractAuthenticationIdpModel>) response.getEntity();
+        final Map<String, ? extends AbstractAuthenticationIdpModel> authenticationIdpModelsResponse = resource.setAuthenticationIdps(authenticationIdpModels);
         assertEquals(authenticationIdpModels, authenticationIdpModelsResponse);
     }
 
@@ -67,10 +59,7 @@ class AuthenticationResourceTest {
         final AuthenticationSsoModel authenticationSsoModel = AuthenticationSsoModel.EXAMPLE_1;
         doReturn(authenticationSsoModel).when(authenticationService).getAuthenticationSso();
 
-        final Response response = resource.getAuthenticationSso();
-        assertEquals(200, response.getStatus());
-
-        final AuthenticationSsoModel authenticationSsoModelResponse = (AuthenticationSsoModel) response.getEntity();
+        final AuthenticationSsoModel authenticationSsoModelResponse = resource.getAuthenticationSso();
         assertEquals(authenticationSsoModel, authenticationSsoModelResponse);
     }
 
@@ -79,10 +68,7 @@ class AuthenticationResourceTest {
         final AuthenticationSsoModel authenticationSsoModel = AuthenticationSsoModel.EXAMPLE_1;
         doReturn(authenticationSsoModel).when(authenticationService).setAuthenticationSso(authenticationSsoModel);
 
-        final Response response = resource.setAuthenticationSso(authenticationSsoModel);
-        assertEquals(200, response.getStatus());
-
-        final AuthenticationSsoModel authenticationSsoModelResponse = (AuthenticationSsoModel) response.getEntity();
+        final AuthenticationSsoModel authenticationSsoModelResponse = resource.setAuthenticationSso(authenticationSsoModel);
         assertEquals(authenticationSsoModel, authenticationSsoModelResponse);
     }
 
