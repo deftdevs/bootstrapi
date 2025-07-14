@@ -9,7 +9,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.ws.rs.core.Response;
 import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,42 +31,29 @@ class ApplicationLinkResourceTest {
     @Test
     void testGetApplicationLink() {
         final ApplicationLinkModel bean = ApplicationLinkModel.EXAMPLE_1;
-
-        UUID id = UUID.randomUUID();
-
+        final UUID id = UUID.randomUUID();
         doReturn(bean).when(applicationLinksService).getApplicationLink(id);
 
-        final Response response = resource.getApplicationLink(id);
-        assertEquals(200, response.getStatus());
-        final ApplicationLinkModel linkModel = (ApplicationLinkModel) response.getEntity();
-
+        final ApplicationLinkModel linkModel = resource.getApplicationLink(id);
         assertEquals(linkModel, bean);
     }
 
     @Test
     void testCreateApplicationLink() {
         final ApplicationLinkModel bean = ApplicationLinkModel.EXAMPLE_1;
+        doReturn(bean).when(applicationLinksService).addApplicationLink(bean);
 
-        doReturn(bean).when(applicationLinksService).addApplicationLink(bean, true);
-
-        final Response response = resource.createApplicationLink(true, bean);
-        assertEquals(200, response.getStatus());
-        final ApplicationLinkModel responseModel = (ApplicationLinkModel) response.getEntity();
-
+        final ApplicationLinkModel responseModel = resource.createApplicationLink(bean);
         assertEquals(responseModel, bean);
     }
 
     @Test
     void testUpdateApplicationLink() {
         final ApplicationLinkModel bean = ApplicationLinkModel.EXAMPLE_1;
-        UUID id = UUID.randomUUID();
+        final UUID id = UUID.randomUUID();
+        doReturn(bean).when(applicationLinksService).setApplicationLink(id, bean);
 
-        doReturn(bean).when(applicationLinksService).setApplicationLink(id, bean, true);
-
-        final Response response = resource.updateApplicationLink(id, true, bean);
-        assertEquals(200, response.getStatus());
-        final ApplicationLinkModel linkModel = (ApplicationLinkModel) response.getEntity();
-
+        final ApplicationLinkModel linkModel = resource.updateApplicationLink(id, bean);
         assertEquals(linkModel, bean);
     }
 
