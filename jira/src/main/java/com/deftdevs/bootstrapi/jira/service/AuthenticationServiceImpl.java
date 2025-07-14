@@ -11,8 +11,6 @@ import com.deftdevs.bootstrapi.jira.model.util.AuthenticationIdpModelUtil;
 import com.deftdevs.bootstrapi.jira.model.util.AuthenticationSsoModelUtil;
 import com.deftdevs.bootstrapi.jira.service.api.JiraAuthenticationService;
 
-import java.util.Comparator;
-import java.util.List;
 import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -31,21 +29,19 @@ public class AuthenticationServiceImpl implements JiraAuthenticationService {
     }
 
     @Override
-    public List<AbstractAuthenticationIdpModel> getAuthenticationIdps() {
+    public Map<String, ? extends AbstractAuthenticationIdpModel> getAuthenticationIdps() {
         return idpConfigService.getIdpConfigs().stream()
                 .map(AuthenticationIdpModelUtil::toAuthenticationIdpModel)
-                .sorted(authenticationIdpModelComparator)
-                .collect(Collectors.toList());
+                .collect(Collectors.toMap(AbstractAuthenticationIdpModel::getName, Function.identity()));
     }
 
     @Override
-    public List<AbstractAuthenticationIdpModel> setAuthenticationIdps(
-            final List<AbstractAuthenticationIdpModel> authenticationIdpModels) {
+    public Map<String, ? extends AbstractAuthenticationIdpModel> setAuthenticationIdps(
+            final Map<String, ? extends AbstractAuthenticationIdpModel> authenticationIdpModels) {
 
-        return authenticationIdpModels.stream()
+        return authenticationIdpModels.values().stream()
                 .map(this::setAuthenticationIdp)
-                .sorted(authenticationIdpModelComparator)
-                .collect(Collectors.toList());
+                .collect(Collectors.toMap(AbstractAuthenticationIdpModel::getName, Function.identity()));
     }
 
     public AbstractAuthenticationIdpModel setAuthenticationIdp(
@@ -91,7 +87,5 @@ public class AuthenticationServiceImpl implements JiraAuthenticationService {
 
         return idpConfigsByName.get(name);
     }
-
-    static Comparator<AbstractAuthenticationIdpModel> authenticationIdpModelComparator = (a1, a2) -> a1.getName().compareToIgnoreCase(a2.getName());
 
 }
