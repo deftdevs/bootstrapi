@@ -101,10 +101,10 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
         // existing application links map
         final Map<String, ApplicationLinkModel> linkModelMap = getApplicationLinks();
 
-        // find existing link by rpcUrl
+        // find existing link by name
         for (Map.Entry<String, ApplicationLinkModel> applicationLinkModelEntry : applicationLinkModels.entrySet()) {
+            final String name = applicationLinkModelEntry.getKey();
             final ApplicationLinkModel applicationLinkModel = applicationLinkModelEntry.getValue();
-            final String name = applicationLinkModel.getName();
 
             if (linkModelMap.containsKey(name)) {
                 setApplicationLink(linkModelMap.get(name).getUuid(), applicationLinkModel);
