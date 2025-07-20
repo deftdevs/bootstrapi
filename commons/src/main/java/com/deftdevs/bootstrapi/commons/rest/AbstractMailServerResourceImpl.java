@@ -13,6 +13,7 @@ public class AbstractMailServerResourceImpl implements MailServerResource {
 
     public AbstractMailServerResourceImpl(
             final MailServerService mailServerService) {
+
         this.mailServerService = mailServerService;
     }
 
@@ -23,7 +24,9 @@ public class AbstractMailServerResourceImpl implements MailServerResource {
     }
 
     @Override
-    public Response setMailServerSmtp(MailServerSmtpModel bean) {
+    public Response setMailServerSmtp(
+            final MailServerSmtpModel bean) {
+
         final MailServerSmtpModel updatedSmtpModel = mailServerService.setMailServerSmtp(bean);
         return Response.ok(updatedSmtpModel).build();
     }
@@ -31,11 +34,18 @@ public class AbstractMailServerResourceImpl implements MailServerResource {
     @Override
     public Response getMailServerPop() {
         final MailServerPopModel popModel = mailServerService.getMailServerPop();
+
+        if (popModel == null) {
+            return Response.noContent().build();
+        }
+
         return Response.ok(popModel).build();
     }
 
     @Override
-    public Response setMailServerPop(MailServerPopModel bean) {
+    public Response setMailServerPop(
+            final MailServerPopModel bean) {
+
         final MailServerPopModel updatedPopModel = mailServerService.setMailServerPop(bean);
         return Response.ok(updatedPopModel).build();
     }

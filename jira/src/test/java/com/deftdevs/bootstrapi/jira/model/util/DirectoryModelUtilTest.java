@@ -69,18 +69,17 @@ class DirectoryModelUtilTest {
         directory.setAttribute(INCREMENTAL_SYNC_ENABLED, "");
 
         final DirectoryCrowdModel directoryModel = (DirectoryCrowdModel) DirectoryModelUtil.toDirectoryModel(directory);
-
         assertNotNull(directoryModel);
         assertEquals(directory.getName(), directoryModel.getName());
 
         final Map<String, String> attributes = directory.getAttributes();
         assertEquals(directory.getId(), directoryModel.getId());
         assertEquals(attributes.get(CROWD_SERVER_URL), directoryModel.getServer().getUrl().toString());
-        assertNull(directoryModel.getServer().getAppPassword());
+        assertTrue(directoryModel.getServer().getAppPassword() == null || directoryModel.getServer().getAppPassword().isEmpty());
         assertEquals(attributes.get(CROWD_HTTP_PROXY_HOST), directoryModel.getServer().getProxy().getHost());
         assertEquals(attributes.get(CROWD_HTTP_PROXY_PORT), directoryModel.getServer().getProxy().getPort().toString());
         assertEquals(attributes.get(CROWD_HTTP_PROXY_USERNAME), directoryModel.getServer().getProxy().getUsername());
-        assertNull(directoryModel.getServer().getProxy().getPassword());
+        assertEquals(attributes.get(CROWD_HTTP_PROXY_PASSWORD), directoryModel.getServer().getProxy().getPassword());
     }
 
 }

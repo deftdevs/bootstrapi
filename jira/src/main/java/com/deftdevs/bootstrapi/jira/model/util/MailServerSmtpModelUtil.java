@@ -15,18 +15,18 @@ public class MailServerSmtpModelUtil {
             return null;
         }
 
-        final MailServerSmtpModel mailServerSmtpModel = new MailServerSmtpModel();
-        mailServerSmtpModel.setName(smtpMailServer.getName());
-        mailServerSmtpModel.setDescription(smtpMailServer.getDescription());
-        mailServerSmtpModel.setFrom(smtpMailServer.getDefaultFrom());
-        mailServerSmtpModel.setPrefix(smtpMailServer.getPrefix());
-        mailServerSmtpModel.setProtocol(smtpMailServer.getMailProtocol().getProtocol());
-        mailServerSmtpModel.setHost(smtpMailServer.getHostname());
-        mailServerSmtpModel.setPort(smtpMailServer.getPort());
-        mailServerSmtpModel.setUseTls(smtpMailServer.isTlsRequired());
-        mailServerSmtpModel.setTimeout(smtpMailServer.getTimeout());
-        mailServerSmtpModel.setUsername(smtpMailServer.getUsername());
-        return mailServerSmtpModel;
+        return MailServerSmtpModel.builder()
+                .name(smtpMailServer.getName())
+                .description(smtpMailServer.getDescription())
+                .from(smtpMailServer.getDefaultFrom())
+                .prefix(smtpMailServer.getPrefix())
+                .protocol(smtpMailServer.getMailProtocol().getProtocol())
+                .host(smtpMailServer.getHostname())
+                .port(smtpMailServer.getPort() == null ? null : Integer.valueOf(smtpMailServer.getPort()))
+                .useTls(smtpMailServer.isTlsRequired())
+                .timeout(smtpMailServer.getTimeout())
+                .username(smtpMailServer.getUsername())
+                .build();
     }
 
     private MailServerSmtpModelUtil() {

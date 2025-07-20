@@ -20,30 +20,30 @@ public class MailServerSmtpModelUtil {
             return null;
         }
 
-        final MailServerSmtpModel mailServerSmtpModel = new MailServerSmtpModel();
+        MailServerSmtpModel.MailServerSmtpModelBuilder<?, ?> mailServerSmtpModelBuilder = MailServerSmtpModel.builder();
 
         if (mailConfiguration.getNotificationEmails() != null && !mailConfiguration.getNotificationEmails().isEmpty()) {
-            mailServerSmtpModel.setAdminContact(mailConfiguration.getNotificationEmails().get(0));
+            mailServerSmtpModelBuilder.adminContact(mailConfiguration.getNotificationEmails().get(0));
         }
 
         final SMTPServer mailConfigurationSmtp = mailConfiguration.getSmtpServer();
 
         if (mailConfigurationSmtp.getFrom() != null) {
-            mailServerSmtpModel.setFrom(mailConfigurationSmtp.getFrom().toString());
+            mailServerSmtpModelBuilder.from(mailConfigurationSmtp.getFrom().toString());
         }
-
-        mailServerSmtpModel.setPrefix(mailConfigurationSmtp.getPrefix());
-        mailServerSmtpModel.setHost(mailConfigurationSmtp.getHost());
-        mailServerSmtpModel.setPort(mailConfigurationSmtp.getPort());
-        mailServerSmtpModel.setUsername(mailConfigurationSmtp.getUsername());
-        // don't return password here
-        mailServerSmtpModel.setTimeout((long) mailConfigurationSmtp.getTimeout());
 
         // TODO: After the build blocker in BootstrAPI commons has been removed,
         //  implement proper distinguishing between useTls and startTls,
         //  see https://github.com/deftdevs/bootstrapi-commons/issues/153
 
-        return mailServerSmtpModel;
+        return mailServerSmtpModelBuilder
+                .prefix(mailConfigurationSmtp.getPrefix())
+                .host(mailConfigurationSmtp.getHost())
+                .port(mailConfigurationSmtp.getPort())
+                .username(mailConfigurationSmtp.getUsername())
+                // don't return password here
+                .timeout((long) mailConfigurationSmtp.getTimeout())
+                .build();
     }
 
     @Nullable

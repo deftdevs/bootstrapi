@@ -1,9 +1,12 @@
 package com.deftdevs.bootstrapi.commons.model;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import lombok.Builder;
 
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
@@ -14,7 +17,9 @@ import java.net.URI;
  * Model for user directory settings in REST requests.
  */
 @Data
+@SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = BootstrAPI.DIRECTORY + '-' + BootstrAPI.DIRECTORY_CROWD)
 public class DirectoryCrowdModel extends AbstractDirectoryModel {
@@ -29,7 +34,9 @@ public class DirectoryCrowdModel extends AbstractDirectoryModel {
     private DirectoryCrowdAdvanced advanced;
 
     @Data
+    @Builder
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class DirectoryCrowdServer {
 
         @XmlElement
@@ -54,7 +61,9 @@ public class DirectoryCrowdModel extends AbstractDirectoryModel {
         private Integer maxConnections;
 
         @Data
+        @Builder
         @NoArgsConstructor
+        @AllArgsConstructor
         public static class DirectoryCrowdServerProxy {
 
             @XmlElement
@@ -72,7 +81,9 @@ public class DirectoryCrowdModel extends AbstractDirectoryModel {
     }
 
     @Data
+    @Builder
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class DirectoryCrowdPermissions {
 
         @XmlElement
@@ -83,7 +94,9 @@ public class DirectoryCrowdModel extends AbstractDirectoryModel {
     }
 
     @Data
+    @Builder
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class DirectoryCrowdAdvanced {
 
         @XmlElement
@@ -101,48 +114,41 @@ public class DirectoryCrowdModel extends AbstractDirectoryModel {
 
     // Example instances for documentation and tests
 
-    public static final DirectoryCrowdModel EXAMPLE_1;
+    public static final DirectoryCrowdModel EXAMPLE_1 = DirectoryCrowdModel.builder()
+        .name("example")
+        .server(DirectoryCrowdServer.builder()
+            .url(URI.create("https://crowd.example.com"))
+            .appPassword("p455w0rd")
+            .build())
+        .build();
 
-    static {
-        EXAMPLE_1 = new DirectoryCrowdModel();
-        EXAMPLE_1.setName("example");
-        EXAMPLE_1.setServer(new DirectoryCrowdServer());
-        EXAMPLE_1.getServer().setUrl(URI.create("https://crowd.example.com"));
-        EXAMPLE_1.getServer().setAppPassword("p455w0rd");
-    }
+    public static final DirectoryCrowdModel EXAMPLE_1_WITH_PROXY = DirectoryCrowdModel.builder()
+        .name("example")
+        .server(DirectoryCrowdServer.builder()
+            .url(URI.create("https://crowd.example.com"))
+            .appPassword("p433w0rd")
+            .proxy(DirectoryCrowdServer.DirectoryCrowdServerProxy.builder()
+                .host("proxy.example.com")
+                .username("user")
+                .password("pass")
+                .build())
+            .build())
+        .build();
 
-    public static final DirectoryCrowdModel EXAMPLE_1_WITH_PROXY;
+    public static final DirectoryCrowdModel EXAMPLE_2 = DirectoryCrowdModel.builder()
+        .name("example2")
+        .server(DirectoryCrowdServer.builder()
+            .url(URI.create("https://crowd2.example.com"))
+            .appPassword("0th3r")
+            .build())
+        .build();
 
-    static {
-        EXAMPLE_1_WITH_PROXY = new DirectoryCrowdModel();
-        EXAMPLE_1_WITH_PROXY.setName("example");
-        EXAMPLE_1_WITH_PROXY.setServer(new DirectoryCrowdServer());
-        EXAMPLE_1_WITH_PROXY.getServer().setUrl(URI.create("https://crowd.example.com"));
-        EXAMPLE_1_WITH_PROXY.getServer().setAppPassword("p433w0rd");
-        EXAMPLE_1_WITH_PROXY.getServer().setProxy(new DirectoryCrowdServer.DirectoryCrowdServerProxy());
-        EXAMPLE_1_WITH_PROXY.getServer().getProxy().setHost("proxy.example.com");
-        EXAMPLE_1_WITH_PROXY.getServer().getProxy().setUsername("user");
-        EXAMPLE_1_WITH_PROXY.getServer().getProxy().setPassword("pass");
-    }
-
-    public static final DirectoryCrowdModel EXAMPLE_2;
-
-    static {
-        EXAMPLE_2 = new DirectoryCrowdModel();
-        EXAMPLE_2.setName("example2");
-        EXAMPLE_2.setServer(new DirectoryCrowdServer());
-        EXAMPLE_2.getServer().setUrl(URI.create("https://crowd2.example.com"));
-        EXAMPLE_2.getServer().setAppPassword("0th3r");
-    }
-
-    public static final DirectoryCrowdModel EXAMPLE_3;
-
-    static {
-        EXAMPLE_3 = new DirectoryCrowdModel();
-        EXAMPLE_3.setName("example other");
-        EXAMPLE_3.setServer(new DirectoryCrowdServer());
-        EXAMPLE_3.getServer().setUrl(URI.create("https://crowd3.example.com"));
-        EXAMPLE_3.getServer().setAppPassword("p466w0rd");
-    }
+    public static final DirectoryCrowdModel EXAMPLE_3 = DirectoryCrowdModel.builder()
+        .name("example other")
+        .server(DirectoryCrowdServer.builder()
+            .url(URI.create("https://crowd3.example.com"))
+            .appPassword("p466w0rd")
+            .build())
+        .build();
 
 }

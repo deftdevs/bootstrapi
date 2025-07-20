@@ -24,13 +24,12 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
     public SettingsModel getSettingsGeneral() {
         final Settings settings = globalSettingsManager.getGlobalSettings();
 
-        final SettingsModel settingsModel = new SettingsModel();
-        settingsModel.setBaseUrl(URI.create(settings.getBaseUrl()));
-        settingsModel.setTitle(settings.getSiteTitle());
-        settingsModel.setContactMessage(settings.getCustomContactMessage());
-        settingsModel.setExternalUserManagement(settings.isExternalUserManagement());
-
-        return settingsModel;
+        return SettingsModel.builder()
+            .baseUrl(URI.create(settings.getBaseUrl()))
+            .title(settings.getSiteTitle())
+            .contactMessage(settings.getCustomContactMessage())
+            .externalUserManagement(settings.isExternalUserManagement())
+            .build();
     }
 
     @Override

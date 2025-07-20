@@ -1,14 +1,18 @@
 package com.deftdevs.bootstrapi.crowd.model;
 
 import com.deftdevs.bootstrapi.crowd.rest.api.MailTemplateResource;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @XmlRootElement(name = MailTemplateResource.MAIL_TEMPLATES)
 public class MailTemplatesModel {
 
@@ -27,24 +31,20 @@ public class MailTemplatesModel {
     @XmlElement
     private String emailChangeInfo;
 
-    public static final MailTemplatesModel EXAMPLE_1;
-    public static final MailTemplatesModel EXAMPLE_2;
+    public static final MailTemplatesModel EXAMPLE_1 = MailTemplatesModel.builder()
+        .forgottenPassword("Example1ForgottenPassword")
+        .forgottenUsername("Example1ForgottenUsername")
+        .passwordExpirationReminder("Example1PasswordExpirationReminder")
+        .emailChangeValidation("Example1ValidationMessage")
+        .emailChangeInfo("Example1EmailChangeMessage")
+        .build();
 
-    static {
-        EXAMPLE_1 = new MailTemplatesModel();
-        EXAMPLE_1.setForgottenPassword("Example1ForgottenPassword");
-        EXAMPLE_1.setForgottenUsername("Example1ForgottenUsername");
-        EXAMPLE_1.setPasswordExpirationReminder("Example1PasswordExpirationReminder");
-        EXAMPLE_1.setEmailChangeValidation("Example1ValidationMessage");
-        EXAMPLE_1.setEmailChangeInfo("Example1EmailChangeMessage");
-    }
+    public static final MailTemplatesModel EXAMPLE_2 = MailTemplatesModel.builder()
+        .forgottenPassword("Example2ForgottenPassword")
+        .forgottenUsername("Example2ForgottenUsername")
+        .passwordExpirationReminder("Example2PasswordExpirationReminder")
+        .emailChangeValidation("Example2ValidationMessage")
+        .emailChangeInfo("Example2EmailChangeMessage")
+        .build();
 
-    static {
-        EXAMPLE_2 = new MailTemplatesModel();
-        EXAMPLE_2.setForgottenPassword("Example2ForgottenPassword");
-        EXAMPLE_2.setForgottenUsername("Example2ForgottenUsername");
-        EXAMPLE_2.setPasswordExpirationReminder("Example2PasswordExpirationReminder");
-        EXAMPLE_2.setEmailChangeValidation("Example2ValidationMessage");
-        EXAMPLE_2.setEmailChangeInfo("Example2EmailChangeMessage");
-    }
 }

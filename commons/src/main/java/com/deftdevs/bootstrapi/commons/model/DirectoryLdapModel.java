@@ -1,9 +1,12 @@
 package com.deftdevs.bootstrapi.commons.model;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import lombok.Builder;
 
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
@@ -13,7 +16,9 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Model for user directory settings in REST requests.
  */
 @Data
+@SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = BootstrAPI.DIRECTORY + '-' + BootstrAPI.DIRECTORY_LDAP)
 public class DirectoryLdapModel extends AbstractDirectoryModel {
@@ -28,7 +33,9 @@ public class DirectoryLdapModel extends AbstractDirectoryModel {
     private DirectoryLdapPermissions permissions;
 
     @Data
+    @Builder
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class DirectoryLdapServer {
 
         @XmlElement
@@ -49,7 +56,9 @@ public class DirectoryLdapModel extends AbstractDirectoryModel {
     }
 
     @Data
+    @Builder
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class DirectoryLdapSchema {
 
         @XmlElement
@@ -63,7 +72,9 @@ public class DirectoryLdapModel extends AbstractDirectoryModel {
     }
 
     @Data
+    @Builder
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class DirectoryLdapPermissions {
 
         @XmlElement

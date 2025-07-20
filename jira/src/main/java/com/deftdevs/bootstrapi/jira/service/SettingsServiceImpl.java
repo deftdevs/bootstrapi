@@ -29,15 +29,19 @@ public class SettingsServiceImpl implements JiraSettingsService {
 
     @Override
     public SettingsModel getSettingsGeneral() {
-        final SettingsModel settingsModel = new SettingsModel();
         final String baseUrl = applicationProperties.getString(JIRA_BASEURL);
-        if (baseUrl != null) {
-            settingsModel.setBaseUrl(URI.create(baseUrl));
-        }
-        settingsModel.setMode(applicationProperties.getString(JIRA_MODE));
-        settingsModel.setTitle(applicationProperties.getString(JIRA_TITLE));
-        settingsModel.setContactMessage(applicationProperties.getString(JIRA_CONTACT_ADMINISTRATORS_MESSSAGE));
-        settingsModel.setExternalUserManagement(Boolean.parseBoolean(applicationProperties.getString(JIRA_OPTION_USER_EXTERNALMGT)));
+        final String mode = applicationProperties.getString(JIRA_MODE);
+        final String title = applicationProperties.getString(JIRA_TITLE);
+        final String contactMessage = applicationProperties.getString(JIRA_CONTACT_ADMINISTRATORS_MESSSAGE);
+        final Boolean externalUserManagement = Boolean.parseBoolean(applicationProperties.getString(JIRA_OPTION_USER_EXTERNALMGT));
+
+        final SettingsModel settingsModel = SettingsModel.builder()
+            .baseUrl(baseUrl != null ? URI.create(baseUrl) : null)
+            .mode(mode)
+            .title(title)
+            .contactMessage(contactMessage)
+            .externalUserManagement(externalUserManagement)
+            .build();
 
         return settingsModel;
     }

@@ -38,11 +38,10 @@ public class AuthenticationSsoModelUtil {
     public static AuthenticationSsoModel toAuthenticationSsoModel(
             final SsoConfig ssoConfig) {
 
-        final AuthenticationSsoModel authenticationSsoModel = new AuthenticationSsoModel();
-        authenticationSsoModel.setShowOnLogin(ssoConfig.getShowLoginForm());
-        authenticationSsoModel.setEnableAuthenticationFallback(ssoConfig.enableAuthenticationFallback());
-
-        return authenticationSsoModel;
+        return AuthenticationSsoModel.builder()
+                .showOnLogin(ssoConfig.getShowLoginForm())
+                .enableAuthenticationFallback(ssoConfig.enableAuthenticationFallback())
+                .build();
     }
 
     private AuthenticationSsoModelUtil() {

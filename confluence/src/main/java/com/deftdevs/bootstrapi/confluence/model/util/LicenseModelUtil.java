@@ -17,14 +17,14 @@ public class LicenseModelUtil {
     public static LicenseModel toLicenseModel(
             @Nonnull final SingleProductLicenseDetailsView productLicense) {
 
-        final LicenseModel licenseModel = new LicenseModel();
-        licenseModel.setProducts(Collections.singletonList(productLicense.getProductDisplayName()));
-        licenseModel.setType(productLicense.getLicenseTypeName());
-        licenseModel.setOrganization(productLicense.getOrganisationName());
-        licenseModel.setDescription(productLicense.getDescription());
-        licenseModel.setExpiryDate(productLicense.getMaintenanceExpiryDate());
-        licenseModel.setMaxUsers(productLicense.getNumberOfUsers());
-        return licenseModel;
+        return LicenseModel.builder()
+                .products(Collections.singletonList(productLicense.getProductDisplayName()))
+                .type(productLicense.getLicenseTypeName())
+                .organization(productLicense.getOrganisationName())
+                .description(productLicense.getDescription())
+                .expiryDate(productLicense.getMaintenanceExpiryDate())
+                .maxUsers(productLicense.getNumberOfUsers())
+                .build();
     }
 
     private LicenseModelUtil() {

@@ -9,12 +9,11 @@ public class UserModelUtil {
     public static UserModel toUserModel(
             final User user) {
 
-        final UserModel userModel = new UserModel();
-        userModel.setUsername(user.getName());
-        userModel.setFullName(user.getFullName());
-        userModel.setEmail(user.getEmail());
-
-        return userModel;
+        return UserModel.builder()
+            .username(user.getName())
+            .fullName(user.getFullName())
+            .email(user.getEmail())
+            .build();
     }
 
     // Make sure to return a ConfluenceUser here to that unit tests are working

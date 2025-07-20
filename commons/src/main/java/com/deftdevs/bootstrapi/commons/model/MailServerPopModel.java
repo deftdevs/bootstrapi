@@ -4,10 +4,12 @@ import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
+@SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = BootstrAPI.MAIL_SERVER + "-" + BootstrAPI.MAIL_SERVER_POP)
@@ -15,18 +17,16 @@ public class MailServerPopModel extends AbstractMailServerProtocolModel {
 
     // Example instances for documentation and tests
 
-    public static final MailServerPopModel EXAMPLE_1;
-    public static final MailServerPopModel EXAMPLE_2;
+    public static final MailServerPopModel EXAMPLE_1 = MailServerPopModel.builder()
+        .name("Example")
+        .host("mail.example.com")
+        .build();
 
-    static {
-        EXAMPLE_1 = new MailServerPopModel();
-        EXAMPLE_1.setName("Example");
-        EXAMPLE_1.setHost("mail.example.com");
+    public static final MailServerPopModel EXAMPLE_2 = MailServerPopModel.builder()
+        .name("Example")
+        .host("mail.example.com")
+        .port(110)
+        .protocol("pop3")
+        .build();
 
-        EXAMPLE_2 = new MailServerPopModel();
-        EXAMPLE_2.setName("Example");
-        EXAMPLE_2.setHost("mail.example.com");
-        EXAMPLE_2.setPort("110");
-        EXAMPLE_2.setProtocol("pop3");
-    }
 }

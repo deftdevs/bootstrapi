@@ -122,15 +122,16 @@ public class ApplicationsServiceTest {
 
     @Test
     public void testSetApplicationAllAttributes() throws ApplicationNotFoundException, ApplicationManagerException {
-        Application application1 = toApplication(EXAMPLE_1);
-        ApplicationModel requestApplicationModel = new ApplicationModel();
-        requestApplicationModel.setId(application1.getId());
-        requestApplicationModel.setName("Changed Name");
-        requestApplicationModel.setDescription("Changed Description");
-        requestApplicationModel.setActive(false);
-        requestApplicationModel.setPassword("password1");
-        requestApplicationModel.setRemoteAddresses(Collections.singletonList("127.0.0.5"));
-        Application application2 = toApplication(requestApplicationModel);
+        final Application application1 = toApplication(EXAMPLE_1);
+        final ApplicationModel requestApplicationModel = ApplicationModel.builder()
+                .id(application1.getId())
+                .name("Changed Name")
+                .description("Changed Description")
+                .active(false)
+                .password("password1")
+                .remoteAddresses(Collections.singletonList("127.0.0.5"))
+                .build();
+        final Application application2 = toApplication(requestApplicationModel);
 
         doReturn(application1).when(applicationManager).findById(anyLong());
         doReturn(application2).when(applicationManager).update(any(Application.class));
@@ -154,7 +155,7 @@ public class ApplicationsServiceTest {
         Application application = toApplication(EXAMPLE_1);
         doReturn(application).when(applicationManager).findById(anyLong());
         doReturn(application).when(applicationManager).update(any(Application.class));
-        ApplicationModel requestApplicationModel = new ApplicationModel();
+        ApplicationModel requestApplicationModel = ApplicationModel.builder().build();
 
         final ArgumentCaptor<Application> applicationCaptor = ArgumentCaptor.forClass(Application.class);
         applicationsService.setApplication(100, requestApplicationModel);

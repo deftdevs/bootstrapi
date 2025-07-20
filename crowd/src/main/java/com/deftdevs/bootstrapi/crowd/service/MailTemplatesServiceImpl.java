@@ -20,19 +20,17 @@ public class MailTemplatesServiceImpl implements MailTemplatesService {
 
     @Override
     public MailTemplatesModel getMailTemplates() {
-        final MailTemplatesModel mailTemplatesModel = new MailTemplatesModel();
-
         try {
-            mailTemplatesModel.setForgottenPassword(propertyManager.getProperty(FORGOTTEN_PASSWORD_EMAIL_TEMPLATE));
-            mailTemplatesModel.setForgottenUsername(propertyManager.getProperty(FORGOTTEN_USERNAME_EMAIL_TEMPLATE));
-            mailTemplatesModel.setPasswordExpirationReminder(propertyManager.getProperty(PASSWORD_EXPIRATION_REMINDER_EMAIL_TEMPLATE));
-            mailTemplatesModel.setEmailChangeValidation(propertyManager.getProperty(EMAIL_CHANGE_VALIDATION_EMAIL_TEMPLATE));
-            mailTemplatesModel.setEmailChangeInfo(propertyManager.getProperty(EMAIL_CHANGE_INFO_EMAIL_TEMPLATE));
+            return MailTemplatesModel.builder()
+                .forgottenPassword(propertyManager.getProperty(FORGOTTEN_PASSWORD_EMAIL_TEMPLATE))
+                .forgottenUsername(propertyManager.getProperty(FORGOTTEN_USERNAME_EMAIL_TEMPLATE))
+                .passwordExpirationReminder(propertyManager.getProperty(PASSWORD_EXPIRATION_REMINDER_EMAIL_TEMPLATE))
+                .emailChangeValidation(propertyManager.getProperty(EMAIL_CHANGE_VALIDATION_EMAIL_TEMPLATE))
+                .emailChangeInfo(propertyManager.getProperty(EMAIL_CHANGE_INFO_EMAIL_TEMPLATE))
+                .build();
         } catch (final ObjectNotFoundException e) {
             throw new NotFoundException(e.getMessage());
         }
-
-        return mailTemplatesModel;
     }
 
     @Override

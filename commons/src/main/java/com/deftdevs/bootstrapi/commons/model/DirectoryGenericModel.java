@@ -4,6 +4,7 @@ import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -11,6 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * Model for all user directories that are not supported by the plugin(s) yet.
  */
 @Data
+@SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = BootstrAPI.DIRECTORY + '-' + BootstrAPI.DIRECTORY_GENERIC)

@@ -16,11 +16,10 @@ public class SessionConfigServiceImpl implements SessionConfigService {
 
     @Override
     public SessionConfigModel getSessionConfig() {
-        final SessionConfigModel sessionConfigModel = new SessionConfigModel();
-        sessionConfigModel.setSessionTimeoutInMinutes(propertyManager.getSessionTime());
-        sessionConfigModel.setRequireConsistentClientIP(propertyManager.isIncludeIpAddressInValidationFactors());
-
-        return sessionConfigModel;
+        return SessionConfigModel.builder()
+                .sessionTimeoutInMinutes(propertyManager.getSessionTime())
+                .requireConsistentClientIP(propertyManager.isIncludeIpAddressInValidationFactors())
+                .build();
     }
 
     @Override
@@ -37,4 +36,5 @@ public class SessionConfigServiceImpl implements SessionConfigService {
 
         return getSessionConfig();
     }
+
 }

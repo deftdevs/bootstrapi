@@ -41,11 +41,12 @@ class SettingsServiceTest {
 
         final SettingsModel settingsModel = settingsService.getSettingsGeneral();
 
-        final SettingsModel settingsModelRef = new SettingsModel();
-        settingsModelRef.setBaseUrl(URI.create(settings.getBaseUrl()));
-        settingsModelRef.setTitle(settings.getSiteTitle());
-        settingsModelRef.setContactMessage(settings.getCustomContactMessage());
-        settingsModelRef.setExternalUserManagement(settings.isExternalUserManagement());
+        final SettingsModel settingsModelRef = SettingsModel.builder()
+                .baseUrl(URI.create(settings.getBaseUrl()))
+                .title(settings.getSiteTitle())
+                .contactMessage(settings.getCustomContactMessage())
+                .externalUserManagement(settings.isExternalUserManagement())
+                .build();
 
         assertEquals(settingsModelRef, settingsModel);
     }
@@ -57,11 +58,12 @@ class SettingsServiceTest {
 
         final Settings updateSettings = new OtherTestSettings();
 
-        final SettingsModel requestModel = new SettingsModel();
-        requestModel.setBaseUrl(URI.create(updateSettings.getBaseUrl()));
-        requestModel.setTitle(updateSettings.getSiteTitle());
-        requestModel.setContactMessage(updateSettings.getCustomContactMessage());
-        requestModel.setExternalUserManagement(updateSettings.isExternalUserManagement());
+        final SettingsModel requestModel = SettingsModel.builder()
+                .baseUrl(URI.create(updateSettings.getBaseUrl()))
+                .title(updateSettings.getSiteTitle())
+                .contactMessage(updateSettings.getCustomContactMessage())
+                .externalUserManagement(updateSettings.isExternalUserManagement())
+                .build();
 
         final SettingsModel responseModel = settingsService.setSettingsGeneral(requestModel);
 
@@ -69,11 +71,12 @@ class SettingsServiceTest {
         verify(globalSettingsManager).updateGlobalSettings(settingsCaptor.capture());
         final Settings settings = settingsCaptor.getValue();
 
-        final SettingsModel settingsModel = new SettingsModel();
-        settingsModel.setBaseUrl(URI.create(settings.getBaseUrl()));
-        settingsModel.setTitle(settings.getSiteTitle());
-        settingsModel.setContactMessage(settings.getCustomContactMessage());
-        settingsModel.setExternalUserManagement(settings.isExternalUserManagement());
+        final SettingsModel settingsModel = SettingsModel.builder()
+                .baseUrl(URI.create(settings.getBaseUrl()))
+                .title(settings.getSiteTitle())
+                .contactMessage(settings.getCustomContactMessage())
+                .externalUserManagement(settings.isExternalUserManagement())
+                .build();
 
         assertEquals(requestModel, settingsModel);
         assertEquals(requestModel, responseModel);
@@ -81,7 +84,7 @@ class SettingsServiceTest {
 
     @Test
     void testSetSettingsDefaultConfig(){
-        final SettingsModel settingsModel = new SettingsModel();
+        final SettingsModel settingsModel = SettingsModel.builder().build();
 
         final Settings defaultSettings = new DefaultTestSettings();
         doReturn(defaultSettings).when(globalSettingsManager).getGlobalSettings();

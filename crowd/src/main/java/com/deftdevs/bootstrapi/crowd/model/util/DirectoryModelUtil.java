@@ -73,76 +73,80 @@ public class DirectoryModelUtil {
     @Nonnull
     public static DirectoryInternalModel toDirectoryInternalModel(
             @Nonnull final Directory directory) {
-
-        final DirectoryInternalModel directoryModel = new DirectoryInternalModel();
-        setDirectoryModelDetails(directoryModel, directory);
-
         final Map<String, String> attributes = new HashMap<>(directory.getAttributes());
 
-        directoryModel.setCredentialPolicy(new DirectoryInternalModel.DirectoryInternalCredentialPolicy());
-        directoryModel.getCredentialPolicy().setPasswordRegex(attributes.get(AbstractInternalDirectory.ATTRIBUTE_PASSWORD_REGEX));
-        directoryModel.getCredentialPolicy().setPasswordComplexityMessage(attributes.get(AbstractInternalDirectory.ATTRIBUTE_PASSWORD_COMPLEXITY_MESSAGE));
-        directoryModel.getCredentialPolicy().setPasswordMaxAttempts(toLong(attributes.get(AbstractInternalDirectory.ATTRIBUTE_PASSWORD_MAX_ATTEMPTS)));
-        directoryModel.getCredentialPolicy().setPasswordHistoryCount(toLong(attributes.get(AbstractInternalDirectory.ATTRIBUTE_PASSWORD_HISTORY_COUNT)));
-        directoryModel.getCredentialPolicy().setPasswordMaxChangeTime(toLong(attributes.get(AbstractInternalDirectory.ATTRIBUTE_PASSWORD_MAX_CHANGE_TIME)));
-        directoryModel.getCredentialPolicy().setPasswordExpiryNotificationDays(toIntegerList(attributes.get(AbstractInternalDirectory.ATTRIBUTE_PASSWORD_EXPIRATION_NOTIFICATION_PERIODS)));
-        directoryModel.getCredentialPolicy().setPasswordEncryptionMethod(attributes.get(AbstractInternalDirectory.ATTRIBUTE_USER_ENCRYPTION_METHOD));
+        DirectoryInternalModel.DirectoryInternalCredentialPolicy credentialPolicy = DirectoryInternalModel.DirectoryInternalCredentialPolicy.builder()
+            .passwordRegex(attributes.get(AbstractInternalDirectory.ATTRIBUTE_PASSWORD_REGEX))
+            .passwordComplexityMessage(attributes.get(AbstractInternalDirectory.ATTRIBUTE_PASSWORD_COMPLEXITY_MESSAGE))
+            .passwordMaxAttempts(toLong(attributes.get(AbstractInternalDirectory.ATTRIBUTE_PASSWORD_MAX_ATTEMPTS)))
+            .passwordHistoryCount(toLong(attributes.get(AbstractInternalDirectory.ATTRIBUTE_PASSWORD_HISTORY_COUNT)))
+            .passwordMaxChangeTime(toLong(attributes.get(AbstractInternalDirectory.ATTRIBUTE_PASSWORD_MAX_CHANGE_TIME)))
+            .passwordExpiryNotificationDays(toIntegerList(attributes.get(AbstractInternalDirectory.ATTRIBUTE_PASSWORD_EXPIRATION_NOTIFICATION_PERIODS)))
+            .passwordEncryptionMethod(attributes.get(AbstractInternalDirectory.ATTRIBUTE_USER_ENCRYPTION_METHOD))
+            .build();
 
-        directoryModel.setAdvanced(new DirectoryInternalModel.DirectoryInternalAdvanced());
-        directoryModel.getAdvanced().setEnableNestedGroups(toBoolean(attributes.getOrDefault(ATTRIBUTE_USE_NESTED_GROUPS, "false")));
+        DirectoryInternalModel.DirectoryInternalAdvanced advanced = DirectoryInternalModel.DirectoryInternalAdvanced.builder()
+            .enableNestedGroups(toBoolean(attributes.getOrDefault(ATTRIBUTE_USE_NESTED_GROUPS, "false")))
+            .build();
 
-        setDirectoryModelPermissions(directoryModel, directory);
-
-        return directoryModel;
+        DirectoryInternalModel.DirectoryInternalModelBuilder<?,?> builder = DirectoryInternalModel.builder();
+        setDirectoryModelDetails(builder, directory);
+        setDirectoryModelPermissions(builder, directory);
+        return builder
+            .credentialPolicy(credentialPolicy)
+            .advanced(advanced)
+            .build();
     }
 
     @Nonnull
     public static DirectoryDelegatingModel toDirectoryDelegatingModel(
             @Nonnull final Directory directory) {
+        DirectoryDelegatingModel.DirectoryDelegatingConnector connector = DirectoryDelegatingModel.DirectoryDelegatingConnector.builder()
+            .type(toDirectoryDelegatingConnectorType(directory))
+            .url(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_URL_KEY))
+            .ssl(toDirectoryDelegatingConnectorSslType(directory))
+            .useNodeReferrals(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_REFERRAL_KEY)))
+            .nestedGroupsDisabled(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_NESTED_GROUPS_DISABLED)))
+            .synchronizeUsers(toBoolean(directory.getAttributes().get(DelegatedAuthenticationDirectory.ATTRIBUTE_CREATE_USER_ON_AUTH)))
+            .synchronizeUserDetails(toBoolean(directory.getAttributes().get(DelegatedAuthenticationDirectory.ATTRIBUTE_UPDATE_USER_ON_AUTH)))
+            .synchronizeGroupMemberships(toBoolean(directory.getAttributes().get(DelegatedAuthenticationDirectory.ATTRIBUTE_KEY_IMPORT_GROUPS)))
+            .useUserMembershipAttribute(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE)))
+            .usePagedResults(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_PAGEDRESULTS_KEY)))
+            .pagedResultsSize(toLong(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_PAGEDRESULTS_SIZE)))
+            .readTimeoutInMillis(toLong(directory.getAttributes().get(SynchronisableDirectoryProperties.READ_TIMEOUT_IN_MILLISECONDS)))
+            .searchTimeoutInMillis(toLong(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_SEARCH_TIMELIMIT)))
+            .connectionTimeoutInMillis(toLong(directory.getAttributes().get(SynchronisableDirectoryProperties.CONNECTION_TIMEOUT_IN_MILLISECONDS)))
+            .baseDn(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_BASEDN_KEY))
+            .username(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_USERDN_KEY))
+            .build();
 
-        final DirectoryDelegatingModel directoryModel = new DirectoryDelegatingModel();
-        setDirectoryModelDetails(directoryModel, directory);
+        DirectoryDelegatingModel.DirectoryDelegatingConfiguration configuration = DirectoryDelegatingModel.DirectoryDelegatingConfiguration.builder()
+            .userDn(directory.getAttributes().get(LDAPPropertiesMapper.USER_DN_ADDITION))
+            .userObjectClass(directory.getAttributes().get(LDAPPropertiesMapper.USER_OBJECTCLASS_KEY))
+            .userObjectFilter(directory.getAttributes().get(LDAPPropertiesMapper.USER_OBJECTFILTER_KEY))
+            .userNameAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_USERNAME_KEY))
+            .userNameRdnAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_USERNAME_RDN_KEY))
+            .userFirstNameAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_FIRSTNAME_KEY))
+            .userLastNameAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_LASTNAME_KEY))
+            .userDisplayNameAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_DISPLAYNAME_KEY))
+            .userEmailAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_EMAIL_KEY))
+            .userGroupAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_GROUP_KEY))
+            .userUniqueIdAttribute(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_EXTERNAL_ID))
+            .groupDn(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_DN_ADDITION))
+            .groupObjectClass(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_OBJECTCLASS_KEY))
+            .groupObjectFilter(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_OBJECTFILTER_KEY))
+            .groupNameAttribute(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_NAME_KEY))
+            .groupDescriptionAttribute(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_DESCRIPTION_KEY))
+            .groupMembersAttribute(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_USERNAMES_KEY))
+            .build();
 
-        directoryModel.setConnector(new DirectoryDelegatingModel.DirectoryDelegatingConnector());
-        directoryModel.getConnector().setType(toDirectoryDelegatingConnectorType(directory));
-        directoryModel.getConnector().setUrl(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_URL_KEY));
-        directoryModel.getConnector().setSsl(toDirectoryDelegatingConnectorSslType(directory));
-        directoryModel.getConnector().setUseNodeReferrals(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_REFERRAL_KEY)));
-        directoryModel.getConnector().setNestedGroupsDisabled(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_NESTED_GROUPS_DISABLED)));
-        directoryModel.getConnector().setSynchronizeUsers(toBoolean(directory.getAttributes().get(DelegatedAuthenticationDirectory.ATTRIBUTE_CREATE_USER_ON_AUTH)));
-        directoryModel.getConnector().setSynchronizeUserDetails(toBoolean(directory.getAttributes().get(DelegatedAuthenticationDirectory.ATTRIBUTE_UPDATE_USER_ON_AUTH)));
-        directoryModel.getConnector().setSynchronizeGroupMemberships(toBoolean(directory.getAttributes().get(DelegatedAuthenticationDirectory.ATTRIBUTE_KEY_IMPORT_GROUPS)));
-        directoryModel.getConnector().setUseUserMembershipAttribute(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE)));
-        directoryModel.getConnector().setUsePagedResults(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_PAGEDRESULTS_KEY)));
-        directoryModel.getConnector().setPagedResultsSize(toLong(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_PAGEDRESULTS_SIZE)));
-        directoryModel.getConnector().setReadTimeoutInMillis(toLong(directory.getAttributes().get(SynchronisableDirectoryProperties.READ_TIMEOUT_IN_MILLISECONDS)));
-        directoryModel.getConnector().setSearchTimeoutInMillis(toLong(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_SEARCH_TIMELIMIT)));
-        directoryModel.getConnector().setConnectionTimeoutInMillis(toLong(directory.getAttributes().get(SynchronisableDirectoryProperties.CONNECTION_TIMEOUT_IN_MILLISECONDS)));
-        directoryModel.getConnector().setBaseDn(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_BASEDN_KEY));
-        directoryModel.getConnector().setUsername(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_USERDN_KEY));
-
-        directoryModel.setConfiguration(new DirectoryDelegatingModel.DirectoryDelegatingConfiguration());
-        directoryModel.getConfiguration().setUserDn(directory.getAttributes().get(LDAPPropertiesMapper.USER_DN_ADDITION));
-        directoryModel.getConfiguration().setUserObjectClass(directory.getAttributes().get(LDAPPropertiesMapper.USER_OBJECTCLASS_KEY));
-        directoryModel.getConfiguration().setUserObjectFilter(directory.getAttributes().get(LDAPPropertiesMapper.USER_OBJECTFILTER_KEY));
-        directoryModel.getConfiguration().setUserNameAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_USERNAME_KEY));
-        directoryModel.getConfiguration().setUserNameRdnAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_USERNAME_RDN_KEY));
-        directoryModel.getConfiguration().setUserFirstNameAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_FIRSTNAME_KEY));
-        directoryModel.getConfiguration().setUserLastNameAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_LASTNAME_KEY));
-        directoryModel.getConfiguration().setUserDisplayNameAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_DISPLAYNAME_KEY));
-        directoryModel.getConfiguration().setUserEmailAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_EMAIL_KEY));
-        directoryModel.getConfiguration().setUserGroupAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_GROUP_KEY));
-        directoryModel.getConfiguration().setUserUniqueIdAttribute(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_EXTERNAL_ID));
-        directoryModel.getConfiguration().setGroupDn(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_DN_ADDITION));
-        directoryModel.getConfiguration().setGroupObjectClass(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_OBJECTCLASS_KEY));
-        directoryModel.getConfiguration().setGroupObjectFilter(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_OBJECTFILTER_KEY));
-        directoryModel.getConfiguration().setGroupNameAttribute(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_NAME_KEY));
-        directoryModel.getConfiguration().setGroupDescriptionAttribute(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_DESCRIPTION_KEY));
-        directoryModel.getConfiguration().setGroupMembersAttribute(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_USERNAMES_KEY));
-
-        setDirectoryModelPermissions(directoryModel, directory);
-
-        return directoryModel;
+        DirectoryDelegatingModel.DirectoryDelegatingModelBuilder<?,?> builder = DirectoryDelegatingModel.builder();
+        setDirectoryModelDetails(builder, directory);
+        setDirectoryModelPermissions(builder, directory);
+        return builder
+            .connector(connector)
+            .configuration(configuration)
+            .build();
     }
 
     @Nonnull
@@ -158,11 +162,9 @@ public class DirectoryModelUtil {
     @Nonnull
     private static DirectoryGenericModel toDirectoryGenericModel(
             @Nonnull final Directory directory) {
-
-        final DirectoryGenericModel directoryModel = new DirectoryGenericModel();
-        setDirectoryModelDetails(directoryModel, directory);
-
-        return directoryModel;
+        DirectoryGenericModel.DirectoryGenericModelBuilder<?,?> builder = DirectoryGenericModel.builder();
+        setDirectoryModelDetails(builder, directory);
+        return builder.build();
     }
 
     /*
@@ -239,49 +241,44 @@ public class DirectoryModelUtil {
      */
 
     private static void setDirectoryModelDetails(
-            @Nonnull final AbstractDirectoryModel directoryModel,
+            @Nonnull final AbstractDirectoryModel.AbstractDirectoryModelBuilder<?,?> builder,
             @Nonnull final Directory directory) {
-
-        directoryModel.setId(directory.getId());
-        directoryModel.setName(directory.getName());
-        directoryModel.setDescription(directory.getDescription());
-        directoryModel.setActive(directory.isActive());
-        directoryModel.setCreatedDate(directory.getCreatedDate());
-        directoryModel.setUpdatedDate(directory.getUpdatedDate());
+        builder
+            .id(directory.getId())
+            .name(directory.getName())
+            .description(directory.getDescription())
+            .active(directory.isActive())
+            .createdDate(directory.getCreatedDate())
+            .updatedDate(directory.getUpdatedDate());
     }
 
     private static void setDirectoryModelPermissions(
-            @Nonnull final AbstractDirectoryModel directoryModel,
+            @Nonnull final AbstractDirectoryModel.AbstractDirectoryModelBuilder<?,?> builder,
             @Nonnull final Directory directory) {
-
         final DirectoryPermissions permissions = toDirectoryPermissions(directory);
-
-        if (DirectoryInternalModel.class.equals(directoryModel.getClass())) {
-            DirectoryInternalModel directoryInternalModel = (DirectoryInternalModel) directoryModel;
-            directoryInternalModel.setPermissions(permissions);
-        } else if (DirectoryDelegatingModel.class.equals(directoryModel.getClass())) {
-            DirectoryDelegatingModel directoryDelegatingModel = (DirectoryDelegatingModel) directoryModel;
-            directoryDelegatingModel.setPermissions(permissions);
+        // Only set permissions if the builder supports it
+        if (builder instanceof DirectoryInternalModel.DirectoryInternalModelBuilder) {
+            ((DirectoryInternalModel.DirectoryInternalModelBuilder<?,?>) builder).permissions(permissions);
+        } else if (builder instanceof DirectoryDelegatingModel.DirectoryDelegatingModelBuilder) {
+            ((DirectoryDelegatingModel.DirectoryDelegatingModelBuilder<?,?>) builder).permissions(permissions);
         }
+        // else: DirectoryGenericModel does not have permissions
     }
 
     @Nonnull
     private static DirectoryPermissions toDirectoryPermissions(
             @Nonnull final Directory directory) {
-
         final Set<OperationType> allowedOperations = directory.getAllowedOperations();
-
-        final DirectoryPermissions permissions = new DirectoryPermissions();
-        permissions.setAddGroup(allowedOperations.contains(OperationType.CREATE_GROUP));
-        permissions.setAddUser(allowedOperations.contains(OperationType.CREATE_USER));
-        permissions.setModifyGroup(allowedOperations.contains(OperationType.UPDATE_GROUP));
-        permissions.setModifyUser(allowedOperations.contains(OperationType.UPDATE_USER));
-        permissions.setModifyGroupAttributes(allowedOperations.contains(OperationType.UPDATE_GROUP_ATTRIBUTE));
-        permissions.setModifyUserAttributes(allowedOperations.contains(OperationType.UPDATE_USER_ATTRIBUTE));
-        permissions.setRemoveGroup(allowedOperations.contains(OperationType.DELETE_GROUP));
-        permissions.setRemoveUser(allowedOperations.contains(OperationType.DELETE_USER));
-
-        return permissions;
+        return DirectoryPermissions.builder()
+            .addGroup(allowedOperations.contains(OperationType.CREATE_GROUP))
+            .addUser(allowedOperations.contains(OperationType.CREATE_USER))
+            .modifyGroup(allowedOperations.contains(OperationType.UPDATE_GROUP))
+            .modifyUser(allowedOperations.contains(OperationType.UPDATE_USER))
+            .modifyGroupAttributes(allowedOperations.contains(OperationType.UPDATE_GROUP_ATTRIBUTE))
+            .modifyUserAttributes(allowedOperations.contains(OperationType.UPDATE_USER_ATTRIBUTE))
+            .removeGroup(allowedOperations.contains(OperationType.DELETE_GROUP))
+            .removeUser(allowedOperations.contains(OperationType.DELETE_USER))
+            .build();
     }
 
     // There is no API from Crowd to get the connector type of a directory,

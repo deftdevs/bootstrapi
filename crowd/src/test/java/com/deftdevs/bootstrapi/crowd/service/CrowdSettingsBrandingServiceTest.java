@@ -88,7 +88,7 @@ public class CrowdSettingsBrandingServiceTest {
     @Test
     public void setLoginPageDefaultConfig() throws PropertyManagerException {
 
-        SettingsBrandingLoginPageModel settingsBrandingLoginPageModel = new SettingsBrandingLoginPageModel();
+        SettingsBrandingLoginPageModel settingsBrandingLoginPageModel = SettingsBrandingLoginPageModel.builder().build();
 
         LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration(SettingsBrandingLoginPageModel.EXAMPLE_1);
         Optional<LookAndFeelConfiguration> lookAndFeelConfigurationOptional = Optional.of(lookAndFeelConfiguration);
@@ -109,7 +109,7 @@ public class CrowdSettingsBrandingServiceTest {
     @Test
     public void setLoginPageBadRequestException() throws PropertyManagerException {
 
-        SettingsBrandingLoginPageModel settingsBrandingLoginPageModel = new SettingsBrandingLoginPageModel();
+        SettingsBrandingLoginPageModel settingsBrandingLoginPageModel = SettingsBrandingLoginPageModel.builder().build();
 
         LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration(SettingsBrandingLoginPageModel.EXAMPLE_2);
         Optional<LookAndFeelConfiguration> lookAndFeelConfigurationOptional = Optional.of(lookAndFeelConfiguration);

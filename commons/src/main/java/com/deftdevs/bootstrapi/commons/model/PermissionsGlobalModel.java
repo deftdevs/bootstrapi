@@ -1,7 +1,9 @@
 package com.deftdevs.bootstrapi.commons.model;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -11,7 +13,9 @@ import java.util.List;
 import java.util.Map;
 
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @XmlRootElement(name = BootstrAPI.PERMISSIONS + "-" + BootstrAPI.PERMISSIONS_GLOBAL)
 public class PermissionsGlobalModel {
 
