@@ -123,7 +123,7 @@ public class ApplicationsServiceTest {
     @Test
     public void testSetApplicationAllAttributes() throws ApplicationNotFoundException, ApplicationManagerException {
         Application application1 = toApplication(EXAMPLE_1);
-        ApplicationModel requestApplicationModel = new ApplicationModel();
+        ApplicationModel requestApplicationModel = ApplicationModel.builder().build();
         requestApplicationModel.setId(application1.getId());
         requestApplicationModel.setName("Changed Name");
         requestApplicationModel.setDescription("Changed Description");
@@ -154,7 +154,7 @@ public class ApplicationsServiceTest {
         Application application = toApplication(EXAMPLE_1);
         doReturn(application).when(applicationManager).findById(anyLong());
         doReturn(application).when(applicationManager).update(any(Application.class));
-        ApplicationModel requestApplicationModel = new ApplicationModel();
+        ApplicationModel requestApplicationModel = ApplicationModel.builder().build();
 
         final ArgumentCaptor<Application> applicationCaptor = ArgumentCaptor.forClass(Application.class);
         applicationsService.setApplication(100, requestApplicationModel);

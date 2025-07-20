@@ -33,7 +33,7 @@ public class ApplicationLinkModelUtil {
     public static ApplicationLinkModel toApplicationLinkModel(
             final ApplicationLink applicationLink) {
 
-        final ApplicationLinkModel applicationLinkModel = new ApplicationLinkModel();
+        final ApplicationLinkModel applicationLinkModel = ApplicationLinkModel.builder().build();
         applicationLinkModel.setUuid(UUID.fromString(applicationLink.getId().get()));
         applicationLinkModel.setName(applicationLink.getName());
         applicationLinkModel.setType(getLinkTypeFromAppType(applicationLink.getType()));

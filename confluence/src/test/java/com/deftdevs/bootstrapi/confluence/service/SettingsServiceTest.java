@@ -41,7 +41,7 @@ class SettingsServiceTest {
 
         final SettingsModel settingsModel = settingsService.getSettingsGeneral();
 
-        final SettingsModel settingsModelRef = new SettingsModel();
+        final SettingsModel settingsModelRef = SettingsModel.builder().build();
         settingsModelRef.setBaseUrl(URI.create(settings.getBaseUrl()));
         settingsModelRef.setTitle(settings.getSiteTitle());
         settingsModelRef.setContactMessage(settings.getCustomContactMessage());
@@ -57,7 +57,7 @@ class SettingsServiceTest {
 
         final Settings updateSettings = new OtherTestSettings();
 
-        final SettingsModel requestModel = new SettingsModel();
+        final SettingsModel requestModel = SettingsModel.builder().build();
         requestModel.setBaseUrl(URI.create(updateSettings.getBaseUrl()));
         requestModel.setTitle(updateSettings.getSiteTitle());
         requestModel.setContactMessage(updateSettings.getCustomContactMessage());
@@ -69,7 +69,7 @@ class SettingsServiceTest {
         verify(globalSettingsManager).updateGlobalSettings(settingsCaptor.capture());
         final Settings settings = settingsCaptor.getValue();
 
-        final SettingsModel settingsModel = new SettingsModel();
+        final SettingsModel settingsModel = SettingsModel.builder().build();
         settingsModel.setBaseUrl(URI.create(settings.getBaseUrl()));
         settingsModel.setTitle(settings.getSiteTitle());
         settingsModel.setContactMessage(settings.getCustomContactMessage());
@@ -81,7 +81,7 @@ class SettingsServiceTest {
 
     @Test
     void testSetSettingsDefaultConfig(){
-        final SettingsModel settingsModel = new SettingsModel();
+        final SettingsModel settingsModel = SettingsModel.builder().build();
 
         final Settings defaultSettings = new DefaultTestSettings();
         doReturn(defaultSettings).when(globalSettingsManager).getGlobalSettings();

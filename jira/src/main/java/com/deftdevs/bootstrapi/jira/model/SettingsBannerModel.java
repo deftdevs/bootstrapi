@@ -1,9 +1,7 @@
 package com.deftdevs.bootstrapi.jira.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -15,8 +13,6 @@ import static com.deftdevs.bootstrapi.commons.constants.BootstrAPI.SETTINGS_BANN
 
 @Data
 @Builder
-@NoArgsConstructor
-@AllArgsConstructor
 @XmlRootElement(name = SETTINGS + "-" + SETTINGS_BANNER)
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SettingsBannerModel {

@@ -49,7 +49,7 @@ public class MailServerServiceTest {
         final MailConfiguration emptyMailConfiguration = MailConfiguration.builder().build();
         doReturn(emptyMailConfiguration).when(mailConfigurationService).getMailConfiguration();
 
-        final MailServerSmtpModel mailServerSmtpModel = new MailServerSmtpModel();
+        final MailServerSmtpModel mailServerSmtpModel = MailServerSmtpModel.builder().build();
         mailServerService.setMailServerSmtp(mailServerSmtpModel);
 
         final ArgumentCaptor<MailConfiguration> mailConfigurationCaptor = ArgumentCaptor.forClass(MailConfiguration.class);

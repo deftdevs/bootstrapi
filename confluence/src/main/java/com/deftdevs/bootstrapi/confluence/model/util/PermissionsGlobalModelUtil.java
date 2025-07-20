@@ -41,17 +41,14 @@ public class PermissionsGlobalModelUtil {
             anonymousGlobalPermissions.add(globalAnonymousPermission.getType());
         }
 
-        final PermissionsGlobalModel permissionsGlobalModel = new PermissionsGlobalModel();
-
+        PermissionsGlobalModel.PermissionsGlobalModelBuilder builder = PermissionsGlobalModel.builder();
         if (!groupGlobalPermissions.isEmpty()) {
-            permissionsGlobalModel.setGroupPermissions(groupGlobalPermissions);
+            builder.groupPermissions(groupGlobalPermissions);
         }
-
         if (!anonymousGlobalPermissions.isEmpty()) {
-            permissionsGlobalModel.setAnonymousPermissions(new ArrayList<String>(anonymousGlobalPermissions));
+            builder.anonymousPermissions(new ArrayList<>(anonymousGlobalPermissions));
         }
-
-        return permissionsGlobalModel;
+        return builder.build();
     }
 
     private PermissionsGlobalModelUtil() {

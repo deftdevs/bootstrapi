@@ -19,7 +19,7 @@ public class SettingsServiceImpl
 
     @Override
     public SettingsModel getSettingsGeneral() {
-        SettingsModel settingsModel = new SettingsModel();
+        SettingsModel settingsModel = SettingsModel.builder().build();
         try {
             settingsModel.setBaseUrl(propertyManager.getBaseUrl());
             settingsModel.setTitle(propertyManager.getDeploymentTitle());

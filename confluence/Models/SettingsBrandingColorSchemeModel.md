@@ -14,7 +14,6 @@
 | **menuItemSelectedText** | **String** |  | [optional] [default to null] |
 | **searchFieldBackground** | **String** |  | [optional] [default to null] |
 | **searchFieldText** | **String** |  | [optional] [default to null] |
-| **pageMenuSelectedBackground** | **String** |  | [optional] [default to null] |
 | **pageMenuItemText** | **String** |  | [optional] [default to null] |
 | **headingText** | **String** |  | [optional] [default to null] |
 | **links** | **String** |  | [optional] [default to null] |

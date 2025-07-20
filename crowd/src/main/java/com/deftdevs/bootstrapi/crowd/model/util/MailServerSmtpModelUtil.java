@@ -20,7 +20,7 @@ public class MailServerSmtpModelUtil {
             return null;
         }
 
-        final MailServerSmtpModel mailServerSmtpModel = new MailServerSmtpModel();
+        final MailServerSmtpModel mailServerSmtpModel = MailServerSmtpModel.builder().build();
 
         if (mailConfiguration.getNotificationEmails() != null && !mailConfiguration.getNotificationEmails().isEmpty()) {
             mailServerSmtpModel.setAdminContact(mailConfiguration.getNotificationEmails().get(0));

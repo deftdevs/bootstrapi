@@ -4,7 +4,8 @@ import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.type.DirectoryPermissions;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import lombok.Builder;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -16,7 +17,7 @@ import java.util.Collections;
  * Model for directory settings in REST requests.
  */
 @Data
-@NoArgsConstructor
+@SuperBuilder
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = BootstrAPI.DIRECTORY + '-' + BootstrAPI.DIRECTORY_INTERNAL)
 public class DirectoryInternalModel extends AbstractDirectoryModel {
@@ -40,7 +41,7 @@ public class DirectoryInternalModel extends AbstractDirectoryModel {
     private List<UserModel> users;
 
     @Data
-    @NoArgsConstructor
+    @Builder
     public static class DirectoryInternalCredentialPolicy {
 
         @XmlElement
@@ -66,7 +67,7 @@ public class DirectoryInternalModel extends AbstractDirectoryModel {
     }
 
     @Data
-    @NoArgsConstructor
+    @Builder
     public static class DirectoryInternalAdvanced {
 
         @XmlElement
@@ -75,32 +76,32 @@ public class DirectoryInternalModel extends AbstractDirectoryModel {
 
     // examples
 
-    public static final DirectoryInternalModel EXAMPLE_1;
+    public static final DirectoryInternalModel EXAMPLE_1 = DirectoryInternalModel.builder()
+        .id(1L)
+        .name("Example")
+        .active(true)
+        .description("Example Directory")
+        .credentialPolicy(DirectoryInternalCredentialPolicy.builder()
+            .passwordRegex("[a-zA-Z0-9]+")
+            .passwordComplexityMessage("Only alphanumeric characters")
+            .passwordMaxAttempts(3L)
+            .passwordHistoryCount(10L)
+            .passwordMaxChangeTime(60L)
+            .passwordExpiryNotificationDays(Arrays.asList(1, 7))
+            .passwordEncryptionMethod("ATLASSIAN_SECURITY_ENCODER")
+            .build())
+        .permissions(DirectoryPermissions.builder()
+            .addGroup(true)
+            .addUser(true)
+            .modifyGroup(true)
+            .modifyUser(true)
+            .modifyGroupAttributes(true)
+            .modifyUserAttributes(true)
+            .removeGroup(true)
+            .removeUser(true)
+            .build())
+        .groups(Collections.singletonList(GroupModel.EXAMPLE_1))
+        .users(Collections.singletonList(UserModel.EXAMPLE_1))
+        .build();
 
-    static {
-        EXAMPLE_1 = new DirectoryInternalModel();
-        EXAMPLE_1.setId(1L);
-        EXAMPLE_1.setName("Example");
-        EXAMPLE_1.setActive(true);
-        EXAMPLE_1.setDescription("Example Directory");
-        EXAMPLE_1.setCredentialPolicy(new DirectoryInternalCredentialPolicy());
-        EXAMPLE_1.getCredentialPolicy().setPasswordRegex("[a-zA-Z0-9]+");
-        EXAMPLE_1.getCredentialPolicy().setPasswordComplexityMessage("Only alphanumeric characters");
-        EXAMPLE_1.getCredentialPolicy().setPasswordMaxAttempts(3L);
-        EXAMPLE_1.getCredentialPolicy().setPasswordHistoryCount(10L);
-        EXAMPLE_1.getCredentialPolicy().setPasswordMaxChangeTime(60L);
-        EXAMPLE_1.getCredentialPolicy().setPasswordExpiryNotificationDays(Arrays.asList(1, 7));
-        EXAMPLE_1.getCredentialPolicy().setPasswordEncryptionMethod("ATLASSIAN_SECURITY_ENCODER");
-        EXAMPLE_1.setPermissions(new DirectoryPermissions());
-        EXAMPLE_1.getPermissions().setAddGroup(true);
-        EXAMPLE_1.getPermissions().setAddUser(true);
-        EXAMPLE_1.getPermissions().setModifyGroup(true);
-        EXAMPLE_1.getPermissions().setModifyUser(true);
-        EXAMPLE_1.getPermissions().setModifyGroupAttributes(true);
-        EXAMPLE_1.getPermissions().setModifyUserAttributes(true);
-        EXAMPLE_1.getPermissions().setRemoveGroup(true);
-        EXAMPLE_1.getPermissions().setRemoveUser(true);
-        EXAMPLE_1.setGroups(Collections.singletonList(GroupModel.EXAMPLE_1));
-        EXAMPLE_1.setUsers(Collections.singletonList(UserModel.EXAMPLE_1));
-    }
 }

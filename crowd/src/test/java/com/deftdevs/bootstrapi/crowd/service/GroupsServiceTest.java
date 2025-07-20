@@ -145,8 +145,7 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        final GroupModel groupModel = new GroupModel();
-        groupModel.setName(group.getName());
+        final GroupModel groupModel = GroupModel.builder().name(group.getName()).build();
 
         groupsService.updateGroup(group.getDirectoryId(), group.getName(), groupModel);
         verify(directoryManager, never()).renameGroup(anyLong(), anyString(), anyString());
@@ -344,8 +343,7 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        final GroupModel groupModel = new GroupModel();
-        groupModel.setName("new_group_name");
+        final GroupModel groupModel = GroupModel.builder().name("new_group_name").build();
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).renameGroup(anyLong(), anyString(), anyString());
 
@@ -359,8 +357,7 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        final GroupModel groupModel = new GroupModel();
-        groupModel.setName("new_group_name");
+        final GroupModel groupModel = GroupModel.builder().name("new_group_name").build();
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).renameGroup(anyLong(), anyString(), anyString());
 
@@ -374,8 +371,7 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        final GroupModel groupModel = new GroupModel();
-        groupModel.setName("new_group_name");
+        final GroupModel groupModel = GroupModel.builder().name("new_group_name").build();
 
         doThrow(new InvalidGroupException(group, "message")).when(directoryManager).renameGroup(anyLong(), anyString(), anyString());
 
@@ -389,8 +385,7 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        final GroupModel groupModel = new GroupModel();
-        groupModel.setName("new_group_name");
+        final GroupModel groupModel = GroupModel.builder().name("new_group_name").build();
 
         doThrow(new InvalidGroupException(group, "message")).when(directoryManager).renameGroup(anyLong(), anyString(), anyString());
 
@@ -404,8 +399,7 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        final GroupModel groupModel = new GroupModel();
-        groupModel.setName("new_group_name");
+        final GroupModel groupModel = GroupModel.builder().name("new_group_name").build();
 
         doThrow(new OperationFailedException()).when(directoryManager).renameGroup(anyLong(), anyString(), anyString());
 
@@ -419,8 +413,7 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         doReturn(group).when(directoryManager).findGroupByName(group.getDirectoryId(), group.getName());
 
-        final GroupModel groupModel = new GroupModel();
-        groupModel.setName("new_group_name");
+        final GroupModel groupModel = GroupModel.builder().name("new_group_name").build();
 
         doThrow(new OperationFailedException()).when(directoryManager).renameGroup(anyLong(), anyString(), anyString());
 

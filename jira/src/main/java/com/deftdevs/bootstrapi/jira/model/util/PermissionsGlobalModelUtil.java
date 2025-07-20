@@ -24,12 +24,9 @@ public class PermissionsGlobalModelUtil {
             groupGlobalPermissions.get(group).add(globalPermission.getPermissionKey());
         }
 
-        final PermissionsGlobalModel permissionsGlobalModel = new PermissionsGlobalModel();
-
-        if (!groupGlobalPermissions.isEmpty()) {
-            permissionsGlobalModel.setGroupPermissions(groupGlobalPermissions);
-        }
-
+        final PermissionsGlobalModel permissionsGlobalModel = PermissionsGlobalModel.builder()
+            .groupPermissions(!groupGlobalPermissions.isEmpty() ? groupGlobalPermissions : null)
+            .build();
         return permissionsGlobalModel;
     }
 

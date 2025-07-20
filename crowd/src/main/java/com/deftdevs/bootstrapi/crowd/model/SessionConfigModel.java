@@ -1,8 +1,8 @@
 package com.deftdevs.bootstrapi.crowd.model;
 
 import com.deftdevs.bootstrapi.crowd.rest.api.SessionConfigResource;
-import lombok.Builder;
 import lombok.Data;
+import lombok.Builder;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;

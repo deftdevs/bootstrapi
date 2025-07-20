@@ -7,7 +7,7 @@ public class SettingsResourceFuncTest extends AbstractSettingsResourceFuncTest {
 
     @Override
     protected SettingsModel getExampleModel() {
-        final SettingsModel settingsModel = new SettingsModel();
+        final SettingsModel settingsModel = SettingsModel.builder().build();
         settingsModel.setBaseUrl(SettingsModel.EXAMPLE_1.getBaseUrl());
         settingsModel.setTitle(SettingsModel.EXAMPLE_1.getTitle());
         return settingsModel;

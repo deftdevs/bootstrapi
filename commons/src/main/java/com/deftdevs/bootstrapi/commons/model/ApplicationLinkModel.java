@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.commons.model;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
 
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
@@ -14,7 +14,7 @@ import java.util.UUID;
  * Model for an application link in REST requests.
  */
 @Data
-@NoArgsConstructor
+@Builder
 @XmlRootElement(name = BootstrAPI.APPLICATION_LINK)
 public class ApplicationLinkModel {
 
@@ -72,18 +72,15 @@ public class ApplicationLinkModel {
 
     // Example instances for documentation and tests
 
-    public static final ApplicationLinkModel EXAMPLE_1;
-
-    static {
-        EXAMPLE_1 = new ApplicationLinkModel();
-        EXAMPLE_1.setUuid(UUID.randomUUID());
-        EXAMPLE_1.setName("Example");
-        EXAMPLE_1.setDisplayUrl(URI.create("http://example.com"));
-        EXAMPLE_1.setRpcUrl(URI.create("http://rpc.example.com"));
-        EXAMPLE_1.setOutgoingAuthType(ApplicationLinkAuthType.OAUTH);
-        EXAMPLE_1.setIncomingAuthType(ApplicationLinkAuthType.OAUTH);
-        EXAMPLE_1.setPrimary(true);
-        EXAMPLE_1.setType(ApplicationLinkType.JIRA);
-    }
+    public static final ApplicationLinkModel EXAMPLE_1 = ApplicationLinkModel.builder()
+        .uuid(UUID.randomUUID())
+        .name("Example")
+        .displayUrl(URI.create("http://example.com"))
+        .rpcUrl(URI.create("http://rpc.example.com"))
+        .outgoingAuthType(ApplicationLinkAuthType.OAUTH)
+        .incomingAuthType(ApplicationLinkAuthType.OAUTH)
+        .primary(true)
+        .type(ApplicationLinkType.JIRA)
+        .build();
 
 }

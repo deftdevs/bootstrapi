@@ -2,14 +2,14 @@ package com.deftdevs.bootstrapi.confluence.model;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
 
 import javax.validation.constraints.NotNull;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
-@NoArgsConstructor
+@Builder
 @XmlRootElement(name = BootstrAPI.CACHE)
 public class CacheModel {
 

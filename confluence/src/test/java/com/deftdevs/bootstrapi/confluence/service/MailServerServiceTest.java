@@ -41,7 +41,7 @@ class MailServerServiceTest {
         assertEquals(smtpMailServer.getName(), bean.getName());
         assertEquals(smtpMailServer.getDescription(), bean.getDescription());
         assertEquals(smtpMailServer.getHostname(), bean.getHost());
-        assertTrue(smtpMailServer.getTimeout() == bean.getTimeout());
+        assertEquals(smtpMailServer.getTimeout(), (long) bean.getTimeout());
         assertEquals(smtpMailServer.getUsername(), bean.getUsername());
         assertNull(bean.getPassword());
         assertEquals(smtpMailServer.getDefaultFrom(), bean.getFrom());
@@ -118,7 +118,7 @@ class MailServerServiceTest {
 
     @Test
     void testPutSmtpServerDefaultConfig() throws MailException {
-        final MailServerSmtpModel mailServerSmtpModel = new MailServerSmtpModel();
+        final MailServerSmtpModel mailServerSmtpModel = MailServerSmtpModel.builder().build();
 
         mailServerService.setMailServerSmtp(mailServerSmtpModel);
 

@@ -10,7 +10,6 @@ import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageModel;
 import com.deftdevs.bootstrapi.crowd.service.api.CrowdSettingsBrandingService;
 import org.apache.commons.io.FileUtils;
 
-import javax.validation.constraints.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -33,7 +32,7 @@ public class SettingsBrandingServiceImpl implements CrowdSettingsBrandingService
 
     @Override
     public SettingsBrandingLoginPageModel getLoginPage() {
-        final SettingsBrandingLoginPageModel settingsBrandingLoginPageModel = new SettingsBrandingLoginPageModel();
+        final SettingsBrandingLoginPageModel settingsBrandingLoginPageModel = SettingsBrandingLoginPageModel.builder().build();
 
         LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration();
         settingsBrandingLoginPageModel.setHeader(lookAndFeelConfiguration.getHeader());
@@ -113,7 +112,7 @@ public class SettingsBrandingServiceImpl implements CrowdSettingsBrandingService
             String extension = contentType.split("/")[1];
 
             if (!allowedTypes.contains(extension)) {
-                throw new BadRequestException("The content type must be one of: " + allowedTypes.toString());
+                throw new BadRequestException("The content type must be one of: " + allowedTypes);
             }
 
             byte[] fileContent = Files.readAllBytes(file.toPath());

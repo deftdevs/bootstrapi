@@ -71,7 +71,7 @@ public class MailTemplatesServiceTest {
 
     @Test
     public void testSetMailTemplates() {
-        final MailTemplatesModel inputMailTemplatesModel = new MailTemplatesModel();
+        final MailTemplatesModel inputMailTemplatesModel = MailTemplatesModel.builder().build();
         inputMailTemplatesModel.setForgottenPassword("1");
         inputMailTemplatesModel.setForgottenUsername("2");
         inputMailTemplatesModel.setPasswordExpirationReminder("3");

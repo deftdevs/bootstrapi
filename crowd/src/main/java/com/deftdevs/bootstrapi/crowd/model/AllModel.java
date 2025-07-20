@@ -1,17 +1,15 @@
 package com.deftdevs.bootstrapi.crowd.model;
 
 import com.deftdevs.bootstrapi.commons.model.SettingsModel;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
-@AllArgsConstructor
+@Builder
 @XmlRootElement(name = "all")
 public class AllModel {
 

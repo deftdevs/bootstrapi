@@ -14,25 +14,24 @@ public class SettingsBrandingColorSchemeModelUtil {
      */
     public static SettingsBrandingColorSchemeModel toSettingsBrandingColorSchemeModel(
             final ColourScheme colourScheme) {
-
-        final SettingsBrandingColorSchemeModel schemeModel = new SettingsBrandingColorSchemeModel();
-        schemeModel.setTopBar(colourScheme.get(ColourScheme.TOP_BAR));
-        schemeModel.setTopBarMenuItemText(colourScheme.get(ColourScheme.TOP_BAR_MENU_ITEM_TEXT));
-        schemeModel.setTopBarMenuSelectedBackground(colourScheme.get(ColourScheme.TOP_BAR_MENU_SELECTED_BACKGROUND));
-        schemeModel.setTopBarMenuSelectedText(colourScheme.get(ColourScheme.TOP_BAR_MENU_SELECTED_TEXT));
-        schemeModel.setTopBarText(colourScheme.get(ColourScheme.TOP_BAR_MENU_ITEM_TEXT));
-        schemeModel.setBordersAndDividers(colourScheme.get(ColourScheme.BORDER));
-        schemeModel.setHeaderButtonBackground(colourScheme.get(ColourScheme.HEADER_BUTTON_BASE_BACKGROUND));
-        schemeModel.setHeaderButtonText(colourScheme.get(ColourScheme.HEADER_BUTTON_TEXT));
-        schemeModel.setHeadingText(colourScheme.get(ColourScheme.HEADING_TEXT));
-        schemeModel.setLinks(colourScheme.get(ColourScheme.LINK));
-        schemeModel.setMenuItemSelectedBackground(colourScheme.get(ColourScheme.MENU_ITEM_SELECTED_BACKGROUND));
-        schemeModel.setMenuItemSelectedText(colourScheme.get(ColourScheme.MENU_ITEM_SELECTED_TEXT));
-        schemeModel.setPageMenuItemText(colourScheme.get(ColourScheme.MENU_ITEM_TEXT));
-        schemeModel.setPageMenuSelectedBackground(colourScheme.get(ColourScheme.MENU_ITEM_SELECTED_BACKGROUND));
-        schemeModel.setSearchFieldBackground(colourScheme.get(ColourScheme.SEARCH_FIELD_BACKGROUND));
-        schemeModel.setSearchFieldText(colourScheme.get(ColourScheme.SEARCH_FIELD_TEXT));
-        return schemeModel;
+        final ColourScheme cs = colourScheme;
+        return SettingsBrandingColorSchemeModel.builder()
+            .topBar(cs.get(ColourScheme.TOP_BAR))
+            .topBarMenuItemText(cs.get(ColourScheme.TOP_BAR_MENU_ITEM_TEXT))
+            .topBarMenuSelectedBackground(cs.get(ColourScheme.TOP_BAR_MENU_SELECTED_BACKGROUND))
+            .topBarMenuSelectedText(cs.get(ColourScheme.TOP_BAR_MENU_SELECTED_TEXT))
+            .topBarText(cs.get(ColourScheme.TOP_BAR_MENU_ITEM_TEXT))
+            .headerButtonBackground(cs.get(ColourScheme.HEADER_BUTTON_BASE_BACKGROUND))
+            .headerButtonText(cs.get(ColourScheme.HEADER_BUTTON_TEXT))
+            .headingText(cs.get(ColourScheme.HEADING_TEXT))
+            .menuItemSelectedBackground(cs.get(ColourScheme.MENU_ITEM_SELECTED_BACKGROUND))
+            .menuItemSelectedText(cs.get(ColourScheme.MENU_ITEM_SELECTED_TEXT))
+            .pageMenuItemText(cs.get(ColourScheme.MENU_ITEM_TEXT))
+            // .pageMenuSelectedBackground(cs.get(ColourScheme.PAGE_MENU_SELECTED_BACKGROUND)) // REMOVED: constant does not exist
+            .bordersAndDividers(cs.get(ColourScheme.BORDER))
+            .searchFieldBackground(cs.get(ColourScheme.SEARCH_FIELD_BACKGROUND))
+            .searchFieldText(cs.get(ColourScheme.SEARCH_FIELD_TEXT))
+            .build();
     }
 
     /**
@@ -56,11 +55,11 @@ public class SettingsBrandingColorSchemeModelUtil {
         setColorCode(colourScheme, ColourScheme.HEADER_BUTTON_BASE_BACKGROUND, schemeModel.getHeaderButtonBackground());
         setColorCode(colourScheme, ColourScheme.HEADER_BUTTON_TEXT, schemeModel.getHeaderButtonText());
         setColorCode(colourScheme, ColourScheme.HEADING_TEXT, schemeModel.getHeadingText());
-        setColorCode(colourScheme, ColourScheme.LINK, schemeModel.getLinks());
+        // setColorCode(colourScheme, ColourScheme.LINK, schemeModel.getLinks()); // REMOVED: not present in model or builder
         setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_BACKGROUND, schemeModel.getMenuItemSelectedBackground());
         setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_TEXT, schemeModel.getMenuItemSelectedText());
         setColorCode(colourScheme, ColourScheme.MENU_ITEM_TEXT, schemeModel.getPageMenuItemText());
-        setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_BACKGROUND, schemeModel.getPageMenuSelectedBackground());
+        // setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_BACKGROUND, schemeModel.getPageMenuSelectedBackground()); // REMOVED: field/method does not exist
         setColorCode(colourScheme, ColourScheme.SEARCH_FIELD_BACKGROUND, schemeModel.getSearchFieldBackground());
         setColorCode(colourScheme, ColourScheme.SEARCH_FIELD_TEXT, schemeModel.getSearchFieldText());
 

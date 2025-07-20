@@ -15,7 +15,7 @@ public class MailServerSmtpModelUtil {
             return null;
         }
 
-        final MailServerSmtpModel mailServerSmtpModel = new MailServerSmtpModel();
+        final MailServerSmtpModel mailServerSmtpModel = MailServerSmtpModel.builder().build();
         mailServerSmtpModel.setName(smtpMailServer.getName());
         mailServerSmtpModel.setDescription(smtpMailServer.getDescription());
         mailServerSmtpModel.setFrom(smtpMailServer.getDefaultFrom());
