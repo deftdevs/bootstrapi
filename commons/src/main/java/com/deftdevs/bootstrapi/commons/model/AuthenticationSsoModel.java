@@ -1,14 +1,14 @@
 package com.deftdevs.bootstrapi.commons.model;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
-@NoArgsConstructor
+@Builder
 @XmlRootElement(name = BootstrAPI.AUTHENTICATION + "-" + BootstrAPI.AUTHENTICATION_SSO)
 public class AuthenticationSsoModel {
 
@@ -23,13 +23,10 @@ public class AuthenticationSsoModel {
 
     // Example instances for documentation and tests
 
-    public static final AuthenticationSsoModel EXAMPLE_1;
-
-    static {
-        EXAMPLE_1 = new AuthenticationSsoModel();
-        EXAMPLE_1.setShowOnLogin(true);
-        EXAMPLE_1.setShowOnLoginForJsm(true);
-        EXAMPLE_1.setEnableAuthenticationFallback(true);
-    }
+    public static final AuthenticationSsoModel EXAMPLE_1 = AuthenticationSsoModel.builder()
+            .showOnLogin(true)
+            .showOnLoginForJsm(true)
+            .enableAuthenticationFallback(true)
+            .build();
 
 }

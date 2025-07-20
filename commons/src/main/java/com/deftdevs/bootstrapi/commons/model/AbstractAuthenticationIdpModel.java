@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -14,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 
 @Data
-@NoArgsConstructor
+@SuperBuilder
 @XmlRootElement
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
