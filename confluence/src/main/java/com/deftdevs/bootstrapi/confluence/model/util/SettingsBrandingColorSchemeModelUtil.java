@@ -14,23 +14,23 @@ public class SettingsBrandingColorSchemeModelUtil {
      */
     public static SettingsBrandingColorSchemeModel toSettingsBrandingColorSchemeModel(
             final ColourScheme colourScheme) {
-        final ColourScheme cs = colourScheme;
+
         return SettingsBrandingColorSchemeModel.builder()
-            .topBar(cs.get(ColourScheme.TOP_BAR))
-            .topBarMenuItemText(cs.get(ColourScheme.TOP_BAR_MENU_ITEM_TEXT))
-            .topBarMenuSelectedBackground(cs.get(ColourScheme.TOP_BAR_MENU_SELECTED_BACKGROUND))
-            .topBarMenuSelectedText(cs.get(ColourScheme.TOP_BAR_MENU_SELECTED_TEXT))
-            .topBarText(cs.get(ColourScheme.TOP_BAR_MENU_ITEM_TEXT))
-            .headerButtonBackground(cs.get(ColourScheme.HEADER_BUTTON_BASE_BACKGROUND))
-            .headerButtonText(cs.get(ColourScheme.HEADER_BUTTON_TEXT))
-            .headingText(cs.get(ColourScheme.HEADING_TEXT))
-            .menuItemSelectedBackground(cs.get(ColourScheme.MENU_ITEM_SELECTED_BACKGROUND))
-            .menuItemSelectedText(cs.get(ColourScheme.MENU_ITEM_SELECTED_TEXT))
-            .pageMenuItemText(cs.get(ColourScheme.MENU_ITEM_TEXT))
-            // .pageMenuSelectedBackground(cs.get(ColourScheme.PAGE_MENU_SELECTED_BACKGROUND)) // REMOVED: constant does not exist
-            .bordersAndDividers(cs.get(ColourScheme.BORDER))
-            .searchFieldBackground(cs.get(ColourScheme.SEARCH_FIELD_BACKGROUND))
-            .searchFieldText(cs.get(ColourScheme.SEARCH_FIELD_TEXT))
+            .topBar(colourScheme.get(ColourScheme.TOP_BAR))
+            .topBarMenuItemText(colourScheme.get(ColourScheme.TOP_BAR_MENU_ITEM_TEXT))
+            .topBarMenuSelectedBackground(colourScheme.get(ColourScheme.TOP_BAR_MENU_SELECTED_BACKGROUND))
+            .topBarMenuSelectedText(colourScheme.get(ColourScheme.TOP_BAR_MENU_SELECTED_TEXT))
+            .topBarText(colourScheme.get(ColourScheme.TOP_BAR_MENU_ITEM_TEXT))
+            .headerButtonBackground(colourScheme.get(ColourScheme.HEADER_BUTTON_BASE_BACKGROUND))
+            .headerButtonText(colourScheme.get(ColourScheme.HEADER_BUTTON_TEXT))
+            .headingText(colourScheme.get(ColourScheme.HEADING_TEXT))
+            .menuItemSelectedBackground(colourScheme.get(ColourScheme.MENU_ITEM_SELECTED_BACKGROUND))
+            .menuItemSelectedText(colourScheme.get(ColourScheme.MENU_ITEM_SELECTED_TEXT))
+            .pageMenuItemText(colourScheme.get(ColourScheme.MENU_ITEM_TEXT))
+            // .pageMenuSelectedBackground(cs.get(ColourScheme.MENU_ITEM_SELECTED_BACKGROUND))
+            .bordersAndDividers(colourScheme.get(ColourScheme.BORDER))
+            .searchFieldBackground(colourScheme.get(ColourScheme.SEARCH_FIELD_BACKGROUND))
+            .searchFieldText(colourScheme.get(ColourScheme.SEARCH_FIELD_TEXT))
             .build();
     }
 
@@ -55,11 +55,11 @@ public class SettingsBrandingColorSchemeModelUtil {
         setColorCode(colourScheme, ColourScheme.HEADER_BUTTON_BASE_BACKGROUND, schemeModel.getHeaderButtonBackground());
         setColorCode(colourScheme, ColourScheme.HEADER_BUTTON_TEXT, schemeModel.getHeaderButtonText());
         setColorCode(colourScheme, ColourScheme.HEADING_TEXT, schemeModel.getHeadingText());
-        // setColorCode(colourScheme, ColourScheme.LINK, schemeModel.getLinks()); // REMOVED: not present in model or builder
+        setColorCode(colourScheme, ColourScheme.LINK, schemeModel.getLinks());
         setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_BACKGROUND, schemeModel.getMenuItemSelectedBackground());
         setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_TEXT, schemeModel.getMenuItemSelectedText());
         setColorCode(colourScheme, ColourScheme.MENU_ITEM_TEXT, schemeModel.getPageMenuItemText());
-        // setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_BACKGROUND, schemeModel.getPageMenuSelectedBackground()); // REMOVED: field/method does not exist
+        // setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_BACKGROUND, schemeModel.getPageMenuSelectedBackground());
         setColorCode(colourScheme, ColourScheme.SEARCH_FIELD_BACKGROUND, schemeModel.getSearchFieldBackground());
         setColorCode(colourScheme, ColourScheme.SEARCH_FIELD_TEXT, schemeModel.getSearchFieldText());
 

@@ -21,7 +21,7 @@ public class MailServerPopModelUtil {
             .protocol(popMailServer.getMailProtocol().getProtocol())
             .host(popMailServer.getHostname())
             .port(popMailServer.getPort() == null ? null : Integer.valueOf(popMailServer.getPort()))
-            .timeout(Long.valueOf(popMailServer.getTimeout()))
+            .timeout(popMailServer.getTimeout())
             .username(popMailServer.getUsername())
             .build();
     }

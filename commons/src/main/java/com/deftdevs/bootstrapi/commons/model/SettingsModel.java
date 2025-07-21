@@ -1,8 +1,10 @@
 package com.deftdevs.bootstrapi.commons.model;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -13,6 +15,8 @@ import java.net.URI;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @XmlRootElement(name = BootstrAPI.SETTINGS)
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SettingsModel {

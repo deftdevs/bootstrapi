@@ -2,8 +2,10 @@ package com.deftdevs.bootstrapi.crowd.model;
 
 import com.atlassian.crowd.embedded.api.OperationType;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -12,6 +14,8 @@ import java.util.Collections;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @XmlRootElement(name = BootstrAPI.APPLICATION)
 public class ApplicationModel {
 

@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
 @SuperBuilder
+// may not have constructor annotations because the class does not contain any additional fields
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = BootstrAPI.MAIL_SERVER + "-" + BootstrAPI.MAIL_SERVER_POP)
 public class MailServerPopModel extends AbstractMailServerProtocolModel {

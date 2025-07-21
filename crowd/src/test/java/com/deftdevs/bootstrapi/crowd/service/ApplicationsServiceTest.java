@@ -122,15 +122,16 @@ public class ApplicationsServiceTest {
 
     @Test
     public void testSetApplicationAllAttributes() throws ApplicationNotFoundException, ApplicationManagerException {
-        Application application1 = toApplication(EXAMPLE_1);
-        ApplicationModel requestApplicationModel = ApplicationModel.builder().build();
-        requestApplicationModel.setId(application1.getId());
-        requestApplicationModel.setName("Changed Name");
-        requestApplicationModel.setDescription("Changed Description");
-        requestApplicationModel.setActive(false);
-        requestApplicationModel.setPassword("password1");
-        requestApplicationModel.setRemoteAddresses(Collections.singletonList("127.0.0.5"));
-        Application application2 = toApplication(requestApplicationModel);
+        final Application application1 = toApplication(EXAMPLE_1);
+        final ApplicationModel requestApplicationModel = ApplicationModel.builder()
+                .id(application1.getId())
+                .name("Changed Name")
+                .description("Changed Description")
+                .active(false)
+                .password("password1")
+                .remoteAddresses(Collections.singletonList("127.0.0.5"))
+                .build();
+        final Application application2 = toApplication(requestApplicationModel);
 
         doReturn(application1).when(applicationManager).findById(anyLong());
         doReturn(application2).when(applicationManager).update(any(Application.class));

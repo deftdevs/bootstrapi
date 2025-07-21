@@ -1,7 +1,9 @@
 package com.deftdevs.bootstrapi.commons.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Builder;
+import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -12,6 +14,8 @@ import static com.deftdevs.bootstrapi.commons.constants.BootstrAPI.*;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 @XmlRootElement(name = SETTINGS + "-" + SETTINGS_BRANDING + "-" + COLOR_SCHEME)
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SettingsBrandingColorSchemeModel {
@@ -49,8 +53,8 @@ public class SettingsBrandingColorSchemeModel {
     @XmlElement
     private String searchFieldText;
 
-    // @XmlElement
-    // private String pageMenuSelectedBackground; // REMOVED: field not supported by util, builder, or ColourScheme
+    @XmlElement
+    private String pageMenuSelectedBackground;
 
     @XmlElement
     private String pageMenuItemText;
@@ -77,7 +81,7 @@ public class SettingsBrandingColorSchemeModel {
         .menuItemSelectedBackground(COLOR_WHITE)
         .menuItemSelectedText(COLOR_WHITE)
         .pageMenuItemText(COLOR_WHITE)
-        // .pageMenuSelectedBackground(COLOR_WHITE) // REMOVED: field does not exist
+        .pageMenuSelectedBackground(COLOR_WHITE)
         .searchFieldBackground(COLOR_WHITE)
         .searchFieldText(COLOR_WHITE)
         .topBar(COLOR_WHITE)

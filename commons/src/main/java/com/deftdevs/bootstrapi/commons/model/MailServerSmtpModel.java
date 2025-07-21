@@ -1,8 +1,10 @@
 package com.deftdevs.bootstrapi.commons.model;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -10,6 +12,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
 @SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = BootstrAPI.MAIL_SERVER + "-" + BootstrAPI.MAIL_SERVER_SMTP)
 public class MailServerSmtpModel extends AbstractMailServerProtocolModel {
@@ -25,8 +29,6 @@ public class MailServerSmtpModel extends AbstractMailServerProtocolModel {
 
     @XmlElement
     private Boolean useTls;
-
-    // Removed explicit constructor to allow Lombok builder and inheritance to work
 
     public boolean getUseTls() {
         return Boolean.TRUE.equals(useTls);

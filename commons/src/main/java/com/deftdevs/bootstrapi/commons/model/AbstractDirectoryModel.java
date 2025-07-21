@@ -4,7 +4,9 @@ import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import io.swagger.v3.oas.annotations.media.Schema;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.validation.constraints.NotNull;
@@ -17,6 +19,8 @@ import java.util.Date;
  */
 @Data
 @SuperBuilder
+@NoArgsConstructor
+@AllArgsConstructor
 @XmlRootElement
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,

@@ -20,25 +20,23 @@ public class ApplicationModelUtil {
             final Application application,
             final DefaultGroupMembershipService defaultGroupMembershipService) {
 
-        final ApplicationModel applicationModel = ApplicationModel.builder().build();
-
-        applicationModel.setId(application.getId());
-        applicationModel.setName(application.getName());
-        applicationModel.setDescription(application.getDescription());
-        applicationModel.setActive(application.isActive());
-        applicationModel.setType(toApplicationModelType(application.getType()));
-        applicationModel.setCachedDirectoriesAuthenticationOrderOptimisationEnabled(application.isCachedDirectoriesAuthenticationOrderOptimisationEnabled());
-        applicationModel.setDirectoryMappings(toApplicationModelDirectoryMappings(application, defaultGroupMembershipService).stream()
-                .sorted(Comparator.comparing(ApplicationModel.ApplicationDirectoryMapping::getDirectoryName))
-                .collect(Collectors.toList()));
-        applicationModel.setAccessBasedSynchronisation(toApplicationModelAccessBasedSynchronisation(application));
-        applicationModel.setMembershipAggregationEnabled(application.isMembershipAggregationEnabled());
-        applicationModel.setRemoteAddresses(toStringCollection(application.getRemoteAddresses()));
-        applicationModel.setAliasingEnabled(application.isAliasingEnabled());
-        applicationModel.setLowercaseOutputEnabled(application.isLowerCaseOutput());
-        applicationModel.setAuthenticationWithoutPasswordEnabled(application.isAuthenticationWithoutPasswordEnabled());
-
-        return applicationModel;
+        return ApplicationModel.builder()
+                .id(application.getId())
+                .name(application.getName())
+                .description(application.getDescription())
+                .active(application.isActive())
+                .type(toApplicationModelType(application.getType()))
+                .cachedDirectoriesAuthenticationOrderOptimisationEnabled(application.isCachedDirectoriesAuthenticationOrderOptimisationEnabled())
+                .directoryMappings(toApplicationModelDirectoryMappings(application, defaultGroupMembershipService).stream()
+                        .sorted(Comparator.comparing(ApplicationModel.ApplicationDirectoryMapping::getDirectoryName))
+                        .collect(Collectors.toList()))
+                .accessBasedSynchronisation(toApplicationModelAccessBasedSynchronisation(application))
+                .membershipAggregationEnabled(application.isMembershipAggregationEnabled())
+                .remoteAddresses(toStringCollection(application.getRemoteAddresses()))
+                .aliasingEnabled(application.isAliasingEnabled())
+                .lowercaseOutputEnabled(application.isLowerCaseOutput())
+                .authenticationWithoutPasswordEnabled(application.isAuthenticationWithoutPasswordEnabled())
+                .build();
     }
 
     public static Application toApplication(

@@ -32,15 +32,14 @@ public class SettingsBrandingServiceImpl implements CrowdSettingsBrandingService
 
     @Override
     public SettingsBrandingLoginPageModel getLoginPage() {
-        final SettingsBrandingLoginPageModel settingsBrandingLoginPageModel = SettingsBrandingLoginPageModel.builder().build();
+        final LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration();
 
-        LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration();
-        settingsBrandingLoginPageModel.setHeader(lookAndFeelConfiguration.getHeader());
-        settingsBrandingLoginPageModel.setContent(lookAndFeelConfiguration.getWelcomeText());
-        settingsBrandingLoginPageModel.setButtonColor(lookAndFeelConfiguration.getPrimaryColor());
-        settingsBrandingLoginPageModel.setShowLogo(lookAndFeelConfiguration.isShowLogo());
-
-        return settingsBrandingLoginPageModel;
+        return SettingsBrandingLoginPageModel.builder()
+                .header(lookAndFeelConfiguration.getHeader())
+                .content(lookAndFeelConfiguration.getWelcomeText())
+                .buttonColor(lookAndFeelConfiguration.getPrimaryColor())
+                .showLogo(lookAndFeelConfiguration.isShowLogo())
+                .build();
     }
 
     @Override
