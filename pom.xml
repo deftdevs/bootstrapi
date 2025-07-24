@@ -82,7 +82,7 @@
         <sonar.test.exclusions>**/test/**/*Test.java,**/test/**/*IT.java</sonar.test.exclusions>
         <sonar.java.binaries>target/classes</sonar.java.binaries>
         <!-- other properties -->
-        <atlassian.amps.version>9.5.1</atlassian.amps.version>
+        <atlassian.amps.version>9.5.2</atlassian.amps.version>
         <atlassian.platform.version>7.3.18</atlassian.platform.version>
         <atlassian.plugins.osgi.javaconfig.version>0.6.0</atlassian.plugins.osgi.javaconfig.version>
         <jacoco.maven-plugin.version>0.8.13</jacoco.maven-plugin.version>
