@@ -75,40 +75,48 @@ public class DirectoryModelUtil {
         final AbstractDirectoryModel directoryModel;
 
         if (DirectoryType.CROWD.equals(directory.getType())) {
-
-            DirectoryCrowdModel.DirectoryCrowdServer serverModel = new DirectoryCrowdModel.DirectoryCrowdServer();
-            serverModel.setUrl(URI.create(attributes.get(CROWD_SERVER_URL)));
+            DirectoryCrowdModel.DirectoryCrowdServer.DirectoryCrowdServerProxy proxy = null;
             if (attributes.containsKey(CROWD_HTTP_PROXY_HOST)) {
-                DirectoryCrowdModel.DirectoryCrowdServer.DirectoryCrowdServerProxy proxy = new DirectoryCrowdModel.DirectoryCrowdServer.DirectoryCrowdServerProxy();
-                proxy.setUsername(attributes.get(CROWD_HTTP_PROXY_USERNAME));
-                proxy.setHost(attributes.get(CROWD_HTTP_PROXY_HOST));
-                if (attributes.get(CROWD_HTTP_PROXY_PORT) != null) {
-                    proxy.setPort(Integer.valueOf(attributes.get(CROWD_HTTP_PROXY_PORT)));
-                }
-                serverModel.setProxy(proxy);
+                proxy = DirectoryCrowdModel.DirectoryCrowdServer.DirectoryCrowdServerProxy.builder()
+                    .username(attributes.get(CROWD_HTTP_PROXY_USERNAME))
+                    .host(attributes.get(CROWD_HTTP_PROXY_HOST))
+                    .port(attributes.get(CROWD_HTTP_PROXY_PORT) != null ? Integer.valueOf(attributes.get(CROWD_HTTP_PROXY_PORT)) : null)
+                    .password(attributes.get(CROWD_HTTP_PROXY_PASSWORD))
+                    .build();
             }
-            serverModel.setConnectionTimeoutInMillis(toLong(attributes.get(CROWD_HTTP_TIMEOUT)));
-            serverModel.setMaxConnections(toInt(attributes.get(CROWD_HTTP_MAX_CONNECTIONS)));
-            serverModel.setAppUsername(attributes.get(APPLICATION_NAME));
+            DirectoryCrowdModel.DirectoryCrowdServer serverModel = DirectoryCrowdModel.DirectoryCrowdServer.builder()
+                .url(URI.create(attributes.get(CROWD_SERVER_URL)))
+                .proxy(proxy)
+                .connectionTimeoutInMillis(toLong(attributes.get(CROWD_HTTP_TIMEOUT)))
+                .maxConnections(toInt(attributes.get(CROWD_HTTP_MAX_CONNECTIONS)))
+                .appUsername(attributes.get(APPLICATION_NAME))
+                .appPassword(attributes.get(APPLICATION_PASSWORD))
+                .build();
 
-            DirectoryCrowdModel.DirectoryCrowdAdvanced advanced = new DirectoryCrowdModel.DirectoryCrowdAdvanced();
-            advanced.setEnableIncrementalSync(toBoolean(attributes.get(INCREMENTAL_SYNC_ENABLED)));
-            advanced.setEnableNestedGroups(toBoolean(attributes.get(ATTRIBUTE_KEY_USE_NESTED_GROUPS)));
-            advanced.setUpdateSyncIntervalInMinutes(toInt(attributes.get(CACHE_SYNCHRONISE_INTERVAL)));
+            DirectoryCrowdModel.DirectoryCrowdAdvanced advanced = DirectoryCrowdModel.DirectoryCrowdAdvanced.builder()
+                .enableIncrementalSync(toBoolean(attributes.get(INCREMENTAL_SYNC_ENABLED)))
+                .enableNestedGroups(toBoolean(attributes.get(ATTRIBUTE_KEY_USE_NESTED_GROUPS)))
+                .updateSyncIntervalInMinutes(toInt(attributes.get(CACHE_SYNCHRONISE_INTERVAL)))
+                .updateGroupMembershipMethod(attributes.get(SYNC_GROUP_MEMBERSHIP_AFTER_SUCCESSFUL_USER_AUTH_ENABLED))
+                .build();
 
-            DirectoryCrowdModel directoryCrowdModel = new DirectoryCrowdModel();
-            directoryCrowdModel.setServer(serverModel);
-            directoryCrowdModel.setAdvanced(advanced);
+            DirectoryCrowdModel directoryCrowdModel = DirectoryCrowdModel.builder()
+                .server(serverModel)
+                .advanced(advanced)
+                .name(directory.getName())
+                .active(directory.isActive())
+                .description(directory.getDescription())
+                .id(directory.getId())
+                .build();
             directoryModel = directoryCrowdModel;
-
         } else  {
-            directoryModel = new DirectoryGenericModel();
+            directoryModel = DirectoryGenericModel.builder()
+                .name(directory.getName())
+                .active(directory.isActive())
+                .description(directory.getDescription())
+                .id(directory.getId())
+                .build();
         }
-
-        directoryModel.setName(directory.getName());
-        directoryModel.setActive(directory.isActive());
-        directoryModel.setDescription(directory.getDescription());
-        directoryModel.setId(directory.getId());
         return directoryModel;
     }
 

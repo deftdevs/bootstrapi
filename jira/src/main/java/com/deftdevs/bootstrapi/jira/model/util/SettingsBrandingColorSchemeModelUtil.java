@@ -19,24 +19,21 @@ public class SettingsBrandingColorSchemeModelUtil {
     @NotNull
     public static SettingsBrandingColorSchemeModel getSettingsBrandingColorSchemeModel(
             final ApplicationProperties applicationProperties) {
-
-        final SettingsBrandingColorSchemeModel schemeModel = new SettingsBrandingColorSchemeModel();
         Map<String, Object> propertyMap = applicationProperties.asMap();
-
-        schemeModel.setTopBar(propertyMap.get(APKeys.JIRA_LF_TOP_BGCOLOUR).toString());
-        schemeModel.setTopBarMenuItemText(propertyMap.get(APKeys.JIRA_LF_MENU_TEXTCOLOUR).toString());
-        schemeModel.setTopBarMenuSelectedBackground(propertyMap.get(APKeys.JIRA_LF_TOP_HIGHLIGHTCOLOR).toString());
-        schemeModel.setTopBarMenuSelectedText(propertyMap.get(APKeys.JIRA_LF_TOP_TEXTHIGHLIGHTCOLOR).toString());
-        schemeModel.setTopBarText(propertyMap.get(APKeys.JIRA_LF_TOP_TEXTCOLOUR).toString());
-        schemeModel.setBordersAndDividers(propertyMap.get(APKeys.JIRA_LF_TOP_SEPARATOR_BGCOLOR).toString());
-        schemeModel.setHeaderButtonBackground(propertyMap.get(APKeys.JIRA_LF_HERO_BUTTON_BASEBGCOLOUR).toString());
-        schemeModel.setHeaderButtonText(propertyMap.get(APKeys.JIRA_LF_HERO_BUTTON_TEXTCOLOUR).toString());
-        schemeModel.setHeadingText(propertyMap.get(APKeys.JIRA_LF_TEXT_HEADINGCOLOUR).toString());
-        schemeModel.setLinks(propertyMap.get(APKeys.JIRA_LF_TEXT_LINKCOLOUR).toString());
-        schemeModel.setMenuItemSelectedBackground(propertyMap.get(APKeys.JIRA_LF_MENU_BGCOLOUR).toString());
-        schemeModel.setMenuItemSelectedText(propertyMap.get(APKeys.JIRA_LF_MENU_TEXTCOLOUR).toString());
-
-        return schemeModel;
+        return SettingsBrandingColorSchemeModel.builder()
+            .topBar(propertyMap.get(APKeys.JIRA_LF_TOP_BGCOLOUR).toString())
+            .topBarMenuItemText(propertyMap.get(APKeys.JIRA_LF_MENU_TEXTCOLOUR).toString())
+            .topBarMenuSelectedBackground(propertyMap.get(APKeys.JIRA_LF_TOP_HIGHLIGHTCOLOR).toString())
+            .topBarMenuSelectedText(propertyMap.get(APKeys.JIRA_LF_TOP_TEXTHIGHLIGHTCOLOR).toString())
+            .topBarText(propertyMap.get(APKeys.JIRA_LF_TOP_TEXTCOLOUR).toString())
+            .bordersAndDividers(propertyMap.get(APKeys.JIRA_LF_TOP_SEPARATOR_BGCOLOR).toString())
+            .headerButtonBackground(propertyMap.get(APKeys.JIRA_LF_HERO_BUTTON_BASEBGCOLOUR).toString())
+            .headerButtonText(propertyMap.get(APKeys.JIRA_LF_HERO_BUTTON_TEXTCOLOUR).toString())
+            .headingText(propertyMap.get(APKeys.JIRA_LF_TEXT_HEADINGCOLOUR).toString())
+            .links(propertyMap.get(APKeys.JIRA_LF_TEXT_LINKCOLOUR).toString())
+            .menuItemSelectedBackground(propertyMap.get(APKeys.JIRA_LF_MENU_BGCOLOUR).toString())
+            .menuItemSelectedText(propertyMap.get(APKeys.JIRA_LF_MENU_TEXTCOLOUR).toString())
+            .build();
     }
 
     /**

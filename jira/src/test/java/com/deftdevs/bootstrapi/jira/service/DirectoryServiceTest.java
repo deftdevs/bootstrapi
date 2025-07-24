@@ -151,7 +151,7 @@ class DirectoryServiceTest {
 
     @Test
     void testSetDirectoryUnsupportedType() {
-        final DirectoryLdapModel directoryLdapModel = new DirectoryLdapModel();
+        final DirectoryLdapModel directoryLdapModel = DirectoryLdapModel.builder().build();
 
         assertThrows(BadRequestException.class, () -> {
             directoryService.setDirectory(1L, directoryLdapModel, false);
@@ -196,7 +196,7 @@ class DirectoryServiceTest {
 
     @Test
     void testAddDirectoryUnsupportedType() {
-        final DirectoryLdapModel directoryLdapModel = new DirectoryLdapModel();
+        final DirectoryLdapModel directoryLdapModel = DirectoryLdapModel.builder().build();
 
         assertThrows(BadRequestException.class, () -> {
             directoryService.addDirectory(directoryLdapModel, false);

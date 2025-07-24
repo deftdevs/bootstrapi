@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 
 public interface MailTemplateResource {
 
-    static final String MAIL_TEMPLATES = "mail-templates";
+    String MAIL_TEMPLATES = "mail-templates";
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
