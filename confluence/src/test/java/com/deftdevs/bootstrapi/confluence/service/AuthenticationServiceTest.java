@@ -81,7 +81,7 @@ class AuthenticationServiceTest {
 
     @Test
     void testSetAuthenticationIdpsNameNull() {
-        final AuthenticationIdpOidcModel authenticationIdpOidcModel = new AuthenticationIdpOidcModel();
+        final AuthenticationIdpOidcModel authenticationIdpOidcModel = AuthenticationIdpOidcModel.builder().build();
         final List<AbstractAuthenticationIdpModel> authenticationIdpModels = Collections.singletonList(authenticationIdpOidcModel);
 
         assertThrows(BadRequestException.class, () -> {
@@ -91,8 +91,9 @@ class AuthenticationServiceTest {
 
     @Test
     void testSetAuthenticationIdpsNameEmpty() {
-        final AuthenticationIdpOidcModel authenticationIdpOidcModel = new AuthenticationIdpOidcModel();
-        authenticationIdpOidcModel.setName("");
+        final AuthenticationIdpOidcModel authenticationIdpOidcModel = AuthenticationIdpOidcModel.builder()
+                .name("")
+                .build();
         final List<AbstractAuthenticationIdpModel> authenticationIdpModels = Collections.singletonList(authenticationIdpOidcModel);
 
         assertThrows(BadRequestException.class, () -> {

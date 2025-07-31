@@ -2,13 +2,13 @@ package com.deftdevs.bootstrapi.commons.model.type;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.Builder;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
-@NoArgsConstructor
+@Builder
 @XmlRootElement(name = BootstrAPI.PERMISSIONS)
 public class DirectoryPermissions {
 

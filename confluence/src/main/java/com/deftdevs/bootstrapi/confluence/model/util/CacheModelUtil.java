@@ -14,15 +14,14 @@ public class CacheModelUtil {
     public static CacheModel toCacheModel(
             final ManagedCache managedCache) {
 
-        CacheModel cacheModel = new CacheModel();
-        cacheModel.setName(managedCache.getName());
-        cacheModel.setCurrentHeapSizeInByte(managedCache.getStatistics().get(CacheStatisticsKey.HEAP_SIZE).get());
-        cacheModel.setEffectivenessInPercent(getEffectiveness(managedCache));
-        cacheModel.setMaxObjectCount(managedCache.currentMaxEntries());
-        cacheModel.setUtilisationInPercent(getUtilization(managedCache));
-        cacheModel.setFlushable(managedCache.isFlushable());
-
-        return cacheModel;
+        return CacheModel.builder()
+            .name(managedCache.getName())
+            .currentHeapSizeInByte(managedCache.getStatistics().get(CacheStatisticsKey.HEAP_SIZE).get())
+            .effectivenessInPercent(getEffectiveness(managedCache))
+            .maxObjectCount(managedCache.currentMaxEntries())
+            .utilisationInPercent(getUtilization(managedCache))
+            .flushable(managedCache.isFlushable())
+            .build();
     }
 
     private static double getEffectiveness(

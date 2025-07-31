@@ -72,7 +72,7 @@ public class DirectoryServiceImpl implements DirectoriesService {
             } else {
                 throw new BadRequestException(format("Updating directory type '%s' is not supported (yet)", directoryRequestModel.getClass()));
             }
-        };
+        }
 
         return getDirectories();
     }
