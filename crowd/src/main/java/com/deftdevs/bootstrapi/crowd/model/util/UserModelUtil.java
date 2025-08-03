@@ -17,15 +17,14 @@ public class UserModelUtil {
     public static UserModel toUserModel(
             @Nonnull final User user) {
 
-        final UserModel userModel = new UserModel();
-        userModel.setUsername(user.getName());
-        userModel.setFirstName(user.getFirstName());
-        userModel.setLastName(user.getLastName());
-        userModel.setFullName(user.getDisplayName());
-        userModel.setEmail(user.getEmailAddress());
-        userModel.setActive(user.isActive());
-
-        return userModel;
+        return UserModel.builder()
+            .username(user.getName())
+            .firstName(user.getFirstName())
+            .lastName(user.getLastName())
+            .fullName(user.getDisplayName())
+            .email(user.getEmailAddress())
+            .active(user.isActive())
+            .build();
     }
 
     private UserModelUtil() {

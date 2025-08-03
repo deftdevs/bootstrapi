@@ -14,11 +14,10 @@ class AbstractMailServerProtocolModelTest {
     void testTimeoutHasDefaultValue() {
         final long timeout = 12345L;
 
-        final AbstractMailServerProtocolModel beanWithTimeoutSet = new AbstractMailServerProtocolModel() {};
-        beanWithTimeoutSet.setTimeout(timeout);
+        final AbstractMailServerProtocolModel beanWithTimeoutSet = MailServerPopModel.builder().timeout(timeout).build();
         assertEquals(timeout, beanWithTimeoutSet.getTimeout().longValue());
 
-        final AbstractMailServerProtocolModel beanWithoutTimeoutSet = new AbstractMailServerProtocolModel() {};
+        final AbstractMailServerProtocolModel beanWithoutTimeoutSet = MailServerPopModel.builder().build();
         assertNotNull(beanWithoutTimeoutSet.getTimeout());
     }
 
@@ -26,12 +25,8 @@ class AbstractMailServerProtocolModelTest {
     void testSetPortUsingIntAndString() {
         final int port = 1337;
 
-        final AbstractMailServerProtocolModel beanUsingInt = new AbstractMailServerProtocolModel() {};
-        beanUsingInt.setPort(port);
-
-        final AbstractMailServerProtocolModel beanUsingString = new AbstractMailServerProtocolModel() {};
-        beanUsingString.setPort(String.valueOf(port));
-
+        final AbstractMailServerProtocolModel beanUsingInt = MailServerPopModel.builder().port(port).build();
+        final AbstractMailServerProtocolModel beanUsingString = MailServerPopModel.builder().port(port).build();
         assertEquals(beanUsingInt.getPort(), beanUsingString.getPort());
     }
 
