@@ -6,7 +6,7 @@ All URIs are relative to *https://&lt;CROWD_URL&gt;/rest/bootstrapi/1*
 |------------- | ------------- | -------------|
 | [**deleteDirectories**](DirectoriesApi.md#deleteDirectories) | **DELETE** /directories | Delete all user directories |
 | [**getDirectories**](DirectoriesApi.md#getDirectories) | **GET** /directories | Get all user directories |
-| [**setDirectories**](DirectoriesApi.md#setDirectories) | **PUT** /directories | Set a list of user directories |
+| [**setDirectories**](DirectoriesApi.md#setDirectories) | **PUT** /directories | Set directories mapped by their name. |
 
 
 <a name="deleteDirectories"></a>
@@ -38,7 +38,7 @@ null (empty response body)
 
 <a name="getDirectories"></a>
 # **getDirectories**
-> List getDirectories()
+> Map getDirectories()
 
 Get all user directories
 
@@ -47,7 +47,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**List**](../Models/AbstractDirectoryModel.md)
+[**Map**](../Models/AbstractDirectoryModel.md)
 
 ### Authorization
 
@@ -60,9 +60,9 @@ This endpoint does not need any parameter.
 
 <a name="setDirectories"></a>
 # **setDirectories**
-> List setDirectories(test-connection, AbstractDirectoryModel)
+> Map setDirectories(request\_body)
 
-Set a list of user directories
+Set directories mapped by their name.
 
     NOTE: All existing directories with the same &#39;name&#39; attribute are updated.
 
@@ -70,12 +70,11 @@ Set a list of user directories
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **test-connection** | **Boolean**|  | [optional] [default to false] |
-| **AbstractDirectoryModel** | [**List**](../Models/AbstractDirectoryModel.md)|  | [optional] |
+| **request\_body** | [**Map**](../Models/AbstractDirectoryModel.md)|  | [optional] |
 
 ### Return type
 
-[**List**](../Models/AbstractDirectoryModel.md)
+[**Map**](../Models/AbstractDirectoryModel.md)
 
 ### Authorization
 
