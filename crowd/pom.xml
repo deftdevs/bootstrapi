@@ -49,7 +49,7 @@
     </developers>
 
     <properties>
-        <crowd.version>6.3.1</crowd.version>
+        <crowd.version>6.3.2</crowd.version>
         <crowd.data.version>6.3.1</crowd.data.version>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
         <ajp.port>8409</ajp.port>
