@@ -1,15 +1,19 @@
 package com.deftdevs.bootstrapi.commons.model;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
+@SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = BootstrAPI.AUTHENTICATION + "-" + BootstrAPI.AUTHENTICATION_IDP + "-" + BootstrAPI.AUTHENTICATION_IDP_SAML)
 public class AuthenticationIdpSamlModel extends AbstractAuthenticationIdpModel {
@@ -24,18 +28,15 @@ public class AuthenticationIdpSamlModel extends AbstractAuthenticationIdpModel {
 
     // Example instances for documentation and tests
 
-    public static final AuthenticationIdpSamlModel EXAMPLE_1;
-
-    static {
-        EXAMPLE_1 = new AuthenticationIdpSamlModel();
-        EXAMPLE_1.setId(1L);
-        EXAMPLE_1.setName("SAML");
-        EXAMPLE_1.setEnabled(true);
-        EXAMPLE_1.setUrl("https://saml.example.com");
-        EXAMPLE_1.setEnableRememberMe(true);
-        EXAMPLE_1.setButtonText("Login with SAML");
-        EXAMPLE_1.setCertificate("certificate");
-        EXAMPLE_1.setUsernameAttribute("username");
-    }
+    public static final AuthenticationIdpSamlModel EXAMPLE_1 = AuthenticationIdpSamlModel.builder()
+            .id(1L)
+            .name("SAML")
+            .enabled(true)
+            .url("https://saml.example.com")
+            .enableRememberMe(true)
+            .buttonText("Login with SAML")
+            .certificate("certificate")
+            .usernameAttribute("username")
+            .build();
 
 }

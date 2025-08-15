@@ -18,20 +18,16 @@ public class LicenseModelUtil {
     public static LicenseModel toLicenseModel(
             @Nonnull final LicenseDetails licenseDetails) {
 
-        final LicenseModel licenseModel = new LicenseModel();
-
-        licenseModel.setProducts(licenseDetails.getLicensedApplications().getKeys().stream()
+        final LicenseModel licenseModel = LicenseModel.builder()
+            .products(licenseDetails.getLicensedApplications().getKeys().stream()
                 .map(ApplicationKey::value)
-                .collect(Collectors.toList()));
-
-        if (licenseDetails.getLicenseType() != null) {
-            licenseModel.setType(licenseDetails.getLicenseType().name());
-        }
-
-        licenseModel.setOrganization(licenseDetails.getOrganisation());
-        licenseModel.setDescription(licenseDetails.getDescription());
-        licenseModel.setExpiryDate(licenseDetails.getMaintenanceExpiryDate());
-        // cannot set max users with license details
+                .collect(Collectors.toList()))
+            .type(licenseDetails.getLicenseType() != null ? licenseDetails.getLicenseType().name() : null)
+            .organization(licenseDetails.getOrganisation())
+            .description(licenseDetails.getDescription())
+            .expiryDate(licenseDetails.getMaintenanceExpiryDate())
+            // cannot set max users with license details
+            .build();
         return licenseModel;
     }
 
