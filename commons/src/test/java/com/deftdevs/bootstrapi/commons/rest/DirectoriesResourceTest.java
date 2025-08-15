@@ -50,7 +50,7 @@ class DirectoriesResourceTest {
         final DirectoryCrowdModel directoryModel1 = DirectoryCrowdModel.EXAMPLE_1;
         final DirectoryCrowdModel directoryModel2 = DirectoryCrowdModel.EXAMPLE_3;
         final List<AbstractDirectoryModel> directoryModels = Arrays.asList(directoryModel1, directoryModel2);
-        doReturn(directoryModels).when(directoriesService).setDirectories(directoryModels, false);
+        doReturn(directoryModels).when(directoriesService).setDirectories(directoryModels);
 
         final Response response = resource.setDirectories(Boolean.FALSE, directoryModels);
         assertEquals(200, response.getStatus());

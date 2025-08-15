@@ -78,7 +78,7 @@ public class DirectoriesServiceTest {
         final boolean testConnection = false;
         doReturn(null).when(spy).addDirectory(directoryModel, testConnection);
 
-        spy.setDirectories(directoryModels, testConnection);
+        spy.setDirectories(directoryModels);
         verify(spy).addDirectory(directoryModel, testConnection);
     }
 
@@ -94,7 +94,7 @@ public class DirectoriesServiceTest {
         final boolean testConnection = false;
 
         assertThrows(BadRequestException.class, () -> {
-            spy.setDirectories(directoryModels, testConnection);
+            spy.setDirectories(directoryModels);
         });
     }
 
@@ -109,7 +109,7 @@ public class DirectoriesServiceTest {
         final boolean testConnection = false;
         doReturn(null).when(spy).setDirectory(directory.getId(), directoryModel, testConnection);
 
-        spy.setDirectories(directoryModels, testConnection);
+        spy.setDirectories(directoryModels);
         verify(spy).setDirectory(directory.getId(), directoryModel, testConnection);
     }
 
@@ -126,7 +126,7 @@ public class DirectoriesServiceTest {
         final boolean testConnection = false;
 
         assertThrows(BadRequestException.class, () -> {
-            spy.setDirectories(directoryModels, testConnection);
+            spy.setDirectories(directoryModels);
         });
     }
 
