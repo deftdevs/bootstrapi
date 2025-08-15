@@ -10,8 +10,6 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.ws.rs.core.Response;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.doReturn;
@@ -32,39 +30,27 @@ class DirectoryResourceTest {
     @Test
     void testGetDirectory() {
         DirectoryCrowdModel directoryModel = DirectoryCrowdModel.EXAMPLE_1;
-
         doReturn(directoryModel).when(directoriesService).getDirectory(1L);
 
-        final Response response = resource.getDirectory(1L);
-        assertEquals(200, response.getStatus());
-        final AbstractDirectoryModel directoryModelResponse = (AbstractDirectoryModel) response.getEntity();
-
+        final AbstractDirectoryModel directoryModelResponse = resource.getDirectory(1L);
         assertEquals(directoryModel, directoryModelResponse);
     }
 
     @Test
     void testCreateDirectory() {
         DirectoryCrowdModel bean = DirectoryCrowdModel.EXAMPLE_1;
+        doReturn(bean).when(directoriesService).addDirectory(bean);
 
-        doReturn(bean).when(directoriesService).addDirectory(bean, false);
-
-        final Response response = resource.createDirectory(Boolean.FALSE, bean);
-        assertEquals(200, response.getStatus());
-        final AbstractDirectoryModel responseModel = (AbstractDirectoryModel) response.getEntity();
-
+        final AbstractDirectoryModel responseModel = resource.createDirectory(bean);
         assertEquals(bean.getName(), responseModel.getName());
     }
 
     @Test
     void testUpdateDirectory() {
         DirectoryCrowdModel directoryModel = DirectoryCrowdModel.EXAMPLE_1;
+        doReturn(directoryModel).when(directoriesService).setDirectory(1L, directoryModel);
 
-        doReturn(directoryModel).when(directoriesService).setDirectory(1L, directoryModel, false);
-
-        final Response response = resource.updateDirectory(1L, Boolean.FALSE, directoryModel);
-        assertEquals(200, response.getStatus());
-        final AbstractDirectoryModel directoryModelResponse = (AbstractDirectoryModel) response.getEntity();
-
+        final AbstractDirectoryModel directoryModelResponse = resource.updateDirectory(1L, directoryModel);
         assertEquals(directoryModel, directoryModelResponse);
     }
 

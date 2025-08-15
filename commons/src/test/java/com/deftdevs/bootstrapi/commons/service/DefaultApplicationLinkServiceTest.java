@@ -17,12 +17,12 @@ import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
 import com.atlassian.applinks.spi.util.TypeAccessor;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.types.DefaultApplicationLink;
-import com.deftdevs.bootstrapi.commons.types.DefaultApplicationType;
 import com.deftdevs.bootstrapi.commons.helper.api.ApplicationLinksAuthConfigHelper;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel.ApplicationLinkType;
 import com.deftdevs.bootstrapi.commons.model.util.ApplicationLinkModelUtil;
+import com.deftdevs.bootstrapi.commons.types.DefaultApplicationLink;
+import com.deftdevs.bootstrapi.commons.types.DefaultApplicationType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -33,7 +33,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import static com.atlassian.applinks.internal.common.status.oauth.OAuthConfig.createDefaultOAuthConfig;
@@ -42,9 +42,16 @@ import static com.atlassian.applinks.internal.status.error.ApplinkErrorType.CONN
 import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel.ApplicationLinkStatus.AVAILABLE;
 import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel.ApplicationLinkStatus.CONFIGURATION_ERROR;
 import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel.ApplicationLinkType.CROWD;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.anyBoolean;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class DefaultApplicationLinkServiceTest {
@@ -76,12 +83,12 @@ class DefaultApplicationLinkServiceTest {
         doReturn(OAuthConfig.createDefaultOAuthConfig()).when(applicationLinksAuthConfigHelper).getIncomingOAuthConfig(any());
         doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
 
-        final List<ApplicationLinkModel> applicationLinkModels = applicationLinkService.getApplicationLinks();
+        final Map<String, ApplicationLinkModel> applicationLinkModels = applicationLinkService.getApplicationLinks();
         final ApplicationLinkModel applicationLinkModel = ApplicationLinkModelUtil.toApplicationLinkModel(applicationLink);
         applicationLinkModel.setOutgoingAuthType(ApplicationLinkModel.ApplicationLinkAuthType.OAUTH);
         applicationLinkModel.setIncomingAuthType(ApplicationLinkModel.ApplicationLinkAuthType.OAUTH);
         applicationLinkModel.setStatus(AVAILABLE);
-        assertEquals(applicationLinkModels.iterator().next(), applicationLinkModel);
+        assertEquals(applicationLinkModels.values().iterator().next(), applicationLinkModel);
     }
 
     @Test
@@ -107,7 +114,7 @@ class DefaultApplicationLinkServiceTest {
 
         final ApplicationLink applicationLink = createApplicationLink();
         final ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();
-        final List<ApplicationLinkModel> applicationLinkModels = Collections.singletonList(createApplicationLinkModel());
+        final Map<String, ApplicationLinkModel> applicationLinkModels = Collections.singletonMap(applicationLinkModel.getName(), applicationLinkModel);
         doReturn(Collections.singletonList(applicationLink)).when(mutatingApplicationLinkService).getApplicationLinks();
         doReturn(applicationLink).when(mutatingApplicationLinkService).getApplicationLink(any());
         doReturn(applicationLink).when(mutatingApplicationLinkService).addApplicationLink(any(), any(), any());
@@ -116,8 +123,8 @@ class DefaultApplicationLinkServiceTest {
         doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getIncomingOAuthConfig(any());
         doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
 
-        final List<ApplicationLinkModel> responseApplicationLinkModels = applicationLinkService.setApplicationLinks(applicationLinkModels, true);
-        assertEquals(responseApplicationLinkModels.iterator().next().getName(), applicationLinkModel.getName());
+        final Map<String, ApplicationLinkModel> responseApplicationLinkModels = applicationLinkService.setApplicationLinks(applicationLinkModels);
+        assertEquals(responseApplicationLinkModels.values().iterator().next().getName(), applicationLinkModel.getName());
     }
 
     @Test
@@ -126,7 +133,6 @@ class DefaultApplicationLinkServiceTest {
 
         ApplicationLink applicationLink = createApplicationLink();
         ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();
-
         doReturn(applicationLink).when(mutatingApplicationLinkService).getApplicationLink(any());
         doReturn(applicationLink).when(mutatingApplicationLinkService).addApplicationLink(any(), any(), any());
         doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
@@ -134,8 +140,7 @@ class DefaultApplicationLinkServiceTest {
         doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getIncomingOAuthConfig(any());
         doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
 
-        ApplicationLinkModel applicationLinkResponse = applicationLinkService.setApplicationLink(UUID.randomUUID(), applicationLinkModel, true);
-
+        ApplicationLinkModel applicationLinkResponse = applicationLinkService.setApplicationLink(UUID.randomUUID(), applicationLinkModel);
         assertEquals(applicationLinkModel.getName(), applicationLinkResponse.getName());
     }
 
@@ -156,7 +161,7 @@ class DefaultApplicationLinkServiceTest {
         doNothing().when(spyApplicationLinkService).setOutgoingOAuthConfig(any(), any());
         doNothing().when(spyApplicationLinkService).setIncomingOAuthConfig(any(), any(), anyBoolean());
 
-        final ApplicationLinkModel applicationLinkResponse = spyApplicationLinkService.setApplicationLink(UUID.randomUUID(), applicationLinkModel, true);
+        final ApplicationLinkModel applicationLinkResponse = spyApplicationLinkService.setApplicationLink(UUID.randomUUID(), applicationLinkModel);
         assertEquals(applicationLinkModel.getName(), applicationLinkResponse.getName());
     }
 
@@ -173,7 +178,7 @@ class DefaultApplicationLinkServiceTest {
         doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getIncomingOAuthConfig(any());
         doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
 
-        ApplicationLinkModel applicationLinkResponse = applicationLinkService.addApplicationLink(applicationLinkModel, true);
+        ApplicationLinkModel applicationLinkResponse = applicationLinkService.addApplicationLink(applicationLinkModel);
 
         assertEquals(applicationLinkResponse.getName(), applicationLinkModel.getName());
         assertNotEquals(applicationLinkResponse, applicationLinkModel);
@@ -192,7 +197,7 @@ class DefaultApplicationLinkServiceTest {
         doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getIncomingOAuthConfig(any());
         doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
 
-        ApplicationLinkModel applicationLinkResponse = applicationLinkService.addApplicationLink(applicationLinkModel, true);
+        ApplicationLinkModel applicationLinkResponse = applicationLinkService.addApplicationLink(applicationLinkModel);
 
         assertEquals(applicationLinkResponse.getName(), applicationLinkModel.getName());
         assertNotEquals(applicationLinkResponse, applicationLinkModel);
@@ -211,7 +216,7 @@ class DefaultApplicationLinkServiceTest {
         doThrow(new AuthenticationConfigurationException("")).when(mutatingApplicationLinkService).configureAuthenticationForApplicationLink(any(), any(), any(), any());
         doReturn(createApplinkStatus(applicationLink, CONFIGURATION_ERROR)).when(applinkStatusService).getApplinkStatus(any());
 
-        ApplicationLinkModel applicationLinkResponse = applicationLinkService.addApplicationLink(applicationLinkModel, true);
+        ApplicationLinkModel applicationLinkResponse = applicationLinkService.addApplicationLink(applicationLinkModel);
 
         assertEquals(applicationLinkResponse.getName(), applicationLinkModel.getName());
         assertNotEquals(applicationLinkResponse, applicationLinkModel);
@@ -230,7 +235,7 @@ class DefaultApplicationLinkServiceTest {
         doThrow(new AuthenticationConfigurationException("")).when(mutatingApplicationLinkService).configureAuthenticationForApplicationLink(any(), any(), any(), any());
 
         Exception exception = assertThrows(BadRequestException.class, () -> {
-            applicationLinkService.addApplicationLink(applicationLinkModel, false);
+            applicationLinkService.addApplicationLink(applicationLinkModel);
         });
     }
 
@@ -248,7 +253,7 @@ class DefaultApplicationLinkServiceTest {
             doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getIncomingOAuthConfig(any());
             doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
 
-            ApplicationLinkModel applicationLinkResponse = applicationLinkService.addApplicationLink(applicationLinkModel, true);
+            ApplicationLinkModel applicationLinkResponse = applicationLinkService.addApplicationLink(applicationLinkModel);
 
             assertEquals(applicationLinkResponse.getName(), applicationLinkModel.getName());
         }

@@ -40,10 +40,10 @@ public class ApplicationsServiceImpl implements ApplicationsService {
     }
 
     @Override
-    public List<ApplicationModel> getApplications() {
+    public Map<String, ApplicationModel> getApplications() {
         return applicationManager.findAll().stream()
                 .map(application -> ApplicationModelUtil.toApplicationModel(application, defaultGroupMembershipService))
-                .collect(Collectors.toList());
+                .collect(Collectors.toMap(ApplicationModel::getName, Function.identity()));
     }
 
     @Override
@@ -58,17 +58,21 @@ public class ApplicationsServiceImpl implements ApplicationsService {
     }
 
     @Override
-    public List<ApplicationModel> setApplications(
-            final List<ApplicationModel> applicationModels) {
+    public Map<String, ApplicationModel> setApplications(
+            final Map<String, ApplicationModel> applicationModels) {
 
-        final List<ApplicationModel> resultApplicationModels = new ArrayList<>();
+        final Map<String, ApplicationModel> resultApplicationModels = new LinkedHashMap<>();
 
-        for (ApplicationModel applicationModel : applicationModels) {
+        for (Map.Entry<String, ApplicationModel> applicationModelEntry : applicationModels.entrySet()) {
+            final ApplicationModel applicationModel = applicationModelEntry.getValue();
+
             try {
-                final Application application = applicationManager.findByName(applicationModel.getName());
-                resultApplicationModels.add(setApplication(application.getId(), applicationModel));
+                final Application application = applicationManager.findByName(applicationModelEntry.getKey());
+                final ApplicationModel updatedApplicationModel = setApplication(application.getId(), applicationModel);
+                resultApplicationModels.put(updatedApplicationModel.getName(), updatedApplicationModel);
             } catch (ApplicationNotFoundException ignored) {
-                resultApplicationModels.add(addApplication(applicationModel));
+                final ApplicationModel addedApplicationModel = addApplication(applicationModel);
+                resultApplicationModels.put(addedApplicationModel.getName(), addedApplicationModel);
             }
         }
 
