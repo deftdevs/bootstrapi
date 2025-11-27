@@ -88,7 +88,7 @@
         <jacoco.maven-plugin.version>0.8.14</jacoco.maven-plugin.version>
         <lombok.version>1.18.42</lombok.version>
         <maven.compiler-plugin.version>3.14.1</maven.compiler-plugin.version>
-        <maven.release-plugin.version>3.1.1</maven.release-plugin.version>
+        <maven.release-plugin.version>3.2.0</maven.release-plugin.version>
         <maven.resources-plugin.version>3.3.1</maven.resources-plugin.version>
         <openapi-generator.version>7.17.0</openapi-generator.version>
         <swagger.version>2.2.41</swagger.version>
