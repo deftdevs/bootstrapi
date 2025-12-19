@@ -98,7 +98,7 @@
         <jersey-common.version>2.47</jersey-common.version>
         <junit.version>5.13.4</junit.version>
         <mockito.version>5.20.0</mockito.version>
-        <bytebuddy.version>1.18.2</bytebuddy.version>
+        <bytebuddy.version>1.18.3</bytebuddy.version>
     </properties>
 
     <dependencyManagement>
