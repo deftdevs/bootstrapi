@@ -33,14 +33,14 @@ public class ApplicationLinkModelUtil {
     public static ApplicationLinkModel toApplicationLinkModel(
             final ApplicationLink applicationLink) {
 
-        final ApplicationLinkModel applicationLinkModel = new ApplicationLinkModel();
-        applicationLinkModel.setUuid(UUID.fromString(applicationLink.getId().get()));
-        applicationLinkModel.setName(applicationLink.getName());
-        applicationLinkModel.setType(getLinkTypeFromAppType(applicationLink.getType()));
-        applicationLinkModel.setDisplayUrl(applicationLink.getDisplayUrl());
-        applicationLinkModel.setRpcUrl(applicationLink.getRpcUrl());
-        applicationLinkModel.setPrimary(applicationLink.isPrimary());
-        return applicationLinkModel;
+        return ApplicationLinkModel.builder()
+                .uuid(UUID.fromString(applicationLink.getId().get()))
+                .name(applicationLink.getName())
+                .type(getLinkTypeFromAppType(applicationLink.getType()))
+                .displayUrl(applicationLink.getDisplayUrl())
+                .rpcUrl(applicationLink.getRpcUrl())
+                .primary(applicationLink.isPrimary())
+                .build();
     }
 
     /**

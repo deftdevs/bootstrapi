@@ -8,7 +8,6 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import javax.validation.constraints.NotNull;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
@@ -29,7 +28,7 @@ public interface SettingsCustomHtmlResource {
                             description = "Returns the custom HTML"
                     ),
                     @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
                             description = "Returns a list of error messages."
                     ),
             }
@@ -48,7 +47,7 @@ public interface SettingsCustomHtmlResource {
                             description = "Returns the updated custom HTML"
                     ),
                     @ApiResponse(
-                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
                             description = "Returns a list of error messages."
                     ),
             }

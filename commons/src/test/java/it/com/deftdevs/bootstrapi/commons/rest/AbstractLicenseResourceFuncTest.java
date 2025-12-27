@@ -26,8 +26,8 @@ public abstract class AbstractLicenseResourceFuncTest {
 
         final List<LicenseModel> licenseModels = objectMapper.readValue(licensesResponse.body(), new TypeReference<List<LicenseModel>>(){});
         assertNotNull(licenseModels);
-        assertNotEquals(0, ((List<LicenseModel>) licenseModels).size());
-        assertNotNull(((List<LicenseModel>) licenseModels).iterator().next().getOrganization());
+        assertNotEquals(0, licenseModels.size());
+        assertNotNull(licenseModels.iterator().next().getOrganization());
     }
 
     @Test

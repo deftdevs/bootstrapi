@@ -1,7 +1,9 @@
 package com.deftdevs.bootstrapi.commons.model;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlElement;
@@ -15,7 +17,9 @@ import java.util.Date;
  * Model for a licence info in REST requests.
  */
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @XmlRootElement(name = BootstrAPI.LICENSE)
 public class LicenseModel {
 
@@ -39,32 +43,29 @@ public class LicenseModel {
 
     // Example instances for documentation and tests
 
-    public static final LicenseModel EXAMPLE_1;
-    public static final LicenseModel EXAMPLE_2_DEVELOPER_LICENSE;
+    public static final LicenseModel EXAMPLE_1 = LicenseModel.builder()
+            .description("Example License")
+            .organization("Example Organization")
+            .products(Collections.singletonList("example-product"))
+            .maxUsers(10)
+            .expiryDate(new Date())
+            .build();
 
-    static {
-        EXAMPLE_1 = new LicenseModel();
-        EXAMPLE_1.setDescription("Example License");
-        EXAMPLE_1.setOrganization("Example Organization");
-        EXAMPLE_1.setProducts(Collections.singletonList("example-product"));
-        EXAMPLE_1.setMaxUsers(10);
-        EXAMPLE_1.setExpiryDate(new Date());
-
-        // use "3 hour expiration for all Atlassian host products*"
-        // from https://developer.atlassian.com/platform/marketplace/timebomb-licenses-for-testing-server-apps/
-        EXAMPLE_2_DEVELOPER_LICENSE = new LicenseModel();
-        EXAMPLE_2_DEVELOPER_LICENSE.setDescription("Test license for plugin developers");
-        EXAMPLE_2_DEVELOPER_LICENSE.setType("TESTING");
-        EXAMPLE_2_DEVELOPER_LICENSE.setOrganization("Atlassian");
-        EXAMPLE_2_DEVELOPER_LICENSE.setProducts(Arrays.asList(
-                "Confluence",
-                "Jira",
-                "Bitbucket",
-                "Crowd",
-                "Bamboo",
-                "Fisheye"));
-        EXAMPLE_2_DEVELOPER_LICENSE.setMaxUsers(1);
-        EXAMPLE_2_DEVELOPER_LICENSE.setExpiryDate(new Date());
-    }
+    // use "3 hour expiration for all Atlassian host products*"
+    // from https://developer.atlassian.com/platform/marketplace/timebomb-licenses-for-testing-server-apps/
+    public static final LicenseModel EXAMPLE_2_DEVELOPER_LICENSE = LicenseModel.builder()
+            .description("Test license for plugin developers")
+            .type("TESTING")
+            .organization("Atlassian")
+            .products(Arrays.asList(
+                    "Confluence",
+                    "Jira",
+                    "Bitbucket",
+                    "Crowd",
+                    "Bamboo",
+                    "Fisheye"))
+            .maxUsers(1)
+            .expiryDate(new Date())
+            .build();
 
 }

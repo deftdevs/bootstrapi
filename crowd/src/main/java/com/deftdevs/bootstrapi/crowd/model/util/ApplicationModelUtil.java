@@ -4,6 +4,7 @@ import com.atlassian.crowd.embedded.api.PasswordCredential;
 import com.atlassian.crowd.exception.OperationFailedException;
 import com.atlassian.crowd.manager.application.DefaultGroupMembershipService;
 import com.atlassian.crowd.model.application.*;
+import com.atlassian.crowd.embedded.api.OperationType;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
 import com.deftdevs.bootstrapi.crowd.model.ApplicationModel;
@@ -19,25 +20,23 @@ public class ApplicationModelUtil {
             final Application application,
             final DefaultGroupMembershipService defaultGroupMembershipService) {
 
-        final ApplicationModel applicationModel = new ApplicationModel();
-
-        applicationModel.setId(application.getId());
-        applicationModel.setName(application.getName());
-        applicationModel.setDescription(application.getDescription());
-        applicationModel.setActive(application.isActive());
-        applicationModel.setType(toApplicationModelType(application.getType()));
-        applicationModel.setCachedDirectoriesAuthenticationOrderOptimisationEnabled(application.isCachedDirectoriesAuthenticationOrderOptimisationEnabled());
-        applicationModel.setDirectoryMappings(toApplicationModelDirectoryMappings(application, defaultGroupMembershipService).stream()
-                .sorted(Comparator.comparing(ApplicationModel.ApplicationDirectoryMapping::getDirectoryName))
-                .collect(Collectors.toList()));
-        applicationModel.setAccessBasedSynchronisation(toApplicationModelAccessBasedSynchronisation(application));
-        applicationModel.setMembershipAggregationEnabled(application.isMembershipAggregationEnabled());
-        applicationModel.setRemoteAddresses(toStringCollection(application.getRemoteAddresses()));
-        applicationModel.setAliasingEnabled(application.isAliasingEnabled());
-        applicationModel.setLowercaseOutputEnabled(application.isLowerCaseOutput());
-        applicationModel.setAuthenticationWithoutPasswordEnabled(application.isAuthenticationWithoutPasswordEnabled());
-
-        return applicationModel;
+        return ApplicationModel.builder()
+                .id(application.getId())
+                .name(application.getName())
+                .description(application.getDescription())
+                .active(application.isActive())
+                .type(toApplicationModelType(application.getType()))
+                .cachedDirectoriesAuthenticationOrderOptimisationEnabled(application.isCachedDirectoriesAuthenticationOrderOptimisationEnabled())
+                .directoryMappings(toApplicationModelDirectoryMappings(application, defaultGroupMembershipService).stream()
+                        .sorted(Comparator.comparing(ApplicationModel.ApplicationDirectoryMapping::getDirectoryName))
+                        .collect(Collectors.toList()))
+                .accessBasedSynchronisation(toApplicationModelAccessBasedSynchronisation(application))
+                .membershipAggregationEnabled(application.isMembershipAggregationEnabled())
+                .remoteAddresses(toStringCollection(application.getRemoteAddresses()))
+                .aliasingEnabled(application.isAliasingEnabled())
+                .lowercaseOutputEnabled(application.isLowerCaseOutput())
+                .authenticationWithoutPasswordEnabled(application.isAuthenticationWithoutPasswordEnabled())
+                .build();
     }
 
     public static Application toApplication(
@@ -191,27 +190,24 @@ public class ApplicationModelUtil {
         final List<ApplicationModel.ApplicationDirectoryMapping> applicationModelDirectoryMappings = new ArrayList<>();
 
         for (final ApplicationDirectoryMapping applicationDirectoryMapping : applicationDirectoryMappings) {
-            final ApplicationModel.ApplicationDirectoryMapping applicationModelDirectoryMapping = new ApplicationModel.ApplicationDirectoryMapping();
-            applicationModelDirectoryMapping.setDirectoryName(applicationDirectoryMapping.getDirectory().getName());
-            applicationModelDirectoryMapping.setAuthenticationAllowAll(applicationDirectoryMapping.isAllowAllToAuthenticate());
-
-            // if all directory users are allowed to authenticate, we don't return the unused list of groups that are allowed to do so,
-            // but instead we just return an empty list
-            if (!applicationDirectoryMapping.isAllowAllToAuthenticate()) {
-                applicationModelDirectoryMapping.setAuthenticationGroups(new ArrayList<>(applicationDirectoryMapping.getAuthorisedGroupNames()));
-            } else {
-                applicationModelDirectoryMapping.setAuthenticationGroups(Collections.emptyList());
-            }
-
+            List<String> authenticationGroups = !applicationDirectoryMapping.isAllowAllToAuthenticate()
+                ? new ArrayList<>(applicationDirectoryMapping.getAuthorisedGroupNames())
+                : Collections.emptyList();
+            List<String> autoAssignmentGroups;
             try {
-                applicationModelDirectoryMapping.setAutoAssignmentGroups(defaultGroupMembershipService.listAll(application,
-                        applicationDirectoryMapping).stream().sorted().collect(Collectors.toList()));
+                autoAssignmentGroups = defaultGroupMembershipService.listAll(application, applicationDirectoryMapping)
+                    .stream().sorted().collect(Collectors.toList());
             } catch (OperationFailedException e) {
                 throw new InternalServerErrorException(e);
             }
-
-            applicationModelDirectoryMapping.setAllowedOperations(applicationDirectoryMapping.getAllowedOperations().stream().sorted().collect(Collectors.toList()));
-
+            List<OperationType> allowedOperations = applicationDirectoryMapping.getAllowedOperations().stream().sorted().collect(Collectors.toList());
+            ApplicationModel.ApplicationDirectoryMapping applicationModelDirectoryMapping = ApplicationModel.ApplicationDirectoryMapping.builder()
+                .directoryName(applicationDirectoryMapping.getDirectory().getName())
+                .authenticationAllowAll(applicationDirectoryMapping.isAllowAllToAuthenticate())
+                .authenticationGroups(authenticationGroups)
+                .autoAssignmentGroups(autoAssignmentGroups)
+                .allowedOperations(allowedOperations)
+                .build();
             applicationModelDirectoryMappings.add(applicationModelDirectoryMapping);
         }
 
