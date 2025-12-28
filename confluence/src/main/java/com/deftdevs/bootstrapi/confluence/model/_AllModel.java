@@ -1,0 +1,33 @@
+package com.deftdevs.bootstrapi.confluence.model;
+
+import com.deftdevs.bootstrapi.commons.model.GroupModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.commons.model.UserModel;
+import com.deftdevs.bootstrapi.commons.model.type._AllModelStatus;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import java.util.Map;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@XmlRootElement(name = "all")
+public class _AllModel {
+
+    @XmlElement
+    private SettingsModel settings;
+
+    @XmlElement
+    private Map<String, UserModel> users;
+
+    @XmlElement
+    private Map<String, GroupModel> groups;
+
+    @XmlElement
+    private Map<String, _AllModelStatus> status;
+
+}
