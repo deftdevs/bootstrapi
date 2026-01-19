@@ -3,6 +3,8 @@
   "extends": [
     "config:recommended"
   ],
+  "minimumReleaseAge": "7 days",
+  "platformAutomerge": true,
   "prConcurrentLimit": 0,
   "separateMajorMinor": true,
   "separateMinorPatch": true,
@@ -10,11 +12,10 @@
   "separateMultipleMinor": true,
   "packageRules": [
     {
-      "description": "Auto-merge patch updates",
-      "matchUpdateTypes": [
-        "patch"
-      ],
-      "automerge": true
+      "description": "Auto-merge minor and patch updates after CI passes",
+      "matchUpdateTypes": ["minor", "patch"],
+      "automerge": true,
+      "automergeType": "pr"
     },
     {
       "description": "Allow only Atlassian packages with SemVer version and exclude 1000er versions",
