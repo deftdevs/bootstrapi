@@ -48,7 +48,7 @@
 
     <properties>
         <maven-jar-plugin.version>3.5.0</maven-jar-plugin.version>
-        <jackson.version>2.20.1</jackson.version>
+        <jackson.version>2.20.2</jackson.version>
     </properties>
 
     <dependencyManagement>
