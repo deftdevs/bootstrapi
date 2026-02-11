@@ -10,10 +10,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.ws.rs.core.Response;
-import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
+import java.util.Map;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -35,27 +36,22 @@ class DirectoriesResourceTest {
     @Test
     void testGetDirectories() {
         final DirectoryCrowdModel initialDirectoryModel = DirectoryCrowdModel.EXAMPLE_1;
-        final List<AbstractDirectoryModel> directoryModels = Collections.singletonList(initialDirectoryModel);
+        final Map<String, AbstractDirectoryModel> directoryModels = Collections.singletonMap(initialDirectoryModel.getName(), initialDirectoryModel);
         doReturn(directoryModels).when(directoriesService).getDirectories();
 
-        final Response response = resource.getDirectories();
-        assertEquals(200, response.getStatus());
-
-        final List<AbstractDirectoryModel> responseDirectoryModels = (List<AbstractDirectoryModel>) response.getEntity();
-        assertEquals(initialDirectoryModel, responseDirectoryModels.iterator().next());
+        final Map<String, ? extends AbstractDirectoryModel> responseDirectoryModels = resource.getDirectories();
+        assertEquals(initialDirectoryModel, responseDirectoryModels.values().iterator().next());
     }
 
     @Test
     void testSetDirectories() {
         final DirectoryCrowdModel directoryModel1 = DirectoryCrowdModel.EXAMPLE_1;
         final DirectoryCrowdModel directoryModel2 = DirectoryCrowdModel.EXAMPLE_3;
-        final List<AbstractDirectoryModel> directoryModels = Arrays.asList(directoryModel1, directoryModel2);
-        doReturn(directoryModels).when(directoriesService).setDirectories(directoryModels, false);
+        final Map<String, ? extends AbstractDirectoryModel> directoryModels = Stream.of(directoryModel1, directoryModel2)
+                        .collect(Collectors.toMap(AbstractDirectoryModel::getName, Function.identity()));
+        doReturn(directoryModels).when(directoriesService).setDirectories(directoryModels);
 
-        final Response response = resource.setDirectories(Boolean.FALSE, directoryModels);
-        assertEquals(200, response.getStatus());
-
-        final List<AbstractDirectoryModel> responseDirectoryModels = (List<AbstractDirectoryModel>) response.getEntity();
+        final Map<String, ? extends AbstractDirectoryModel> responseDirectoryModels = resource.setDirectories(directoryModels);
         assertEquals(directoryModels.size(), responseDirectoryModels.size());
     }
 

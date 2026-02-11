@@ -5,11 +5,10 @@ import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoModel;
 import com.deftdevs.bootstrapi.commons.rest.api.AuthenticationResource;
 import com.deftdevs.bootstrapi.commons.service.api.AuthenticationService;
 
-import javax.ws.rs.core.Response;
-import java.util.List;
+import java.util.Map;
 
-public abstract class AbstractAuthenticationResourceImpl<IB extends AbstractAuthenticationIdpModel, SB extends AuthenticationSsoModel, S extends AuthenticationService<IB, SB>>
-        implements AuthenticationResource<IB, SB> {
+public abstract class AbstractAuthenticationResourceImpl<IM extends AbstractAuthenticationIdpModel, SM extends AuthenticationSsoModel, S extends AuthenticationService<IM, SM>>
+        implements AuthenticationResource<IM, SM> {
 
     private final S authenticationService;
 
@@ -20,31 +19,27 @@ public abstract class AbstractAuthenticationResourceImpl<IB extends AbstractAuth
     }
 
     @Override
-    public Response getAuthenticationIdps() {
-        final List<IB> resultAuthenticationIdpModels = authenticationService.getAuthenticationIdps();
-        return Response.ok(resultAuthenticationIdpModels).build();
+    public Map<String, ? extends IM> getAuthenticationIdps() {
+        return authenticationService.getAuthenticationIdps();
     }
 
     @Override
-    public Response setAuthenticationIdps(
-            final List<IB> authenticationIdpModels) {
+    public Map<String, ? extends IM> setAuthenticationIdps(
+            final Map<String, ? extends IM> authenticationIdpModels) {
 
-        final List<IB> resultAuthenticationIdpModels = authenticationService.setAuthenticationIdps(authenticationIdpModels);
-        return Response.ok(resultAuthenticationIdpModels).build();
+        return authenticationService.setAuthenticationIdps(authenticationIdpModels);
     }
 
     @Override
-    public Response getAuthenticationSso() {
-        final SB resultAuthenticationSsoModel = authenticationService.getAuthenticationSso();
-        return Response.ok(resultAuthenticationSsoModel).build();
+    public SM getAuthenticationSso() {
+        return authenticationService.getAuthenticationSso();
     }
 
     @Override
-    public Response setAuthenticationSso(
-            final SB authenticationSsoModel) {
+    public SM setAuthenticationSso(
+            final SM authenticationSsoModel) {
 
-        final SB resultAuthenticationSsoModel = authenticationService.setAuthenticationSso(authenticationSsoModel);
-        return Response.ok(resultAuthenticationSsoModel).build();
+        return authenticationService.setAuthenticationSso(authenticationSsoModel);
     }
 
 }
