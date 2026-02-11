@@ -21,7 +21,6 @@ import com.deftdevs.bootstrapi.crowd.model.util.DirectoryModelUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 
 import javax.annotation.Nonnull;
-import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -66,8 +65,7 @@ public class DirectoriesServiceImpl implements DirectoriesService {
 
     @Override
     public List<AbstractDirectoryModel> setDirectories(
-            final List<AbstractDirectoryModel> directoryModels,
-            final boolean testConnection) {
+            final List<AbstractDirectoryModel> directoryModels) {
 
         final Map<String, Directory> existingDirectoriesByName = findAllDirectories().stream()
                 .collect(Collectors.toMap(Directory::getName, Function.identity()));
@@ -76,9 +74,9 @@ public class DirectoriesServiceImpl implements DirectoriesService {
 
         for (AbstractDirectoryModel directoryModel : directoryModels) {
             if (existingDirectoriesByName.containsKey(directoryModel.getName())) {
-                resultDirectories.add(setDirectory(existingDirectoriesByName.get(directoryModel.getName()).getId(), directoryModel, testConnection));
+                resultDirectories.add(setDirectory(existingDirectoriesByName.get(directoryModel.getName()).getId(), directoryModel, false));
             } else {
-                resultDirectories.add(addDirectory(directoryModel, testConnection));
+                resultDirectories.add(addDirectory(directoryModel, false));
             }
         }
 

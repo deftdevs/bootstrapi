@@ -7,6 +7,7 @@ All URIs are relative to *https://<JIRA_URL>/rest/bootstrapi/1*
 
 | Class | Method | HTTP request | Description |
 |------------ | ------------- | ------------- | -------------|
+| *AllApi* | [**setAll**](Apis/AllApi.md#setall) | **PUT** / | _all |
 | *ApplicationLinkApi* | [**createApplicationLink**](Apis/ApplicationLinkApi.md#createapplicationlink) | **POST** /application-link | Create an application link |
 *ApplicationLinkApi* | [**deleteApplicationLink**](Apis/ApplicationLinkApi.md#deleteapplicationlink) | **DELETE** /application-link/{uuid} | Delete an application link |
 *ApplicationLinkApi* | [**getApplicationLink**](Apis/ApplicationLinkApi.md#getapplicationlink) | **GET** /application-link/{uuid} | Get an application link |
@@ -79,6 +80,8 @@ All URIs are relative to *https://<JIRA_URL>/rest/bootstrapi/1*
  - [SettingsModel](./Models/SettingsModel.md)
  - [SettingsSecurityModel](./Models/SettingsSecurityModel.md)
  - [UserModel](./Models/UserModel.md)
+ - [_AllModel](./Models/_AllModel.md)
+ - [_AllModelStatus](./Models/_AllModelStatus.md)
 
 
 <a name="documentation-for-authorization"></a>

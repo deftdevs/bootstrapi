@@ -28,13 +28,11 @@ public interface DirectoriesService {
     /**
      * Adds or Updates directory configurations. Any existing configurations with the same 'name' property is updated.
      *
-     * @param directories    the directories
-     * @param testConnection whether to test connection
+     * @param directories the directories
      * @return the directories
      */
     List<AbstractDirectoryModel> setDirectories(
-            List<AbstractDirectoryModel> directories,
-            boolean testConnection);
+            List<AbstractDirectoryModel> directories);
 
     /**
      * Updates a single directory configuration. Any existing configuration with the same 'name' property is updated.
