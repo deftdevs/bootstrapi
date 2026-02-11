@@ -112,23 +112,21 @@ public class AuthenticationIdpModelUtil {
 
         final OidcConfig oidcConfig = (OidcConfig) idpConfig;
 
-        final AuthenticationIdpOidcModel authenticationIdpOidcModel = new AuthenticationIdpOidcModel();
-        authenticationIdpOidcModel.setId(oidcConfig.getId());
-        authenticationIdpOidcModel.setName(oidcConfig.getName());
-        authenticationIdpOidcModel.setEnabled(oidcConfig.isEnabled());
-        authenticationIdpOidcModel.setEnabledForJsm(oidcConfig.isIncludeCustomerLogins());
-        authenticationIdpOidcModel.setUrl(oidcConfig.getIssuer());
-        authenticationIdpOidcModel.setEnableRememberMe(oidcConfig.isEnableRememberMe());
-        authenticationIdpOidcModel.setButtonText(oidcConfig.getButtonText());
-        authenticationIdpOidcModel.setClientId(oidcConfig.getClientId());
-        authenticationIdpOidcModel.setUsernameClaim(oidcConfig.getUsernameClaim());
-        authenticationIdpOidcModel.setAdditionalScopes(oidcConfig.getAdditionalScopes());
-        authenticationIdpOidcModel.setDiscoveryEnabled(oidcConfig.isDiscoveryEnabled());
-        authenticationIdpOidcModel.setAuthorizationEndpoint(oidcConfig.getAuthorizationEndpoint());
-        authenticationIdpOidcModel.setTokenEndpoint(oidcConfig.getTokenEndpoint());
-        authenticationIdpOidcModel.setUserInfoEndpoint(oidcConfig.getUserInfoEndpoint());
-
-        return authenticationIdpOidcModel;
+        return AuthenticationIdpOidcModel.builder()
+                .id(oidcConfig.getId())
+                .name(oidcConfig.getName())
+                .enabled(oidcConfig.isEnabled())
+                .url(oidcConfig.getIssuer())
+                .enableRememberMe(oidcConfig.isEnableRememberMe())
+                .buttonText(oidcConfig.getButtonText())
+                .clientId(oidcConfig.getClientId())
+                .usernameClaim(oidcConfig.getUsernameClaim())
+                .additionalScopes(oidcConfig.getAdditionalScopes())
+                .discoveryEnabled(oidcConfig.isDiscoveryEnabled())
+                .authorizationEndpoint(oidcConfig.getAuthorizationEndpoint())
+                .tokenEndpoint(oidcConfig.getTokenEndpoint())
+                .userInfoEndpoint(oidcConfig.getUserInfoEndpoint())
+                .build();
     }
 
     private static AuthenticationIdpSamlModel toAuthenticationIdpSamlModel(
@@ -140,18 +138,16 @@ public class AuthenticationIdpModelUtil {
 
         final SamlConfig samlConfig = (SamlConfig) idpConfig;
 
-        final AuthenticationIdpSamlModel authenticationIdpSamlModel = new AuthenticationIdpSamlModel();
-        authenticationIdpSamlModel.setId(samlConfig.getId());
-        authenticationIdpSamlModel.setName(samlConfig.getName());
-        authenticationIdpSamlModel.setEnabled(samlConfig.isEnabled());
-        authenticationIdpSamlModel.setEnabledForJsm(samlConfig.isIncludeCustomerLogins());
-        authenticationIdpSamlModel.setUrl(samlConfig.getIssuer());
-        authenticationIdpSamlModel.setEnableRememberMe(samlConfig.isEnableRememberMe());
-        authenticationIdpSamlModel.setButtonText(samlConfig.getButtonText());
-        // is it wanted to return the certificate here?
-        authenticationIdpSamlModel.setUsernameAttribute(samlConfig.getUsernameAttribute());
-
-        return authenticationIdpSamlModel;
+        return AuthenticationIdpSamlModel.builder()
+                .id(samlConfig.getId())
+                .name(samlConfig.getName())
+                .enabled(samlConfig.isEnabled())
+                .url(samlConfig.getIssuer())
+                .enableRememberMe(samlConfig.isEnableRememberMe())
+                .buttonText(samlConfig.getButtonText())
+                // is it wanted to return the certificate here?
+                .usernameAttribute(samlConfig.getUsernameAttribute())
+                .build();
     }
 
     private static void verifyIdAndType(

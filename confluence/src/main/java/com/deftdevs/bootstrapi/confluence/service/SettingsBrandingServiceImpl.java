@@ -18,7 +18,7 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
 
     private static final int DEFAULT_FAVICON_DIMENSION = 16;
 
-    private static final String ERROR_MESSAGE_FAVICON = "It is currently not possible to use the favicon endpoints in BootstrAPI for Confluence because of API changes made by Atlassian";;
+    private static final String ERROR_MESSAGE_FAVICON = "It is currently not possible to use the favicon endpoints in BootstrAPI for Confluence because of API changes made by Atlassian";
 
     private final ColourSchemeManager colourSchemeManager;
     private final SiteLogoManager siteLogoManager;

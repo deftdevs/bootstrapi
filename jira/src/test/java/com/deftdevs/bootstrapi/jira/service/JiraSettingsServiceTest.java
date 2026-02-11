@@ -54,12 +54,13 @@ class JiraSettingsServiceTest {
 
     @Test
     void testSetSettingsGeneral() {
-        final SettingsModel settingsModel = new SettingsModel();
-        settingsModel.setBaseUrl(BASE_URL);
-        settingsModel.setMode(MODE_PUBLIC);
-        settingsModel.setTitle(TITLE);
-        settingsModel.setContactMessage(CONTACT_MESSAGE);
-        settingsModel.setExternalUserManagement(Boolean.parseBoolean(EXTERNAL_USER_MANAGEMENT));
+        final SettingsModel settingsModel = SettingsModel.builder()
+            .baseUrl(BASE_URL)
+            .mode(MODE_PUBLIC)
+            .title(TITLE)
+            .contactMessage(CONTACT_MESSAGE)
+            .externalUserManagement(Boolean.parseBoolean(EXTERNAL_USER_MANAGEMENT))
+            .build();
 
         settingsService.setSettingsGeneral(settingsModel);
 
@@ -72,7 +73,7 @@ class JiraSettingsServiceTest {
 
     @Test
     void testSetSettingsGeneralEmptyModel() {
-        final SettingsModel settingsModel = new SettingsModel();
+        final SettingsModel settingsModel = SettingsModel.builder().build();
 
         settingsService.setSettingsGeneral(settingsModel);
 
@@ -84,8 +85,7 @@ class JiraSettingsServiceTest {
 
     @Test
     void testSetSettingsGeneralUnsupportedMode() {
-        final SettingsModel settingsModel = new SettingsModel();
-        settingsModel.setMode("unsupported");
+        final SettingsModel settingsModel = SettingsModel.builder().mode("unsupported").build();
 
         assertThrows(BadRequestException.class, () -> {
             settingsService.setSettingsGeneral(settingsModel);
@@ -94,8 +94,7 @@ class JiraSettingsServiceTest {
 
     @Test
     void testSetSettingsGeneralInvalidCombination() {
-        final SettingsModel settingsModel = new SettingsModel();
-        settingsModel.setMode(MODE_PUBLIC);
+        final SettingsModel settingsModel = SettingsModel.builder().mode(MODE_PUBLIC).build();
         doReturn(true).when(applicationProperties).getOption(JIRA_OPTION_USER_EXTERNALMGT);
 
         assertThrows(BadRequestException.class, () -> {

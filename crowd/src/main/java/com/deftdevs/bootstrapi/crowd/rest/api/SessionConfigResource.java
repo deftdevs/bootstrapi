@@ -16,7 +16,7 @@ import javax.ws.rs.core.Response;
 
 public interface SessionConfigResource {
 
-    static final String SESSION_CONFIG = "session-config";
+    String SESSION_CONFIG = "session-config";
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

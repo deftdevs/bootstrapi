@@ -71,12 +71,13 @@ public class MailTemplatesServiceTest {
 
     @Test
     public void testSetMailTemplates() {
-        final MailTemplatesModel inputMailTemplatesModel = new MailTemplatesModel();
-        inputMailTemplatesModel.setForgottenPassword("1");
-        inputMailTemplatesModel.setForgottenUsername("2");
-        inputMailTemplatesModel.setPasswordExpirationReminder("3");
-        inputMailTemplatesModel.setEmailChangeValidation("4");
-        inputMailTemplatesModel.setEmailChangeInfo("5");
+        final MailTemplatesModel inputMailTemplatesModel = MailTemplatesModel.builder()
+                .forgottenPassword("1")
+                .forgottenUsername("2")
+                .passwordExpirationReminder("3")
+                .emailChangeValidation("4")
+                .emailChangeInfo("5")
+                .build();
 
         final MailTemplatesModel outputMailTemplatesModel = mailTemplateService.setMailTemplates(inputMailTemplatesModel);
 

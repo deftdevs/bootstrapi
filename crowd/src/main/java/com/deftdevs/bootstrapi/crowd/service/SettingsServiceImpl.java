@@ -19,14 +19,14 @@ public class SettingsServiceImpl
 
     @Override
     public SettingsModel getSettingsGeneral() {
-        SettingsModel settingsModel = new SettingsModel();
         try {
-            settingsModel.setBaseUrl(propertyManager.getBaseUrl());
-            settingsModel.setTitle(propertyManager.getDeploymentTitle());
+            return SettingsModel.builder()
+                    .baseUrl(propertyManager.getBaseUrl())
+                    .title(propertyManager.getDeploymentTitle())
+                    .build();
         } catch (PropertyManagerException e) {
             throw new InternalServerErrorException(e);
         }
-        return settingsModel;
     }
 
     @Override

@@ -15,24 +15,23 @@ public class SettingsBrandingColorSchemeModelUtil {
     public static SettingsBrandingColorSchemeModel toSettingsBrandingColorSchemeModel(
             final ColourScheme colourScheme) {
 
-        final SettingsBrandingColorSchemeModel schemeModel = new SettingsBrandingColorSchemeModel();
-        schemeModel.setTopBar(colourScheme.get(ColourScheme.TOP_BAR));
-        schemeModel.setTopBarMenuItemText(colourScheme.get(ColourScheme.TOP_BAR_MENU_ITEM_TEXT));
-        schemeModel.setTopBarMenuSelectedBackground(colourScheme.get(ColourScheme.TOP_BAR_MENU_SELECTED_BACKGROUND));
-        schemeModel.setTopBarMenuSelectedText(colourScheme.get(ColourScheme.TOP_BAR_MENU_SELECTED_TEXT));
-        schemeModel.setTopBarText(colourScheme.get(ColourScheme.TOP_BAR_MENU_ITEM_TEXT));
-        schemeModel.setBordersAndDividers(colourScheme.get(ColourScheme.BORDER));
-        schemeModel.setHeaderButtonBackground(colourScheme.get(ColourScheme.HEADER_BUTTON_BASE_BACKGROUND));
-        schemeModel.setHeaderButtonText(colourScheme.get(ColourScheme.HEADER_BUTTON_TEXT));
-        schemeModel.setHeadingText(colourScheme.get(ColourScheme.HEADING_TEXT));
-        schemeModel.setLinks(colourScheme.get(ColourScheme.LINK));
-        schemeModel.setMenuItemSelectedBackground(colourScheme.get(ColourScheme.MENU_ITEM_SELECTED_BACKGROUND));
-        schemeModel.setMenuItemSelectedText(colourScheme.get(ColourScheme.MENU_ITEM_SELECTED_TEXT));
-        schemeModel.setPageMenuItemText(colourScheme.get(ColourScheme.MENU_ITEM_TEXT));
-        schemeModel.setPageMenuSelectedBackground(colourScheme.get(ColourScheme.MENU_ITEM_SELECTED_BACKGROUND));
-        schemeModel.setSearchFieldBackground(colourScheme.get(ColourScheme.SEARCH_FIELD_BACKGROUND));
-        schemeModel.setSearchFieldText(colourScheme.get(ColourScheme.SEARCH_FIELD_TEXT));
-        return schemeModel;
+        return SettingsBrandingColorSchemeModel.builder()
+            .topBar(colourScheme.get(ColourScheme.TOP_BAR))
+            .topBarMenuItemText(colourScheme.get(ColourScheme.TOP_BAR_MENU_ITEM_TEXT))
+            .topBarMenuSelectedBackground(colourScheme.get(ColourScheme.TOP_BAR_MENU_SELECTED_BACKGROUND))
+            .topBarMenuSelectedText(colourScheme.get(ColourScheme.TOP_BAR_MENU_SELECTED_TEXT))
+            .topBarText(colourScheme.get(ColourScheme.TOP_BAR_MENU_ITEM_TEXT))
+            .headerButtonBackground(colourScheme.get(ColourScheme.HEADER_BUTTON_BASE_BACKGROUND))
+            .headerButtonText(colourScheme.get(ColourScheme.HEADER_BUTTON_TEXT))
+            .headingText(colourScheme.get(ColourScheme.HEADING_TEXT))
+            .menuItemSelectedBackground(colourScheme.get(ColourScheme.MENU_ITEM_SELECTED_BACKGROUND))
+            .menuItemSelectedText(colourScheme.get(ColourScheme.MENU_ITEM_SELECTED_TEXT))
+            .pageMenuItemText(colourScheme.get(ColourScheme.MENU_ITEM_TEXT))
+            // .pageMenuSelectedBackground(cs.get(ColourScheme.MENU_ITEM_SELECTED_BACKGROUND))
+            .bordersAndDividers(colourScheme.get(ColourScheme.BORDER))
+            .searchFieldBackground(colourScheme.get(ColourScheme.SEARCH_FIELD_BACKGROUND))
+            .searchFieldText(colourScheme.get(ColourScheme.SEARCH_FIELD_TEXT))
+            .build();
     }
 
     /**
@@ -60,7 +59,7 @@ public class SettingsBrandingColorSchemeModelUtil {
         setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_BACKGROUND, schemeModel.getMenuItemSelectedBackground());
         setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_TEXT, schemeModel.getMenuItemSelectedText());
         setColorCode(colourScheme, ColourScheme.MENU_ITEM_TEXT, schemeModel.getPageMenuItemText());
-        setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_BACKGROUND, schemeModel.getPageMenuSelectedBackground());
+        // setColorCode(colourScheme, ColourScheme.MENU_ITEM_SELECTED_BACKGROUND, schemeModel.getPageMenuSelectedBackground());
         setColorCode(colourScheme, ColourScheme.SEARCH_FIELD_BACKGROUND, schemeModel.getSearchFieldBackground());
         setColorCode(colourScheme, ColourScheme.SEARCH_FIELD_TEXT, schemeModel.getSearchFieldText());
 

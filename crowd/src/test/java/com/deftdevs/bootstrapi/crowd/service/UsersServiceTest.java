@@ -255,12 +255,13 @@ public class UsersServiceTest {
         // return the same user as the one we are updating
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).updateUser(anyLong(), any());
 
-        final UserModel userModel = new UserModel();
-        userModel.setFirstName("Other");
-        userModel.setLastName("Full Name");
-        userModel.setFullName("Other Full Name");
-        userModel.setEmail("other@example.com");
-        userModel.setActive(false);
+        final UserModel userModel = UserModel.builder()
+            .firstName("Other")
+            .lastName("Full Name")
+            .fullName("Other Full Name")
+            .email("other@example.com")
+            .active(false)
+            .build();
 
         final ArgumentCaptor<UserTemplate> userTemplateArgumentCaptor = ArgumentCaptor.forClass(UserTemplate.class);
         usersService.updateUser(user.getDirectoryId(), user.getName(), userModel);
@@ -292,8 +293,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setUsername(user.getName());
+        final UserModel userModel = UserModel.builder().username(user.getName()).build();
 
         usersService.updateUser(user.getDirectoryId(), user.getName(), userModel);
         verify(directoryManager, never()).renameUser(anyLong(), anyString(), anyString());
@@ -318,12 +318,13 @@ public class UsersServiceTest {
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).updateUser(anyLong(), any());
 
-        final UserModel userModel = new UserModel();
-        userModel.setFirstName("Other");
-        userModel.setLastName("Full Name");
-        userModel.setFullName("Other Full Name");
-        userModel.setEmail("other@example.com");
-        userModel.setActive(false);
+        final UserModel userModel = UserModel.builder()
+            .firstName("Other")
+            .lastName("Full Name")
+            .fullName("Other Full Name")
+            .email("other@example.com")
+            .active(false)
+            .build();
 
         final ArgumentCaptor<UserTemplate> userTemplateArgumentCaptor = ArgumentCaptor.forClass(UserTemplate.class);
         usersService.updateUser(user.getName(), userModel);
@@ -341,8 +342,7 @@ public class UsersServiceTest {
         doReturn(Collections.singletonList(getTestDirectory())).when(directoryManager).searchDirectories(any());
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setUsername("new_username");
+        final UserModel userModel = UserModel.builder().username("new_username").build();
         doReturn(user).when(directoryManager).renameUser(user.getDirectoryId(), user.getName(), userModel.getUsername());
 
         usersService.updateUser(user.getName(), userModel);
@@ -356,8 +356,7 @@ public class UsersServiceTest {
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
         // Just setting the same username and nothing else should not trigger any update
-        final UserModel userModel = new UserModel();
-        userModel.setUsername(user.getName());
+        final UserModel userModel = UserModel.builder().username(user.getName()).build();
 
         usersService.updateUser(user.getName(), userModel);
         verify(directoryManager, never()).renameUser(anyLong(), anyString(), anyString());
@@ -370,8 +369,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setPassword("s3cr3t");
+        final UserModel userModel = UserModel.builder().password("s3cr3t").build();
 
         final ArgumentCaptor<PasswordCredential> passwordCredentialArgumentCaptor = ArgumentCaptor.forClass(PasswordCredential.class);
         usersService.updateUser(user.getName(), userModel);
@@ -473,8 +471,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setUsername("new_username");
+        final UserModel userModel = UserModel.builder().username("new_username").build();
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
 
@@ -488,8 +485,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setUsername("new_username");
+        final UserModel userModel = UserModel.builder().username("new_username").build();
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
 
@@ -503,8 +499,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setUsername("new_username");
+        final UserModel userModel = UserModel.builder().username("new_username").build();
 
         doThrow(new UserAlreadyExistsException(user.getDirectoryId(), userModel.getUsername())).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
 
@@ -518,8 +513,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setUsername("new_username");
+        final UserModel userModel = UserModel.builder().username("new_username").build();
 
         doThrow(new UserAlreadyExistsException(user.getDirectoryId(), userModel.getUsername())).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
 
@@ -533,8 +527,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setUsername("new_username");
+        final UserModel userModel = UserModel.builder().username("new_username").build();
 
         doThrow(new InvalidUserException(user, "message")).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
 
@@ -548,8 +541,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setUsername("new_username");
+        final UserModel userModel = UserModel.builder().username("new_username").build();
 
         doThrow(new InvalidUserException(user, "message")).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
 
@@ -563,8 +555,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setUsername("new_username");
+        final UserModel userModel = UserModel.builder().username("new_username").build();
 
         doThrow(new OperationFailedException()).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
 
@@ -578,8 +569,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setUsername("new_username");
+        final UserModel userModel = UserModel.builder().username("new_username").build();
 
         doThrow(new OperationFailedException()).when(directoryManager).renameUser(anyLong(), anyString(), anyString());
 
@@ -593,8 +583,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setFullName("Other Full Name");
+        final UserModel userModel = UserModel.builder().fullName("Other Full Name").build();
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).updateUser(anyLong(), any());
 
@@ -606,8 +595,7 @@ public class UsersServiceTest {
     @Test
     public void testUpdateUserNotFoundExceptionAnyDirectory() throws CrowdException {
         final User user = getTestUser();
-        final UserModel userModel = new UserModel();
-        userModel.setFullName("Other Full Name");
+        final UserModel userModel = UserModel.builder().fullName("Other Full Name").build();
 
         assertThrows(WebApplicationException.class, () -> {
             usersService.updateUser(user.getName(), userModel);
@@ -619,8 +607,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setFullName("Other Full Name");
+        final UserModel userModel = UserModel.builder().fullName("Other Full Name").build();
 
         doThrow(new DirectoryPermissionException()).when(directoryManager).updateUser(anyLong(), any());
 
@@ -634,8 +621,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setFullName("Other Full Name");
+        final UserModel userModel = UserModel.builder().fullName("Other Full Name").build();
 
         doThrow(new InvalidUserException(user, "message")).when(directoryManager).updateUser(anyLong(), any());
 
@@ -649,8 +635,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setFullName("Other Full Name");
+        final UserModel userModel = UserModel.builder().fullName("Other Full Name").build();
 
         doThrow(new InvalidUserException(user, "message")).when(directoryManager).updateUser(anyLong(), any());
 
@@ -664,8 +649,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setEmail("other@example.com");
+        final UserModel userModel = UserModel.builder().email("other@example.com").build();
 
         doThrow(new OperationFailedException()).when(directoryManager).updateUser(anyLong(), any());
 
@@ -679,8 +663,7 @@ public class UsersServiceTest {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
 
-        final UserModel userModel = new UserModel();
-        userModel.setEmail("other@example.com");
+        final UserModel userModel = UserModel.builder().email("other@example.com").build();
 
         doThrow(new OperationFailedException()).when(directoryManager).updateUser(anyLong(), any());
 
