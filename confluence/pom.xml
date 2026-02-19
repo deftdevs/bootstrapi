@@ -67,17 +67,10 @@
 
             <dependency>
                 <groupId>com.atlassian.confluence</groupId>
-                <artifactId>confluence-project</artifactId>
+                <artifactId>confluence-api</artifactId>
                 <version>${confluence.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
-                <exclusions>
-                    <exclusion>
-                        <!-- exclude because Maven central does not allow the used versions containing an '@' character -->
-                        <groupId>com.atlassian.platform</groupId>
-                        <artifactId>ctk-plugin</artifactId>
-                    </exclusion>
-                </exclusions>
             </dependency>
 
             <dependency>
