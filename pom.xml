@@ -83,7 +83,7 @@
         <sonar.java.binaries>target/classes</sonar.java.binaries>
         <!-- other properties -->
         <atlassian.amps.version>9.11.5</atlassian.amps.version>
-        <atlassian.platform.version>7.3.20</atlassian.platform.version>
+        <atlassian.platform.version>8.6.0</atlassian.platform.version>
         <atlassian.plugins.osgi.javaconfig.version>0.6.1</atlassian.plugins.osgi.javaconfig.version>
         <jacoco.maven-plugin.version>0.8.14</jacoco.maven-plugin.version>
         <lombok.version>1.18.42</lombok.version>
