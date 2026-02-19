@@ -2,7 +2,6 @@ package com.deftdevs.bootstrapi.crowd.service;
 
 import com.atlassian.crowd.manager.property.PropertyManager;
 import com.atlassian.crowd.manager.property.PropertyManagerException;
-import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,9 +13,12 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import static com.deftdevs.bootstrapi.crowd.service.TrustedProxiesServiceImpl.SEPARATOR;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.lenient;
 
@@ -41,7 +43,7 @@ public class TrustedProxiesServiceTest {
         lenient().doAnswer(invocation -> {
             final String[] trustedProxiesStrings = StringUtils.split((String) invocation.getArguments()[0], SEPARATOR);
             trustedProxies.clear();
-            trustedProxies.addAll(ImmutableSet.copyOf(trustedProxiesStrings));
+            trustedProxies.addAll(Set.copyOf(Arrays.asList(trustedProxiesStrings)));
             return null; // return null since the method is void
         }).when(propertyManager).setTrustedProxyServers(anyString());
 

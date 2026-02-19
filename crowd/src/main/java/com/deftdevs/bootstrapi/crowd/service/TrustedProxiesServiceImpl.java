@@ -3,9 +3,9 @@ package com.deftdevs.bootstrapi.crowd.service;
 import com.atlassian.crowd.manager.property.PropertyManager;
 import com.atlassian.crowd.manager.property.PropertyManagerException;
 import com.deftdevs.bootstrapi.crowd.service.api.TrustedProxiesService;
-import com.google.common.collect.ImmutableSet;
 import org.apache.commons.lang3.StringUtils;
 
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
@@ -66,7 +66,7 @@ public class TrustedProxiesServiceImpl implements TrustedProxiesService {
             final String trustedProxyServers = this.propertyManager.getTrustedProxyServers();
             if (!StringUtils.isBlank(trustedProxyServers)) {
                 final String[] trustedProxyServerStrings = StringUtils.split(trustedProxyServers, SEPARATOR);
-                return ImmutableSet.copyOf(trustedProxyServerStrings);
+                return Set.copyOf(Arrays.asList(trustedProxyServerStrings));
             }
         } catch (PropertyManagerException ignored) {}
 
