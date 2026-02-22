@@ -33,6 +33,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -144,20 +145,20 @@ public class DirectoriesServiceTest {
         assertEquals(DirectoryInternalModel.class, directoryModel.getClass());
 
         final DirectoryInternalModel directoryInternalModel = (DirectoryInternalModel) directoryModel;
-        directoryInternalModel.setGroups(Collections.singletonList(GroupModel.EXAMPLE_1));
-        directoryInternalModel.setUsers(Collections.singletonList(UserModel.EXAMPLE_1));
+        directoryInternalModel.setGroups(Collections.singletonMap(GroupModel.EXAMPLE_1.getName(), GroupModel.EXAMPLE_1));
+        directoryInternalModel.setUsers(Collections.singletonMap(UserModel.EXAMPLE_1.getUsername(), UserModel.EXAMPLE_1));
 
         // Return the same directory as passed as argument
         doAnswer(invocation -> invocation.getArgument(0, Directory.class)).when(directoryManager).addDirectory(any());
-        // Return the same groups bean as passed as argument
-        doAnswer(invocation -> invocation.getArgument(1, List.class)).when(groupsService).setGroups(anyLong(), any());
-        // Return the same user beans as passed as argument
-        doAnswer(invocation -> invocation.getArgument(1, Collection.class)).when(usersService).setUsers(anyLong(), anyList());
+        // Return the same groups as passed as argument
+        doAnswer(invocation -> invocation.getArgument(1, Map.class)).when(groupsService).setGroups(anyLong(), any());
+        // Return the same users as passed as argument
+        doAnswer(invocation -> invocation.getArgument(1, Map.class)).when(usersService).setUsers(anyLong(), anyMap());
 
         directoriesService.addDirectory(directoryInternalModel);
         verify(directoryManager).addDirectory(any());
         verify(groupsService).setGroups(anyLong(), any());
-        verify(usersService).setUsers(anyLong(), anyList());
+        verify(usersService).setUsers(anyLong(), anyMap());
     }
 
     @Test
@@ -193,20 +194,20 @@ public class DirectoriesServiceTest {
         assertEquals(DirectoryInternalModel.class, directoryModel.getClass());
 
         final DirectoryInternalModel directoryInternalModel = (DirectoryInternalModel) directoryModel;
-        directoryInternalModel.setGroups(Collections.singletonList(GroupModel.EXAMPLE_1));
-        directoryInternalModel.setUsers(Collections.singletonList(UserModel.EXAMPLE_1));
+        directoryInternalModel.setGroups(Collections.singletonMap(GroupModel.EXAMPLE_1.getName(), GroupModel.EXAMPLE_1));
+        directoryInternalModel.setUsers(Collections.singletonMap(UserModel.EXAMPLE_1.getUsername(), UserModel.EXAMPLE_1));
 
         // Return the same directory as passed as argument
         doAnswer(invocation -> invocation.getArgument(0, Directory.class)).when(directoryManager).updateDirectory(any());
-        // Return the same groups bean as passed as argument
-        doAnswer(invocation -> invocation.getArgument(1, List.class)).when(groupsService).setGroups(anyLong(), any());
-        // Return the same user beans as passed as argument
-        doAnswer(invocation -> invocation.getArgument(1, Collection.class)).when(usersService).setUsers(anyLong(), anyList());
+        // Return the same groups as passed as argument
+        doAnswer(invocation -> invocation.getArgument(1, Map.class)).when(groupsService).setGroups(anyLong(), any());
+        // Return the same users as passed as argument
+        doAnswer(invocation -> invocation.getArgument(1, Map.class)).when(usersService).setUsers(anyLong(), anyMap());
 
         directoriesService.setDirectory(directory.getId(), directoryInternalModel);
         verify(directoryManager).updateDirectory(any());
         verify(groupsService).setGroups(anyLong(), any());
-        verify(usersService).setUsers(anyLong(), anyList());
+        verify(usersService).setUsers(anyLong(), anyMap());
     }
 
     @Test

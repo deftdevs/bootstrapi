@@ -11,7 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-import java.util.List;
+import java.util.Map;
 
 public interface GroupsResource {
 
@@ -34,6 +34,6 @@ public interface GroupsResource {
     )
     Response setGroups(
             @QueryParam("directoryId") final long directoryId,
-            final List<GroupModel> groupModels);
+            final Map<String, GroupModel> groupModels);
 
 }
