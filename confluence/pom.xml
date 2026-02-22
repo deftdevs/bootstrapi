@@ -80,6 +80,18 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+
+            <!--
+                The confluence-project POM (parent of confluence-api) defines ctk-plugin with a
+                Gradle-specific version string containing '@' (e.g. 6.0.2@platform_6.0.4).
+                Maven Central rejects version strings containing '@', so we override it here
+                with the valid Maven version.
+            -->
+            <dependency>
+                <groupId>com.atlassian.platform</groupId>
+                <artifactId>ctk-plugin</artifactId>
+                <version>6.0.2</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 
