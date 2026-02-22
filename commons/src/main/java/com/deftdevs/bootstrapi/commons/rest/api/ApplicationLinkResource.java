@@ -82,7 +82,7 @@ public interface ApplicationLinkResource {
     )
     ApplicationLinkModel updateApplicationLink(
             @PathParam("uuid") final UUID uuid,
-            final ApplicationLinkModel linksModelModels);
+            final ApplicationLinkModel applicationLinkModel);
 
     @DELETE
     @Path("{uuid}")
