@@ -1,6 +1,8 @@
 package com.deftdevs.bootstrapi.crowd.model;
 
 import com.deftdevs.bootstrapi.crowd.rest.api.SessionConfigResource;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -8,7 +10,9 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @XmlRootElement(name = SessionConfigResource.SESSION_CONFIG)
 public class SessionConfigModel {
 
@@ -18,18 +22,14 @@ public class SessionConfigModel {
     @XmlElement
     private Boolean requireConsistentClientIP;
 
-    public static final SessionConfigModel EXAMPLE_1;
-    public static final SessionConfigModel EXAMPLE_2;
+    public static final SessionConfigModel EXAMPLE_1 = SessionConfigModel.builder()
+            .sessionTimeoutInMinutes(20L)
+            .requireConsistentClientIP(false)
+            .build();
 
-    static {
-        EXAMPLE_1 = new SessionConfigModel();
-        EXAMPLE_1.setSessionTimeoutInMinutes(20L);
-        EXAMPLE_1.setRequireConsistentClientIP(false);
-    }
+    public static final SessionConfigModel EXAMPLE_2 = SessionConfigModel.builder()
+            .sessionTimeoutInMinutes(30L)
+            .requireConsistentClientIP(true)
+            .build();
 
-    static {
-        EXAMPLE_2 = new SessionConfigModel();
-        EXAMPLE_2.setSessionTimeoutInMinutes(30L);
-        EXAMPLE_2.setRequireConsistentClientIP(true);
-    }
 }

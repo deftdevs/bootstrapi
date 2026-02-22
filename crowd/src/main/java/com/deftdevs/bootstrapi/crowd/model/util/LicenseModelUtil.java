@@ -13,15 +13,14 @@ public class LicenseModelUtil {
 
         List<String> products = new ArrayList<>();
         license.getProducts().forEach(product -> products.add(product.toString()));
-        final LicenseModel licenseModel = new LicenseModel();
-        licenseModel.setProducts(products);
-        licenseModel.setMaxUsers(license.getMaximumNumberOfUsers());
-        licenseModel.setExpiryDate(license.getExpiryDate());
-        licenseModel.setDescription(license.getDescription());
-        licenseModel.setOrganization(license.getOrganisation().toString());
-        licenseModel.setType(license.getLicenseType().toString());
-
-        return licenseModel;
+        return LicenseModel.builder()
+            .products(products)
+            .maxUsers(license.getMaximumNumberOfUsers())
+            .expiryDate(license.getExpiryDate())
+            .description(license.getDescription())
+            .organization(license.getOrganisation().toString())
+            .type(license.getLicenseType().toString())
+            .build();
     }
 
     private LicenseModelUtil() {

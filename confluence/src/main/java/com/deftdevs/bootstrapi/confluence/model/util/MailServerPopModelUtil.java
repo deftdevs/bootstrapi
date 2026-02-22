@@ -15,15 +15,15 @@ public class MailServerPopModelUtil {
             return null;
         }
 
-        final MailServerPopModel mailServerPopModel = new MailServerPopModel();
-        mailServerPopModel.setName(popMailServer.getName());
-        mailServerPopModel.setDescription(popMailServer.getDescription());
-        mailServerPopModel.setProtocol(popMailServer.getMailProtocol().getProtocol());
-        mailServerPopModel.setHost(popMailServer.getHostname());
-        mailServerPopModel.setPort(popMailServer.getPort());
-        mailServerPopModel.setTimeout(popMailServer.getTimeout());
-        mailServerPopModel.setUsername(popMailServer.getUsername());
-        return mailServerPopModel;
+        return MailServerPopModel.builder()
+            .name(popMailServer.getName())
+            .description(popMailServer.getDescription())
+            .protocol(popMailServer.getMailProtocol().getProtocol())
+            .host(popMailServer.getHostname())
+            .port(popMailServer.getPort() == null ? null : Integer.valueOf(popMailServer.getPort()))
+            .timeout(popMailServer.getTimeout())
+            .username(popMailServer.getUsername())
+            .build();
     }
 
     private MailServerPopModelUtil() {

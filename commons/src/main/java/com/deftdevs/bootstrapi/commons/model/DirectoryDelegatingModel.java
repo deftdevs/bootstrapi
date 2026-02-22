@@ -2,15 +2,20 @@ package com.deftdevs.bootstrapi.commons.model;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.type.DirectoryPermissions;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
+import lombok.Builder;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
+@SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = BootstrAPI.DIRECTORY + '-' + BootstrAPI.DIRECTORY_DELEGATING)
 public class DirectoryDelegatingModel extends AbstractDirectoryModel {
@@ -28,7 +33,9 @@ public class DirectoryDelegatingModel extends AbstractDirectoryModel {
     // current (unimplemented) behaviour is LDAP connection pooling: JNDI
 
     @Data
+    @Builder
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class DirectoryDelegatingConnector {
 
         @XmlElement
@@ -84,19 +91,19 @@ public class DirectoryDelegatingModel extends AbstractDirectoryModel {
 
         public enum ConnectorType {
             MICROSOFT_ACTIVE_DIRECTORY,
-            ;
         }
 
         public enum SslType {
             NONE,
             LDAPS,
             START_TLS,
-            ;
         }
     }
 
     @Data
+    @Builder
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class DirectoryDelegatingConfiguration {
 
         @XmlElement
@@ -153,59 +160,59 @@ public class DirectoryDelegatingModel extends AbstractDirectoryModel {
 
     // Example instances for documentation and tests
 
-    public static final DirectoryDelegatingModel EXAMPLE_1;
-
-    static {
-        EXAMPLE_1 = new DirectoryDelegatingModel();
-        EXAMPLE_1.setId(1L);
-        EXAMPLE_1.setName("Example");
-        EXAMPLE_1.setActive(true);
-        EXAMPLE_1.setDescription("Example Directory");
-        EXAMPLE_1.setConnector(new DirectoryDelegatingConnector());
-        EXAMPLE_1.getConnector().setType(DirectoryDelegatingConnector.ConnectorType.MICROSOFT_ACTIVE_DIRECTORY);
-        EXAMPLE_1.getConnector().setUrl("ldaps://example.com:636");
-        EXAMPLE_1.getConnector().setSsl(DirectoryDelegatingConnector.SslType.LDAPS);
-        EXAMPLE_1.getConnector().setUseNodeReferrals(false);
-        EXAMPLE_1.getConnector().setNestedGroupsDisabled(true);
-        EXAMPLE_1.getConnector().setSynchronizeUsers(false);
-        EXAMPLE_1.getConnector().setSynchronizeUserDetails(false);
-        EXAMPLE_1.getConnector().setSynchronizeGroupMemberships(false);
-        EXAMPLE_1.getConnector().setUseUserMembershipAttribute(false);
-        EXAMPLE_1.getConnector().setUsePagedResults(true);
-        EXAMPLE_1.getConnector().setPagedResultsSize(999L);
-        EXAMPLE_1.getConnector().setReadTimeoutInMillis(120000L);
-        EXAMPLE_1.getConnector().setSearchTimeoutInMillis(60000L);
-        EXAMPLE_1.getConnector().setConnectionTimeoutInMillis(10000L);
-        EXAMPLE_1.getConnector().setBaseDn("DC=example,DC=com");
-        EXAMPLE_1.getConnector().setUsername("domain\\example");
-        EXAMPLE_1.getConnector().setPassword("p455w0rd");
-        EXAMPLE_1.setConfiguration(new DirectoryDelegatingConfiguration());
-        EXAMPLE_1.getConfiguration().setUserDn("");
-        EXAMPLE_1.getConfiguration().setUserObjectClass("user");
-        EXAMPLE_1.getConfiguration().setUserObjectFilter("(objectClass=user)");
-        EXAMPLE_1.getConfiguration().setUserNameAttribute("sAMAccountName");
-        EXAMPLE_1.getConfiguration().setUserNameRdnAttribute("cn");
-        EXAMPLE_1.getConfiguration().setUserFirstNameAttribute("givenName");
-        EXAMPLE_1.getConfiguration().setUserLastNameAttribute("sn");
-        EXAMPLE_1.getConfiguration().setUserDisplayNameAttribute("displayName");
-        EXAMPLE_1.getConfiguration().setUserEmailAttribute("email");
-        EXAMPLE_1.getConfiguration().setUserGroupAttribute("memberOf");
-        EXAMPLE_1.getConfiguration().setUserUniqueIdAttribute("userID");
-        EXAMPLE_1.getConfiguration().setGroupDn("");
-        EXAMPLE_1.getConfiguration().setGroupObjectClass("group");
-        EXAMPLE_1.getConfiguration().setGroupObjectFilter("(objectClass=group)");
-        EXAMPLE_1.getConfiguration().setGroupNameAttribute("gn");
-        EXAMPLE_1.getConfiguration().setGroupDescriptionAttribute("description");
-        EXAMPLE_1.getConfiguration().setGroupMembersAttribute("member");
-        EXAMPLE_1.setPermissions(new DirectoryPermissions());
-        EXAMPLE_1.getPermissions().setAddGroup(true);
-        EXAMPLE_1.getPermissions().setAddUser(true);
-        EXAMPLE_1.getPermissions().setModifyGroup(true);
-        EXAMPLE_1.getPermissions().setModifyUser(true);
-        EXAMPLE_1.getPermissions().setModifyGroupAttributes(true);
-        EXAMPLE_1.getPermissions().setModifyUserAttributes(true);
-        EXAMPLE_1.getPermissions().setRemoveGroup(true);
-        EXAMPLE_1.getPermissions().setRemoveUser(true);
-    }
+    public static final DirectoryDelegatingModel EXAMPLE_1 = DirectoryDelegatingModel.builder()
+        .id(1L)
+        .name("Example")
+        .active(true)
+        .description("Example Directory")
+        .connector(DirectoryDelegatingConnector.builder()
+            .type(DirectoryDelegatingConnector.ConnectorType.MICROSOFT_ACTIVE_DIRECTORY)
+            .url("ldaps://example.com:636")
+            .ssl(DirectoryDelegatingConnector.SslType.LDAPS)
+            .useNodeReferrals(false)
+            .nestedGroupsDisabled(true)
+            .synchronizeUsers(false)
+            .synchronizeUserDetails(false)
+            .synchronizeGroupMemberships(false)
+            .useUserMembershipAttribute(false)
+            .usePagedResults(true)
+            .pagedResultsSize(999L)
+            .readTimeoutInMillis(120000L)
+            .searchTimeoutInMillis(60000L)
+            .connectionTimeoutInMillis(10000L)
+            .baseDn("DC=example,DC=com")
+            .username("domain\\example")
+            .password("p455w0rd")
+            .build())
+        .configuration(DirectoryDelegatingConfiguration.builder()
+            .userDn("")
+            .userObjectClass("user")
+            .userObjectFilter("(objectClass=user)")
+            .userNameAttribute("sAMAccountName")
+            .userNameRdnAttribute("cn")
+            .userFirstNameAttribute("givenName")
+            .userLastNameAttribute("sn")
+            .userDisplayNameAttribute("displayName")
+            .userEmailAttribute("email")
+            .userGroupAttribute("memberOf")
+            .userUniqueIdAttribute("userID")
+            .groupDn("")
+            .groupObjectClass("group")
+            .groupObjectFilter("(objectClass=group)")
+            .groupNameAttribute("gn")
+            .groupDescriptionAttribute("description")
+            .groupMembersAttribute("member")
+            .build())
+        .permissions(DirectoryPermissions.builder()
+            .addGroup(true)
+            .addUser(true)
+            .modifyGroup(true)
+            .modifyUser(true)
+            .modifyGroupAttributes(true)
+            .modifyUserAttributes(true)
+            .removeGroup(true)
+            .removeUser(true)
+            .build())
+        .build();
 
 }

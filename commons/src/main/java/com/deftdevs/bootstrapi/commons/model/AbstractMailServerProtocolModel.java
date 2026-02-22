@@ -1,16 +1,22 @@
 package com.deftdevs.bootstrapi.commons.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.experimental.SuperBuilder;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.builder.EqualsExclude;
 import org.apache.commons.lang3.builder.HashCodeExclude;
 
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
+@SuperBuilder
 @NoArgsConstructor
+@AllArgsConstructor
+@XmlRootElement
 public abstract class AbstractMailServerProtocolModel {
 
     public static final Long DEFAULT_TIMEOUT = 10000L;

@@ -15,7 +15,7 @@ import java.util.List;
 
 public interface TrustedProxiesResource {
 
-    static final String TRUSTED_PROXIES = "trusted-proxies";
+    String TRUSTED_PROXIES = "trusted-proxies";
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

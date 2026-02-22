@@ -62,8 +62,7 @@ class UserServiceTest {
 
     @Test
     void testUpdateUsername() throws EntityException {
-        final UserModel requestUserModel = new UserModel();
-        requestUserModel.setUsername("ChangeUsername");
+        final UserModel requestUserModel = UserModel.builder().username("ChangeUsername").build();
 
         final User existingUser = toUser(UserModel.EXAMPLE_1);
         final ConfluenceUserImpl userUpdatedUsername = new ConfluenceUserImpl(existingUser);
@@ -79,8 +78,7 @@ class UserServiceTest {
 
     @Test
     void testUpdateUsernameException() throws EntityException {
-        final UserModel requestUserModel = new UserModel();
-        requestUserModel.setUsername("ChangeUsername");
+        final UserModel requestUserModel = UserModel.builder().username("ChangeUsername").build();
 
         final User existingUser = toUser(UserModel.EXAMPLE_1);
         doReturn(existingUser).when(userManager).getUser(existingUser.getName());
@@ -98,7 +96,7 @@ class UserServiceTest {
         final User user = toUser(UserModel.EXAMPLE_1);
         doReturn(user).when(userManager).getUser(user.getName());
 
-        final UserModel updateUserModel = new UserModel();
+        final UserModel updateUserModel = UserModel.builder().build();
         final UserModel notUpdatedUserModel = userService.updateUser(user.getName(), updateUserModel);
 
         assertUserModelEquals(UserModel.EXAMPLE_1, notUpdatedUserModel);
@@ -109,8 +107,7 @@ class UserServiceTest {
         final UserModel userModel = UserModel.EXAMPLE_1;
         doReturn(toUser(userModel)).when(userManager).getUser(userModel.getUsername());
 
-        final UserModel updateUserModel = new UserModel();
-        updateUserModel.setPassword("new password");
+        final UserModel updateUserModel = UserModel.builder().password("new password").build();
 
         final UserModel updatedUserModel = userService.updateUser(userModel.getUsername(), userModel);
         assertUserModelEquals(userModel, updatedUserModel);

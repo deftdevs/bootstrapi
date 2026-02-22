@@ -35,9 +35,9 @@ public class LicensesServiceImpl implements LicensesService {
 
         licenseKeys.forEach(this::addLicense);
 
-        final LicenseModel licenseModel = new LicenseModel();
-        licenseModel.setDescription(ERROR_MESSAGE);
-        return Collections.singletonList(licenseModel);
+        return Collections.singletonList(
+            LicenseModel.builder().description(ERROR_MESSAGE).build()
+        );
     }
 
     public LicenseModel addLicense(
@@ -50,9 +50,7 @@ public class LicensesServiceImpl implements LicensesService {
             throw new BadRequestException(e.getMessage());
         }
 
-        final LicenseModel licenseModel = new LicenseModel();
-        licenseModel.setDescription(ERROR_MESSAGE);
-        return licenseModel;
+        return LicenseModel.builder().description(ERROR_MESSAGE).build();
     }
 
 }

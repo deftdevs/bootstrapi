@@ -29,7 +29,7 @@ class SettingsColourSchemeModelUtilTest {
     @Test
     void testToGlobalColorSchemeSetNullValues() {
 
-        SettingsBrandingColorSchemeModel schemeModel = new SettingsBrandingColorSchemeModel();
+        SettingsBrandingColorSchemeModel schemeModel = SettingsBrandingColorSchemeModel.builder().build();
         BaseColourScheme baseColourScheme = toGlobalColorScheme(schemeModel, null);
 
         assertNotNull(baseColourScheme);

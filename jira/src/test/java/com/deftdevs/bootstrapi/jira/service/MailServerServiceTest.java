@@ -98,7 +98,7 @@ class MailServerServiceTest {
 
     @Test
     void testPutMailServerSmtpDefaultConfig() throws MailException {
-        final MailServerSmtpModel mailServerSmtpModel = new MailServerSmtpModel();
+        final MailServerSmtpModel mailServerSmtpModel = MailServerSmtpModel.builder().build();
 
         mailServerService.setMailServerSmtp(mailServerSmtpModel);
 

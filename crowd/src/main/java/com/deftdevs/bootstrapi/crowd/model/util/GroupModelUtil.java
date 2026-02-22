@@ -17,12 +17,11 @@ public class GroupModelUtil {
     public static GroupModel toGroupModel(
             @Nonnull final Group group) {
 
-        final GroupModel groupModel = new GroupModel();
-        groupModel.setName(group.getName());
-        groupModel.setDescription(group.getDescription());
-        groupModel.setActive(group.isActive());
-
-        return groupModel;
+        return GroupModel.builder()
+            .name(group.getName())
+            .description(group.getDescription())
+            .active(group.isActive())
+            .build();
     }
 
     private GroupModelUtil() {

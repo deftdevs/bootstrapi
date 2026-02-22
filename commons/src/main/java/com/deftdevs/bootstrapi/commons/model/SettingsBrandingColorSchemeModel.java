@@ -1,6 +1,8 @@
 package com.deftdevs.bootstrapi.commons.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -11,7 +13,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import static com.deftdevs.bootstrapi.commons.constants.BootstrAPI.*;
 
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @XmlRootElement(name = SETTINGS + "-" + SETTINGS_BRANDING + "-" + COLOR_SCHEME)
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SettingsBrandingColorSchemeModel {
@@ -66,25 +70,23 @@ public class SettingsBrandingColorSchemeModel {
 
     // Example instances for documentation and tests
 
-    public static final SettingsBrandingColorSchemeModel EXAMPLE_1;
+    private static final String COLOR_WHITE = "#FFFFFF";
 
-    static {
-        final String COLOR_WHITE = "#FFFFFF";
+    public static final SettingsBrandingColorSchemeModel EXAMPLE_1 = SettingsBrandingColorSchemeModel.builder()
+        .bordersAndDividers(COLOR_WHITE)
+        .headerButtonBackground(COLOR_WHITE)
+        .headerButtonText(COLOR_WHITE)
+        .headingText(COLOR_WHITE)
+        .links(COLOR_WHITE)
+        .menuItemSelectedBackground(COLOR_WHITE)
+        .menuItemSelectedText(COLOR_WHITE)
+        .pageMenuItemText(COLOR_WHITE)
+        .pageMenuSelectedBackground(COLOR_WHITE)
+        .searchFieldBackground(COLOR_WHITE)
+        .searchFieldText(COLOR_WHITE)
+        .topBar(COLOR_WHITE)
+        .topBarMenuSelectedBackground(COLOR_WHITE)
+        .topBarMenuItemText(COLOR_WHITE)
+        .build();
 
-        EXAMPLE_1 = new SettingsBrandingColorSchemeModel();
-        EXAMPLE_1.setBordersAndDividers(COLOR_WHITE);
-        EXAMPLE_1.setHeaderButtonBackground(COLOR_WHITE);
-        EXAMPLE_1.setHeaderButtonText(COLOR_WHITE);
-        EXAMPLE_1.setHeadingText(COLOR_WHITE);
-        EXAMPLE_1.setLinks(COLOR_WHITE);
-        EXAMPLE_1.setMenuItemSelectedBackground(COLOR_WHITE);
-        EXAMPLE_1.setMenuItemSelectedText(COLOR_WHITE);
-        EXAMPLE_1.setPageMenuItemText(COLOR_WHITE);
-        EXAMPLE_1.setPageMenuSelectedBackground(COLOR_WHITE);
-        EXAMPLE_1.setSearchFieldBackground(COLOR_WHITE);
-        EXAMPLE_1.setSearchFieldText(COLOR_WHITE);
-        EXAMPLE_1.setTopBar(COLOR_WHITE);
-        EXAMPLE_1.setTopBarMenuSelectedBackground(COLOR_WHITE);
-        EXAMPLE_1.setTopBarMenuItemText(COLOR_WHITE);
-    }
 }

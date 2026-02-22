@@ -1,7 +1,9 @@
 package com.deftdevs.bootstrapi.commons.model;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Builder;
 import lombok.NoArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 
@@ -12,7 +14,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 import java.net.URI;
 
 @Data
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
 @XmlRootElement(name = BootstrAPI.SETTINGS)
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SettingsModel {
@@ -42,23 +46,20 @@ public class SettingsModel {
 
     // Example instances for documentation and tests
 
-    public static final SettingsModel EXAMPLE_1;
-    public static final SettingsModel EXAMPLE_1_NO_MODE;
+    public static final SettingsModel EXAMPLE_1 = SettingsModel.builder()
+        .title("Example")
+        .baseUrl(URI.create("https://example.com"))
+        .mode("private")
+        .contactMessage("Test Message")
+        .externalUserManagement(true)
+        .build();
 
-    static {
-        EXAMPLE_1 = new SettingsModel();
-        EXAMPLE_1.setTitle("Example");
-        EXAMPLE_1.setBaseUrl(URI.create("https://example.com"));
-        EXAMPLE_1.setMode("private");
-        EXAMPLE_1.setContactMessage("Test Message");
-        EXAMPLE_1.setExternalUserManagement(true);
-
-        EXAMPLE_1_NO_MODE = new SettingsModel();
-        EXAMPLE_1_NO_MODE.setTitle("Example");
-        EXAMPLE_1_NO_MODE.setBaseUrl(URI.create("https://example.com"));
-        EXAMPLE_1_NO_MODE.setMode(null);
-        EXAMPLE_1_NO_MODE.setContactMessage("Test Message");
-        EXAMPLE_1_NO_MODE.setExternalUserManagement(true);
-    }
+    public static final SettingsModel EXAMPLE_1_NO_MODE = SettingsModel.builder()
+        .title("Example")
+        .baseUrl(URI.create("https://example.com"))
+        .mode(null)
+        .contactMessage("Test Message")
+        .externalUserManagement(true)
+        .build();
 
 }
