@@ -12,8 +12,9 @@ import lombok.Builder;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Model for directory settings in REST requests.
@@ -39,10 +40,10 @@ public class DirectoryInternalModel extends AbstractDirectoryModel {
     // in external directories also, so we just start with the internal directory for now.
 
     @XmlElement
-    private List<GroupModel> groups;
+    private Map<String, GroupModel> groups;
 
     @XmlElement
-    private List<UserModel> users;
+    private Map<String, UserModel> users;
 
     @Data
     @Builder
@@ -108,8 +109,8 @@ public class DirectoryInternalModel extends AbstractDirectoryModel {
             .removeGroup(true)
             .removeUser(true)
             .build())
-        .groups(Collections.singletonList(GroupModel.EXAMPLE_1))
-        .users(Collections.singletonList(UserModel.EXAMPLE_1))
+        .groups(Collections.singletonMap(GroupModel.EXAMPLE_1.getName(), GroupModel.EXAMPLE_1))
+        .users(Collections.singletonMap(UserModel.EXAMPLE_1.getUsername(), UserModel.EXAMPLE_1))
         .build();
 
 }

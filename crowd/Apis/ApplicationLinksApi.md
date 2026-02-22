@@ -60,7 +60,7 @@ This endpoint does not need any parameter.
 
 <a name="setApplicationLinks"></a>
 # **setApplicationLinks**
-> List setApplicationLinks(ignore-setup-errors, ApplicationLinkModel)
+> List setApplicationLinks(request\_body)
 
 Set a list of application links
 
@@ -70,8 +70,7 @@ Set a list of application links
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **ignore-setup-errors** | **Boolean**|  | [optional] [default to false] |
-| **ApplicationLinkModel** | [**List**](../Models/ApplicationLinkModel.md)|  | [optional] |
+| **request\_body** | [**Map**](../Models/ApplicationLinkModel.md)|  | [optional] |
 
 ### Return type
 

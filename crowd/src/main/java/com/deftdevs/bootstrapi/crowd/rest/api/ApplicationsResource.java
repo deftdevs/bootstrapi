@@ -9,10 +9,14 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
-import javax.ws.rs.*;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
-import java.util.List;
+import java.util.Map;
 
 public interface ApplicationsResource {
 
@@ -33,7 +37,7 @@ public interface ApplicationsResource {
                     ),
             }
     )
-    Response getApplications();
+    Map<String, ApplicationModel> getApplications();
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -53,8 +57,8 @@ public interface ApplicationsResource {
                     ),
             }
     )
-    Response setApplications(
-            List<ApplicationModel> applicationModels);
+    Map<String, ApplicationModel> setApplications(
+            Map<String, ApplicationModel> applicationModels);
 
     @DELETE
     @Operation(
@@ -72,7 +76,7 @@ public interface ApplicationsResource {
                     ),
             }
     )
-    Response deleteApplications(
+    void deleteApplications(
             @QueryParam("force") final boolean force);
 
 }

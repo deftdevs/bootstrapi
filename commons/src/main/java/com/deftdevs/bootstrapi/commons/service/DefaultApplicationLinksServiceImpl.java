@@ -31,16 +31,16 @@ import org.apache.commons.lang3.NotImplementedException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.URI;
-import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import static com.atlassian.applinks.internal.status.error.ApplinkErrorType.CONNECTION_REFUSED;
-import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel.ApplicationLinkStatus.*;
+import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel.ApplicationLinkStatus.AVAILABLE;
 import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel.ApplicationLinkStatus.CONFIGURATION_ERROR;
+import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel.ApplicationLinkStatus.UNAVAILABLE;
 
 public class DefaultApplicationLinksServiceImpl implements ApplicationLinksService {
 
@@ -67,12 +67,12 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
     }
 
     @Override
-    public List<ApplicationLinkModel> getApplicationLinks() {
+    public Map<String, ApplicationLinkModel> getApplicationLinks() {
         final Iterable<ApplicationLink> applicationLinksIterable = mutatingApplicationLinkService.getApplicationLinks();
 
         return StreamSupport.stream(applicationLinksIterable.spliterator(),false)
                 .map(this::getApplicationLinkModel)
-                .collect(Collectors.toList());
+                .collect(Collectors.toMap(ApplicationLinkModel::getName, Function.identity()));
     }
 
     @Override
@@ -95,21 +95,21 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
     }
 
     @Override
-    public List<ApplicationLinkModel> setApplicationLinks(
-            final List<ApplicationLinkModel> applicationLinkModels,
-            final boolean ignoreSetupErrors) {
+    public Map<String, ApplicationLinkModel> setApplicationLinks(
+            final Map<String, ApplicationLinkModel> applicationLinkModels) {
 
         // existing application links map
-        final Map<URI, ApplicationLinkModel> linkModelMap = getApplicationLinks().stream()
-                .collect(Collectors.toMap(ApplicationLinkModel::getRpcUrl, link -> link));
+        final Map<String, ApplicationLinkModel> linkModelMap = getApplicationLinks();
 
-        // find existing link by rpcUrl
-        for (ApplicationLinkModel applicationLink : applicationLinkModels) {
-            URI key = applicationLink.getRpcUrl();
-            if (linkModelMap.containsKey(key)) {
-                setApplicationLink(linkModelMap.get(key).getUuid(), applicationLink, ignoreSetupErrors);
+        // find existing link by name
+        for (Map.Entry<String, ApplicationLinkModel> applicationLinkModelEntry : applicationLinkModels.entrySet()) {
+            final String name = applicationLinkModelEntry.getKey();
+            final ApplicationLinkModel applicationLinkModel = applicationLinkModelEntry.getValue();
+
+            if (linkModelMap.containsKey(name)) {
+                setApplicationLink(linkModelMap.get(name).getUuid(), applicationLinkModel);
             } else {
-                addApplicationLink(applicationLink, ignoreSetupErrors);
+                addApplicationLink(applicationLinkModel);
             }
         }
 
@@ -119,8 +119,7 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
     @Override
     public ApplicationLinkModel setApplicationLink(
             final UUID uuid,
-            final ApplicationLinkModel applicationLinkModel,
-            final boolean ignoreSetupErrors) {
+            final ApplicationLinkModel applicationLinkModel) {
 
         final ApplicationId applicationId = new ApplicationId(uuid.toString());
 
@@ -139,7 +138,7 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
 
             // configuring authentication might fail if setup is incorrect or remote app is unavailable
             setOutgoingOAuthConfig(applicationLink, outgoingOAuthConfig);
-            setIncomingOAuthConfig(applicationLink, incomingOAuthConfig, ignoreSetupErrors);
+            setIncomingOAuthConfig(applicationLink, incomingOAuthConfig, Boolean.TRUE.equals(applicationLinkModel.getIgnoreSetupErrors()));
 
             return getApplicationLinkModel(recreatedApplicationLink);
         } catch (TypeNotInstalledException e) {
@@ -149,8 +148,7 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
 
     @Override
     public ApplicationLinkModel addApplicationLink(
-            final ApplicationLinkModel applicationLinkModel,
-            final boolean ignoreSetupErrors) {
+            final ApplicationLinkModel applicationLinkModel) {
 
         final ApplicationLinkDetails applicationLinkDetails = ApplicationLinkModelUtil.toApplicationLinkDetails(applicationLinkModel);
         final OAuthConfig outgoingOAuthConfig = ApplicationLinkModelUtil.toOAuthConfig(applicationLinkModel.getOutgoingAuthType());
@@ -176,7 +174,7 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
 
         // configuring authentication might fail if setup is incorrect or remote app is unavailable
         setOutgoingOAuthConfig(applicationLink, outgoingOAuthConfig);
-        setIncomingOAuthConfig(applicationLink, incomingOAuthConfig, ignoreSetupErrors);
+        setIncomingOAuthConfig(applicationLink, incomingOAuthConfig, Boolean.TRUE.equals(applicationLinkModel.getIgnoreSetupErrors()));
 
         return getApplicationLinkModel(applicationLink);
     }

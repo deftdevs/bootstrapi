@@ -9,7 +9,7 @@ import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import javax.inject.Inject;
 import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
-import java.util.List;
+import java.util.Map;
 
 @SystemAdminOnly
 @Path(BootstrAPI.GROUPS)
@@ -27,9 +27,9 @@ public class GroupsResourceImpl implements GroupsResource {
     @Override
     public Response setGroups(
             final long directoryId,
-            final List<GroupModel> groupModels) {
+            final Map<String, GroupModel> groupModels) {
 
-        final List<GroupModel> resultGroupModels = groupsService.setGroups(directoryId, groupModels);
+        final Map<String, GroupModel> resultGroupModels = groupsService.setGroups(directoryId, groupModels);
         return Response.ok(resultGroupModels).build();
     }
 

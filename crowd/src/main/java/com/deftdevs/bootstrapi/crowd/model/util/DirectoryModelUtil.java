@@ -25,27 +25,27 @@ import lombok.Getter;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import static com.deftdevs.bootstrapi.crowd.util.AttributeUtil.*;
+import static com.deftdevs.bootstrapi.crowd.util.AttributeUtil.fromBoolean;
+import static com.deftdevs.bootstrapi.crowd.util.AttributeUtil.fromIntegerCollection;
+import static com.deftdevs.bootstrapi.crowd.util.AttributeUtil.fromLong;
+import static com.deftdevs.bootstrapi.crowd.util.AttributeUtil.toBoolean;
+import static com.deftdevs.bootstrapi.crowd.util.AttributeUtil.toIntegerList;
+import static com.deftdevs.bootstrapi.crowd.util.AttributeUtil.toLong;
 import static java.lang.Boolean.TRUE;
 
 public class DirectoryModelUtil {
 
     public static final String ATTRIBUTE_USE_NESTED_GROUPS = "useNestedGroups";
 
-    private static final Set<Class<? extends AbstractDirectoryModel>> SUPPORTED_DIRECTORY_BEAN_TYPES;
-
-    static {
-        final Set<Class<? extends AbstractDirectoryModel>> supportedDirectoryModelTypes = new HashSet<>();
-        supportedDirectoryModelTypes.add(DirectoryInternalModel.class);
-        supportedDirectoryModelTypes.add(DirectoryDelegatingModel.class);
-        SUPPORTED_DIRECTORY_BEAN_TYPES = Collections.unmodifiableSet(supportedDirectoryModelTypes);
-    }
+    public static final Set<Class<? extends AbstractDirectoryModel>> SUPPORTED_DIRECTORY_BEAN_TYPES = Set.of(
+            DirectoryInternalModel.class,
+            DirectoryDelegatingModel.class
+    );
 
     /*
      * Methods for converting directories to directory beans.
