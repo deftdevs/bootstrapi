@@ -128,9 +128,9 @@ public class UsersServiceTest {
         final UserModel userModel = UserModelUtil.toUserModel(user);
         userModel.setPassword("s3cr3t");
 
-        final List<UserModel> userModels = new ArrayList<>();
-        userModels.add(userModel);
-        userModels.add(UserModel.EXAMPLE_1);
+        final Map<String, UserModel> userModels = new LinkedHashMap<>();
+        userModels.put(userModel.getUsername(), userModel);
+        userModels.put(UserModel.EXAMPLE_1.getUsername(), UserModel.EXAMPLE_1);
         final UsersServiceImpl spy = spy(usersService);
         doAnswer(invocation -> invocation.getArguments()[1]).when(spy).setUser(anyLong(), any());
 
@@ -140,7 +140,7 @@ public class UsersServiceTest {
 
     @Test
     public void testSetUsersNull() {
-        assertEquals(Collections.emptyList(), usersService.setUsers(getTestDirectory().getId(), (List<UserModel>) null));
+        assertEquals(Collections.emptyMap(), usersService.setUsers(getTestDirectory().getId(), (Map<String, UserModel>) null));
     }
 
     @Test

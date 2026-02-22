@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.crowd.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.GroupModel;
 
-import java.util.List;
+import java.util.Map;
 
 public interface GroupsService {
 
@@ -61,8 +61,8 @@ public interface GroupsService {
      * @param groupModels the group beans
      * @return the set group beans
      */
-    List<GroupModel> setGroups(
+    Map<String, GroupModel> setGroups(
             final long directoryId,
-            final List<GroupModel> groupModels);
+            final Map<String, GroupModel> groupModels);
 
 }

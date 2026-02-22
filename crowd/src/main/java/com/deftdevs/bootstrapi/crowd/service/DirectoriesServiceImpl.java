@@ -178,14 +178,12 @@ public class DirectoriesServiceImpl extends AbstractDirectoriesService {
             final DirectoryInternalModel resultDirectoryInternalModel = (DirectoryInternalModel) resultDirectoryModel;
 
             if (directoryInternalModel.getGroups() != null) {
-                // this is the new implementation using a groups bean
-                final List<GroupModel> resultGroupModels = groupsService.setGroups(resultDirectoryInternalModel.getId(), directoryInternalModel.getGroups());
+                final Map<String, GroupModel> resultGroupModels = groupsService.setGroups(resultDirectoryInternalModel.getId(), directoryInternalModel.getGroups());
                 resultDirectoryInternalModel.setGroups(resultGroupModels);
             }
 
             if (directoryInternalModel.getUsers() != null) {
-                // this is the old implementation using a list of users
-                final List<UserModel> resultUserModels = usersService.setUsers(resultDirectoryInternalModel.getId(), directoryInternalModel.getUsers());
+                final Map<String, UserModel> resultUserModels = usersService.setUsers(resultDirectoryInternalModel.getId(), directoryInternalModel.getUsers());
                 resultDirectoryInternalModel.setUsers(resultUserModels);
             }
         }
