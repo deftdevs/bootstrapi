@@ -33,6 +33,7 @@ import java.util.*;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyLong;
+import static org.mockito.ArgumentMatchers.anyMap;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
@@ -74,12 +75,11 @@ public class DirectoriesServiceTest {
         doReturn(Collections.singletonList(directoryInternal)).when(spy).findAllDirectories();
 
         final AbstractDirectoryModel directoryModel = DirectoryModelUtil.toDirectoryModel(directoryInternalNew);
-        final List<AbstractDirectoryModel> directoryModels = Collections.singletonList(directoryModel);
-        final boolean testConnection = false;
-        doReturn(null).when(spy).addDirectory(directoryModel, testConnection);
+        final Map<String, AbstractDirectoryModel> directoryModels = Collections.singletonMap(directoryModel.getName(), directoryModel);
+        doReturn(directoryModel).when(spy).addDirectory(directoryModel);
 
-        spy.setDirectories(directoryModels, testConnection);
-        verify(spy).addDirectory(directoryModel, testConnection);
+        spy.setDirectories(directoryModels);
+        verify(spy).addDirectory(directoryModel);
     }
 
     @Test
@@ -90,11 +90,10 @@ public class DirectoriesServiceTest {
         doReturn(Collections.singletonList(directoryInternal)).when(spy).findAllDirectories();
 
         final AbstractDirectoryModel directoryModel = DirectoryModelUtil.toDirectoryModel(directoryAzureAd);
-        final List<AbstractDirectoryModel> directoryModels = Collections.singletonList(directoryModel);
-        final boolean testConnection = false;
+        final Map<String, AbstractDirectoryModel> directoryModels = Collections.singletonMap(directoryModel.getName(), directoryModel);
 
         assertThrows(BadRequestException.class, () -> {
-            spy.setDirectories(directoryModels, testConnection);
+            spy.setDirectories(directoryModels);
         });
     }
 
@@ -105,12 +104,11 @@ public class DirectoriesServiceTest {
         doReturn(Collections.singletonList(directory)).when(spy).findAllDirectories();
 
         final AbstractDirectoryModel directoryModel = DirectoryModelUtil.toDirectoryModel(directory);
-        final List<AbstractDirectoryModel> directoryModels = Collections.singletonList(directoryModel);
-        final boolean testConnection = false;
-        doReturn(null).when(spy).setDirectory(directory.getId(), directoryModel, testConnection);
+        final Map<String, AbstractDirectoryModel> directoryModels = Collections.singletonMap(directoryModel.getName(), directoryModel);
+        doReturn(directoryModel).when(spy).setDirectory(directory.getId(), directoryModel);
 
-        spy.setDirectories(directoryModels, testConnection);
-        verify(spy).setDirectory(directory.getId(), directoryModel, testConnection);
+        spy.setDirectories(directoryModels);
+        verify(spy).setDirectory(directory.getId(), directoryModel);
     }
 
     @Test
@@ -118,15 +116,13 @@ public class DirectoriesServiceTest {
         final Directory directoryInternal = getTestDirectoryInternal();
         final Directory directoryAzureAd = getTestDirectoryAzureAd();
         final DirectoriesServiceImpl spy = spy(directoriesService);
-        doReturn(ListUtil.of(directoryInternal, directoryAzureAd)).when(spy).findAllDirectories();
-        doReturn(directoryAzureAd).when(spy).findDirectory(directoryAzureAd.getId());
+        doReturn(List.of(directoryInternal, directoryAzureAd)).when(spy).findAllDirectories();
 
         final AbstractDirectoryModel directoryModel = DirectoryModelUtil.toDirectoryModel(directoryAzureAd);
-        final List<AbstractDirectoryModel> directoryModels = Collections.singletonList(directoryModel);
-        final boolean testConnection = false;
+        final Map<String, AbstractDirectoryModel> directoryModels = Collections.singletonMap(directoryModel.getName(), directoryModel);
 
         assertThrows(BadRequestException.class, () -> {
-            spy.setDirectories(directoryModels, testConnection);
+            spy.setDirectories(directoryModels);
         });
     }
 
@@ -137,7 +133,7 @@ public class DirectoriesServiceTest {
         // Return the same directory as passed as argument
         doAnswer(invocation -> invocation.getArgument(0, Directory.class)).when(directoryManager).addDirectory(any());
 
-        directoriesService.addDirectory(directoryModel, false);
+        directoriesService.addDirectory(directoryModel);
         verify(directoryManager).addDirectory(any());
     }
 
@@ -148,20 +144,20 @@ public class DirectoriesServiceTest {
         assertEquals(DirectoryInternalModel.class, directoryModel.getClass());
 
         final DirectoryInternalModel directoryInternalModel = (DirectoryInternalModel) directoryModel;
-        directoryInternalModel.setGroups(Collections.singletonList(GroupModel.EXAMPLE_1));
-        directoryInternalModel.setUsers(Collections.singletonList(UserModel.EXAMPLE_1));
+        directoryInternalModel.setGroups(Collections.singletonMap(GroupModel.EXAMPLE_1.getName(), GroupModel.EXAMPLE_1));
+        directoryInternalModel.setUsers(Collections.singletonMap(UserModel.EXAMPLE_1.getUsername(), UserModel.EXAMPLE_1));
 
         // Return the same directory as passed as argument
         doAnswer(invocation -> invocation.getArgument(0, Directory.class)).when(directoryManager).addDirectory(any());
-        // Return the same groups bean as passed as argument
-        doAnswer(invocation -> invocation.getArgument(1, List.class)).when(groupsService).setGroups(anyLong(), any());
-        // Return the same user beans as passed as argument
-        doAnswer(invocation -> invocation.getArgument(1, Collection.class)).when(usersService).setUsers(anyLong(), any());
+        // Return the same groups as passed as argument
+        doAnswer(invocation -> invocation.getArgument(1, Map.class)).when(groupsService).setGroups(anyLong(), any());
+        // Return the same users as passed as argument
+        doAnswer(invocation -> invocation.getArgument(1, Map.class)).when(usersService).setUsers(anyLong(), anyMap());
 
-        directoriesService.addDirectory(directoryInternalModel, false);
+        directoriesService.addDirectory(directoryInternalModel);
         verify(directoryManager).addDirectory(any());
         verify(groupsService).setGroups(anyLong(), any());
-        verify(usersService).setUsers(anyLong(), any());
+        verify(usersService).setUsers(anyLong(), anyMap());
     }
 
     @Test
@@ -171,7 +167,7 @@ public class DirectoriesServiceTest {
         doThrow(new DirectoryInstantiationException()).when(directoryManager).addDirectory(any());
 
         assertThrows(InternalServerErrorException.class, () -> {
-            directoriesService.addDirectory(directoryModel, false);
+            directoriesService.addDirectory(directoryModel);
         });
     }
 
@@ -182,10 +178,9 @@ public class DirectoriesServiceTest {
 
         final AbstractDirectoryModel directoryModel = DirectoryModelUtil.toDirectoryModel(directory);
         // Return the same directory as passed as argument
-
         doAnswer(invocation -> invocation.getArgument(0, Directory.class)).when(directoryManager).updateDirectory(any());
 
-        directoriesService.setDirectory(directory.getId(), directoryModel, false);
+        directoriesService.setDirectory(directory.getId(), directoryModel);
         verify(directoryManager).updateDirectory(any());
     }
 
@@ -198,20 +193,20 @@ public class DirectoriesServiceTest {
         assertEquals(DirectoryInternalModel.class, directoryModel.getClass());
 
         final DirectoryInternalModel directoryInternalModel = (DirectoryInternalModel) directoryModel;
-        directoryInternalModel.setGroups(Collections.singletonList(GroupModel.EXAMPLE_1));
-        directoryInternalModel.setUsers(Collections.singletonList(UserModel.EXAMPLE_1));
+        directoryInternalModel.setGroups(Collections.singletonMap(GroupModel.EXAMPLE_1.getName(), GroupModel.EXAMPLE_1));
+        directoryInternalModel.setUsers(Collections.singletonMap(UserModel.EXAMPLE_1.getUsername(), UserModel.EXAMPLE_1));
 
         // Return the same directory as passed as argument
         doAnswer(invocation -> invocation.getArgument(0, Directory.class)).when(directoryManager).updateDirectory(any());
-        // Return the same groups bean as passed as argument
-        doAnswer(invocation -> invocation.getArgument(1, List.class)).when(groupsService).setGroups(anyLong(), any());
-        // Return the same user beans as passed as argument
-        doAnswer(invocation -> invocation.getArgument(1, Collection.class)).when(usersService).setUsers(anyLong(), any());
+        // Return the same groups as passed as argument
+        doAnswer(invocation -> invocation.getArgument(1, Map.class)).when(groupsService).setGroups(anyLong(), any());
+        // Return the same users as passed as argument
+        doAnswer(invocation -> invocation.getArgument(1, Map.class)).when(usersService).setUsers(anyLong(), anyMap());
 
-        directoriesService.setDirectory(directory.getId(), directoryInternalModel, false);
+        directoriesService.setDirectory(directory.getId(), directoryInternalModel);
         verify(directoryManager).updateDirectory(any());
         verify(groupsService).setGroups(anyLong(), any());
-        verify(usersService).setUsers(anyLong(), any());
+        verify(usersService).setUsers(anyLong(), anyMap());
     }
 
     @Test
@@ -221,7 +216,7 @@ public class DirectoriesServiceTest {
         doThrow(new DirectoryNotFoundException(directory.getName())).when(directoryManager).findDirectoryById(directory.getId());
 
         assertThrows(NotFoundException.class, () -> {
-            directoriesService.setDirectory(directory.getId(), directoryModel, false);
+            directoriesService.setDirectory(directory.getId(), directoryModel);
         });
     }
 
@@ -233,7 +228,7 @@ public class DirectoriesServiceTest {
         doThrow(new DirectoryNotFoundException(directory.getName())).when(directoryManager).updateDirectory(any());
 
         assertThrows(InternalServerErrorException.class, () -> {
-            directoriesService.setDirectory(directory.getId(), directoryModel, false);
+            directoriesService.setDirectory(directory.getId(), directoryModel);
         });
     }
 
@@ -253,7 +248,7 @@ public class DirectoriesServiceTest {
         final Directory directoryAzureAd = getTestDirectoryAzureAd();
         final Directory directoryInternalOther = getTestDirectoryInternalOther();
         final DirectoriesServiceImpl spy = spy(directoriesService);
-        doReturn(ListUtil.of(directoryInternal, directoryAzureAd, directoryInternalOther)).when(spy).findAllDirectories();
+        doReturn(List.of(directoryInternal, directoryAzureAd, directoryInternalOther)).when(spy).findAllDirectories();
 
         spy.deleteDirectories(true);
         verify(spy, never()).deleteDirectory(directoryInternal.getId());
@@ -271,7 +266,7 @@ public class DirectoriesServiceTest {
     @Test
     public void testDeleteDirectory() throws CrowdException {
         final Directory directory = getTestDirectoryAzureAd();
-        doReturn(ListUtil.of(getTestDirectoryInternal(), directory)).when(directoryManager).searchDirectories(any());
+        doReturn(List.of(getTestDirectoryInternal(), directory)).when(directoryManager).searchDirectories(any());
         doReturn(directory).when(directoryManager).findDirectoryById(directory.getId());
         directoriesService.deleteDirectory(directory.getId());
         verify(directoryManager).removeDirectory(directory);
@@ -291,7 +286,7 @@ public class DirectoriesServiceTest {
     @Test
     public void testDeleteDirectoryNotFoundAfterAlreadyFound() throws CrowdException {
         final Directory directory = getTestDirectoryInternal();
-        doReturn(ListUtil.of(directory, getTestDirectoryAzureAd())).when(directoryManager).searchDirectories(any());
+        doReturn(List.of(directory, getTestDirectoryAzureAd())).when(directoryManager).searchDirectories(any());
         doReturn(directory).when(directoryManager).findDirectoryById(directory.getId());
         doThrow(new DirectoryNotFoundException("Directory")).when(directoryManager).removeDirectory(directory);
 
@@ -303,7 +298,7 @@ public class DirectoriesServiceTest {
     @Test
     public void testDeleteDirectorySynchronizing() throws CrowdException {
         final Directory directory = getTestDirectoryInternal();
-        doReturn(ListUtil.of(directory, getTestDirectoryAzureAd())).when(directoryManager).searchDirectories(any());
+        doReturn(List.of(directory, getTestDirectoryAzureAd())).when(directoryManager).searchDirectories(any());
         doReturn(directory).when(directoryManager).findDirectoryById(directory.getId());
         doThrow(new DirectoryCurrentlySynchronisingException(1L)).when(directoryManager).removeDirectory(directory);
 
@@ -346,23 +341,13 @@ public class DirectoriesServiceTest {
     }
 
     private List<Directory> getTestDirectories() {
-        return ListUtil.of(getTestDirectoryInternal(), getTestDirectoryAzureAd(), getTestDirectoryInternalOther());
+        return List.of(getTestDirectoryInternal(), getTestDirectoryAzureAd(), getTestDirectoryInternalOther());
     }
 
     private Date toDate(
             final LocalDate localDate) {
 
         return Date.from(localDate.atStartOfDay().atZone(ZoneId.systemDefault()).toInstant());
-    }
-
-    private static class ListUtil {
-
-        static <T> List<T> of(T... elements) {
-            List<T> list = new ArrayList<>();
-            Collections.addAll(list, elements);
-            return list;
-        }
-
     }
 
 }

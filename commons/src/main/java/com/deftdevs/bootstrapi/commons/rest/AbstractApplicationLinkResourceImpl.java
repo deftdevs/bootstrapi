@@ -4,7 +4,6 @@ import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel;
 import com.deftdevs.bootstrapi.commons.rest.api.ApplicationLinkResource;
 import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
 
-import javax.ws.rs.core.Response;
 import java.util.UUID;
 
 public abstract class AbstractApplicationLinkResourceImpl implements ApplicationLinkResource {
@@ -18,39 +17,31 @@ public abstract class AbstractApplicationLinkResourceImpl implements Application
     }
 
     @Override
-    public Response getApplicationLink(
+    public ApplicationLinkModel getApplicationLink(
             final UUID uuid) {
 
-        final ApplicationLinkModel linkModel = applicationLinksService.getApplicationLink(uuid);
-        return Response.ok(linkModel).build();
+        return applicationLinksService.getApplicationLink(uuid);
     }
 
     @Override
-    public Response createApplicationLink(
-            final boolean ignoreSetupErrors,
-            final ApplicationLinkModel linkModel) {
+    public ApplicationLinkModel createApplicationLink(
+            final ApplicationLinkModel applicationLinkModel) {
 
-        final ApplicationLinkModel addedApplicationLink = applicationLinksService.addApplicationLink(
-                linkModel, ignoreSetupErrors);
-        return Response.ok(addedApplicationLink).build();
+        return applicationLinksService.addApplicationLink(applicationLinkModel);
     }
 
     @Override
-    public Response updateApplicationLink(
+    public ApplicationLinkModel updateApplicationLink(
             final UUID uuid,
-            final boolean ignoreSetupErrors,
-            final ApplicationLinkModel linkModel) {
+            final ApplicationLinkModel applicationLinkModel) {
 
-        final ApplicationLinkModel updatedLinkModel = applicationLinksService.setApplicationLink(
-                uuid, linkModel, ignoreSetupErrors);
-        return Response.ok(updatedLinkModel).build();
+        return applicationLinksService.setApplicationLink(uuid, applicationLinkModel);
     }
 
     @Override
-    public Response deleteApplicationLink(
+    public void deleteApplicationLink(
             final UUID uuid) {
 
         applicationLinksService.deleteApplicationLink(uuid);
-        return Response.ok().build();
     }
 }

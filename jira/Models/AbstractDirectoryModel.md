@@ -4,12 +4,14 @@
 | Name | Type | Description | Notes |
 |------------ | ------------- | ------------- | -------------|
 | **id** | **Long** |  | [optional] [default to null] |
-| **name** | **String** |  | [default to null] |
+| **name** | **String** |  | [optional] [default to null] |
 | **description** | **String** |  | [optional] [default to null] |
 | **active** | **Boolean** |  | [optional] [default to null] |
 | **createdDate** | **Date** |  | [optional] [default to null] |
 | **updatedDate** | **Date** |  | [optional] [default to null] |
+| **testConnection** | **Boolean** |  | [optional] [default to null] |
 | **type** | **String** |  | [default to null] |
+| **testConnection** | **Boolean** |  | [optional] [default to null] |
 | **connector** | [**DirectoryDelegatingConnector**](DirectoryDelegatingConnector.md) |  | [optional] [default to null] |
 | **configuration** | [**DirectoryDelegatingConfiguration**](DirectoryDelegatingConfiguration.md) |  | [optional] [default to null] |
 | **permissions** | [**DirectoryLdapPermissions**](DirectoryLdapPermissions.md) |  | [optional] [default to null] |

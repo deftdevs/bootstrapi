@@ -10,7 +10,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.core.Response;
 import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.ArgumentMatchers.*;
@@ -31,13 +31,13 @@ public class GroupsResourceTest {
 
     @Test
     public void testSetGroups() {
-        final List<GroupModel> groupModels = Collections.singletonList(GroupModel.EXAMPLE_1);
+        final Map<String, GroupModel> groupModels = Collections.singletonMap(GroupModel.EXAMPLE_1.getName(), GroupModel.EXAMPLE_1);
         doReturn(groupModels).when(groupsService).setGroups(anyLong(), any());
 
         final Response response = groupsResource.setGroups(0L, groupModels);
         assertEquals(200, response.getStatus());
 
-        final List<GroupModel> responseGroupModels = (List<GroupModel>) response.getEntity();
+        final Map<String, GroupModel> responseGroupModels = (Map<String, GroupModel>) response.getEntity();
         assertEquals(groupModels, responseGroupModels);
     }
 

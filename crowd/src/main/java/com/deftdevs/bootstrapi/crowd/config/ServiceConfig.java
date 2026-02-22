@@ -1,6 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.config;
 
 import com.deftdevs.bootstrapi.commons.service.api.*;
+import com.deftdevs.bootstrapi.crowd.model._AllModel;
 import com.deftdevs.bootstrapi.crowd.service.*;
 import com.deftdevs.bootstrapi.crowd.service.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,14 @@ public class ServiceConfig {
 
     @Autowired
     private HelperConfig helperConfig;
+
+    @Bean
+    public _AllService<_AllModel> _allService() {
+        return new _AllServiceImpl(
+                crowdSettingsGeneralService(),
+                directoriesService(),
+                applicationsService());
+    }
 
     @Bean
     public ApplicationLinksService applicationLinksService() {

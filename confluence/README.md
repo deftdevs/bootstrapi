@@ -7,6 +7,7 @@ All URIs are relative to *https://<CONFLUENCE_URL>/rest/bootstrapi/1*
 
 | Class | Method | HTTP request | Description |
 |------------ | ------------- | ------------- | -------------|
+| *AllApi* | [**setAll**](Apis/AllApi.md#setall) | **PUT** / | _all |
 | *ApplicationLinkApi* | [**createApplicationLink**](Apis/ApplicationLinkApi.md#createapplicationlink) | **POST** /application-link | Create an application link |
 *ApplicationLinkApi* | [**deleteApplicationLink**](Apis/ApplicationLinkApi.md#deleteapplicationlink) | **DELETE** /application-link/{uuid} | Delete an application link |
 *ApplicationLinkApi* | [**getApplicationLink**](Apis/ApplicationLinkApi.md#getapplicationlink) | **GET** /application-link/{uuid} | Get an application link |
@@ -24,7 +25,7 @@ All URIs are relative to *https://<CONFLUENCE_URL>/rest/bootstrapi/1*
 *CachesApi* | [**updateCache**](Apis/CachesApi.md#updatecache) | **PUT** /caches/{name} | Update an existing cache-size. Only Setting maxObjectCount is supported. |
 | *DirectoriesApi* | [**deleteDirectories**](Apis/DirectoriesApi.md#deletedirectories) | **DELETE** /directories | Delete all user directories |
 *DirectoriesApi* | [**getDirectories**](Apis/DirectoriesApi.md#getdirectories) | **GET** /directories | Get all user directories |
-*DirectoriesApi* | [**setDirectories**](Apis/DirectoriesApi.md#setdirectories) | **PUT** /directories | Set a list of user directories |
+*DirectoriesApi* | [**setDirectories**](Apis/DirectoriesApi.md#setdirectories) | **PUT** /directories | Set directories mapped by their name. |
 | *DirectoryApi* | [**createDirectory**](Apis/DirectoryApi.md#createdirectory) | **POST** /directory | Create a user directory |
 *DirectoryApi* | [**deleteDirectory**](Apis/DirectoryApi.md#deletedirectory) | **DELETE** /directory/{id} | Delete a user directory |
 *DirectoryApi* | [**getDirectory**](Apis/DirectoryApi.md#getdirectory) | **GET** /directory/{id} | Get a user directory |
@@ -94,6 +95,8 @@ All URIs are relative to *https://<CONFLUENCE_URL>/rest/bootstrapi/1*
  - [SettingsModel](./Models/SettingsModel.md)
  - [SettingsSecurityModel](./Models/SettingsSecurityModel.md)
  - [UserModel](./Models/UserModel.md)
+ - [_AllModel](./Models/_AllModel.md)
+ - [_AllModelStatus](./Models/_AllModelStatus.md)
 
 
 <a name="documentation-for-authorization"></a>

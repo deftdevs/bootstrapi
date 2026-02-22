@@ -56,7 +56,7 @@ This endpoint does not need any parameter.
 
 <a name="setAuthenticationIdps"></a>
 # **setAuthenticationIdps**
-> List setAuthenticationIdps(AbstractAuthenticationIdpModel)
+> List setAuthenticationIdps(request\_body)
 
 Set all authentication identity providers
 
@@ -64,7 +64,7 @@ Set all authentication identity providers
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **AbstractAuthenticationIdpModel** | [**List**](../Models/AbstractAuthenticationIdpModel.md)|  | [optional] |
+| **request\_body** | [**Map**](../Models/AbstractAuthenticationIdpModel.md)|  | [optional] |
 
 ### Return type
 
