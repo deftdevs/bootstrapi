@@ -82,7 +82,7 @@ public interface ApplicationResource {
     )
     ApplicationModel updateApplication(
             @PathParam("id") long id,
-            ApplicationModel applicationsModelModels);
+            ApplicationModel applicationModel);
 
     @DELETE
     @Path("{id}")
