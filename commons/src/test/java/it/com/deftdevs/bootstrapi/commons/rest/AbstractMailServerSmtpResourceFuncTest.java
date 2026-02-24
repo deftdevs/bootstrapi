@@ -3,7 +3,10 @@ package it.com.deftdevs.bootstrapi.commons.rest;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.MethodOrderer;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestMethodOrder;
 
 import javax.ws.rs.HttpMethod;
 import javax.ws.rs.core.Response;
@@ -12,28 +15,39 @@ import java.net.http.HttpResponse;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
+@TestMethodOrder(MethodOrderer.OrderAnnotation.class)
 public abstract class AbstractMailServerSmtpResourceFuncTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
     @Test
-    void testGetMailServerImap() throws Exception {
+    @Order(1)
+    void testGetMailServerSmtpNotConfigured() throws Exception {
         final HttpResponse<String> mailServerSmtpResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
                 .request();
-        assertEquals(Response.Status.OK.getStatusCode(), mailServerSmtpResponse.statusCode());
-
-        final MailServerSmtpModel mailServerSmtpModel = objectMapper.readValue(mailServerSmtpResponse.body(), MailServerSmtpModel.class);
-        assertNotNull(mailServerSmtpModel);
+        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), mailServerSmtpResponse.statusCode());
     }
 
     @Test
-    void testSetMailServerImap() throws Exception {
+    @Order(2)
+    void testSetMailServerSmtp() throws Exception {
         final HttpResponse<String> mailServerSmtpResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
                 .request(HttpMethod.PUT, getExampleModel());
-        assertEquals(Response.Status.OK.getStatusCode(), mailServerSmtpResponse.statusCode());
+        assertEquals(Response.Status.OK.getStatusCode(), mailServerSmtpResponse.statusCode(), mailServerSmtpResponse.body());
 
         final MailServerSmtpModel mailServerSmtpModel = objectMapper.readValue(mailServerSmtpResponse.body(), MailServerSmtpModel.class);
         assertMailServerModelAgainstExample(mailServerSmtpModel);
+    }
+
+    @Test
+    @Order(3)
+    void testGetMailServerSmtp() throws Exception {
+        final HttpResponse<String> mailServerSmtpResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
+                .request();
+        assertEquals(Response.Status.OK.getStatusCode(), mailServerSmtpResponse.statusCode(), mailServerSmtpResponse.body());
+
+        final MailServerSmtpModel mailServerSmtpModel = objectMapper.readValue(mailServerSmtpResponse.body(), MailServerSmtpModel.class);
+        assertNotNull(mailServerSmtpModel);
     }
 
     @Test

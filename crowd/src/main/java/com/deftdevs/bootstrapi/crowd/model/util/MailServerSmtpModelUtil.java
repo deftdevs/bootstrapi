@@ -80,6 +80,8 @@ public class MailServerSmtpModelUtil {
 
         if (mailServerSmtpModel.getAdminContact() != null) {
             mailConfigurationBuilder.setNotificationEmails(Collections.singletonList(mailServerSmtpModel.getAdminContact()));
+        } else {
+            mailConfigurationBuilder.setNotificationEmails(Collections.emptyList());
         }
 
         if (mailServerSmtpModel.getFrom() != null) {
