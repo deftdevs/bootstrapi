@@ -1,0 +1,16 @@
+# _AllModel
+## Properties
+
+| Name | Type | Description | Notes |
+|------------ | ------------- | ------------- | -------------|
+| **settings** | [**SettingsModel**](SettingsModel.md) |  | [optional] [default to null] |
+| **directories** | [**Map**](AbstractDirectoryModel.md) |  | [optional] [default to null] |
+| **applicationLinks** | [**Map**](ApplicationLinkModel.md) |  | [optional] [default to null] |
+| **authentication** | [**AuthenticationModel**](AuthenticationModel.md) |  | [optional] [default to null] |
+| **licenses** | **List** |  | [optional] [default to null] |
+| **mailServer** | [**MailServerModel**](MailServerModel.md) |  | [optional] [default to null] |
+| **permissionsGlobal** | [**PermissionsGlobalModel**](PermissionsGlobalModel.md) |  | [optional] [default to null] |
+| **status** | [**Map**](_AllModelStatus.md) |  | [optional] [default to null] |
+
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
+

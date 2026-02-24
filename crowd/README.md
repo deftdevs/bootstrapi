@@ -7,6 +7,7 @@ All URIs are relative to *https://CROWD_URL/rest/bootstrapi/1*
 
 | Class | Method | HTTP request | Description |
 |------------ | ------------- | ------------- | -------------|
+| *AllApi* | [**setAll**](Apis/AllApi.md#setAll) | **PUT** / | _all |
 | *ApplicationApi* | [**createApplication**](Apis/ApplicationApi.md#createApplication) | **POST** /application | Create an application |
 *ApplicationApi* | [**deleteApplication**](Apis/ApplicationApi.md#deleteApplication) | **DELETE** /application/{id} | Delete an application |
 *ApplicationApi* | [**getApplication**](Apis/ApplicationApi.md#getApplication) | **GET** /application/{id} | Get an application |
@@ -87,8 +88,11 @@ All URIs are relative to *https://CROWD_URL/rest/bootstrapi/1*
  - [MailTemplatesModel](./Models/MailTemplatesModel.md)
  - [SessionConfigModel](./Models/SessionConfigModel.md)
  - [SettingsBrandingLoginPageModel](./Models/SettingsBrandingLoginPageModel.md)
+ - [SettingsGeneralModel](./Models/SettingsGeneralModel.md)
  - [SettingsModel](./Models/SettingsModel.md)
  - [UserModel](./Models/UserModel.md)
+ - [_AllModel](./Models/_AllModel.md)
+ - [_AllModelStatus](./Models/_AllModelStatus.md)
 
 
 <a name="documentation-for-authorization"></a>

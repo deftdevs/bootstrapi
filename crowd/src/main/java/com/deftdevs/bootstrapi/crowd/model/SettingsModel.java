@@ -1,26 +1,25 @@
 package com.deftdevs.bootstrapi.crowd.model;
 
-import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
+
+import static com.deftdevs.bootstrapi.commons.constants.BootstrAPI.SETTINGS;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement(name = "all")
-public class AllModel {
+@XmlRootElement(name = SETTINGS)
+public class SettingsModel {
 
     @XmlElement
-    private SettingsModel settings;
+    private SettingsGeneralModel general;
 
     @XmlElement
-    private List<ApplicationModel> applications;
+    private SettingsBrandingLoginPageModel branding;
 
 }

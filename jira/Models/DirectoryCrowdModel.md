@@ -9,8 +9,8 @@
 | **active** | **Boolean** |  | [optional] [default to null] |
 | **createdDate** | **Date** |  | [optional] [default to null] |
 | **updatedDate** | **Date** |  | [optional] [default to null] |
-| **type** | **String** |  | [default to null] |
 | **testConnection** | **Boolean** |  | [optional] [default to null] |
+| **type** | **String** |  | [default to null] |
 | **server** | [**DirectoryCrowdServer**](DirectoryCrowdServer.md) |  | [optional] [default to null] |
 | **permissions** | [**DirectoryCrowdPermissions**](DirectoryCrowdPermissions.md) |  | [optional] [default to null] |
 | **advanced** | [**DirectoryCrowdAdvanced**](DirectoryCrowdAdvanced.md) |  | [optional] [default to null] |

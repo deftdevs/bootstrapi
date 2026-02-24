@@ -1,6 +1,7 @@
 package com.deftdevs.bootstrapi.confluence.config;
 
 import com.deftdevs.bootstrapi.commons.service.api.*;
+import com.deftdevs.bootstrapi.confluence.model._AllModel;
 import com.deftdevs.bootstrapi.confluence.service.*;
 import com.deftdevs.bootstrapi.confluence.service.api.CachesService;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceAuthenticationService;
@@ -17,6 +18,19 @@ public class ServiceConfig {
 
     @Autowired
     private HelperConfig helperConfig;
+
+    @Bean
+    public _AllService<_AllModel> _allService() {
+        return new _AllServiceImpl(
+                confluenceSettingsService(),
+                directoriesService(),
+                applicationLinksService(),
+                confluenceAuthenticationService(),
+                licensesService(),
+                mailServerService(),
+                permissionsService(),
+                settingsBrandingService());
+    }
 
     @Bean
     public ApplicationLinksService applicationLinksService() {

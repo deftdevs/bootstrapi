@@ -3,7 +3,7 @@ package com.deftdevs.bootstrapi.crowd.service;
 import com.atlassian.crowd.manager.property.PropertyManager;
 import com.atlassian.crowd.manager.property.PropertyManagerException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
-import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,7 +12,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.URISyntaxException;
 
-import static com.deftdevs.bootstrapi.commons.model.SettingsModel.EXAMPLE_1_NO_MODE;
+import static com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel.EXAMPLE_1_NO_MODE;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
@@ -23,7 +23,7 @@ public class SettingsServiceTest {
     @Mock
     private PropertyManager propertyManager;
 
-    public static final SettingsModel SETTINGS_MODEL = EXAMPLE_1_NO_MODE;
+    public static final SettingsGeneralModel SETTINGS_MODEL = EXAMPLE_1_NO_MODE;
 
     private SettingsServiceImpl settingsService;
 

@@ -3,7 +3,7 @@ package com.deftdevs.bootstrapi.confluence.service;
 import com.atlassian.confluence.setup.settings.CustomHtmlSettings;
 import com.atlassian.confluence.setup.settings.GlobalSettingsManager;
 import com.atlassian.confluence.setup.settings.Settings;
-import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
 import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlModel;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
@@ -21,10 +21,10 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
     }
 
     @Override
-    public SettingsModel getSettingsGeneral() {
+    public SettingsGeneralModel getSettingsGeneral() {
         final Settings settings = globalSettingsManager.getGlobalSettings();
 
-        return SettingsModel.builder()
+        return SettingsGeneralModel.builder()
             .baseUrl(URI.create(settings.getBaseUrl()))
             .title(settings.getSiteTitle())
             .contactMessage(settings.getCustomContactMessage())
@@ -33,7 +33,7 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
     }
 
     @Override
-    public SettingsModel setSettingsGeneral(SettingsModel settingsModel) {
+    public SettingsGeneralModel setSettingsGeneral(SettingsGeneralModel settingsModel) {
         final Settings settings = globalSettingsManager.getGlobalSettings();
 
         if (settingsModel.getBaseUrl() != null) {
