@@ -1,6 +1,6 @@
 # DirectoriesApi
 
-All URIs are relative to *https://&lt;CONFLUENCE_URL&gt;/rest/bootstrapi/1*
+All URIs are relative to *https://CONFLUENCE_URL/rest/bootstrapi/1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|

@@ -12,11 +12,10 @@ info:
 security:
   - basicAuth: []
 servers:
-  - url: "{url}/rest/bootstrapi/1/"
+  - url: "{baseUrl}/rest/bootstrapi/1/"
     variables:
-      url:
-        default: https://<CONFLUENCE_URL>
-        description: URL with protocol, domain, port and path
+      baseUrl:
+        default: https://CONFLUENCE_URL
 components:
   securitySchemes:
     basicAuth:
