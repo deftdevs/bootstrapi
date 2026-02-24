@@ -1,9 +1,9 @@
 package com.deftdevs.bootstrapi.commons.service.api;
 
-import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 
 
-public interface SettingsService<B extends SettingsModel> {
+public interface SettingsGeneralService<B extends SettingsGeneralModel> {
 
     /**
      * Get the settings.

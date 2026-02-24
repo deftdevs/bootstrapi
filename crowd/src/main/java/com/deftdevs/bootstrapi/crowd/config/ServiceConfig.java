@@ -21,8 +21,15 @@ public class ServiceConfig {
     public _AllService<_AllModel> _allService() {
         return new _AllServiceImpl(
                 crowdSettingsGeneralService(),
+                settingsBrandingService(),
                 directoriesService(),
-                applicationsService());
+                applicationsService(),
+                applicationLinksService(),
+                licensesService(),
+                mailServerService(),
+                mailTemplatesService(),
+                sessionConfigService(),
+                trustedProxiesService());
     }
 
     @Bean

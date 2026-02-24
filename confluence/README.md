@@ -92,6 +92,7 @@ All URIs are relative to *https://CONFLUENCE_URL/rest/bootstrapi/1*
  - [PermissionsGlobalModel](./Models/PermissionsGlobalModel.md)
  - [SettingsBrandingColorSchemeModel](./Models/SettingsBrandingColorSchemeModel.md)
  - [SettingsCustomHtmlModel](./Models/SettingsCustomHtmlModel.md)
+ - [SettingsGeneralModel](./Models/SettingsGeneralModel.md)
  - [SettingsModel](./Models/SettingsModel.md)
  - [SettingsSecurityModel](./Models/SettingsSecurityModel.md)
  - [UserModel](./Models/UserModel.md)

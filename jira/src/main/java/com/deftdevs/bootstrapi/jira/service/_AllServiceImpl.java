@@ -1,5 +1,6 @@
-package com.deftdevs.bootstrapi.crowd.service;
+package com.deftdevs.bootstrapi.jira.service;
 
+import com.deftdevs.bootstrapi.commons.model.AuthenticationModel;
 import com.deftdevs.bootstrapi.commons.model.MailServerModel;
 import com.deftdevs.bootstrapi.commons.model.type._AllModelStatus;
 import com.deftdevs.bootstrapi.commons.service._AbstractAllServiceImpl;
@@ -7,53 +8,41 @@ import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
-import com.deftdevs.bootstrapi.crowd.model.SettingsModel;
-import com.deftdevs.bootstrapi.crowd.model._AllModel;
-import com.deftdevs.bootstrapi.crowd.service.api.ApplicationsService;
-import com.deftdevs.bootstrapi.crowd.service.api.CrowdSettingsBrandingService;
-import com.deftdevs.bootstrapi.crowd.service.api.CrowdSettingsGeneralService;
-import com.deftdevs.bootstrapi.crowd.service.api.MailTemplatesService;
-import com.deftdevs.bootstrapi.crowd.service.api.SessionConfigService;
-import com.deftdevs.bootstrapi.crowd.service.api.TrustedProxiesService;
+import com.deftdevs.bootstrapi.commons.service.api.PermissionsService;
+import com.deftdevs.bootstrapi.jira.model.SettingsModel;
+import com.deftdevs.bootstrapi.jira.model._AllModel;
+import com.deftdevs.bootstrapi.jira.service.api.JiraAuthenticationService;
+import com.deftdevs.bootstrapi.jira.service.api.JiraSettingsService;
 
 import java.util.HashMap;
 import java.util.Map;
 
 public class _AllServiceImpl extends _AbstractAllServiceImpl<_AllModel> {
 
-    private final CrowdSettingsGeneralService settingsService;
-    private final CrowdSettingsBrandingService brandingService;
+    private final JiraSettingsService settingsService;
     private final DirectoriesService directoriesService;
-    private final ApplicationsService applicationsService;
     private final ApplicationLinksService applicationLinksService;
+    private final JiraAuthenticationService authenticationService;
     private final LicensesService licensesService;
     private final MailServerService mailServerService;
-    private final MailTemplatesService mailTemplatesService;
-    private final SessionConfigService sessionConfigService;
-    private final TrustedProxiesService trustedProxiesService;
+    private final PermissionsService permissionsService;
 
     public _AllServiceImpl(
-            final CrowdSettingsGeneralService settingsService,
-            final CrowdSettingsBrandingService brandingService,
+            final JiraSettingsService settingsService,
             final DirectoriesService directoriesService,
-            final ApplicationsService applicationsService,
             final ApplicationLinksService applicationLinksService,
+            final JiraAuthenticationService authenticationService,
             final LicensesService licensesService,
             final MailServerService mailServerService,
-            final MailTemplatesService mailTemplatesService,
-            final SessionConfigService sessionConfigService,
-            final TrustedProxiesService trustedProxiesService) {
+            final PermissionsService permissionsService) {
 
         this.settingsService = settingsService;
-        this.brandingService = brandingService;
         this.directoriesService = directoriesService;
-        this.applicationsService = applicationsService;
         this.applicationLinksService = applicationLinksService;
+        this.authenticationService = authenticationService;
         this.licensesService = licensesService;
         this.mailServerService = mailServerService;
-        this.mailTemplatesService = mailTemplatesService;
-        this.sessionConfigService = sessionConfigService;
-        this.trustedProxiesService = trustedProxiesService;
+        this.permissionsService = permissionsService;
     }
 
     @Override
@@ -69,19 +58,29 @@ public class _AllServiceImpl extends _AbstractAllServiceImpl<_AllModel> {
             final SettingsModel settingsResult = new SettingsModel();
             setEntity("settings/general", settingsInput.getGeneral(),
                     settingsService::setSettingsGeneral, settingsResult::setGeneral, statusMap);
-            setEntity("settings/branding", settingsInput.getBranding(),
-                    brandingService::setLoginPage, settingsResult::setBranding, statusMap);
+            setEntity("settings/security", settingsInput.getSecurity(),
+                    settingsService::setSettingsSecurity, settingsResult::setSecurity, statusMap);
+            setEntity("settings/banner", settingsInput.getBanner(),
+                    settingsService::setSettingsBanner, settingsResult::setBanner, statusMap);
             result.setSettings(settingsResult);
         }
 
         setEntities("directories", allModel.getDirectories(),
                 directoriesService::setDirectories, result::setDirectories, statusMap);
 
-        setEntities("applications", allModel.getApplications(),
-                applicationsService::setApplications, result::setApplications, statusMap);
-
         setEntities("applicationLinks", allModel.getApplicationLinks(),
                 applicationLinksService::setApplicationLinks, result::setApplicationLinks, statusMap);
+
+        // Authentication wrapper
+        final AuthenticationModel authInput = allModel.getAuthentication();
+        if (authInput != null) {
+            final AuthenticationModel authResult = new AuthenticationModel();
+            setEntities("authentication/idps", authInput.getIdps(),
+                    authenticationService::setAuthenticationIdps, authResult::setIdps, statusMap);
+            setEntity("authentication/sso", authInput.getSso(),
+                    authenticationService::setAuthenticationSso, authResult::setSso, statusMap);
+            result.setAuthentication(authResult);
+        }
 
         setEntity("licenses", allModel.getLicenses(),
                 keys -> { licensesService.setLicenses(keys); return keys; },
@@ -98,14 +97,8 @@ public class _AllServiceImpl extends _AbstractAllServiceImpl<_AllModel> {
             result.setMailServer(mailServerResult);
         }
 
-        setEntity("mailTemplates", allModel.getMailTemplates(),
-                mailTemplatesService::setMailTemplates, result::setMailTemplates, statusMap);
-
-        setEntity("sessionConfig", allModel.getSessionConfig(),
-                sessionConfigService::setSessionConfig, result::setSessionConfig, statusMap);
-
-        setEntity("trustedProxies", allModel.getTrustedProxies(),
-                trustedProxiesService::setTrustedProxies, result::setTrustedProxies, statusMap);
+        setEntity("permissionsGlobal", allModel.getPermissionsGlobal(),
+                permissionsService::setPermissionsGlobal, result::setPermissionsGlobal, statusMap);
 
         result.setStatus(statusMap);
         return result;

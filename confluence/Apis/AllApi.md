@@ -9,7 +9,7 @@ All URIs are relative to *https://CONFLUENCE_URL/rest/bootstrapi/1*
 
 <a name="setAll"></a>
 # **setAll**
-> SettingsModel setAll(\_AllModel)
+> _AllModel setAll(\_AllModel)
 
 _all
 
@@ -21,7 +21,7 @@ _all
 
 ### Return type
 
-[**SettingsModel**](../Models/SettingsModel.md)
+[**_AllModel**](../Models/_AllModel.md)
 
 ### Authorization
 

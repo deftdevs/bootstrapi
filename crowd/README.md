@@ -88,6 +88,7 @@ All URIs are relative to *https://CROWD_URL/rest/bootstrapi/1*
  - [MailTemplatesModel](./Models/MailTemplatesModel.md)
  - [SessionConfigModel](./Models/SessionConfigModel.md)
  - [SettingsBrandingLoginPageModel](./Models/SettingsBrandingLoginPageModel.md)
+ - [SettingsGeneralModel](./Models/SettingsGeneralModel.md)
  - [SettingsModel](./Models/SettingsModel.md)
  - [UserModel](./Models/UserModel.md)
  - [_AllModel](./Models/_AllModel.md)

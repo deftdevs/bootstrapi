@@ -19,7 +19,7 @@ import java.net.URI;
 @AllArgsConstructor
 @XmlRootElement(name = BootstrAPI.SETTINGS)
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SettingsModel {
+public class SettingsGeneralModel {
 
     @XmlElement
     private URI baseUrl;
@@ -46,7 +46,7 @@ public class SettingsModel {
 
     // Example instances for documentation and tests
 
-    public static final SettingsModel EXAMPLE_1 = SettingsModel.builder()
+    public static final SettingsGeneralModel EXAMPLE_1 = SettingsGeneralModel.builder()
         .title("Example")
         .baseUrl(URI.create("https://example.com"))
         .mode("private")
@@ -54,7 +54,7 @@ public class SettingsModel {
         .externalUserManagement(true)
         .build();
 
-    public static final SettingsModel EXAMPLE_1_NO_MODE = SettingsModel.builder()
+    public static final SettingsGeneralModel EXAMPLE_1_NO_MODE = SettingsGeneralModel.builder()
         .title("Example")
         .baseUrl(URI.create("https://example.com"))
         .mode(null)

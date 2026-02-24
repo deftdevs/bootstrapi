@@ -1,7 +1,7 @@
 package it.com.deftdevs.bootstrapi.commons.rest;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
@@ -11,7 +11,7 @@ import java.net.http.HttpResponse;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public abstract class AbstractSettingsResourceFuncTest {
+public abstract class AbstractSettingsGeneralResourceFuncTest {
 
     private final ObjectMapper objectMapper = new ObjectMapper();
 
@@ -21,7 +21,7 @@ public abstract class AbstractSettingsResourceFuncTest {
                 .request();
         assertEquals(Response.Status.OK.getStatusCode(), settingsResponse.statusCode());
 
-        final SettingsModel settingsModel = objectMapper.readValue(settingsResponse.body(), SettingsModel.class);
+        final SettingsGeneralModel settingsModel = objectMapper.readValue(settingsResponse.body(), SettingsGeneralModel.class);
         assertNotNull(settingsModel.getTitle());
     }
 
@@ -31,7 +31,7 @@ public abstract class AbstractSettingsResourceFuncTest {
                 .request(HttpMethod.PUT, getExampleModel());
         assertEquals(Response.Status.OK.getStatusCode(), settingsResponse.statusCode());
 
-        final SettingsModel settingsModel = objectMapper.readValue(settingsResponse.body(), SettingsModel.class);
+        final SettingsGeneralModel settingsModel = objectMapper.readValue(settingsResponse.body(), SettingsGeneralModel.class);
         assertEquals(getExampleModel(), settingsModel);
     }
 
@@ -73,7 +73,7 @@ public abstract class AbstractSettingsResourceFuncTest {
         assertEquals(Response.Status.FORBIDDEN.getStatusCode(), settingsResponse.statusCode());
     }
 
-    protected SettingsModel getExampleModel() {
-        return SettingsModel.EXAMPLE_1;
+    protected SettingsGeneralModel getExampleModel() {
+        return SettingsGeneralModel.EXAMPLE_1;
     }
 }

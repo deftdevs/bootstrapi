@@ -2,8 +2,8 @@ package com.deftdevs.bootstrapi.confluence.rest;
 
 import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
-import com.deftdevs.bootstrapi.commons.model.SettingsModel;
-import com.deftdevs.bootstrapi.commons.rest.AbstractSettingsResourceImpl;
+import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
+import com.deftdevs.bootstrapi.commons.rest.AbstractSettingsGeneralResourceImpl;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
@@ -18,10 +18,10 @@ import javax.ws.rs.core.MediaType;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 @SystemAdminOnly
-public class SettingsResourceImpl extends AbstractSettingsResourceImpl<SettingsModel, ConfluenceSettingsService> {
+public class SettingsGeneralResourceImpl extends AbstractSettingsGeneralResourceImpl<SettingsGeneralModel, ConfluenceSettingsService> {
 
     @Inject
-    public SettingsResourceImpl(
+    public SettingsGeneralResourceImpl(
             final ConfluenceSettingsService settingsService) {
 
         super(settingsService);

@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -43,7 +43,7 @@ class JiraSettingsServiceTest {
         doReturn(CONTACT_MESSAGE).when(applicationProperties).getString(JIRA_CONTACT_ADMINISTRATORS_MESSSAGE);
         doReturn(EXTERNAL_USER_MANAGEMENT).when(applicationProperties).getString(JIRA_OPTION_USER_EXTERNALMGT);
 
-        final SettingsModel settingsModel = settingsService.getSettingsGeneral();
+        final SettingsGeneralModel settingsModel = settingsService.getSettingsGeneral();
 
         assertEquals(BASE_URL, settingsModel.getBaseUrl());
         assertEquals(MODE_PUBLIC, settingsModel.getMode());
@@ -54,7 +54,7 @@ class JiraSettingsServiceTest {
 
     @Test
     void testSetSettingsGeneral() {
-        final SettingsModel settingsModel = SettingsModel.builder()
+        final SettingsGeneralModel settingsModel = SettingsGeneralModel.builder()
             .baseUrl(BASE_URL)
             .mode(MODE_PUBLIC)
             .title(TITLE)
@@ -73,7 +73,7 @@ class JiraSettingsServiceTest {
 
     @Test
     void testSetSettingsGeneralEmptyModel() {
-        final SettingsModel settingsModel = SettingsModel.builder().build();
+        final SettingsGeneralModel settingsModel = SettingsGeneralModel.builder().build();
 
         settingsService.setSettingsGeneral(settingsModel);
 
@@ -85,7 +85,7 @@ class JiraSettingsServiceTest {
 
     @Test
     void testSetSettingsGeneralUnsupportedMode() {
-        final SettingsModel settingsModel = SettingsModel.builder().mode("unsupported").build();
+        final SettingsGeneralModel settingsModel = SettingsGeneralModel.builder().mode("unsupported").build();
 
         assertThrows(BadRequestException.class, () -> {
             settingsService.setSettingsGeneral(settingsModel);
@@ -94,7 +94,7 @@ class JiraSettingsServiceTest {
 
     @Test
     void testSetSettingsGeneralInvalidCombination() {
-        final SettingsModel settingsModel = SettingsModel.builder().mode(MODE_PUBLIC).build();
+        final SettingsGeneralModel settingsModel = SettingsGeneralModel.builder().mode(MODE_PUBLIC).build();
         doReturn(true).when(applicationProperties).getOption(JIRA_OPTION_USER_EXTERNALMGT);
 
         assertThrows(BadRequestException.class, () -> {

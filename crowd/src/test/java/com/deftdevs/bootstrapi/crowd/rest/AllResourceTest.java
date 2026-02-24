@@ -1,7 +1,8 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
-import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.crowd.model.ApplicationModel;
+import com.deftdevs.bootstrapi.crowd.model.SettingsModel;
 import com.deftdevs.bootstrapi.crowd.model._AllModel;
 import com.deftdevs.bootstrapi.commons.model.type._AllModelStatus;
 import com.deftdevs.bootstrapi.commons.service.api._AllService;
@@ -34,7 +35,9 @@ public class AllResourceTest {
 
         // Setup test data
         allModel = new _AllModel();
-        allModel.setSettings(SettingsModel.EXAMPLE_1);
+        final SettingsModel settings = new SettingsModel();
+        settings.setGeneral(SettingsGeneralModel.EXAMPLE_1);
+        allModel.setSettings(settings);
 
         // Setup applications map
         Map<String, ApplicationModel> applications = new HashMap<>();
@@ -42,7 +45,7 @@ public class AllResourceTest {
         allModel.setApplications(applications);
 
         Map<String, _AllModelStatus> status = new HashMap<>();
-        status.put("settings", _AllModelStatus.success());
+        status.put("settings/general", _AllModelStatus.success());
         status.put("directories", _AllModelStatus.success());
         status.put("applications", _AllModelStatus.success());
         allModel.setStatus(status);

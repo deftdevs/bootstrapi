@@ -3,7 +3,7 @@ package com.deftdevs.bootstrapi.jira.service;
 import com.atlassian.jira.config.properties.APKeys;
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
 import com.deftdevs.bootstrapi.jira.model.SettingsBannerModel;
 import com.deftdevs.bootstrapi.jira.service.api.JiraSettingsService;
@@ -28,14 +28,14 @@ public class SettingsServiceImpl implements JiraSettingsService {
     }
 
     @Override
-    public SettingsModel getSettingsGeneral() {
+    public SettingsGeneralModel getSettingsGeneral() {
         final String baseUrl = applicationProperties.getString(JIRA_BASEURL);
         final String mode = applicationProperties.getString(JIRA_MODE);
         final String title = applicationProperties.getString(JIRA_TITLE);
         final String contactMessage = applicationProperties.getString(JIRA_CONTACT_ADMINISTRATORS_MESSSAGE);
         final Boolean externalUserManagement = Boolean.parseBoolean(applicationProperties.getString(JIRA_OPTION_USER_EXTERNALMGT));
 
-        final SettingsModel settingsModel = SettingsModel.builder()
+        final SettingsGeneralModel settingsModel = SettingsGeneralModel.builder()
             .baseUrl(baseUrl != null ? URI.create(baseUrl) : null)
             .mode(mode)
             .title(title)
@@ -47,8 +47,8 @@ public class SettingsServiceImpl implements JiraSettingsService {
     }
 
     @Override
-    public SettingsModel setSettingsGeneral(
-            final SettingsModel settingsModel) {
+    public SettingsGeneralModel setSettingsGeneral(
+            final SettingsGeneralModel settingsModel) {
 
         if (settingsModel.getBaseUrl() != null) {
             applicationProperties.setString(JIRA_BASEURL, settingsModel.getBaseUrl().toString());

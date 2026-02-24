@@ -3,7 +3,7 @@ package com.deftdevs.bootstrapi.crowd.service;
 import com.atlassian.crowd.manager.property.PropertyManager;
 import com.atlassian.crowd.manager.property.PropertyManagerException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
-import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.crowd.service.api.CrowdSettingsGeneralService;
 
 public class SettingsServiceImpl
@@ -18,9 +18,9 @@ public class SettingsServiceImpl
     }
 
     @Override
-    public SettingsModel getSettingsGeneral() {
+    public SettingsGeneralModel getSettingsGeneral() {
         try {
-            return SettingsModel.builder()
+            return SettingsGeneralModel.builder()
                     .baseUrl(propertyManager.getBaseUrl())
                     .title(propertyManager.getDeploymentTitle())
                     .build();
@@ -30,7 +30,7 @@ public class SettingsServiceImpl
     }
 
     @Override
-    public SettingsModel setSettingsGeneral(SettingsModel settingsModel) {
+    public SettingsGeneralModel setSettingsGeneral(SettingsGeneralModel settingsModel) {
         if (settingsModel.getBaseUrl() != null) {
             propertyManager.setBaseUrl(settingsModel.getBaseUrl());
         }
