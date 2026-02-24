@@ -6,8 +6,6 @@ import com.atlassian.crowd.directory.DirectoryProperties;
 import com.atlassian.crowd.directory.InternalDirectory;
 import com.atlassian.crowd.directory.MicrosoftActiveDirectory;
 import com.atlassian.crowd.directory.SynchronisableDirectoryProperties;
-import com.atlassian.crowd.directory.ldap.LDAPPropertiesMapper;
-import com.atlassian.crowd.directory.ldap.LdapSecureMode;
 import com.atlassian.crowd.directory.monitor.poller.PollerConfig;
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
@@ -37,6 +35,41 @@ import static java.lang.Boolean.TRUE;
 public class DirectoryModelUtil {
 
     public static final String ATTRIBUTE_USE_NESTED_GROUPS = "useNestedGroups";
+
+    static final String LDAP_URL_KEY = "ldap.url";
+    static final String LDAP_SECURE_KEY = "ldap.secure";
+    static final String LDAP_REFERRAL_KEY = "ldap.referral";
+    static final String LDAP_BASEDN_KEY = "ldap.basedn";
+    static final String LDAP_USERDN_KEY = "ldap.userdn";
+    static final String LDAP_PASSWORD_KEY = "ldap.password";
+    static final String LDAP_PAGEDRESULTS_KEY = "ldap.pagedresults";
+    static final String LDAP_PAGEDRESULTS_SIZE = "ldap.pagedresults.size";
+    static final String LDAP_NESTED_GROUPS_DISABLED = "ldap.nestedgroups.disabled";
+    static final String LDAP_FILTER_EXPIRED_USERS = "ldap.filter.expiredUsers";
+    static final String LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE = "ldap.usermembership.use";
+    static final String LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE_FOR_GROUP_MEMBERSHIP = "ldap.usermembership.use.for.groups";
+    static final String LDAP_RELAXED_DN_STANDARDISATION = "ldap.relaxed.dn.standardisation";
+    static final String LDAP_SEARCH_TIMELIMIT = "ldap.search.timelimit";
+    static final String LDAP_EXTERNAL_ID = "ldap.external.id";
+    static final String LDAP_POOL_TYPE = "ldap.pool.type";
+    static final String ROLES_DISABLED = "ldap.roles.disabled";
+    static final String LOCAL_GROUPS = "ldap.local.groups";
+    static final String GROUP_DN_ADDITION = "ldap.group.dn";
+    static final String GROUP_DESCRIPTION_KEY = "ldap.group.description";
+    static final String GROUP_NAME_KEY = "ldap.group.name";
+    static final String GROUP_OBJECTCLASS_KEY = "ldap.group.objectclass";
+    static final String GROUP_OBJECTFILTER_KEY = "ldap.group.filter";
+    static final String GROUP_USERNAMES_KEY = "ldap.group.usernames";
+    static final String USER_DN_ADDITION = "ldap.user.dn";
+    static final String USER_EMAIL_KEY = "ldap.user.email";
+    static final String USER_FIRSTNAME_KEY = "ldap.user.firstname";
+    static final String USER_GROUP_KEY = "ldap.user.group";
+    static final String USER_LASTNAME_KEY = "ldap.user.lastname";
+    static final String USER_DISPLAYNAME_KEY = "ldap.user.displayname";
+    static final String USER_OBJECTCLASS_KEY = "ldap.user.objectclass";
+    static final String USER_OBJECTFILTER_KEY = "ldap.user.filter";
+    static final String USER_USERNAME_KEY = "ldap.user.username";
+    static final String USER_USERNAME_RDN_KEY = "ldap.user.username.rdn";
 
     private static final Set<Class<? extends AbstractDirectoryModel>> SUPPORTED_DIRECTORY_BEAN_TYPES;
 
@@ -103,41 +136,41 @@ public class DirectoryModelUtil {
             @Nonnull final Directory directory) {
         DirectoryDelegatingModel.DirectoryDelegatingConnector connector = DirectoryDelegatingModel.DirectoryDelegatingConnector.builder()
             .type(toDirectoryDelegatingConnectorType(directory))
-            .url(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_URL_KEY))
+            .url(directory.getAttributes().get(LDAP_URL_KEY))
             .ssl(toDirectoryDelegatingConnectorSslType(directory))
-            .useNodeReferrals(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_REFERRAL_KEY)))
-            .nestedGroupsDisabled(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_NESTED_GROUPS_DISABLED)))
+            .useNodeReferrals(toBoolean(directory.getAttributes().get(LDAP_REFERRAL_KEY)))
+            .nestedGroupsDisabled(toBoolean(directory.getAttributes().get(LDAP_NESTED_GROUPS_DISABLED)))
             .synchronizeUsers(toBoolean(directory.getAttributes().get(DelegatedAuthenticationDirectory.ATTRIBUTE_CREATE_USER_ON_AUTH)))
             .synchronizeUserDetails(toBoolean(directory.getAttributes().get(DelegatedAuthenticationDirectory.ATTRIBUTE_UPDATE_USER_ON_AUTH)))
             .synchronizeGroupMemberships(toBoolean(directory.getAttributes().get(DelegatedAuthenticationDirectory.ATTRIBUTE_KEY_IMPORT_GROUPS)))
-            .useUserMembershipAttribute(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE)))
-            .usePagedResults(toBoolean(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_PAGEDRESULTS_KEY)))
-            .pagedResultsSize(toLong(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_PAGEDRESULTS_SIZE)))
+            .useUserMembershipAttribute(toBoolean(directory.getAttributes().get(LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE)))
+            .usePagedResults(toBoolean(directory.getAttributes().get(LDAP_PAGEDRESULTS_KEY)))
+            .pagedResultsSize(toLong(directory.getAttributes().get(LDAP_PAGEDRESULTS_SIZE)))
             .readTimeoutInMillis(toLong(directory.getAttributes().get(SynchronisableDirectoryProperties.READ_TIMEOUT_IN_MILLISECONDS)))
-            .searchTimeoutInMillis(toLong(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_SEARCH_TIMELIMIT)))
+            .searchTimeoutInMillis(toLong(directory.getAttributes().get(LDAP_SEARCH_TIMELIMIT)))
             .connectionTimeoutInMillis(toLong(directory.getAttributes().get(SynchronisableDirectoryProperties.CONNECTION_TIMEOUT_IN_MILLISECONDS)))
-            .baseDn(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_BASEDN_KEY))
-            .username(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_USERDN_KEY))
+            .baseDn(directory.getAttributes().get(LDAP_BASEDN_KEY))
+            .username(directory.getAttributes().get(LDAP_USERDN_KEY))
             .build();
 
         DirectoryDelegatingModel.DirectoryDelegatingConfiguration configuration = DirectoryDelegatingModel.DirectoryDelegatingConfiguration.builder()
-            .userDn(directory.getAttributes().get(LDAPPropertiesMapper.USER_DN_ADDITION))
-            .userObjectClass(directory.getAttributes().get(LDAPPropertiesMapper.USER_OBJECTCLASS_KEY))
-            .userObjectFilter(directory.getAttributes().get(LDAPPropertiesMapper.USER_OBJECTFILTER_KEY))
-            .userNameAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_USERNAME_KEY))
-            .userNameRdnAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_USERNAME_RDN_KEY))
-            .userFirstNameAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_FIRSTNAME_KEY))
-            .userLastNameAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_LASTNAME_KEY))
-            .userDisplayNameAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_DISPLAYNAME_KEY))
-            .userEmailAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_EMAIL_KEY))
-            .userGroupAttribute(directory.getAttributes().get(LDAPPropertiesMapper.USER_GROUP_KEY))
-            .userUniqueIdAttribute(directory.getAttributes().get(LDAPPropertiesMapper.LDAP_EXTERNAL_ID))
-            .groupDn(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_DN_ADDITION))
-            .groupObjectClass(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_OBJECTCLASS_KEY))
-            .groupObjectFilter(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_OBJECTFILTER_KEY))
-            .groupNameAttribute(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_NAME_KEY))
-            .groupDescriptionAttribute(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_DESCRIPTION_KEY))
-            .groupMembersAttribute(directory.getAttributes().get(LDAPPropertiesMapper.GROUP_USERNAMES_KEY))
+            .userDn(directory.getAttributes().get(USER_DN_ADDITION))
+            .userObjectClass(directory.getAttributes().get(USER_OBJECTCLASS_KEY))
+            .userObjectFilter(directory.getAttributes().get(USER_OBJECTFILTER_KEY))
+            .userNameAttribute(directory.getAttributes().get(USER_USERNAME_KEY))
+            .userNameRdnAttribute(directory.getAttributes().get(USER_USERNAME_RDN_KEY))
+            .userFirstNameAttribute(directory.getAttributes().get(USER_FIRSTNAME_KEY))
+            .userLastNameAttribute(directory.getAttributes().get(USER_LASTNAME_KEY))
+            .userDisplayNameAttribute(directory.getAttributes().get(USER_DISPLAYNAME_KEY))
+            .userEmailAttribute(directory.getAttributes().get(USER_EMAIL_KEY))
+            .userGroupAttribute(directory.getAttributes().get(USER_GROUP_KEY))
+            .userUniqueIdAttribute(directory.getAttributes().get(LDAP_EXTERNAL_ID))
+            .groupDn(directory.getAttributes().get(GROUP_DN_ADDITION))
+            .groupObjectClass(directory.getAttributes().get(GROUP_OBJECTCLASS_KEY))
+            .groupObjectFilter(directory.getAttributes().get(GROUP_OBJECTFILTER_KEY))
+            .groupNameAttribute(directory.getAttributes().get(GROUP_NAME_KEY))
+            .groupDescriptionAttribute(directory.getAttributes().get(GROUP_DESCRIPTION_KEY))
+            .groupMembersAttribute(directory.getAttributes().get(GROUP_USERNAMES_KEY))
             .build();
 
         DirectoryDelegatingModel.DirectoryDelegatingModelBuilder<?,?> builder = DirectoryDelegatingModel.builder();
@@ -153,10 +186,15 @@ public class DirectoryModelUtil {
     private static DirectoryDelegatingModel.DirectoryDelegatingConnector.SslType toDirectoryDelegatingConnectorSslType(
             @Nonnull final Directory directory) {
 
-        final String ldapSecure = directory.getAttributes().get(LDAPPropertiesMapper.LDAP_SECURE_KEY);
-        // LdapSecureMode.fromString evaluates to the default value NONE ("false") if ldapSecure is null
-        final LdapSecureMode ldapSecureMode = LdapSecureMode.fromString(ldapSecure);
-        return DirectoryDelegatingModel.DirectoryDelegatingConnector.SslType.valueOf(ldapSecureMode.name().toUpperCase());
+        final String ldapSecure = directory.getAttributes().get(LDAP_SECURE_KEY);
+
+        if ("true".equalsIgnoreCase(ldapSecure)) {
+            return DirectoryDelegatingModel.DirectoryDelegatingConnector.SslType.LDAPS;
+        } else if ("starttls".equalsIgnoreCase(ldapSecure)) {
+            return DirectoryDelegatingModel.DirectoryDelegatingConnector.SslType.START_TLS;
+        }
+
+        return DirectoryDelegatingModel.DirectoryDelegatingConnector.SslType.NONE;
     }
 
     @Nonnull
@@ -346,14 +384,20 @@ public class DirectoryModelUtil {
     }
 
     @Nullable
-    private static String toDirectoryDelegatingConnectorSecureModeName(
+    static String toDirectoryDelegatingConnectorSecureModeName(
             @Nullable final DirectoryDelegatingModel.DirectoryDelegatingConnector.SslType sslType) {
 
         if (sslType == null) {
             return null;
         }
 
-        return LdapSecureMode.valueOf(sslType.name()).getName();
+        if (sslType == DirectoryDelegatingModel.DirectoryDelegatingConnector.SslType.LDAPS) {
+            return "true";
+        } else if (sslType == DirectoryDelegatingModel.DirectoryDelegatingConnector.SslType.START_TLS) {
+            return "starttls";
+        }
+
+        return "false";
     }
 
     private static void setDirectoryAttributes(
@@ -385,43 +429,43 @@ public class DirectoryModelUtil {
         final DirectoryDelegatingModel.DirectoryDelegatingConnector connector = directoryDelegatingModel.getConnector();
         if (connector != null) {
             setAttributeIfNotNull(attributes, DelegatedAuthenticationDirectory.ATTRIBUTE_LDAP_DIRECTORY_CLASS, toDirectoryDelegatedConnectorTypeClass(connector.getType()));
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_URL_KEY, connector.getUrl());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_SECURE_KEY, toDirectoryDelegatingConnectorSecureModeName(connector.getSsl()));
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_REFERRAL_KEY, fromBoolean(connector.getUseNodeReferrals()));
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_NESTED_GROUPS_DISABLED, fromBoolean(connector.getNestedGroupsDisabled()));
+            setAttributeIfNotNull(attributes, LDAP_URL_KEY, connector.getUrl());
+            setAttributeIfNotNull(attributes, LDAP_SECURE_KEY, toDirectoryDelegatingConnectorSecureModeName(connector.getSsl()));
+            setAttributeIfNotNull(attributes, LDAP_REFERRAL_KEY, fromBoolean(connector.getUseNodeReferrals()));
+            setAttributeIfNotNull(attributes, LDAP_NESTED_GROUPS_DISABLED, fromBoolean(connector.getNestedGroupsDisabled()));
             setAttributeIfNotNull(attributes, DelegatedAuthenticationDirectory.ATTRIBUTE_CREATE_USER_ON_AUTH, fromBoolean(connector.getSynchronizeUsers()));
             setAttributeIfNotNull(attributes, DelegatedAuthenticationDirectory.ATTRIBUTE_UPDATE_USER_ON_AUTH, fromBoolean(connector.getSynchronizeUserDetails()));
             setAttributeIfNotNull(attributes, DelegatedAuthenticationDirectory.ATTRIBUTE_KEY_IMPORT_GROUPS, fromBoolean(connector.getSynchronizeGroupMemberships()));
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE, fromBoolean(connector.getUseUserMembershipAttribute()));
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_PAGEDRESULTS_KEY, fromBoolean(connector.getUsePagedResults()));
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_PAGEDRESULTS_SIZE, fromLong(connector.getPagedResultsSize()));
+            setAttributeIfNotNull(attributes, LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE, fromBoolean(connector.getUseUserMembershipAttribute()));
+            setAttributeIfNotNull(attributes, LDAP_PAGEDRESULTS_KEY, fromBoolean(connector.getUsePagedResults()));
+            setAttributeIfNotNull(attributes, LDAP_PAGEDRESULTS_SIZE, fromLong(connector.getPagedResultsSize()));
             setAttributeIfNotNull(attributes, SynchronisableDirectoryProperties.READ_TIMEOUT_IN_MILLISECONDS, fromLong(connector.getReadTimeoutInMillis()));
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_SEARCH_TIMELIMIT, fromLong(connector.getSearchTimeoutInMillis()));
+            setAttributeIfNotNull(attributes, LDAP_SEARCH_TIMELIMIT, fromLong(connector.getSearchTimeoutInMillis()));
             setAttributeIfNotNull(attributes, SynchronisableDirectoryProperties.CONNECTION_TIMEOUT_IN_MILLISECONDS, fromLong(connector.getConnectionTimeoutInMillis()));
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_BASEDN_KEY, connector.getBaseDn());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_USERDN_KEY, connector.getUsername());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_PASSWORD_KEY, connector.getPassword());
+            setAttributeIfNotNull(attributes, LDAP_BASEDN_KEY, connector.getBaseDn());
+            setAttributeIfNotNull(attributes, LDAP_USERDN_KEY, connector.getUsername());
+            setAttributeIfNotNull(attributes, LDAP_PASSWORD_KEY, connector.getPassword());
         }
 
         final DirectoryDelegatingModel.DirectoryDelegatingConfiguration configuration = directoryDelegatingModel.getConfiguration();
         if (configuration != null) {
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.USER_DN_ADDITION, configuration.getUserDn());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.USER_OBJECTCLASS_KEY, configuration.getUserObjectClass());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.USER_OBJECTFILTER_KEY, configuration.getUserObjectFilter());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.USER_USERNAME_KEY, configuration.getUserNameAttribute());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.USER_USERNAME_RDN_KEY, configuration.getUserNameRdnAttribute());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.USER_FIRSTNAME_KEY, configuration.getUserFirstNameAttribute());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.USER_LASTNAME_KEY, configuration.getUserLastNameAttribute());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.USER_DISPLAYNAME_KEY, configuration.getUserDisplayNameAttribute());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.USER_EMAIL_KEY, configuration.getUserEmailAttribute());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.USER_GROUP_KEY, configuration.getUserGroupAttribute());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.LDAP_EXTERNAL_ID, configuration.getUserUniqueIdAttribute());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.GROUP_DN_ADDITION, configuration.getGroupDn());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.GROUP_OBJECTCLASS_KEY, configuration.getGroupObjectClass());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.GROUP_OBJECTFILTER_KEY, configuration.getGroupObjectFilter());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.GROUP_NAME_KEY, configuration.getGroupNameAttribute());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.GROUP_DESCRIPTION_KEY, configuration.getGroupDescriptionAttribute());
-            setAttributeIfNotNull(attributes, LDAPPropertiesMapper.GROUP_USERNAMES_KEY, configuration.getGroupMembersAttribute());
+            setAttributeIfNotNull(attributes, USER_DN_ADDITION, configuration.getUserDn());
+            setAttributeIfNotNull(attributes, USER_OBJECTCLASS_KEY, configuration.getUserObjectClass());
+            setAttributeIfNotNull(attributes, USER_OBJECTFILTER_KEY, configuration.getUserObjectFilter());
+            setAttributeIfNotNull(attributes, USER_USERNAME_KEY, configuration.getUserNameAttribute());
+            setAttributeIfNotNull(attributes, USER_USERNAME_RDN_KEY, configuration.getUserNameRdnAttribute());
+            setAttributeIfNotNull(attributes, USER_FIRSTNAME_KEY, configuration.getUserFirstNameAttribute());
+            setAttributeIfNotNull(attributes, USER_LASTNAME_KEY, configuration.getUserLastNameAttribute());
+            setAttributeIfNotNull(attributes, USER_DISPLAYNAME_KEY, configuration.getUserDisplayNameAttribute());
+            setAttributeIfNotNull(attributes, USER_EMAIL_KEY, configuration.getUserEmailAttribute());
+            setAttributeIfNotNull(attributes, USER_GROUP_KEY, configuration.getUserGroupAttribute());
+            setAttributeIfNotNull(attributes, LDAP_EXTERNAL_ID, configuration.getUserUniqueIdAttribute());
+            setAttributeIfNotNull(attributes, GROUP_DN_ADDITION, configuration.getGroupDn());
+            setAttributeIfNotNull(attributes, GROUP_OBJECTCLASS_KEY, configuration.getGroupObjectClass());
+            setAttributeIfNotNull(attributes, GROUP_OBJECTFILTER_KEY, configuration.getGroupObjectFilter());
+            setAttributeIfNotNull(attributes, GROUP_NAME_KEY, configuration.getGroupNameAttribute());
+            setAttributeIfNotNull(attributes, GROUP_DESCRIPTION_KEY, configuration.getGroupDescriptionAttribute());
+            setAttributeIfNotNull(attributes, GROUP_USERNAMES_KEY, configuration.getGroupMembersAttribute());
         }
 
         // Also set some defaults for directory delegating.
@@ -430,12 +474,12 @@ public class DirectoryModelUtil {
         attributes.putIfAbsent(DirectoryImpl.ATTRIBUTE_KEY_LOCAL_USER_STATUS, Boolean.toString(false));
         attributes.putIfAbsent(DirectoryImpl.ATTRIBUTE_KEY_USE_PRIMARY_GROUP, Boolean.toString(false));
         attributes.putIfAbsent(DirectoryProperties.CACHE_ENABLED, Boolean.toString(false));
-        attributes.putIfAbsent(LDAPPropertiesMapper.LDAP_FILTER_EXPIRED_USERS, Boolean.toString(false));
-        attributes.putIfAbsent(LDAPPropertiesMapper.LDAP_POOL_TYPE, "JNDI");
-        attributes.putIfAbsent(LDAPPropertiesMapper.LDAP_RELAXED_DN_STANDARDISATION, Boolean.toString(false));
-        attributes.putIfAbsent(LDAPPropertiesMapper.LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE_FOR_GROUP_MEMBERSHIP, Boolean.toString(false));
-        attributes.putIfAbsent(LDAPPropertiesMapper.LOCAL_GROUPS, Boolean.toString(false));
-        attributes.putIfAbsent(LDAPPropertiesMapper.ROLES_DISABLED, Boolean.toString(true));
+        attributes.putIfAbsent(LDAP_FILTER_EXPIRED_USERS, Boolean.toString(false));
+        attributes.putIfAbsent(LDAP_POOL_TYPE, "JNDI");
+        attributes.putIfAbsent(LDAP_RELAXED_DN_STANDARDISATION, Boolean.toString(false));
+        attributes.putIfAbsent(LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE_FOR_GROUP_MEMBERSHIP, Boolean.toString(false));
+        attributes.putIfAbsent(LOCAL_GROUPS, Boolean.toString(false));
+        attributes.putIfAbsent(ROLES_DISABLED, Boolean.toString(true));
         attributes.putIfAbsent(SynchronisableDirectoryProperties.INCREMENTAL_SYNC_ENABLED, Boolean.toString(false));
         attributes.putIfAbsent(SynchronisableDirectoryProperties.CACHE_SYNCHRONISE_CRON, pollerConfig.getCronExpression());
         attributes.putIfAbsent(SynchronisableDirectoryProperties.CACHE_SYNCHRONISE_INTERVAL, Long.toString(pollerConfig.getPollingIntervalInMin() * 60));

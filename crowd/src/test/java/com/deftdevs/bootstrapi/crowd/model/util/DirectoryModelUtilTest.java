@@ -2,8 +2,6 @@ package com.deftdevs.bootstrapi.crowd.model.util;
 
 import com.atlassian.crowd.directory.DelegatedAuthenticationDirectory;
 import com.atlassian.crowd.directory.SynchronisableDirectoryProperties;
-import com.atlassian.crowd.directory.ldap.LDAPPropertiesMapper;
-import com.atlassian.crowd.directory.ldap.LdapSecureMode;
 import com.atlassian.crowd.embedded.api.Directory;
 import com.atlassian.crowd.embedded.api.DirectoryType;
 import com.atlassian.crowd.embedded.api.MockDirectoryInternal;
@@ -115,21 +113,21 @@ public class DirectoryModelUtilTest {
             final boolean firstParameterIsExpected) {
 
         AssertUtil.assertEquals(directory.getValue(DelegatedAuthenticationDirectory.ATTRIBUTE_LDAP_DIRECTORY_CLASS), DirectoryDelegatingConnectorTypeImplClass.MICROSOFT_ACTIVE_DIRECTORY.getImplClass(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_URL_KEY), directoryDelegatingModel.getConnector().getUrl(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_SECURE_KEY), LdapSecureMode.valueOf(directoryDelegatingModel.getConnector().getSsl().name()).getName(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_REFERRAL_KEY), String.valueOf(directoryDelegatingModel.getConnector().getUseNodeReferrals()), firstParameterIsExpected);
-        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_NESTED_GROUPS_DISABLED), String.valueOf(directoryDelegatingModel.getConnector().getNestedGroupsDisabled()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(DirectoryModelUtil.LDAP_URL_KEY), directoryDelegatingModel.getConnector().getUrl(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(DirectoryModelUtil.LDAP_SECURE_KEY), DirectoryModelUtil.toDirectoryDelegatingConnectorSecureModeName(directoryDelegatingModel.getConnector().getSsl()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(DirectoryModelUtil.LDAP_REFERRAL_KEY), String.valueOf(directoryDelegatingModel.getConnector().getUseNodeReferrals()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(DirectoryModelUtil.LDAP_NESTED_GROUPS_DISABLED), String.valueOf(directoryDelegatingModel.getConnector().getNestedGroupsDisabled()), firstParameterIsExpected);
         AssertUtil.assertEquals(directory.getValue(DelegatedAuthenticationDirectory.ATTRIBUTE_CREATE_USER_ON_AUTH), String.valueOf(directoryDelegatingModel.getConnector().getSynchronizeUsers()), firstParameterIsExpected);
         AssertUtil.assertEquals(directory.getValue(DelegatedAuthenticationDirectory.ATTRIBUTE_UPDATE_USER_ON_AUTH), String.valueOf(directoryDelegatingModel.getConnector().getSynchronizeUserDetails()), firstParameterIsExpected);
         AssertUtil.assertEquals(directory.getValue(DelegatedAuthenticationDirectory.ATTRIBUTE_KEY_IMPORT_GROUPS), String.valueOf(directoryDelegatingModel.getConnector().getSynchronizeGroupMemberships()), firstParameterIsExpected);
-        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE), String.valueOf(directoryDelegatingModel.getConnector().getUseUserMembershipAttribute()), firstParameterIsExpected);
-        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_PAGEDRESULTS_KEY), String.valueOf(directoryDelegatingModel.getConnector().getUsePagedResults()), firstParameterIsExpected);
-        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_PAGEDRESULTS_SIZE), String.valueOf(directoryDelegatingModel.getConnector().getPagedResultsSize()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(DirectoryModelUtil.LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE), String.valueOf(directoryDelegatingModel.getConnector().getUseUserMembershipAttribute()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(DirectoryModelUtil.LDAP_PAGEDRESULTS_KEY), String.valueOf(directoryDelegatingModel.getConnector().getUsePagedResults()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(DirectoryModelUtil.LDAP_PAGEDRESULTS_SIZE), String.valueOf(directoryDelegatingModel.getConnector().getPagedResultsSize()), firstParameterIsExpected);
         AssertUtil.assertEquals(directory.getValue(SynchronisableDirectoryProperties.READ_TIMEOUT_IN_MILLISECONDS), String.valueOf(directoryDelegatingModel.getConnector().getReadTimeoutInMillis()), firstParameterIsExpected);
-        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_SEARCH_TIMELIMIT), String.valueOf(directoryDelegatingModel.getConnector().getSearchTimeoutInMillis()), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(DirectoryModelUtil.LDAP_SEARCH_TIMELIMIT), String.valueOf(directoryDelegatingModel.getConnector().getSearchTimeoutInMillis()), firstParameterIsExpected);
         AssertUtil.assertEquals(directory.getValue(SynchronisableDirectoryProperties.CONNECTION_TIMEOUT_IN_MILLISECONDS), String.valueOf(directoryDelegatingModel.getConnector().getConnectionTimeoutInMillis()), firstParameterIsExpected);
-        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_BASEDN_KEY), directoryDelegatingModel.getConnector().getBaseDn(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directory.getValue(LDAPPropertiesMapper.LDAP_USERDN_KEY), directoryDelegatingModel.getConnector().getUsername(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(DirectoryModelUtil.LDAP_BASEDN_KEY), directoryDelegatingModel.getConnector().getBaseDn(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directory.getValue(DirectoryModelUtil.LDAP_USERDN_KEY), directoryDelegatingModel.getConnector().getUsername(), firstParameterIsExpected);
     }
 
     private void assertDirectoryDelegatingAttributesForConfigurationMatch(
@@ -137,23 +135,23 @@ public class DirectoryModelUtilTest {
             final DirectoryDelegatingModel directoryDelegatingModelExpected,
             final boolean firstParameterIsExpected) {
 
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_DN_ADDITION), directoryDelegatingModelExpected.getConfiguration().getUserDn(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_OBJECTCLASS_KEY), directoryDelegatingModelExpected.getConfiguration().getUserObjectClass(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_OBJECTFILTER_KEY), directoryDelegatingModelExpected.getConfiguration().getUserObjectFilter(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_USERNAME_KEY), directoryDelegatingModelExpected.getConfiguration().getUserNameAttribute(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_USERNAME_RDN_KEY), directoryDelegatingModelExpected.getConfiguration().getUserNameRdnAttribute(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_FIRSTNAME_KEY), directoryDelegatingModelExpected.getConfiguration().getUserFirstNameAttribute(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_LASTNAME_KEY), directoryDelegatingModelExpected.getConfiguration().getUserLastNameAttribute(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_DISPLAYNAME_KEY), directoryDelegatingModelExpected.getConfiguration().getUserDisplayNameAttribute(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_EMAIL_KEY), directoryDelegatingModelExpected.getConfiguration().getUserEmailAttribute(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.USER_GROUP_KEY), directoryDelegatingModelExpected.getConfiguration().getUserGroupAttribute(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.LDAP_EXTERNAL_ID), directoryDelegatingModelExpected.getConfiguration().getUserUniqueIdAttribute(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.GROUP_DN_ADDITION), directoryDelegatingModelExpected.getConfiguration().getGroupDn(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.GROUP_OBJECTCLASS_KEY), directoryDelegatingModelExpected.getConfiguration().getGroupObjectClass(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.GROUP_OBJECTFILTER_KEY), directoryDelegatingModelExpected.getConfiguration().getGroupObjectFilter(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.GROUP_NAME_KEY), directoryDelegatingModelExpected.getConfiguration().getGroupNameAttribute(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.GROUP_DESCRIPTION_KEY), directoryDelegatingModelExpected.getConfiguration().getGroupDescriptionAttribute(), firstParameterIsExpected);
-        AssertUtil.assertEquals(directoryActual.getValue(LDAPPropertiesMapper.GROUP_USERNAMES_KEY), directoryDelegatingModelExpected.getConfiguration().getGroupMembersAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.USER_DN_ADDITION), directoryDelegatingModelExpected.getConfiguration().getUserDn(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.USER_OBJECTCLASS_KEY), directoryDelegatingModelExpected.getConfiguration().getUserObjectClass(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.USER_OBJECTFILTER_KEY), directoryDelegatingModelExpected.getConfiguration().getUserObjectFilter(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.USER_USERNAME_KEY), directoryDelegatingModelExpected.getConfiguration().getUserNameAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.USER_USERNAME_RDN_KEY), directoryDelegatingModelExpected.getConfiguration().getUserNameRdnAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.USER_FIRSTNAME_KEY), directoryDelegatingModelExpected.getConfiguration().getUserFirstNameAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.USER_LASTNAME_KEY), directoryDelegatingModelExpected.getConfiguration().getUserLastNameAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.USER_DISPLAYNAME_KEY), directoryDelegatingModelExpected.getConfiguration().getUserDisplayNameAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.USER_EMAIL_KEY), directoryDelegatingModelExpected.getConfiguration().getUserEmailAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.USER_GROUP_KEY), directoryDelegatingModelExpected.getConfiguration().getUserGroupAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.LDAP_EXTERNAL_ID), directoryDelegatingModelExpected.getConfiguration().getUserUniqueIdAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.GROUP_DN_ADDITION), directoryDelegatingModelExpected.getConfiguration().getGroupDn(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.GROUP_OBJECTCLASS_KEY), directoryDelegatingModelExpected.getConfiguration().getGroupObjectClass(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.GROUP_OBJECTFILTER_KEY), directoryDelegatingModelExpected.getConfiguration().getGroupObjectFilter(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.GROUP_NAME_KEY), directoryDelegatingModelExpected.getConfiguration().getGroupNameAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.GROUP_DESCRIPTION_KEY), directoryDelegatingModelExpected.getConfiguration().getGroupDescriptionAttribute(), firstParameterIsExpected);
+        AssertUtil.assertEquals(directoryActual.getValue(DirectoryModelUtil.GROUP_USERNAMES_KEY), directoryDelegatingModelExpected.getConfiguration().getGroupMembersAttribute(), firstParameterIsExpected);
     }
 
     private void assertDirectoryAllowedOperationsMatches(
@@ -179,40 +177,40 @@ public class DirectoryModelUtilTest {
                 .setAllowedOperations(Collections.emptySet())
                 // Connector attributes
                 .setAttribute(DelegatedAuthenticationDirectory.ATTRIBUTE_LDAP_DIRECTORY_CLASS, DirectoryDelegatingConnectorTypeImplClass.MICROSOFT_ACTIVE_DIRECTORY.getImplClass())
-                .setAttribute(LDAPPropertiesMapper.LDAP_URL_KEY, "ldap://example.com:389")
-                .setAttribute(LDAPPropertiesMapper.LDAP_SECURE_KEY, LdapSecureMode.START_TLS.getName())
-                .setAttribute(LDAPPropertiesMapper.LDAP_REFERRAL_KEY, String.valueOf(true))
-                .setAttribute(LDAPPropertiesMapper.LDAP_NESTED_GROUPS_DISABLED, String.valueOf(false))
+                .setAttribute(DirectoryModelUtil.LDAP_URL_KEY, "ldap://example.com:389")
+                .setAttribute(DirectoryModelUtil.LDAP_SECURE_KEY, "starttls")
+                .setAttribute(DirectoryModelUtil.LDAP_REFERRAL_KEY, String.valueOf(true))
+                .setAttribute(DirectoryModelUtil.LDAP_NESTED_GROUPS_DISABLED, String.valueOf(false))
                 .setAttribute(DelegatedAuthenticationDirectory.ATTRIBUTE_CREATE_USER_ON_AUTH, String.valueOf(false))
                 .setAttribute(DelegatedAuthenticationDirectory.ATTRIBUTE_UPDATE_USER_ON_AUTH, String.valueOf(false))
                 .setAttribute(DelegatedAuthenticationDirectory.ATTRIBUTE_KEY_IMPORT_GROUPS, String.valueOf(false))
-                .setAttribute(LDAPPropertiesMapper.LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE, String.valueOf(false))
-                .setAttribute(LDAPPropertiesMapper.LDAP_PAGEDRESULTS_KEY, String.valueOf(true))
-                .setAttribute(LDAPPropertiesMapper.LDAP_PAGEDRESULTS_SIZE, String.valueOf(999L))
+                .setAttribute(DirectoryModelUtil.LDAP_USING_USER_MEMBERSHIP_ATTRIBUTE, String.valueOf(false))
+                .setAttribute(DirectoryModelUtil.LDAP_PAGEDRESULTS_KEY, String.valueOf(true))
+                .setAttribute(DirectoryModelUtil.LDAP_PAGEDRESULTS_SIZE, String.valueOf(999L))
                 .setAttribute(SynchronisableDirectoryProperties.READ_TIMEOUT_IN_MILLISECONDS, String.valueOf(123000L))
-                .setAttribute(LDAPPropertiesMapper.LDAP_SEARCH_TIMELIMIT, String.valueOf(456000L))
+                .setAttribute(DirectoryModelUtil.LDAP_SEARCH_TIMELIMIT, String.valueOf(456000L))
                 .setAttribute(SynchronisableDirectoryProperties.CONNECTION_TIMEOUT_IN_MILLISECONDS, String.valueOf(789000L))
-                .setAttribute(LDAPPropertiesMapper.LDAP_BASEDN_KEY, "baseDn")
-                .setAttribute(LDAPPropertiesMapper.LDAP_USERDN_KEY, "userDn")
-                .setAttribute(LDAPPropertiesMapper.LDAP_PASSWORD_KEY, "password")
+                .setAttribute(DirectoryModelUtil.LDAP_BASEDN_KEY, "baseDn")
+                .setAttribute(DirectoryModelUtil.LDAP_USERDN_KEY, "userDn")
+                .setAttribute(DirectoryModelUtil.LDAP_PASSWORD_KEY, "password")
                 // Configuration attributes
-                .setAttribute(LDAPPropertiesMapper.USER_DN_ADDITION, "userDnAddition")
-                .setAttribute(LDAPPropertiesMapper.USER_OBJECTCLASS_KEY, "userObjectClass")
-                .setAttribute(LDAPPropertiesMapper.USER_OBJECTFILTER_KEY, "userObjectFilter")
-                .setAttribute(LDAPPropertiesMapper.USER_USERNAME_KEY, "userName")
-                .setAttribute(LDAPPropertiesMapper.USER_USERNAME_RDN_KEY, "userNameRdn")
-                .setAttribute(LDAPPropertiesMapper.USER_FIRSTNAME_KEY, "userFirstName")
-                .setAttribute(LDAPPropertiesMapper.USER_LASTNAME_KEY, "userLastName")
-                .setAttribute(LDAPPropertiesMapper.USER_DISPLAYNAME_KEY, "userDisplayName")
-                .setAttribute(LDAPPropertiesMapper.USER_EMAIL_KEY, "userEmail")
-                .setAttribute(LDAPPropertiesMapper.USER_GROUP_KEY, "userGroup")
-                .setAttribute(LDAPPropertiesMapper.LDAP_EXTERNAL_ID, "userUniqueId")
-                .setAttribute(LDAPPropertiesMapper.GROUP_DN_ADDITION, "groupDnAddition")
-                .setAttribute(LDAPPropertiesMapper.GROUP_OBJECTCLASS_KEY, "groupObjectClass")
-                .setAttribute(LDAPPropertiesMapper.GROUP_OBJECTFILTER_KEY, "groupObjectFilter")
-                .setAttribute(LDAPPropertiesMapper.GROUP_NAME_KEY, "groupName")
-                .setAttribute(LDAPPropertiesMapper.GROUP_DESCRIPTION_KEY, "groupDescription")
-                .setAttribute(LDAPPropertiesMapper.GROUP_USERNAMES_KEY, "groupMembers")
+                .setAttribute(DirectoryModelUtil.USER_DN_ADDITION, "userDnAddition")
+                .setAttribute(DirectoryModelUtil.USER_OBJECTCLASS_KEY, "userObjectClass")
+                .setAttribute(DirectoryModelUtil.USER_OBJECTFILTER_KEY, "userObjectFilter")
+                .setAttribute(DirectoryModelUtil.USER_USERNAME_KEY, "userName")
+                .setAttribute(DirectoryModelUtil.USER_USERNAME_RDN_KEY, "userNameRdn")
+                .setAttribute(DirectoryModelUtil.USER_FIRSTNAME_KEY, "userFirstName")
+                .setAttribute(DirectoryModelUtil.USER_LASTNAME_KEY, "userLastName")
+                .setAttribute(DirectoryModelUtil.USER_DISPLAYNAME_KEY, "userDisplayName")
+                .setAttribute(DirectoryModelUtil.USER_EMAIL_KEY, "userEmail")
+                .setAttribute(DirectoryModelUtil.USER_GROUP_KEY, "userGroup")
+                .setAttribute(DirectoryModelUtil.LDAP_EXTERNAL_ID, "userUniqueId")
+                .setAttribute(DirectoryModelUtil.GROUP_DN_ADDITION, "groupDnAddition")
+                .setAttribute(DirectoryModelUtil.GROUP_OBJECTCLASS_KEY, "groupObjectClass")
+                .setAttribute(DirectoryModelUtil.GROUP_OBJECTFILTER_KEY, "groupObjectFilter")
+                .setAttribute(DirectoryModelUtil.GROUP_NAME_KEY, "groupName")
+                .setAttribute(DirectoryModelUtil.GROUP_DESCRIPTION_KEY, "groupDescription")
+                .setAttribute(DirectoryModelUtil.GROUP_USERNAMES_KEY, "groupMembers")
                 ;
 
         return directoryBuilder.build();
