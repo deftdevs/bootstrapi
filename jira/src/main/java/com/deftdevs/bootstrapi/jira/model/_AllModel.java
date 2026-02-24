@@ -4,6 +4,7 @@ import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsModel;
 import com.deftdevs.bootstrapi.commons.model.UserModel;
+import com.deftdevs.bootstrapi.commons.model.type._AllModelAccessor;
 import com.deftdevs.bootstrapi.commons.model.type._AllModelStatus;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -17,7 +18,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @XmlRootElement(name = BootstrAPI._ALL)
-public class _AllModel {
+public class _AllModel implements _AllModelAccessor {
 
     @XmlElement
     private SettingsModel settings;

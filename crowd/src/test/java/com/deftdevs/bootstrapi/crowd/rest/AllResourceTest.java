@@ -43,8 +43,7 @@ public class AllResourceTest {
 
         Map<String, _AllModelStatus> status = new HashMap<>();
         status.put("settings", _AllModelStatus.success());
-        status.put("users", _AllModelStatus.success());
-        status.put("groups", _AllModelStatus.success());
+        status.put("directories", _AllModelStatus.success());
         status.put("applications", _AllModelStatus.success());
         allModel.setStatus(status);
     }

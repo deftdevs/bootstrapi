@@ -1,6 +1,8 @@
 package com.deftdevs.bootstrapi.commons.service.api;
 
-public interface _AllService<_AllModel> {
+import com.deftdevs.bootstrapi.commons.model.type._AllModelAccessor;
+
+public interface _AllService<_AllModel extends _AllModelAccessor> {
 
     /**
      * Apply a complete configuration.
