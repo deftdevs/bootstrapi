@@ -20,6 +20,11 @@ public class AbstractMailServerResourceImpl implements MailServerResource {
     @Override
     public Response getMailServerSmtp() {
         final MailServerSmtpModel smtpModel = mailServerService.getMailServerSmtp();
+
+        if (smtpModel == null) {
+            return Response.noContent().build();
+        }
+
         return Response.ok(smtpModel).build();
     }
 

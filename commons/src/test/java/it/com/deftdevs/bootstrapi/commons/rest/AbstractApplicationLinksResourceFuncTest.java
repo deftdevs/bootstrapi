@@ -28,9 +28,9 @@ public abstract class AbstractApplicationLinksResourceFuncTest {
     void testSetApplicationLinks() throws Exception {
         final ApplicationLinkModel applicationLinkModel = getExampleModel();
 
-        final HttpResponse<String> applicationLinksResponse = HttpRequestHelper.builder(BootstrAPI.APPLICATION_LINKS + "?" + "ignoreSetupErrors")
+        final HttpResponse<String> applicationLinksResponse = HttpRequestHelper.builder(BootstrAPI.APPLICATION_LINKS + "?" + "ignore-setup-errors=true")
                 .request(HttpMethod.PUT, Collections.singletonList(applicationLinkModel));
-        assertEquals(Response.Status.OK.getStatusCode(), applicationLinksResponse.statusCode());
+        assertEquals(Response.Status.OK.getStatusCode(), applicationLinksResponse.statusCode(), applicationLinksResponse.body());
 
         final List<ApplicationLinkModel> applicationLinkModels = objectMapper.readValue(applicationLinksResponse.body(), new TypeReference<List<ApplicationLinkModel>>(){});
         assertEquals(1, applicationLinkModels.size());
