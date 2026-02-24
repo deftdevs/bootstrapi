@@ -18,9 +18,9 @@ import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.WebApplicationException;
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -179,9 +179,9 @@ public class GroupsServiceTest {
 
     @Test
     public void testSetGroups() {
-        final List<GroupModel> groupModels = new ArrayList<>();
-        groupModels.add(GroupModel.EXAMPLE_1);
-        groupModels.add(GroupModel.EXAMPLE_2);
+        final Map<String, GroupModel> groupModels = new LinkedHashMap<>();
+        groupModels.put(GroupModel.EXAMPLE_1.getName(), GroupModel.EXAMPLE_1);
+        groupModels.put(GroupModel.EXAMPLE_2.getName(), GroupModel.EXAMPLE_2);
 
         final GroupsServiceImpl spy = spy(groupsService);
         doAnswer(invocation -> invocation.getArguments()[2]).when(spy).setGroup(anyLong(), any(), any());
@@ -192,7 +192,7 @@ public class GroupsServiceTest {
 
     @Test
     public void testSetGroupsNull() {
-        assertEquals(Collections.emptyList(), groupsService.setGroups(0L, null));
+        assertEquals(Collections.emptyMap(), groupsService.setGroups(0L, null));
     }
 
     // We kind of need to test all the exceptions here, but it's also pointless to test

@@ -22,7 +22,7 @@ import java.net.URI;
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
 @XmlRootElement(name = BootstrAPI.DIRECTORY + '-' + BootstrAPI.DIRECTORY_CROWD)
-public class DirectoryCrowdModel extends AbstractDirectoryModel {
+public class DirectoryCrowdModel extends AbstractDirectoryExternalModel {
 
     @XmlElement
     private DirectoryCrowdServer server;

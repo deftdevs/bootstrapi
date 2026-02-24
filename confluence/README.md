@@ -24,7 +24,7 @@ All URIs are relative to *https://CONFLUENCE_URL/rest/bootstrapi/1*
 *CachesApi* | [**updateCache**](Apis/CachesApi.md#updateCache) | **PUT** /caches/{name} | Update an existing cache-size. Only Setting maxObjectCount is supported. |
 | *DirectoriesApi* | [**deleteDirectories**](Apis/DirectoriesApi.md#deleteDirectories) | **DELETE** /directories | Delete all user directories |
 *DirectoriesApi* | [**getDirectories**](Apis/DirectoriesApi.md#getDirectories) | **GET** /directories | Get all user directories |
-*DirectoriesApi* | [**setDirectories**](Apis/DirectoriesApi.md#setDirectories) | **PUT** /directories | Set a list of user directories |
+*DirectoriesApi* | [**setDirectories**](Apis/DirectoriesApi.md#setDirectories) | **PUT** /directories | Set directories mapped by their name. |
 | *DirectoryApi* | [**createDirectory**](Apis/DirectoryApi.md#createDirectory) | **POST** /directory | Create a user directory |
 *DirectoryApi* | [**deleteDirectory**](Apis/DirectoryApi.md#deleteDirectory) | **DELETE** /directory/{id} | Delete a user directory |
 *DirectoryApi* | [**getDirectory**](Apis/DirectoryApi.md#getDirectory) | **GET** /directory/{id} | Get a user directory |

@@ -15,6 +15,8 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.Map;
+
 import static com.deftdevs.bootstrapi.confluence.model.util.UserModelUtil.toUser;
 import static com.deftdevs.bootstrapi.confluence.model.util.UserModelUtil.toUserModel;
 import static org.junit.jupiter.api.Assertions.*;
@@ -136,7 +138,7 @@ class UserServiceTest {
     @Test
     void testSetUsersByDirectoryIdNotImplemented() {
         assertThrows(UnsupportedOperationException.class, () -> {
-            userService.setUsers(0, null);
+            userService.setUsers(0, (Map<String, UserModel>) null);
         });
     }
 

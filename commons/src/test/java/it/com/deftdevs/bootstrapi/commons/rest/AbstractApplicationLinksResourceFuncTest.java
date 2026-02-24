@@ -10,9 +10,10 @@ import javax.ws.rs.HttpMethod;
 import javax.ws.rs.core.Response;
 import java.net.http.HttpResponse;
 import java.util.Collections;
-import java.util.List;
+import java.util.Map;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public abstract class AbstractApplicationLinksResourceFuncTest {
 
@@ -28,14 +29,14 @@ public abstract class AbstractApplicationLinksResourceFuncTest {
     void testSetApplicationLinks() throws Exception {
         final ApplicationLinkModel applicationLinkModel = getExampleModel();
 
-        final HttpResponse<String> applicationLinksResponse = HttpRequestHelper.builder(BootstrAPI.APPLICATION_LINKS + "?" + "ignore-setup-errors=true")
-                .request(HttpMethod.PUT, Collections.singletonList(applicationLinkModel));
+        final HttpResponse<String> applicationLinksResponse = HttpRequestHelper.builder(BootstrAPI.APPLICATION_LINKS)
+                .request(HttpMethod.PUT, Collections.singletonMap(applicationLinkModel.getName(), applicationLinkModel));
         assertEquals(Response.Status.OK.getStatusCode(), applicationLinksResponse.statusCode(), applicationLinksResponse.body());
 
-        final List<ApplicationLinkModel> applicationLinkModels = objectMapper.readValue(applicationLinksResponse.body(), new TypeReference<List<ApplicationLinkModel>>(){});
-        assertEquals(1, applicationLinkModels.size());
+        final Map<String, ApplicationLinkModel> applicationLinkModels = objectMapper.readValue(applicationLinksResponse.body(), new TypeReference<Map<String, ApplicationLinkModel>>(){});
+        assertTrue(applicationLinkModels.containsKey(applicationLinkModel.getName()));
 
-        final ApplicationLinkModel responseApplicationLinkModel = applicationLinkModels.iterator().next();
+        final ApplicationLinkModel responseApplicationLinkModel = applicationLinkModels.get(applicationLinkModel.getName());
         assertEquals(applicationLinkModel.getRpcUrl(), responseApplicationLinkModel.getRpcUrl());
     }
 
@@ -58,7 +59,16 @@ public abstract class AbstractApplicationLinksResourceFuncTest {
     }
 
     protected ApplicationLinkModel getExampleModel() {
-        return ApplicationLinkModel.EXAMPLE_1;
+        return ApplicationLinkModel.builder()
+                .name(ApplicationLinkModel.EXAMPLE_1.getName())
+                .displayUrl(ApplicationLinkModel.EXAMPLE_1.getDisplayUrl())
+                .rpcUrl(ApplicationLinkModel.EXAMPLE_1.getRpcUrl())
+                .outgoingAuthType(ApplicationLinkModel.EXAMPLE_1.getOutgoingAuthType())
+                .incomingAuthType(ApplicationLinkModel.EXAMPLE_1.getIncomingAuthType())
+                .primary(ApplicationLinkModel.EXAMPLE_1.getPrimary())
+                .type(ApplicationLinkModel.EXAMPLE_1.getType())
+                .ignoreSetupErrors(true)
+                .build();
     }
 
 }

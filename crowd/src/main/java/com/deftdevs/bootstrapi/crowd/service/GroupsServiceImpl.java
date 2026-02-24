@@ -17,8 +17,8 @@ import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 
 import javax.annotation.Nullable;
 import java.util.Collections;
-import java.util.List;
-import java.util.stream.Collectors;
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class GroupsServiceImpl implements GroupsService {
 
@@ -115,17 +115,20 @@ public class GroupsServiceImpl implements GroupsService {
     }
 
     @Override
-    public List<GroupModel> setGroups(
+    public Map<String, GroupModel> setGroups(
             final long directoryId,
-            final List<GroupModel> groupModels) {
+            final Map<String, GroupModel> groupModels) {
 
         if (groupModels == null) {
-            return Collections.emptyList();
+            return Collections.emptyMap();
         }
 
-        return groupModels.stream()
-                .map(groupModel -> setGroup(directoryId, groupModel.getName(), groupModel))
-                .collect(Collectors.toList());
+        final Map<String, GroupModel> resultGroupModels = new LinkedHashMap<>();
+        for (Map.Entry<String, GroupModel> entry : groupModels.entrySet()) {
+            final GroupModel resultGroupModel = setGroup(directoryId, entry.getKey(), entry.getValue());
+            resultGroupModels.put(resultGroupModel.getName(), resultGroupModel);
+        }
+        return resultGroupModels;
     }
 
     @Nullable
