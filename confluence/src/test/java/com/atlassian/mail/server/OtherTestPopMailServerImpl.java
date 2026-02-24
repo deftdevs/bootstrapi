@@ -1,8 +1,8 @@
 package com.atlassian.mail.server;
 
-import com.atlassian.mail.server.impl.PopMailServerImpl;
+import com.atlassian.confluence.mail.ConfluencePopMailServer;
 
-public class OtherTestPopMailServerImpl extends PopMailServerImpl implements OtherTestPopMailServer {
+public class OtherTestPopMailServerImpl extends ConfluencePopMailServer implements OtherTestPopMailServer {
 
     public OtherTestPopMailServerImpl() {
         super(
@@ -14,10 +14,9 @@ public class OtherTestPopMailServerImpl extends PopMailServerImpl implements Oth
                 PORT,
                 USERNAME,
                 PASSWORD,
-                TIMEOUT
+                null
         );
+        setTimeout(TIMEOUT);
     }
-
-
 
 }

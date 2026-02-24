@@ -3,7 +3,6 @@ package com.deftdevs.bootstrapi.crowd.model.util;
 import com.atlassian.crowd.manager.mail.MailConfiguration;
 import com.atlassian.crowd.manager.mail.MockMailConfiguration;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
@@ -33,7 +32,6 @@ public class MailServerSmtpModelUtilTest {
     }
 
     @Test
-    @Disabled("Running in IntelliJ, failing in Maven!?")
     public void testToMailConfiguration() throws AddressException {
         final MailServerSmtpModel mailServerSmtpModel = MailServerSmtpModel.EXAMPLE_1;
 

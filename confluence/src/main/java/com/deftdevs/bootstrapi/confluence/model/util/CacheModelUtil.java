@@ -4,6 +4,9 @@ import com.atlassian.cache.CacheStatisticsKey;
 import com.atlassian.cache.ManagedCache;
 import com.deftdevs.bootstrapi.confluence.model.CacheModel;
 
+import java.util.SortedMap;
+import java.util.function.Supplier;
+
 public class CacheModelUtil {
 
     /**
@@ -16,7 +19,7 @@ public class CacheModelUtil {
 
         return CacheModel.builder()
             .name(managedCache.getName())
-            .currentHeapSizeInByte(managedCache.getStatistics().get(CacheStatisticsKey.HEAP_SIZE).get())
+            .currentHeapSizeInByte(getStatistic(managedCache, CacheStatisticsKey.HEAP_SIZE))
             .effectivenessInPercent(getEffectiveness(managedCache))
             .maxObjectCount(managedCache.currentMaxEntries())
             .utilisationInPercent(getUtilization(managedCache))
@@ -24,27 +27,36 @@ public class CacheModelUtil {
             .build();
     }
 
-    private static double getEffectiveness(
-            final ManagedCache cache) {
+    private static Long getStatistic(
+            final ManagedCache cache,
+            final CacheStatisticsKey key) {
 
-        long hit = cache.getStatistics().get(CacheStatisticsKey.HIT_COUNT).get();
-        long miss = cache.getStatistics().get(CacheStatisticsKey.MISS_COUNT).get();
-        return (double) hit * 100 / (hit + miss);
+        final SortedMap<CacheStatisticsKey, Supplier<Long>> statistics = cache.getStatistics();
+        final Supplier<Long> supplier = statistics.get(key);
+        return supplier != null ? supplier.get() : null;
     }
 
+    private static Double getEffectiveness(
+            final ManagedCache cache) {
+
+        final Long hit = getStatistic(cache, CacheStatisticsKey.HIT_COUNT);
+        final Long miss = getStatistic(cache, CacheStatisticsKey.MISS_COUNT);
+        if (hit == null || miss == null || hit + miss == 0) {
+            return null;
+        }
+        return (double) hit * 100 / (hit + miss);
+    }
 
     private static Double getUtilization(
             final ManagedCache cache) {
 
-        // currentMaxEntries can be null so check this first
+        final Long objects = getStatistic(cache, CacheStatisticsKey.SIZE);
+        final Integer size = cache.currentMaxEntries();
 
-        long objects = cache.getStatistics().get(CacheStatisticsKey.SIZE).get();
-        Integer size = cache.currentMaxEntries();
-
-        if (size != null) {
-            return (double) objects * 100 / size;
+        if (objects == null || size == null) {
+            return null;
         }
-        return null;
+        return (double) objects * 100 / size;
     }
 
     private CacheModelUtil() {

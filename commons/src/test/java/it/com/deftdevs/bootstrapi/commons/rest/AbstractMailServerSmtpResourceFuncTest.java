@@ -22,7 +22,7 @@ public abstract class AbstractMailServerSmtpResourceFuncTest {
 
     @Test
     @Order(1)
-    void testGetMailServerSmtpNotConfigured() throws Exception {
+    protected void testGetMailServerSmtpNotConfigured() throws Exception {
         final HttpResponse<String> mailServerSmtpResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
                 .request();
         assertEquals(Response.Status.NO_CONTENT.getStatusCode(), mailServerSmtpResponse.statusCode());

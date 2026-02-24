@@ -8,10 +8,16 @@ import com.deftdevs.bootstrapi.confluence.model.CacheModel;
 import com.deftdevs.bootstrapi.confluence.model.util.CacheModelUtil;
 import com.deftdevs.bootstrapi.confluence.service.api.CachesService;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class CachesServiceImpl implements CachesService {
+
+    private static final Logger log = LoggerFactory.getLogger(CachesServiceImpl.class);
 
     private final CacheManager cacheManager;
 
@@ -23,9 +29,16 @@ public class CachesServiceImpl implements CachesService {
 
     @Override
     public List<CacheModel> getAllCaches() {
-        return cacheManager.getManagedCaches().stream()
-                .map(CacheModelUtil::toCacheModel)
-                .collect(Collectors.toList());
+        final Collection<ManagedCache> managedCaches = cacheManager.getManagedCaches();
+        final List<CacheModel> cacheModels = new ArrayList<>();
+        for (ManagedCache managedCache : managedCaches) {
+            try {
+                cacheModels.add(CacheModelUtil.toCacheModel(managedCache));
+            } catch (Exception e) {
+                log.warn("Failed to convert cache '{}': {}", managedCache.getName(), e.getMessage());
+            }
+        }
+        return cacheModels;
     }
 
     @Override

@@ -1,8 +1,8 @@
 package com.atlassian.mail.server;
 
-import com.atlassian.mail.server.impl.SMTPMailServerImpl;
+import com.atlassian.confluence.jmx.JmxSMTPMailServer;
 
-public class OtherTestSmtpMailServerImpl extends SMTPMailServerImpl implements OtherTestSmtpMailServer {
+public class OtherTestSmtpMailServerImpl extends JmxSMTPMailServer implements OtherTestSmtpMailServer {
 
     public OtherTestSmtpMailServerImpl() {
         super(
@@ -11,6 +11,7 @@ public class OtherTestSmtpMailServerImpl extends SMTPMailServerImpl implements O
                 DESCRIPTION,
                 FROM,
                 PREFIX,
+                false,
                 false,
                 PROTOCOL,
                 HOST,

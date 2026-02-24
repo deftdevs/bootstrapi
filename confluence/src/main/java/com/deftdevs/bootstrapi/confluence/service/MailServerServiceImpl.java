@@ -1,12 +1,12 @@
 package com.deftdevs.bootstrapi.confluence.service;
 
+import com.atlassian.confluence.jmx.JmxSMTPMailServer;
+import com.atlassian.confluence.mail.ConfluencePopMailServer;
 import com.atlassian.mail.MailException;
 import com.atlassian.mail.MailProtocol;
 import com.atlassian.mail.server.MailServerManager;
 import com.atlassian.mail.server.PopMailServer;
 import com.atlassian.mail.server.SMTPMailServer;
-import com.atlassian.mail.server.impl.PopMailServerImpl;
-import com.atlassian.mail.server.impl.SMTPMailServerImpl;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.MailServerPopModel;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
@@ -35,7 +35,7 @@ public class MailServerServiceImpl implements MailServerService {
     public MailServerSmtpModel setMailServerSmtp(MailServerSmtpModel mailServerSmtpModel) {
         final SMTPMailServer smtpMailServer = mailServerManager.isDefaultSMTPMailServerDefined()
                 ? mailServerManager.getDefaultSMTPMailServer()
-                : new SMTPMailServerImpl.Builder<>().build();
+                : new JmxSMTPMailServer();
 
         assert smtpMailServer != null;
 
@@ -100,7 +100,7 @@ public class MailServerServiceImpl implements MailServerService {
 
         final PopMailServer popMailServer = mailServerManager.getDefaultPopMailServer() != null
                 ? mailServerManager.getDefaultPopMailServer()
-                : new PopMailServerImpl.Builder<>().build();
+                : new ConfluencePopMailServer(null, null, null, null, null, null, null, null, null);
 
         assert popMailServer != null;
 
