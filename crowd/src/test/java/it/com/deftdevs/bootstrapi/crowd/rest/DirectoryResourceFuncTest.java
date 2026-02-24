@@ -50,7 +50,7 @@ public class DirectoryResourceFuncTest {
         // Delete
         final HttpResponse<String> deleteResponse = HttpRequestHelper.builder(BootstrAPI.DIRECTORY + "/" + createdDirectory.getId())
                 .request(HttpMethod.DELETE, null);
-        assertEquals(Response.Status.OK.getStatusCode(), deleteResponse.statusCode());
+        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), deleteResponse.statusCode());
 
         // Verify deleted
         final HttpResponse<String> getAfterDeleteResponse = HttpRequestHelper.builder(BootstrAPI.DIRECTORY + "/" + createdDirectory.getId())
