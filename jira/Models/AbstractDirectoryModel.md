@@ -16,8 +16,8 @@
 | **permissions** | [**DirectoryLdapPermissions**](DirectoryLdapPermissions.md) |  | [optional] [default to null] |
 | **credentialPolicy** | [**DirectoryInternalCredentialPolicy**](DirectoryInternalCredentialPolicy.md) |  | [optional] [default to null] |
 | **advanced** | [**DirectoryInternalAdvanced**](DirectoryInternalAdvanced.md) |  | [optional] [default to null] |
-| **groups** | [**List**](GroupModel.md) |  | [optional] [default to null] |
-| **users** | [**List**](UserModel.md) |  | [optional] [default to null] |
+| **groups** | [**Map**](GroupModel.md) |  | [optional] [default to null] |
+| **users** | [**Map**](UserModel.md) |  | [optional] [default to null] |
 | **server** | [**DirectoryLdapServer**](DirectoryLdapServer.md) |  | [optional] [default to null] |
 | **schema** | [**DirectoryLdapSchema**](DirectoryLdapSchema.md) |  | [optional] [default to null] |
 
