@@ -91,6 +91,8 @@ public class HttpRequestHelper {
             requestBuilder.header("Accept", acceptMediaType);
         }
 
+        requestBuilder.header("X-Atlassian-Token", "no-check");
+
         if (username != null && password != null) {
             requestBuilder.header("Authorization", "Basic " +
                     Base64.getEncoder().encodeToString((String.format("%s:%s", username, password)).getBytes()));
