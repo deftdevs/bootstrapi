@@ -1,6 +1,5 @@
 package com.deftdevs.bootstrapi.jira.service;
 
-import com.atlassian.jira.permission.GlobalPermissionKey;
 import com.atlassian.jira.permission.GlobalPermissionType;
 import com.atlassian.jira.security.GlobalPermissionEntry;
 import com.atlassian.jira.security.GlobalPermissionManager;
@@ -17,7 +16,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class PermissionsServiceImpl implements PermissionsService {
 
@@ -53,10 +51,6 @@ public class PermissionsServiceImpl implements PermissionsService {
                 ));
 
         final Map<String, ? extends Collection<String>> requestGroupPermissions = permissionsGlobalModel.getGroupPermissions();
-        final Set<String> validGlobalPermissions = Stream.concat(
-                GlobalPermissionKey.DEFAULT_APP_GLOBAL_PERMISSIONS.stream(),
-                Stream.of(GlobalPermissionKey.ADMINISTER, GlobalPermissionKey.SYSTEM_ADMIN)
-        ).map(GlobalPermissionKey::getKey).collect(Collectors.toSet());
 
         if (requestGroupPermissions == null) {
             return;
@@ -70,15 +64,17 @@ public class PermissionsServiceImpl implements PermissionsService {
             }
 
             for (String permission : existingGroupPermissions.get(group)) {
-                if (!validGlobalPermissions.contains(permission)) {
+                if (requestGroupPermissions.get(group).contains(permission)) {
+                    continue;
+                }
+
+                final GlobalPermissionType permissionType = getGlobalPermissionType(permission);
+                if (permissionType == null) {
+                    // an existing permission is unknown to Jira - this should not happen at runtime
                     throw new InternalServerErrorException(String.format("The given global permission '%s' is not valid", permission));
                 }
 
-                if (!requestGroupPermissions.get(group).contains(permission)) {
-                    final GlobalPermissionType permissionType = getGlobalPermissionType(permission);
-                    assert permissionType != null;  // we've already checked if it's valid
-                    globalPermissionManager.removePermission(permissionType, group);
-                }
+                globalPermissionManager.removePermission(permissionType, group);
             }
         }
 
@@ -86,15 +82,16 @@ public class PermissionsServiceImpl implements PermissionsService {
         for (String group : requestGroupPermissions.keySet()) {
             // consider all groups of the request for global permissions that are supposed to be added
             for (String permission : requestGroupPermissions.get(group)) {
-                if (!validGlobalPermissions.contains(permission)) {
+                if (existingGroupPermissions.containsKey(group) && existingGroupPermissions.get(group).contains(permission)) {
+                    continue;
+                }
+
+                final GlobalPermissionType permissionType = getGlobalPermissionType(permission);
+                if (permissionType == null) {
                     throw new BadRequestException(String.format("The given global permission '%s' is not valid", permission));
                 }
 
-                if (!existingGroupPermissions.containsKey(group) || !existingGroupPermissions.get(group).contains(permission)) {
-                    final GlobalPermissionType permissionType = getGlobalPermissionType(permission);
-                    assert permissionType != null;  // we've already checked if it's valid
-                    globalPermissionManager.addPermission(permissionType, group);
-                }
+                globalPermissionManager.addPermission(permissionType, group);
             }
         }
     }
