@@ -85,8 +85,9 @@ public class MailServerServiceTest {
         final MailConfiguration emptyMailConfiguration = MailConfiguration.builder().build();
         doReturn(emptyMailConfiguration).when(mailConfigurationService).getMailConfiguration();
 
-        final MailServerSmtpModel mailServerSmtpModel = MailServerSmtpModel.EXAMPLE_1;
-        mailServerSmtpModel.setFrom("@wrong@format@");
+        final MailServerSmtpModel mailServerSmtpModel = MailServerSmtpModel.builder()
+                .from("@wrong@format@")
+                .build();
 
         assertThrows(BadRequestException.class, () -> {
             mailServerService.setMailServerSmtp(mailServerSmtpModel);
