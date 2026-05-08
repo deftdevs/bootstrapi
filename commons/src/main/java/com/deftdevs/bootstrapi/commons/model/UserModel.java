@@ -2,14 +2,14 @@ package com.deftdevs.bootstrapi.commons.model;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import lombok.Builder;
 import lombok.NoArgsConstructor;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.List;
+import java.util.Map;
 
 /**
  * Model for users REST requests.
@@ -44,7 +44,7 @@ public class UserModel {
     private String password;
 
     @XmlElement
-    private List<GroupModel> groups;
+    private Map<String, GroupModel> groups;
 
     // Example instances for documentation and tests
 

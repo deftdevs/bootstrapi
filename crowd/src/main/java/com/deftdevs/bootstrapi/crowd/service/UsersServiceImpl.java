@@ -27,6 +27,7 @@ import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.atlassian.crowd.model.user.UserConstants.*;
@@ -103,22 +104,20 @@ public class UsersServiceImpl implements UsersService {
             final String username,
             final UserModel userModel) {
 
-        final User existingUser = findUser(directoryId, userModel.getUsername());
+        final String effectiveUsername = userModel.getUsername() != null ? userModel.getUsername() : username;
+
+        if (effectiveUsername == null) {
+            throw new BadRequestException("Cannot create user, username is required");
+        }
+
+        if (username != null && !effectiveUsername.equals(username)) {
+            throw new BadRequestException("Cannot create user, two different usernames provided");
+        }
+
+        final User existingUser = findUser(directoryId, effectiveUsername);
 
         if (existingUser != null) {
-            throw new BadRequestException(String.format("User '%s' already exists", userModel.getUsername()));
-        }
-
-        if (userModel.getUsername() == null) {
-            if (username == null) {
-                throw new BadRequestException("Cannot create user, username is required");
-            }
-
-            userModel.setUsername(username);
-        }
-
-        if (username != null && !userModel.getUsername().equals(username)) {
-            throw new BadRequestException("Cannot create user, two different usernames provided");
+            throw new BadRequestException(String.format("User '%s' already exists", effectiveUsername));
         }
 
         if (userModel.getFirstName() == null || userModel.getLastName() == null || userModel.getFullName() == null || userModel.getEmail() == null) {
@@ -129,7 +128,7 @@ public class UsersServiceImpl implements UsersService {
             throw new BadRequestException("Cannot create user, password is required");
         }
 
-        final UserTemplateWithAttributes userTemplate = new UserTemplateWithAttributes(userModel.getUsername(), directoryId);
+        final UserTemplateWithAttributes userTemplate = new UserTemplateWithAttributes(effectiveUsername, directoryId);
         userTemplate.setFirstName(userModel.getFirstName());
         userTemplate.setLastName(userModel.getLastName());
         userTemplate.setDisplayName(userModel.getFullName());
@@ -140,7 +139,7 @@ public class UsersServiceImpl implements UsersService {
         final UserModel resultUserModel = UserModelUtil.toUserModel(user);
 
         if (userModel.getGroups() != null) {
-            final List<GroupModel> resultGroupModels = addUserToGroups(directoryId, userModel.getUsername(), userModel.getGroups());
+            final Map<String, GroupModel> resultGroupModels = addUserToGroups(directoryId, effectiveUsername, userModel.getGroups());
             resultUserModel.setGroups(resultGroupModels);
         }
 
@@ -173,7 +172,7 @@ public class UsersServiceImpl implements UsersService {
         final UserModel resultUserModel = UserModelUtil.toUserModel(user);
 
         if (userModel.getGroups() != null) {
-            final List<GroupModel> resultGroupModels = addUserToGroups(directoryId, userModel.getUsername(), userModel.getGroups());
+            final Map<String, GroupModel> resultGroupModels = addUserToGroups(directoryId, user.getName(), userModel.getGroups());
             resultUserModel.setGroups(resultGroupModels);
         }
 
@@ -395,19 +394,19 @@ public class UsersServiceImpl implements UsersService {
         }
     }
 
-    List<GroupModel> addUserToGroups(
+    Map<String, GroupModel> addUserToGroups(
             final long directoryId,
             final String username,
-            final List<GroupModel> groupModels) {
+            final Map<String, GroupModel> groupModels) {
 
         final List<GroupModel> resultGroupModels = new ArrayList<>();
 
         if (groupModels != null) {
-            for (GroupModel groupModel : groupModels) {
-                final GroupModel resultGroupModel = groupsService.setGroup(directoryId, groupModel.getName(), groupModel);
+            for (Map.Entry<String, GroupModel> groupModelEntry : groupModels.entrySet()) {
+                final GroupModel resultGroupModel = groupsService.setGroup(directoryId, groupModelEntry.getKey(), groupModelEntry.getValue());
 
                 try {
-                    directoryManager.addUserToGroup(directoryId, username, groupModel.getName());
+                    directoryManager.addUserToGroup(directoryId, username, resultGroupModel.getName());
                     resultGroupModels.add(resultGroupModel);
                 } catch (DirectoryPermissionException | ReadOnlyGroupException e) {
                     throw new BadRequestException(e);
@@ -421,7 +420,7 @@ public class UsersServiceImpl implements UsersService {
             }
         }
 
-        return resultGroupModels;
+        return resultGroupModels.stream().collect(Collectors.toMap(GroupModel::getName, Function.identity()));
     }
 
     private static UserTemplate getUserTemplate(

@@ -172,7 +172,10 @@ public class DirectoriesServiceImpl extends AbstractDirectoriesService {
         return directoryManager.searchDirectories(allDirectoriesEntityQuery);
     }
 
-    private void handleGroupsAndUsers(AbstractDirectoryModel directoryModel, AbstractDirectoryModel resultDirectoryModel) {
+    private void handleGroupsAndUsers(
+            final AbstractDirectoryModel directoryModel,
+            final AbstractDirectoryModel resultDirectoryModel) {
+
         if (DirectoryInternalModel.class.equals(directoryModel.getClass()) && directoryModel.getClass().equals(resultDirectoryModel.getClass())) {
             final DirectoryInternalModel directoryInternalModel = (DirectoryInternalModel) directoryModel;
             final DirectoryInternalModel resultDirectoryInternalModel = (DirectoryInternalModel) resultDirectoryModel;
