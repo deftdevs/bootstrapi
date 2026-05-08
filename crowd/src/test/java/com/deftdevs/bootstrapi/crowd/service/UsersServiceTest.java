@@ -27,6 +27,9 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import javax.ws.rs.WebApplicationException;
 import java.util.*;
+import java.util.function.Function;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static com.atlassian.crowd.model.user.UserConstants.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -128,9 +131,8 @@ public class UsersServiceTest {
         final UserModel userModel = UserModelUtil.toUserModel(user);
         userModel.setPassword("s3cr3t");
 
-        final Map<String, UserModel> userModels = new LinkedHashMap<>();
-        userModels.put(userModel.getUsername(), userModel);
-        userModels.put(UserModel.EXAMPLE_1.getUsername(), UserModel.EXAMPLE_1);
+        final Map<String, UserModel> userModels = Stream.of(userModel, UserModel.EXAMPLE_1)
+                .collect(Collectors.toMap(UserModel::getUsername, Function.identity()));
         final UsersServiceImpl spy = spy(usersService);
         doAnswer(invocation -> invocation.getArguments()[1]).when(spy).setUser(anyLong(), any());
 
@@ -140,7 +142,7 @@ public class UsersServiceTest {
 
     @Test
     public void testSetUsersNull() {
-        assertEquals(Collections.emptyMap(), usersService.setUsers(getTestDirectory().getId(), (Map<String, UserModel>) null));
+        assertEquals(Collections.emptyMap(), usersService.setUsers(getTestDirectory().getId(), null));
     }
 
     @Test
@@ -179,9 +181,10 @@ public class UsersServiceTest {
     public void testAddUserWithGroups() throws CrowdException, DirectoryPermissionException {
         // return the same user as the one we are adding
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addUser(anyLong(), any(), any());
+        doAnswer(invocation -> invocation.getArguments()[2]).when(groupsService).setGroup(anyLong(), anyString(), any());
 
         final UserModel userModel = UserModelUtil.toUserModel(getTestUser());
-        final List<GroupModel> groupModels = Collections.singletonList(GroupModel.EXAMPLE_1);
+        final Map<String, GroupModel> groupModels = Stream.of(GroupModel.EXAMPLE_1).collect(Collectors.toMap(GroupModel::getName, Function.identity()));
         userModel.setPassword("12345");
         userModel.setGroups(groupModels);
 
@@ -215,8 +218,6 @@ public class UsersServiceTest {
     @Test
     public void testAddUserTwoDifferentNames() throws CrowdException {
         final User user = getTestUser();
-        doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
-
         final UserModel userModel = UserModelUtil.toUserModel(user);
 
         assertThrows(BadRequestException.class, () -> {
@@ -279,13 +280,32 @@ public class UsersServiceTest {
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
         // return the same user as the one we are updating
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).updateUser(anyLong(), any());
+        doAnswer(invocation -> invocation.getArguments()[2]).when(groupsService).setGroup(anyLong(), anyString(), any());
 
         final UserModel userModel = UserModelUtil.toUserModel(getTestUser());
-        final List<GroupModel> groupModels = Collections.singletonList(GroupModel.EXAMPLE_1);
+        final Map<String, GroupModel> groupModels = Stream.of(GroupModel.EXAMPLE_1)
+                .collect(Collectors.toMap(GroupModel::getName, Function.identity()));
         userModel.setGroups(groupModels);
 
         usersService.updateUser(1L, user.getName(), userModel);
         verify(groupsService, times(groupModels.size())).setGroup(anyLong(), anyString(), any());
+    }
+
+    @Test
+    public void updateUserWithGroupsAndNoUsernameInModel() throws CrowdException, DirectoryPermissionException {
+        final User user = getTestUser();
+        doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
+        // return the same user as the one we are updating
+        doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).updateUser(anyLong(), any());
+        doAnswer(invocation -> invocation.getArguments()[2]).when(groupsService).setGroup(anyLong(), anyString(), any());
+
+        final UserModel userModel = UserModel.builder()
+                .fullName("Other Full Name")
+                .groups(Stream.of(GroupModel.EXAMPLE_1).collect(Collectors.toMap(GroupModel::getName, Function.identity())))
+                .build();
+
+        usersService.updateUser(1L, user.getName(), userModel);
+        verify(directoryManager).addUserToGroup(anyLong(), eq(user.getName()), anyString());
     }
 
     @Test
