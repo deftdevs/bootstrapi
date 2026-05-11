@@ -66,10 +66,22 @@ public class UsersServiceImpl implements UsersService {
             final long directoryId,
             final UserModel userModel) {
 
-        final User user = findUser(directoryId, userModel.getUsername());
+        if (userModel.getUsername() == null) {
+            throw new BadRequestException("Cannot set user, username is required");
+        }
+
+        return setUser(directoryId, userModel.getUsername(), userModel);
+    }
+
+    UserModel setUser(
+            final long directoryId,
+            final String username,
+            final UserModel userModel) {
+
+        final User user = findUser(directoryId, username);
 
         if (user == null) {
-            return addUser(directoryId, userModel);
+            return addUser(directoryId, username, userModel);
         }
 
         return updateUser(directoryId, user.getName(), userModel);
@@ -86,7 +98,7 @@ public class UsersServiceImpl implements UsersService {
 
         final Map<String, UserModel> resultUserModels = new LinkedHashMap<>();
         for (Map.Entry<String, UserModel> entry : userModels.entrySet()) {
-            final UserModel resultUserModel = setUser(directoryId, entry.getValue());
+            final UserModel resultUserModel = setUser(directoryId, entry.getKey(), entry.getValue());
             resultUserModels.put(resultUserModel.getUsername(), resultUserModel);
         }
         return resultUserModels;
@@ -415,7 +427,7 @@ public class UsersServiceImpl implements UsersService {
                          OperationFailedException e) {
                     throw new InternalServerErrorException(e);
                 } catch (MembershipAlreadyExistsException e) {
-                    // ignore
+                    resultGroupModels.add(resultGroupModel);
                 }
             }
         }

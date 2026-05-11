@@ -101,14 +101,20 @@ public class UsersServiceTest {
     }
 
     @Test
+    public void testSetUserNoUsername() {
+        assertThrows(BadRequestException.class, () ->
+                usersService.setUser(1L, UserModel.builder().build()));
+    }
+
+    @Test
     public void testSetUserAddNew() {
         final User user = getTestUser();
         final UserModel userModel = UserModelUtil.toUserModel(user);
         final UsersServiceImpl spy = spy(usersService);
-        doReturn(userModel).when(spy).addUser(anyLong(), any(UserModel.class));
+        doReturn(userModel).when(spy).addUser(anyLong(), anyString(), any(UserModel.class));
 
         spy.setUser(user.getDirectoryId(), userModel);
-        verify(spy).addUser(anyLong(), any(UserModel.class));
+        verify(spy).addUser(anyLong(), anyString(), any(UserModel.class));
     }
 
     @Test
@@ -126,6 +132,17 @@ public class UsersServiceTest {
     }
 
     @Test
+    public void testSetUserWithMapKeyUsernameWhenModelUsernameIsNull() {
+        final User user = getTestUser();
+        final UserModel userModel = UserModel.builder().build(); // no username set
+        final UsersServiceImpl spy = spy(usersService);
+        doReturn(userModel).when(spy).addUser(anyLong(), anyString(), any(UserModel.class));
+
+        spy.setUser(user.getDirectoryId(), user.getName(), userModel);
+        verify(spy).addUser(anyLong(), eq(user.getName()), any(UserModel.class));
+    }
+
+    @Test
     public void testSetUsers() {
         final User user = getTestUser();
         final UserModel userModel = UserModelUtil.toUserModel(user);
@@ -134,10 +151,22 @@ public class UsersServiceTest {
         final Map<String, UserModel> userModels = Stream.of(userModel, UserModel.EXAMPLE_1)
                 .collect(Collectors.toMap(UserModel::getUsername, Function.identity()));
         final UsersServiceImpl spy = spy(usersService);
-        doAnswer(invocation -> invocation.getArguments()[1]).when(spy).setUser(anyLong(), any());
+        doAnswer(invocation -> invocation.getArguments()[2]).when(spy).setUser(anyLong(), anyString(), any());
 
         spy.setUsers(user.getDirectoryId(), userModels);
-        verify(spy, times(userModels.size())).setUser(anyLong(), any());
+        verify(spy, times(userModels.size())).setUser(anyLong(), anyString(), any());
+    }
+
+    @Test
+    public void testSetUsersWithNullUsernameInModelUsesMapKey() {
+        final User user = getTestUser();
+        final UserModel userModel = UserModel.builder().build(); // no username set
+        final Map<String, UserModel> userModels = Collections.singletonMap(user.getName(), userModel);
+        final UsersServiceImpl spy = spy(usersService);
+        doAnswer(invocation -> UserModelUtil.toUserModel(user)).when(spy).setUser(anyLong(), anyString(), any());
+
+        spy.setUsers(user.getDirectoryId(), userModels);
+        verify(spy).setUser(anyLong(), eq(user.getName()), eq(userModel));
     }
 
     @Test
@@ -190,6 +219,24 @@ public class UsersServiceTest {
 
         usersService.addUser(1L, userModel);
         verify(groupsService, times(groupModels.size())).setGroup(anyLong(), anyString(), any());
+    }
+
+    @Test
+    public void testAddUserWithGroupsAlreadyMember() throws CrowdException, DirectoryPermissionException {
+        // return the same user as the one we are adding
+        doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addUser(anyLong(), any(), any());
+        doAnswer(invocation -> invocation.getArguments()[2]).when(groupsService).setGroup(anyLong(), anyString(), any());
+        doThrow(new MembershipAlreadyExistsException(1L, "test", GroupModel.EXAMPLE_1.getName()))
+                .when(directoryManager).addUserToGroup(anyLong(), anyString(), anyString());
+
+        final UserModel userModel = UserModelUtil.toUserModel(getTestUser());
+        final Map<String, GroupModel> groupModels = Stream.of(GroupModel.EXAMPLE_1).collect(Collectors.toMap(GroupModel::getName, Function.identity()));
+        userModel.setPassword("12345");
+        userModel.setGroups(groupModels);
+
+        final UserModel result = usersService.addUser(1L, userModel);
+        assertNotNull(result.getGroups());
+        assertEquals(groupModels.size(), result.getGroups().size());
     }
 
     @Test

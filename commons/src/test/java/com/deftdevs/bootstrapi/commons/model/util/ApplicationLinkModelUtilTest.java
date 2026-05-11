@@ -60,6 +60,20 @@ class ApplicationLinkModelUtilTest {
     }
 
     @Test
+    void testToApplicationLinkDetailsWithNullPrimary() throws Exception {
+        final ApplicationLinkModel bean = ApplicationLinkModel.builder()
+                .name(ApplicationLinkModel.EXAMPLE_1.getName())
+                .displayUrl(ApplicationLinkModel.EXAMPLE_1.getDisplayUrl())
+                .rpcUrl(ApplicationLinkModel.EXAMPLE_1.getRpcUrl())
+                .primary(null)
+                .build();
+        final ApplicationLinkDetails linkDetails = ApplicationLinkModelUtil.toApplicationLinkDetails(bean);
+
+        assertNotNull(linkDetails);
+        assertFalse(linkDetails.isPrimary());
+    }
+
+    @Test
     void testToApplicationLinkAuthTypeDisabled() {
         assertEquals(ApplicationLinkModel.ApplicationLinkAuthType.DISABLED,
                 ApplicationLinkModelUtil.toApplicationLinkAuthType(OAuthConfig.createDisabledConfig()));
