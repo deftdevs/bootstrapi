@@ -79,7 +79,7 @@ public class ApplicationLinkModelUtil {
                 .name(applicationLinkModel.getName())
                 .displayUrl(applicationLinkModel.getDisplayUrl())
                 .rpcUrl(applicationLinkModel.getRpcUrl())
-                .isPrimary(applicationLinkModel.getPrimary())
+                .isPrimary(Boolean.TRUE.equals(applicationLinkModel.getPrimary()))
                 .build();
     }
 
