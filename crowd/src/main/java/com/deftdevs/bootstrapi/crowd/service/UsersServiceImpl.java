@@ -81,7 +81,14 @@ public class UsersServiceImpl implements UsersService {
         final User user = findUser(directoryId, username);
 
         if (user == null) {
+            if (userModel == null) {
+                throw new UserNotFoundException(username);
+            }
             return addUser(directoryId, username, userModel);
+        }
+
+        if (userModel == null) {
+            return UserModelUtil.toUserModel(user);
         }
 
         return updateUser(directoryId, user.getName(), userModel);

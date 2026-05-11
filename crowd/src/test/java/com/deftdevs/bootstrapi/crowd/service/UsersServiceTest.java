@@ -143,6 +143,24 @@ public class UsersServiceTest {
     }
 
     @Test
+    public void testSetUserNullModelAddNew() {
+        final User user = getTestUser();
+        assertThrows(UserNotFoundException.class, () ->
+                usersService.setUser(user.getDirectoryId(), user.getName(), null));
+    }
+
+    @Test
+    public void testSetUserNullModelExisting() throws CrowdException {
+        final User user = getTestUser();
+        final UsersServiceImpl spy = spy(usersService);
+        doReturn(user).when(spy).findUser(user.getDirectoryId(), user.getName());
+
+        spy.setUser(user.getDirectoryId(), user.getName(), null);
+        verify(spy, never()).addUser(anyLong(), anyString(), any());
+        verify(spy, never()).updateUser(anyLong(), anyString(), any());
+    }
+
+    @Test
     public void testSetUsers() {
         final User user = getTestUser();
         final UserModel userModel = UserModelUtil.toUserModel(user);
