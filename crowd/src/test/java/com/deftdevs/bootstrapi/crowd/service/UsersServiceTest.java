@@ -12,11 +12,9 @@ import com.atlassian.crowd.model.user.User;
 import com.atlassian.crowd.model.user.UserTemplate;
 import com.atlassian.crowd.model.user.UserTemplateWithAttributes;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import com.deftdevs.bootstrapi.commons.model.UserModel;
 import com.deftdevs.bootstrapi.commons.exception.UserNotFoundException;
 import com.deftdevs.bootstrapi.crowd.model.util.UserModelUtil;
-import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -44,14 +42,11 @@ public class UsersServiceTest {
     @Mock
     private DirectoryManager directoryManager;
 
-    @Mock
-    private GroupsService groupsService;
-
     private UsersServiceImpl usersService;
 
     @BeforeEach
     public void setup() {
-        usersService = new UsersServiceImpl(crowdService, directoryManager, groupsService);
+        usersService = new UsersServiceImpl(crowdService, directoryManager);
 
         setupDirectoryManager();
     }
@@ -143,10 +138,16 @@ public class UsersServiceTest {
     }
 
     @Test
-    public void testSetUserNullModelAddNew() {
+    public void testSetUserNullModelMissingUserIsNoOp() {
         final User user = getTestUser();
-        assertThrows(UserNotFoundException.class, () ->
-                usersService.setUser(user.getDirectoryId(), user.getName(), null));
+        assertNull(usersService.setUser(user.getDirectoryId(), user.getName(), null));
+    }
+
+    @Test
+    public void testSetUsersWithNullModelMissingUserSkipsEntry() {
+        final Map<String, UserModel> userModels = new LinkedHashMap<>();
+        userModels.put("missing-user", null);
+        assertTrue(usersService.setUsers(getTestDirectory().getId(), userModels).isEmpty());
     }
 
     @Test
@@ -228,33 +229,58 @@ public class UsersServiceTest {
     public void testAddUserWithGroups() throws CrowdException, DirectoryPermissionException {
         // return the same user as the one we are adding
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addUser(anyLong(), any(), any());
-        doAnswer(invocation -> invocation.getArguments()[2]).when(groupsService).setGroup(anyLong(), anyString(), any());
 
         final UserModel userModel = UserModelUtil.toUserModel(getTestUser());
-        final Map<String, GroupModel> groupModels = Stream.of(GroupModel.EXAMPLE_1).collect(Collectors.toMap(GroupModel::getName, Function.identity()));
+        final Map<String, Boolean> groups = new LinkedHashMap<>();
+        groups.put("group-to-add", true);
+        groups.put("group-to-remove", false);
+        groups.put("group-no-op", null);
         userModel.setPassword("12345");
-        userModel.setGroups(groupModels);
+        userModel.setGroups(groups);
 
-        usersService.addUser(1L, userModel);
-        verify(groupsService, times(groupModels.size())).setGroup(anyLong(), anyString(), any());
+        final UserModel result = usersService.addUser(1L, userModel);
+        verify(directoryManager).addUserToGroup(anyLong(), anyString(), eq("group-to-add"));
+        verify(directoryManager).removeUserFromGroup(anyLong(), anyString(), eq("group-to-remove"));
+        verify(directoryManager, never()).addUserToGroup(anyLong(), anyString(), eq("group-no-op"));
+        verify(directoryManager, never()).removeUserFromGroup(anyLong(), anyString(), eq("group-no-op"));
+        assertNotNull(result.getGroups());
+        assertEquals(2, result.getGroups().size());
+        assertEquals(true, result.getGroups().get("group-to-add"));
+        assertEquals(false, result.getGroups().get("group-to-remove"));
     }
 
     @Test
     public void testAddUserWithGroupsAlreadyMember() throws CrowdException, DirectoryPermissionException {
         // return the same user as the one we are adding
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addUser(anyLong(), any(), any());
-        doAnswer(invocation -> invocation.getArguments()[2]).when(groupsService).setGroup(anyLong(), anyString(), any());
-        doThrow(new MembershipAlreadyExistsException(1L, "test", GroupModel.EXAMPLE_1.getName()))
+        doThrow(new MembershipAlreadyExistsException(1L, "test", "some-group"))
                 .when(directoryManager).addUserToGroup(anyLong(), anyString(), anyString());
 
         final UserModel userModel = UserModelUtil.toUserModel(getTestUser());
-        final Map<String, GroupModel> groupModels = Stream.of(GroupModel.EXAMPLE_1).collect(Collectors.toMap(GroupModel::getName, Function.identity()));
         userModel.setPassword("12345");
-        userModel.setGroups(groupModels);
+        userModel.setGroups(Collections.singletonMap("some-group", true));
 
         final UserModel result = usersService.addUser(1L, userModel);
         assertNotNull(result.getGroups());
-        assertEquals(groupModels.size(), result.getGroups().size());
+        assertEquals(1, result.getGroups().size());
+        assertEquals(true, result.getGroups().get("some-group"));
+    }
+
+    @Test
+    public void testAddUserWithGroupsRemoveNotMember() throws CrowdException, DirectoryPermissionException {
+        // return the same user as the one we are adding
+        doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addUser(anyLong(), any(), any());
+        doThrow(new MembershipNotFoundException("test", "some-group"))
+                .when(directoryManager).removeUserFromGroup(anyLong(), anyString(), anyString());
+
+        final UserModel userModel = UserModelUtil.toUserModel(getTestUser());
+        userModel.setPassword("12345");
+        userModel.setGroups(Collections.singletonMap("some-group", false));
+
+        final UserModel result = usersService.addUser(1L, userModel);
+        assertNotNull(result.getGroups());
+        assertEquals(1, result.getGroups().size());
+        assertEquals(false, result.getGroups().get("some-group"));
     }
 
     @Test
@@ -345,15 +371,12 @@ public class UsersServiceTest {
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
         // return the same user as the one we are updating
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).updateUser(anyLong(), any());
-        doAnswer(invocation -> invocation.getArguments()[2]).when(groupsService).setGroup(anyLong(), anyString(), any());
 
         final UserModel userModel = UserModelUtil.toUserModel(getTestUser());
-        final Map<String, GroupModel> groupModels = Stream.of(GroupModel.EXAMPLE_1)
-                .collect(Collectors.toMap(GroupModel::getName, Function.identity()));
-        userModel.setGroups(groupModels);
+        userModel.setGroups(Collections.singletonMap("group-to-add", true));
 
         usersService.updateUser(1L, user.getName(), userModel);
-        verify(groupsService, times(groupModels.size())).setGroup(anyLong(), anyString(), any());
+        verify(directoryManager).addUserToGroup(anyLong(), eq(user.getName()), eq("group-to-add"));
     }
 
     @Test
@@ -362,15 +385,14 @@ public class UsersServiceTest {
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());
         // return the same user as the one we are updating
         doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).updateUser(anyLong(), any());
-        doAnswer(invocation -> invocation.getArguments()[2]).when(groupsService).setGroup(anyLong(), anyString(), any());
 
         final UserModel userModel = UserModel.builder()
                 .fullName("Other Full Name")
-                .groups(Stream.of(GroupModel.EXAMPLE_1).collect(Collectors.toMap(GroupModel::getName, Function.identity())))
+                .groups(Collections.singletonMap("group-to-add", true))
                 .build();
 
         usersService.updateUser(1L, user.getName(), userModel);
-        verify(directoryManager).addUserToGroup(anyLong(), eq(user.getName()), anyString());
+        verify(directoryManager).addUserToGroup(anyLong(), eq(user.getName()), eq("group-to-add"));
     }
 
     @Test

@@ -83,6 +83,54 @@ public class DirectoriesServiceTest {
     }
 
     @Test
+    public void testSetDirectoriesNullModelMissingDirectorySkipsEntry() {
+        final Directory directoryInternal = getTestDirectoryInternal();
+        final DirectoriesServiceImpl spy = spy(directoriesService);
+        doReturn(Collections.singletonList(directoryInternal)).when(spy).findAllDirectories();
+
+        final Map<String, AbstractDirectoryModel> directoryModels = new LinkedHashMap<>();
+        directoryModels.put("missing-directory", null);
+        assertTrue(spy.setDirectories(directoryModels).isEmpty());
+        verify(spy, never()).addDirectory(any());
+        verify(spy, never()).setDirectory(anyLong(), any());
+    }
+
+    @Test
+    public void testSetDirectoriesNullModelExistingDirectoryReturnedAsIs() {
+        final Directory directoryInternal = getTestDirectoryInternal();
+        final DirectoriesServiceImpl spy = spy(directoriesService);
+        final List<Directory> directories = Collections.singletonList(directoryInternal);
+        doReturn(directories).when(spy).findAllDirectories();
+
+        final Map<String, AbstractDirectoryModel> directoryModels = new LinkedHashMap<>();
+        directoryModels.put(directoryInternal.getName(), null);
+
+        final Map<String, ? extends AbstractDirectoryModel> result = spy.setDirectories(directoryModels);
+        assertEquals(directories.size(), result.size());
+        assertEquals(directoryInternal.getName(), result.values().iterator().next().getName());
+        verify(spy, never()).addDirectory(any());
+        verify(spy, never()).setDirectory(anyLong(), any());
+    }
+
+    @Test
+    public void testSetDirectoriesNullNameUsesMapKey() {
+        final Directory directoryInternal = getTestDirectoryInternal();
+        final Directory directoryInternalNew = getTestDirectoryInternalOther();
+        final DirectoriesServiceImpl spy = spy(directoriesService);
+        doReturn(Collections.singletonList(directoryInternal)).when(spy).findAllDirectories();
+
+        final AbstractDirectoryModel directoryModel = DirectoryModelUtil.toDirectoryModel(directoryInternalNew);
+        final String mapKey = directoryModel.getName();
+        directoryModel.setName(null);
+        final Map<String, AbstractDirectoryModel> directoryModels = Collections.singletonMap(mapKey, directoryModel);
+        doReturn(directoryModel).when(spy).addDirectory(any());
+
+        spy.setDirectories(directoryModels);
+        assertEquals(mapKey, directoryModel.getName());
+        verify(spy).addDirectory(directoryModel);
+    }
+
+    @Test
     public void testSetDirectoriesAddNewUnsupportedType() {
         final Directory directoryInternal = getTestDirectoryInternal();
         final Directory directoryAzureAd = getTestDirectoryAzureAd();

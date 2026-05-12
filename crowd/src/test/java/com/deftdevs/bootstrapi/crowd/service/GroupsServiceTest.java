@@ -108,6 +108,13 @@ public class GroupsServiceTest {
     }
 
     @Test
+    public void testCreateGroupNullModel() {
+        assertThrows(BadRequestException.class, () -> {
+            groupsService.createGroup(0L, null);
+        });
+    }
+
+    @Test
     public void testUpdateGroup() throws Exception {
         final Group group = getTestGroup();
         final Group renamedGroup = ImmutableGroup.builder(group)
@@ -157,10 +164,10 @@ public class GroupsServiceTest {
         final Group group = getTestGroup();
         final GroupModel groupModel = GroupModel.EXAMPLE_1;
         final GroupsServiceImpl spy = spy(groupsService);
-        doReturn(groupModel).when(spy).createGroup(anyLong(), any());
+        doReturn(groupModel).when(spy).createGroup(anyLong(), anyString(), any());
 
         spy.setGroup(group.getDirectoryId(), groupModel.getName(), groupModel);
-        verify(spy).createGroup(anyLong(), any());
+        verify(spy).createGroup(anyLong(), anyString(), any());
     }
 
     @Test
@@ -191,10 +198,33 @@ public class GroupsServiceTest {
     }
 
     @Test
-    public void testSetGroupNullModelAddNew() {
+    public void testSetGroupsNullModelMissingGroupSkipsEntry() {
+        final Map<String, GroupModel> groupModels = new LinkedHashMap<>();
+        groupModels.put("missing-group", null);
+        assertTrue(groupsService.setGroups(0L, groupModels).isEmpty());
+    }
+
+    @Test
+    public void testSetGroupsNullNameUsesMapKey() {
+        final String mapKey = GroupModel.EXAMPLE_1.getName();
+        final GroupModel modelWithoutName = GroupModel.builder()
+                .active(GroupModel.EXAMPLE_1.getActive())
+                .description(GroupModel.EXAMPLE_1.getDescription())
+                .build();
+        final Map<String, GroupModel> groupModels = Collections.singletonMap(mapKey, modelWithoutName);
+
+        final GroupsServiceImpl spy = spy(groupsService);
+        doReturn(modelWithoutName).when(spy).setGroup(anyLong(), anyString(), any());
+
+        spy.setGroups(0L, groupModels);
+        assertEquals(mapKey, modelWithoutName.getName());
+        verify(spy).setGroup(anyLong(), eq(mapKey), eq(modelWithoutName));
+    }
+
+    @Test
+    public void testSetGroupNullModelMissingGroupIsNoOp() {
         final Group group = getTestGroup();
-        assertThrows(GroupNotFoundException.class, () ->
-                groupsService.setGroup(group.getDirectoryId(), group.getName(), null));
+        assertNull(groupsService.setGroup(group.getDirectoryId(), group.getName(), null));
     }
 
     @Test
