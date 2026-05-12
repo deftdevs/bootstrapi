@@ -39,6 +39,7 @@ import static com.deftdevs.bootstrapi.crowd.model.util.ApplicationModelUtil.toSt
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.any;
 import static org.mockito.Mockito.anyLong;
 import static org.mockito.Mockito.doReturn;
@@ -195,6 +196,42 @@ public class ApplicationsServiceTest {
         verify(spy).persistApplicationDirectoryMappings(any(), any());
         verify(spy).persistApplicationModelAuthenticationGroups(any(), any());
         verify(spy).persistApplicationModelAutoAssignmentGroups(any(), any());
+    }
+
+    @Test
+    public void testSetApplicationsNullModelMissingApplicationSkipsEntry() throws ApplicationNotFoundException {
+        doThrow(new ApplicationNotFoundException("")).when(applicationManager).findByName("missing-app");
+        final Map<String, ApplicationModel> applicationModels = Collections.singletonMap("missing-app", null);
+        assertTrue(applicationsService.setApplications(applicationModels).isEmpty());
+    }
+
+    @Test
+    public void testSetApplicationsNullModelExistingApplicationReturnedAsIs() throws ApplicationNotFoundException {
+        final Application application = toApplication(EXAMPLE_1);
+        doReturn(application).when(applicationManager).findByName(EXAMPLE_1.getName());
+        doReturn(application).when(applicationManager).findById(application.getId());
+
+        final Map<String, ApplicationModel> applicationModels = Collections.singletonMap(EXAMPLE_1.getName(), null);
+        final Map<String, ApplicationModel> result = applicationsService.setApplications(applicationModels);
+        assertEquals(applicationModels.size(), result.size());
+        assertEquals(EXAMPLE_1.getName(), result.get(EXAMPLE_1.getName()).getName());
+    }
+
+    @Test
+    public void testSetApplicationsNullNameUsesMapKey() throws ApplicationNotFoundException {
+        final String mapKey = EXAMPLE_2.getName();
+        final ApplicationModel modelWithoutName = ApplicationModel.builder()
+                .type(EXAMPLE_2.getType())
+                .build();
+        final Map<String, ApplicationModel> applicationModels = Collections.singletonMap(mapKey, modelWithoutName);
+        doThrow(new ApplicationNotFoundException("")).when(applicationManager).findByName(mapKey);
+
+        final ApplicationsServiceImpl spy = spy(applicationsService);
+        doReturn(EXAMPLE_2).when(spy).addApplication(modelWithoutName);
+
+        spy.setApplications(applicationModels);
+        assertEquals(mapKey, modelWithoutName.getName());
+        verify(spy).addApplication(modelWithoutName);
     }
 
     @Test

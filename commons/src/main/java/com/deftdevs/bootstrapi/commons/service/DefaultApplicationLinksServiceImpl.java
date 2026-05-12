@@ -106,6 +106,15 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
             final String name = applicationLinkModelEntry.getKey();
             final ApplicationLinkModel applicationLinkModel = applicationLinkModelEntry.getValue();
 
+            // declarative no-op: null model means "leave this entry untouched"
+            if (applicationLinkModel == null) {
+                continue;
+            }
+
+            if (applicationLinkModel.getName() == null) {
+                applicationLinkModel.setName(name);
+            }
+
             if (linkModelMap.containsKey(name)) {
                 setApplicationLink(linkModelMap.get(name).getUuid(), applicationLinkModel);
             } else {

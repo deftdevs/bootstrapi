@@ -16,18 +16,15 @@ import com.deftdevs.bootstrapi.commons.exception.DirectoryNotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.UserNotFoundException;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
-import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import com.deftdevs.bootstrapi.commons.model.UserModel;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
 import com.deftdevs.bootstrapi.crowd.model.util.UserModelUtil;
-import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 
 import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import static com.atlassian.crowd.model.user.UserConstants.*;
@@ -36,16 +33,13 @@ public class UsersServiceImpl implements UsersService {
 
     private final CrowdService crowdService;
     private final DirectoryManager directoryManager;
-    private final GroupsService groupsService;
 
     public UsersServiceImpl(
             final CrowdService crowdService,
-            final DirectoryManager directoryManager,
-            final GroupsService groupsService) {
+            final DirectoryManager directoryManager) {
 
         this.crowdService = crowdService;
         this.directoryManager = directoryManager;
-        this.groupsService = groupsService;
     }
 
     @Override
@@ -82,7 +76,8 @@ public class UsersServiceImpl implements UsersService {
 
         if (user == null) {
             if (userModel == null) {
-                throw new UserNotFoundException(username);
+                // declarative no-op: null model + missing entity → nothing to do
+                return null;
             }
             return addUser(directoryId, username, userModel);
         }
@@ -106,7 +101,9 @@ public class UsersServiceImpl implements UsersService {
         final Map<String, UserModel> resultUserModels = new LinkedHashMap<>();
         for (Map.Entry<String, UserModel> entry : userModels.entrySet()) {
             final UserModel resultUserModel = setUser(directoryId, entry.getKey(), entry.getValue());
-            resultUserModels.put(resultUserModel.getUsername(), resultUserModel);
+            if (resultUserModel != null) {
+                resultUserModels.put(resultUserModel.getUsername(), resultUserModel);
+            }
         }
         return resultUserModels;
     }
@@ -158,8 +155,8 @@ public class UsersServiceImpl implements UsersService {
         final UserModel resultUserModel = UserModelUtil.toUserModel(user);
 
         if (userModel.getGroups() != null) {
-            final Map<String, GroupModel> resultGroupModels = addUserToGroups(directoryId, effectiveUsername, userModel.getGroups());
-            resultUserModel.setGroups(resultGroupModels);
+            final Map<String, Boolean> resultGroups = setUserGroups(directoryId, effectiveUsername, userModel.getGroups());
+            resultUserModel.setGroups(resultGroups);
         }
 
         return resultUserModel;
@@ -191,8 +188,8 @@ public class UsersServiceImpl implements UsersService {
         final UserModel resultUserModel = UserModelUtil.toUserModel(user);
 
         if (userModel.getGroups() != null) {
-            final Map<String, GroupModel> resultGroupModels = addUserToGroups(directoryId, user.getName(), userModel.getGroups());
-            resultUserModel.setGroups(resultGroupModels);
+            final Map<String, Boolean> resultGroups = setUserGroups(directoryId, user.getName(), userModel.getGroups());
+            resultUserModel.setGroups(resultGroups);
         }
 
         return resultUserModel;
@@ -413,33 +410,52 @@ public class UsersServiceImpl implements UsersService {
         }
     }
 
-    Map<String, GroupModel> addUserToGroups(
+    Map<String, Boolean> setUserGroups(
             final long directoryId,
             final String username,
-            final Map<String, GroupModel> groupModels) {
+            final Map<String, Boolean> groups) {
 
-        final List<GroupModel> resultGroupModels = new ArrayList<>();
+        final Map<String, Boolean> resultGroups = new LinkedHashMap<>();
 
-        if (groupModels != null) {
-            for (Map.Entry<String, GroupModel> groupModelEntry : groupModels.entrySet()) {
-                final GroupModel resultGroupModel = groupsService.setGroup(directoryId, groupModelEntry.getKey(), groupModelEntry.getValue());
+        if (groups == null) {
+            return resultGroups;
+        }
 
-                try {
-                    directoryManager.addUserToGroup(directoryId, username, resultGroupModel.getName());
-                    resultGroupModels.add(resultGroupModel);
-                } catch (DirectoryPermissionException | ReadOnlyGroupException e) {
-                    throw new BadRequestException(e);
-                } catch (com.atlassian.crowd.exception.DirectoryNotFoundException |
-                         com.atlassian.crowd.exception.UserNotFoundException | GroupNotFoundException |
-                         OperationFailedException e) {
-                    throw new InternalServerErrorException(e);
-                } catch (MembershipAlreadyExistsException e) {
-                    resultGroupModels.add(resultGroupModel);
+        for (Map.Entry<String, Boolean> entry : groups.entrySet()) {
+            final String groupName = entry.getKey();
+            final Boolean assignUserToGroup = entry.getValue();
+
+            // null = no-op (declarative merge: don't touch this membership)
+            if (assignUserToGroup == null) {
+                continue;
+            }
+
+            try {
+                if (assignUserToGroup) {
+                    try {
+                        directoryManager.addUserToGroup(directoryId, username, groupName);
+                    } catch (MembershipAlreadyExistsException ignored) {}
+
+                    // if add successful or already a member, return that
+                    resultGroups.put(groupName, true);
+                } else {
+                    try {
+                        directoryManager.removeUserFromGroup(directoryId, username, groupName);
+                    } catch (MembershipNotFoundException ignored) {}
+
+                    // if remove successful or already not a member, return that
+                    resultGroups.put(groupName, false);
                 }
+            } catch (DirectoryPermissionException | ReadOnlyGroupException e) {
+                throw new BadRequestException(e);
+            } catch (com.atlassian.crowd.exception.DirectoryNotFoundException |
+                     com.atlassian.crowd.exception.UserNotFoundException | GroupNotFoundException |
+                     OperationFailedException e) {
+                throw new InternalServerErrorException(e);
             }
         }
 
-        return resultGroupModels.stream().collect(Collectors.toMap(GroupModel::getName, Function.identity()));
+        return resultGroups;
     }
 
     private static UserTemplate getUserTemplate(

@@ -93,8 +93,7 @@ public class ServiceConfig {
     public UsersService usersService() {
         return new UsersServiceImpl(
                 atlassianConfig.crowdService(),
-                atlassianConfig.directoryManager(),
-                groupsService());
+                atlassianConfig.directoryManager());
     }
 
 }

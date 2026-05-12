@@ -45,6 +45,7 @@ import static com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel.Applica
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.doNothing;
@@ -106,6 +107,34 @@ class DefaultApplicationLinkServiceTest {
         applicationLinkModel.setIncomingAuthType(ApplicationLinkModel.ApplicationLinkAuthType.OAUTH);
         applicationLinkModel.setStatus(AVAILABLE);
         assertEquals(applicationLinkModel, appLinkResponse);
+    }
+
+    @Test
+    void testSetApplicationLinksNullModelMissingLinkSkipsEntry() {
+        doReturn(Collections.emptyList()).when(mutatingApplicationLinkService).getApplicationLinks();
+        final Map<String, ApplicationLinkModel> applicationLinkModels = Collections.singletonMap("missing-link", null);
+        assertTrue(applicationLinkService.setApplicationLinks(applicationLinkModels).isEmpty());
+    }
+
+    @Test
+    void testSetApplicationLinksNullNameUsesMapKey()
+            throws URISyntaxException, NoAccessException, NoSuchApplinkException, TypeNotInstalledException {
+
+        final ApplicationLink applicationLink = createApplicationLink();
+        final ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();
+        final String mapKey = applicationLinkModel.getName();
+        applicationLinkModel.setName(null);
+        final Map<String, ApplicationLinkModel> applicationLinkModels = Collections.singletonMap(mapKey, applicationLinkModel);
+        doReturn(Collections.singletonList(applicationLink)).when(mutatingApplicationLinkService).getApplicationLinks();
+        doReturn(applicationLink).when(mutatingApplicationLinkService).getApplicationLink(any());
+        doReturn(applicationLink).when(mutatingApplicationLinkService).addApplicationLink(any(), any(), any());
+        doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
+        doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getOutgoingOAuthConfig(any());
+        doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getIncomingOAuthConfig(any());
+        doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
+
+        applicationLinkService.setApplicationLinks(applicationLinkModels);
+        assertEquals(mapKey, applicationLinkModel.getName());
     }
 
     @Test

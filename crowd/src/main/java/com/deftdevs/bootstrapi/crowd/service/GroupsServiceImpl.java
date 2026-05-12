@@ -49,17 +49,35 @@ public class GroupsServiceImpl implements GroupsService {
             final long directoryId,
             final GroupModel groupModel) {
 
-        if (groupModel.getName() == null) {
+        if (groupModel == null) {
+            throw new BadRequestException("Cannot create group, a full group model is required");
+        }
+
+        return createGroup(directoryId, groupModel.getName(), groupModel);
+    }
+
+    GroupModel createGroup(
+            final long directoryId,
+            final String groupName,
+            final GroupModel groupModel) {
+
+        final String effectiveGroupName = groupModel.getName() != null ? groupModel.getName() : groupName;
+
+        if (effectiveGroupName == null) {
             throw new BadRequestException("Cannot create group, group name is required");
         }
 
-        final Group existingGroup = findGroup(directoryId, groupModel.getName());
-
-        if (existingGroup != null) {
-            throw new BadRequestException(String.format("Group '%s' already exists", groupModel.getName()));
+        if (groupName != null && !effectiveGroupName.equals(groupName)) {
+            throw new BadRequestException("Cannot create group, two different group names provided");
         }
 
-        final GroupTemplate groupTemplate = new GroupTemplate(groupModel.getName(), directoryId);
+        final Group existingGroup = findGroup(directoryId, effectiveGroupName);
+
+        if (existingGroup != null) {
+            throw new BadRequestException(String.format("Group '%s' already exists", effectiveGroupName));
+        }
+
+        final GroupTemplate groupTemplate = new GroupTemplate(effectiveGroupName, directoryId);
         groupTemplate.setDescription(groupModel.getDescription());
         groupTemplate.setActive(groupModel.getActive() == null || groupModel.getActive());
 
@@ -67,10 +85,10 @@ public class GroupsServiceImpl implements GroupsService {
             return GroupModelUtil.toGroupModel(directoryManager.addGroup(directoryId, groupTemplate));
         } catch (DirectoryPermissionException | InvalidGroupException e) {
             // A permission exception should only happen if we try adding the group
-            // a user in a read-only directory, so treat this as a bad request
+            // in a read-only directory, so treat this as a bad request
             throw new BadRequestException(e);
         } catch (com.atlassian.crowd.exception.DirectoryNotFoundException | OperationFailedException e) {
-            // At this point, we know the group exists, thus directory not found
+            // At this point, we know the directory exists, thus directory not found
             // should never happen, so if it does, treat it as an internal server error
             throw new InternalServerErrorException(e);
         }
@@ -109,9 +127,10 @@ public class GroupsServiceImpl implements GroupsService {
 
         if (group == null) {
             if (groupModel == null) {
-                throw new GroupNotFoundException(groupName);
+                // declarative no-op: null model + missing entity → nothing to do
+                return null;
             }
-            return createGroup(directoryId, groupModel);
+            return createGroup(directoryId, groupName, groupModel);
         }
 
         if (groupModel == null) {
@@ -132,8 +151,17 @@ public class GroupsServiceImpl implements GroupsService {
 
         final Map<String, GroupModel> resultGroupModels = new LinkedHashMap<>();
         for (Map.Entry<String, GroupModel> entry : groupModels.entrySet()) {
-            final GroupModel resultGroupModel = setGroup(directoryId, entry.getKey(), entry.getValue());
-            resultGroupModels.put(resultGroupModel.getName(), resultGroupModel);
+            final String groupName = entry.getKey();
+            final GroupModel groupModel = entry.getValue();
+
+            if (groupModel != null && groupModel.getName() == null) {
+                groupModel.setName(groupName);
+            }
+
+            final GroupModel resultGroupModel = setGroup(directoryId, groupName, groupModel);
+            if (resultGroupModel != null) {
+                resultGroupModels.put(resultGroupModel.getName(), resultGroupModel);
+            }
         }
         return resultGroupModels;
     }

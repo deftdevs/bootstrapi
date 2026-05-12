@@ -44,7 +44,7 @@ public class UserModel {
     private String password;
 
     @XmlElement
-    private Map<String, GroupModel> groups;
+    private Map<String, Boolean> groups;
 
     // Example instances for documentation and tests
 
