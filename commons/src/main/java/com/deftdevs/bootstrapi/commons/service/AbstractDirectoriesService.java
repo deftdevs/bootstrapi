@@ -22,20 +22,30 @@ public abstract class AbstractDirectoriesService implements DirectoriesService {
         final Map<String, AbstractDirectoryModel> resultDirectories = new LinkedHashMap<>();
 
         for (Map.Entry<String, ? extends AbstractDirectoryModel> directoryModelEntry : directoryModels.entrySet()) {
+            final String directoryName = directoryModelEntry.getKey();
             final AbstractDirectoryModel directoryModel = directoryModelEntry.getValue();
+
+            if (directoryModel == null) {
+                throw new BadRequestException(String.format(
+                        "Cannot set directory '%s', a full directory model is required", directoryName));
+            }
+
+            if (directoryModel.getName() == null) {
+                directoryModel.setName(directoryName);
+            }
 
             // Check if directoryModel is not an instance of any supported class
             if (getSupportedClassesForUpdate().stream().noneMatch(clazz -> clazz.isInstance(directoryModel))) {
                 throw new BadRequestException(String.format("Updating directory type '%s' is not supported (yet)", directoryModel.getClass()));
             }
 
-            final AbstractDirectoryModel existingDirectoryModel = existingDirectoriesByName.get(directoryModelEntry.getKey());
+            final AbstractDirectoryModel existingDirectoryModel = existingDirectoriesByName.get(directoryName);
             final AbstractDirectoryModel resultDirectoryModel;
 
             if (existingDirectoryModel != null) {
-                resultDirectoryModel = setDirectory(existingDirectoryModel.getId(), directoryModelEntry.getValue());
+                resultDirectoryModel = setDirectory(existingDirectoryModel.getId(), directoryModel);
             } else {
-                resultDirectoryModel = addDirectory(directoryModelEntry.getValue());
+                resultDirectoryModel = addDirectory(directoryModel);
             }
 
             resultDirectories.put(resultDirectoryModel.getName(), resultDirectoryModel);

@@ -198,6 +198,29 @@ public class ApplicationsServiceTest {
     }
 
     @Test
+    public void testSetApplicationsNullModel() {
+        final Map<String, ApplicationModel> applicationModels = Collections.singletonMap("test", null);
+        assertThrows(BadRequestException.class, () -> applicationsService.setApplications(applicationModels));
+    }
+
+    @Test
+    public void testSetApplicationsNullNameUsesMapKey() throws ApplicationNotFoundException {
+        final String mapKey = EXAMPLE_2.getName();
+        final ApplicationModel modelWithoutName = ApplicationModel.builder()
+                .type(EXAMPLE_2.getType())
+                .build();
+        final Map<String, ApplicationModel> applicationModels = Collections.singletonMap(mapKey, modelWithoutName);
+        doThrow(new ApplicationNotFoundException("")).when(applicationManager).findByName(mapKey);
+
+        final ApplicationsServiceImpl spy = spy(applicationsService);
+        doReturn(EXAMPLE_2).when(spy).addApplication(modelWithoutName);
+
+        spy.setApplications(applicationModels);
+        assertEquals(mapKey, modelWithoutName.getName());
+        verify(spy).addApplication(modelWithoutName);
+    }
+
+    @Test
     public void testSetApplications() throws ApplicationNotFoundException {
         final Application applicationExample1 = ImmutableApplication.builder(toApplication(EXAMPLE_1))
                 .setId(EXAMPLE_1.getId())

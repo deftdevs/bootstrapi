@@ -106,6 +106,15 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
             final String name = applicationLinkModelEntry.getKey();
             final ApplicationLinkModel applicationLinkModel = applicationLinkModelEntry.getValue();
 
+            if (applicationLinkModel == null) {
+                throw new BadRequestException(String.format(
+                        "Cannot set application link '%s', a full application link model is required", name));
+            }
+
+            if (applicationLinkModel.getName() == null) {
+                applicationLinkModel.setName(name);
+            }
+
             if (linkModelMap.containsKey(name)) {
                 setApplicationLink(linkModelMap.get(name).getUuid(), applicationLinkModel);
             } else {

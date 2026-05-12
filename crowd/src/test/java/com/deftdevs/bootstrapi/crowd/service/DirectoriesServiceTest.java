@@ -83,6 +83,35 @@ public class DirectoriesServiceTest {
     }
 
     @Test
+    public void testSetDirectoriesNullModel() {
+        final Directory directoryInternal = getTestDirectoryInternal();
+        final DirectoriesServiceImpl spy = spy(directoriesService);
+        doReturn(Collections.singletonList(directoryInternal)).when(spy).findAllDirectories();
+
+        final Map<String, AbstractDirectoryModel> directoryModels = new LinkedHashMap<>();
+        directoryModels.put("other", null);
+        assertThrows(BadRequestException.class, () -> spy.setDirectories(directoryModels));
+    }
+
+    @Test
+    public void testSetDirectoriesNullNameUsesMapKey() {
+        final Directory directoryInternal = getTestDirectoryInternal();
+        final Directory directoryInternalNew = getTestDirectoryInternalOther();
+        final DirectoriesServiceImpl spy = spy(directoriesService);
+        doReturn(Collections.singletonList(directoryInternal)).when(spy).findAllDirectories();
+
+        final AbstractDirectoryModel directoryModel = DirectoryModelUtil.toDirectoryModel(directoryInternalNew);
+        final String mapKey = directoryModel.getName();
+        directoryModel.setName(null);
+        final Map<String, AbstractDirectoryModel> directoryModels = Collections.singletonMap(mapKey, directoryModel);
+        doReturn(directoryModel).when(spy).addDirectory(any());
+
+        spy.setDirectories(directoryModels);
+        assertEquals(mapKey, directoryModel.getName());
+        verify(spy).addDirectory(directoryModel);
+    }
+
+    @Test
     public void testSetDirectoriesAddNewUnsupportedType() {
         final Directory directoryInternal = getTestDirectoryInternal();
         final Directory directoryAzureAd = getTestDirectoryAzureAd();

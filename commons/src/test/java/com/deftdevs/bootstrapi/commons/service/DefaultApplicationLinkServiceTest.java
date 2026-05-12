@@ -109,6 +109,33 @@ class DefaultApplicationLinkServiceTest {
     }
 
     @Test
+    void testSetApplicationLinksNullModel() {
+        final Map<String, ApplicationLinkModel> applicationLinkModels = Collections.singletonMap("test", null);
+        assertThrows(BadRequestException.class, () -> applicationLinkService.setApplicationLinks(applicationLinkModels));
+    }
+
+    @Test
+    void testSetApplicationLinksNullNameUsesMapKey()
+            throws URISyntaxException, NoAccessException, NoSuchApplinkException, TypeNotInstalledException {
+
+        final ApplicationLink applicationLink = createApplicationLink();
+        final ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();
+        final String mapKey = applicationLinkModel.getName();
+        applicationLinkModel.setName(null);
+        final Map<String, ApplicationLinkModel> applicationLinkModels = Collections.singletonMap(mapKey, applicationLinkModel);
+        doReturn(Collections.singletonList(applicationLink)).when(mutatingApplicationLinkService).getApplicationLinks();
+        doReturn(applicationLink).when(mutatingApplicationLinkService).getApplicationLink(any());
+        doReturn(applicationLink).when(mutatingApplicationLinkService).addApplicationLink(any(), any(), any());
+        doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
+        doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getOutgoingOAuthConfig(any());
+        doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getIncomingOAuthConfig(any());
+        doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
+
+        applicationLinkService.setApplicationLinks(applicationLinkModels);
+        assertEquals(mapKey, applicationLinkModel.getName());
+    }
+
+    @Test
     void testSetApplicationLinks()
             throws URISyntaxException, NoAccessException, NoSuchApplinkException, TypeNotInstalledException {
 

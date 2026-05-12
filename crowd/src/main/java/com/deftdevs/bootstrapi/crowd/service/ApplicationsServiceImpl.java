@@ -64,10 +64,20 @@ public class ApplicationsServiceImpl implements ApplicationsService {
         final Map<String, ApplicationModel> resultApplicationModels = new LinkedHashMap<>();
 
         for (Map.Entry<String, ApplicationModel> applicationModelEntry : applicationModels.entrySet()) {
+            final String applicationName = applicationModelEntry.getKey();
             final ApplicationModel applicationModel = applicationModelEntry.getValue();
 
+            if (applicationModel == null) {
+                throw new BadRequestException(String.format(
+                        "Cannot set application '%s', a full application model is required", applicationName));
+            }
+
+            if (applicationModel.getName() == null) {
+                applicationModel.setName(applicationName);
+            }
+
             try {
-                final Application application = applicationManager.findByName(applicationModelEntry.getKey());
+                final Application application = applicationManager.findByName(applicationName);
                 final ApplicationModel updatedApplicationModel = setApplication(application.getId(), applicationModel);
                 resultApplicationModels.put(updatedApplicationModel.getName(), updatedApplicationModel);
             } catch (ApplicationNotFoundException ignored) {
