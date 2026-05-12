@@ -191,6 +191,24 @@ public class GroupsServiceTest {
     }
 
     @Test
+    public void testSetGroupNullModelAddNew() {
+        final Group group = getTestGroup();
+        assertThrows(GroupNotFoundException.class, () ->
+                groupsService.setGroup(group.getDirectoryId(), group.getName(), null));
+    }
+
+    @Test
+    public void testSetGroupNullModelExisting() {
+        final Group group = getTestGroup();
+        final GroupsServiceImpl spy = spy(groupsService);
+        doReturn(group).when(spy).findGroup(group.getDirectoryId(), group.getName());
+
+        spy.setGroup(group.getDirectoryId(), group.getName(), null);
+        verify(spy, never()).createGroup(anyLong(), any());
+        verify(spy, never()).updateGroup(anyLong(), anyString(), any());
+    }
+
+    @Test
     public void testSetGroupsNull() {
         assertEquals(Collections.emptyMap(), groupsService.setGroups(0L, null));
     }

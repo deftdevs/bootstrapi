@@ -108,7 +108,14 @@ public class GroupsServiceImpl implements GroupsService {
         final Group group = findGroup(directoryId, groupName);
 
         if (group == null) {
+            if (groupModel == null) {
+                throw new GroupNotFoundException(groupName);
+            }
             return createGroup(directoryId, groupModel);
+        }
+
+        if (groupModel == null) {
+            return GroupModelUtil.toGroupModel(group);
         }
 
         return updateGroup(directoryId, groupName, groupModel);
