@@ -284,6 +284,21 @@ public class UsersServiceTest {
     }
 
     @Test
+    public void testAddUserWithGroupsUnknownGroupThrowsNotFound() throws CrowdException, DirectoryPermissionException {
+        // return the same user as the one we are adding
+        doAnswer(invocation -> invocation.getArguments()[1]).when(directoryManager).addUser(anyLong(), any(), any());
+        doThrow(new GroupNotFoundException("unknown-group"))
+                .when(directoryManager).addUserToGroup(anyLong(), anyString(), anyString());
+
+        final UserModel userModel = UserModelUtil.toUserModel(getTestUser());
+        userModel.setPassword("12345");
+        userModel.setGroups(Collections.singletonMap("unknown-group", true));
+
+        assertThrows(com.deftdevs.bootstrapi.commons.exception.GroupNotFoundException.class,
+                () -> usersService.addUser(1L, userModel));
+    }
+
+    @Test
     public void testAddUserAlreadyExists() throws CrowdException {
         final User user = getTestUser();
         doReturn(user).when(directoryManager).findUserByName(user.getDirectoryId(), user.getName());

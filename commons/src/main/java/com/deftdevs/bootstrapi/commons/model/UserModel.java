@@ -1,6 +1,7 @@
 package com.deftdevs.bootstrapi.commons.model;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -44,6 +45,9 @@ public class UserModel {
     private String password;
 
     @XmlElement
+    @Schema(description = "Group memberships keyed by group name. true ensures the user is a member, " +
+            "false ensures the user is not a member, null is a no-op (leaves the membership untouched). " +
+            "Group lifecycle is managed via the top-level groups map; referenced groups must already exist.")
     private Map<String, Boolean> groups;
 
     // Example instances for documentation and tests
