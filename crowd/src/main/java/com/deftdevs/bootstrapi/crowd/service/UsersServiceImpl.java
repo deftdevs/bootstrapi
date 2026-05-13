@@ -448,8 +448,12 @@ public class UsersServiceImpl implements UsersService {
                 }
             } catch (DirectoryPermissionException | ReadOnlyGroupException e) {
                 throw new BadRequestException(e);
+            } catch (GroupNotFoundException e) {
+                // the referenced group does not exist - group lifecycle is managed via the top-level
+                // groups map, so a non-existent group here is a client error (404)
+                throw new com.deftdevs.bootstrapi.commons.exception.GroupNotFoundException(groupName);
             } catch (com.atlassian.crowd.exception.DirectoryNotFoundException |
-                     com.atlassian.crowd.exception.UserNotFoundException | GroupNotFoundException |
+                     com.atlassian.crowd.exception.UserNotFoundException |
                      OperationFailedException e) {
                 throw new InternalServerErrorException(e);
             }
