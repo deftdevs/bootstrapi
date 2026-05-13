@@ -21,6 +21,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -115,6 +116,45 @@ class AuthenticationServiceTest {
         assertThrows(BadRequestException.class, () -> {
             authenticationService.setAuthenticationIdps(authenticationIdpModels);
         });
+    }
+
+    @Test
+    void testSetAuthenticationIdpsNullNameUsesMapKey() {
+        final String mapKey = "from-map-key";
+        final AuthenticationIdpOidcModel modelWithoutName = AuthenticationIdpOidcModel.builder().build();
+        final Map<String, AbstractAuthenticationIdpModel> authenticationIdpModels = Collections.singletonMap(mapKey, modelWithoutName);
+        doAnswer(invocation -> invocation.getArgument(0)).when(idpConfigService).addIdpConfig(any());
+
+        authenticationService.setAuthenticationIdps(authenticationIdpModels);
+        assertEquals(mapKey, modelWithoutName.getName());
+        verify(idpConfigService, times(1)).addIdpConfig(any());
+    }
+
+    @Test
+    void testSetAuthenticationIdpsNullModelMissingIdpSkipsEntry() {
+        final Map<String, AbstractAuthenticationIdpModel> authenticationIdpModels = new LinkedHashMap<>();
+        authenticationIdpModels.put("missing-idp", null);
+
+        final Map<String, ? extends AbstractAuthenticationIdpModel> result = authenticationService.setAuthenticationIdps(authenticationIdpModels);
+        assertTrue(result.isEmpty());
+        verify(idpConfigService, times(0)).addIdpConfig(any());
+        verify(idpConfigService, times(0)).updateIdpConfig(any());
+    }
+
+    @Test
+    void testSetAuthenticationIdpsNullModelExistingIdpReturnedAsIs() {
+        final AuthenticationIdpOidcModel idpModel = AuthenticationIdpOidcModel.EXAMPLE_1;
+        final IdpConfig idpConfig = AuthenticationIdpModelUtil.toIdpConfig(idpModel);
+        doReturn(Collections.singletonList(idpConfig)).when(idpConfigService).getIdpConfigs();
+
+        final Map<String, AbstractAuthenticationIdpModel> authenticationIdpModels = new LinkedHashMap<>();
+        authenticationIdpModels.put(idpModel.getName(), null);
+
+        final Map<String, ? extends AbstractAuthenticationIdpModel> result = authenticationService.setAuthenticationIdps(authenticationIdpModels);
+        assertEquals(1, result.size());
+        assertEquals(idpModel.getName(), result.values().iterator().next().getName());
+        verify(idpConfigService, times(0)).addIdpConfig(any());
+        verify(idpConfigService, times(0)).updateIdpConfig(any());
     }
 
     @Test
