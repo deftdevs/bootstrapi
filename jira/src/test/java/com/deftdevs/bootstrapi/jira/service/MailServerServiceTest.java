@@ -234,4 +234,44 @@ class MailServerServiceTest {
         });
     }
 
+    @Test
+    void testDeleteMailServerSmtp() throws Exception {
+        final SMTPMailServer smtpMailServer = new DefaultTestSmtpMailServerImpl();
+        doReturn(smtpMailServer).when(mailServerManager).getDefaultSMTPMailServer();
+
+        mailServerService.deleteMailServerSmtp();
+
+        verify(mailServerManager).delete(smtpMailServer.getId());
+    }
+
+    @Test
+    void testDeleteMailServerSmtpNotConfigured() throws Exception {
+        doReturn(null).when(mailServerManager).getDefaultSMTPMailServer();
+
+        mailServerService.deleteMailServerSmtp();
+
+        verify(mailServerManager, never()).delete(any());
+    }
+
+    @Test
+    void testDeleteMailServerPop() throws Exception {
+        final PopMailServer popMailServer = new DefaultTestPopMailServerImpl();
+        doReturn(popMailServer).when(mailServerManager).getDefaultPopMailServer();
+
+        mailServerService.deleteMailServerPop();
+
+        verify(mailServerManager).delete(popMailServer.getId());
+    }
+
+    @Test
+    void testDeleteMailServerSmtpException() throws Exception {
+        final SMTPMailServer smtpMailServer = new DefaultTestSmtpMailServerImpl();
+        doReturn(smtpMailServer).when(mailServerManager).getDefaultSMTPMailServer();
+        doThrow(new MailException("delete failed")).when(mailServerManager).delete(smtpMailServer.getId());
+
+        assertThrows(BadRequestException.class, () -> {
+            mailServerService.deleteMailServerSmtp();
+        });
+    }
+
 }

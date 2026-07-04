@@ -28,7 +28,9 @@ All URIs are relative to *https://JIRA_URL/rest/bootstrapi/1*
 | *LicenseApi* | [**addLicense**](Apis/LicenseApi.md#addLicense) | **POST** /license | Add a license |
 | *LicensesApi* | [**getLicenses**](Apis/LicensesApi.md#getLicenses) | **GET** /licenses | Get all licenses information |
 *LicensesApi* | [**setLicenses**](Apis/LicensesApi.md#setLicenses) | **PUT** /licenses | Set a list of licenses |
-| *MailServerApi* | [**getMailServerPop**](Apis/MailServerApi.md#getMailServerPop) | **GET** /mail-server/pop | Get the default POP mail server |
+| *MailServerApi* | [**deleteMailServerPop**](Apis/MailServerApi.md#deleteMailServerPop) | **DELETE** /mail-server/pop | Remove the default POP mail server |
+*MailServerApi* | [**deleteMailServerSmtp**](Apis/MailServerApi.md#deleteMailServerSmtp) | **DELETE** /mail-server/smtp | Remove the default SMTP mail server |
+*MailServerApi* | [**getMailServerPop**](Apis/MailServerApi.md#getMailServerPop) | **GET** /mail-server/pop | Get the default POP mail server |
 *MailServerApi* | [**getMailServerSmtp**](Apis/MailServerApi.md#getMailServerSmtp) | **GET** /mail-server/smtp | Get the default SMTP mail server |
 *MailServerApi* | [**setMailServerPop**](Apis/MailServerApi.md#setMailServerPop) | **PUT** /mail-server/pop | Set the default POP mail server |
 *MailServerApi* | [**setMailServerSmtp**](Apis/MailServerApi.md#setMailServerSmtp) | **PUT** /mail-server/smtp | Set the default SMTP mail server |

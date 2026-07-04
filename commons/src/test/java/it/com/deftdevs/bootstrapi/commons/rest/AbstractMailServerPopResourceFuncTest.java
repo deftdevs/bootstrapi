@@ -23,6 +23,12 @@ public abstract class AbstractMailServerPopResourceFuncTest {
     @Test
     @Order(1)
     protected void testGetMailServerPopNotConfigured() throws Exception {
+        // delete any existing configuration first so this test does not depend
+        // on the state left behind by other test classes
+        final HttpResponse<String> deleteResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
+                .request(HttpMethod.DELETE, null);
+        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), deleteResponse.statusCode());
+
         final HttpResponse<String> mailServerPopResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_POP)
                 .request();
         assertEquals(Response.Status.NO_CONTENT.getStatusCode(), mailServerPopResponse.statusCode());

@@ -35,7 +35,8 @@ All URIs are relative to *https://CROWD_URL/rest/bootstrapi/1*
 | *LicenseApi* | [**addLicense**](Apis/LicenseApi.md#addLicense) | **POST** /license | Add a license |
 | *LicensesApi* | [**getLicenses**](Apis/LicensesApi.md#getLicenses) | **GET** /licenses | Get all licenses information |
 *LicensesApi* | [**setLicenses**](Apis/LicensesApi.md#setLicenses) | **PUT** /licenses | Set a list of licenses |
-| *MailServerApi* | [**getMailServerSmtp**](Apis/MailServerApi.md#getMailServerSmtp) | **GET** /mail-server/smtp | Get the default SMTP mail server |
+| *MailServerApi* | [**deleteMailServerSmtp**](Apis/MailServerApi.md#deleteMailServerSmtp) | **DELETE** /mail-server/smtp | Remove the default SMTP mail server |
+*MailServerApi* | [**getMailServerSmtp**](Apis/MailServerApi.md#getMailServerSmtp) | **GET** /mail-server/smtp | Get the default SMTP mail server |
 *MailServerApi* | [**setMailServerSmtp**](Apis/MailServerApi.md#setMailServerSmtp) | **PUT** /mail-server/smtp | Set the default SMTP mail server |
 | *MailTemplatesApi* | [**getMailTemplates**](Apis/MailTemplatesApi.md#getMailTemplates) | **GET** /mail-templates | Get the mail templates |
 *MailTemplatesApi* | [**setMailTemplates**](Apis/MailTemplatesApi.md#setMailTemplates) | **PUT** /mail-templates | Set the mail templates |

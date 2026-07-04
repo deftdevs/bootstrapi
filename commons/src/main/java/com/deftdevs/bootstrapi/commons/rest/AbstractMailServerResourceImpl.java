@@ -54,4 +54,16 @@ public class AbstractMailServerResourceImpl implements MailServerResource {
         final MailServerPopModel updatedPopModel = mailServerService.setMailServerPop(bean);
         return Response.ok(updatedPopModel).build();
     }
+
+    @Override
+    public Response deleteMailServerSmtp() {
+        mailServerService.deleteMailServerSmtp();
+        return Response.noContent().build();
+    }
+
+    @Override
+    public Response deleteMailServerPop() {
+        mailServerService.deleteMailServerPop();
+        return Response.noContent().build();
+    }
 }

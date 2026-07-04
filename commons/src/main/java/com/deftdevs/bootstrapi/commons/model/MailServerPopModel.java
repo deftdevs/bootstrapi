@@ -22,11 +22,14 @@ public class MailServerPopModel extends AbstractMailServerProtocolModel {
         .host("mail.example.com")
         .build();
 
+    // greenmail-compatible so functional tests can apply it against the integration
+    // test environment (see ci.yaml)
     public static final MailServerPopModel EXAMPLE_2 = MailServerPopModel.builder()
         .name("Example")
-        .host("mail.example.com")
-        .port(110)
         .protocol("pop3")
+        .host("localhost")
+        .port(3110)
+        .timeout(5000L)
         .build();
 
 }
