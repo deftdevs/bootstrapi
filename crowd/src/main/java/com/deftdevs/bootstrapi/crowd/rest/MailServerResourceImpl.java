@@ -40,4 +40,10 @@ public class MailServerResourceImpl implements MailServerSmtpResource {
         return Response.ok(updatedSmtpModel).build();
     }
 
+    @Override
+    public Response deleteMailServerSmtp() {
+        mailServerService.deleteMailServerSmtp();
+        return Response.noContent().build();
+    }
+
 }

@@ -44,18 +44,17 @@ public class MailServerSmtpModel extends AbstractMailServerProtocolModel {
         .host("mail.example.com")
         .build();
 
+    // greenmail-compatible so functional tests can apply it against the integration
+    // test environment (see ci.yaml); only fields that products echo back are set
     public static final MailServerSmtpModel EXAMPLE_2 = MailServerSmtpModel.builder()
         .name("Example")
-        .adminContact(null)
         .from("mail@example.com")
         .prefix("[Example]")
-        .host("mail.example.com")
-        .description("test smtp server")
-        .port(25)
         .protocol("smtp")
-        .timeout(2000L)
-        .username("admin")
-        .password("password")
+        .host("localhost")
+        .port(3025)
+        .useTls(false)
+        .timeout(5000L)
         .build();
 
 }

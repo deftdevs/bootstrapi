@@ -107,4 +107,18 @@ public class MailServerServiceTest {
             mailServerService.setMailServerPop(null);
         });
     }
+
+    @Test
+    public void testDeleteMailServerSmtp() {
+        assertThrows(UnsupportedOperationException.class, () -> {
+            mailServerService.deleteMailServerSmtp();
+        });
+    }
+
+    @Test
+    public void testDeleteMailServerPop() {
+        assertThrows(UnsupportedOperationException.class, () -> {
+            mailServerService.deleteMailServerPop();
+        });
+    }
 }

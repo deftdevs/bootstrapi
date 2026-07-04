@@ -145,4 +145,34 @@ public class MailServerServiceImpl implements MailServerService {
         return mailServerPopModel;
     }
 
+    @Override
+    public void deleteMailServerSmtp() {
+        final SMTPMailServer smtpMailServer = mailServerManager.getDefaultSMTPMailServer();
+
+        if (smtpMailServer == null) {
+            return;
+        }
+
+        try {
+            mailServerManager.delete(smtpMailServer.getId());
+        } catch (MailException e) {
+            throw new BadRequestException(e.getMessage());
+        }
+    }
+
+    @Override
+    public void deleteMailServerPop() {
+        final PopMailServer popMailServer = mailServerManager.getDefaultPopMailServer();
+
+        if (popMailServer == null) {
+            return;
+        }
+
+        try {
+            mailServerManager.delete(popMailServer.getId());
+        } catch (MailException e) {
+            throw new BadRequestException(e.getMessage());
+        }
+    }
+
 }

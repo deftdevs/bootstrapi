@@ -13,6 +13,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
 class MailServerResourceTest {
@@ -77,5 +78,21 @@ class MailServerResourceTest {
         final MailServerPopModel popModel = (MailServerPopModel) response.getEntity();
 
         assertEquals(popModel, bean);
+    }
+
+    @Test
+    void testDeleteMailServerSmtp() {
+        final Response response = resource.deleteMailServerSmtp();
+
+        assertEquals(204, response.getStatus());
+        verify(mailServerService).deleteMailServerSmtp();
+    }
+
+    @Test
+    void testDeleteMailServerPop() {
+        final Response response = resource.deleteMailServerPop();
+
+        assertEquals(204, response.getStatus());
+        verify(mailServerService).deleteMailServerPop();
     }
 }

@@ -23,6 +23,12 @@ public abstract class AbstractMailServerSmtpResourceFuncTest {
     @Test
     @Order(1)
     protected void testGetMailServerSmtpNotConfigured() throws Exception {
+        // delete any existing configuration first so this test does not depend
+        // on the state left behind by other test classes
+        final HttpResponse<String> deleteResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
+                .request(HttpMethod.DELETE, null);
+        assertEquals(Response.Status.NO_CONTENT.getStatusCode(), deleteResponse.statusCode());
+
         final HttpResponse<String> mailServerSmtpResponse = HttpRequestHelper.builder(BootstrAPI.MAIL_SERVER + "/" + BootstrAPI.MAIL_SERVER_SMTP)
                 .request();
         assertEquals(Response.Status.NO_CONTENT.getStatusCode(), mailServerSmtpResponse.statusCode());

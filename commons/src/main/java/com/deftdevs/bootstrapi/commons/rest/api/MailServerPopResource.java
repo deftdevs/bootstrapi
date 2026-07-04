@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -61,5 +62,24 @@ public interface MailServerPopResource {
     )
     Response setMailServerPop(
             final MailServerPopModel bean);
+
+    @DELETE
+    @Path(BootstrAPI.MAIL_SERVER_POP)
+    @Operation(
+            tags = { BootstrAPI.MAIL_SERVER },
+            summary = "Remove the default POP mail server",
+            description = "Removes the default POP mail server if one is configured; does nothing otherwise.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "204",
+                            description = "The default POP mail server has been removed or none was configured."
+                    ),
+                    @ApiResponse(
+                            responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    ),
+            }
+    )
+    Response deleteMailServerPop();
 
 }

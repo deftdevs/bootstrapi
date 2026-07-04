@@ -36,6 +36,11 @@ public class MailServerServiceImpl implements MailServerService {
     }
 
     @Override
+    public void deleteMailServerSmtp() {
+        throw new UnsupportedOperationException("Deleting SMTP mail server is not supported by Crowd");
+    }
+
+    @Override
     public MailServerPopModel getMailServerPop() {
         throw new UnsupportedOperationException("Getting POP mail server is not supported by Crowd");
     }
@@ -45,5 +50,10 @@ public class MailServerServiceImpl implements MailServerService {
             final MailServerPopModel mailServerPopModel) {
 
         throw new UnsupportedOperationException("Setting POP mail server is not supported by Crowd");
+    }
+
+    @Override
+    public void deleteMailServerPop() {
+        throw new UnsupportedOperationException("Deleting POP mail server is not supported by Crowd");
     }
 }

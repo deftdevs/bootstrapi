@@ -23,6 +23,11 @@ public interface MailServerService {
             final MailServerSmtpModel smtpModel);
 
     /**
+     * Removes the default smtp mailserver if one is configured; does nothing otherwise.
+     */
+    void deleteMailServerSmtp();
+
+    /**
      * Get the pop mailserver settings.
      *
      * @return the pop mailserver settings
@@ -37,4 +42,9 @@ public interface MailServerService {
      */
     MailServerPopModel setMailServerPop(
             final MailServerPopModel popModel);
+
+    /**
+     * Removes the default pop mailserver if one is configured; does nothing otherwise.
+     */
+    void deleteMailServerPop();
 }
