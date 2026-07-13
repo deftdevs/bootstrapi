@@ -40,7 +40,7 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="getSettingsBrandingColorScheme"></a>
 # **getSettingsBrandingColorScheme**
@@ -62,7 +62,7 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="getSettingsBrandingCustomHtml"></a>
 # **getSettingsBrandingCustomHtml**
@@ -84,7 +84,7 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="getSettingsBrandingFavicon"></a>
 # **getSettingsBrandingFavicon**
@@ -150,7 +150,7 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="getSettingsSecurity"></a>
 # **getSettingsSecurity**
@@ -172,7 +172,7 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="setSettings"></a>
 # **setSettings**
@@ -198,8 +198,8 @@ Apply a settings configuration
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: application/json, application/yaml, application/x-yaml, text/yaml
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="setSettingsBrandingColorScheme"></a>
 # **setSettingsBrandingColorScheme**
@@ -223,8 +223,8 @@ Set the color scheme
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: application/json, application/yaml, application/x-yaml, text/yaml
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="setSettingsBrandingCustomHtml"></a>
 # **setSettingsBrandingCustomHtml**
@@ -248,8 +248,8 @@ Set the custom HTML
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: application/json, application/yaml, application/x-yaml, text/yaml
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="setSettingsBrandingFavicon"></a>
 # **setSettingsBrandingFavicon**
@@ -274,7 +274,7 @@ null (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/octet-stream
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="setSettingsBrandingLogo"></a>
 # **setSettingsBrandingLogo**
@@ -299,7 +299,7 @@ null (empty response body)
 ### HTTP request headers
 
 - **Content-Type**: application/octet-stream
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="setSettingsGeneral"></a>
 # **setSettingsGeneral**
@@ -323,8 +323,8 @@ Set the general settings
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: application/json, application/yaml, application/x-yaml, text/yaml
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="setSettingsSecurity"></a>
 # **setSettingsSecurity**
@@ -348,6 +348,6 @@ Set the security settings
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: application/json, application/yaml, application/x-yaml, text/yaml
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 

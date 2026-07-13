@@ -22,7 +22,7 @@ public interface AuthenticationResource {
 
     @GET
     @Path(BootstrAPI.AUTHENTICATION_IDPS)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
     @Operation(
             tags = { BootstrAPI.AUTHENTICATION },
             summary = "Get all authentication identity providers",
@@ -40,8 +40,8 @@ public interface AuthenticationResource {
 
     @PATCH
     @Path(BootstrAPI.AUTHENTICATION_IDPS)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
+    @Produces({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
     @Operation(
             tags = { BootstrAPI.AUTHENTICATION },
             summary = "Set all authentication identity providers",
@@ -60,7 +60,7 @@ public interface AuthenticationResource {
 
     @GET
     @Path(BootstrAPI.AUTHENTICATION_SSO)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
     @Operation(
             tags = { BootstrAPI.AUTHENTICATION },
             summary = "Get authentication SSO configuration",
@@ -78,8 +78,8 @@ public interface AuthenticationResource {
 
     @PATCH
     @Path(BootstrAPI.AUTHENTICATION_SSO)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
+    @Produces({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
     @Operation(
             tags = { BootstrAPI.AUTHENTICATION },
             summary = "Set authentication SSO configuration",

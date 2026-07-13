@@ -33,7 +33,7 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="getSettingsBrandingLoginPage"></a>
 # **getSettingsBrandingLoginPage**
@@ -55,7 +55,7 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="getSettingsGeneral"></a>
 # **getSettingsGeneral**
@@ -77,7 +77,7 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="setSettings"></a>
 # **setSettings**
@@ -103,8 +103,8 @@ Apply a settings configuration
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: application/json, application/yaml, application/x-yaml, text/yaml
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="setSettingsBrandingLoginPage"></a>
 # **setSettingsBrandingLoginPage**
@@ -128,8 +128,8 @@ Set the login-page settings
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: application/json, application/yaml, application/x-yaml, text/yaml
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="setSettingsBrandingLogo"></a>
 # **setSettingsBrandingLogo**
@@ -154,7 +154,7 @@ Set the logo
 ### HTTP request headers
 
 - **Content-Type**: image/*
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="setSettingsGeneral"></a>
 # **setSettingsGeneral**
@@ -178,6 +178,6 @@ Set the general settings
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: application/json, application/yaml, application/x-yaml, text/yaml
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 

@@ -21,7 +21,7 @@ import java.util.Map;
 public interface ApplicationsResource {
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
     @Operation(
             tags = { BootstrAPI.APPLICATIONS },
             summary = "Get all applications",
@@ -40,8 +40,8 @@ public interface ApplicationsResource {
     Map<String, ApplicationModel> getApplications();
 
     @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
+    @Produces({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
     @Operation(
             tags = { BootstrAPI.APPLICATIONS },
             summary = "Set a list of applications",

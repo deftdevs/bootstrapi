@@ -32,8 +32,8 @@ Create an application
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: application/json, application/yaml, application/x-yaml, text/yaml
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="deleteApplication"></a>
 # **deleteApplication**
@@ -83,7 +83,7 @@ Get an application
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="updateApplication"></a>
 # **updateApplication**
@@ -108,6 +108,6 @@ Update an application
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: application/json, application/yaml, application/x-yaml, text/yaml
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 

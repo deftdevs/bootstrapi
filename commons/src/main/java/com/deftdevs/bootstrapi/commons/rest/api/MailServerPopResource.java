@@ -21,7 +21,7 @@ public interface MailServerPopResource {
 
     @GET
     @Path(BootstrAPI.MAIL_SERVER_POP)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
     @Operation(
             tags = { BootstrAPI.MAIL_SERVER },
             summary = "Get the default POP mail server",
@@ -44,8 +44,8 @@ public interface MailServerPopResource {
 
     @PUT
     @Path(BootstrAPI.MAIL_SERVER_POP)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
+    @Produces({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
     @Operation(
             tags = { BootstrAPI.MAIL_SERVER },
             summary = "Set the default POP mail server",

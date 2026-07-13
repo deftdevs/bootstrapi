@@ -16,7 +16,7 @@ import java.io.InputStream;
 public interface SettingsBrandingResource {
 
     @GET
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
     @Path(BootstrAPI.SETTINGS_BRANDING_LOGIN_PAGE)
     @Operation(
             tags = { BootstrAPI.SETTINGS },
@@ -29,8 +29,8 @@ public interface SettingsBrandingResource {
     Response getSettingsBrandingLoginPage();
 
     @PUT
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
+    @Produces({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
     @Path(BootstrAPI.SETTINGS_BRANDING_LOGIN_PAGE)
     @Operation(
             tags = { BootstrAPI.SETTINGS },
@@ -45,7 +45,7 @@ public interface SettingsBrandingResource {
 
     @PUT
     @Consumes(BootstrAPI.MEDIA_TYPE_IMAGE)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
     @Path(BootstrAPI.LOGO)
     @Operation(
             tags = { BootstrAPI.SETTINGS },

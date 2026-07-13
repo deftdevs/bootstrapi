@@ -61,6 +61,9 @@ public class BootstrAPI {
     public static final String USER_PASSWORD                = "password";
 
     public static final String MEDIA_TYPE_IMAGE             = "image/*";
+    public static final String MEDIA_TYPE_YAML              = "application/yaml";
+    public static final String MEDIA_TYPE_YAML_LEGACY       = "application/x-yaml";
+    public static final String MEDIA_TYPE_YAML_TEXT         = "text/yaml";
 
     public static final String ERROR_COLLECTION_RESPONSE_DESCRIPTION      = "Returns a list of error messages.";
     public static final String _ALL_PUT_SUMMARY                           = "Apply a complete configuration";

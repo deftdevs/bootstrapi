@@ -1,8 +1,10 @@
 package it.com.deftdevs.bootstrapi.commons.rest;
 
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.HttpMethod;
@@ -52,6 +54,20 @@ public abstract class _AbstractAllResourceFuncTest {
             generalNode = generalNode.path(segment);
         }
         assertEquals(getExampleSettingsGeneralModel().getTitle(), generalNode.path("title").asText());
+    }
+
+    @Test
+    void testSetAllAcceptsYaml() throws Exception {
+        final String yaml = new ObjectMapper(new YAMLFactory()).writeValueAsString(getExampleAllModel());
+
+        final HttpResponse<String> allResponse = HttpRequestHelper.builder(ALL_PATH)
+                .contentMediaType(BootstrAPI.MEDIA_TYPE_YAML)
+                .request(HttpMethod.PUT, yaml);
+        assertEquals(200, allResponse.statusCode(), allResponse.body());
+
+        final JsonNode allNode = objectMapper.readTree(allResponse.body());
+        assertEquals(200, allNode.path("status").path(getSettingsGeneralStatusKey()).path("status").asInt(),
+                "expected a success entry for the general settings, got: " + allNode.path("status"));
     }
 
     @Test

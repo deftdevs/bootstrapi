@@ -32,8 +32,8 @@ Create an application link
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: application/json, application/yaml, application/x-yaml, text/yaml
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="deleteApplicationLink"></a>
 # **deleteApplicationLink**
@@ -85,7 +85,7 @@ Get an application link
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="updateApplicationLink"></a>
 # **updateApplicationLink**
@@ -110,6 +110,6 @@ Update an application link
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: application/json, application/yaml, application/x-yaml, text/yaml
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 

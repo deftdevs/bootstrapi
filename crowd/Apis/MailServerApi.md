@@ -53,7 +53,7 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="setMailServerSmtp"></a>
 # **setMailServerSmtp**
@@ -77,6 +77,6 @@ Set the default SMTP mail server
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: application/json, application/yaml, application/x-yaml, text/yaml
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 

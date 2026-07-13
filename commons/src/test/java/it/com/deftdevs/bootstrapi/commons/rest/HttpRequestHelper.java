@@ -1,5 +1,6 @@
 package it.com.deftdevs.bootstrapi.commons.rest;
 
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
@@ -69,7 +70,10 @@ public class HttpRequestHelper {
 
         if (payload == null) {
             bodyPublisher = HttpRequest.BodyPublishers.noBody();
-        } else if (MediaType.TEXT_PLAIN.equals(contentMediaType)) {
+        } else if (MediaType.TEXT_PLAIN.equals(contentMediaType)
+                || BootstrAPI.MEDIA_TYPE_YAML.equals(contentMediaType)
+                || BootstrAPI.MEDIA_TYPE_YAML_LEGACY.equals(contentMediaType)
+                || BootstrAPI.MEDIA_TYPE_YAML_TEXT.equals(contentMediaType)) {
             bodyPublisher = HttpRequest.BodyPublishers.ofString(String.valueOf(payload));
         } else if (MediaType.APPLICATION_JSON.equals(contentMediaType)) {
             final ObjectWriter objectWriter = new ObjectMapper().writer().withDefaultPrettyPrinter();

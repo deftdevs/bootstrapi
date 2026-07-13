@@ -32,7 +32,7 @@ Get a user
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="setUser"></a>
 # **setUser**
@@ -57,8 +57,8 @@ Update an user
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: application/json, application/yaml, application/x-yaml, text/yaml
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="setUserPassword"></a>
 # **setUserPassword**
@@ -84,5 +84,5 @@ Update a user password
 ### HTTP request headers
 
 - **Content-Type**: text/plain
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
