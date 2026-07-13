@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.confluence.model.util;
 
 import com.atlassian.confluence.themes.BaseColourScheme;
 import com.atlassian.confluence.themes.ColourScheme;
-import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
+import com.deftdevs.bootstrapi.confluence.model.SettingsBrandingColorSchemeModel;
 
 
 public class SettingsBrandingColorSchemeModelUtil {

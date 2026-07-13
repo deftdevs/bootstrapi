@@ -3,24 +3,30 @@ package com.deftdevs.bootstrapi.crowd.service;
 import com.atlassian.crowd.manager.property.PropertyManager;
 import com.atlassian.crowd.manager.property.PropertyManagerException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
-import com.deftdevs.bootstrapi.commons.model.SettingsModel;
-import com.deftdevs.bootstrapi.crowd.service.api.CrowdSettingsGeneralService;
+import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
+import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageModel;
+import com.deftdevs.bootstrapi.crowd.service.api.CrowdSettingsBrandingService;
+import com.deftdevs.bootstrapi.crowd.service.api.CrowdSettingsService;
 
-public class SettingsServiceImpl
-        implements CrowdSettingsGeneralService {
+import java.io.InputStream;
+
+public class SettingsServiceImpl implements CrowdSettingsService {
 
     private final PropertyManager propertyManager;
+    private final CrowdSettingsBrandingService settingsBrandingService;
 
     public SettingsServiceImpl(
-            final PropertyManager propertyManager) {
+            final PropertyManager propertyManager,
+            final CrowdSettingsBrandingService settingsBrandingService) {
 
         this.propertyManager = propertyManager;
+        this.settingsBrandingService = settingsBrandingService;
     }
 
     @Override
-    public SettingsModel getSettingsGeneral() {
+    public SettingsGeneralModel getSettingsGeneral() {
         try {
-            return SettingsModel.builder()
+            return SettingsGeneralModel.builder()
                     .baseUrl(propertyManager.getBaseUrl())
                     .title(propertyManager.getDeploymentTitle())
                     .build();
@@ -30,7 +36,7 @@ public class SettingsServiceImpl
     }
 
     @Override
-    public SettingsModel setSettingsGeneral(SettingsModel settingsModel) {
+    public SettingsGeneralModel setSettingsGeneral(SettingsGeneralModel settingsModel) {
         if (settingsModel.getBaseUrl() != null) {
             propertyManager.setBaseUrl(settingsModel.getBaseUrl());
         }
@@ -38,6 +44,21 @@ public class SettingsServiceImpl
             propertyManager.setDeploymentTitle(settingsModel.getTitle());
         }
         return getSettingsGeneral();
+    }
+
+    @Override
+    public SettingsBrandingLoginPageModel getLoginPage() {
+        return settingsBrandingService.getLoginPage();
+    }
+
+    @Override
+    public SettingsBrandingLoginPageModel setLoginPage(final SettingsBrandingLoginPageModel settingsBrandingLoginPageModel) {
+        return settingsBrandingService.setLoginPage(settingsBrandingLoginPageModel);
+    }
+
+    @Override
+    public void setLogo(final InputStream inputStream) {
+        settingsBrandingService.setLogo(inputStream);
     }
 
 }

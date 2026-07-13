@@ -5,10 +5,10 @@ import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoModel;
 import com.deftdevs.bootstrapi.commons.rest.AbstractAuthenticationResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.AuthenticationService;
 
-public class TestAuthenticationResourceImpl extends AbstractAuthenticationResourceImpl<AbstractAuthenticationIdpModel, AuthenticationSsoModel, AuthenticationService<AbstractAuthenticationIdpModel, AuthenticationSsoModel>> {
+public class TestAuthenticationResourceImpl extends AbstractAuthenticationResourceImpl {
 
     public TestAuthenticationResourceImpl(
-            AuthenticationService<AbstractAuthenticationIdpModel, AuthenticationSsoModel> authenticationService) {
+            AuthenticationService authenticationService) {
 
         super(authenticationService);
     }

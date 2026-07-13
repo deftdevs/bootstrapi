@@ -7,37 +7,36 @@ import com.deftdevs.bootstrapi.commons.service.api.AuthenticationService;
 
 import java.util.Map;
 
-public abstract class AbstractAuthenticationResourceImpl<IM extends AbstractAuthenticationIdpModel, SM extends AuthenticationSsoModel, S extends AuthenticationService<IM, SM>>
-        implements AuthenticationResource<IM, SM> {
+public abstract class AbstractAuthenticationResourceImpl implements AuthenticationResource {
 
-    private final S authenticationService;
+    private final AuthenticationService authenticationService;
 
     protected AbstractAuthenticationResourceImpl(
-            final S authenticationService) {
+            final AuthenticationService authenticationService) {
 
         this.authenticationService = authenticationService;
     }
 
     @Override
-    public Map<String, ? extends IM> getAuthenticationIdps() {
+    public Map<String, ? extends AbstractAuthenticationIdpModel> getAuthenticationIdps() {
         return authenticationService.getAuthenticationIdps();
     }
 
     @Override
-    public Map<String, ? extends IM> setAuthenticationIdps(
-            final Map<String, ? extends IM> authenticationIdpModels) {
+    public Map<String, ? extends AbstractAuthenticationIdpModel> setAuthenticationIdps(
+            final Map<String, ? extends AbstractAuthenticationIdpModel> authenticationIdpModels) {
 
         return authenticationService.setAuthenticationIdps(authenticationIdpModels);
     }
 
     @Override
-    public SM getAuthenticationSso() {
+    public AuthenticationSsoModel getAuthenticationSso() {
         return authenticationService.getAuthenticationSso();
     }
 
     @Override
-    public SM setAuthenticationSso(
-            final SM authenticationSsoModel) {
+    public AuthenticationSsoModel setAuthenticationSso(
+            final AuthenticationSsoModel authenticationSsoModel) {
 
         return authenticationService.setAuthenticationSso(authenticationSsoModel);
     }

@@ -1,6 +1,7 @@
 package com.deftdevs.bootstrapi.jira.config;
 
 import com.deftdevs.bootstrapi.commons.service.api.*;
+import com.deftdevs.bootstrapi.jira.model._AllModel;
 import com.deftdevs.bootstrapi.jira.service.*;
 import com.deftdevs.bootstrapi.jira.service.api.JiraAuthenticationService;
 import com.deftdevs.bootstrapi.jira.service.api.JiraSettingsService;
@@ -16,6 +17,18 @@ public class ServiceConfig {
 
     @Autowired
     private HelperConfig helperConfig;
+
+    @Bean
+    public _AllService<_AllModel> _allService() {
+        return new _AllServiceImpl(
+                jiraSettingsService(),
+                directoriesService(),
+                applicationLinksService(),
+                jiraAuthenticationService(),
+                licensesService(),
+                mailServerService(),
+                permissionsService());
+    }
 
     @Bean
     public ApplicationLinksService applicationLinksService() {

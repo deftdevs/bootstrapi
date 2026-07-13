@@ -2,7 +2,12 @@ package com.deftdevs.bootstrapi.jira.service;
 
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
-import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
+import com.deftdevs.bootstrapi.commons.model.type.ServiceResult;
+import com.deftdevs.bootstrapi.commons.util.FieldNames;
+import com.deftdevs.bootstrapi.jira.model.SettingsBannerModel;
+import com.deftdevs.bootstrapi.jira.model.SettingsModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,6 +18,7 @@ import java.net.URI;
 
 import static com.atlassian.jira.config.properties.APKeys.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.*;
 
@@ -43,7 +49,7 @@ class JiraSettingsServiceTest {
         doReturn(CONTACT_MESSAGE).when(applicationProperties).getString(JIRA_CONTACT_ADMINISTRATORS_MESSSAGE);
         doReturn(EXTERNAL_USER_MANAGEMENT).when(applicationProperties).getString(JIRA_OPTION_USER_EXTERNALMGT);
 
-        final SettingsModel settingsModel = settingsService.getSettingsGeneral();
+        final SettingsGeneralModel settingsModel = settingsService.getSettingsGeneral();
 
         assertEquals(BASE_URL, settingsModel.getBaseUrl());
         assertEquals(MODE_PUBLIC, settingsModel.getMode());
@@ -54,7 +60,7 @@ class JiraSettingsServiceTest {
 
     @Test
     void testSetSettingsGeneral() {
-        final SettingsModel settingsModel = SettingsModel.builder()
+        final SettingsGeneralModel settingsModel = SettingsGeneralModel.builder()
             .baseUrl(BASE_URL)
             .mode(MODE_PUBLIC)
             .title(TITLE)
@@ -73,7 +79,7 @@ class JiraSettingsServiceTest {
 
     @Test
     void testSetSettingsGeneralEmptyModel() {
-        final SettingsModel settingsModel = SettingsModel.builder().build();
+        final SettingsGeneralModel settingsModel = SettingsGeneralModel.builder().build();
 
         settingsService.setSettingsGeneral(settingsModel);
 
@@ -85,7 +91,7 @@ class JiraSettingsServiceTest {
 
     @Test
     void testSetSettingsGeneralUnsupportedMode() {
-        final SettingsModel settingsModel = SettingsModel.builder().mode("unsupported").build();
+        final SettingsGeneralModel settingsModel = SettingsGeneralModel.builder().mode("unsupported").build();
 
         assertThrows(BadRequestException.class, () -> {
             settingsService.setSettingsGeneral(settingsModel);
@@ -94,12 +100,76 @@ class JiraSettingsServiceTest {
 
     @Test
     void testSetSettingsGeneralInvalidCombination() {
-        final SettingsModel settingsModel = SettingsModel.builder().mode(MODE_PUBLIC).build();
+        final SettingsGeneralModel settingsModel = SettingsGeneralModel.builder().mode(MODE_PUBLIC).build();
         doReturn(true).when(applicationProperties).getOption(JIRA_OPTION_USER_EXTERNALMGT);
 
         assertThrows(BadRequestException.class, () -> {
             settingsService.setSettingsGeneral(settingsModel);
         });
+    }
+
+    // composite getSettings/setSettings default methods
+
+    @Test
+    void testGetSettings() {
+        final SettingsServiceImpl serviceSpy = spy(settingsService);
+        doReturn(SettingsGeneralModel.EXAMPLE_1).when(serviceSpy).getSettingsGeneral();
+        doReturn(SettingsSecurityModel.EXAMPLE_1).when(serviceSpy).getSettingsSecurity();
+        doReturn(SettingsBannerModel.EXAMPLE_1).when(serviceSpy).getSettingsBanner();
+
+        final SettingsModel settingsModel = serviceSpy.getSettings();
+
+        assertEquals(SettingsGeneralModel.EXAMPLE_1, settingsModel.getGeneral());
+        assertEquals(SettingsSecurityModel.EXAMPLE_1, settingsModel.getSecurity());
+        assertEquals(SettingsBannerModel.EXAMPLE_1, settingsModel.getBanner());
+    }
+
+    @Test
+    void testSetSettingsAppliesAllSubFields() {
+        final SettingsServiceImpl serviceSpy = spy(settingsService);
+        doReturn(SettingsGeneralModel.EXAMPLE_1).when(serviceSpy).setSettingsGeneral(SettingsGeneralModel.EXAMPLE_1);
+        doReturn(SettingsSecurityModel.EXAMPLE_1).when(serviceSpy).setSettingsSecurity(SettingsSecurityModel.EXAMPLE_1);
+        doReturn(SettingsBannerModel.EXAMPLE_1).when(serviceSpy).setSettingsBanner(SettingsBannerModel.EXAMPLE_1);
+
+        final ServiceResult<SettingsModel> result = serviceSpy.setSettings(SettingsModel.builder()
+                .general(SettingsGeneralModel.EXAMPLE_1)
+                .security(SettingsSecurityModel.EXAMPLE_1)
+                .banner(SettingsBannerModel.EXAMPLE_1)
+                .build());
+
+        assertEquals(SettingsGeneralModel.EXAMPLE_1, result.getModel().getGeneral());
+        assertEquals(SettingsSecurityModel.EXAMPLE_1, result.getModel().getSecurity());
+        assertEquals(SettingsBannerModel.EXAMPLE_1, result.getModel().getBanner());
+        assertEquals(200, result.getStatus().get(FieldNames.of(SettingsModel.class, SettingsGeneralModel.class)).getStatus());
+        assertEquals(200, result.getStatus().get(FieldNames.of(SettingsModel.class, SettingsSecurityModel.class)).getStatus());
+        assertEquals(200, result.getStatus().get(FieldNames.of(SettingsModel.class, SettingsBannerModel.class)).getStatus());
+    }
+
+    @Test
+    void testSetSettingsSkipsNullSubFields() {
+        final SettingsServiceImpl serviceSpy = spy(settingsService);
+
+        final ServiceResult<SettingsModel> result = serviceSpy.setSettings(new SettingsModel());
+
+        assertEquals(0, result.getStatus().size());
+        verify(serviceSpy, never()).setSettingsGeneral(SettingsGeneralModel.EXAMPLE_1);
+    }
+
+    @Test
+    void testSetSettingsRecordsPerSubFieldFailure() {
+        final SettingsServiceImpl serviceSpy = spy(settingsService);
+        doReturn(SettingsGeneralModel.EXAMPLE_1).when(serviceSpy).setSettingsGeneral(SettingsGeneralModel.EXAMPLE_1);
+        doThrow(new BadRequestException("invalid banner")).when(serviceSpy).setSettingsBanner(SettingsBannerModel.EXAMPLE_1);
+
+        final ServiceResult<SettingsModel> result = serviceSpy.setSettings(SettingsModel.builder()
+                .general(SettingsGeneralModel.EXAMPLE_1)
+                .banner(SettingsBannerModel.EXAMPLE_1)
+                .build());
+
+        assertEquals(SettingsGeneralModel.EXAMPLE_1, result.getModel().getGeneral());
+        assertNull(result.getModel().getBanner());
+        assertEquals(200, result.getStatus().get(FieldNames.of(SettingsModel.class, SettingsGeneralModel.class)).getStatus());
+        assertEquals(400, result.getStatus().get(FieldNames.of(SettingsModel.class, SettingsBannerModel.class)).getStatus());
     }
 
 }

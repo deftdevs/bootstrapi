@@ -2,7 +2,9 @@ package com.deftdevs.bootstrapi.commons.constants;
 
 public class BootstrAPI {
 
-    public static final String ALL                          = "all";
+    public static final String _ALL                         = "_all";
+    public static final String _ROOT                        = "/";
+
     public static final String APPLICATION                  = "application";
     public static final String APPLICATIONS                 = "applications";
     public static final String APPLICATION_LINK             = "application-link";
@@ -49,6 +51,7 @@ public class BootstrAPI {
     public static final String SETTINGS_BRANDING_LOGIN_PAGE = "login-page";
     public static final String SETTINGS_BRANDING_LOGO       = "logo";
     public static final String SETTINGS_CUSTOM_HTML         = "custom-html";
+    public static final String SETTINGS_GENERAL             = "general";
     public static final String SETTINGS_SECURITY            = "security";
     public static final String USER                         = "user";
     public static final String USERS                        = "users";
@@ -57,10 +60,20 @@ public class BootstrAPI {
     public static final String MEDIA_TYPE_IMAGE             = "image/*";
 
     public static final String ERROR_COLLECTION_RESPONSE_DESCRIPTION      = "Returns a list of error messages.";
+    public static final String _ALL_PUT_SUMMARY                           = "Apply a complete configuration";
+    public static final String _ALL_PUT_RESPONSE_DESCRIPTION              = "Returns the updated configuration. The per-sub-field outcome is reported in the"
+            + " 'status' map, keyed by the request's field paths (e.g. 'settings/general', 'mailServer/smtp';"
+            + " 2xx for success, 4xx/5xx for failure with a human-readable 'message' and optional 'details')."
+            + " License keys in the response are redacted (e.g. 'AAAB...wxyz#a1b2')."
+            + " If any sub-field fails, the highest sub-field status code is returned with the same response body.";
+    public static final String _ALL_PUT_FAILURE_RESPONSE_DESCRIPTION      = "One or more sub-fields failed to apply. The response code is the highest"
+            + " sub-field status code; inspect the per-sub-field 'status' map in the response body to see which"
+            + " fields succeeded and which failed. Request-level errors (e.g. a missing request body) return an"
+            + " error message list instead.";
     public static final String SETTINGS_GENERAL_GET_SUMMARY               = "Get the general settings";
     public static final String SETTINGS_GENERAL_GET_RESPONSE_DESCRIPTION  = "Returns the general settings";
     public static final String SETTINGS_GENERAL_PUT_SUMMARY               = "Set the general settings";
-    public static final String SETTINGS_GENERAL_PUT_RESPONSE_DESCRIPTION  = "Returns the general security settings";
+    public static final String SETTINGS_GENERAL_PUT_RESPONSE_DESCRIPTION  = "Returns the updated general settings";
     public static final String SETTINGS_SECURITY_GET_SUMMARY              = "Get the security settings";
     public static final String SETTINGS_SECURITY_GET_RESPONSE_DESCRIPTION = "Returns the security settings";
     public static final String SETTINGS_SECURITY_PUT_SUMMARY              = "Set the security settings";

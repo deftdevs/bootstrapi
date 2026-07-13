@@ -6,13 +6,15 @@ import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
+import com.deftdevs.bootstrapi.commons.model.type.SubEntityOf;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@XmlRootElement(name = BootstrAPI.MAIL_SERVER + "-" + BootstrAPI.MAIL_SERVER_POP)
+@SubEntityOf(MailServerModel.class)
+@XmlRootElement(name = BootstrAPI.MAIL_SERVER_POP)
 public class MailServerPopModel extends AbstractMailServerProtocolModel {
 
     // Example instances for documentation and tests

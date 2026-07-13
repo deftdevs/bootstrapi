@@ -14,8 +14,7 @@ import java.util.Map;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
-public abstract class AbstractAuthenticationService<IB extends AbstractAuthenticationIdpModel, SB extends AuthenticationSsoModel>
-        implements AuthenticationService<IB, SB> {
+public abstract class AbstractAuthenticationService implements AuthenticationService {
 
     protected final IdpConfigService idpConfigService;
     protected final SsoConfigService ssoConfigService;
@@ -29,21 +28,23 @@ public abstract class AbstractAuthenticationService<IB extends AbstractAuthentic
     }
 
     @Override
-    public Map<String, ? extends IB> getAuthenticationIdps() {
+    public Map<String, ? extends AbstractAuthenticationIdpModel> getAuthenticationIdps() {
         return idpConfigService.getIdpConfigs().stream()
                 .map(this::toAuthenticationIdpModel)
-                .collect(Collectors.toMap(AbstractAuthenticationIdpModel::getName, Function.identity()));
+                .collect(Collectors.toMap(AbstractAuthenticationIdpModel::getName, Function.identity(), (existing, replacement) -> {
+                    throw new IllegalStateException("Duplicate name key found: " + existing.getName());
+                }));
     }
 
     @Override
-    public Map<String, ? extends IB> setAuthenticationIdps(
-            final Map<String, ? extends IB> authenticationIdpModels) {
+    public Map<String, ? extends AbstractAuthenticationIdpModel> setAuthenticationIdps(
+            final Map<String, ? extends AbstractAuthenticationIdpModel> authenticationIdpModels) {
 
-        final Map<String, IB> resultIdpModels = new LinkedHashMap<>();
+        final Map<String, AbstractAuthenticationIdpModel> resultIdpModels = new LinkedHashMap<>();
 
-        for (Map.Entry<String, ? extends IB> entry : authenticationIdpModels.entrySet()) {
+        for (Map.Entry<String, ? extends AbstractAuthenticationIdpModel> entry : authenticationIdpModels.entrySet()) {
             final String idpName = entry.getKey();
-            final IB idpModel = entry.getValue();
+            final AbstractAuthenticationIdpModel idpModel = entry.getValue();
 
             if (idpModel == null) {
                 // declarative no-op: null model + existing entity → return as-is;
@@ -59,7 +60,7 @@ public abstract class AbstractAuthenticationService<IB extends AbstractAuthentic
                 idpModel.setName(idpName);
             }
 
-            final IB resultIdpModel = setAuthenticationIdp(idpModel);
+            final AbstractAuthenticationIdpModel resultIdpModel = setAuthenticationIdp(idpModel);
             resultIdpModels.put(resultIdpModel.getName(), resultIdpModel);
         }
 
@@ -67,8 +68,8 @@ public abstract class AbstractAuthenticationService<IB extends AbstractAuthentic
     }
 
     @Override
-    public IB setAuthenticationIdp(
-            final IB authenticationIdpModel) {
+    public AbstractAuthenticationIdpModel setAuthenticationIdp(
+            final AbstractAuthenticationIdpModel authenticationIdpModel) {
 
         if (authenticationIdpModel.getName() == null || authenticationIdpModel.getName().trim().isEmpty()) {
             throw new BadRequestException("The name cannot be empty");
@@ -88,13 +89,13 @@ public abstract class AbstractAuthenticationService<IB extends AbstractAuthentic
     }
 
     @Override
-    public SB getAuthenticationSso() {
+    public AuthenticationSsoModel getAuthenticationSso() {
         return toAuthenticationSsoModel(ssoConfigService.getSsoConfig());
     }
 
     @Override
-    public SB setAuthenticationSso(
-            final SB authenticationSsoModel) {
+    public AuthenticationSsoModel setAuthenticationSso(
+            final AuthenticationSsoModel authenticationSsoModel) {
 
         final SsoConfig existingSsoConfig = ssoConfigService.getSsoConfig();
         final SsoConfig ssoConfig = toSsoConfig(authenticationSsoModel, existingSsoConfig);
@@ -113,14 +114,14 @@ public abstract class AbstractAuthenticationService<IB extends AbstractAuthentic
         return idpConfigsByName.get(name);
     }
 
-    protected abstract IB toAuthenticationIdpModel(IdpConfig idpConfig);
+    protected abstract AbstractAuthenticationIdpModel toAuthenticationIdpModel(IdpConfig idpConfig);
 
-    protected abstract IdpConfig toIdpConfig(IB authenticationIdpModel);
+    protected abstract IdpConfig toIdpConfig(AbstractAuthenticationIdpModel authenticationIdpModel);
 
-    protected abstract IdpConfig toIdpConfig(IB authenticationIdpModel, IdpConfig existingIdpConfig);
+    protected abstract IdpConfig toIdpConfig(AbstractAuthenticationIdpModel authenticationIdpModel, IdpConfig existingIdpConfig);
 
-    protected abstract SB toAuthenticationSsoModel(SsoConfig ssoConfig);
+    protected abstract AuthenticationSsoModel toAuthenticationSsoModel(SsoConfig ssoConfig);
 
-    protected abstract SsoConfig toSsoConfig(SB authenticationSsoModel, SsoConfig existingSsoConfig);
+    protected abstract SsoConfig toSsoConfig(AuthenticationSsoModel authenticationSsoModel, SsoConfig existingSsoConfig);
 
 }

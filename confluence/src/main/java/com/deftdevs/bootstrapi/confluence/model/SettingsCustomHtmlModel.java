@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import com.deftdevs.bootstrapi.commons.model.type.SubEntityOf;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import static com.deftdevs.bootstrapi.commons.constants.BootstrAPI.*;
@@ -16,7 +17,8 @@ import static com.deftdevs.bootstrapi.commons.constants.BootstrAPI.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement(name = SETTINGS + "-" + SETTINGS_CUSTOM_HTML)
+@SubEntityOf(SettingsModel.class)
+@XmlRootElement(name = SETTINGS_CUSTOM_HTML)
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SettingsCustomHtmlModel {
 

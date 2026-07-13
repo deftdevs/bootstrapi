@@ -20,7 +20,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@XmlRootElement(name = BootstrAPI.DIRECTORY + '-' + BootstrAPI.DIRECTORY_LDAP)
+@XmlRootElement(name = BootstrAPI.DIRECTORY_LDAP)
 public class DirectoryLdapModel extends AbstractDirectoryExternalModel {
 
     @XmlElement

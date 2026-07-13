@@ -8,16 +8,17 @@ import lombok.experimental.SuperBuilder;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import com.deftdevs.bootstrapi.commons.model.type.SubEntityOf;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import static com.deftdevs.bootstrapi.commons.constants.BootstrAPI.SETTINGS;
 import static com.deftdevs.bootstrapi.commons.constants.BootstrAPI.SETTINGS_SECURITY;
 
 @Data
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement(name = SETTINGS + "-" + SETTINGS_SECURITY)
+@SubEntityOf(AbstractSettingsModel.class)
+@XmlRootElement(name = SETTINGS_SECURITY)
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SettingsSecurityModel {
 

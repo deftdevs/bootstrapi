@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.xml.bind.annotation.XmlElement;
+import com.deftdevs.bootstrapi.commons.model.type.SubEntityOf;
 import javax.xml.bind.annotation.XmlRootElement;
 
 @Data
@@ -15,7 +16,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@XmlRootElement(name = BootstrAPI.MAIL_SERVER + "-" + BootstrAPI.MAIL_SERVER_SMTP)
+@SubEntityOf(MailServerModel.class)
+@XmlRootElement(name = BootstrAPI.MAIL_SERVER_SMTP)
 public class MailServerSmtpModel extends AbstractMailServerProtocolModel {
 
     @XmlElement
@@ -55,6 +57,16 @@ public class MailServerSmtpModel extends AbstractMailServerProtocolModel {
         .port(3025)
         .useTls(false)
         .timeout(5000L)
+        .build();
+
+    // restricted to the fields supported by all products (e.g. Crowd does not echo name and protocol)
+    public static final MailServerSmtpModel EXAMPLE_2_MINIMAL = MailServerSmtpModel.builder()
+        .from(EXAMPLE_2.getFrom())
+        .prefix(EXAMPLE_2.getPrefix())
+        .host(EXAMPLE_2.getHost())
+        .port(EXAMPLE_2.getPort())
+        .useTls(EXAMPLE_2.getUseTls())
+        .timeout(EXAMPLE_2.getTimeout())
         .build();
 
 }

@@ -5,7 +5,7 @@ import com.atlassian.confluence.settings.setup.OtherTestSettings;
 import com.atlassian.confluence.setup.settings.CustomHtmlSettings;
 import com.atlassian.confluence.setup.settings.GlobalSettingsManager;
 import com.atlassian.confluence.setup.settings.Settings;
-import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
 import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlModel;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,11 +26,14 @@ class SettingsServiceTest {
     @Mock
     private GlobalSettingsManager globalSettingsManager;
 
+    @Mock
+    private com.deftdevs.bootstrapi.confluence.service.api.SettingsBrandingService settingsBrandingService;
+
     private SettingsServiceImpl settingsService;
 
     @BeforeEach
     public void setup() {
-        settingsService = new SettingsServiceImpl(globalSettingsManager);
+        settingsService = new SettingsServiceImpl(globalSettingsManager, settingsBrandingService);
     }
 
     @Test
@@ -39,9 +42,9 @@ class SettingsServiceTest {
 
         doReturn(settings).when(globalSettingsManager).getGlobalSettings();
 
-        final SettingsModel settingsModel = settingsService.getSettingsGeneral();
+        final SettingsGeneralModel settingsModel = settingsService.getSettingsGeneral();
 
-        final SettingsModel settingsModelRef = SettingsModel.builder()
+        final SettingsGeneralModel settingsModelRef = SettingsGeneralModel.builder()
                 .baseUrl(URI.create(settings.getBaseUrl()))
                 .title(settings.getSiteTitle())
                 .contactMessage(settings.getCustomContactMessage())
@@ -58,20 +61,20 @@ class SettingsServiceTest {
 
         final Settings updateSettings = new OtherTestSettings();
 
-        final SettingsModel requestModel = SettingsModel.builder()
+        final SettingsGeneralModel requestModel = SettingsGeneralModel.builder()
                 .baseUrl(URI.create(updateSettings.getBaseUrl()))
                 .title(updateSettings.getSiteTitle())
                 .contactMessage(updateSettings.getCustomContactMessage())
                 .externalUserManagement(updateSettings.isExternalUserManagement())
                 .build();
 
-        final SettingsModel responseModel = settingsService.setSettingsGeneral(requestModel);
+        final SettingsGeneralModel responseModel = settingsService.setSettingsGeneral(requestModel);
 
         final ArgumentCaptor<Settings> settingsCaptor = ArgumentCaptor.forClass(Settings.class);
         verify(globalSettingsManager).updateGlobalSettings(settingsCaptor.capture());
         final Settings settings = settingsCaptor.getValue();
 
-        final SettingsModel settingsModel = SettingsModel.builder()
+        final SettingsGeneralModel settingsModel = SettingsGeneralModel.builder()
                 .baseUrl(URI.create(settings.getBaseUrl()))
                 .title(settings.getSiteTitle())
                 .contactMessage(settings.getCustomContactMessage())
@@ -84,7 +87,7 @@ class SettingsServiceTest {
 
     @Test
     void testSetSettingsDefaultConfig(){
-        final SettingsModel settingsModel = SettingsModel.builder().build();
+        final SettingsGeneralModel settingsModel = SettingsGeneralModel.builder().build();
 
         final Settings defaultSettings = new DefaultTestSettings();
         doReturn(defaultSettings).when(globalSettingsManager).getGlobalSettings();
@@ -158,6 +161,7 @@ class SettingsServiceTest {
         spy.setSettingsSecurity(settingsSecurityModel);
         verify(settings).setWebSudoEnabled(settingsSecurityModel.getWebSudoEnabled());
         verify(settings).setWebSudoTimeout(settingsSecurityModel.getWebSudoTimeout());
+        verify(globalSettingsManager).updateGlobalSettings(settings);
     }
 
 }

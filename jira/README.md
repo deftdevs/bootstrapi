@@ -7,6 +7,7 @@ All URIs are relative to *https://JIRA_URL/rest/bootstrapi/1*
 
 | Class | Method | HTTP request | Description |
 |------------ | ------------- | ------------- | -------------|
+| *AllApi* | [**setAll**](Apis/AllApi.md#setAll) | **PUT** / | Apply a complete configuration |
 | *ApplicationLinkApi* | [**createApplicationLink**](Apis/ApplicationLinkApi.md#createApplicationLink) | **POST** /application-link | Create an application link |
 *ApplicationLinkApi* | [**deleteApplicationLink**](Apis/ApplicationLinkApi.md#deleteApplicationLink) | **DELETE** /application-link/{uuid} | Delete an application link |
 *ApplicationLinkApi* | [**getApplicationLink**](Apis/ApplicationLinkApi.md#getApplicationLink) | **GET** /application-link/{uuid} | Get an application link |
@@ -53,6 +54,7 @@ All URIs are relative to *https://JIRA_URL/rest/bootstrapi/1*
  - [ApplicationLinkModel](./Models/ApplicationLinkModel.md)
  - [AuthenticationIdpOidcModel](./Models/AuthenticationIdpOidcModel.md)
  - [AuthenticationIdpSamlModel](./Models/AuthenticationIdpSamlModel.md)
+ - [AuthenticationModel](./Models/AuthenticationModel.md)
  - [AuthenticationSsoModel](./Models/AuthenticationSsoModel.md)
  - [DirectoryCrowdAdvanced](./Models/DirectoryCrowdAdvanced.md)
  - [DirectoryCrowdModel](./Models/DirectoryCrowdModel.md)
@@ -74,13 +76,17 @@ All URIs are relative to *https://JIRA_URL/rest/bootstrapi/1*
  - [ErrorCollection](./Models/ErrorCollection.md)
  - [GroupModel](./Models/GroupModel.md)
  - [LicenseModel](./Models/LicenseModel.md)
+ - [MailServerModel](./Models/MailServerModel.md)
  - [MailServerPopModel](./Models/MailServerPopModel.md)
  - [MailServerSmtpModel](./Models/MailServerSmtpModel.md)
  - [PermissionsGlobalModel](./Models/PermissionsGlobalModel.md)
  - [SettingsBannerModel](./Models/SettingsBannerModel.md)
+ - [SettingsGeneralModel](./Models/SettingsGeneralModel.md)
  - [SettingsModel](./Models/SettingsModel.md)
  - [SettingsSecurityModel](./Models/SettingsSecurityModel.md)
  - [UserModel](./Models/UserModel.md)
+ - [_AllModel](./Models/_AllModel.md)
+ - [_AllModelStatus](./Models/_AllModelStatus.md)
 
 
 <a name="documentation-for-authorization"></a>

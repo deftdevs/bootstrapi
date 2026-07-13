@@ -12,7 +12,7 @@ import com.deftdevs.bootstrapi.confluence.model.util.AuthenticationSsoModelUtil;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceAuthenticationService;
 
 public class AuthenticationServiceImpl
-        extends AbstractAuthenticationService<AbstractAuthenticationIdpModel, AuthenticationSsoModel>
+        extends AbstractAuthenticationService
         implements ConfluenceAuthenticationService {
 
     public AuthenticationServiceImpl(

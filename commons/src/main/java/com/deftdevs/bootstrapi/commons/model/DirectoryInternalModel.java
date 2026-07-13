@@ -24,7 +24,7 @@ import java.util.Map;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@XmlRootElement(name = BootstrAPI.DIRECTORY + '-' + BootstrAPI.DIRECTORY_INTERNAL)
+@XmlRootElement(name = BootstrAPI.DIRECTORY_INTERNAL)
 public class DirectoryInternalModel extends AbstractDirectoryModel {
 
     @XmlElement

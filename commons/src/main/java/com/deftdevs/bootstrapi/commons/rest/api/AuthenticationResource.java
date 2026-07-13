@@ -18,7 +18,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import java.util.Map;
 
-public interface AuthenticationResource<IM extends AbstractAuthenticationIdpModel, SM extends AuthenticationSsoModel> {
+public interface AuthenticationResource {
 
     @GET
     @Path(BootstrAPI.AUTHENTICATION_IDPS)
@@ -36,7 +36,7 @@ public interface AuthenticationResource<IM extends AbstractAuthenticationIdpMode
                     )
             }
     )
-    Map<String, ? extends IM> getAuthenticationIdps();
+    Map<String, ? extends AbstractAuthenticationIdpModel> getAuthenticationIdps();
 
     @PATCH
     @Path(BootstrAPI.AUTHENTICATION_IDPS)
@@ -55,8 +55,8 @@ public interface AuthenticationResource<IM extends AbstractAuthenticationIdpMode
                     )
             }
     )
-    Map<String, ? extends IM> setAuthenticationIdps(
-            final Map<String, ? extends IM> authenticationIdpModels);
+    Map<String, ? extends AbstractAuthenticationIdpModel> setAuthenticationIdps(
+            final Map<String, ? extends AbstractAuthenticationIdpModel> authenticationIdpModels);
 
     @GET
     @Path(BootstrAPI.AUTHENTICATION_SSO)
@@ -74,7 +74,7 @@ public interface AuthenticationResource<IM extends AbstractAuthenticationIdpMode
                     )
             }
     )
-    SM getAuthenticationSso();
+    AuthenticationSsoModel getAuthenticationSso();
 
     @PATCH
     @Path(BootstrAPI.AUTHENTICATION_SSO)
@@ -93,7 +93,7 @@ public interface AuthenticationResource<IM extends AbstractAuthenticationIdpMode
                     )
             }
     )
-    SM setAuthenticationSso(
-            final SM authenticationSsoModel);
+    AuthenticationSsoModel setAuthenticationSso(
+            final AuthenticationSsoModel authenticationSsoModel);
 
 }

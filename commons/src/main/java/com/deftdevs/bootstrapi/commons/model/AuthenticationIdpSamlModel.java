@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@XmlRootElement(name = BootstrAPI.AUTHENTICATION + "-" + BootstrAPI.AUTHENTICATION_IDP + "-" + BootstrAPI.AUTHENTICATION_IDP_SAML)
+@XmlRootElement(name = BootstrAPI.AUTHENTICATION_IDP_SAML)
 public class AuthenticationIdpSamlModel extends AbstractAuthenticationIdpModel {
 
     @XmlElement

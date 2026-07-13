@@ -17,7 +17,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@XmlRootElement(name = BootstrAPI.DIRECTORY + '-' + BootstrAPI.DIRECTORY_DELEGATING)
+@XmlRootElement(name = BootstrAPI.DIRECTORY_DELEGATING)
 public class DirectoryDelegatingModel extends AbstractDirectoryExternalModel {
 
     @XmlElement

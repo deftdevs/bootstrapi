@@ -7,6 +7,7 @@ All URIs are relative to *https://CROWD_URL/rest/bootstrapi/1*
 
 | Class | Method | HTTP request | Description |
 |------------ | ------------- | ------------- | -------------|
+| *AllApi* | [**setAll**](Apis/AllApi.md#setAll) | **PUT** / | Apply a complete configuration |
 | *ApplicationApi* | [**createApplication**](Apis/ApplicationApi.md#createApplication) | **POST** /application | Create an application |
 *ApplicationApi* | [**deleteApplication**](Apis/ApplicationApi.md#deleteApplication) | **DELETE** /application/{id} | Delete an application |
 *ApplicationApi* | [**getApplication**](Apis/ApplicationApi.md#getApplication) | **GET** /application/{id} | Get an application |
@@ -84,12 +85,19 @@ All URIs are relative to *https://CROWD_URL/rest/bootstrapi/1*
  - [ErrorCollection](./Models/ErrorCollection.md)
  - [GroupModel](./Models/GroupModel.md)
  - [LicenseModel](./Models/LicenseModel.md)
+ - [MailServerModel](./Models/MailServerModel.md)
+ - [MailServerPopModel](./Models/MailServerPopModel.md)
  - [MailServerSmtpModel](./Models/MailServerSmtpModel.md)
  - [MailTemplatesModel](./Models/MailTemplatesModel.md)
  - [SessionConfigModel](./Models/SessionConfigModel.md)
  - [SettingsBrandingLoginPageModel](./Models/SettingsBrandingLoginPageModel.md)
+ - [SettingsBrandingModel](./Models/SettingsBrandingModel.md)
+ - [SettingsGeneralModel](./Models/SettingsGeneralModel.md)
  - [SettingsModel](./Models/SettingsModel.md)
+ - [SettingsSecurityModel](./Models/SettingsSecurityModel.md)
  - [UserModel](./Models/UserModel.md)
+ - [_AllModel](./Models/_AllModel.md)
+ - [_AllModelStatus](./Models/_AllModelStatus.md)
 
 
 <a name="documentation-for-authorization"></a>

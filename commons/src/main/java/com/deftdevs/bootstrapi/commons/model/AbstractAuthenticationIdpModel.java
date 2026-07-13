@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 
 import javax.xml.bind.annotation.XmlElement;
+import com.deftdevs.bootstrapi.commons.model.type.SubEntityOf;
 import javax.xml.bind.annotation.XmlRootElement;
 
 
@@ -17,7 +18,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @SuperBuilder
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement
+@SubEntityOf(AuthenticationModel.class)
+@XmlRootElement(name = BootstrAPI.AUTHENTICATION_IDP)
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.NAME,
         include = JsonTypeInfo.As.PROPERTY,

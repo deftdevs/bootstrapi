@@ -36,7 +36,7 @@ This endpoint does not need any parameter.
 
 <a name="getSettings"></a>
 # **getSettings**
-> SettingsModel getSettings()
+> SettingsGeneralModel getSettings()
 
 Get the general settings
 
@@ -45,7 +45,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**SettingsModel**](../Models/SettingsModel.md)
+[**SettingsGeneralModel**](../Models/SettingsGeneralModel.md)
 
 ### Authorization
 
@@ -105,7 +105,7 @@ Set the banner
 
 <a name="setSettings"></a>
 # **setSettings**
-> SettingsModel setSettings(SettingsModel)
+> SettingsGeneralModel setSettings(SettingsGeneralModel)
 
 Set the general settings
 
@@ -113,11 +113,11 @@ Set the general settings
 
 |Name | Type | Description  | Notes |
 |------------- | ------------- | ------------- | -------------|
-| **SettingsModel** | [**SettingsModel**](../Models/SettingsModel.md)|  | [optional] |
+| **SettingsGeneralModel** | [**SettingsGeneralModel**](../Models/SettingsGeneralModel.md)|  | [optional] |
 
 ### Return type
 
-[**SettingsModel**](../Models/SettingsModel.md)
+[**SettingsGeneralModel**](../Models/SettingsGeneralModel.md)
 
 ### Authorization
 

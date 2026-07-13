@@ -1,8 +1,8 @@
 package com.deftdevs.bootstrapi.crowd.service.api;
 
-import com.deftdevs.bootstrapi.commons.model.SettingsModel;
-import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
+import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
+import com.deftdevs.bootstrapi.commons.service.api.SettingsGeneralService;
 
 public interface CrowdSettingsGeneralService extends
-        SettingsService<SettingsModel> {
+        SettingsGeneralService<SettingsGeneralModel> {
 }
