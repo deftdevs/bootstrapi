@@ -1,5 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+
 import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 import com.deftdevs.bootstrapi.crowd.model.MailTemplatesModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.MailTemplateResource;
@@ -10,7 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 @SystemAdminOnly
-@Path(MailTemplateResource.MAIL_TEMPLATES)
+@Path(BootstrAPI.MAIL_TEMPLATES)
 public class MailTemplatesResourceImpl implements MailTemplateResource {
 
     private final MailTemplatesService mailTemplatesService;

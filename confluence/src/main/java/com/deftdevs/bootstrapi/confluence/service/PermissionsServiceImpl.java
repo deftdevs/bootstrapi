@@ -43,7 +43,7 @@ public class PermissionsServiceImpl implements PermissionsService {
     private void setPermissionsGlobalForGroups(
             final PermissionsGlobalModel permissionsGlobalModel) {
 
-        final Map<String, ? extends Collection<String>> requestGroupPermissions = permissionsGlobalModel.getGroupPermissions();
+        final Map<String, ? extends Collection<String>> requestGroupPermissions = permissionsGlobalModel.getGroups();
 
         if (requestGroupPermissions == null) {
             return;
@@ -97,7 +97,7 @@ public class PermissionsServiceImpl implements PermissionsService {
     private void setPermissionsGlobalForAnonymous(
             final PermissionsGlobalModel permissionsGlobalModel) {
 
-        if (permissionsGlobalModel.getAnonymousPermissions() == null) {
+        if (permissionsGlobalModel.getAnonymous() == null) {
             return;
         }
 
@@ -112,7 +112,7 @@ public class PermissionsServiceImpl implements PermissionsService {
                         )
                 );
 
-        final Set<String> requestAnonymousPermissions = new HashSet<>(permissionsGlobalModel.getAnonymousPermissions());
+        final Set<String> requestAnonymousPermissions = new HashSet<>(permissionsGlobalModel.getAnonymous());
 
         // remove all anonymous global permissions that currently exist but are not contained in the request
         for (Map.Entry<String, SpacePermission> permissionEntry : existingAnonymousPermissions.entrySet()) {

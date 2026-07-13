@@ -15,12 +15,12 @@ public abstract class AbstractPermissionsResourceImpl implements PermissionsReso
     }
 
     @Override
-    public Response getPermissionGlobal() {
+    public Response getPermissionsGlobal() {
         return Response.ok(permissionsService.getPermissionsGlobal()).build();
     }
 
     @Override
-    public Response setPermissionGlobal(
+    public Response setPermissionsGlobal(
             final PermissionsGlobalModel permissionsGlobalModel) {
         return Response.ok(permissionsService.setPermissionsGlobal(permissionsGlobalModel)).build();
     }

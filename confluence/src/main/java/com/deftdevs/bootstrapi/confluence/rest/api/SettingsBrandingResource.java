@@ -36,7 +36,7 @@ public interface SettingsBrandingResource {
                     ),
             }
     )
-    Response getBrandingColorScheme();
+    Response getSettingsBrandingColorScheme();
 
     @PUT
     @Path(BootstrAPI.COLOR_SCHEME)
@@ -56,7 +56,7 @@ public interface SettingsBrandingResource {
                     ),
             }
     )
-    Response setBrandingColorScheme(
+    Response setSettingsBrandingColorScheme(
             final SettingsBrandingColorSchemeModel bean);
 
     @GET
@@ -76,7 +76,7 @@ public interface SettingsBrandingResource {
                     ),
             }
     )
-    Response getBrandingLogo();
+    Response getSettingsBrandingLogo();
 
     @PUT
     @Path(BootstrAPI.LOGO)
@@ -96,7 +96,7 @@ public interface SettingsBrandingResource {
                     ),
             }
     )
-    Response setBrandingLogo(
+    Response setSettingsBrandingLogo(
             final InputStream binaryInputStream);
 
     @GET
@@ -116,7 +116,7 @@ public interface SettingsBrandingResource {
                     ),
             }
     )
-    Response getBrandingFavicon();
+    Response getSettingsBrandingFavicon();
 
     @PUT
     @Path(BootstrAPI.FAVICON)
@@ -136,6 +136,6 @@ public interface SettingsBrandingResource {
                     ),
             }
     )
-    Response setBrandingFavicon(
+    Response setSettingsBrandingFavicon(
             final InputStream binaryInputStream);
 }

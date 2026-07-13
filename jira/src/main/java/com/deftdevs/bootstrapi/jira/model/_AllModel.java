@@ -3,7 +3,7 @@ package com.deftdevs.bootstrapi.jira.model;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model._AbstractAllModel;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationModel;
-import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
+import com.deftdevs.bootstrapi.commons.model.PermissionsModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
@@ -23,6 +23,6 @@ public class _AllModel extends _AbstractAllModel<SettingsModel> {
     private AuthenticationModel authentication;
 
     @XmlElement
-    private PermissionsGlobalModel permissionsGlobal;
+    private PermissionsModel permissions;
 
 }

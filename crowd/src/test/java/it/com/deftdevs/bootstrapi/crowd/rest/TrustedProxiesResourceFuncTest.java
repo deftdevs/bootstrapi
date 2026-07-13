@@ -1,6 +1,7 @@
 package it.com.deftdevs.bootstrapi.crowd.rest;
 
-import com.deftdevs.bootstrapi.crowd.rest.api.TrustedProxiesResource;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.com.deftdevs.bootstrapi.commons.rest.HttpRequestHelper;
@@ -20,7 +21,7 @@ public class TrustedProxiesResourceFuncTest {
 
     @Test
     void testGetTrustedProxies() throws Exception {
-        final HttpResponse<String> response = HttpRequestHelper.builder(TrustedProxiesResource.TRUSTED_PROXIES)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.TRUSTED_PROXIES)
                 .request();
         assertEquals(Response.Status.OK.getStatusCode(), response.statusCode());
 
@@ -32,7 +33,7 @@ public class TrustedProxiesResourceFuncTest {
     void testSetTrustedProxies() throws Exception {
         final List<String> proxies = List.of("10.0.0.1", "10.0.0.2");
 
-        final HttpResponse<String> response = HttpRequestHelper.builder(TrustedProxiesResource.TRUSTED_PROXIES)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.TRUSTED_PROXIES)
                 .request(HttpMethod.PUT, proxies);
         assertEquals(Response.Status.OK.getStatusCode(), response.statusCode());
 
@@ -43,11 +44,11 @@ public class TrustedProxiesResourceFuncTest {
     @Test
     void testAddAndRemoveTrustedProxy() throws Exception {
         // Set empty list first
-        HttpRequestHelper.builder(TrustedProxiesResource.TRUSTED_PROXIES)
+        HttpRequestHelper.builder(BootstrAPI.TRUSTED_PROXIES)
                 .request(HttpMethod.PUT, List.of());
 
         // Add a proxy
-        final HttpResponse<String> addResponse = HttpRequestHelper.builder(TrustedProxiesResource.TRUSTED_PROXIES)
+        final HttpResponse<String> addResponse = HttpRequestHelper.builder(BootstrAPI.TRUSTED_PROXIES)
                 .contentMediaType(MediaType.TEXT_PLAIN)
                 .request(HttpMethod.POST, "192.168.1.1");
         assertEquals(Response.Status.OK.getStatusCode(), addResponse.statusCode());
@@ -56,7 +57,7 @@ public class TrustedProxiesResourceFuncTest {
         assertTrue(proxies.contains("192.168.1.1"));
 
         // Remove the proxy
-        final HttpResponse<String> removeResponse = HttpRequestHelper.builder(TrustedProxiesResource.TRUSTED_PROXIES)
+        final HttpResponse<String> removeResponse = HttpRequestHelper.builder(BootstrAPI.TRUSTED_PROXIES)
                 .contentMediaType(MediaType.TEXT_PLAIN)
                 .request(HttpMethod.DELETE, "192.168.1.1");
         assertEquals(Response.Status.OK.getStatusCode(), removeResponse.statusCode());
@@ -67,7 +68,7 @@ public class TrustedProxiesResourceFuncTest {
 
     @Test
     void testGetTrustedProxiesUnauthenticated() throws Exception {
-        final HttpResponse<String> response = HttpRequestHelper.builder(TrustedProxiesResource.TRUSTED_PROXIES)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.TRUSTED_PROXIES)
                 .username("wrong")
                 .password("password")
                 .request();
@@ -76,7 +77,7 @@ public class TrustedProxiesResourceFuncTest {
 
     @Test
     void testSetTrustedProxiesUnauthenticated() throws Exception {
-        final HttpResponse<String> response = HttpRequestHelper.builder(TrustedProxiesResource.TRUSTED_PROXIES)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.TRUSTED_PROXIES)
                 .username("wrong")
                 .password("password")
                 .request(HttpMethod.PUT, List.of("10.0.0.1"));
@@ -85,7 +86,7 @@ public class TrustedProxiesResourceFuncTest {
 
     @Test
     void testGetTrustedProxiesUnauthorized() throws Exception {
-        final HttpResponse<String> response = HttpRequestHelper.builder(TrustedProxiesResource.TRUSTED_PROXIES)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.TRUSTED_PROXIES)
                 .username("user")
                 .password("user")
                 .request();
@@ -94,7 +95,7 @@ public class TrustedProxiesResourceFuncTest {
 
     @Test
     void testSetTrustedProxiesUnauthorized() throws Exception {
-        final HttpResponse<String> response = HttpRequestHelper.builder(TrustedProxiesResource.TRUSTED_PROXIES)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.TRUSTED_PROXIES)
                 .username("user")
                 .password("user")
                 .request(HttpMethod.PUT, List.of("10.0.0.1"));

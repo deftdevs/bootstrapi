@@ -44,11 +44,13 @@ All URIs are relative to *https://CROWD_URL/rest/bootstrapi/1*
 | *PingApi* | [**getPing**](Apis/PingApi.md#getPing) | **GET** /ping | Ping method for probing the REST API. |
 | *SessionConfigApi* | [**getSessionConfig**](Apis/SessionConfigApi.md#getSessionConfig) | **GET** /session-config | Get the session config |
 *SessionConfigApi* | [**setSessionConfig**](Apis/SessionConfigApi.md#setSessionConfig) | **PUT** /session-config | Set the session config |
-| *SettingsApi* | [**getLoginPage**](Apis/SettingsApi.md#getLoginPage) | **GET** /settings/branding/login-page | Get the login-page settings |
-*SettingsApi* | [**getSettings**](Apis/SettingsApi.md#getSettings) | **GET** /settings | Get the general settings |
-*SettingsApi* | [**setLoginPage**](Apis/SettingsApi.md#setLoginPage) | **PUT** /settings/branding/login-page | Set the login-page settings |
-*SettingsApi* | [**setLogo**](Apis/SettingsApi.md#setLogo) | **PUT** /settings/branding/logo | Set the logo |
-*SettingsApi* | [**setSettings**](Apis/SettingsApi.md#setSettings) | **PUT** /settings | Set the general settings |
+| *SettingsApi* | [**getSettings**](Apis/SettingsApi.md#getSettings) | **GET** /settings | Get all settings |
+*SettingsApi* | [**getSettingsBrandingLoginPage**](Apis/SettingsApi.md#getSettingsBrandingLoginPage) | **GET** /settings/branding/login-page | Get the login-page settings |
+*SettingsApi* | [**getSettingsGeneral**](Apis/SettingsApi.md#getSettingsGeneral) | **GET** /settings/general | Get the general settings |
+*SettingsApi* | [**setSettings**](Apis/SettingsApi.md#setSettings) | **PUT** /settings | Apply a settings configuration |
+*SettingsApi* | [**setSettingsBrandingLoginPage**](Apis/SettingsApi.md#setSettingsBrandingLoginPage) | **PUT** /settings/branding/login-page | Set the login-page settings |
+*SettingsApi* | [**setSettingsBrandingLogo**](Apis/SettingsApi.md#setSettingsBrandingLogo) | **PUT** /settings/branding/logo | Set the logo |
+*SettingsApi* | [**setSettingsGeneral**](Apis/SettingsApi.md#setSettingsGeneral) | **PUT** /settings/general | Set the general settings |
 | *TrustedProxiesApi* | [**addTrustedProxy**](Apis/TrustedProxiesApi.md#addTrustedProxy) | **POST** /trusted-proxies | Add a trusted proxy |
 *TrustedProxiesApi* | [**getTrustedProxies**](Apis/TrustedProxiesApi.md#getTrustedProxies) | **GET** /trusted-proxies | Get the trusted proxies |
 *TrustedProxiesApi* | [**removeTrustedProxy**](Apis/TrustedProxiesApi.md#removeTrustedProxy) | **DELETE** /trusted-proxies | Remove a trusted proxy |

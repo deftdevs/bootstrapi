@@ -22,4 +22,7 @@ public class SettingsBrandingModel {
     @XmlElement
     private SettingsBrandingColorSchemeModel colorScheme;
 
+    @XmlElement
+    private SettingsBrandingCustomHtmlModel customHtml;
+
 }

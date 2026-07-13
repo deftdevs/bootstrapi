@@ -19,6 +19,6 @@ import static com.deftdevs.bootstrapi.commons.constants.BootstrAPI.SETTINGS;
 public class SettingsModel extends AbstractSettingsModel {
 
     @XmlElement
-    private SettingsBannerModel banner;
+    private SettingsBrandingModel branding;
 
 }

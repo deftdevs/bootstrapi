@@ -25,7 +25,7 @@ public class PermissionsGlobalModelUtil {
         }
 
         final PermissionsGlobalModel permissionsGlobalModel = PermissionsGlobalModel.builder()
-            .groupPermissions(!groupGlobalPermissions.isEmpty() ? groupGlobalPermissions : null)
+            .groups(!groupGlobalPermissions.isEmpty() ? groupGlobalPermissions : null)
             .build();
         return permissionsGlobalModel;
     }

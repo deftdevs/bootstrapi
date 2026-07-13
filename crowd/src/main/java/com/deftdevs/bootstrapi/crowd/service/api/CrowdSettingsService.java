@@ -2,6 +2,7 @@ package com.deftdevs.bootstrapi.crowd.service.api;
 
 import com.deftdevs.bootstrapi.commons.model.type.ServiceResult;
 import com.deftdevs.bootstrapi.commons.model.type._AllModelStatus;
+import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
 import com.deftdevs.bootstrapi.commons.util.ServiceResultUtil;
 import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
@@ -15,6 +16,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 public interface CrowdSettingsService extends
+        SettingsService<SettingsModel>,
         CrowdSettingsGeneralService,
         CrowdSettingsBrandingService {
 
@@ -22,7 +24,7 @@ public interface CrowdSettingsService extends
         return SettingsModel.builder()
                 .general(getSettingsGeneral())
                 .branding(SettingsBrandingModel.builder()
-                        .loginPage(getLoginPage())
+                        .loginPage(getSettingsBrandingLoginPage())
                         .build())
                 .build();
     }
@@ -52,7 +54,7 @@ public interface CrowdSettingsService extends
         final Map<String, _AllModelStatus> status = new LinkedHashMap<>();
 
         ServiceResultUtil.setSubEntity(status, SettingsBrandingLoginPageModel.class, brandingModel.getLoginPage(),
-                this::setLoginPage, result::setLoginPage);
+                this::setSettingsBrandingLoginPage, result::setLoginPage);
 
         return new ServiceResult<>(result, status);
     }

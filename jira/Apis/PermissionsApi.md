@@ -4,13 +4,13 @@ All URIs are relative to *https://JIRA_URL/rest/bootstrapi/1*
 
 | Method | HTTP request | Description |
 |------------- | ------------- | -------------|
-| [**getPermissionGlobal**](PermissionsApi.md#getPermissionGlobal) | **GET** /permissions/global | Get global permissions configuration |
-| [**setPermissionGlobal**](PermissionsApi.md#setPermissionGlobal) | **PUT** /permissions/global | Set global permissions configuration |
+| [**getPermissionsGlobal**](PermissionsApi.md#getPermissionsGlobal) | **GET** /permissions/global | Get global permissions configuration |
+| [**setPermissionsGlobal**](PermissionsApi.md#setPermissionsGlobal) | **PUT** /permissions/global | Set global permissions configuration |
 
 
-<a name="getPermissionGlobal"></a>
-# **getPermissionGlobal**
-> PermissionsGlobalModel getPermissionGlobal()
+<a name="getPermissionsGlobal"></a>
+# **getPermissionsGlobal**
+> PermissionsGlobalModel getPermissionsGlobal()
 
 Get global permissions configuration
 
@@ -32,9 +32,9 @@ This endpoint does not need any parameter.
 - **Content-Type**: Not defined
 - **Accept**: application/json
 
-<a name="setPermissionGlobal"></a>
-# **setPermissionGlobal**
-> PermissionsGlobalModel setPermissionGlobal(PermissionsGlobalModel)
+<a name="setPermissionsGlobal"></a>
+# **setPermissionsGlobal**
+> PermissionsGlobalModel setPermissionsGlobal(PermissionsGlobalModel)
 
 Set global permissions configuration
 

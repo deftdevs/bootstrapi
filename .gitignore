@@ -3,3 +3,4 @@
 
 # Ignore Maven build files
 **/target/
+test.yaml

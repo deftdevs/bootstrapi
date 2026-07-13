@@ -44,11 +44,11 @@ public class PermissionsGlobalModelUtil {
         final PermissionsGlobalModel.PermissionsGlobalModelBuilder builder = PermissionsGlobalModel.builder();
 
         if (!groupGlobalPermissions.isEmpty()) {
-            builder.groupPermissions(groupGlobalPermissions);
+            builder.groups(groupGlobalPermissions);
         }
 
         if (!anonymousGlobalPermissions.isEmpty()) {
-            builder.anonymousPermissions(new ArrayList<>(anonymousGlobalPermissions));
+            builder.anonymous(new ArrayList<>(anonymousGlobalPermissions));
         }
 
         return builder.build();

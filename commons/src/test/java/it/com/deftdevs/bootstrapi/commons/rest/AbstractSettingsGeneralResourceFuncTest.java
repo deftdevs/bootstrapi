@@ -16,7 +16,7 @@ public abstract class AbstractSettingsGeneralResourceFuncTest {
 
     @Test
     void testGetSettings() throws Exception {
-        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS)
+        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS + "/" + BootstrAPI.SETTINGS_GENERAL)
                 .request();
         assertEquals(200, settingsResponse.statusCode());
 
@@ -26,7 +26,7 @@ public abstract class AbstractSettingsGeneralResourceFuncTest {
 
     @Test
     void testSetSettings() throws Exception {
-        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS)
+        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS + "/" + BootstrAPI.SETTINGS_GENERAL)
                 .request(HttpMethod.PUT, getExampleModel());
         assertEquals(200, settingsResponse.statusCode());
 
@@ -36,7 +36,7 @@ public abstract class AbstractSettingsGeneralResourceFuncTest {
 
     @Test
     public void testGetSettingsUnauthenticated() throws Exception {
-        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS)
+        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS + "/" + BootstrAPI.SETTINGS_GENERAL)
                 .username("wrong")
                 .password("password")
                 .request();
@@ -45,7 +45,7 @@ public abstract class AbstractSettingsGeneralResourceFuncTest {
 
     @Test
     public void testSetSettingsUnauthenticated() throws Exception {
-        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS)
+        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS + "/" + BootstrAPI.SETTINGS_GENERAL)
                 .username("wrong")
                 .password("password")
                 .request(HttpMethod.PUT, getExampleModel());
@@ -54,7 +54,7 @@ public abstract class AbstractSettingsGeneralResourceFuncTest {
 
     @Test
     void testGetSettingsUnauthorized() throws Exception {
-        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS)
+        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS + "/" + BootstrAPI.SETTINGS_GENERAL)
                 .username("user")
                 .password("user")
                 .request();
@@ -64,7 +64,7 @@ public abstract class AbstractSettingsGeneralResourceFuncTest {
 
     @Test
     void testSetSettingsUnauthorized() throws Exception {
-        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS)
+        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(BootstrAPI.SETTINGS + "/" + BootstrAPI.SETTINGS_GENERAL)
                 .username("user")
                 .password("user")
                 .request(HttpMethod.PUT, getExampleModel());

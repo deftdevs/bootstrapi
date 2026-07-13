@@ -1,5 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.rest;
 
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+
 import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 import com.deftdevs.bootstrapi.crowd.model.SessionConfigModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.SessionConfigResource;
@@ -10,7 +12,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.core.Response;
 
 @SystemAdminOnly
-@Path(SessionConfigResource.SESSION_CONFIG)
+@Path(BootstrAPI.SESSION_CONFIG)
 public class SessionConfigResourceImpl implements SessionConfigResource {
 
     private final SessionConfigService sessionConfigService;

@@ -6,7 +6,8 @@ import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
 import com.deftdevs.bootstrapi.commons.model.type.ServiceResult;
 import com.deftdevs.bootstrapi.commons.util.FieldNames;
-import com.deftdevs.bootstrapi.jira.model.SettingsBannerModel;
+import com.deftdevs.bootstrapi.jira.model.SettingsBrandingBannerModel;
+import com.deftdevs.bootstrapi.jira.model.SettingsBrandingModel;
 import com.deftdevs.bootstrapi.jira.model.SettingsModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -115,13 +116,13 @@ class JiraSettingsServiceTest {
         final SettingsServiceImpl serviceSpy = spy(settingsService);
         doReturn(SettingsGeneralModel.EXAMPLE_1).when(serviceSpy).getSettingsGeneral();
         doReturn(SettingsSecurityModel.EXAMPLE_1).when(serviceSpy).getSettingsSecurity();
-        doReturn(SettingsBannerModel.EXAMPLE_1).when(serviceSpy).getSettingsBanner();
+        doReturn(SettingsBrandingBannerModel.EXAMPLE_1).when(serviceSpy).getSettingsBrandingBanner();
 
         final SettingsModel settingsModel = serviceSpy.getSettings();
 
         assertEquals(SettingsGeneralModel.EXAMPLE_1, settingsModel.getGeneral());
         assertEquals(SettingsSecurityModel.EXAMPLE_1, settingsModel.getSecurity());
-        assertEquals(SettingsBannerModel.EXAMPLE_1, settingsModel.getBanner());
+        assertEquals(SettingsBrandingBannerModel.EXAMPLE_1, settingsModel.getBranding().getBanner());
     }
 
     @Test
@@ -129,20 +130,22 @@ class JiraSettingsServiceTest {
         final SettingsServiceImpl serviceSpy = spy(settingsService);
         doReturn(SettingsGeneralModel.EXAMPLE_1).when(serviceSpy).setSettingsGeneral(SettingsGeneralModel.EXAMPLE_1);
         doReturn(SettingsSecurityModel.EXAMPLE_1).when(serviceSpy).setSettingsSecurity(SettingsSecurityModel.EXAMPLE_1);
-        doReturn(SettingsBannerModel.EXAMPLE_1).when(serviceSpy).setSettingsBanner(SettingsBannerModel.EXAMPLE_1);
+        doReturn(SettingsBrandingBannerModel.EXAMPLE_1).when(serviceSpy).setSettingsBrandingBanner(SettingsBrandingBannerModel.EXAMPLE_1);
 
         final ServiceResult<SettingsModel> result = serviceSpy.setSettings(SettingsModel.builder()
                 .general(SettingsGeneralModel.EXAMPLE_1)
                 .security(SettingsSecurityModel.EXAMPLE_1)
-                .banner(SettingsBannerModel.EXAMPLE_1)
+                .branding(SettingsBrandingModel.builder()
+                        .banner(SettingsBrandingBannerModel.EXAMPLE_1)
+                        .build())
                 .build());
 
         assertEquals(SettingsGeneralModel.EXAMPLE_1, result.getModel().getGeneral());
         assertEquals(SettingsSecurityModel.EXAMPLE_1, result.getModel().getSecurity());
-        assertEquals(SettingsBannerModel.EXAMPLE_1, result.getModel().getBanner());
+        assertEquals(SettingsBrandingBannerModel.EXAMPLE_1, result.getModel().getBranding().getBanner());
         assertEquals(200, result.getStatus().get(FieldNames.of(SettingsModel.class, SettingsGeneralModel.class)).getStatus());
         assertEquals(200, result.getStatus().get(FieldNames.of(SettingsModel.class, SettingsSecurityModel.class)).getStatus());
-        assertEquals(200, result.getStatus().get(FieldNames.of(SettingsModel.class, SettingsBannerModel.class)).getStatus());
+        assertEquals(200, result.getStatus().get(FieldNames.pathOf(SettingsModel.class, SettingsBrandingBannerModel.class)).getStatus());
     }
 
     @Test
@@ -159,17 +162,19 @@ class JiraSettingsServiceTest {
     void testSetSettingsRecordsPerSubFieldFailure() {
         final SettingsServiceImpl serviceSpy = spy(settingsService);
         doReturn(SettingsGeneralModel.EXAMPLE_1).when(serviceSpy).setSettingsGeneral(SettingsGeneralModel.EXAMPLE_1);
-        doThrow(new BadRequestException("invalid banner")).when(serviceSpy).setSettingsBanner(SettingsBannerModel.EXAMPLE_1);
+        doThrow(new BadRequestException("invalid banner")).when(serviceSpy).setSettingsBrandingBanner(SettingsBrandingBannerModel.EXAMPLE_1);
 
         final ServiceResult<SettingsModel> result = serviceSpy.setSettings(SettingsModel.builder()
                 .general(SettingsGeneralModel.EXAMPLE_1)
-                .banner(SettingsBannerModel.EXAMPLE_1)
+                .branding(SettingsBrandingModel.builder()
+                        .banner(SettingsBrandingBannerModel.EXAMPLE_1)
+                        .build())
                 .build());
 
         assertEquals(SettingsGeneralModel.EXAMPLE_1, result.getModel().getGeneral());
-        assertNull(result.getModel().getBanner());
+        assertNull(result.getModel().getBranding().getBanner());
         assertEquals(200, result.getStatus().get(FieldNames.of(SettingsModel.class, SettingsGeneralModel.class)).getStatus());
-        assertEquals(400, result.getStatus().get(FieldNames.of(SettingsModel.class, SettingsBannerModel.class)).getStatus());
+        assertEquals(400, result.getStatus().get(FieldNames.pathOf(SettingsModel.class, SettingsBrandingBannerModel.class)).getStatus());
     }
 
 }

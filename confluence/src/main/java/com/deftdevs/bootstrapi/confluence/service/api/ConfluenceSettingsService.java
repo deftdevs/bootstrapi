@@ -7,32 +7,34 @@ import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
 import com.deftdevs.bootstrapi.commons.model.type.ServiceResult;
 import com.deftdevs.bootstrapi.commons.model.type._AllModelStatus;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsGeneralService;
+import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsSecurityService;
 import com.deftdevs.bootstrapi.commons.util.ServiceResultUtil;
-import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlModel;
+import com.deftdevs.bootstrapi.confluence.model.SettingsBrandingCustomHtmlModel;
 import com.deftdevs.bootstrapi.confluence.model.SettingsModel;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 public interface ConfluenceSettingsService extends
+        SettingsService<SettingsModel>,
         SettingsGeneralService<SettingsGeneralModel>,
         SettingsSecurityService<SettingsSecurityModel>,
         SettingsBrandingService {
 
-    SettingsCustomHtmlModel getCustomHtml();
+    SettingsBrandingCustomHtmlModel getSettingsBrandingCustomHtml();
 
-    SettingsCustomHtmlModel setCustomHtml(
-            SettingsCustomHtmlModel settingsCustomHtmlModel);
+    SettingsBrandingCustomHtmlModel setSettingsBrandingCustomHtml(
+            SettingsBrandingCustomHtmlModel settingsCustomHtmlModel);
 
     default SettingsModel getSettings() {
         return SettingsModel.builder()
                 .general(getSettingsGeneral())
                 .security(getSettingsSecurity())
                 .branding(SettingsBrandingModel.builder()
-                        .colorScheme(getColourScheme())
+                        .colorScheme(getSettingsBrandingColorScheme())
+                        .customHtml(getSettingsBrandingCustomHtml())
                         .build())
-                .customHtml(getCustomHtml())
                 .build();
     }
 
@@ -46,9 +48,6 @@ public interface ConfluenceSettingsService extends
                 this::setSettingsSecurity, result::setSecurity);
         ServiceResultUtil.setSubEntityWithStatus(status, SettingsBrandingModel.class, settingsModel.getBranding(),
                 this::setSettingsBranding, result::setBranding);
-        ServiceResultUtil.setSubEntity(status, SettingsCustomHtmlModel.class, settingsModel.getCustomHtml(),
-                this::setCustomHtml, result::setCustomHtml);
-
         return new ServiceResult<>(result, status);
     }
 
@@ -57,7 +56,9 @@ public interface ConfluenceSettingsService extends
         final Map<String, _AllModelStatus> status = new LinkedHashMap<>();
 
         ServiceResultUtil.setSubEntity(status, SettingsBrandingColorSchemeModel.class, brandingModel.getColorScheme(),
-                this::setColourScheme, result::setColorScheme);
+                this::setSettingsBrandingColorScheme, result::setColorScheme);
+        ServiceResultUtil.setSubEntity(status, SettingsBrandingCustomHtmlModel.class, brandingModel.getCustomHtml(),
+                this::setSettingsBrandingCustomHtml, result::setCustomHtml);
 
         return new ServiceResult<>(result, status);
     }

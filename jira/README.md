@@ -35,14 +35,16 @@ All URIs are relative to *https://JIRA_URL/rest/bootstrapi/1*
 *MailServerApi* | [**getMailServerSmtp**](Apis/MailServerApi.md#getMailServerSmtp) | **GET** /mail-server/smtp | Get the default SMTP mail server |
 *MailServerApi* | [**setMailServerPop**](Apis/MailServerApi.md#setMailServerPop) | **PUT** /mail-server/pop | Set the default POP mail server |
 *MailServerApi* | [**setMailServerSmtp**](Apis/MailServerApi.md#setMailServerSmtp) | **PUT** /mail-server/smtp | Set the default SMTP mail server |
-| *PermissionsApi* | [**getPermissionGlobal**](Apis/PermissionsApi.md#getPermissionGlobal) | **GET** /permissions/global | Get global permissions configuration |
-*PermissionsApi* | [**setPermissionGlobal**](Apis/PermissionsApi.md#setPermissionGlobal) | **PUT** /permissions/global | Set global permissions configuration |
+| *PermissionsApi* | [**getPermissionsGlobal**](Apis/PermissionsApi.md#getPermissionsGlobal) | **GET** /permissions/global | Get global permissions configuration |
+*PermissionsApi* | [**setPermissionsGlobal**](Apis/PermissionsApi.md#setPermissionsGlobal) | **PUT** /permissions/global | Set global permissions configuration |
 | *PingApi* | [**getPing**](Apis/PingApi.md#getPing) | **GET** /ping | Ping method for probing the REST API. |
-| *SettingsApi* | [**getBanner**](Apis/SettingsApi.md#getBanner) | **GET** /settings/banner | Get the banner |
-*SettingsApi* | [**getSettings**](Apis/SettingsApi.md#getSettings) | **GET** /settings | Get the general settings |
+| *SettingsApi* | [**getSettings**](Apis/SettingsApi.md#getSettings) | **GET** /settings | Get all settings |
+*SettingsApi* | [**getSettingsBrandingBanner**](Apis/SettingsApi.md#getSettingsBrandingBanner) | **GET** /settings/branding/banner | Get the banner |
+*SettingsApi* | [**getSettingsGeneral**](Apis/SettingsApi.md#getSettingsGeneral) | **GET** /settings/general | Get the general settings |
 *SettingsApi* | [**getSettingsSecurity**](Apis/SettingsApi.md#getSettingsSecurity) | **GET** /settings/security | Get the security settings |
-*SettingsApi* | [**setBanner**](Apis/SettingsApi.md#setBanner) | **PUT** /settings/banner | Set the banner |
-*SettingsApi* | [**setSettings**](Apis/SettingsApi.md#setSettings) | **PUT** /settings | Set the general settings |
+*SettingsApi* | [**setSettings**](Apis/SettingsApi.md#setSettings) | **PUT** /settings | Apply a settings configuration |
+*SettingsApi* | [**setSettingsBrandingBanner**](Apis/SettingsApi.md#setSettingsBrandingBanner) | **PUT** /settings/branding/banner | Set the banner |
+*SettingsApi* | [**setSettingsGeneral**](Apis/SettingsApi.md#setSettingsGeneral) | **PUT** /settings/general | Set the general settings |
 *SettingsApi* | [**setSettingsSecurity**](Apis/SettingsApi.md#setSettingsSecurity) | **PUT** /settings/security | Set the security settings |
 
 
@@ -80,7 +82,9 @@ All URIs are relative to *https://JIRA_URL/rest/bootstrapi/1*
  - [MailServerPopModel](./Models/MailServerPopModel.md)
  - [MailServerSmtpModel](./Models/MailServerSmtpModel.md)
  - [PermissionsGlobalModel](./Models/PermissionsGlobalModel.md)
- - [SettingsBannerModel](./Models/SettingsBannerModel.md)
+ - [PermissionsModel](./Models/PermissionsModel.md)
+ - [SettingsBrandingBannerModel](./Models/SettingsBrandingBannerModel.md)
+ - [SettingsBrandingModel](./Models/SettingsBrandingModel.md)
  - [SettingsGeneralModel](./Models/SettingsGeneralModel.md)
  - [SettingsModel](./Models/SettingsModel.md)
  - [SettingsSecurityModel](./Models/SettingsSecurityModel.md)

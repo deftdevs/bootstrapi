@@ -25,38 +25,38 @@ public class SettingsBrandingResourceImpl implements SettingsBrandingResource {
     }
 
     @Override
-    public Response getBrandingColorScheme() {
-        final SettingsBrandingColorSchemeModel colourSchemeModel = brandingService.getColourScheme();
+    public Response getSettingsBrandingColorScheme() {
+        final SettingsBrandingColorSchemeModel colourSchemeModel = brandingService.getSettingsBrandingColorScheme();
         return Response.ok(colourSchemeModel).build();
     }
 
     @Override
-    public Response setBrandingColorScheme(SettingsBrandingColorSchemeModel bean) {
-        final SettingsBrandingColorSchemeModel colourSchemeModel = brandingService.setColourScheme(bean);
+    public Response setSettingsBrandingColorScheme(SettingsBrandingColorSchemeModel bean) {
+        final SettingsBrandingColorSchemeModel colourSchemeModel = brandingService.setSettingsBrandingColorScheme(bean);
         return Response.ok(colourSchemeModel).build();
     }
 
     @Override
-    public Response getBrandingLogo() {
-        InputStream logo = brandingService.getLogo();
+    public Response getSettingsBrandingLogo() {
+        InputStream logo = brandingService.getSettingsBrandingLogo();
         return Response.ok(logo).build();
     }
 
     @Override
-    public Response setBrandingLogo(InputStream binaryInputStream) {
-        brandingService.setLogo(binaryInputStream);
+    public Response setSettingsBrandingLogo(InputStream binaryInputStream) {
+        brandingService.setSettingsBrandingLogo(binaryInputStream);
         return Response.ok().build();
     }
 
     @Override
-    public Response getBrandingFavicon() {
-        InputStream favicon = brandingService.getFavicon();
+    public Response getSettingsBrandingFavicon() {
+        InputStream favicon = brandingService.getSettingsBrandingFavicon();
         return Response.ok(favicon).build();
     }
 
     @Override
-    public Response setBrandingFavicon(InputStream binaryInputStream) {
-        brandingService.setFavicon(binaryInputStream);
+    public Response setSettingsBrandingFavicon(InputStream binaryInputStream) {
+        brandingService.setSettingsBrandingFavicon(binaryInputStream);
         return Response.ok().build();
     }
 

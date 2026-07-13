@@ -11,16 +11,16 @@ import javax.xml.bind.annotation.XmlElement;
 import com.deftdevs.bootstrapi.commons.model.type.SubEntityOf;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import static com.deftdevs.bootstrapi.commons.constants.BootstrAPI.SETTINGS_BANNER;
+import static com.deftdevs.bootstrapi.commons.constants.BootstrAPI.SETTINGS_BRANDING_BANNER;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@SubEntityOf(SettingsModel.class)
-@XmlRootElement(name = SETTINGS_BANNER)
+@SubEntityOf(SettingsBrandingModel.class)
+@XmlRootElement(name = SETTINGS_BRANDING_BANNER)
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SettingsBannerModel {
+public class SettingsBrandingBannerModel {
 
     @XmlElement
     private String content;
@@ -35,7 +35,7 @@ public class SettingsBannerModel {
 
     // Example instances for documentation and tests
 
-    public static final SettingsBannerModel EXAMPLE_1 = SettingsBannerModel.builder()
+    public static final SettingsBrandingBannerModel EXAMPLE_1 = SettingsBrandingBannerModel.builder()
             .content("")
             .visibility(Visibility.PUBLIC)
             .build();

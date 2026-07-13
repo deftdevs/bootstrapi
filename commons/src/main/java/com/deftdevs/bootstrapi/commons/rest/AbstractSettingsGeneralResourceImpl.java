@@ -18,13 +18,13 @@ public abstract class AbstractSettingsGeneralResourceImpl<B extends SettingsGene
     }
 
     @Override
-    public Response getSettings() {
+    public Response getSettingsGeneral() {
         final B settingsModel = settingsService.getSettingsGeneral();
         return Response.ok(settingsModel).build();
     }
 
     @Override
-    public Response setSettings(B settingsModel) {
+    public Response setSettingsGeneral(B settingsModel) {
         final B updatedSettingsGeneralModel = settingsService.setSettingsGeneral(settingsModel);
         return Response.ok(updatedSettingsGeneralModel).build();
     }

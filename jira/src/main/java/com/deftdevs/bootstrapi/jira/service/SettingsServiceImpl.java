@@ -5,7 +5,7 @@ import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
-import com.deftdevs.bootstrapi.jira.model.SettingsBannerModel;
+import com.deftdevs.bootstrapi.jira.model.SettingsBrandingBannerModel;
 import com.deftdevs.bootstrapi.jira.service.api.JiraSettingsService;
 
 import java.net.URI;
@@ -106,20 +106,20 @@ public class SettingsServiceImpl implements JiraSettingsService {
     }
 
     @Override
-    public SettingsBannerModel getSettingsBanner() {
+    public SettingsBrandingBannerModel getSettingsBrandingBanner() {
         final String content = applicationProperties.getDefaultBackedText(JIRA_ALERT_HEADER);
         final String visibilityString = applicationProperties.getDefaultBackedString(JIRA_ALERT_HEADER_VISIBILITY);
-        final SettingsBannerModel.Visibility visibility = SettingsBannerModel.Visibility.valueOf(visibilityString.toUpperCase());
+        final SettingsBrandingBannerModel.Visibility visibility = SettingsBrandingBannerModel.Visibility.valueOf(visibilityString.toUpperCase());
 
-        return SettingsBannerModel.builder()
+        return SettingsBrandingBannerModel.builder()
                 .content(content)
                 .visibility(visibility)
                 .build();
     }
 
     @Override
-    public SettingsBannerModel setSettingsBanner(
-            final SettingsBannerModel settingsBannerModel) {
+    public SettingsBrandingBannerModel setSettingsBrandingBanner(
+            final SettingsBrandingBannerModel settingsBannerModel) {
 
         if (settingsBannerModel.getContent() != null) {
             applicationProperties.setText(JIRA_ALERT_HEADER, settingsBannerModel.getContent());
@@ -129,7 +129,7 @@ public class SettingsServiceImpl implements JiraSettingsService {
             applicationProperties.setString(JIRA_ALERT_HEADER_VISIBILITY, settingsBannerModel.getVisibility().name().toLowerCase());
         }
 
-        return getSettingsBanner();
+        return getSettingsBrandingBanner();
     }
 
 }

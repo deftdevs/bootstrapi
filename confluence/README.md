@@ -39,20 +39,22 @@ All URIs are relative to *https://CONFLUENCE_URL/rest/bootstrapi/1*
 *MailServerApi* | [**getMailServerSmtp**](Apis/MailServerApi.md#getMailServerSmtp) | **GET** /mail-server/smtp | Get the default SMTP mail server |
 *MailServerApi* | [**setMailServerPop**](Apis/MailServerApi.md#setMailServerPop) | **PUT** /mail-server/pop | Set the default POP mail server |
 *MailServerApi* | [**setMailServerSmtp**](Apis/MailServerApi.md#setMailServerSmtp) | **PUT** /mail-server/smtp | Set the default SMTP mail server |
-| *PermissionsApi* | [**getPermissionGlobal**](Apis/PermissionsApi.md#getPermissionGlobal) | **GET** /permissions/global | Get global permissions configuration |
-*PermissionsApi* | [**setPermissionGlobal**](Apis/PermissionsApi.md#setPermissionGlobal) | **PUT** /permissions/global | Set global permissions configuration |
+| *PermissionsApi* | [**getPermissionsGlobal**](Apis/PermissionsApi.md#getPermissionsGlobal) | **GET** /permissions/global | Get global permissions configuration |
+*PermissionsApi* | [**setPermissionsGlobal**](Apis/PermissionsApi.md#setPermissionsGlobal) | **PUT** /permissions/global | Set global permissions configuration |
 | *PingApi* | [**getPing**](Apis/PingApi.md#getPing) | **GET** /ping | Ping method for probing the REST API. |
-| *SettingsApi* | [**getBrandingColorScheme**](Apis/SettingsApi.md#getBrandingColorScheme) | **GET** /settings/branding/color-scheme | Get the color scheme |
-*SettingsApi* | [**getBrandingFavicon**](Apis/SettingsApi.md#getBrandingFavicon) | **GET** /settings/branding/favicon | Get the favicon |
-*SettingsApi* | [**getBrandingLogo**](Apis/SettingsApi.md#getBrandingLogo) | **GET** /settings/branding/logo | Get the logo |
-*SettingsApi* | [**getCustomHtml**](Apis/SettingsApi.md#getCustomHtml) | **GET** /settings/custom-html | Get the custom HTML |
-*SettingsApi* | [**getSettings**](Apis/SettingsApi.md#getSettings) | **GET** /settings | Get the general settings |
+| *SettingsApi* | [**getSettings**](Apis/SettingsApi.md#getSettings) | **GET** /settings | Get all settings |
+*SettingsApi* | [**getSettingsBrandingColorScheme**](Apis/SettingsApi.md#getSettingsBrandingColorScheme) | **GET** /settings/branding/color-scheme | Get the color scheme |
+*SettingsApi* | [**getSettingsBrandingCustomHtml**](Apis/SettingsApi.md#getSettingsBrandingCustomHtml) | **GET** /settings/branding/custom-html | Get the custom HTML |
+*SettingsApi* | [**getSettingsBrandingFavicon**](Apis/SettingsApi.md#getSettingsBrandingFavicon) | **GET** /settings/branding/favicon | Get the favicon |
+*SettingsApi* | [**getSettingsBrandingLogo**](Apis/SettingsApi.md#getSettingsBrandingLogo) | **GET** /settings/branding/logo | Get the logo |
+*SettingsApi* | [**getSettingsGeneral**](Apis/SettingsApi.md#getSettingsGeneral) | **GET** /settings/general | Get the general settings |
 *SettingsApi* | [**getSettingsSecurity**](Apis/SettingsApi.md#getSettingsSecurity) | **GET** /settings/security | Get the security settings |
-*SettingsApi* | [**setBrandingColorScheme**](Apis/SettingsApi.md#setBrandingColorScheme) | **PUT** /settings/branding/color-scheme | Set the color scheme |
-*SettingsApi* | [**setBrandingFavicon**](Apis/SettingsApi.md#setBrandingFavicon) | **PUT** /settings/branding/favicon | Set the favicon |
-*SettingsApi* | [**setBrandingLogo**](Apis/SettingsApi.md#setBrandingLogo) | **PUT** /settings/branding/logo | Set the logo |
-*SettingsApi* | [**setCustomHtml**](Apis/SettingsApi.md#setCustomHtml) | **PUT** /settings/custom-html | Set the custom HTML |
-*SettingsApi* | [**setSettings**](Apis/SettingsApi.md#setSettings) | **PUT** /settings | Set the general settings |
+*SettingsApi* | [**setSettings**](Apis/SettingsApi.md#setSettings) | **PUT** /settings | Apply a settings configuration |
+*SettingsApi* | [**setSettingsBrandingColorScheme**](Apis/SettingsApi.md#setSettingsBrandingColorScheme) | **PUT** /settings/branding/color-scheme | Set the color scheme |
+*SettingsApi* | [**setSettingsBrandingCustomHtml**](Apis/SettingsApi.md#setSettingsBrandingCustomHtml) | **PUT** /settings/branding/custom-html | Set the custom HTML |
+*SettingsApi* | [**setSettingsBrandingFavicon**](Apis/SettingsApi.md#setSettingsBrandingFavicon) | **PUT** /settings/branding/favicon | Set the favicon |
+*SettingsApi* | [**setSettingsBrandingLogo**](Apis/SettingsApi.md#setSettingsBrandingLogo) | **PUT** /settings/branding/logo | Set the logo |
+*SettingsApi* | [**setSettingsGeneral**](Apis/SettingsApi.md#setSettingsGeneral) | **PUT** /settings/general | Set the general settings |
 *SettingsApi* | [**setSettingsSecurity**](Apis/SettingsApi.md#setSettingsSecurity) | **PUT** /settings/security | Set the security settings |
 | *UserApi* | [**getUser**](Apis/UserApi.md#getUser) | **GET** /user | Get a user |
 *UserApi* | [**setUser**](Apis/UserApi.md#setUser) | **PUT** /user | Update an user |
@@ -94,9 +96,10 @@ All URIs are relative to *https://CONFLUENCE_URL/rest/bootstrapi/1*
  - [MailServerPopModel](./Models/MailServerPopModel.md)
  - [MailServerSmtpModel](./Models/MailServerSmtpModel.md)
  - [PermissionsGlobalModel](./Models/PermissionsGlobalModel.md)
+ - [PermissionsModel](./Models/PermissionsModel.md)
  - [SettingsBrandingColorSchemeModel](./Models/SettingsBrandingColorSchemeModel.md)
+ - [SettingsBrandingCustomHtmlModel](./Models/SettingsBrandingCustomHtmlModel.md)
  - [SettingsBrandingModel](./Models/SettingsBrandingModel.md)
- - [SettingsCustomHtmlModel](./Models/SettingsCustomHtmlModel.md)
  - [SettingsGeneralModel](./Models/SettingsGeneralModel.md)
  - [SettingsModel](./Models/SettingsModel.md)
  - [SettingsSecurityModel](./Models/SettingsSecurityModel.md)

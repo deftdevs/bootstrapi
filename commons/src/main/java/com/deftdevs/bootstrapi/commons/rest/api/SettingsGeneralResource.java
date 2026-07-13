@@ -28,7 +28,7 @@ public interface SettingsGeneralResource<B extends SettingsGeneralModel> {
                     ),
             }
     )
-    Response getSettings();
+    Response getSettingsGeneral();
 
     @PUT
     @Operation(
@@ -44,7 +44,7 @@ public interface SettingsGeneralResource<B extends SettingsGeneralModel> {
                     ),
             }
     )
-    Response setSettings(
+    Response setSettingsGeneral(
             final B bean);
 
 }

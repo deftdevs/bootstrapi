@@ -1,7 +1,8 @@
 package it.com.deftdevs.bootstrapi.crowd.rest;
 
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+
 import com.deftdevs.bootstrapi.crowd.model.MailTemplatesModel;
-import com.deftdevs.bootstrapi.crowd.rest.api.MailTemplateResource;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.com.deftdevs.bootstrapi.commons.rest.HttpRequestHelper;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ public class MailTemplatesResourceFuncTest {
 
     @Test
     void testGetMailTemplates() throws Exception {
-        final HttpResponse<String> response = HttpRequestHelper.builder(MailTemplateResource.MAIL_TEMPLATES)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.MAIL_TEMPLATES)
                 .request();
         assertEquals(Response.Status.OK.getStatusCode(), response.statusCode(), response.body());
 
@@ -31,7 +32,7 @@ public class MailTemplatesResourceFuncTest {
     void testSetMailTemplates() throws Exception {
         final MailTemplatesModel exampleModel = MailTemplatesModel.EXAMPLE_1;
 
-        final HttpResponse<String> response = HttpRequestHelper.builder(MailTemplateResource.MAIL_TEMPLATES)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.MAIL_TEMPLATES)
                 .request(HttpMethod.PUT, exampleModel);
         assertEquals(Response.Status.OK.getStatusCode(), response.statusCode(), response.body());
 
@@ -41,7 +42,7 @@ public class MailTemplatesResourceFuncTest {
 
     @Test
     void testGetMailTemplatesUnauthenticated() throws Exception {
-        final HttpResponse<String> response = HttpRequestHelper.builder(MailTemplateResource.MAIL_TEMPLATES)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.MAIL_TEMPLATES)
                 .username("wrong")
                 .password("password")
                 .request();
@@ -51,7 +52,7 @@ public class MailTemplatesResourceFuncTest {
 
     @Test
     void testSetMailTemplatesUnauthenticated() throws Exception {
-        final HttpResponse<String> response = HttpRequestHelper.builder(MailTemplateResource.MAIL_TEMPLATES)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.MAIL_TEMPLATES)
                 .username("wrong")
                 .password("password")
                 .request(HttpMethod.PUT, MailTemplatesModel.EXAMPLE_1);
@@ -61,7 +62,7 @@ public class MailTemplatesResourceFuncTest {
 
     @Test
     void testGetMailTemplatesUnauthorized() throws Exception {
-        final HttpResponse<String> response = HttpRequestHelper.builder(MailTemplateResource.MAIL_TEMPLATES)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.MAIL_TEMPLATES)
                 .username("user")
                 .password("user")
                 .request();
@@ -71,7 +72,7 @@ public class MailTemplatesResourceFuncTest {
 
     @Test
     void testSetMailTemplatesUnauthorized() throws Exception {
-        final HttpResponse<String> response = HttpRequestHelper.builder(MailTemplateResource.MAIL_TEMPLATES)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.MAIL_TEMPLATES)
                 .username("user")
                 .password("user")
                 .request(HttpMethod.PUT, MailTemplatesModel.EXAMPLE_1);

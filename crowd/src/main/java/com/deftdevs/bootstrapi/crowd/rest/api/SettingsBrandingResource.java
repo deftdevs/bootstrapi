@@ -26,7 +26,7 @@ public interface SettingsBrandingResource {
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
-    Response getLoginPage();
+    Response getSettingsBrandingLoginPage();
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -40,7 +40,7 @@ public interface SettingsBrandingResource {
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
-    Response setLoginPage(
+    Response setSettingsBrandingLoginPage(
             SettingsBrandingLoginPageModel settingsBrandingLoginPageModel);
 
     @PUT
@@ -54,5 +54,5 @@ public interface SettingsBrandingResource {
                     @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
-    Response setLogo(InputStream inputStream);
+    Response setSettingsBrandingLogo(InputStream inputStream);
 }

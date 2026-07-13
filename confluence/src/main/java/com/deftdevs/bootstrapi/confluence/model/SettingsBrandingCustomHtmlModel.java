@@ -17,10 +17,10 @@ import static com.deftdevs.bootstrapi.commons.constants.BootstrAPI.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@SubEntityOf(SettingsModel.class)
-@XmlRootElement(name = SETTINGS_CUSTOM_HTML)
+@SubEntityOf(SettingsBrandingModel.class)
+@XmlRootElement(name = SETTINGS_BRANDING_CUSTOM_HTML)
 @XmlAccessorType(XmlAccessType.FIELD)
-public class SettingsCustomHtmlModel {
+public class SettingsBrandingCustomHtmlModel {
 
     @XmlElement
     private String beforeHeadEnd;
@@ -33,7 +33,7 @@ public class SettingsCustomHtmlModel {
 
     // Example instances for documentation and tests
 
-    public static final SettingsCustomHtmlModel EXAMPLE_1 = SettingsCustomHtmlModel.builder()
+    public static final SettingsBrandingCustomHtmlModel EXAMPLE_1 = SettingsBrandingCustomHtmlModel.builder()
             .beforeHeadEnd("Before head end")
             .afterBodyStart("After body start")
             .beforeBodyEnd("Before body end")

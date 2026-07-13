@@ -26,7 +26,7 @@ public interface PermissionsResource {
                     @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
-    Response getPermissionGlobal();
+    Response getPermissionsGlobal();
 
     @PUT
     @Path(BootstrAPI.PERMISSIONS_GLOBAL)
@@ -41,7 +41,7 @@ public interface PermissionsResource {
                     @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
             }
     )
-    Response setPermissionGlobal(
+    Response setPermissionsGlobal(
             PermissionsGlobalModel permissionsGlobalModel);
 
 }

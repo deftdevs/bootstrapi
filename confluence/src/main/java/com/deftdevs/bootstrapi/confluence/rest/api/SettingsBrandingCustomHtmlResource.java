@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.confluence.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlModel;
+import com.deftdevs.bootstrapi.confluence.model.SettingsBrandingCustomHtmlModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -15,7 +15,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-public interface SettingsCustomHtmlResource {
+public interface SettingsBrandingCustomHtmlResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -24,7 +24,7 @@ public interface SettingsCustomHtmlResource {
             summary = "Get the custom HTML",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsCustomHtmlModel.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingCustomHtmlModel.class)),
                             description = "Returns the custom HTML"
                     ),
                     @ApiResponse(
@@ -33,7 +33,7 @@ public interface SettingsCustomHtmlResource {
                     ),
             }
     )
-    Response getCustomHtml();
+    Response getSettingsBrandingCustomHtml();
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -43,7 +43,7 @@ public interface SettingsCustomHtmlResource {
             summary = "Set the custom HTML",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsCustomHtmlModel.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingCustomHtmlModel.class)),
                             description = "Returns the updated custom HTML"
                     ),
                     @ApiResponse(
@@ -52,7 +52,7 @@ public interface SettingsCustomHtmlResource {
                     ),
             }
     )
-    Response setCustomHtml(
-            final SettingsCustomHtmlModel bean);
+    Response setSettingsBrandingCustomHtml(
+            final SettingsBrandingCustomHtmlModel bean);
 
 }

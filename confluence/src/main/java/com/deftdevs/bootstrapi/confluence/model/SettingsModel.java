@@ -21,7 +21,4 @@ public class SettingsModel extends AbstractSettingsModel {
     @XmlElement
     private SettingsBrandingModel branding;
 
-    @XmlElement
-    private SettingsCustomHtmlModel customHtml;
-
 }

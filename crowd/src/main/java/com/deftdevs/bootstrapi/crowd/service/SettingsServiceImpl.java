@@ -47,18 +47,18 @@ public class SettingsServiceImpl implements CrowdSettingsService {
     }
 
     @Override
-    public SettingsBrandingLoginPageModel getLoginPage() {
-        return settingsBrandingService.getLoginPage();
+    public SettingsBrandingLoginPageModel getSettingsBrandingLoginPage() {
+        return settingsBrandingService.getSettingsBrandingLoginPage();
     }
 
     @Override
-    public SettingsBrandingLoginPageModel setLoginPage(final SettingsBrandingLoginPageModel settingsBrandingLoginPageModel) {
-        return settingsBrandingService.setLoginPage(settingsBrandingLoginPageModel);
+    public SettingsBrandingLoginPageModel setSettingsBrandingLoginPage(final SettingsBrandingLoginPageModel settingsBrandingLoginPageModel) {
+        return settingsBrandingService.setSettingsBrandingLoginPage(settingsBrandingLoginPageModel);
     }
 
     @Override
-    public void setLogo(final InputStream inputStream) {
-        settingsBrandingService.setLogo(inputStream);
+    public void setSettingsBrandingLogo(final InputStream inputStream) {
+        settingsBrandingService.setSettingsBrandingLogo(inputStream);
     }
 
 }

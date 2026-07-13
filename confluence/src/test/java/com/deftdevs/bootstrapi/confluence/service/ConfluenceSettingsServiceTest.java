@@ -9,7 +9,7 @@ import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
 import com.deftdevs.bootstrapi.commons.model.type.ServiceResult;
 import com.deftdevs.bootstrapi.commons.util.FieldNames;
 import com.deftdevs.bootstrapi.confluence.service.api.SettingsBrandingService;
-import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlModel;
+import com.deftdevs.bootstrapi.confluence.model.SettingsBrandingCustomHtmlModel;
 import com.deftdevs.bootstrapi.confluence.model.SettingsModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,42 +47,42 @@ class ConfluenceSettingsServiceTest {
     void testGetSettings() {
         doReturn(SettingsGeneralModel.EXAMPLE_1).when(settingsService).getSettingsGeneral();
         doReturn(SettingsSecurityModel.EXAMPLE_1).when(settingsService).getSettingsSecurity();
-        doReturn(SettingsBrandingColorSchemeModel.EXAMPLE_1).when(settingsBrandingService).getColourScheme();
-        doReturn(SettingsCustomHtmlModel.EXAMPLE_1).when(settingsService).getCustomHtml();
+        doReturn(SettingsBrandingColorSchemeModel.EXAMPLE_1).when(settingsBrandingService).getSettingsBrandingColorScheme();
+        doReturn(SettingsBrandingCustomHtmlModel.EXAMPLE_1).when(settingsService).getSettingsBrandingCustomHtml();
 
         final SettingsModel settingsModel = settingsService.getSettings();
 
         assertEquals(SettingsGeneralModel.EXAMPLE_1, settingsModel.getGeneral());
         assertEquals(SettingsSecurityModel.EXAMPLE_1, settingsModel.getSecurity());
         assertEquals(SettingsBrandingColorSchemeModel.EXAMPLE_1, settingsModel.getBranding().getColorScheme());
-        assertEquals(SettingsCustomHtmlModel.EXAMPLE_1, settingsModel.getCustomHtml());
+        assertEquals(SettingsBrandingCustomHtmlModel.EXAMPLE_1, settingsModel.getBranding().getCustomHtml());
     }
 
     @Test
     void testSetSettingsAppliesAllSubFields() {
         doReturn(SettingsGeneralModel.EXAMPLE_1).when(settingsService).setSettingsGeneral(SettingsGeneralModel.EXAMPLE_1);
         doReturn(SettingsSecurityModel.EXAMPLE_1).when(settingsService).setSettingsSecurity(SettingsSecurityModel.EXAMPLE_1);
-        doReturn(SettingsBrandingColorSchemeModel.EXAMPLE_1).when(settingsBrandingService).setColourScheme(SettingsBrandingColorSchemeModel.EXAMPLE_1);
-        doReturn(SettingsCustomHtmlModel.EXAMPLE_1).when(settingsService).setCustomHtml(SettingsCustomHtmlModel.EXAMPLE_1);
+        doReturn(SettingsBrandingColorSchemeModel.EXAMPLE_1).when(settingsBrandingService).setSettingsBrandingColorScheme(SettingsBrandingColorSchemeModel.EXAMPLE_1);
+        doReturn(SettingsBrandingCustomHtmlModel.EXAMPLE_1).when(settingsService).setSettingsBrandingCustomHtml(SettingsBrandingCustomHtmlModel.EXAMPLE_1);
 
         final ServiceResult<SettingsModel> result = settingsService.setSettings(SettingsModel.builder()
                 .general(SettingsGeneralModel.EXAMPLE_1)
                 .security(SettingsSecurityModel.EXAMPLE_1)
                 .branding(SettingsBrandingModel.builder()
                         .colorScheme(SettingsBrandingColorSchemeModel.EXAMPLE_1)
+                        .customHtml(SettingsBrandingCustomHtmlModel.EXAMPLE_1)
                         .build())
-                .customHtml(SettingsCustomHtmlModel.EXAMPLE_1)
                 .build());
 
         assertEquals(SettingsGeneralModel.EXAMPLE_1, result.getModel().getGeneral());
         assertEquals(SettingsSecurityModel.EXAMPLE_1, result.getModel().getSecurity());
         assertEquals(SettingsBrandingColorSchemeModel.EXAMPLE_1, result.getModel().getBranding().getColorScheme());
-        assertEquals(SettingsCustomHtmlModel.EXAMPLE_1, result.getModel().getCustomHtml());
+        assertEquals(SettingsBrandingCustomHtmlModel.EXAMPLE_1, result.getModel().getBranding().getCustomHtml());
 
         assertEquals(200, result.getStatus().get(FieldNames.of(SettingsModel.class, SettingsGeneralModel.class)).getStatus());
         assertEquals(200, result.getStatus().get(FieldNames.of(SettingsModel.class, SettingsSecurityModel.class)).getStatus());
         assertEquals(200, result.getStatus().get(FieldNames.pathOf(SettingsModel.class, SettingsBrandingColorSchemeModel.class)).getStatus());
-        assertEquals(200, result.getStatus().get(FieldNames.of(SettingsModel.class, SettingsCustomHtmlModel.class)).getStatus());
+        assertEquals(200, result.getStatus().get(FieldNames.pathOf(SettingsModel.class, SettingsBrandingCustomHtmlModel.class)).getStatus());
     }
 
     @Test
@@ -97,7 +97,7 @@ class ConfluenceSettingsServiceTest {
     void testSetSettingsRecordsPerSubFieldFailure() {
         doReturn(SettingsGeneralModel.EXAMPLE_1).when(settingsService).setSettingsGeneral(SettingsGeneralModel.EXAMPLE_1);
         doThrow(new BadRequestException("invalid colour scheme"))
-                .when(settingsBrandingService).setColourScheme(SettingsBrandingColorSchemeModel.EXAMPLE_1);
+                .when(settingsBrandingService).setSettingsBrandingColorScheme(SettingsBrandingColorSchemeModel.EXAMPLE_1);
 
         final ServiceResult<SettingsModel> result = settingsService.setSettings(SettingsModel.builder()
                 .general(SettingsGeneralModel.EXAMPLE_1)

@@ -40,19 +40,22 @@ public class BootstrAPI {
     public static final String MAIL_SERVERS                 = "mail-servers";
     public static final String MAIL_SERVER_POP              = "pop";
     public static final String MAIL_SERVER_SMTP             = "smtp";
+    public static final String MAIL_TEMPLATES               = "mail-templates";
     public static final String PERMISSION                   = "permission";
     public static final String PERMISSIONS                  = "permissions";
     public static final String PERMISSION_ANONYMOUS_ACCESS  = "anonymous-access";
     public static final String PERMISSIONS_GLOBAL           = "global";
     public static final String PING                         = "ping";
+    public static final String SESSION_CONFIG               = "session-config";
     public static final String SETTINGS                     = "settings";
-    public static final String SETTINGS_BANNER              = "banner";
     public static final String SETTINGS_BRANDING            = "branding";
+    public static final String SETTINGS_BRANDING_BANNER     = "banner";
+    public static final String SETTINGS_BRANDING_CUSTOM_HTML= "custom-html";
     public static final String SETTINGS_BRANDING_LOGIN_PAGE = "login-page";
     public static final String SETTINGS_BRANDING_LOGO       = "logo";
-    public static final String SETTINGS_CUSTOM_HTML         = "custom-html";
     public static final String SETTINGS_GENERAL             = "general";
     public static final String SETTINGS_SECURITY            = "security";
+    public static final String TRUSTED_PROXIES              = "trusted-proxies";
     public static final String USER                         = "user";
     public static final String USERS                        = "users";
     public static final String USER_PASSWORD                = "password";
@@ -70,6 +73,12 @@ public class BootstrAPI {
             + " sub-field status code; inspect the per-sub-field 'status' map in the response body to see which"
             + " fields succeeded and which failed. Request-level errors (e.g. a missing request body) return an"
             + " error message list instead.";
+    public static final String SETTINGS_GET_SUMMARY                       = "Get all settings";
+    public static final String SETTINGS_GET_RESPONSE_DESCRIPTION          = "Returns all settings groups supported by this product.";
+    public static final String SETTINGS_PUT_SUMMARY                       = "Apply a settings configuration";
+    public static final String SETTINGS_PUT_RESPONSE_DESCRIPTION          = "Returns the updated settings. The per-sub-field outcome is reported in the"
+            + " 'status' map, keyed by the request's field paths (e.g. 'general', 'branding/colorScheme')."
+            + " If any sub-field fails, the highest sub-field status code is returned with the same response body.";
     public static final String SETTINGS_GENERAL_GET_SUMMARY               = "Get the general settings";
     public static final String SETTINGS_GENERAL_GET_RESPONSE_DESCRIPTION  = "Returns the general settings";
     public static final String SETTINGS_GENERAL_PUT_SUMMARY               = "Set the general settings";

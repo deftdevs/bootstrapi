@@ -1,6 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.model;
 
-import com.deftdevs.bootstrapi.crowd.rest.api.MailTemplateResource;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Builder;
@@ -13,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement(name = MailTemplateResource.MAIL_TEMPLATES)
+@XmlRootElement(name = BootstrAPI.MAIL_TEMPLATES)
 public class MailTemplatesModel {
 
     @XmlElement

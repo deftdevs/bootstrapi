@@ -26,21 +26,21 @@ public class SettingsBrandingResourceImpl implements SettingsBrandingResource {
     }
 
     @Override
-    public Response getLoginPage() {
-        return Response.ok(crowdSettingsBrandingService.getLoginPage()).build();
+    public Response getSettingsBrandingLoginPage() {
+        return Response.ok(crowdSettingsBrandingService.getSettingsBrandingLoginPage()).build();
     }
 
     @Override
-    public Response setLoginPage(
+    public Response setSettingsBrandingLoginPage(
             SettingsBrandingLoginPageModel settingsBrandingLoginPageModel) {
 
-        return Response.ok(crowdSettingsBrandingService.setLoginPage(settingsBrandingLoginPageModel)).build();
+        return Response.ok(crowdSettingsBrandingService.setSettingsBrandingLoginPage(settingsBrandingLoginPageModel)).build();
     }
 
     @Override
-    public Response setLogo(InputStream inputStream) {
+    public Response setSettingsBrandingLogo(InputStream inputStream) {
 
-        crowdSettingsBrandingService.setLogo(inputStream);
+        crowdSettingsBrandingService.setSettingsBrandingLogo(inputStream);
         return Response.ok().build();
     }
 }
