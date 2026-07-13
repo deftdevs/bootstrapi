@@ -21,7 +21,7 @@ import java.net.URI;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@XmlRootElement(name = BootstrAPI.DIRECTORY + '-' + BootstrAPI.DIRECTORY_CROWD)
+@XmlRootElement(name = BootstrAPI.DIRECTORY_CROWD)
 public class DirectoryCrowdModel extends AbstractDirectoryExternalModel {
 
     @XmlElement

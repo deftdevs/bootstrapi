@@ -21,7 +21,7 @@ import static org.mockito.Mockito.doReturn;
 class AuthenticationResourceTest {
 
     @Mock
-    private AuthenticationService<AbstractAuthenticationIdpModel, AuthenticationSsoModel> authenticationService;
+    private AuthenticationService authenticationService;
 
     private TestAuthenticationResourceImpl resource;
 

@@ -4,7 +4,7 @@ import com.atlassian.confluence.plugins.lookandfeel.SiteLogo;
 import com.atlassian.confluence.plugins.lookandfeel.SiteLogoManager;
 import com.atlassian.confluence.themes.BaseColourScheme;
 import com.atlassian.confluence.themes.ColourSchemeManager;
-import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
+import com.deftdevs.bootstrapi.confluence.model.SettingsBrandingColorSchemeModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

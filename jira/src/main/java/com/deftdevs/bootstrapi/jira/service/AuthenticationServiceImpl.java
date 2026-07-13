@@ -12,7 +12,7 @@ import com.deftdevs.bootstrapi.jira.model.util.AuthenticationSsoModelUtil;
 import com.deftdevs.bootstrapi.jira.service.api.JiraAuthenticationService;
 
 public class AuthenticationServiceImpl
-        extends AbstractAuthenticationService<AbstractAuthenticationIdpModel, AuthenticationSsoModel>
+        extends AbstractAuthenticationService
         implements JiraAuthenticationService {
 
     public AuthenticationServiceImpl(

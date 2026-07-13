@@ -1,6 +1,7 @@
 package com.deftdevs.bootstrapi.confluence.config;
 
 import com.deftdevs.bootstrapi.commons.service.api.*;
+import com.deftdevs.bootstrapi.confluence.model._AllModel;
 import com.deftdevs.bootstrapi.confluence.service.*;
 import com.deftdevs.bootstrapi.confluence.service.api.CachesService;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceAuthenticationService;
@@ -17,6 +18,18 @@ public class ServiceConfig {
 
     @Autowired
     private HelperConfig helperConfig;
+
+    @Bean
+    public _AllService<_AllModel> _allService() {
+        return new _AllServiceImpl(
+                confluenceSettingsService(),
+                directoriesService(),
+                applicationLinksService(),
+                confluenceAuthenticationService(),
+                licensesService(),
+                mailServerService(),
+                permissionsService());
+    }
 
     @Bean
     public ApplicationLinksService applicationLinksService() {
@@ -42,8 +55,14 @@ public class ServiceConfig {
 
     @Bean
     public ConfluenceSettingsService confluenceSettingsService() {
+        // The branding service is deliberately NOT its own bean: ConfluenceSettingsService
+        // extends SettingsBrandingService, so a standalone branding bean would make by-type
+        // injection of SettingsBrandingService ambiguous in the REST layer.
         return new SettingsServiceImpl(
-                atlassianConfig.globalSettingsManager());
+                atlassianConfig.globalSettingsManager(),
+                new SettingsBrandingServiceImpl(
+                        atlassianConfig.colourSchemeManager(),
+                        atlassianConfig.siteLogoManager()));
     }
 
     @Bean
@@ -68,13 +87,6 @@ public class ServiceConfig {
     public PermissionsService permissionsService() {
         return new PermissionsServiceImpl(
                 atlassianConfig.spacePermissionManager());
-    }
-
-    @Bean
-    public SettingsBrandingService settingsBrandingService() {
-        return new SettingsBrandingServiceImpl(
-                atlassianConfig.colourSchemeManager(),
-                atlassianConfig.siteLogoManager());
     }
 
     @Bean

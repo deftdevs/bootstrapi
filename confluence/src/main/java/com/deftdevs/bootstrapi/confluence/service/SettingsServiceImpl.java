@@ -3,28 +3,34 @@ package com.deftdevs.bootstrapi.confluence.service;
 import com.atlassian.confluence.setup.settings.CustomHtmlSettings;
 import com.atlassian.confluence.setup.settings.GlobalSettingsManager;
 import com.atlassian.confluence.setup.settings.Settings;
-import com.deftdevs.bootstrapi.commons.model.SettingsModel;
+import com.deftdevs.bootstrapi.confluence.model.SettingsBrandingColorSchemeModel;
+import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
+import com.deftdevs.bootstrapi.confluence.service.api.SettingsBrandingService;
 import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlModel;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
 
+import java.io.InputStream;
 import java.net.URI;
 
 public class SettingsServiceImpl implements ConfluenceSettingsService {
 
     private final GlobalSettingsManager globalSettingsManager;
+    private final SettingsBrandingService settingsBrandingService;
 
     public SettingsServiceImpl(
-            final GlobalSettingsManager globalSettingsManager) {
+            final GlobalSettingsManager globalSettingsManager,
+            final SettingsBrandingService settingsBrandingService) {
 
         this.globalSettingsManager = globalSettingsManager;
+        this.settingsBrandingService = settingsBrandingService;
     }
 
     @Override
-    public SettingsModel getSettingsGeneral() {
+    public SettingsGeneralModel getSettingsGeneral() {
         final Settings settings = globalSettingsManager.getGlobalSettings();
 
-        return SettingsModel.builder()
+        return SettingsGeneralModel.builder()
             .baseUrl(URI.create(settings.getBaseUrl()))
             .title(settings.getSiteTitle())
             .contactMessage(settings.getCustomContactMessage())
@@ -33,7 +39,7 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
     }
 
     @Override
-    public SettingsModel setSettingsGeneral(SettingsModel settingsModel) {
+    public SettingsGeneralModel setSettingsGeneral(SettingsGeneralModel settingsModel) {
         final Settings settings = globalSettingsManager.getGlobalSettings();
 
         if (settingsModel.getBaseUrl() != null) {
@@ -116,7 +122,38 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
             settings.setWebSudoTimeout(settingsSecurityModel.getWebSudoTimeout());
         }
 
+        globalSettingsManager.updateGlobalSettings(settings);
+
         return getSettingsSecurity();
     }
 
+    @Override
+    public SettingsBrandingColorSchemeModel getColourScheme() {
+        return settingsBrandingService.getColourScheme();
+    }
+
+    @Override
+    public SettingsBrandingColorSchemeModel setColourScheme(final SettingsBrandingColorSchemeModel colourSchemeModel) {
+        return settingsBrandingService.setColourScheme(colourSchemeModel);
+    }
+
+    @Override
+    public InputStream getLogo() {
+        return settingsBrandingService.getLogo();
+    }
+
+    @Override
+    public void setLogo(final InputStream inputStream) {
+        settingsBrandingService.setLogo(inputStream);
+    }
+
+    @Override
+    public InputStream getFavicon() {
+        return settingsBrandingService.getFavicon();
+    }
+
+    @Override
+    public void setFavicon(final InputStream inputStream) {
+        settingsBrandingService.setFavicon(inputStream);
+    }
 }

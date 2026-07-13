@@ -5,8 +5,8 @@ import com.atlassian.confluence.themes.BaseColourScheme;
 import com.atlassian.confluence.themes.ColourScheme;
 import com.atlassian.confluence.themes.ColourSchemeManager;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
-import com.deftdevs.bootstrapi.commons.model.SettingsBrandingColorSchemeModel;
-import com.deftdevs.bootstrapi.commons.service.api.SettingsBrandingService;
+import com.deftdevs.bootstrapi.confluence.model.SettingsBrandingColorSchemeModel;
+import com.deftdevs.bootstrapi.confluence.service.api.SettingsBrandingService;
 import com.deftdevs.bootstrapi.confluence.model.util.SettingsBrandingColorSchemeModelUtil;
 import org.apache.commons.io.FileUtils;
 

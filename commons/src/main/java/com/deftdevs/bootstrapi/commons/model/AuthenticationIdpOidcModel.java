@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@XmlRootElement(name = BootstrAPI.AUTHENTICATION + "-" + BootstrAPI.AUTHENTICATION_IDP + "-" + BootstrAPI.AUTHENTICATION_IDP_OIDC)
+@XmlRootElement(name = BootstrAPI.AUTHENTICATION_IDP_OIDC)
 public class AuthenticationIdpOidcModel extends AbstractAuthenticationIdpModel {
 
     @XmlElement

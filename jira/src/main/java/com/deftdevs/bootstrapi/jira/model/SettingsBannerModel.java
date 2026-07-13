@@ -8,16 +8,17 @@ import lombok.NoArgsConstructor;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import com.deftdevs.bootstrapi.commons.model.type.SubEntityOf;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import static com.deftdevs.bootstrapi.commons.constants.BootstrAPI.SETTINGS;
 import static com.deftdevs.bootstrapi.commons.constants.BootstrAPI.SETTINGS_BANNER;
 
 @Data
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement(name = SETTINGS + "-" + SETTINGS_BANNER)
+@SubEntityOf(SettingsModel.class)
+@XmlRootElement(name = SETTINGS_BANNER)
 @XmlAccessorType(XmlAccessType.FIELD)
 public class SettingsBannerModel {
 

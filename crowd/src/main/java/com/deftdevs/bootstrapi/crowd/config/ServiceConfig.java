@@ -1,6 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.config;
 
 import com.deftdevs.bootstrapi.commons.service.api.*;
+import com.deftdevs.bootstrapi.crowd.model._AllModel;
 import com.deftdevs.bootstrapi.crowd.service.*;
 import com.deftdevs.bootstrapi.crowd.service.api.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,20 @@ public class ServiceConfig {
 
     @Autowired
     private HelperConfig helperConfig;
+
+    @Bean
+    public _AllService<_AllModel> _allService() {
+        return new _AllServiceImpl(
+                crowdSettingsService(),
+                directoriesService(),
+                applicationsService(),
+                applicationLinksService(),
+                licensesService(),
+                mailServerService(),
+                mailTemplatesService(),
+                sessionConfigService(),
+                trustedProxiesService());
+    }
 
     @Bean
     public ApplicationLinksService applicationLinksService() {
@@ -34,15 +49,15 @@ public class ServiceConfig {
     }
 
     @Bean
-    public CrowdSettingsBrandingService settingsBrandingService() {
-        return new SettingsBrandingServiceImpl(
-                atlassianConfig.propertyManager());
-    }
-
-    @Bean
-    public CrowdSettingsGeneralService crowdSettingsGeneralService() {
+    public CrowdSettingsService crowdSettingsService() {
+        // The single settings bean implements the composite interface; the branding
+        // implementation is deliberately NOT its own bean, so by-type injection of
+        // CrowdSettingsGeneralService and CrowdSettingsBrandingService in the REST
+        // layer resolves unambiguously to this bean.
         return new SettingsServiceImpl(
-                atlassianConfig.propertyManager());
+                atlassianConfig.propertyManager(),
+                new SettingsBrandingServiceImpl(
+                        atlassianConfig.propertyManager()));
     }
 
     @Bean

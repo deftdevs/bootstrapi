@@ -16,7 +16,7 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement(name = BootstrAPI.PERMISSIONS + "-" + BootstrAPI.PERMISSIONS_GLOBAL)
+@XmlRootElement(name = BootstrAPI.PERMISSIONS_GLOBAL)
 public class PermissionsGlobalModel {
 
     @XmlElement

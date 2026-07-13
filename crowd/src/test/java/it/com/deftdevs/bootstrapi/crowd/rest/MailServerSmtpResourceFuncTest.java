@@ -17,13 +17,6 @@ public class MailServerSmtpResourceFuncTest extends AbstractMailServerSmtpResour
 
     @Override
     protected MailServerSmtpModel getExampleModel() {
-        return MailServerSmtpModel.builder()
-                .from("test@example.com")
-                .prefix("[Test]")
-                .host("localhost")
-                .port(3025)
-                .useTls(false)
-                .timeout(5000L)
-                .build();
+        return MailServerSmtpModel.EXAMPLE_2_MINIMAL;
     }
 }

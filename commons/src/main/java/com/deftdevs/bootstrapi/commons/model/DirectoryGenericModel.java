@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @SuperBuilder
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@XmlRootElement(name = BootstrAPI.DIRECTORY + '-' + BootstrAPI.DIRECTORY_GENERIC)
+@XmlRootElement(name = BootstrAPI.DIRECTORY_GENERIC)
 public class DirectoryGenericModel extends AbstractDirectoryModel {
 
 }
