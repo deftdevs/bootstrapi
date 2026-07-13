@@ -5,7 +5,7 @@ import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
 import com.deftdevs.bootstrapi.commons.rest.api.MailServerResource;
 import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 public class AbstractMailServerResourceImpl implements MailServerResource {
 

@@ -5,8 +5,8 @@ import com.deftdevs.bootstrapi.commons.model.type._AllModelAccessor;
 import com.deftdevs.bootstrapi.commons.model.type._AllModelStatus;
 import org.junit.jupiter.api.Test;
 
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Response;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedHashMap;

@@ -6,9 +6,9 @@ import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 import com.deftdevs.bootstrapi.crowd.rest.api.TrustedProxiesResource;
 import com.deftdevs.bootstrapi.crowd.service.api.TrustedProxiesService;
 
-import javax.inject.Inject;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Response;
 import java.util.List;
 
 @SystemAdminOnly

@@ -4,7 +4,7 @@ import com.deftdevs.bootstrapi.commons.model.UserModel;
 import com.deftdevs.bootstrapi.commons.rest.api.UserResource;
 import com.deftdevs.bootstrapi.commons.service.api.UsersService;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 public class AbstractUserResourceImpl implements UserResource {
 

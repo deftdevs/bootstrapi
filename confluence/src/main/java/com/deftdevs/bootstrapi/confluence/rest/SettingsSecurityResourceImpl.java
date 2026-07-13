@@ -7,11 +7,11 @@ import com.deftdevs.bootstrapi.commons.rest.AbstractSettingsSecurityResourceImpl
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 
-import javax.inject.Inject;
-import javax.ws.rs.Consumes;
-import javax.ws.rs.Path;
-import javax.ws.rs.Produces;
-import javax.ws.rs.core.MediaType;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Consumes;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.Produces;
+import jakarta.ws.rs.core.MediaType;
 
 @Path(BootstrAPI.SETTINGS + '/' + BootstrAPI.SETTINGS_SECURITY)
 @Tag(name = BootstrAPI.SETTINGS)

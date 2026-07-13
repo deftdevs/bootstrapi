@@ -4,7 +4,7 @@ import com.deftdevs.bootstrapi.commons.model.MailServerPopModel;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
 import com.deftdevs.bootstrapi.commons.rest.impl.TestMailServerResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

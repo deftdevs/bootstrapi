@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.commons.util;
 
 import org.junit.jupiter.api.Test;
 
-import javax.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlElement;
 import java.util.List;
 import java.util.Map;
 

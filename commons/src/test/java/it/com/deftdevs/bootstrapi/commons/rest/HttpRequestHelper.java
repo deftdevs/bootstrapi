@@ -4,8 +4,8 @@ import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
 
-import javax.ws.rs.HttpMethod;
-import javax.ws.rs.core.MediaType;
+import jakarta.ws.rs.HttpMethod;
+import jakarta.ws.rs.core.MediaType;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URI;

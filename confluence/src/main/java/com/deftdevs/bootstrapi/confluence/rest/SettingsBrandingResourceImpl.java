@@ -6,9 +6,9 @@ import com.deftdevs.bootstrapi.confluence.model.SettingsBrandingColorSchemeModel
 import com.deftdevs.bootstrapi.confluence.rest.api.SettingsBrandingResource;
 import com.deftdevs.bootstrapi.confluence.service.api.SettingsBrandingService;
 
-import javax.inject.Inject;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Response;
 import java.io.InputStream;
 
 @Path(BootstrAPI.SETTINGS + "/" + BootstrAPI.SETTINGS_BRANDING)

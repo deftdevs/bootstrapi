@@ -2,8 +2,8 @@ package com.deftdevs.bootstrapi.commons.model;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

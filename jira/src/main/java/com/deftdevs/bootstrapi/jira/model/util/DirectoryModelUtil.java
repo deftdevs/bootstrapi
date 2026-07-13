@@ -10,7 +10,7 @@ import com.deftdevs.bootstrapi.commons.model.DirectoryGenericModel;
 import com.deftdevs.bootstrapi.commons.model.DirectoryInternalModel;
 import com.deftdevs.bootstrapi.commons.model.DirectoryLdapModel;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.util.HashMap;
 import java.util.Map;

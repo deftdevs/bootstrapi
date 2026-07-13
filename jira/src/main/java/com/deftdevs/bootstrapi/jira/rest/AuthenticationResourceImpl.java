@@ -5,8 +5,8 @@ import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.rest.AbstractAuthenticationResourceImpl;
 import com.deftdevs.bootstrapi.jira.service.api.JiraAuthenticationService;
 
-import javax.inject.Inject;
-import javax.ws.rs.Path;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Path;
 
 @Path(BootstrAPI.AUTHENTICATION)
 @SystemAdminOnly

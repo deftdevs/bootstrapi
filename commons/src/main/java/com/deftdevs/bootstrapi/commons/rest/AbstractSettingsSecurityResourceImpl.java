@@ -4,7 +4,7 @@ import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
 import com.deftdevs.bootstrapi.commons.rest.api.SettingsSecurityResource;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsSecurityService;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 public abstract class AbstractSettingsSecurityResourceImpl<B extends SettingsSecurityModel, S extends SettingsSecurityService<B>>
         implements SettingsSecurityResource<B> {

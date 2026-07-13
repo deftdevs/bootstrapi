@@ -4,7 +4,7 @@ import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
 import com.deftdevs.bootstrapi.commons.rest.api.DirectoryResource;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 public abstract class AbstractDirectoryResourceImpl implements DirectoryResource {
 

@@ -3,10 +3,10 @@ package com.deftdevs.bootstrapi.commons.exception.web.mapper;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import org.junit.jupiter.api.Test;
 
-import javax.ws.rs.core.Response;
-import javax.xml.bind.ValidationException;
+import jakarta.ws.rs.core.Response;
+import jakarta.xml.bind.ValidationException;
 
-import static javax.ws.rs.core.Response.Status.BAD_REQUEST;
+import static jakarta.ws.rs.core.Response.Status.BAD_REQUEST;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class ValidationExceptionMapperTest {

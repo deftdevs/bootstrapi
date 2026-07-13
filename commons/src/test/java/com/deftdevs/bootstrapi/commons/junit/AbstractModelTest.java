@@ -3,7 +3,7 @@ package com.deftdevs.bootstrapi.commons.junit;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
-import javax.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.XmlRootElement;
 
 import static org.junit.jupiter.api.Assertions.*;
 

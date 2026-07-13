@@ -6,8 +6,8 @@ import com.deftdevs.bootstrapi.commons.rest.AbstractLicenseResourceImpl;
 import com.deftdevs.bootstrapi.commons.rest.api.LicenseResource;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 
-import javax.inject.Inject;
-import javax.ws.rs.Path;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Path;
 
 @Path(BootstrAPI.LICENSE)
 @SystemAdminOnly

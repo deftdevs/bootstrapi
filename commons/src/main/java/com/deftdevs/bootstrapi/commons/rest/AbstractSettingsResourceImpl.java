@@ -6,7 +6,7 @@ import com.deftdevs.bootstrapi.commons.model.type.ServiceResult;
 import com.deftdevs.bootstrapi.commons.rest.api.SettingsResource;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsService;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 public abstract class AbstractSettingsResourceImpl<S extends AbstractSettingsModel>
         implements SettingsResource<S> {

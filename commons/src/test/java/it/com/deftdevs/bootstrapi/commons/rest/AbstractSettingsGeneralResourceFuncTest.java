@@ -5,7 +5,7 @@ import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 
-import javax.ws.rs.HttpMethod;
+import jakarta.ws.rs.HttpMethod;
 import java.net.http.HttpResponse;
 
 import static org.junit.jupiter.api.Assertions.*;

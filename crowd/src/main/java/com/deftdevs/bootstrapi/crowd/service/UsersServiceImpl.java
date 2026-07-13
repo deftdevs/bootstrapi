@@ -21,7 +21,7 @@ import com.deftdevs.bootstrapi.commons.service.api.UsersService;
 import com.deftdevs.bootstrapi.crowd.model.util.UserModelUtil;
 
 import javax.annotation.Nullable;
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.*;

@@ -6,8 +6,8 @@ import com.deftdevs.bootstrapi.crowd.model.ApplicationModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.ApplicationResource;
 import com.deftdevs.bootstrapi.crowd.service.api.ApplicationsService;
 
-import javax.inject.Inject;
-import javax.ws.rs.Path;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Path;
 
 @SystemAdminOnly
 @Path(BootstrAPI.APPLICATION)

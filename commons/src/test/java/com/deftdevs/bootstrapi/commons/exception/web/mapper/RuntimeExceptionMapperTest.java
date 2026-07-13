@@ -3,9 +3,9 @@ package com.deftdevs.bootstrapi.commons.exception.web.mapper;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import org.junit.jupiter.api.Test;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
-import static javax.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
+import static jakarta.ws.rs.core.Response.Status.INTERNAL_SERVER_ERROR;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class RuntimeExceptionMapperTest {

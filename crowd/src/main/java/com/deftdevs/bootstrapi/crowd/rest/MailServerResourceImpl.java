@@ -6,9 +6,9 @@ import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
 import com.deftdevs.bootstrapi.commons.rest.api.MailServerSmtpResource;
 import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
 
-import javax.inject.Inject;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Response;
 
 @SystemAdminOnly
 @Path(BootstrAPI.MAIL_SERVER)

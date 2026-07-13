@@ -4,7 +4,7 @@ import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.commons.rest.api.SettingsGeneralResource;
 import com.deftdevs.bootstrapi.commons.service.api.SettingsGeneralService;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 public abstract class AbstractSettingsGeneralResourceImpl<B extends SettingsGeneralModel, S extends SettingsGeneralService<B>>
         implements SettingsGeneralResource<B> {
