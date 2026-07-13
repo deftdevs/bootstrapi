@@ -1,10 +1,13 @@
 package com.deftdevs.bootstrapi.commons.util;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.Validation;
-import javax.validation.ValidationException;
-import javax.validation.Validator;
-import javax.validation.ValidatorFactory;
+import org.hibernate.validator.HibernateValidator;
+import org.hibernate.validator.messageinterpolation.ParameterMessageInterpolator;
+
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validation;
+import jakarta.validation.ValidationException;
+import jakarta.validation.Validator;
+import jakarta.validation.ValidatorFactory;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -14,14 +17,20 @@ import java.util.stream.Collectors;
  */
 public class ModelValidationUtil {
 
+    // the provider is selected explicitly because the products do not expose a Jakarta Bean Validation
+    // provider to plugin bundles; the parameter message interpolator avoids a runtime EL dependency
+    private static final ValidatorFactory VALIDATOR_FACTORY = Validation.byProvider(HibernateValidator.class)
+            .configure()
+            .messageInterpolator(new ParameterMessageInterpolator())
+            .buildValidatorFactory();
+
     /**
-     * Validates the given bean using javax.validation impl from hibernate reference.
+     * Validates the given bean using jakarta.validation impl from hibernate reference.
      *
      * @param bean the bean
      */
     public static void validate(Object bean) {
-        ValidatorFactory validatorFactory = Validation.buildDefaultValidatorFactory();
-        Validator validator = validatorFactory.getValidator();
+        Validator validator = VALIDATOR_FACTORY.getValidator();
         processValidationResult(validator.validate(bean));
     }
 

@@ -2,10 +2,10 @@ package com.deftdevs.bootstrapi.commons.exception.web.mapper;
 
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 
-import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ExceptionMapper;
-import javax.ws.rs.ext.Provider;
-import javax.xml.bind.ValidationException;
+import jakarta.ws.rs.core.Response;
+import jakarta.ws.rs.ext.ExceptionMapper;
+import jakarta.ws.rs.ext.Provider;
+import jakarta.xml.bind.ValidationException;
 import java.util.Arrays;
 
 @Provider

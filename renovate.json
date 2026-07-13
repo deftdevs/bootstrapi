@@ -23,6 +23,60 @@
       "matchPackageNames": [
         "com.atlassian{/,}**"
       ]
+    },
+    {
+      "description": "Keep Confluence on the 10.2 LTS line (patch updates only)",
+      "matchPackageNames": [
+        "com.atlassian.confluence{/,}**"
+      ],
+      "allowedVersions": "/^10\\.2\\.[0-9]+$/"
+    },
+    {
+      "description": "Keep Jira on the 11.3 LTS line (patch updates only)",
+      "matchPackageNames": [
+        "com.atlassian.jira{/,}**"
+      ],
+      "allowedVersions": "/^11\\.3\\.[0-9]+$/"
+    },
+    {
+      "description": "Crowd has no LTS line yet; keep it on 7.2, which ships platform 8.3 like the other products",
+      "matchPackageNames": [
+        "com.atlassian.crowd{/,}**"
+      ],
+      "allowedVersions": "/^7\\.2\\.[0-9]+$/"
+    },
+    {
+      "description": "The platform BOM must match the platform version shipped by the products (see the product parent POMs)",
+      "matchPackageNames": [
+        "com.atlassian.platform.dependencies{/,}**"
+      ],
+      "allowedVersions": "/^8\\.3\\.[0-9]+$/"
+    },
+    {
+      "description": "Jackson must match the version shipped by the products (the YAML dataformat is bundled against it)",
+      "matchPackageNames": [
+        "com.fasterxml.jackson{/,}**"
+      ],
+      "allowedVersions": "/^2\\.21\\.[0-9]+$/"
+    },
+    {
+      "description": "The test stack mirrors the platform: Jersey 3.1, Bean Validation 3.0 (Hibernate Validator 8) and EL 5.0 (Glassfish EL 4)",
+      "matchPackageNames": [
+        "org.glassfish.jersey.core:jersey-common"
+      ],
+      "allowedVersions": "/^3\\.1\\.[0-9]+$/"
+    },
+    {
+      "matchPackageNames": [
+        "org.hibernate.validator{/,}**"
+      ],
+      "allowedVersions": "/^8\\..*/"
+    },
+    {
+      "matchPackageNames": [
+        "org.glassfish:jakarta.el"
+      ],
+      "allowedVersions": "/^4\\.[0-9.]+$/"
     }
   ]
 }

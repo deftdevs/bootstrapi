@@ -6,9 +6,9 @@ import com.deftdevs.bootstrapi.commons.model.GroupModel;
 import com.deftdevs.bootstrapi.crowd.rest.api.GroupResource;
 import com.deftdevs.bootstrapi.crowd.service.api.GroupsService;
 
-import javax.inject.Inject;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Response;
 
 @SystemAdminOnly
 @Path(BootstrAPI.GROUP)

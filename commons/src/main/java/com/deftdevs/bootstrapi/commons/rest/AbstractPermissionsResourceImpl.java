@@ -4,7 +4,7 @@ import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
 import com.deftdevs.bootstrapi.commons.rest.api.PermissionsResource;
 import com.deftdevs.bootstrapi.commons.service.api.PermissionsService;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 
 public abstract class AbstractPermissionsResourceImpl implements PermissionsResource {
 

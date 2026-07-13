@@ -11,7 +11,7 @@ import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingLoginPageModel;
 import com.deftdevs.bootstrapi.crowd.model.SettingsBrandingModel;
 import com.deftdevs.bootstrapi.crowd.model.SettingsModel;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import java.util.LinkedHashMap;
 import java.util.Map;
 

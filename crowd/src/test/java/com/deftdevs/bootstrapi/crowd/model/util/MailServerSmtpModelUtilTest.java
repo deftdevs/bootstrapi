@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import javax.mail.internet.AddressException;
+import jakarta.mail.internet.AddressException;
 
 import static org.junit.jupiter.api.Assertions.*;
 

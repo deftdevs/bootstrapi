@@ -4,7 +4,7 @@ import com.atlassian.plugins.rest.api.security.annotation.UnrestrictedAccess;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.rest.AbstractPingResourceImpl;
 
-import javax.ws.rs.Path;
+import jakarta.ws.rs.Path;
 
 @Path(BootstrAPI.PING)
 @UnrestrictedAccess

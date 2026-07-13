@@ -4,8 +4,8 @@ import com.deftdevs.bootstrapi.commons.model.type.SubEntityOf;
 import com.deftdevs.bootstrapi.commons.model.type._AllModelStatus;
 import org.junit.jupiter.api.Test;
 
-import javax.ws.rs.WebApplicationException;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.WebApplicationException;
+import jakarta.ws.rs.core.Response;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicReference;

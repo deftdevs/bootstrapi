@@ -3,8 +3,8 @@ package com.deftdevs.bootstrapi.commons.util;
 import org.hibernate.validator.internal.engine.ConstraintViolationImpl;
 import org.junit.jupiter.api.Test;
 
-import javax.validation.ConstraintViolation;
-import javax.validation.ValidationException;
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.ValidationException;
 import java.util.HashSet;
 import java.util.Set;
 

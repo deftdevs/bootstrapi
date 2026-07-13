@@ -3,7 +3,7 @@ package com.deftdevs.bootstrapi.confluence.rest;
 import com.deftdevs.bootstrapi.confluence.model.SettingsBrandingColorSchemeModel;
 
 import com.deftdevs.bootstrapi.confluence.service.api.SettingsBrandingService;
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;

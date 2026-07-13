@@ -6,7 +6,7 @@ import com.deftdevs.bootstrapi.commons.model.type._AllModelStatus;
 import com.deftdevs.bootstrapi.commons.rest.api._AllResource;
 import com.deftdevs.bootstrapi.commons.service.api._AllService;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import java.util.Map;
 
 public abstract class _AbstractAllResourceImpl<_AllModel extends _AllModelAccessor>

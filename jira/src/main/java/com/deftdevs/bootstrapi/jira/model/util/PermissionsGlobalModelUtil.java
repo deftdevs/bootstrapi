@@ -3,7 +3,7 @@ package com.deftdevs.bootstrapi.jira.model.util;
 import com.atlassian.jira.security.GlobalPermissionEntry;
 import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
 
-import javax.validation.constraints.NotNull;
+import jakarta.validation.constraints.NotNull;
 import java.util.List;
 import java.util.TreeMap;
 import java.util.TreeSet;

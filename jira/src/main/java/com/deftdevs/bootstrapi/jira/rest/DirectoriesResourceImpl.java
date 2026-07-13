@@ -5,8 +5,8 @@ import com.deftdevs.bootstrapi.commons.rest.AbstractDirectoriesResourceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 import com.atlassian.plugins.rest.api.security.annotation.SystemAdminOnly;
 
-import javax.inject.Inject;
-import javax.ws.rs.Path;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Path;
 
 @Path(BootstrAPI.DIRECTORIES)
 @SystemAdminOnly

@@ -6,9 +6,9 @@ import com.deftdevs.bootstrapi.confluence.model.CacheModel;
 import com.deftdevs.bootstrapi.confluence.rest.api.CachesResource;
 import com.deftdevs.bootstrapi.confluence.service.api.CachesService;
 
-import javax.inject.Inject;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Response;
 
 @Path(BootstrAPI.CACHES)
 @SystemAdminOnly

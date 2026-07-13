@@ -6,9 +6,9 @@ import com.deftdevs.bootstrapi.jira.model.SettingsBrandingBannerModel;
 import com.deftdevs.bootstrapi.jira.rest.api.SettingsBrandingBannerResource;
 import com.deftdevs.bootstrapi.jira.service.api.JiraSettingsService;
 
-import javax.inject.Inject;
-import javax.ws.rs.Path;
-import javax.ws.rs.core.Response;
+import jakarta.inject.Inject;
+import jakarta.ws.rs.Path;
+import jakarta.ws.rs.core.Response;
 
 @Path(BootstrAPI.SETTINGS + "/" + BootstrAPI.SETTINGS_BRANDING + "/" + BootstrAPI.SETTINGS_BRANDING_BANNER)
 @SystemAdminOnly

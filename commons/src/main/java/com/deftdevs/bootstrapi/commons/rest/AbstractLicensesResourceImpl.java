@@ -4,7 +4,7 @@ import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import com.deftdevs.bootstrapi.commons.rest.api.LicensesResource;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 
-import javax.ws.rs.core.Response;
+import jakarta.ws.rs.core.Response;
 import java.util.List;
 
 public abstract class AbstractLicensesResourceImpl implements LicensesResource {
