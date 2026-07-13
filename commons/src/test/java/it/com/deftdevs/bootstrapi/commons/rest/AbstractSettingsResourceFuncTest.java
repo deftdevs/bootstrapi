@@ -5,6 +5,7 @@ import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.commons.util.FieldNames;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.junit.jupiter.api.Test;
 
 import javax.ws.rs.HttpMethod;
@@ -36,6 +37,18 @@ public abstract class AbstractSettingsResourceFuncTest {
         final JsonNode settingsNode = objectMapper.readTree(settingsResponse.body());
         assertFalse(settingsNode.path(FieldNames.of(SettingsGeneralModel.class)).isMissingNode(),
                 "expected a general settings group, got: " + settingsNode);
+    }
+
+    @Test
+    void testGetSettingsAsYaml() throws Exception {
+        final HttpResponse<String> settingsResponse = HttpRequestHelper.builder(SETTINGS_PATH)
+                .acceptMediaType(BootstrAPI.MEDIA_TYPE_YAML)
+                .request();
+        assertEquals(200, settingsResponse.statusCode());
+
+        final JsonNode settingsNode = new ObjectMapper(new YAMLFactory()).readTree(settingsResponse.body());
+        assertFalse(settingsNode.path(FieldNames.of(SettingsGeneralModel.class)).isMissingNode(),
+                "expected a general settings group in the YAML response, got:\n" + settingsResponse.body());
     }
 
     @Test

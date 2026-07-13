@@ -21,7 +21,7 @@ public interface MailServerSmtpResource {
 
     @GET
     @Path(BootstrAPI.MAIL_SERVER_SMTP)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Produces({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
     @Operation(
             tags = { BootstrAPI.MAIL_SERVER },
             summary = "Get the default SMTP mail server",
@@ -44,8 +44,8 @@ public interface MailServerSmtpResource {
 
     @PUT
     @Path(BootstrAPI.MAIL_SERVER_SMTP)
-    @Consumes(MediaType.APPLICATION_JSON)
-    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
+    @Produces({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
     @Operation(
             tags = { BootstrAPI.MAIL_SERVER },
             summary = "Set the default SMTP mail server",

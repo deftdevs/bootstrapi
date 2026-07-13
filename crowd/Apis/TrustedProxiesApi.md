@@ -33,7 +33,7 @@ Add a trusted proxy
 ### HTTP request headers
 
 - **Content-Type**: text/plain
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="getTrustedProxies"></a>
 # **getTrustedProxies**
@@ -55,7 +55,7 @@ This endpoint does not need any parameter.
 ### HTTP request headers
 
 - **Content-Type**: Not defined
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="removeTrustedProxy"></a>
 # **removeTrustedProxy**
@@ -80,7 +80,7 @@ Remove a trusted proxy
 ### HTTP request headers
 
 - **Content-Type**: text/plain
-- **Accept**: application/json
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 
 <a name="setTrustedProxies"></a>
 # **setTrustedProxies**
@@ -104,6 +104,6 @@ Set the trusted proxies
 
 ### HTTP request headers
 
-- **Content-Type**: application/json
-- **Accept**: application/json
+- **Content-Type**: application/json, application/yaml, application/x-yaml, text/yaml
+- **Accept**: application/json, application/yaml, application/x-yaml, text/yaml
 

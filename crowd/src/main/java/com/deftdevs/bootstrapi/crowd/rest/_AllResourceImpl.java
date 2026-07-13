@@ -22,8 +22,8 @@ import javax.ws.rs.core.Response;
 
 @Path(BootstrAPI._ROOT)
 @Tag(name = BootstrAPI._ALL)
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+@Consumes({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
+@Produces({MediaType.APPLICATION_JSON, BootstrAPI.MEDIA_TYPE_YAML, BootstrAPI.MEDIA_TYPE_YAML_LEGACY, BootstrAPI.MEDIA_TYPE_YAML_TEXT})
 @SystemAdminOnly
 public class _AllResourceImpl extends _AbstractAllResourceImpl<_AllModel> {
 

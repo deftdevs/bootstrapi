@@ -331,6 +331,11 @@
                             <formats>
                                 <format>XML</format>
                             </formats>
+                            <excludes>
+                                <!-- third-party classes bundled into the plugin jar -->
+                                <exclude>org/yaml/**</exclude>
+                                <exclude>com/fasterxml/jackson/dataformat/**</exclude>
+                            </excludes>
                         </configuration>
                     </execution>
                 </executions>
