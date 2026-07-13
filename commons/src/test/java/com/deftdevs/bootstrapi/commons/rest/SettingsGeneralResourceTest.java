@@ -33,7 +33,7 @@ class SettingsGeneralResourceTest {
 
         doReturn(bean).when(settingsService).getSettingsGeneral();
 
-        final Response response = resource.getSettings();
+        final Response response = resource.getSettingsGeneral();
         assertEquals(200, response.getStatus());
         final SettingsGeneralModel settingsModel = (SettingsGeneralModel) response.getEntity();
 
@@ -46,7 +46,7 @@ class SettingsGeneralResourceTest {
 
         doReturn(bean).when(settingsService).setSettingsGeneral(bean);
 
-        final Response response = resource.setSettings(bean);
+        final Response response = resource.setSettingsGeneral(bean);
         assertEquals(200, response.getStatus());
         final SettingsGeneralModel settingsModel = (SettingsGeneralModel) response.getEntity();
 

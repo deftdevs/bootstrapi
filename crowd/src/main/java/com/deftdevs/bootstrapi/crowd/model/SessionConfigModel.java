@@ -1,6 +1,7 @@
 package com.deftdevs.bootstrapi.crowd.model;
 
-import com.deftdevs.bootstrapi.crowd.rest.api.SessionConfigResource;
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,7 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@XmlRootElement(name = SessionConfigResource.SESSION_CONFIG)
+@XmlRootElement(name = BootstrAPI.SESSION_CONFIG)
 public class SessionConfigModel {
 
     @XmlElement

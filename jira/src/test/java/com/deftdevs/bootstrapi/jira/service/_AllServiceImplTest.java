@@ -7,6 +7,7 @@ import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import com.deftdevs.bootstrapi.commons.model.MailServerModel;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
 import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
+import com.deftdevs.bootstrapi.commons.model.PermissionsModel;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.commons.model.type.ServiceResult;
@@ -102,7 +103,7 @@ class _AllServiceImplTest {
         final Map<String, LicenseModel> redactedLicenses =
                 Collections.singletonMap(LicenseKeyRedactor.redact("licenseKey"), LicenseModel.EXAMPLE_1);
         final MailServerModel mailServer = new MailServerModel(MailServerSmtpModel.EXAMPLE_1, null);
-        final PermissionsGlobalModel permissionsGlobal = new PermissionsGlobalModel();
+        final PermissionsModel permissions = new PermissionsModel();
 
         doReturn(new ServiceResult<>(settings,
                 Collections.singletonMap(FieldNames.of(SettingsModel.class, SettingsGeneralModel.class), _AllModelStatus.success())))
@@ -116,7 +117,9 @@ class _AllServiceImplTest {
         doReturn(new ServiceResult<>(mailServer,
                 Collections.singletonMap(FieldNames.of(MailServerModel.class, MailServerSmtpModel.class), _AllModelStatus.success())))
                 .when(mailServerService).setMailServer(mailServer);
-        doReturn(permissionsGlobal).when(permissionsService).setPermissionsGlobal(permissionsGlobal);
+        doReturn(new ServiceResult<>(permissions,
+                Collections.singletonMap(FieldNames.of(PermissionsModel.class, PermissionsGlobalModel.class), _AllModelStatus.success())))
+                .when(permissionsService).setPermissions(permissions);
 
         final _AllModel allModel = new _AllModel();
         allModel.setSettings(settings);
@@ -125,7 +128,7 @@ class _AllServiceImplTest {
         allModel.setAuthentication(authentication);
         allModel.setLicenses(licenses);
         allModel.setMailServer(mailServer);
-        allModel.setPermissionsGlobal(permissionsGlobal);
+        allModel.setPermissions(permissions);
 
         final _AllModel result = allService.setAll(allModel);
 
@@ -135,7 +138,7 @@ class _AllServiceImplTest {
         assertEquals(authentication, result.getAuthentication());
         assertEquals(redactedLicenses, result.getLicenses());
         assertEquals(mailServer, result.getMailServer());
-        assertEquals(permissionsGlobal, result.getPermissionsGlobal());
+        assertEquals(permissions, result.getPermissions());
 
         final Map<String, _AllModelStatus> status = result.getStatus();
         assertEquals(7, status.size());
@@ -145,7 +148,7 @@ class _AllServiceImplTest {
         assertEquals(200, status.get(FieldNames.pathOf(_AllModel.class, AuthenticationSsoModel.class)).getStatus());
         assertEquals(200, status.get(FieldNames.of(_AllModel.class, LicenseModel.class)).getStatus());
         assertEquals(200, status.get(FieldNames.pathOf(_AllModel.class, MailServerSmtpModel.class)).getStatus());
-        assertEquals(200, status.get(FieldNames.of(_AllModel.class, PermissionsGlobalModel.class)).getStatus());
+        assertEquals(200, status.get(FieldNames.pathOf(_AllModel.class, PermissionsGlobalModel.class)).getStatus());
     }
 
     @Test

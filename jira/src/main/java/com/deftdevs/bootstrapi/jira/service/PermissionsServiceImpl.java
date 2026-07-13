@@ -50,7 +50,7 @@ public class PermissionsServiceImpl implements PermissionsService {
                         Collectors.mapping(GlobalPermissionEntry::getPermissionKey, Collectors.toSet())
                 ));
 
-        final Map<String, ? extends Collection<String>> requestGroupPermissions = permissionsGlobalModel.getGroupPermissions();
+        final Map<String, ? extends Collection<String>> requestGroupPermissions = permissionsGlobalModel.getGroups();
 
         if (requestGroupPermissions == null) {
             return;

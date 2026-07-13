@@ -1,5 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.rest.api;
 
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
 import com.deftdevs.bootstrapi.crowd.model.MailTemplatesModel;
 import io.swagger.v3.oas.annotations.Operation;
@@ -16,12 +17,11 @@ import javax.ws.rs.core.Response;
 
 public interface MailTemplateResource {
 
-    String MAIL_TEMPLATES = "mail-templates";
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = {MAIL_TEMPLATES},
+            tags = {BootstrAPI.MAIL_TEMPLATES},
             summary = "Get the mail templates",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = MailTemplatesModel.class))),
@@ -34,7 +34,7 @@ public interface MailTemplateResource {
     @Consumes(MediaType.APPLICATION_JSON)
     @Produces(MediaType.APPLICATION_JSON)
     @Operation(
-            tags = {MAIL_TEMPLATES},
+            tags = {BootstrAPI.MAIL_TEMPLATES},
             summary = "Set the mail templates",
             responses = {
                     @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = MailTemplatesModel.class))),

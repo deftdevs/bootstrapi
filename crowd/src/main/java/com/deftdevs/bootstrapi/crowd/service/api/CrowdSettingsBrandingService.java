@@ -6,11 +6,11 @@ import java.io.InputStream;
 
 public interface CrowdSettingsBrandingService {
 
-    SettingsBrandingLoginPageModel getLoginPage();
+    SettingsBrandingLoginPageModel getSettingsBrandingLoginPage();
 
-    SettingsBrandingLoginPageModel setLoginPage(
+    SettingsBrandingLoginPageModel setSettingsBrandingLoginPage(
             SettingsBrandingLoginPageModel settingsBrandingLoginPageModel);
 
-    void setLogo(InputStream inputStream);
+    void setSettingsBrandingLogo(InputStream inputStream);
 
 }

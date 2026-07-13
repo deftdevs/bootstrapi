@@ -1,7 +1,8 @@
 package it.com.deftdevs.bootstrapi.crowd.rest;
 
+import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+
 import com.deftdevs.bootstrapi.crowd.model.SessionConfigModel;
-import com.deftdevs.bootstrapi.crowd.rest.api.SessionConfigResource;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import it.com.deftdevs.bootstrapi.commons.rest.HttpRequestHelper;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ public class SessionConfigResourceFuncTest {
 
     @Test
     void testGetSessionConfig() throws Exception {
-        final HttpResponse<String> response = HttpRequestHelper.builder(SessionConfigResource.SESSION_CONFIG)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.SESSION_CONFIG)
                 .request();
         assertEquals(Response.Status.OK.getStatusCode(), response.statusCode());
 
@@ -33,7 +34,7 @@ public class SessionConfigResourceFuncTest {
     void testSetSessionConfig() throws Exception {
         final SessionConfigModel exampleModel = SessionConfigModel.EXAMPLE_2;
 
-        final HttpResponse<String> response = HttpRequestHelper.builder(SessionConfigResource.SESSION_CONFIG)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.SESSION_CONFIG)
                 .request(HttpMethod.PUT, exampleModel);
         assertEquals(Response.Status.OK.getStatusCode(), response.statusCode());
 
@@ -44,7 +45,7 @@ public class SessionConfigResourceFuncTest {
 
     @Test
     void testGetSessionConfigUnauthenticated() throws Exception {
-        final HttpResponse<String> response = HttpRequestHelper.builder(SessionConfigResource.SESSION_CONFIG)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.SESSION_CONFIG)
                 .username("wrong")
                 .password("password")
                 .request();
@@ -53,7 +54,7 @@ public class SessionConfigResourceFuncTest {
 
     @Test
     void testSetSessionConfigUnauthenticated() throws Exception {
-        final HttpResponse<String> response = HttpRequestHelper.builder(SessionConfigResource.SESSION_CONFIG)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.SESSION_CONFIG)
                 .username("wrong")
                 .password("password")
                 .request(HttpMethod.PUT, SessionConfigModel.EXAMPLE_2);
@@ -62,7 +63,7 @@ public class SessionConfigResourceFuncTest {
 
     @Test
     void testGetSessionConfigUnauthorized() throws Exception {
-        final HttpResponse<String> response = HttpRequestHelper.builder(SessionConfigResource.SESSION_CONFIG)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.SESSION_CONFIG)
                 .username("user")
                 .password("user")
                 .request();
@@ -71,7 +72,7 @@ public class SessionConfigResourceFuncTest {
 
     @Test
     void testSetSessionConfigUnauthorized() throws Exception {
-        final HttpResponse<String> response = HttpRequestHelper.builder(SessionConfigResource.SESSION_CONFIG)
+        final HttpResponse<String> response = HttpRequestHelper.builder(BootstrAPI.SESSION_CONFIG)
                 .username("user")
                 .password("user")
                 .request(HttpMethod.PUT, SessionConfigModel.EXAMPLE_2);

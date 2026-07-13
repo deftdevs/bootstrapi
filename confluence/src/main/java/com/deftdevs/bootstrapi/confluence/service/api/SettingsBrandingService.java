@@ -11,7 +11,7 @@ public interface SettingsBrandingService {
      *
      * @return the colour scheme
      */
-    SettingsBrandingColorSchemeModel getColourScheme();
+    SettingsBrandingColorSchemeModel getSettingsBrandingColorScheme();
 
     /**
      * Set the colour scheme
@@ -19,7 +19,7 @@ public interface SettingsBrandingService {
      * @param colourSchemeModel the colour scheme to set
      * @return the updated colour scheme
      */
-    SettingsBrandingColorSchemeModel setColourScheme(
+    SettingsBrandingColorSchemeModel setSettingsBrandingColorScheme(
             final SettingsBrandingColorSchemeModel colourSchemeModel);
 
     /**
@@ -27,14 +27,14 @@ public interface SettingsBrandingService {
      *
      * @return the logo
      */
-    InputStream getLogo();
+    InputStream getSettingsBrandingLogo();
 
     /**
      * Set the logo
      *
      * @param logoBinary the logo to set
      */
-    void setLogo(
+    void setSettingsBrandingLogo(
             InputStream logoBinary);
 
     /**
@@ -42,14 +42,14 @@ public interface SettingsBrandingService {
      *
      * @return the favicon
      */
-    InputStream getFavicon();
+    InputStream getSettingsBrandingFavicon();
 
     /**
      * Set the favicon
      *
      * @param faviconBinary the favicon to set
      */
-    void setFavicon(
+    void setSettingsBrandingFavicon(
             InputStream faviconBinary);
 
 }

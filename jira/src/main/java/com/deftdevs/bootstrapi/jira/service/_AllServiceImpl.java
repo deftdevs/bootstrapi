@@ -5,7 +5,7 @@ import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationModel;
 import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import com.deftdevs.bootstrapi.commons.model.MailServerModel;
-import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
+import com.deftdevs.bootstrapi.commons.model.PermissionsModel;
 import com.deftdevs.bootstrapi.commons.model.type._AllModelStatus;
 import com.deftdevs.bootstrapi.commons.service._AbstractAllServiceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
@@ -75,8 +75,8 @@ public class _AllServiceImpl extends _AbstractAllServiceImpl<_AllModel> {
         setEntityWithStatus(MailServerModel.class, allModel.getMailServer(),
                 mailServerService::setMailServer, result::setMailServer, statusMap);
 
-        setEntity(PermissionsGlobalModel.class, allModel.getPermissionsGlobal(),
-                permissionsService::setPermissionsGlobal, result::setPermissionsGlobal, statusMap);
+        setEntityWithStatus(PermissionsModel.class, allModel.getPermissions(),
+                permissionsService::setPermissions, result::setPermissions, statusMap);
 
         result.setStatus(statusMap);
         return result;

@@ -42,7 +42,7 @@ class SettingsBrandingServiceTest {
         BaseColourScheme dummyBaseColourScheme = toGlobalColorScheme(SettingsBrandingColorSchemeModel.EXAMPLE_1, null);
         doReturn(dummyBaseColourScheme).when(colourSchemeManager).getGlobalColourScheme();
 
-        SettingsBrandingColorSchemeModel colourScheme = settingsBrandingService.getColourScheme();
+        SettingsBrandingColorSchemeModel colourScheme = settingsBrandingService.getSettingsBrandingColorScheme();
 
         assertEquals(SettingsBrandingColorSchemeModel.EXAMPLE_1.getTopBar(), colourScheme.getTopBar());
     }
@@ -54,7 +54,7 @@ class SettingsBrandingServiceTest {
         BaseColourScheme dummyBaseColourScheme = toGlobalColorScheme(schemeModel, null);
         doReturn(dummyBaseColourScheme).when(colourSchemeManager).getGlobalColourScheme();
 
-        SettingsBrandingColorSchemeModel colourScheme = settingsBrandingService.setColourScheme(schemeModel);
+        SettingsBrandingColorSchemeModel colourScheme = settingsBrandingService.setSettingsBrandingColorScheme(schemeModel);
         verify(colourSchemeManager).saveGlobalColourScheme(any());
 
         assertEquals(schemeModel.getTopBar(), colourScheme.getTopBar());
@@ -67,7 +67,7 @@ class SettingsBrandingServiceTest {
         SiteLogo siteLogo = new SiteLogo("", is);
         doReturn(siteLogo).when(siteLogoManager).getCurrent();
 
-        InputStream logoImage = settingsBrandingService.getLogo();
+        InputStream logoImage = settingsBrandingService.getSettingsBrandingLogo();
 
         assertNotNull(logoImage);
     }
@@ -76,7 +76,7 @@ class SettingsBrandingServiceTest {
     void testSetLogo() throws IOException {
 
         InputStream is = new ByteArrayInputStream("".getBytes());
-        settingsBrandingService.setLogo(is);
+        settingsBrandingService.setSettingsBrandingLogo(is);
 
         verify(siteLogoManager).uploadLogo(any(), any());
     }

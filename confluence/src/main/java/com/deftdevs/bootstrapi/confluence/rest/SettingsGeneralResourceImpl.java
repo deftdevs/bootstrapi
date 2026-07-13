@@ -13,7 +13,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
-@Path(BootstrAPI.SETTINGS)
+@Path(BootstrAPI.SETTINGS + "/" + BootstrAPI.SETTINGS_GENERAL)
 @Tag(name = BootstrAPI.SETTINGS)
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)

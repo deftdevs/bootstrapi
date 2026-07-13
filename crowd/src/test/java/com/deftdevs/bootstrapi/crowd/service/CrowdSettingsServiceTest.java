@@ -45,7 +45,7 @@ class CrowdSettingsServiceTest {
     @Test
     void testGetSettings() {
         doReturn(SettingsGeneralModel.EXAMPLE_1).when(settingsService).getSettingsGeneral();
-        doReturn(SettingsBrandingLoginPageModel.EXAMPLE_1).when(settingsBrandingService).getLoginPage();
+        doReturn(SettingsBrandingLoginPageModel.EXAMPLE_1).when(settingsBrandingService).getSettingsBrandingLoginPage();
 
         final SettingsModel settingsModel = settingsService.getSettings();
 
@@ -56,7 +56,7 @@ class CrowdSettingsServiceTest {
     @Test
     void testSetSettingsAppliesAllSubFields() {
         doReturn(SettingsGeneralModel.EXAMPLE_1).when(settingsService).setSettingsGeneral(SettingsGeneralModel.EXAMPLE_1);
-        doReturn(SettingsBrandingLoginPageModel.EXAMPLE_1).when(settingsBrandingService).setLoginPage(SettingsBrandingLoginPageModel.EXAMPLE_1);
+        doReturn(SettingsBrandingLoginPageModel.EXAMPLE_1).when(settingsBrandingService).setSettingsBrandingLoginPage(SettingsBrandingLoginPageModel.EXAMPLE_1);
 
         final ServiceResult<SettingsModel> result = settingsService.setSettings(SettingsModel.builder()
                 .general(SettingsGeneralModel.EXAMPLE_1)
@@ -87,14 +87,14 @@ class CrowdSettingsServiceTest {
 
         assertTrue(result.getStatus().isEmpty());
         verify(settingsService, never()).setSettingsGeneral(SettingsGeneralModel.EXAMPLE_1);
-        verify(settingsBrandingService, never()).setLoginPage(SettingsBrandingLoginPageModel.EXAMPLE_1);
+        verify(settingsBrandingService, never()).setSettingsBrandingLoginPage(SettingsBrandingLoginPageModel.EXAMPLE_1);
     }
 
     @Test
     void testSetSettingsRecordsPerSubFieldFailure() {
         doReturn(SettingsGeneralModel.EXAMPLE_1).when(settingsService).setSettingsGeneral(SettingsGeneralModel.EXAMPLE_1);
         doThrow(new BadRequestException("invalid login page"))
-                .when(settingsBrandingService).setLoginPage(SettingsBrandingLoginPageModel.EXAMPLE_1);
+                .when(settingsBrandingService).setSettingsBrandingLoginPage(SettingsBrandingLoginPageModel.EXAMPLE_1);
 
         final ServiceResult<SettingsModel> result = settingsService.setSettings(SettingsModel.builder()
                 .general(SettingsGeneralModel.EXAMPLE_1)

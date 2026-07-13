@@ -32,13 +32,13 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
     }
 
     @Override
-    public SettingsBrandingColorSchemeModel getColourScheme() {
+    public SettingsBrandingColorSchemeModel getSettingsBrandingColorScheme() {
         ColourScheme globalColourScheme = colourSchemeManager.getGlobalColourScheme();
         return SettingsBrandingColorSchemeModelUtil.toSettingsBrandingColorSchemeModel(globalColourScheme);
     }
 
     @Override
-    public SettingsBrandingColorSchemeModel setColourScheme(
+    public SettingsBrandingColorSchemeModel setSettingsBrandingColorScheme(
             final SettingsBrandingColorSchemeModel colorSchemeModel) {
 
         BaseColourScheme baseColourScheme = new BaseColourScheme(colourSchemeManager.getGlobalColourScheme());
@@ -48,12 +48,12 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
     }
 
     @Override
-    public InputStream getLogo() {
+    public InputStream getSettingsBrandingLogo() {
         return siteLogoManager.getCurrent().getContent();
     }
 
     @Override
-    public void setLogo(
+    public void setSettingsBrandingLogo(
             final InputStream inputStream) {
 
         try {
@@ -70,12 +70,12 @@ public class SettingsBrandingServiceImpl implements SettingsBrandingService {
     }
 
     @Override
-    public InputStream getFavicon() {
+    public InputStream getSettingsBrandingFavicon() {
         throw new InternalServerErrorException(ERROR_MESSAGE_FAVICON);
     }
 
     @Override
-    public void setFavicon(
+    public void setSettingsBrandingFavicon(
             final InputStream inputStream) {
 
         throw new InternalServerErrorException(ERROR_MESSAGE_FAVICON);

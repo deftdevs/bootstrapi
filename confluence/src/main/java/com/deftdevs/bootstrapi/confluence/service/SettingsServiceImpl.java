@@ -7,7 +7,7 @@ import com.deftdevs.bootstrapi.confluence.model.SettingsBrandingColorSchemeModel
 import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
 import com.deftdevs.bootstrapi.confluence.service.api.SettingsBrandingService;
-import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlModel;
+import com.deftdevs.bootstrapi.confluence.model.SettingsBrandingCustomHtmlModel;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
 
 import java.io.InputStream;
@@ -64,10 +64,10 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
     }
 
     @Override
-    public SettingsCustomHtmlModel getCustomHtml() {
+    public SettingsBrandingCustomHtmlModel getSettingsBrandingCustomHtml() {
         final CustomHtmlSettings customHtmlSettings = globalSettingsManager.getGlobalSettings().getCustomHtmlSettings();
 
-        return SettingsCustomHtmlModel.builder()
+        return SettingsBrandingCustomHtmlModel.builder()
                 .beforeHeadEnd(customHtmlSettings.getBeforeHeadEnd())
                 .afterBodyStart(customHtmlSettings.getAfterBodyStart())
                 .beforeBodyEnd(customHtmlSettings.getBeforeBodyEnd())
@@ -75,8 +75,8 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
     }
 
     @Override
-    public SettingsCustomHtmlModel setCustomHtml(
-            final SettingsCustomHtmlModel settingsCustomHtmlModel) {
+    public SettingsBrandingCustomHtmlModel setSettingsBrandingCustomHtml(
+            final SettingsBrandingCustomHtmlModel settingsCustomHtmlModel) {
 
         final Settings settings = globalSettingsManager.getGlobalSettings();
         final CustomHtmlSettings customHtmlSettings = settings.getCustomHtmlSettings();
@@ -95,7 +95,7 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
 
         globalSettingsManager.updateGlobalSettings(settings);
 
-        return getCustomHtml();
+        return getSettingsBrandingCustomHtml();
     }
 
     @Override
@@ -128,32 +128,32 @@ public class SettingsServiceImpl implements ConfluenceSettingsService {
     }
 
     @Override
-    public SettingsBrandingColorSchemeModel getColourScheme() {
-        return settingsBrandingService.getColourScheme();
+    public SettingsBrandingColorSchemeModel getSettingsBrandingColorScheme() {
+        return settingsBrandingService.getSettingsBrandingColorScheme();
     }
 
     @Override
-    public SettingsBrandingColorSchemeModel setColourScheme(final SettingsBrandingColorSchemeModel colourSchemeModel) {
-        return settingsBrandingService.setColourScheme(colourSchemeModel);
+    public SettingsBrandingColorSchemeModel setSettingsBrandingColorScheme(final SettingsBrandingColorSchemeModel colourSchemeModel) {
+        return settingsBrandingService.setSettingsBrandingColorScheme(colourSchemeModel);
     }
 
     @Override
-    public InputStream getLogo() {
-        return settingsBrandingService.getLogo();
+    public InputStream getSettingsBrandingLogo() {
+        return settingsBrandingService.getSettingsBrandingLogo();
     }
 
     @Override
-    public void setLogo(final InputStream inputStream) {
-        settingsBrandingService.setLogo(inputStream);
+    public void setSettingsBrandingLogo(final InputStream inputStream) {
+        settingsBrandingService.setSettingsBrandingLogo(inputStream);
     }
 
     @Override
-    public InputStream getFavicon() {
-        return settingsBrandingService.getFavicon();
+    public InputStream getSettingsBrandingFavicon() {
+        return settingsBrandingService.getSettingsBrandingFavicon();
     }
 
     @Override
-    public void setFavicon(final InputStream inputStream) {
-        settingsBrandingService.setFavicon(inputStream);
+    public void setSettingsBrandingFavicon(final InputStream inputStream) {
+        settingsBrandingService.setSettingsBrandingFavicon(inputStream);
     }
 }

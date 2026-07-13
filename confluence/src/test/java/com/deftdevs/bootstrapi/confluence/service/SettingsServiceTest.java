@@ -7,7 +7,7 @@ import com.atlassian.confluence.setup.settings.GlobalSettingsManager;
 import com.atlassian.confluence.setup.settings.Settings;
 import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
-import com.deftdevs.bootstrapi.confluence.model.SettingsCustomHtmlModel;
+import com.deftdevs.bootstrapi.confluence.model.SettingsBrandingCustomHtmlModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -106,7 +106,7 @@ class SettingsServiceTest {
 
     @Test
     void testGetCustomHtml() {
-        final SettingsCustomHtmlModel customHtmlModel = SettingsCustomHtmlModel.EXAMPLE_1;
+        final SettingsBrandingCustomHtmlModel customHtmlModel = SettingsBrandingCustomHtmlModel.EXAMPLE_1;
         final CustomHtmlSettings customHtmlSettings = new CustomHtmlSettings(
                 customHtmlModel.getBeforeHeadEnd(),
                 customHtmlModel.getAfterBodyStart(),
@@ -115,7 +115,7 @@ class SettingsServiceTest {
         settings.setCustomHtmlSettings(customHtmlSettings);
         doReturn(settings).when(globalSettingsManager).getGlobalSettings();
 
-        final SettingsCustomHtmlModel result = settingsService.getCustomHtml();
+        final SettingsBrandingCustomHtmlModel result = settingsService.getSettingsBrandingCustomHtml();
         assertEquals(customHtmlModel, result);
     }
 
@@ -125,12 +125,12 @@ class SettingsServiceTest {
         doReturn(new CustomHtmlSettings()).when(settings).getCustomHtmlSettings();
         doReturn(settings).when(globalSettingsManager).getGlobalSettings();
 
-        final SettingsCustomHtmlModel customHtmlModel = SettingsCustomHtmlModel.EXAMPLE_1;
+        final SettingsBrandingCustomHtmlModel customHtmlModel = SettingsBrandingCustomHtmlModel.EXAMPLE_1;
         final SettingsServiceImpl spy = spy(settingsService);
-        doReturn(customHtmlModel).when(spy).getCustomHtml();
+        doReturn(customHtmlModel).when(spy).getSettingsBrandingCustomHtml();
 
         final ArgumentCaptor<Settings> settingsArgumentCaptor = ArgumentCaptor.forClass(Settings.class);
-        spy.setCustomHtml(customHtmlModel);
+        spy.setSettingsBrandingCustomHtml(customHtmlModel);
         verify(globalSettingsManager).updateGlobalSettings(settingsArgumentCaptor.capture());
 
         final Settings capuredSettings = settingsArgumentCaptor.getValue();

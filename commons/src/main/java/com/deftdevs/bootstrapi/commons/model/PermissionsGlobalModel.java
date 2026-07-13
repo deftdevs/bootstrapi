@@ -1,6 +1,7 @@
 package com.deftdevs.bootstrapi.commons.model;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
+import com.deftdevs.bootstrapi.commons.model.type.SubEntityOf;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Builder;
@@ -16,13 +17,14 @@ import java.util.Map;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@SubEntityOf(PermissionsModel.class)
 @XmlRootElement(name = BootstrAPI.PERMISSIONS_GLOBAL)
 public class PermissionsGlobalModel {
 
     @XmlElement
-    private Map<String, ? extends Collection<String>> groupPermissions;
+    private Map<String, ? extends Collection<String>> groups;
 
     @XmlElement
-    private List<String> anonymousPermissions;
+    private List<String> anonymous;
 
 }

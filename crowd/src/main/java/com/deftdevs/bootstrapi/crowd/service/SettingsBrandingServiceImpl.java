@@ -31,7 +31,7 @@ public class SettingsBrandingServiceImpl implements CrowdSettingsBrandingService
     }
 
     @Override
-    public SettingsBrandingLoginPageModel getLoginPage() {
+    public SettingsBrandingLoginPageModel getSettingsBrandingLoginPage() {
         final LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration();
 
         return SettingsBrandingLoginPageModel.builder()
@@ -43,7 +43,7 @@ public class SettingsBrandingServiceImpl implements CrowdSettingsBrandingService
     }
 
     @Override
-    public SettingsBrandingLoginPageModel setLoginPage(
+    public SettingsBrandingLoginPageModel setSettingsBrandingLoginPage(
             SettingsBrandingLoginPageModel settingsBrandingLoginPageModel) {
 
         LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration();
@@ -68,11 +68,11 @@ public class SettingsBrandingServiceImpl implements CrowdSettingsBrandingService
             throw new BadRequestException(e.getMessage());
         }
 
-        return getLoginPage();
+        return getSettingsBrandingLoginPage();
     }
 
     @Override
-    public void setLogo(
+    public void setSettingsBrandingLogo(
             InputStream inputStream) {
 
         ImageInfo imageInfo = getImageInfo(inputStream);

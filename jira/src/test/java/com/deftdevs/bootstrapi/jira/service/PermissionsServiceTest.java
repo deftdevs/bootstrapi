@@ -40,7 +40,7 @@ class PermissionsServiceTest {
         doReturn(Collections.singletonList(globalPermissionEntry)).when(spy).getGlobalPermissions();
 
         final PermissionsGlobalModel permissionsGlobalModel = spy.getPermissionsGlobal();
-        final Map<String, ? extends Collection<String>> groupPermissions = permissionsGlobalModel.getGroupPermissions();
+        final Map<String, ? extends Collection<String>> groupPermissions = permissionsGlobalModel.getGroups();
         assertTrue(groupPermissions.containsKey(group));
 
         final Set<String> permissions = new HashSet<>(groupPermissions.get(group));

@@ -2,7 +2,7 @@ package com.deftdevs.bootstrapi.jira.rest.api;
 
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model.ErrorCollection;
-import com.deftdevs.bootstrapi.jira.model.SettingsBannerModel;
+import com.deftdevs.bootstrapi.jira.model.SettingsBrandingBannerModel;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
@@ -12,7 +12,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-public interface SettingsBannerResource {
+public interface SettingsBrandingBannerResource {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -21,7 +21,7 @@ public interface SettingsBannerResource {
             summary = "Get the banner",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBannerModel.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingBannerModel.class)),
                             description = "Returns the banner"
                     ),
                     @ApiResponse(
@@ -30,7 +30,7 @@ public interface SettingsBannerResource {
                     ),
             }
     )
-    Response getBanner();
+    Response getSettingsBrandingBanner();
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
@@ -40,7 +40,7 @@ public interface SettingsBannerResource {
             summary = "Set the banner",
             responses = {
                     @ApiResponse(
-                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBannerModel.class)),
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingBannerModel.class)),
                             description = "Returns the updated banner"
                     ),
                     @ApiResponse(
@@ -49,7 +49,7 @@ public interface SettingsBannerResource {
                     ),
             }
     )
-    Response setBanner(
-            final SettingsBannerModel bean);
+    Response setSettingsBrandingBanner(
+            final SettingsBrandingBannerModel bean);
 
 }

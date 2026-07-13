@@ -38,7 +38,7 @@ class PermissionsServiceTest {
         doReturn(Collections.singletonList(globalPermissionEntry)).when(spacePermissionManager).getGlobalPermissions();
 
         final PermissionsGlobalModel permissionsGlobalModel = spy.getPermissionsGlobal();
-        final Map<String, ? extends Collection<String>> groupPermissions = permissionsGlobalModel.getGroupPermissions();
+        final Map<String, ? extends Collection<String>> groupPermissions = permissionsGlobalModel.getGroups();
         assertTrue(groupPermissions.containsKey(group));
 
         final Set<String> permissions = new HashSet<>(groupPermissions.get(group));
@@ -69,7 +69,7 @@ class PermissionsServiceTest {
         doReturn(Collections.singletonList(globalPermissionEntry)).when(spacePermissionManager).getGlobalPermissions();
 
         final PermissionsGlobalModel permissionsGlobalModel = spy.getPermissionsGlobal();
-        final Set<String> anonymousPermissions = new HashSet<>(permissionsGlobalModel.getAnonymousPermissions());
+        final Set<String> anonymousPermissions = new HashSet<>(permissionsGlobalModel.getAnonymous());
         assertTrue(anonymousPermissions.contains(globalPermissionEntry.getType()));
     }
 

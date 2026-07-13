@@ -34,9 +34,9 @@ class SettingsBrandingResourceTest {
     void testGetColourScheme() {
         final SettingsBrandingColorSchemeModel bean = SettingsBrandingColorSchemeModel.EXAMPLE_1;
 
-        doReturn(bean).when(brandingService).getColourScheme();
+        doReturn(bean).when(brandingService).getSettingsBrandingColorScheme();
 
-        final Response response = resource.getBrandingColorScheme();
+        final Response response = resource.getSettingsBrandingColorScheme();
         assertEquals(200, response.getStatus());
         final SettingsBrandingColorSchemeModel colourSchemeModel = (SettingsBrandingColorSchemeModel) response.getEntity();
 
@@ -47,9 +47,9 @@ class SettingsBrandingResourceTest {
     void testSetColourScheme() {
         final SettingsBrandingColorSchemeModel bean = SettingsBrandingColorSchemeModel.EXAMPLE_1;
 
-        doReturn(bean).when(brandingService).setColourScheme(bean);
+        doReturn(bean).when(brandingService).setSettingsBrandingColorScheme(bean);
 
-        final Response response = resource.setBrandingColorScheme(bean);
+        final Response response = resource.setSettingsBrandingColorScheme(bean);
         assertEquals(200, response.getStatus());
         final SettingsBrandingColorSchemeModel colourSchemeModel = (SettingsBrandingColorSchemeModel) response.getEntity();
 
@@ -60,9 +60,9 @@ class SettingsBrandingResourceTest {
     void testGetLogo() {
         final InputStream stream = createDummyInputStream();
 
-        doReturn(stream).when(brandingService).getLogo();
+        doReturn(stream).when(brandingService).getSettingsBrandingLogo();
 
-        final Response response = resource.getBrandingLogo();
+        final Response response = resource.getSettingsBrandingLogo();
         assertEquals(200, response.getStatus());
         final InputStream inputStream = (InputStream) response.getEntity();
 
@@ -73,7 +73,7 @@ class SettingsBrandingResourceTest {
     void testSetLogo() {
         final InputStream stream = createDummyInputStream();
 
-        final Response response = resource.setBrandingLogo(stream);
+        final Response response = resource.setSettingsBrandingLogo(stream);
 
         assertEquals(200, response.getStatus());
     }
@@ -82,9 +82,9 @@ class SettingsBrandingResourceTest {
     void testGetFavicon() {
         final InputStream stream = createDummyInputStream();
 
-        doReturn(stream).when(brandingService).getFavicon();
+        doReturn(stream).when(brandingService).getSettingsBrandingFavicon();
 
-        final Response response = resource.getBrandingFavicon();
+        final Response response = resource.getSettingsBrandingFavicon();
         assertEquals(200, response.getStatus());
         final InputStream inputStream = (InputStream) response.getEntity();
 
@@ -95,7 +95,7 @@ class SettingsBrandingResourceTest {
     void testSetFavicon() {
         final InputStream stream = createDummyInputStream();
 
-        final Response response = resource.setBrandingFavicon(stream);
+        final Response response = resource.setSettingsBrandingFavicon(stream);
 
         assertEquals(200, response.getStatus());
     }

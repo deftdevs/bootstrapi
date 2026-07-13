@@ -34,13 +34,13 @@ public class CrowdSettingsBrandingServiceTest {
     }
 
     @Test
-    public void getLoginPage() throws PropertyManagerException {
+    public void getSettingsBrandingLoginPage() throws PropertyManagerException {
 
         LookAndFeelConfiguration lookAndFeelConfiguration = getLookAndFeelConfiguration(SettingsBrandingLoginPageModel.EXAMPLE_1);
         Optional<LookAndFeelConfiguration> lookAndFeelConfigurationOptional = Optional.of(lookAndFeelConfiguration);
         doReturn(lookAndFeelConfigurationOptional).when(propertyManager).getLookAndFeelConfiguration();
 
-        SettingsBrandingLoginPageModel result = settingsBrandingService.getLoginPage();
+        SettingsBrandingLoginPageModel result = settingsBrandingService.getSettingsBrandingLoginPage();
 
         assertEquals(lookAndFeelConfiguration.getHeader(), result.getHeader());
         assertEquals(lookAndFeelConfiguration.getWelcomeText(), result.getContent());
@@ -52,7 +52,7 @@ public class CrowdSettingsBrandingServiceTest {
     public void getLoginPageDefaultConfig() throws PropertyManagerException {
         doReturn(Optional.empty()).when(propertyManager).getLookAndFeelConfiguration();
 
-        assertNotNull(settingsBrandingService.getLoginPage());
+        assertNotNull(settingsBrandingService.getSettingsBrandingLoginPage());
     }
 
     @Test
@@ -60,12 +60,12 @@ public class CrowdSettingsBrandingServiceTest {
         doThrow(new PropertyManagerException()).when(propertyManager).getLookAndFeelConfiguration();
 
         assertThrows(InternalServerErrorException.class, () -> {
-            settingsBrandingService.getLoginPage();
+            settingsBrandingService.getSettingsBrandingLoginPage();
         });
     }
 
     @Test
-    public void setLoginPage() throws PropertyManagerException {
+    public void setSettingsBrandingLoginPage() throws PropertyManagerException {
 
         SettingsBrandingLoginPageModel settingsBrandingLoginPageModel = SettingsBrandingLoginPageModel.EXAMPLE_2;
 
@@ -73,7 +73,7 @@ public class CrowdSettingsBrandingServiceTest {
         Optional<LookAndFeelConfiguration> lookAndFeelConfigurationOptional = Optional.of(lookAndFeelConfiguration);
         doReturn(lookAndFeelConfigurationOptional).when(propertyManager).getLookAndFeelConfiguration();
 
-        settingsBrandingService.setLoginPage(settingsBrandingLoginPageModel);
+        settingsBrandingService.setSettingsBrandingLoginPage(settingsBrandingLoginPageModel);
 
         final ArgumentCaptor<LookAndFeelConfiguration> captor = ArgumentCaptor.forClass(LookAndFeelConfiguration.class);
         verify(propertyManager).setLookAndFeelConfiguration(captor.capture(), any());
@@ -94,7 +94,7 @@ public class CrowdSettingsBrandingServiceTest {
         Optional<LookAndFeelConfiguration> lookAndFeelConfigurationOptional = Optional.of(lookAndFeelConfiguration);
         doReturn(lookAndFeelConfigurationOptional).when(propertyManager).getLookAndFeelConfiguration();
 
-        settingsBrandingService.setLoginPage(settingsBrandingLoginPageModel);
+        settingsBrandingService.setSettingsBrandingLoginPage(settingsBrandingLoginPageModel);
 
         final ArgumentCaptor<LookAndFeelConfiguration> captor = ArgumentCaptor.forClass(LookAndFeelConfiguration.class);
         verify(propertyManager).setLookAndFeelConfiguration(captor.capture(), any());
@@ -119,12 +119,12 @@ public class CrowdSettingsBrandingServiceTest {
 
 
         assertThrows(BadRequestException.class, () -> {
-            settingsBrandingService.setLoginPage(settingsBrandingLoginPageModel);
+            settingsBrandingService.setSettingsBrandingLoginPage(settingsBrandingLoginPageModel);
         });
     }
 
     @Test
-    public void setLogo() throws PropertyManagerException {
+    public void setSettingsBrandingLogo() throws PropertyManagerException {
 
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("images/deftdevs.png");
 
@@ -132,7 +132,7 @@ public class CrowdSettingsBrandingServiceTest {
         Optional<LookAndFeelConfiguration> lookAndFeelConfigurationOptional = Optional.of(lookAndFeelConfiguration);
         doReturn(lookAndFeelConfigurationOptional).when(propertyManager).getLookAndFeelConfiguration();
 
-        settingsBrandingService.setLogo(inputStream);
+        settingsBrandingService.setSettingsBrandingLogo(inputStream);
         verify(propertyManager).setLookAndFeelConfiguration(any(LookAndFeelConfiguration.class), any(ImageInfo.class));
     }
 
@@ -148,7 +148,7 @@ public class CrowdSettingsBrandingServiceTest {
         doThrow(new PropertyManagerException()).when(propertyManager).setLookAndFeelConfiguration(any(LookAndFeelConfiguration.class), any(ImageInfo.class));
 
         assertThrows(BadRequestException.class, () -> {
-            settingsBrandingService.setLogo(inputStream);
+            settingsBrandingService.setSettingsBrandingLogo(inputStream);
         });
     }
 

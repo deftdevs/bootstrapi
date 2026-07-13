@@ -4,7 +4,7 @@ import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsSecurityModel;
-import com.deftdevs.bootstrapi.jira.model.SettingsBannerModel;
+import com.deftdevs.bootstrapi.jira.model.SettingsBrandingBannerModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -133,25 +133,25 @@ class SettingsServiceTest {
         doReturn(content).when(applicationProperties).getDefaultBackedText(JIRA_ALERT_HEADER);
         doReturn(visibility).when(applicationProperties).getDefaultBackedString(JIRA_ALERT_HEADER_VISIBILITY);
 
-        final SettingsBannerModel bannerModel = settingsService.getSettingsBanner();
+        final SettingsBrandingBannerModel bannerModel = settingsService.getSettingsBrandingBanner();
         assertEquals(content, bannerModel.getContent());
         assertEquals(visibility, bannerModel.getVisibility().name().toLowerCase());
     }
 
     @Test
     void testSetBanner() {
-        final SettingsBannerModel settingsBannerModel = SettingsBannerModel.builder()
+        final SettingsBrandingBannerModel settingsBannerModel = SettingsBrandingBannerModel.builder()
                 .content("Hello...")
-                .visibility(SettingsBannerModel.Visibility.valueOf("private".toUpperCase()))
+                .visibility(SettingsBrandingBannerModel.Visibility.valueOf("private".toUpperCase()))
                 .build();
 
         final SettingsServiceImpl spy = spy(settingsService);
-        doReturn(settingsBannerModel).when(spy).getSettingsBanner();
+        doReturn(settingsBannerModel).when(spy).getSettingsBrandingBanner();
 
-        spy.setSettingsBanner(settingsBannerModel);
+        spy.setSettingsBrandingBanner(settingsBannerModel);
         verify(applicationProperties).setText(JIRA_ALERT_HEADER, settingsBannerModel.getContent());
         verify(applicationProperties).setString(JIRA_ALERT_HEADER_VISIBILITY, settingsBannerModel.getVisibility().name().toLowerCase());
-        verify(spy).getSettingsBanner();
+        verify(spy).getSettingsBrandingBanner();
     }
 
 }

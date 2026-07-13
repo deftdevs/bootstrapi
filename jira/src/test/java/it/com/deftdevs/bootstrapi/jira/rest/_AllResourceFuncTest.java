@@ -5,7 +5,8 @@ import com.deftdevs.bootstrapi.commons.model.MailServerPopModel;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.commons.util.FieldNames;
-import com.deftdevs.bootstrapi.jira.model.SettingsBannerModel;
+import com.deftdevs.bootstrapi.jira.model.SettingsBrandingBannerModel;
+import com.deftdevs.bootstrapi.jira.model.SettingsBrandingModel;
 import com.deftdevs.bootstrapi.jira.model.SettingsModel;
 import com.deftdevs.bootstrapi.jira.model._AllModel;
 import it.com.deftdevs.bootstrapi.commons.rest._AbstractAllResourceFuncTest;
@@ -34,7 +35,9 @@ public class _AllResourceFuncTest extends _AbstractAllResourceFuncTest {
         final _AllModel allModel = _AllModel.builder()
                 .settings(SettingsModel.builder()
                         .general(getExampleSettingsGeneralModel())
-                        .banner(SettingsBannerModel.EXAMPLE_1)
+                        .branding(SettingsBrandingModel.builder()
+                                .banner(SettingsBrandingBannerModel.EXAMPLE_1)
+                                .build())
                         .build())
                 .mailServer(MailServerModel.builder()
                         .smtp(MailServerSmtpModel.EXAMPLE_2)
@@ -44,7 +47,7 @@ public class _AllResourceFuncTest extends _AbstractAllResourceFuncTest {
 
         assertSetAllApplied(allModel, Arrays.asList(
                 FieldNames.pathOf(_AllModel.class, SettingsGeneralModel.class),
-                FieldNames.pathOf(_AllModel.class, SettingsBannerModel.class),
+                FieldNames.pathOf(_AllModel.class, SettingsBrandingBannerModel.class),
                 FieldNames.pathOf(_AllModel.class, MailServerSmtpModel.class),
                 FieldNames.pathOf(_AllModel.class, MailServerPopModel.class)));
     }
