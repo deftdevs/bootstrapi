@@ -97,6 +97,42 @@ jobs:
     - name: Run integration tests
       run: mvn -B -pl ${{ matrix.product }} -am verify
 
+  setup-tests:
+    needs: unit-tests
+
+    runs-on: ubuntu-24.04
+
+    strategy:
+      fail-fast: false
+      matrix:
+        product:
+          - confluence
+          - crowd
+          - jira
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v6
+      with:
+        fetch-depth: 0
+
+    - name: Set up JDK 21
+      uses: actions/setup-java@v5
+      with:
+        java-version: 21
+        distribution: temurin
+        cache: 'maven'
+
+    # The Jira and Confluence tests skip without a license secret; the Crowd
+    # test then still verifies the wizard mechanics against a real instance.
+    # Secret names are case-insensitive, so the product name resolves the
+    # SETUP_IT_LICENSE_<PRODUCT> secret directly.
+    - name: Run setup CLI integration tests
+      env:
+        BOOTSTRAPI_SETUP_IT: true
+        BOOTSTRAPI_SETUP_IT_LICENSE: ${{ secrets[format('SETUP_IT_LICENSE_{0}', matrix.product)] }}
+      run: mvn -B -pl ${{ matrix.product }} -am test -Dtest=SetupCliIT -Dsurefire.failIfNoSpecifiedTests=false
+
   apcc:
     needs: build
 

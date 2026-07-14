@@ -46,6 +46,12 @@ The startup configuration is cluster-safe: only one node applies the file at a t
 
 A configuration that cannot be read, parsed or fully applied stops the application, so an instance never comes up with a configuration it could not reach - in a rolling deployment this blocks the rollout instead of hiding the failure. Since only successful applies are recorded, the configuration is retried when the instance is started again.
 
+## Instance setup
+
+The plugin JARs double as setup tools: running `java -jar bootstrapi-<product>-plugin.jar` drives the product setup wizard of a freshly installed instance over HTTP, configured through `BOOTSTRAPI_SETUP_*` environment variables (base URL, license, database connection, administrator account). Together with the startup configuration this makes a complete instance bootstrap declarative: a deployment hook runs the setup from the same artifact that is installed as the plugin, and the `bootstrapi.yaml` applies everything else the moment the setup completes.
+
+The Crowd and Jira wizards are driven completely, including the database step. For Confluence the database connection and license must already be configured, e.g. through the `ATL_*` environment variables of the official container images.
+
 ## Installation
 
 Download the plugin for your product from the [releases](https://github.com/deftdevs/bootstrapi/releases) and upload it in the product's administration under *Manage apps* → *Upload app*. The endpoints require a user with system administrator permissions.
