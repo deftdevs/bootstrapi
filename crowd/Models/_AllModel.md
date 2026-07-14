@@ -8,6 +8,7 @@
 | **applicationLinks** | [**Map**](ApplicationLinkModel.md) |  | [optional] [default to null] |
 | **licenses** | [**Map**](LicenseModel.md) |  | [optional] [default to null] |
 | **mailServer** | [**MailServerModel**](MailServerModel.md) |  | [optional] [default to null] |
+| **upm** | [**UpmModel**](UpmModel.md) |  | [optional] [default to null] |
 | **status** | [**Map**](_AllModelStatus.md) |  | [optional] [default to null] |
 | **applications** | [**Map**](ApplicationModel.md) |  | [optional] [default to null] |
 | **mailTemplates** | [**MailTemplatesModel**](MailTemplatesModel.md) |  | [optional] [default to null] |

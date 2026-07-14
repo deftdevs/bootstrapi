@@ -1,5 +1,6 @@
 package com.deftdevs.bootstrapi.jira.config;
 
+import com.deftdevs.bootstrapi.commons.service.DefaultUpmServiceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.*;
 import com.deftdevs.bootstrapi.jira.model._AllModel;
 import com.deftdevs.bootstrapi.jira.service.*;
@@ -27,7 +28,8 @@ public class ServiceConfig {
                 jiraAuthenticationService(),
                 licensesService(),
                 mailServerService(),
-                permissionsService());
+                permissionsService(),
+                upmService());
     }
 
     @Bean
@@ -74,6 +76,13 @@ public class ServiceConfig {
     public PermissionsService permissionsService() {
         return new PermissionsServiceImpl(
                 atlassianConfig.globalPermissionManager());
+    }
+
+    @Bean
+    public UpmService upmService() {
+        return new DefaultUpmServiceImpl(
+                atlassianConfig.pluginAccessor(),
+                atlassianConfig.pluginController());
     }
 
 }

@@ -56,6 +56,8 @@ All URIs are relative to *https://CONFLUENCE_URL/rest/bootstrapi/1*
 *SettingsApi* | [**setSettingsBrandingLogo**](Apis/SettingsApi.md#setSettingsBrandingLogo) | **PUT** /settings/branding/logo | Set the logo |
 *SettingsApi* | [**setSettingsGeneral**](Apis/SettingsApi.md#setSettingsGeneral) | **PUT** /settings/general | Set the general settings |
 *SettingsApi* | [**setSettingsSecurity**](Apis/SettingsApi.md#setSettingsSecurity) | **PUT** /settings/security | Set the security settings |
+| *UpmApi* | [**getPlugins**](Apis/UpmApi.md#getPlugins) | **GET** /upm | Get all installed plugins |
+*UpmApi* | [**setUpm**](Apis/UpmApi.md#setUpm) | **PUT** /upm | Apply a UPM configuration |
 | *UserApi* | [**getUser**](Apis/UserApi.md#getUser) | **GET** /user | Get a user |
 *UserApi* | [**setUser**](Apis/UserApi.md#setUser) | **PUT** /user | Update an user |
 *UserApi* | [**setUserPassword**](Apis/UserApi.md#setUserPassword) | **PUT** /user/password | Update a user password |
@@ -97,12 +99,16 @@ All URIs are relative to *https://CONFLUENCE_URL/rest/bootstrapi/1*
  - [MailServerSmtpModel](./Models/MailServerSmtpModel.md)
  - [PermissionsGlobalModel](./Models/PermissionsGlobalModel.md)
  - [PermissionsModel](./Models/PermissionsModel.md)
+ - [PluginModel](./Models/PluginModel.md)
+ - [PluginProxyModel](./Models/PluginProxyModel.md)
+ - [PluginResolverModel](./Models/PluginResolverModel.md)
  - [SettingsBrandingColorSchemeModel](./Models/SettingsBrandingColorSchemeModel.md)
  - [SettingsBrandingCustomHtmlModel](./Models/SettingsBrandingCustomHtmlModel.md)
  - [SettingsBrandingModel](./Models/SettingsBrandingModel.md)
  - [SettingsGeneralModel](./Models/SettingsGeneralModel.md)
  - [SettingsModel](./Models/SettingsModel.md)
  - [SettingsSecurityModel](./Models/SettingsSecurityModel.md)
+ - [UpmModel](./Models/UpmModel.md)
  - [UserModel](./Models/UserModel.md)
  - [_AllModel](./Models/_AllModel.md)
  - [_AllModelStatus](./Models/_AllModelStatus.md)

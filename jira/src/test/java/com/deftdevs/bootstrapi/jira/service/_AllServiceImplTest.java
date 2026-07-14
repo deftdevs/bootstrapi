@@ -8,6 +8,7 @@ import com.deftdevs.bootstrapi.commons.model.MailServerModel;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
 import com.deftdevs.bootstrapi.commons.model.PermissionsGlobalModel;
 import com.deftdevs.bootstrapi.commons.model.PermissionsModel;
+import com.deftdevs.bootstrapi.commons.model.UpmModel;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationSsoModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.commons.model.type.ServiceResult;
@@ -19,6 +20,7 @@ import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
 import com.deftdevs.bootstrapi.commons.service.api.PermissionsService;
+import com.deftdevs.bootstrapi.commons.service.api.UpmService;
 import com.deftdevs.bootstrapi.jira.model.SettingsModel;
 import com.deftdevs.bootstrapi.jira.model._AllModel;
 import com.deftdevs.bootstrapi.jira.service.api.JiraAuthenticationService;
@@ -66,6 +68,9 @@ class _AllServiceImplTest {
     @Mock
     private PermissionsService permissionsService;
 
+    @Mock
+    private UpmService upmService;
+
     private _AllServiceImpl allService;
 
     @BeforeEach
@@ -77,7 +82,8 @@ class _AllServiceImplTest {
                 authenticationService,
                 licensesService,
                 mailServerService,
-                permissionsService);
+                permissionsService,
+                upmService);
     }
 
     @Test
@@ -86,7 +92,8 @@ class _AllServiceImplTest {
 
         assertTrue(result.getStatus().isEmpty());
         verifyNoInteractions(settingsService, directoriesService, applicationLinksService,
-                authenticationService, licensesService, mailServerService, permissionsService);
+                authenticationService, licensesService, mailServerService, permissionsService,
+                upmService);
     }
 
     @Test
@@ -104,6 +111,7 @@ class _AllServiceImplTest {
                 Collections.singletonMap(LicenseKeyRedactor.redact("licenseKey"), LicenseModel.EXAMPLE_1);
         final MailServerModel mailServer = new MailServerModel(MailServerSmtpModel.EXAMPLE_1, null);
         final PermissionsModel permissions = new PermissionsModel();
+        final UpmModel upm = new UpmModel();
 
         doReturn(new ServiceResult<>(settings,
                 Collections.singletonMap(FieldNames.of(SettingsModel.class, SettingsGeneralModel.class), _AllModelStatus.success())))
@@ -120,6 +128,9 @@ class _AllServiceImplTest {
         doReturn(new ServiceResult<>(permissions,
                 Collections.singletonMap(FieldNames.of(PermissionsModel.class, PermissionsGlobalModel.class), _AllModelStatus.success())))
                 .when(permissionsService).setPermissions(permissions);
+        doReturn(new ServiceResult<>(upm,
+                Collections.singletonMap("com.example.plugin", _AllModelStatus.success())))
+                .when(upmService).setUpm(upm);
 
         final _AllModel allModel = new _AllModel();
         allModel.setSettings(settings);
@@ -129,6 +140,7 @@ class _AllServiceImplTest {
         allModel.setLicenses(licenses);
         allModel.setMailServer(mailServer);
         allModel.setPermissions(permissions);
+        allModel.setUpm(upm);
 
         final _AllModel result = allService.setAll(allModel);
 
@@ -139,9 +151,10 @@ class _AllServiceImplTest {
         assertEquals(redactedLicenses, result.getLicenses());
         assertEquals(mailServer, result.getMailServer());
         assertEquals(permissions, result.getPermissions());
+        assertEquals(upm, result.getUpm());
 
         final Map<String, _AllModelStatus> status = result.getStatus();
-        assertEquals(7, status.size());
+        assertEquals(8, status.size());
         assertEquals(200, status.get(FieldNames.pathOf(_AllModel.class, SettingsGeneralModel.class)).getStatus());
         assertEquals(200, status.get(FieldNames.of(_AllModel.class, AbstractDirectoryModel.class)).getStatus());
         assertEquals(200, status.get(FieldNames.of(_AllModel.class, ApplicationLinkModel.class)).getStatus());
@@ -149,6 +162,7 @@ class _AllServiceImplTest {
         assertEquals(200, status.get(FieldNames.of(_AllModel.class, LicenseModel.class)).getStatus());
         assertEquals(200, status.get(FieldNames.pathOf(_AllModel.class, MailServerSmtpModel.class)).getStatus());
         assertEquals(200, status.get(FieldNames.pathOf(_AllModel.class, PermissionsGlobalModel.class)).getStatus());
+        assertEquals(200, status.get(FieldNames.of(_AllModel.class, UpmModel.class) + "/com.example.plugin").getStatus());
     }
 
     @Test
