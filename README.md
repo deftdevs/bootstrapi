@@ -38,6 +38,14 @@ The very same document - with the product's own base URL - configures Jira via `
 
 Every sub-field present in the request is applied independently: the response echoes the resulting configuration and reports each sub-field's outcome in its `status` map, keyed by the request's field paths (e.g. `settings/general`, `mailServer/smtp`), answering with the highest sub-field status code.
 
+## Startup configuration
+
+Instead of (or in addition to) calling the REST API, the plugins can apply a configuration automatically during application startup. Place a `bootstrapi.yaml` file with the same structure as the `_all` request body into the application's shared home directory (or local home directory) and it is applied as soon as the application has started.
+
+The startup configuration is cluster-safe: only one node applies the file at a time, and the hash of the last successfully applied document is recorded in the database, so restarts and additional replicas skip an unchanged file.
+
+A configuration that cannot be read, parsed or fully applied stops the application, so an instance never comes up with a configuration it could not reach - in a rolling deployment this blocks the rollout instead of hiding the failure. Since only successful applies are recorded, the configuration is retried when the instance is started again.
+
 ## Installation
 
 Download the plugin for your product from the [releases](https://github.com/deftdevs/bootstrapi/releases) and upload it in the product's administration under *Manage apps* → *Upload app*. The endpoints require a user with system administrator permissions.

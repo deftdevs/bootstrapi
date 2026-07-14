@@ -4,6 +4,7 @@ import com.atlassian.applinks.core.ApplinkStatusService;
 import com.atlassian.applinks.spi.auth.AuthenticationConfigurationManager;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
 import com.atlassian.applinks.spi.util.TypeAccessor;
+import com.atlassian.beehive.ClusterLockService;
 import com.atlassian.config.bootstrap.AtlassianBootstrapManager;
 import com.atlassian.crowd.embedded.api.CrowdService;
 import com.atlassian.crowd.manager.application.ApplicationManager;
@@ -15,6 +16,8 @@ import com.atlassian.oauth.consumer.ConsumerService;
 import com.atlassian.oauth.consumer.ConsumerTokenStore;
 import com.atlassian.oauth.serviceprovider.ServiceProviderConsumerStore;
 import com.atlassian.oauth.serviceprovider.ServiceProviderTokenStore;
+import com.atlassian.sal.api.ApplicationProperties;
+import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -26,6 +29,11 @@ public class AtlassianConfig {
     @Bean
     public ApplicationManager applicationManager() {
         return importOsgiService(ApplicationManager.class);
+    }
+
+    @Bean
+    public ApplicationProperties applicationProperties() {
+        return importOsgiService(ApplicationProperties.class);
     }
 
     @Bean
@@ -41,6 +49,11 @@ public class AtlassianConfig {
     @Bean
     public AuthenticationConfigurationManager authenticationConfigurationManager() {
         return importOsgiService(AuthenticationConfigurationManager.class);
+    }
+
+    @Bean
+    public ClusterLockService clusterLockService() {
+        return importOsgiService(ClusterLockService.class);
     }
 
     @Bean
@@ -76,6 +89,11 @@ public class AtlassianConfig {
     @Bean
     public MutatingApplicationLinkService mutatingApplicationLinkService() {
         return importOsgiService(MutatingApplicationLinkService.class);
+    }
+
+    @Bean
+    public PluginSettingsFactory pluginSettingsFactory() {
+        return importOsgiService(PluginSettingsFactory.class);
     }
 
     @Bean
