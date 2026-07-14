@@ -125,6 +125,12 @@
         </dependency>
 
         <dependency>
+            <groupId>com.atlassian.beehive</groupId>
+            <artifactId>beehive-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.atlassian.sal</groupId>
             <artifactId>sal-api</artifactId>
             <scope>provided</scope>

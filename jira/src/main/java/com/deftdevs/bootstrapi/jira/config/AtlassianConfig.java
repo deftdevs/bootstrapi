@@ -4,6 +4,7 @@ import com.atlassian.applinks.core.ApplinkStatusService;
 import com.atlassian.applinks.spi.auth.AuthenticationConfigurationManager;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
 import com.atlassian.applinks.spi.util.TypeAccessor;
+import com.atlassian.beehive.ClusterLockService;
 import com.atlassian.crowd.embedded.api.CrowdDirectoryService;
 import com.atlassian.jira.config.properties.ApplicationProperties;
 import com.atlassian.jira.license.JiraLicenseManager;
@@ -15,6 +16,7 @@ import com.atlassian.oauth.serviceprovider.ServiceProviderConsumerStore;
 import com.atlassian.oauth.serviceprovider.ServiceProviderTokenStore;
 import com.atlassian.plugins.authentication.api.config.IdpConfigService;
 import com.atlassian.plugins.authentication.api.config.SsoConfigService;
+import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -36,6 +38,11 @@ public class AtlassianConfig {
     @Bean
     public AuthenticationConfigurationManager authenticationConfigurationManager() {
         return importOsgiService(AuthenticationConfigurationManager.class);
+    }
+
+    @Bean
+    public ClusterLockService clusterLockService() {
+        return importOsgiService(ClusterLockService.class);
     }
 
     @Bean
@@ -76,6 +83,16 @@ public class AtlassianConfig {
     @Bean
     public MutatingApplicationLinkService mutatingApplicationLinkService() {
         return importOsgiService(MutatingApplicationLinkService.class);
+    }
+
+    @Bean
+    public PluginSettingsFactory pluginSettingsFactory() {
+        return importOsgiService(PluginSettingsFactory.class);
+    }
+
+    @Bean
+    public com.atlassian.sal.api.ApplicationProperties salApplicationProperties() {
+        return importOsgiService(com.atlassian.sal.api.ApplicationProperties.class);
     }
 
     @Bean

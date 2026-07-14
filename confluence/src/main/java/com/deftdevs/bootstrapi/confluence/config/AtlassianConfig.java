@@ -4,6 +4,7 @@ import com.atlassian.applinks.core.ApplinkStatusService;
 import com.atlassian.applinks.spi.auth.AuthenticationConfigurationManager;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
 import com.atlassian.applinks.spi.util.TypeAccessor;
+import com.atlassian.beehive.ClusterLockService;
 import com.atlassian.cache.CacheManager;
 import com.atlassian.confluence.languages.LocaleManager;
 import com.atlassian.confluence.plugins.lookandfeel.SiteLogoManager;
@@ -22,6 +23,7 @@ import com.atlassian.plugins.authentication.api.config.IdpConfigService;
 import com.atlassian.plugins.authentication.api.config.SsoConfigService;
 import com.atlassian.sal.api.ApplicationProperties;
 import com.atlassian.sal.api.license.LicenseHandler;
+import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
 import com.atlassian.user.UserManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -49,6 +51,11 @@ public class AtlassianConfig {
     @Bean
     public CacheManager cacheManager() {
         return importOsgiService(CacheManager.class);
+    }
+
+    @Bean
+    public ClusterLockService clusterLockService() {
+        return importOsgiService(ClusterLockService.class);
     }
 
     @Bean
@@ -104,6 +111,11 @@ public class AtlassianConfig {
     @Bean
     public PermissionManager permissionManager() {
         return importOsgiService(PermissionManager.class);
+    }
+
+    @Bean
+    public PluginSettingsFactory pluginSettingsFactory() {
+        return importOsgiService(PluginSettingsFactory.class);
     }
 
     @Bean
