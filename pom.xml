@@ -98,7 +98,7 @@
         <hibernate-validator.version>8.0.4.Final</hibernate-validator.version>
         <jakarta.el-api.version>4.0.2</jakarta.el-api.version>
         <jersey-common.version>3.1.12</jersey-common.version>
-        <junit.version>6.0.3</junit.version>
+        <junit.version>6.1.1</junit.version>
         <mockito.version>5.23.0</mockito.version>
         <!-- central publishing properties -->
         <central.autoPublish>true</central.autoPublish>
