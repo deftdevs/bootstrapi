@@ -55,6 +55,14 @@ Models are Lombok beans annotated with `@Data`:
 - Expected status codes are asserted as plain integer literals (`assertEquals(200, ...)`).
 - Test fixtures reuse the models' `EXAMPLE_*` constants and derive keys via `FieldNames` instead of repeating literals.
 
+### Setup CLI integration tests
+
+The setup CLIs (`java -jar <plugin>.jar` drives the product setup wizard) have integration tests that boot the official product container images together with a PostgreSQL container. They are excluded from normal builds and run explicitly:
+
+    BOOTSTRAPI_SETUP_IT=true BOOTSTRAPI_SETUP_IT_LICENSE=<license> mvn -pl <product> test -Dtest=SetupCliIT
+
+The Jira and Confluence tests require a license and skip without one (the public Data Center timebomb licenses work). The Crowd test runs without a license by verifying that the CLI fails loud when the wizard rejects input; with a license it verifies the complete setup.
+
 ## Pull requests
 
 - Keep pull requests focused on one topic.
