@@ -100,7 +100,6 @@
         <jersey-common.version>3.1.12</jersey-common.version>
         <junit.version>6.0.3</junit.version>
         <mockito.version>5.23.0</mockito.version>
-        <bytebuddy.version>1.18.11-jdk5</bytebuddy.version>
         <!-- central publishing properties -->
         <central.autoPublish>true</central.autoPublish>
         <central.waitUntil>published</central.waitUntil>
@@ -117,12 +116,6 @@
             <dependency>
                 <groupId>io.swagger.core.v3</groupId>
                 <artifactId>swagger-annotations-jakarta</artifactId>
-                <version>${swagger.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>io.swagger.core.v3</groupId>
-                <artifactId>swagger-models-jakarta</artifactId>
                 <version>${swagger.version}</version>
             </dependency>
 
@@ -149,12 +142,6 @@
             </dependency>
 
             <dependency>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-starter-web</artifactId>
-                <version>3.5.14</version>
-            </dependency>
-
-            <dependency>
                 <groupId>org.junit</groupId>
                 <artifactId>junit-bom</artifactId>
                 <version>${junit.version}</version>
@@ -172,18 +159,6 @@
                 <groupId>org.mockito</groupId>
                 <artifactId>mockito-junit-jupiter</artifactId>
                 <version>${mockito.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>net.bytebuddy</groupId>
-                <artifactId>byte-buddy</artifactId>
-                <version>${bytebuddy.version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>net.bytebuddy</groupId>
-                <artifactId>byte-buddy-agent</artifactId>
-                <version>${bytebuddy.version}</version>
             </dependency>
 
             <dependency>
