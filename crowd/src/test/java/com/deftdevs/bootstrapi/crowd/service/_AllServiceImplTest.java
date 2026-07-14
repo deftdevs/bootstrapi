@@ -5,6 +5,7 @@ import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel;
 import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import com.deftdevs.bootstrapi.commons.model.MailServerModel;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
+import com.deftdevs.bootstrapi.commons.model.UpmModel;
 import com.deftdevs.bootstrapi.commons.model.SettingsGeneralModel;
 import com.deftdevs.bootstrapi.commons.model.type.ServiceResult;
 import com.deftdevs.bootstrapi.commons.util.FieldNames;
@@ -14,6 +15,7 @@ import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
+import com.deftdevs.bootstrapi.commons.service.api.UpmService;
 import com.deftdevs.bootstrapi.crowd.model.ApplicationModel;
 import com.deftdevs.bootstrapi.crowd.model.MailTemplatesModel;
 import com.deftdevs.bootstrapi.crowd.model.SessionConfigModel;
@@ -74,6 +76,9 @@ class _AllServiceImplTest {
     @Mock
     private TrustedProxiesService trustedProxiesService;
 
+    @Mock
+    private UpmService upmService;
+
     private _AllServiceImpl allService;
 
     @BeforeEach
@@ -87,7 +92,8 @@ class _AllServiceImplTest {
                 mailServerService,
                 mailTemplatesService,
                 sessionConfigService,
-                trustedProxiesService);
+                trustedProxiesService,
+                upmService);
     }
 
     @Test
@@ -97,7 +103,8 @@ class _AllServiceImplTest {
         assertTrue(result.getStatus().isEmpty());
         verifyNoInteractions(settingsService, directoriesService, applicationsService,
                 applicationLinksService, licensesService, mailServerService,
-                mailTemplatesService, sessionConfigService, trustedProxiesService);
+                mailTemplatesService, sessionConfigService, trustedProxiesService,
+                upmService);
     }
 
     @Test
@@ -118,6 +125,7 @@ class _AllServiceImplTest {
         final MailTemplatesModel mailTemplates = MailTemplatesModel.EXAMPLE_1;
         final SessionConfigModel sessionConfig = new SessionConfigModel();
         final List<String> trustedProxies = Collections.singletonList("192.168.0.1");
+        final UpmModel upm = new UpmModel();
 
         doReturn(new ServiceResult<>(settings,
                 Collections.singletonMap(FieldNames.of(SettingsModel.class, SettingsGeneralModel.class), _AllModelStatus.success())))
@@ -132,6 +140,9 @@ class _AllServiceImplTest {
         doReturn(mailTemplates).when(mailTemplatesService).setMailTemplates(mailTemplates);
         doReturn(sessionConfig).when(sessionConfigService).setSessionConfig(sessionConfig);
         doReturn(trustedProxies).when(trustedProxiesService).setTrustedProxies(trustedProxies);
+        doReturn(new ServiceResult<>(upm,
+                Collections.singletonMap("com.example.plugin", _AllModelStatus.success())))
+                .when(upmService).setUpm(upm);
 
         final _AllModel allModel = new _AllModel();
         allModel.setSettings(settings);
@@ -143,6 +154,7 @@ class _AllServiceImplTest {
         allModel.setMailTemplates(mailTemplates);
         allModel.setSessionConfig(sessionConfig);
         allModel.setTrustedProxies(trustedProxies);
+        allModel.setUpm(upm);
 
         final _AllModel result = allService.setAll(allModel);
 
@@ -155,9 +167,10 @@ class _AllServiceImplTest {
         assertEquals(mailTemplates, result.getMailTemplates());
         assertEquals(sessionConfig, result.getSessionConfig());
         assertEquals(trustedProxies, result.getTrustedProxies());
+        assertEquals(upm, result.getUpm());
 
         final Map<String, _AllModelStatus> status = result.getStatus();
-        assertEquals(9, status.size());
+        assertEquals(10, status.size());
         assertEquals(200, status.get(FieldNames.pathOf(_AllModel.class, SettingsGeneralModel.class)).getStatus());
         assertEquals(200, status.get(FieldNames.of(_AllModel.class, AbstractDirectoryModel.class)).getStatus());
         assertEquals(200, status.get(FieldNames.of(_AllModel.class, ApplicationModel.class)).getStatus());
@@ -167,6 +180,7 @@ class _AllServiceImplTest {
         assertEquals(200, status.get(FieldNames.of(_AllModel.class, MailTemplatesModel.class)).getStatus());
         assertEquals(200, status.get(FieldNames.of(_AllModel.class, SessionConfigModel.class)).getStatus());
         assertEquals(200, status.get(FieldNames.of(_AllModel.class, String.class)).getStatus());
+        assertEquals(200, status.get(FieldNames.of(_AllModel.class, UpmModel.class) + "/com.example.plugin").getStatus());
     }
 
     @Test

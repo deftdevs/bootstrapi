@@ -46,6 +46,7 @@ public class BootstrAPI {
     public static final String PERMISSION_ANONYMOUS_ACCESS  = "anonymous-access";
     public static final String PERMISSIONS_GLOBAL           = "global";
     public static final String PING                         = "ping";
+    public static final String PLUGIN                       = "plugin";
     public static final String SESSION_CONFIG               = "session-config";
     public static final String SETTINGS                     = "settings";
     public static final String SETTINGS_BRANDING            = "branding";
@@ -56,6 +57,9 @@ public class BootstrAPI {
     public static final String SETTINGS_GENERAL             = "general";
     public static final String SETTINGS_SECURITY            = "security";
     public static final String TRUSTED_PROXIES              = "trusted-proxies";
+    public static final String UPM                          = "upm";
+    public static final String UPM_PROXY                    = "proxy";
+    public static final String UPM_RESOLVER                 = "resolver";
     public static final String USER                         = "user";
     public static final String USERS                        = "users";
     public static final String USER_PASSWORD                = "password";
