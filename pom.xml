@@ -93,7 +93,7 @@
         <maven.release-plugin.version>3.3.1</maven.release-plugin.version>
         <maven.resources-plugin.version>3.5.0</maven.resources-plugin.version>
         <openapi-generator.version>7.22.0</openapi-generator.version>
-        <swagger.version>2.2.49</swagger.version>
+        <swagger.version>2.2.52</swagger.version>
         <!-- ... -->
         <hibernate-validator.version>8.0.4.Final</hibernate-validator.version>
         <jakarta.el-api.version>4.0.2</jakarta.el-api.version>
