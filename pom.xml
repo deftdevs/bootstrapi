@@ -100,6 +100,8 @@
         <jersey-common.version>3.1.12</jersey-common.version>
         <junit.version>6.1.1</junit.version>
         <mockito.version>5.23.0</mockito.version>
+        <postgresql.version>42.7.7</postgresql.version>
+        <testcontainers.version>2.0.5</testcontainers.version>
         <!-- central publishing properties -->
         <central.autoPublish>true</central.autoPublish>
         <central.waitUntil>published</central.waitUntil>
@@ -177,6 +179,24 @@
                 <groupId>org.glassfish.jersey.core</groupId>
                 <artifactId>jersey-common</artifactId>
                 <version>${jersey-common.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-junit-jupiter</artifactId>
+                <version>${testcontainers.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.testcontainers</groupId>
+                <artifactId>testcontainers-postgresql</artifactId>
+                <version>${testcontainers.version}</version>
             </dependency>
 
             <dependency>
