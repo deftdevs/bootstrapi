@@ -85,7 +85,7 @@
         <atlassian.amps.version>9.12.5</atlassian.amps.version>
         <!-- must match the platform version shipped by the products, see the product parent POMs
              (Confluence 10.2 and Jira 11.3 ship 8.3.21, Crowd 7.2 ships 8.3.19 - patch-level drift within 8.3.x is fine) -->
-        <atlassian.platform.version>8.3.22</atlassian.platform.version>
+        <atlassian.platform.version>8.3.23</atlassian.platform.version>
         <atlassian.plugins.osgi.javaconfig.version>0.6.1</atlassian.plugins.osgi.javaconfig.version>
         <jacoco.maven-plugin.version>0.8.15</jacoco.maven-plugin.version>
         <lombok.version>1.18.46</lombok.version>
