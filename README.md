@@ -46,6 +46,36 @@ The startup configuration is cluster-safe: only one node applies the file at a t
 
 A configuration that cannot be read, parsed or fully applied stops the application, so an instance never comes up with a configuration it could not reach - in a rolling deployment this blocks the rollout instead of hiding the failure. Since only successful applies are recorded, the configuration is retried when the instance is started again.
 
+## Plugin installation
+
+The `upm` section installs other plugins declaratively, through the plugin framework itself - no UPM tokens or admin credentials involved. Resolvers and plugins are both keyed maps, so merged YAML documents can override single values. Every plugin references one of the named resolvers explicitly: `marketplace` type resolvers look the artifact up through the Atlassian Marketplace REST API from the plugin key and version alone, `maven` type resolvers derive it from the plugin's Maven coordinates and the standard repository layout.
+
+```yaml
+upm:
+  resolvers:
+    marketplace:
+      type: marketplace
+      baseUrl: https://marketplace.atlassian.com
+    corp:
+      type: maven
+      baseUrl: https://repository.example.com/maven
+      username: reader
+      password: secret
+  plugins:
+    de.griffel.confluence.plugins.plant-uml:
+      version: "2026.103"
+      resolver: marketplace
+    com.example.internal-plugin:
+      version: 1.0.0
+      resolver: corp
+      groupId: com.example
+      artifactId: internal-plugin
+```
+
+A resolver's base URL may point to a proxying repository such as an Artifactory generic remote: all links returned by the Marketplace API are re-resolved against the resolver's base URL, so the API lookup and the binary download flow through the same repository (resolver credentials work for either type). For endpoints only reachable through a forward proxy, each resolver takes an optional `proxy` (`host`, `port` and optional credentials), so an internal repository and a proxied external one can coexist in the same document.
+
+Plugins already installed in the requested version are skipped, `enabled: false` disables a plugin, and responses echo only the plugins map - never the resolver credentials. Like every other section, `upm` works via the REST API (`PUT /upm` or as part of `_all`) and the startup configuration alike.
+
 ## Installation
 
 Download the plugin for your product from the [releases](https://github.com/deftdevs/bootstrapi/releases) and upload it in the product's administration under *Manage apps* → *Upload app*. The endpoints require a user with system administrator permissions.

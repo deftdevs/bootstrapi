@@ -1,5 +1,6 @@
 package com.deftdevs.bootstrapi.crowd.config;
 
+import com.deftdevs.bootstrapi.commons.service.DefaultUpmServiceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.*;
 import com.deftdevs.bootstrapi.crowd.model._AllModel;
 import com.deftdevs.bootstrapi.crowd.service.*;
@@ -28,7 +29,8 @@ public class ServiceConfig {
                 mailServerService(),
                 mailTemplatesService(),
                 sessionConfigService(),
-                trustedProxiesService());
+                trustedProxiesService(),
+                upmService());
     }
 
     @Bean
@@ -90,6 +92,13 @@ public class ServiceConfig {
     public MailTemplatesService mailTemplatesService() {
         return new MailTemplatesServiceImpl(
                 atlassianConfig.propertyManager());
+    }
+
+    @Bean
+    public UpmService upmService() {
+        return new DefaultUpmServiceImpl(
+                atlassianConfig.pluginAccessor(),
+                atlassianConfig.pluginController());
     }
 
     @Bean

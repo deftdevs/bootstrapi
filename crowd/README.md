@@ -55,6 +55,8 @@ All URIs are relative to *https://CROWD_URL/rest/bootstrapi/1*
 *TrustedProxiesApi* | [**getTrustedProxies**](Apis/TrustedProxiesApi.md#getTrustedProxies) | **GET** /trusted-proxies | Get the trusted proxies |
 *TrustedProxiesApi* | [**removeTrustedProxy**](Apis/TrustedProxiesApi.md#removeTrustedProxy) | **DELETE** /trusted-proxies | Remove a trusted proxy |
 *TrustedProxiesApi* | [**setTrustedProxies**](Apis/TrustedProxiesApi.md#setTrustedProxies) | **PUT** /trusted-proxies | Set the trusted proxies |
+| *UpmApi* | [**getPlugins**](Apis/UpmApi.md#getPlugins) | **GET** /upm | Get all installed plugins |
+*UpmApi* | [**setUpm**](Apis/UpmApi.md#setUpm) | **PUT** /upm | Apply a UPM configuration |
 | *UserApi* | [**getUser**](Apis/UserApi.md#getUser) | **GET** /user | Get a user |
 *UserApi* | [**setUser**](Apis/UserApi.md#setUser) | **PUT** /user | Update an user |
 *UserApi* | [**setUserPassword**](Apis/UserApi.md#setUserPassword) | **PUT** /user/password | Update a user password |
@@ -91,12 +93,16 @@ All URIs are relative to *https://CROWD_URL/rest/bootstrapi/1*
  - [MailServerPopModel](./Models/MailServerPopModel.md)
  - [MailServerSmtpModel](./Models/MailServerSmtpModel.md)
  - [MailTemplatesModel](./Models/MailTemplatesModel.md)
+ - [PluginModel](./Models/PluginModel.md)
+ - [PluginProxyModel](./Models/PluginProxyModel.md)
+ - [PluginResolverModel](./Models/PluginResolverModel.md)
  - [SessionConfigModel](./Models/SessionConfigModel.md)
  - [SettingsBrandingLoginPageModel](./Models/SettingsBrandingLoginPageModel.md)
  - [SettingsBrandingModel](./Models/SettingsBrandingModel.md)
  - [SettingsGeneralModel](./Models/SettingsGeneralModel.md)
  - [SettingsModel](./Models/SettingsModel.md)
  - [SettingsSecurityModel](./Models/SettingsSecurityModel.md)
+ - [UpmModel](./Models/UpmModel.md)
  - [UserModel](./Models/UserModel.md)
  - [_AllModel](./Models/_AllModel.md)
  - [_AllModelStatus](./Models/_AllModelStatus.md)

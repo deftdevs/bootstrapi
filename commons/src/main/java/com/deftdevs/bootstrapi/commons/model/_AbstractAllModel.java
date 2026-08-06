@@ -37,6 +37,9 @@ public abstract class _AbstractAllModel<S> implements _AllModelAccessor {
     private MailServerModel mailServer;
 
     @XmlElement
+    private UpmModel upm;
+
+    @XmlElement
     private Map<String, _AllModelStatus> status;
 
 }
