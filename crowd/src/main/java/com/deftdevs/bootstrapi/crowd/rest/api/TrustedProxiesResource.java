@@ -23,8 +23,8 @@ public interface TrustedProxiesResource {
             tags = {BootstrAPI.TRUSTED_PROXIES},
             summary = "Get the trusted proxies",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = String.class)))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = String.class))), description = "Returns the list of trusted proxies."),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)), description = "Returns a list of error messages.")
             }
     )
     Response getTrustedProxies();
@@ -36,8 +36,8 @@ public interface TrustedProxiesResource {
             tags = {BootstrAPI.TRUSTED_PROXIES},
             summary = "Set the trusted proxies",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = String.class)))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = String.class))), description = "Returns the list of trusted proxies."),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)), description = "Returns a list of error messages.")
             }
     )
     Response setTrustedProxies(
@@ -51,8 +51,8 @@ public interface TrustedProxiesResource {
             tags = {BootstrAPI.TRUSTED_PROXIES},
             summary = "Add a trusted proxy",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = String.class)))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = String.class))), description = "Returns the list of trusted proxies."),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)), description = "Returns a list of error messages.")
             }
     )
     Response addTrustedProxy(
@@ -65,8 +65,8 @@ public interface TrustedProxiesResource {
             tags = {BootstrAPI.TRUSTED_PROXIES},
             summary = "Remove a trusted proxy",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = String.class)))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "200", content = @Content(array = @ArraySchema(schema = @Schema(implementation = String.class))), description = "Returns the list of trusted proxies."),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)), description = "Returns a list of error messages.")
             }
     )
     Response removeTrustedProxy(

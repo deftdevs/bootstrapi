@@ -24,8 +24,8 @@ public interface MailTemplateResource {
             tags = {BootstrAPI.MAIL_TEMPLATES},
             summary = "Get the mail templates",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = MailTemplatesModel.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = MailTemplatesModel.class)), description = "Returns the mail templates."),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)), description = "Returns a list of error messages.")
             }
     )
     Response getMailTemplates();
@@ -37,8 +37,8 @@ public interface MailTemplateResource {
             tags = {BootstrAPI.MAIL_TEMPLATES},
             summary = "Set the mail templates",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = MailTemplatesModel.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = MailTemplatesModel.class)), description = "Returns the mail templates."),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)), description = "Returns a list of error messages.")
             }
     )
     Response setMailTemplates(

@@ -90,8 +90,12 @@
         <jacoco.maven-plugin.version>0.8.15</jacoco.maven-plugin.version>
         <lombok.version>1.18.46</lombok.version>
         <maven.compiler-plugin.version>3.15.0</maven.compiler-plugin.version>
+        <maven.dependency-plugin.version>3.11.0</maven.dependency-plugin.version>
+        <maven.deploy-plugin.version>3.1.4</maven.deploy-plugin.version>
+        <maven.install-plugin.version>3.1.4</maven.install-plugin.version>
         <maven.release-plugin.version>3.3.1</maven.release-plugin.version>
         <maven.resources-plugin.version>3.5.0</maven.resources-plugin.version>
+        <maven.surefire-plugin.version>3.5.6</maven.surefire-plugin.version>
         <openapi-generator.version>7.24.0</openapi-generator.version>
         <swagger.version>2.2.53</swagger.version>
         <!-- ... -->
@@ -100,6 +104,15 @@
         <jersey-common.version>3.1.12</jersey-common.version>
         <junit.version>6.1.2</junit.version>
         <mockito.version>5.23.0</mockito.version>
+        <!-- must match the versions shipped by the products via the platform, see
+             slf4j-api, log4j-api and spring-beans in the dependency trees
+             (patch-level drift is fine, renovate.json restricts the lines) -->
+        <log4j.version>2.26.1</log4j.version>
+        <slf4j.version>2.0.18</slf4j.version>
+        <spring.version>6.2.19</spring.version>
+        <!-- empty default so the late-bound @{argLine} in the surefire configuration
+             always resolves, even when the jacoco agent is not attached -->
+        <argLine></argLine>
         <!-- central publishing properties -->
         <central.autoPublish>true</central.autoPublish>
         <central.waitUntil>published</central.waitUntil>
@@ -184,8 +197,35 @@
                 <artifactId>jakarta.el</artifactId>
                 <version>${jakarta.el-api.version}</version>
             </dependency>
+
+            <dependency>
+                <groupId>org.apache.logging.log4j</groupId>
+                <artifactId>log4j-to-slf4j</artifactId>
+                <version>${log4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-nop</artifactId>
+                <version>${slf4j.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework</groupId>
+                <artifactId>spring-tx</artifactId>
+                <version>${spring.version}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
+
+    <dependencies>
+        <!-- no-op SLF4J provider so tests do not warn about a missing provider -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-nop</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
 
     <build>
         <pluginManagement>
@@ -234,8 +274,41 @@
 
                 <plugin>
                     <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-dependency-plugin</artifactId>
+                    <version>${maven.dependency-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-deploy-plugin</artifactId>
+                    <version>${maven.deploy-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-install-plugin</artifactId>
+                    <version>${maven.install-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
                     <artifactId>maven-release-plugin</artifactId>
                     <version>${maven.release-plugin.version}</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>${maven.surefire-plugin.version}</version>
+                    <configuration>
+                        <!-- attach Mockito as an agent at JVM start so it does not have to
+                             self-attach dynamically, which the JDK warns about and will
+                             disallow in a future release; the jar path property is set by
+                             the dependency:properties execution below; class data sharing
+                             is disabled because it does not work with the appended
+                             bootstrap classpath anyway and the JVM warns about it -->
+                        <argLine>@{argLine} -Xshare:off -javaagent:${org.mockito:mockito-core:jar}</argLine>
+                    </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
@@ -245,6 +318,27 @@
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>5.7.0.6970</version>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>dependency-jar-path-properties</id>
+                        <goals>
+                            <goal>properties</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- must be declared as a build plugin (not just plugin management) so that
+                 the AMPS unit-test goal, which runs surefire itself, merges in the
+                 configuration as well -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
             </plugin>
 
             <plugin>
@@ -312,7 +406,7 @@
                                 <format>XML</format>
                             </formats>
                             <excludes>
-                                <!-- third-party classes bundled into the plugin jar -->
+                                <!-- third-party classes extracted into the plugin jar -->
                                 <exclude>org/yaml/**</exclude>
                                 <exclude>com/fasterxml/jackson/dataformat/**</exclude>
                                 <exclude>com/fasterxml/classmate/**</exclude>
@@ -334,13 +428,13 @@
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-install-plugin</artifactId>
-                        <version>3.1.4</version>
+                        <version>${maven.install-plugin.version}</version>
                     </plugin>
 
                     <plugin>
                         <groupId>org.apache.maven.plugins</groupId>
                         <artifactId>maven-deploy-plugin</artifactId>
-                        <version>3.1.4</version>
+                        <version>${maven.deploy-plugin.version}</version>
                     </plugin>
 
                     <plugin>

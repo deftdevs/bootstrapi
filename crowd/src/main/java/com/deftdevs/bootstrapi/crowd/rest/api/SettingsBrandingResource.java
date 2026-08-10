@@ -22,8 +22,8 @@ public interface SettingsBrandingResource {
             tags = { BootstrAPI.SETTINGS },
             summary = "Get the login-page settings",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingLoginPageModel.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingLoginPageModel.class)), description = "Returns the login-page settings."),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)), description = "Returns a list of error messages.")
             }
     )
     Response getSettingsBrandingLoginPage();
@@ -36,8 +36,8 @@ public interface SettingsBrandingResource {
             tags = { BootstrAPI.SETTINGS },
             summary = "Set the login-page settings",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingLoginPageModel.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SettingsBrandingLoginPageModel.class)), description = "Returns the login-page settings."),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)), description = "Returns a list of error messages.")
             }
     )
     Response setSettingsBrandingLoginPage(
@@ -51,7 +51,7 @@ public interface SettingsBrandingResource {
             tags = { BootstrAPI.SETTINGS },
             summary = "Set the logo",
             responses = {
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)), description = "Returns a list of error messages.")
             }
     )
     Response setSettingsBrandingLogo(InputStream inputStream);

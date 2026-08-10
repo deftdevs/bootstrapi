@@ -2,7 +2,6 @@ package com.deftdevs.bootstrapi.crowd.model.util;
 
 import com.atlassian.crowd.directory.AbstractInternalDirectory;
 import com.atlassian.crowd.directory.DelegatedAuthenticationDirectory;
-import com.atlassian.crowd.directory.DirectoryProperties;
 import com.atlassian.crowd.directory.InternalDirectory;
 import com.atlassian.crowd.directory.MicrosoftActiveDirectory;
 import com.atlassian.crowd.directory.SynchronisableDirectoryProperties;
@@ -39,6 +38,10 @@ import static java.lang.Boolean.TRUE;
 public class DirectoryModelUtil {
 
     public static final String ATTRIBUTE_USE_NESTED_GROUPS = "useNestedGroups";
+
+    // same value as DirectoryProperties.CACHE_ENABLED, which is deprecated
+    // for removal without a replacement constant anywhere in the Crowd API
+    private static final String DIRECTORY_CACHE_ENABLED = "com.atlassian.crowd.directory.sync.cache.enabled";
 
     static final String LDAP_URL_KEY = "ldap.url";
     static final String LDAP_SECURE_KEY = "ldap.secure";
@@ -473,7 +476,7 @@ public class DirectoryModelUtil {
         final PollerConfig pollerConfig = new PollerConfig();
         attributes.putIfAbsent(DirectoryImpl.ATTRIBUTE_KEY_LOCAL_USER_STATUS, Boolean.toString(false));
         attributes.putIfAbsent(DirectoryImpl.ATTRIBUTE_KEY_USE_PRIMARY_GROUP, Boolean.toString(false));
-        attributes.putIfAbsent(DirectoryProperties.CACHE_ENABLED, Boolean.toString(false));
+        attributes.putIfAbsent(DIRECTORY_CACHE_ENABLED, Boolean.toString(false));
         attributes.putIfAbsent(LDAP_FILTER_EXPIRED_USERS, Boolean.toString(false));
         attributes.putIfAbsent(LDAP_POOL_TYPE, "JNDI");
         attributes.putIfAbsent(LDAP_RELAXED_DN_STANDARDISATION, Boolean.toString(false));

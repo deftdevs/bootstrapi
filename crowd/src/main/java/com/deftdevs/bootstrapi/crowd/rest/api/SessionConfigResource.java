@@ -24,8 +24,8 @@ public interface SessionConfigResource {
             tags = {BootstrAPI.SESSION_CONFIG},
             summary = "Get the session config",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SessionConfigModel.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SessionConfigModel.class)), description = "Returns the session config."),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)), description = "Returns a list of error messages.")
             }
     )
     Response getSessionConfig();
@@ -37,8 +37,8 @@ public interface SessionConfigResource {
             tags = {BootstrAPI.SESSION_CONFIG},
             summary = "Set the session config",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SessionConfigModel.class))),
-                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = SessionConfigModel.class)), description = "Returns the session config."),
+                    @ApiResponse(responseCode = "default", content = @Content(schema = @Schema(implementation = ErrorCollection.class)), description = "Returns a list of error messages.")
             }
     )
     Response setSessionConfig(
