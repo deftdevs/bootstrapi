@@ -7,16 +7,18 @@ import com.atlassian.applinks.api.TypeNotInstalledException;
 import com.atlassian.applinks.core.ApplinkStatus;
 import com.atlassian.applinks.core.ApplinkStatusService;
 import com.atlassian.applinks.core.DefaultApplinkStatus;
+import com.atlassian.applinks.internal.common.exception.ConsumerInformationUnavailableException;
 import com.atlassian.applinks.internal.common.exception.NoAccessException;
 import com.atlassian.applinks.internal.common.exception.NoSuchApplinkException;
 import com.atlassian.applinks.internal.common.status.oauth.OAuthConfig;
 import com.atlassian.applinks.internal.status.error.SimpleApplinkError;
 import com.atlassian.applinks.internal.status.oauth.ApplinkOAuthStatus;
-import com.atlassian.applinks.internal.common.exception.ConsumerInformationUnavailableException;
+import com.atlassian.applinks.spi.application.ApplicationIdUtil;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
 import com.atlassian.applinks.spi.util.TypeAccessor;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
+import com.deftdevs.bootstrapi.commons.exception.web.NotFoundException;
 import com.deftdevs.bootstrapi.commons.helper.api.ApplicationLinksAuthConfigHelper;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel.ApplicationLinkType;
@@ -26,6 +28,7 @@ import com.deftdevs.bootstrapi.commons.types.DefaultApplicationType;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.ArgumentCaptor;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
@@ -50,7 +53,9 @@ import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -191,6 +196,142 @@ class DefaultApplicationLinkServiceTest {
 
         final ApplicationLinkModel applicationLinkResponse = spyApplicationLinkService.setApplicationLink(UUID.randomUUID(), applicationLinkModel);
         assertEquals(applicationLinkModel.getName(), applicationLinkResponse.getName());
+    }
+
+    @Test
+    void testSetApplicationLinkNotFound() throws TypeNotInstalledException {
+        doReturn(null).when(mutatingApplicationLinkService).getApplicationLink(any());
+        doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
+
+        assertThrows(NotFoundException.class, () -> {
+            applicationLinkService.setApplicationLink(UUID.randomUUID(), createApplicationLinkModel());
+        });
+    }
+
+    @Test
+    void testSetApplicationLinkRestoresOriginalLinkWhenRecreationFails() throws URISyntaxException, TypeNotInstalledException {
+        final ApplicationLink applicationLink = createApplicationLink();
+        final ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();
+        applicationLinkModel.setName("updated-name");
+        final OAuthConfig outgoingOAuthConfig = OAuthConfig.createDefaultOAuthConfig();
+        doReturn(applicationLink).when(mutatingApplicationLinkService).getApplicationLink(any());
+        doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
+        doReturn(outgoingOAuthConfig).when(applicationLinksAuthConfigHelper).getOutgoingOAuthConfig(any());
+        doThrow(new RuntimeException("recreation failed")).doReturn(applicationLink)
+                .when(mutatingApplicationLinkService).addApplicationLink(any(), any(), any());
+
+        assertThrows(BadRequestException.class, () -> {
+            applicationLinkService.setApplicationLink(UUID.randomUUID(), applicationLinkModel);
+        });
+
+        final ArgumentCaptor<ApplicationLinkDetails> detailsCaptor = ArgumentCaptor.forClass(ApplicationLinkDetails.class);
+        verify(mutatingApplicationLinkService, times(2)).addApplicationLink(any(), any(), detailsCaptor.capture());
+        assertEquals(applicationLinkModel.getName(), detailsCaptor.getAllValues().get(0).getName());
+        assertEquals(applicationLink.getName(), detailsCaptor.getAllValues().get(1).getName());
+
+        // the restored link must also get its original outgoing auth configuration back
+        verify(applicationLinksAuthConfigHelper).setOutgoingOAuthConfig(applicationLink, outgoingOAuthConfig);
+    }
+
+    @Test
+    void testSetApplicationLinkDoesNotPurgeLinkWithUninstalledType() throws URISyntaxException, TypeNotInstalledException {
+        final ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();
+        doThrow(new TypeNotInstalledException("jira")).when(mutatingApplicationLinkService).getApplicationLink(any());
+        doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
+
+        assertThrows(BadRequestException.class, () -> {
+            applicationLinkService.setApplicationLink(UUID.randomUUID(), applicationLinkModel);
+        });
+
+        verify(mutatingApplicationLinkService, never()).deleteApplicationLink(any());
+    }
+
+    @Test
+    void testAddApplicationLinkDoesNotPurgeLinkWithUninstalledType() throws Exception {
+        final ApplicationLink applicationLink = createApplicationLink();
+        final ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();
+        doThrow(new TypeNotInstalledException("jira")).when(mutatingApplicationLinkService).getApplicationLink(any());
+        doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
+        doReturn(applicationLink).when(mutatingApplicationLinkService).createApplicationLink(
+                any(ApplicationType.class), any(ApplicationLinkDetails.class));
+        doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getOutgoingOAuthConfig(any());
+        doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getIncomingOAuthConfig(any());
+        doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
+
+        applicationLinkService.addApplicationLink(applicationLinkModel);
+
+        verify(mutatingApplicationLinkService, never()).deleteApplicationLink(any());
+    }
+
+    @Test
+    void testSetApplicationLinkRecreatesCorruptedLink()
+            throws URISyntaxException, TypeNotInstalledException, NoAccessException, NoSuchApplinkException {
+        final ApplicationLink applicationLink = createApplicationLink();
+        final ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();
+        final UUID uuid = UUID.randomUUID();
+        doThrow(new TypeNotInstalledException("unknown")).when(mutatingApplicationLinkService).getApplicationLink(any());
+        doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
+        doReturn(applicationLink).when(mutatingApplicationLinkService).addApplicationLink(any(), any(), any());
+        doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getOutgoingOAuthConfig(any());
+        doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getIncomingOAuthConfig(any());
+        doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
+
+        final ApplicationLinkModel applicationLinkResponse = applicationLinkService.setApplicationLink(uuid, applicationLinkModel);
+
+        assertEquals(applicationLinkModel.getName(), applicationLinkResponse.getName());
+        final ArgumentCaptor<ApplicationLink> deletedLinkCaptor = ArgumentCaptor.forClass(ApplicationLink.class);
+        verify(mutatingApplicationLinkService).deleteApplicationLink(deletedLinkCaptor.capture());
+        assertEquals(uuid.toString(), deletedLinkCaptor.getValue().getId().get());
+    }
+
+    @Test
+    void testAddApplicationLinkRemovesCorruptedLinkWithSameGeneratedId() throws Exception {
+        final ApplicationLink applicationLink = createApplicationLink();
+        final ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();
+        doThrow(new TypeNotInstalledException("unknown")).when(mutatingApplicationLinkService).getApplicationLink(any());
+        doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
+        doReturn(applicationLink).when(mutatingApplicationLinkService).createApplicationLink(
+                any(ApplicationType.class), any(ApplicationLinkDetails.class));
+        doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getOutgoingOAuthConfig(any());
+        doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getIncomingOAuthConfig(any());
+        doReturn(createApplinkStatus(applicationLink, AVAILABLE)).when(applinkStatusService).getApplinkStatus(any());
+
+        final ApplicationLinkModel applicationLinkResponse = applicationLinkService.addApplicationLink(applicationLinkModel);
+
+        assertEquals(applicationLinkModel.getName(), applicationLinkResponse.getName());
+        final ArgumentCaptor<ApplicationLink> deletedLinkCaptor = ArgumentCaptor.forClass(ApplicationLink.class);
+        verify(mutatingApplicationLinkService).deleteApplicationLink(deletedLinkCaptor.capture());
+        assertEquals(ApplicationIdUtil.generate(applicationLinkModel.getRpcUrl()), deletedLinkCaptor.getValue().getId());
+    }
+
+    @Test
+    void testDeleteApplicationLinkNotFound() throws TypeNotInstalledException {
+        doReturn(null).when(mutatingApplicationLinkService).getApplicationLink(any());
+
+        assertThrows(NotFoundException.class, () -> {
+            applicationLinkService.deleteApplicationLink(UUID.randomUUID());
+        });
+    }
+
+    @Test
+    void testDeleteApplicationLinkCorrupted() throws TypeNotInstalledException {
+        final UUID uuid = UUID.randomUUID();
+        doThrow(new TypeNotInstalledException("unknown")).when(mutatingApplicationLinkService).getApplicationLink(any());
+
+        applicationLinkService.deleteApplicationLink(uuid);
+
+        final ArgumentCaptor<ApplicationLink> deletedLinkCaptor = ArgumentCaptor.forClass(ApplicationLink.class);
+        verify(mutatingApplicationLinkService).deleteApplicationLink(deletedLinkCaptor.capture());
+        assertEquals(uuid.toString(), deletedLinkCaptor.getValue().getId().get());
+    }
+
+    @Test
+    void testBuildApplicationTypeNotInstalled() {
+        doReturn(null).when(typeAccessor).getApplicationType(any());
+
+        assertThrows(BadRequestException.class, () -> {
+            applicationLinkService.buildApplicationType(CROWD);
+        });
     }
 
     @Test
