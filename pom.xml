@@ -301,6 +301,9 @@
                     </execution>
                     <execution>
                         <id>report</id>
+                        <!-- by default, the report goal only runs in the verify phase,
+                             but the CI unit test job only runs the test phase -->
+                        <phase>test</phase>
                         <goals>
                             <goal>report</goal>
                         </goals>
