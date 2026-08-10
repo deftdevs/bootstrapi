@@ -77,6 +77,27 @@
         "org.glassfish:jakarta.el"
       ],
       "allowedVersions": "/^4\\.[0-9.]+$/"
+    },
+    {
+      "description": "SLF4J must stay on the line shipped by the products via the platform",
+      "matchPackageNames": [
+        "org.slf4j{/,}**"
+      ],
+      "allowedVersions": "/^2\\.0\\.[0-9]+$/"
+    },
+    {
+      "description": "Log4j must stay on the line shipped by the products via the platform",
+      "matchPackageNames": [
+        "org.apache.logging.log4j{/,}**"
+      ],
+      "allowedVersions": "/^2\\.[0-9.]+$/"
+    },
+    {
+      "description": "Spring must stay on the line shipped by the products via the platform",
+      "matchPackageNames": [
+        "org.springframework{/,}**"
+      ],
+      "allowedVersions": "/^6\\.2\\.[0-9]+$/"
     }
   ]
 }

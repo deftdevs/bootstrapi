@@ -297,6 +297,15 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Confluence API classes carry annotations referencing Spring transaction
+             classes; without them on the compile classpath, the compiler warns about
+             unknown enum constants -->
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-tx</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
         <!-- test dependencies -->
 
         <dependency>
@@ -343,6 +352,14 @@
             <scope>test</scope>
         </dependency>
 
+        <!-- routes Log4j API calls from provided Confluence dependencies to SLF4J
+             so tests do not complain about a missing Log4j provider -->
+        <dependency>
+            <groupId>org.apache.logging.log4j</groupId>
+            <artifactId>log4j-to-slf4j</artifactId>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -360,6 +377,11 @@
                     <productDataPath>${project.basedir}/src/test/resources/generated-test-resources.zip</productDataPath>
                     <allowGoogleTracking>false</allowGoogleTracking>
                     <enableQuickReload>true</enableQuickReload>
+                    <!-- dependencies must be extracted, not bundled as jars: REST provider
+                         scanning enumerates only the bundle's own entries, so e.g. the YAML
+                         MessageBodyWriter in bootstrapi-commons is not discovered when it sits
+                         in a nested Bundle-ClassPath jar (integration tests catch this) -->
+                    <extractDependencies>true</extractDependencies>
                     <!-- See here for an explanation of default instructions: -->
                     <!-- https://developer.atlassian.com/docs/advanced-topics/configuration-of-instructions-in-atlassian-plugins -->
                     <instructions>
@@ -369,6 +391,9 @@
                         </Import-Package>
                         <Export-Package />
                         <Spring-Context>*</Spring-Context>
+                        <!-- multi-release jar entries of extracted dependencies are fine
+                             but make bnd warn about classes in the wrong directory -->
+                        <_fixupmessages>"Classes found in the wrong directory";is:=ignore</_fixupmessages>
                     </instructions>
                 </configuration>
             </plugin>
@@ -408,7 +433,7 @@
                             <inputSpec>${project.build.directory}/openapi.yaml</inputSpec>
                             <generatorName>markdown</generatorName>
                             <output>${project.basedir}</output>
-                            <skipValidateSpec>true</skipValidateSpec>
+                            <skipValidateSpec>false</skipValidateSpec>
                             <additionalProperties>
                                 <additionalProperty>specDir=src/main/resources/openapi/specs/</additionalProperty>
                                 <additionalProperty>snippetDir=src/main/resources/openapi/snippets/</additionalProperty>

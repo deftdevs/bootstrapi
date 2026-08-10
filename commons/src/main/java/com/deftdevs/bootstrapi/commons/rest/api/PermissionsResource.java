@@ -22,8 +22,14 @@ public interface PermissionsResource {
             summary = "Get global permissions configuration",
             description = "Get the global permissions for ... TODO",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = PermissionsGlobalModel.class))),
-                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = PermissionsGlobalModel.class)),
+                            description = "Returns the global permissions configuration."
+                    ),
+                    @ApiResponse(
+                            responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    )
             }
     )
     Response getPermissionsGlobal();
@@ -37,8 +43,14 @@ public interface PermissionsResource {
             summary = "Set global permissions configuration",
             description = "Set the global permissions for ... TODO",
             responses = {
-                    @ApiResponse(responseCode = "200", content = @Content(schema = @Schema(implementation = PermissionsGlobalModel.class))),
-                    @ApiResponse(responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)))
+                    @ApiResponse(
+                            responseCode = "200", content = @Content(schema = @Schema(implementation = PermissionsGlobalModel.class)),
+                            description = "Returns the updated global permissions configuration."
+                    ),
+                    @ApiResponse(
+                            responseCode = "400", content = @Content(schema = @Schema(implementation = ErrorCollection.class)),
+                            description = "Returns a list of error messages."
+                    )
             }
     )
     Response setPermissionsGlobal(

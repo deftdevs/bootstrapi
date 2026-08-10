@@ -290,7 +290,11 @@
                     <ajpPort>${ajp.port}</ajpPort>
                     <allowGoogleTracking>false</allowGoogleTracking>
                     <enableQuickReload>true</enableQuickReload>
-                    <!-- <extractDependencies>false</extractDependencies> -->
+                    <!-- dependencies must be extracted, not bundled as jars: REST provider
+                         scanning enumerates only the bundle's own entries, so e.g. the YAML
+                         MessageBodyWriter in bootstrapi-commons is not discovered when it sits
+                         in a nested Bundle-ClassPath jar (integration tests catch this) -->
+                    <extractDependencies>true</extractDependencies>
                     <applications>
                         <application>
                             <applicationKey>jira-software</applicationKey>
@@ -310,6 +314,9 @@
                         </Import-Package>
                         <Export-Package />
                         <Spring-Context>*</Spring-Context>
+                        <!-- multi-release jar entries of extracted dependencies are fine
+                             but make bnd warn about classes in the wrong directory -->
+                        <_fixupmessages>"Classes found in the wrong directory";is:=ignore</_fixupmessages>
                     </instructions>
                 </configuration>
             </plugin>
@@ -349,7 +356,7 @@
                             <inputSpec>${project.build.directory}/openapi.yaml</inputSpec>
                             <generatorName>markdown</generatorName>
                             <output>${project.basedir}</output>
-                            <skipValidateSpec>true</skipValidateSpec>
+                            <skipValidateSpec>false</skipValidateSpec>
                             <additionalProperties>
                                 <additionalProperty>specDir=src/main/resources/openapi/specs/</additionalProperty>
                                 <additionalProperty>snippetDir=src/main/resources/openapi/snippets/</additionalProperty>
