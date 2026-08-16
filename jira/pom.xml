@@ -42,7 +42,7 @@
 
     <properties>
         <atlassian.plugin.key>${project.groupId}.${project.artifactId}</atlassian.plugin.key>
-        <jira.version>11.3.8</jira.version>
+        <jira.version>11.3.10</jira.version>
         <jira.data.version>11.3.8</jira.data.version>
         <ajp.port>8209</ajp.port>
     </properties>
