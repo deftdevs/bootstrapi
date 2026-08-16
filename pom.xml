@@ -82,7 +82,7 @@
         <sonar.test.exclusions>**/test/**/*Test.java,**/test/**/*IT.java</sonar.test.exclusions>
         <sonar.java.binaries>target/classes</sonar.java.binaries>
         <!-- other properties -->
-        <atlassian.amps.version>9.12.6</atlassian.amps.version>
+        <atlassian.amps.version>9.13.0</atlassian.amps.version>
         <!-- must match the platform version shipped by the products, see the product parent POMs
              (Confluence 10.2 and Jira 11.3 ship 8.3.21, Crowd 7.2 ships 8.3.19 - patch-level drift within 8.3.x is fine) -->
         <atlassian.platform.version>8.3.26</atlassian.platform.version>
