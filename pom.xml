@@ -96,7 +96,7 @@
         <maven.release-plugin.version>3.3.1</maven.release-plugin.version>
         <maven.resources-plugin.version>3.5.0</maven.resources-plugin.version>
         <maven.surefire-plugin.version>3.5.6</maven.surefire-plugin.version>
-        <openapi-generator.version>7.24.0</openapi-generator.version>
+        <openapi-generator.version>7.25.0</openapi-generator.version>
         <swagger.version>2.2.54</swagger.version>
         <!-- ... -->
         <hibernate-validator.version>8.0.5.Final</hibernate-validator.version>
