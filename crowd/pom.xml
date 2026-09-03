@@ -134,18 +134,6 @@
         </dependency>
 
         <dependency>
-            <groupId>com.atlassian.crowd</groupId>
-            <artifactId>crowd-rest-plugin</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.atlassian.scheduler</groupId>
-            <artifactId>atlassian-scheduler-api</artifactId>
-            <scope>provided</scope>
-        </dependency>
-
-        <dependency>
             <groupId>com.atlassian.plugins.rest</groupId>
             <artifactId>atlassian-rest-v2-api</artifactId>
             <scope>provided</scope>
