@@ -12,7 +12,7 @@ import com.atlassian.applinks.internal.common.exception.NoSuchApplinkException;
 import com.atlassian.applinks.internal.common.status.oauth.OAuthConfig;
 import com.atlassian.applinks.internal.status.error.SimpleApplinkError;
 import com.atlassian.applinks.internal.status.oauth.ApplinkOAuthStatus;
-import com.atlassian.applinks.spi.auth.AuthenticationConfigurationException;
+import com.atlassian.applinks.internal.common.exception.ConsumerInformationUnavailableException;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
 import com.atlassian.applinks.spi.util.TypeAccessor;
@@ -24,7 +24,6 @@ import com.deftdevs.bootstrapi.commons.model.util.ApplicationLinkModelUtil;
 import com.deftdevs.bootstrapi.commons.types.DefaultApplicationLink;
 import com.deftdevs.bootstrapi.commons.types.DefaultApplicationType;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -233,16 +232,18 @@ class DefaultApplicationLinkServiceTest {
     }
 
     @Test
-    @Disabled
     void testAddApplicationLinkWithAuthenticatorErrorIgnored() throws Exception {
         ApplicationLink applicationLink = createApplicationLink();
         ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();
+        applicationLinkModel.setIgnoreSetupErrors(true);
 
         doReturn(applicationLink).when(mutatingApplicationLinkService).createApplicationLink(
                 any(ApplicationType.class), any(ApplicationLinkDetails.class));
         doReturn(applicationLink).when(mutatingApplicationLinkService).getPrimaryApplicationLink(any());
         doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
-        doThrow(new AuthenticationConfigurationException("")).when(mutatingApplicationLinkService).configureAuthenticationForApplicationLink(any(), any(), any(), any());
+        doThrow(new ConsumerInformationUnavailableException("")).when(applicationLinksAuthConfigHelper).setIncomingOAuthConfig(any(), any());
+        doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getOutgoingOAuthConfig(any());
+        doReturn(OAuthConfig.createDisabledConfig()).when(applicationLinksAuthConfigHelper).getIncomingOAuthConfig(any());
         doReturn(createApplinkStatus(applicationLink, CONFIGURATION_ERROR)).when(applinkStatusService).getApplinkStatus(any());
 
         ApplicationLinkModel applicationLinkResponse = applicationLinkService.addApplicationLink(applicationLinkModel);
@@ -252,8 +253,7 @@ class DefaultApplicationLinkServiceTest {
     }
 
     @Test
-    @Disabled
-    void testAddApplicationLinkWithAuthenticatorErrorNOTIgnored() throws Exception {
+    void testAddApplicationLinkWithAuthenticatorErrorNotIgnored() throws Exception {
         ApplicationLink applicationLink = createApplicationLink();
         ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();
 
@@ -261,9 +261,9 @@ class DefaultApplicationLinkServiceTest {
                 any(ApplicationType.class), any(ApplicationLinkDetails.class));
         doReturn(applicationLink).when(mutatingApplicationLinkService).getPrimaryApplicationLink(any());
         doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
-        doThrow(new AuthenticationConfigurationException("")).when(mutatingApplicationLinkService).configureAuthenticationForApplicationLink(any(), any(), any(), any());
+        doThrow(new ConsumerInformationUnavailableException("")).when(applicationLinksAuthConfigHelper).setIncomingOAuthConfig(any(), any());
 
-        Exception exception = assertThrows(BadRequestException.class, () -> {
+        assertThrows(BadRequestException.class, () -> {
             applicationLinkService.addApplicationLink(applicationLinkModel);
         });
     }
