@@ -37,6 +37,7 @@ import static com.deftdevs.bootstrapi.crowd.model.ApplicationModel.EXAMPLE_2;
 import static com.deftdevs.bootstrapi.crowd.model.util.ApplicationModelUtil.toApplication;
 import static com.deftdevs.bootstrapi.crowd.model.util.ApplicationModelUtil.toStringCollection;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -130,6 +131,41 @@ public class ApplicationsServiceTest {
         verify(spy).persistApplicationDirectoryMappings(any(), any());
         verify(spy).persistApplicationModelAuthenticationGroups(any(), any());
         verify(spy).persistApplicationModelAutoAssignmentGroups(any(), any());
+    }
+
+    @Test
+    public void testAddApplicationWithoutPasswordGeneratesRandomPassword() throws InvalidCredentialException, ApplicationAlreadyExistsException, ApplicationNotFoundException {
+        final ApplicationModel applicationModel = ApplicationModel.builder()
+                .name("No Password")
+                .type(ApplicationModel.ApplicationType.GENERIC)
+                .build();
+        final Application application = ImmutableApplication.builder(toApplication(applicationModel)).setId(200L).build();
+        doReturn(application).when(applicationManager).add(any(Application.class));
+        doReturn(application).when(applicationManager).findById(application.getId());
+
+        final ArgumentCaptor<Application> applicationCaptor = ArgumentCaptor.forClass(Application.class);
+        applicationsService.addApplication(applicationModel);
+        verify(applicationManager).add(applicationCaptor.capture());
+        final Application addedApplication = applicationCaptor.getValue();
+
+        assertNotNull(addedApplication.getCredential());
+        assertNotNull(addedApplication.getCredential().getCredential());
+        assertFalse(addedApplication.getCredential().getCredential().isEmpty());
+        assertFalse(addedApplication.getCredential().isEncryptedCredential());
+        assertEquals(applicationModel.getName(), addedApplication.getName());
+    }
+
+    @Test
+    public void testAddApplicationWithPasswordKeepsPassword() throws InvalidCredentialException, ApplicationAlreadyExistsException, ApplicationNotFoundException {
+        final Application application = toApplication(EXAMPLE_1);
+        doReturn(application).when(applicationManager).add(any(Application.class));
+        doReturn(application).when(applicationManager).findById(application.getId());
+
+        final ArgumentCaptor<Application> applicationCaptor = ArgumentCaptor.forClass(Application.class);
+        applicationsService.addApplication(EXAMPLE_1);
+        verify(applicationManager).add(applicationCaptor.capture());
+
+        assertEquals(EXAMPLE_1.getPassword(), applicationCaptor.getValue().getCredential().getCredential());
     }
 
     @Test
