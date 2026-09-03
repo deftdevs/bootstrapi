@@ -10,6 +10,7 @@ import com.atlassian.crowd.manager.application.DefaultGroupMembershipService;
 import com.atlassian.crowd.manager.directory.DirectoryManager;
 import com.atlassian.crowd.model.application.Application;
 import com.atlassian.crowd.model.application.ApplicationDirectoryMapping;
+import com.atlassian.crowd.model.application.ImmutableApplication;
 import com.atlassian.crowd.model.application.ImmutableApplicationDirectoryMapping;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
 import com.deftdevs.bootstrapi.commons.exception.web.InternalServerErrorException;
@@ -19,11 +20,14 @@ import com.deftdevs.bootstrapi.crowd.model.util.ApplicationModelUtil;
 import com.deftdevs.bootstrapi.crowd.service.api.ApplicationsService;
 
 import javax.annotation.Nonnull;
+import java.security.SecureRandom;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 
 public class ApplicationsServiceImpl implements ApplicationsService {
+
+    private static final SecureRandom SECURE_RANDOM = new SecureRandom();
 
     private final ApplicationManager applicationManager;
     private final DefaultGroupMembershipService defaultGroupMembershipService;
@@ -101,7 +105,7 @@ public class ApplicationsServiceImpl implements ApplicationsService {
             final ApplicationModel applicationModel) {
 
         try {
-            final Application createdApplication = applicationManager.add(ApplicationModelUtil.toApplication(applicationModel));
+            final Application createdApplication = applicationManager.add(withPasswordIfMissing(ApplicationModelUtil.toApplication(applicationModel)));
             persistApplicationDirectoryMappings(createdApplication, applicationModel);
             persistApplicationModelAuthenticationGroups(createdApplication, applicationModel);
             persistApplicationModelAutoAssignmentGroups(createdApplication, applicationModel);
@@ -161,6 +165,27 @@ public class ApplicationsServiceImpl implements ApplicationsService {
         } catch (ApplicationManagerException e) {
             throw new InternalServerErrorException(e);
         }
+    }
+
+    /**
+     * Crowd refuses to create an application without a password. To allow creating applications
+     * declaratively without specifying a password, a random one is generated in that case.
+     * It can be replaced later by setting the password explicitly.
+     */
+    static Application withPasswordIfMissing(
+            final Application application) {
+
+        if (application.getCredential() != null) {
+            return application;
+        }
+
+        final byte[] randomBytes = new byte[32];
+        SECURE_RANDOM.nextBytes(randomBytes);
+        final String randomPassword = Base64.getEncoder().withoutPadding().encodeToString(randomBytes);
+
+        return ImmutableApplication.builder(application)
+                .setPasswordCredential(PasswordCredential.unencrypted(randomPassword))
+                .build();
     }
 
     void persistApplicationDirectoryMappings(
