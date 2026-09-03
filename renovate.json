@@ -3,6 +3,7 @@
   "extends": [
     "config:recommended"
   ],
+  "baseBranchPatterns": ["$default", "/^release\\/.*/"],
   "minimumReleaseAge": "7 days",
   "platformAutomerge": true,
   "prConcurrentLimit": 0,
@@ -29,6 +30,7 @@
       "matchPackageNames": [
         "com.atlassian.confluence{/,}**"
       ],
+      "matchBaseBranches": ["main"],
       "allowedVersions": "/^10\\.2\\.[0-9]+$/"
     },
     {
@@ -36,6 +38,7 @@
       "matchPackageNames": [
         "com.atlassian.jira{/,}**"
       ],
+      "matchBaseBranches": ["main"],
       "allowedVersions": "/^11\\.3\\.[0-9]+$/"
     },
     {
@@ -43,6 +46,7 @@
       "matchPackageNames": [
         "com.atlassian.crowd{/,}**"
       ],
+      "matchBaseBranches": ["main"],
       "allowedVersions": "/^7\\.2\\.[0-9]+$/"
     },
     {
@@ -50,6 +54,7 @@
       "matchPackageNames": [
         "com.atlassian.platform.dependencies{/,}**"
       ],
+      "matchBaseBranches": ["main"],
       "allowedVersions": "/^8\\.3\\.[0-9]+$/"
     },
     {
@@ -57,6 +62,7 @@
       "matchPackageNames": [
         "com.fasterxml.jackson{/,}**"
       ],
+      "matchBaseBranches": ["main"],
       "allowedVersions": "/^2\\.21\\.[0-9]+$/"
     },
     {
@@ -64,18 +70,21 @@
       "matchPackageNames": [
         "org.glassfish.jersey.core:jersey-common"
       ],
+      "matchBaseBranches": ["main"],
       "allowedVersions": "/^3\\.1\\.[0-9]+$/"
     },
     {
       "matchPackageNames": [
         "org.hibernate.validator{/,}**"
       ],
+      "matchBaseBranches": ["main"],
       "allowedVersions": "/^8\\..*/"
     },
     {
       "matchPackageNames": [
         "org.glassfish:jakarta.el"
       ],
+      "matchBaseBranches": ["main"],
       "allowedVersions": "/^4\\.[0-9.]+$/"
     },
     {
@@ -83,6 +92,7 @@
       "matchPackageNames": [
         "org.slf4j{/,}**"
       ],
+      "matchBaseBranches": ["main"],
       "allowedVersions": "/^2\\.0\\.[0-9]+$/"
     },
     {
@@ -90,6 +100,7 @@
       "matchPackageNames": [
         "org.apache.logging.log4j{/,}**"
       ],
+      "matchBaseBranches": ["main"],
       "allowedVersions": "/^2\\.[0-9.]+$/"
     },
     {
@@ -97,7 +108,70 @@
       "matchPackageNames": [
         "org.springframework{/,}**"
       ],
+      "matchBaseBranches": ["main"],
       "allowedVersions": "/^6\\.2\\.[0-9]+$/"
+    },
+    {
+      "description": "Release 1.x keeps Confluence on the 9.5 line (patch updates only)",
+      "matchBaseBranches": ["release/1.x"],
+      "matchPackageNames": [
+        "com.atlassian.confluence{/,}**"
+      ],
+      "allowedVersions": "/^9\\.5\\.[0-9]+$/"
+    },
+    {
+      "description": "Release 1.x keeps Jira on the 10.7 line (patch updates only)",
+      "matchBaseBranches": ["release/1.x"],
+      "matchPackageNames": [
+        "com.atlassian.jira{/,}**"
+      ],
+      "allowedVersions": "/^10\\.7\\.[0-9]+$/"
+    },
+    {
+      "description": "Release 1.x keeps Crowd on the 6.3 line (patch updates only)",
+      "matchBaseBranches": ["release/1.x"],
+      "matchPackageNames": [
+        "com.atlassian.crowd{/,}**"
+      ],
+      "allowedVersions": "/^6\\.3\\.[0-9]+$/"
+    },
+    {
+      "description": "Release 1.x products ship platform 7.3",
+      "matchBaseBranches": ["release/1.x"],
+      "matchPackageNames": [
+        "com.atlassian.platform.dependencies{/,}**"
+      ],
+      "allowedVersions": "/^7\\.3\\.[0-9]+$/"
+    },
+    {
+      "description": "Release 1.x products ship Jackson 2.21",
+      "matchBaseBranches": ["release/1.x"],
+      "matchPackageNames": [
+        "com.fasterxml.jackson{/,}**"
+      ],
+      "allowedVersions": "/^2\\.21\\.[0-9]+$/"
+    },
+    {
+      "description": "Release 1.x test stack mirrors platform 7.3: Jersey 2, Bean Validation 2.0 (Hibernate Validator 6) and EL 3.0 (Glassfish EL 3)",
+      "matchBaseBranches": ["release/1.x"],
+      "matchPackageNames": [
+        "org.glassfish.jersey.core:jersey-common"
+      ],
+      "allowedVersions": "/^2\\.[0-9.]+$/"
+    },
+    {
+      "matchBaseBranches": ["release/1.x"],
+      "matchPackageNames": [
+        "org.hibernate.validator{/,}**"
+      ],
+      "allowedVersions": "/^6\\..*/"
+    },
+    {
+      "matchBaseBranches": ["release/1.x"],
+      "matchPackageNames": [
+        "org.glassfish:jakarta.el"
+      ],
+      "allowedVersions": "/^3\\.[0-9.]+$/"
     }
   ]
 }
