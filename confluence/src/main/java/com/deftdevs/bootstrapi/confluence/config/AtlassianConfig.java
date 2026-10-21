@@ -19,6 +19,8 @@ import com.atlassian.oauth.consumer.ConsumerService;
 import com.atlassian.oauth.consumer.ConsumerTokenStore;
 import com.atlassian.oauth.serviceprovider.ServiceProviderConsumerStore;
 import com.atlassian.oauth.serviceprovider.ServiceProviderTokenStore;
+import com.atlassian.plugin.PluginAccessor;
+import com.atlassian.plugin.PluginController;
 import com.atlassian.plugins.authentication.api.config.IdpConfigService;
 import com.atlassian.plugins.authentication.api.config.SsoConfigService;
 import com.atlassian.sal.api.ApplicationProperties;
@@ -111,6 +113,16 @@ public class AtlassianConfig {
     @Bean
     public PermissionManager permissionManager() {
         return importOsgiService(PermissionManager.class);
+    }
+
+    @Bean
+    public PluginAccessor pluginAccessor() {
+        return importOsgiService(PluginAccessor.class);
+    }
+
+    @Bean
+    public PluginController pluginController() {
+        return importOsgiService(PluginController.class);
     }
 
     @Bean

@@ -1,5 +1,6 @@
 package com.deftdevs.bootstrapi.confluence.config;
 
+import com.deftdevs.bootstrapi.commons.service.DefaultUpmServiceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.*;
 import com.deftdevs.bootstrapi.confluence.model._AllModel;
 import com.deftdevs.bootstrapi.confluence.service.*;
@@ -28,7 +29,8 @@ public class ServiceConfig {
                 confluenceAuthenticationService(),
                 licensesService(),
                 mailServerService(),
-                permissionsService());
+                permissionsService(),
+                upmService());
     }
 
     @Bean
@@ -87,6 +89,13 @@ public class ServiceConfig {
     public PermissionsService permissionsService() {
         return new PermissionsServiceImpl(
                 atlassianConfig.spacePermissionManager());
+    }
+
+    @Bean
+    public UpmService upmService() {
+        return new DefaultUpmServiceImpl(
+                atlassianConfig.pluginAccessor(),
+                atlassianConfig.pluginController());
     }
 
     @Bean

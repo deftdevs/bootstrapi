@@ -14,6 +14,8 @@ import com.atlassian.oauth.consumer.ConsumerService;
 import com.atlassian.oauth.consumer.ConsumerTokenStore;
 import com.atlassian.oauth.serviceprovider.ServiceProviderConsumerStore;
 import com.atlassian.oauth.serviceprovider.ServiceProviderTokenStore;
+import com.atlassian.plugin.PluginAccessor;
+import com.atlassian.plugin.PluginController;
 import com.atlassian.plugins.authentication.api.config.IdpConfigService;
 import com.atlassian.plugins.authentication.api.config.SsoConfigService;
 import com.atlassian.sal.api.pluginsettings.PluginSettingsFactory;
@@ -83,6 +85,16 @@ public class AtlassianConfig {
     @Bean
     public MutatingApplicationLinkService mutatingApplicationLinkService() {
         return importOsgiService(MutatingApplicationLinkService.class);
+    }
+
+    @Bean
+    public PluginAccessor pluginAccessor() {
+        return importOsgiService(PluginAccessor.class);
+    }
+
+    @Bean
+    public PluginController pluginController() {
+        return importOsgiService(PluginController.class);
     }
 
     @Bean
