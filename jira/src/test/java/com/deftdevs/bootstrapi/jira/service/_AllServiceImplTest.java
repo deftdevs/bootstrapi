@@ -3,6 +3,7 @@ package com.deftdevs.bootstrapi.jira.service;
 import com.deftdevs.bootstrapi.commons.model.AbstractDirectoryModel;
 import com.deftdevs.bootstrapi.commons.model.ApplicationLinkModel;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationModel;
+import com.deftdevs.bootstrapi.commons.model.CloudConnectorModel;
 import com.deftdevs.bootstrapi.commons.model.LicenseModel;
 import com.deftdevs.bootstrapi.commons.model.MailServerModel;
 import com.deftdevs.bootstrapi.commons.model.MailServerSmtpModel;
@@ -15,6 +16,7 @@ import com.deftdevs.bootstrapi.commons.util.FieldNames;
 import com.deftdevs.bootstrapi.commons.util.LicenseKeyRedactor;
 import com.deftdevs.bootstrapi.commons.model.type._AllModelStatus;
 import com.deftdevs.bootstrapi.commons.service.api.ApplicationLinksService;
+import com.deftdevs.bootstrapi.commons.service.api.CloudConnectorService;
 import com.deftdevs.bootstrapi.commons.service.api.DirectoriesService;
 import com.deftdevs.bootstrapi.commons.service.api.LicensesService;
 import com.deftdevs.bootstrapi.commons.service.api.MailServerService;
@@ -55,6 +57,9 @@ class _AllServiceImplTest {
     private ApplicationLinksService applicationLinksService;
 
     @Mock
+    private CloudConnectorService cloudConnectorService;
+
+    @Mock
     private JiraAuthenticationService authenticationService;
 
     @Mock
@@ -74,6 +79,7 @@ class _AllServiceImplTest {
                 settingsService,
                 directoriesService,
                 applicationLinksService,
+                cloudConnectorService,
                 authenticationService,
                 licensesService,
                 mailServerService,
@@ -85,7 +91,7 @@ class _AllServiceImplTest {
         final _AllModel result = allService.setAll(new _AllModel());
 
         assertTrue(result.getStatus().isEmpty());
-        verifyNoInteractions(settingsService, directoriesService, applicationLinksService,
+        verifyNoInteractions(settingsService, directoriesService, applicationLinksService, cloudConnectorService,
                 authenticationService, licensesService, mailServerService, permissionsService);
     }
 
@@ -97,6 +103,7 @@ class _AllServiceImplTest {
                 Collections.singletonMap("directory", mock(AbstractDirectoryModel.class));
         final Map<String, ApplicationLinkModel> applicationLinks =
                 Collections.singletonMap("link", ApplicationLinkModel.EXAMPLE_1);
+        final CloudConnectorModel cloudConnector = CloudConnectorModel.EXAMPLE_1;
         final AuthenticationModel authentication = new AuthenticationModel();
         final Map<String, LicenseModel> licenses =
                 Collections.singletonMap("licenseKey", LicenseModel.EXAMPLE_1);
@@ -110,6 +117,7 @@ class _AllServiceImplTest {
                 .when(settingsService).setSettings(settings);
         doReturn(directories).when(directoriesService).setDirectories(directories);
         doReturn(applicationLinks).when(applicationLinksService).setApplicationLinks(applicationLinks);
+        doReturn(cloudConnector).when(cloudConnectorService).setCloudConnector(cloudConnector);
         doReturn(new ServiceResult<>(authentication,
                 Collections.singletonMap(FieldNames.of(AuthenticationModel.class, AuthenticationSsoModel.class), _AllModelStatus.success())))
                 .when(authenticationService).setAuthentication(authentication);
@@ -125,6 +133,7 @@ class _AllServiceImplTest {
         allModel.setSettings(settings);
         allModel.setDirectories(directories);
         allModel.setApplicationLinks(applicationLinks);
+        allModel.setCloudConnector(cloudConnector);
         allModel.setAuthentication(authentication);
         allModel.setLicenses(licenses);
         allModel.setMailServer(mailServer);
@@ -135,16 +144,18 @@ class _AllServiceImplTest {
         assertEquals(settings, result.getSettings());
         assertEquals(directories, result.getDirectories());
         assertEquals(applicationLinks, result.getApplicationLinks());
+        assertEquals(cloudConnector, result.getCloudConnector());
         assertEquals(authentication, result.getAuthentication());
         assertEquals(redactedLicenses, result.getLicenses());
         assertEquals(mailServer, result.getMailServer());
         assertEquals(permissions, result.getPermissions());
 
         final Map<String, _AllModelStatus> status = result.getStatus();
-        assertEquals(7, status.size());
+        assertEquals(8, status.size());
         assertEquals(200, status.get(FieldNames.pathOf(_AllModel.class, SettingsGeneralModel.class)).getStatus());
         assertEquals(200, status.get(FieldNames.of(_AllModel.class, AbstractDirectoryModel.class)).getStatus());
         assertEquals(200, status.get(FieldNames.of(_AllModel.class, ApplicationLinkModel.class)).getStatus());
+        assertEquals(200, status.get(FieldNames.of(_AllModel.class, CloudConnectorModel.class)).getStatus());
         assertEquals(200, status.get(FieldNames.pathOf(_AllModel.class, AuthenticationSsoModel.class)).getStatus());
         assertEquals(200, status.get(FieldNames.of(_AllModel.class, LicenseModel.class)).getStatus());
         assertEquals(200, status.get(FieldNames.pathOf(_AllModel.class, MailServerSmtpModel.class)).getStatus());

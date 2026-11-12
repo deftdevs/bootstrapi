@@ -59,6 +59,12 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
 
     private static final String NOT_FOUND_MESSAGE = "Application link with ID '%s' was not found!";
 
+    // applinks marks the links it manages for cloud connections (the cloud connector,
+    // cloud product connections and application tunnels) with this property. Like
+    // in the applinks REST API, these links are not exposed as application links, so
+    // they can neither be read, changed nor deleted (and thus broken) here.
+    private static final String PROPERTY_UNICONN = "uniconn";
+
     private final MutatingApplicationLinkService mutatingApplicationLinkService;
 
     private final ApplinkStatusService applinkStatusService;
@@ -84,6 +90,7 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
         final Iterable<ApplicationLink> applicationLinksIterable = mutatingApplicationLinkService.getApplicationLinks();
 
         return StreamSupport.stream(applicationLinksIterable.spliterator(),false)
+                .filter(applicationLink -> !isUniconnApplicationLink(applicationLink))
                 .map(this::getApplicationLinkModel)
                 .collect(Collectors.toMap(ApplicationLinkModel::getName, Function.identity()));
     }
@@ -97,7 +104,7 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
         try {
             final MutableApplicationLink applicationLink = mutatingApplicationLinkService.getApplicationLink(id);
 
-            if (applicationLink == null) {
+            if (applicationLink == null || isUniconnApplicationLink(applicationLink)) {
                 throw new NotFoundException(String.format(NOT_FOUND_MESSAGE, id));
             }
 
@@ -155,6 +162,10 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
 
         try {
             applicationLink = mutatingApplicationLinkService.getApplicationLink(applicationId);
+
+            if (applicationLink != null && isUniconnApplicationLink(applicationLink)) {
+                throw new NotFoundException(String.format(NOT_FOUND_MESSAGE, applicationId));
+            }
         } catch (TypeNotInstalledException e) {
             // a valid link whose type module is just not installed must not be purged
             if (!isCorrupted(e)) {
@@ -266,6 +277,10 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
             throw new BadRequestException("'force = true' must be supplied to delete all entries");
         } else {
             for (ApplicationLink applicationLink : mutatingApplicationLinkService.getApplicationLinks()) {
+                if (isUniconnApplicationLink(applicationLink)) {
+                    continue;
+                }
+
                 mutatingApplicationLinkService.deleteApplicationLink(applicationLink);
             }
         }
@@ -277,7 +292,7 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
         try {
             MutableApplicationLink applicationLink = mutatingApplicationLinkService.getApplicationLink(applicationId);
 
-            if (applicationLink == null) {
+            if (applicationLink == null || isUniconnApplicationLink(applicationLink)) {
                 throw new NotFoundException(String.format(NOT_FOUND_MESSAGE, applicationId));
             }
 
@@ -313,6 +328,10 @@ public class DefaultApplicationLinksServiceImpl implements ApplicationLinksServi
         } catch (Exception restoreException) {
             log.error("Failed to restore application link '{}' after its recreation failed; the link may be corrupted now", applicationId, restoreException);
         }
+    }
+
+    private static boolean isUniconnApplicationLink(final ApplicationLink applicationLink) {
+        return Boolean.parseBoolean(String.valueOf(applicationLink.getProperty(PROPERTY_UNICONN)));
     }
 
     private static boolean isCorrupted(final TypeNotInstalledException e) {

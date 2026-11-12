@@ -46,6 +46,8 @@ The startup configuration is cluster-safe: only one node applies the file at a t
 
 A configuration that cannot be read, parsed or fully applied stops the application, so an instance never comes up with a configuration it could not reach - in a rolling deployment this blocks the rollout instead of hiding the failure. Since only successful applies are recorded, the configuration is retried when the instance is started again.
 
+The `cloudConnector` (Jira and Confluence) cannot be part of the startup configuration. The application links plugin records the user who created the connector, so it can only be set through an authenticated REST request.
+
 ## Installation
 
 Download the plugin for your product from the [releases](https://github.com/deftdevs/bootstrapi/releases) and upload it in the product's administration under *Manage apps* → *Upload app*. The endpoints require a user with system administrator permissions.

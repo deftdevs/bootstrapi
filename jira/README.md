@@ -19,6 +19,9 @@ All URIs are relative to *https://JIRA_URL/rest/bootstrapi/1*
 *AuthenticationApi* | [**getAuthenticationSso**](Apis/AuthenticationApi.md#getAuthenticationSso) | **GET** /authentication/sso | Get authentication SSO configuration |
 *AuthenticationApi* | [**setAuthenticationIdps**](Apis/AuthenticationApi.md#setAuthenticationIdps) | **PATCH** /authentication/idps | Set all authentication identity providers |
 *AuthenticationApi* | [**setAuthenticationSso**](Apis/AuthenticationApi.md#setAuthenticationSso) | **PATCH** /authentication/sso | Set authentication SSO configuration |
+| *CloudConnectorApi* | [**deleteCloudConnector**](Apis/CloudConnectorApi.md#deleteCloudConnector) | **DELETE** /cloud-connector | Disable the cloud connector |
+*CloudConnectorApi* | [**getCloudConnector**](Apis/CloudConnectorApi.md#getCloudConnector) | **GET** /cloud-connector | Get the cloud connector |
+*CloudConnectorApi* | [**setCloudConnector**](Apis/CloudConnectorApi.md#setCloudConnector) | **PUT** /cloud-connector | Set the cloud connector |
 | *DirectoriesApi* | [**deleteDirectories**](Apis/DirectoriesApi.md#deleteDirectories) | **DELETE** /directories | Delete all user directories |
 *DirectoriesApi* | [**getDirectories**](Apis/DirectoriesApi.md#getDirectories) | **GET** /directories | Get all user directories |
 *DirectoriesApi* | [**setDirectories**](Apis/DirectoriesApi.md#setDirectories) | **PUT** /directories | Set directories mapped by their name. |
@@ -58,6 +61,7 @@ All URIs are relative to *https://JIRA_URL/rest/bootstrapi/1*
  - [AuthenticationIdpSamlModel](./Models/AuthenticationIdpSamlModel.md)
  - [AuthenticationModel](./Models/AuthenticationModel.md)
  - [AuthenticationSsoModel](./Models/AuthenticationSsoModel.md)
+ - [CloudConnectorModel](./Models/CloudConnectorModel.md)
  - [DirectoryCrowdAdvanced](./Models/DirectoryCrowdAdvanced.md)
  - [DirectoryCrowdModel](./Models/DirectoryCrowdModel.md)
  - [DirectoryCrowdPermissions](./Models/DirectoryCrowdPermissions.md)
