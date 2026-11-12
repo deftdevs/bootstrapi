@@ -133,6 +133,18 @@
         </dependency>
 
         <dependency>
+            <groupId>com.atlassian.oauth2</groupId>
+            <artifactId>oauth2-client-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.atlassian.plugins.authentication</groupId>
             <artifactId>atlassian-authentication-plugin-api</artifactId>
             <scope>provided</scope>

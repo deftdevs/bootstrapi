@@ -10,6 +10,7 @@
 | **mailServer** | [**MailServerModel**](MailServerModel.md) |  | [optional] [default to null] |
 | **status** | [**Map**](_AllModelStatus.md) |  | [optional] [default to null] |
 | **authentication** | [**AuthenticationModel**](AuthenticationModel.md) |  | [optional] [default to null] |
+| **cloudConnector** | [**CloudConnectorModel**](CloudConnectorModel.md) |  | [optional] [default to null] |
 | **permissions** | [**PermissionsModel**](PermissionsModel.md) |  | [optional] [default to null] |
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -20,6 +20,7 @@ public class BootstrAPI {
     public static final String CACHES                       = "caches";
     public static final String CACHE_FLUSH                  = "flush";
     public static final String CLOUD                        = "cloud";
+    public static final String CLOUD_CONNECTOR              = "cloud-connector";
     public static final String CLOUD_TUNNEL                 = "tunnel";
     public static final String COLOR_SCHEME                 = "color-scheme";
     public static final String DIRECTORIES                  = "directories";
