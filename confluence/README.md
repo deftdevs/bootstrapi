@@ -23,6 +23,9 @@ All URIs are relative to *https://CONFLUENCE_URL/rest/bootstrapi/1*
 *CachesApi* | [**getCache**](Apis/CachesApi.md#getCache) | **GET** /caches/{name} | Read cache information for a specified cache |
 *CachesApi* | [**getCaches**](Apis/CachesApi.md#getCaches) | **GET** /caches | Read all cache information |
 *CachesApi* | [**updateCache**](Apis/CachesApi.md#updateCache) | **PUT** /caches/{name} | Update an existing cache-size. Only Setting maxObjectCount is supported. |
+| *CloudConnectorApi* | [**deleteCloudConnector**](Apis/CloudConnectorApi.md#deleteCloudConnector) | **DELETE** /cloud-connector | Disable the cloud connector |
+*CloudConnectorApi* | [**getCloudConnector**](Apis/CloudConnectorApi.md#getCloudConnector) | **GET** /cloud-connector | Get the cloud connector |
+*CloudConnectorApi* | [**setCloudConnector**](Apis/CloudConnectorApi.md#setCloudConnector) | **PUT** /cloud-connector | Set the cloud connector |
 | *DirectoriesApi* | [**deleteDirectories**](Apis/DirectoriesApi.md#deleteDirectories) | **DELETE** /directories | Delete all user directories |
 *DirectoriesApi* | [**getDirectories**](Apis/DirectoriesApi.md#getDirectories) | **GET** /directories | Get all user directories |
 *DirectoriesApi* | [**setDirectories**](Apis/DirectoriesApi.md#setDirectories) | **PUT** /directories | Set directories mapped by their name. |
@@ -72,6 +75,7 @@ All URIs are relative to *https://CONFLUENCE_URL/rest/bootstrapi/1*
  - [AuthenticationModel](./Models/AuthenticationModel.md)
  - [AuthenticationSsoModel](./Models/AuthenticationSsoModel.md)
  - [CacheModel](./Models/CacheModel.md)
+ - [CloudConnectorModel](./Models/CloudConnectorModel.md)
  - [DirectoryCrowdAdvanced](./Models/DirectoryCrowdAdvanced.md)
  - [DirectoryCrowdModel](./Models/DirectoryCrowdModel.md)
  - [DirectoryCrowdPermissions](./Models/DirectoryCrowdPermissions.md)
