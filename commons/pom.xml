@@ -5,7 +5,7 @@
     <parent>
         <groupId>com.deftdevs</groupId>
         <artifactId>bootstrapi-parent</artifactId>
-        <version>2.0.1-SNAPSHOT</version>
+        <version>2.1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>bootstrapi-commons</artifactId>
@@ -97,6 +97,31 @@
         <dependency>
             <groupId>com.atlassian.applinks</groupId>
             <artifactId>applinks-plugin</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.oauth2</groupId>
+            <artifactId>oauth2-client-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- bundled by the product plugins that import the shared configurations -->
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-osgi-javaconfig</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
             <scope>provided</scope>
         </dependency>
 
@@ -237,6 +262,13 @@
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-common</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- required to mock SAL's UserManager, which references servlet types -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <scope>test</scope>
         </dependency>
 

@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.deftdevs</groupId>
         <artifactId>bootstrapi-parent</artifactId>
-        <version>2.0.1-SNAPSHOT</version>
+        <version>2.1.0-SNAPSHOT</version>
     </parent>
 
     <artifactId>bootstrapi-confluence-plugin</artifactId>
@@ -150,6 +150,18 @@
         <dependency>
             <groupId>com.atlassian.crowd</groupId>
             <artifactId>embedded-crowd-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.oauth2</groupId>
+            <artifactId>oauth2-client-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-api</artifactId>
             <scope>provided</scope>
         </dependency>
 

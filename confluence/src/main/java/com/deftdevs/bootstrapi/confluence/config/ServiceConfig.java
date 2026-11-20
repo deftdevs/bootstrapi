@@ -1,23 +1,25 @@
 package com.deftdevs.bootstrapi.confluence.config;
 
+import com.deftdevs.bootstrapi.commons.config.CloudConnectorConfig;
 import com.deftdevs.bootstrapi.commons.service.api.*;
 import com.deftdevs.bootstrapi.confluence.model._AllModel;
 import com.deftdevs.bootstrapi.confluence.service.*;
 import com.deftdevs.bootstrapi.confluence.service.api.CachesService;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceAuthenticationService;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@RequiredArgsConstructor
 public class ServiceConfig {
 
-    @Autowired
-    private AtlassianConfig atlassianConfig;
+    private final AtlassianConfig atlassianConfig;
 
-    @Autowired
-    private HelperConfig helperConfig;
+    private final CloudConnectorConfig cloudConnectorConfig;
+
+    private final HelperConfig helperConfig;
 
     @Bean
     public _AllService<_AllModel> _allService() {
@@ -25,6 +27,7 @@ public class ServiceConfig {
                 confluenceSettingsService(),
                 directoriesService(),
                 applicationLinksService(),
+                cloudConnectorConfig.cloudConnectorService(),
                 confluenceAuthenticationService(),
                 licensesService(),
                 mailServerService(),

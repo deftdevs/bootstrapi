@@ -3,6 +3,7 @@ package com.deftdevs.bootstrapi.confluence.model;
 import com.deftdevs.bootstrapi.commons.constants.BootstrAPI;
 import com.deftdevs.bootstrapi.commons.model._AbstractAllModel;
 import com.deftdevs.bootstrapi.commons.model.AuthenticationModel;
+import com.deftdevs.bootstrapi.commons.model.CloudConnectorModel;
 import com.deftdevs.bootstrapi.commons.model.PermissionsModel;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -21,6 +22,9 @@ public class _AllModel extends _AbstractAllModel<SettingsModel> {
 
     @XmlElement
     private AuthenticationModel authentication;
+
+    @XmlElement
+    private CloudConnectorModel cloudConnector;
 
     @XmlElement
     private PermissionsModel permissions;

@@ -1,22 +1,24 @@
 package com.deftdevs.bootstrapi.jira.config;
 
+import com.deftdevs.bootstrapi.commons.config.CloudConnectorConfig;
 import com.deftdevs.bootstrapi.commons.service.api.*;
 import com.deftdevs.bootstrapi.jira.model._AllModel;
 import com.deftdevs.bootstrapi.jira.service.*;
 import com.deftdevs.bootstrapi.jira.service.api.JiraAuthenticationService;
 import com.deftdevs.bootstrapi.jira.service.api.JiraSettingsService;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
+@RequiredArgsConstructor
 public class ServiceConfig {
 
-    @Autowired
-    private AtlassianConfig atlassianConfig;
+    private final AtlassianConfig atlassianConfig;
 
-    @Autowired
-    private HelperConfig helperConfig;
+    private final CloudConnectorConfig cloudConnectorConfig;
+
+    private final HelperConfig helperConfig;
 
     @Bean
     public _AllService<_AllModel> _allService() {
@@ -24,6 +26,7 @@ public class ServiceConfig {
                 jiraSettingsService(),
                 directoriesService(),
                 applicationLinksService(),
+                cloudConnectorConfig.cloudConnectorService(),
                 jiraAuthenticationService(),
                 licensesService(),
                 mailServerService(),
