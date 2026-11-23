@@ -1,11 +1,13 @@
 package com.deftdevs.bootstrapi.confluence.config;
 
+import com.deftdevs.bootstrapi.commons.service.DefaultCloudTunnelServiceImpl;
 import com.deftdevs.bootstrapi.commons.service.api.*;
 import com.deftdevs.bootstrapi.confluence.model._AllModel;
 import com.deftdevs.bootstrapi.confluence.service.*;
 import com.deftdevs.bootstrapi.confluence.service.api.CachesService;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceAuthenticationService;
 import com.deftdevs.bootstrapi.confluence.service.api.ConfluenceSettingsService;
+import org.osgi.framework.FrameworkUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,6 +40,14 @@ public class ServiceConfig {
                 atlassianConfig.applinkStatusService(),
                 atlassianConfig.typeAccessor(),
                 helperConfig.applicationLinksAuthConfigHelper());
+    }
+
+    // the tunnel service is looked up per request, as its plugin is optional
+    @Bean
+    public CloudTunnelService cloudTunnelService() {
+        return new DefaultCloudTunnelServiceImpl(
+                FrameworkUtil.getBundle(ServiceConfig.class).getBundleContext(),
+                atlassianConfig.mutatingApplicationLinkService());
     }
 
     @Bean

@@ -23,6 +23,9 @@ All URIs are relative to *https://CONFLUENCE_URL/rest/bootstrapi/1*
 *CachesApi* | [**getCache**](Apis/CachesApi.md#getCache) | **GET** /caches/{name} | Read cache information for a specified cache |
 *CachesApi* | [**getCaches**](Apis/CachesApi.md#getCaches) | **GET** /caches | Read all cache information |
 *CachesApi* | [**updateCache**](Apis/CachesApi.md#updateCache) | **PUT** /caches/{name} | Update an existing cache-size. Only Setting maxObjectCount is supported. |
+| *CloudApi* | [**deleteCloudTunnel**](Apis/CloudApi.md#deleteCloudTunnel) | **DELETE** /cloud/tunnel | Delete the cloud application tunnel |
+*CloudApi* | [**getCloudTunnel**](Apis/CloudApi.md#getCloudTunnel) | **GET** /cloud/tunnel | Get the cloud application tunnel |
+*CloudApi* | [**setCloudTunnel**](Apis/CloudApi.md#setCloudTunnel) | **PUT** /cloud/tunnel | Set the cloud application tunnel |
 | *DirectoriesApi* | [**deleteDirectories**](Apis/DirectoriesApi.md#deleteDirectories) | **DELETE** /directories | Delete all user directories |
 *DirectoriesApi* | [**getDirectories**](Apis/DirectoriesApi.md#getDirectories) | **GET** /directories | Get all user directories |
 *DirectoriesApi* | [**setDirectories**](Apis/DirectoriesApi.md#setDirectories) | **PUT** /directories | Set directories mapped by their name. |
@@ -72,6 +75,7 @@ All URIs are relative to *https://CONFLUENCE_URL/rest/bootstrapi/1*
  - [AuthenticationModel](./Models/AuthenticationModel.md)
  - [AuthenticationSsoModel](./Models/AuthenticationSsoModel.md)
  - [CacheModel](./Models/CacheModel.md)
+ - [CloudTunnelModel](./Models/CloudTunnelModel.md)
  - [DirectoryCrowdAdvanced](./Models/DirectoryCrowdAdvanced.md)
  - [DirectoryCrowdModel](./Models/DirectoryCrowdModel.md)
  - [DirectoryCrowdPermissions](./Models/DirectoryCrowdPermissions.md)
