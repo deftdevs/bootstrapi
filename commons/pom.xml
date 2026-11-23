@@ -101,6 +101,31 @@
         </dependency>
 
         <dependency>
+            <groupId>com.atlassian.oauth2</groupId>
+            <artifactId>oauth2-client-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-api</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- bundled by the product plugins that import the shared configurations -->
+        <dependency>
+            <groupId>com.atlassian.plugins</groupId>
+            <artifactId>atlassian-plugins-osgi-javaconfig</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
             <groupId>com.atlassian.plugins.authentication</groupId>
             <artifactId>atlassian-authentication-plugin-api</artifactId>
             <scope>provided</scope>
@@ -243,6 +268,13 @@
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-common</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- required to mock SAL's UserManager, which references servlet types -->
+        <dependency>
+            <groupId>jakarta.servlet</groupId>
+            <artifactId>jakarta.servlet-api</artifactId>
             <scope>test</scope>
         </dependency>
 

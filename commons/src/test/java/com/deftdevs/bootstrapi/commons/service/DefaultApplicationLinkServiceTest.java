@@ -15,6 +15,7 @@ import com.atlassian.applinks.internal.status.error.SimpleApplinkError;
 import com.atlassian.applinks.internal.status.oauth.ApplinkOAuthStatus;
 import com.atlassian.applinks.spi.application.ApplicationIdUtil;
 import com.atlassian.applinks.spi.link.ApplicationLinkDetails;
+import com.atlassian.applinks.spi.link.MutableApplicationLink;
 import com.atlassian.applinks.spi.link.MutatingApplicationLinkService;
 import com.atlassian.applinks.spi.util.TypeAccessor;
 import com.deftdevs.bootstrapi.commons.exception.web.BadRequestException;
@@ -34,6 +35,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.net.URI;
 import java.net.URISyntaxException;
+import java.util.Arrays;
 import java.util.Collections;
 import java.util.Map;
 import java.util.UUID;
@@ -53,6 +55,7 @@ import static org.mockito.Mockito.anyBoolean;
 import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.doReturn;
 import static org.mockito.Mockito.doThrow;
+import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.spy;
 import static org.mockito.Mockito.times;
@@ -456,6 +459,61 @@ class DefaultApplicationLinkServiceTest {
         applicationLinkService.deleteApplicationLink(UUID.randomUUID());
 
         verify(mutatingApplicationLinkService).deleteApplicationLink(any());
+    }
+
+    @Test
+    void testGetApplicationLinksExcludesUniconnLinks() {
+        final MutableApplicationLink uniconnApplicationLink = createUniconnApplicationLink();
+        doReturn(Collections.singletonList(uniconnApplicationLink)).when(mutatingApplicationLinkService).getApplicationLinks();
+
+        assertTrue(applicationLinkService.getApplicationLinks().isEmpty());
+    }
+
+    @Test
+    void testGetApplicationLinkUniconnLinkNotFound() throws TypeNotInstalledException {
+        final MutableApplicationLink uniconnApplicationLink = createUniconnApplicationLink();
+        doReturn(uniconnApplicationLink).when(mutatingApplicationLinkService).getApplicationLink(any());
+
+        assertThrows(NotFoundException.class, () -> applicationLinkService.getApplicationLink(UUID.randomUUID()));
+    }
+
+    @Test
+    void testSetApplicationLinkUniconnLinkNotFound() throws URISyntaxException, TypeNotInstalledException {
+        final MutableApplicationLink uniconnApplicationLink = createUniconnApplicationLink();
+        doReturn(uniconnApplicationLink).when(mutatingApplicationLinkService).getApplicationLink(any());
+        doReturn(new DefaultApplicationType()).when(typeAccessor).getApplicationType(any());
+
+        final ApplicationLinkModel applicationLinkModel = createApplicationLinkModel();
+        assertThrows(NotFoundException.class, () -> applicationLinkService.setApplicationLink(UUID.randomUUID(), applicationLinkModel));
+        verify(mutatingApplicationLinkService, never()).deleteApplicationLink(any());
+    }
+
+    @Test
+    void testDeleteApplicationLinksKeepsUniconnLinks() throws URISyntaxException {
+        final ApplicationLink applicationLink = createApplicationLink();
+        final MutableApplicationLink uniconnApplicationLink = createUniconnApplicationLink();
+        doReturn(Arrays.asList(applicationLink, uniconnApplicationLink)).when(mutatingApplicationLinkService).getApplicationLinks();
+
+        applicationLinkService.deleteApplicationLinks(true);
+
+        verify(mutatingApplicationLinkService).deleteApplicationLink(applicationLink);
+        verify(mutatingApplicationLinkService, never()).deleteApplicationLink(uniconnApplicationLink);
+    }
+
+    @Test
+    void testDeleteApplicationLinkUniconnLinkNotFound() throws TypeNotInstalledException {
+        final MutableApplicationLink uniconnApplicationLink = createUniconnApplicationLink();
+        doReturn(uniconnApplicationLink).when(mutatingApplicationLinkService).getApplicationLink(any());
+
+        assertThrows(NotFoundException.class, () -> applicationLinkService.deleteApplicationLink(UUID.randomUUID()));
+        verify(mutatingApplicationLinkService, never()).deleteApplicationLink(any());
+    }
+
+    // links managed by applinks for cloud connections are marked with the 'uniconn' property
+    private MutableApplicationLink createUniconnApplicationLink() {
+        final MutableApplicationLink applicationLink = mock(MutableApplicationLink.class);
+        doReturn("true").when(applicationLink).getProperty("uniconn");
+        return applicationLink;
     }
 
     private ApplicationLinkModel createApplicationLinkModel() throws URISyntaxException {

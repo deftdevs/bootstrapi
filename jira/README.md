@@ -22,6 +22,9 @@ All URIs are relative to *https://JIRA_URL/rest/bootstrapi/1*
 | *CloudApi* | [**deleteCloudTunnel**](Apis/CloudApi.md#deleteCloudTunnel) | **DELETE** /cloud/tunnel | Delete the cloud application tunnel |
 *CloudApi* | [**getCloudTunnel**](Apis/CloudApi.md#getCloudTunnel) | **GET** /cloud/tunnel | Get the cloud application tunnel |
 *CloudApi* | [**setCloudTunnel**](Apis/CloudApi.md#setCloudTunnel) | **PUT** /cloud/tunnel | Set the cloud application tunnel |
+| *CloudConnectorApi* | [**deleteCloudConnector**](Apis/CloudConnectorApi.md#deleteCloudConnector) | **DELETE** /cloud-connector | Disable the cloud connector |
+*CloudConnectorApi* | [**getCloudConnector**](Apis/CloudConnectorApi.md#getCloudConnector) | **GET** /cloud-connector | Get the cloud connector |
+*CloudConnectorApi* | [**setCloudConnector**](Apis/CloudConnectorApi.md#setCloudConnector) | **PUT** /cloud-connector | Set the cloud connector |
 | *DirectoriesApi* | [**deleteDirectories**](Apis/DirectoriesApi.md#deleteDirectories) | **DELETE** /directories | Delete all user directories |
 *DirectoriesApi* | [**getDirectories**](Apis/DirectoriesApi.md#getDirectories) | **GET** /directories | Get all user directories |
 *DirectoriesApi* | [**setDirectories**](Apis/DirectoriesApi.md#setDirectories) | **PUT** /directories | Set directories mapped by their name. |
@@ -61,6 +64,7 @@ All URIs are relative to *https://JIRA_URL/rest/bootstrapi/1*
  - [AuthenticationIdpSamlModel](./Models/AuthenticationIdpSamlModel.md)
  - [AuthenticationModel](./Models/AuthenticationModel.md)
  - [AuthenticationSsoModel](./Models/AuthenticationSsoModel.md)
+ - [CloudConnectorModel](./Models/CloudConnectorModel.md)
  - [CloudTunnelModel](./Models/CloudTunnelModel.md)
  - [DirectoryCrowdAdvanced](./Models/DirectoryCrowdAdvanced.md)
  - [DirectoryCrowdModel](./Models/DirectoryCrowdModel.md)
